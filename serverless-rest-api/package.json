@@ -1,0 +1,17 @@
+{
+  "name": "serverless-crud",
+  "version": "0.1.0",
+  "description": "Serverless CRUD service",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.6.7",
+    "chalk": "^1.1.3",
+    "openwhisk": "^2.1.6",
+    "serverless-flow-plugin": "0.0.7",
+    "uuid": "^2.0.3"
+  }
+}
