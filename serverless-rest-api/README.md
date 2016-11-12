@@ -1,6 +1,6 @@
-# Serverless Boilerplate
+# Serverless REST API
 
-Serverless service which provides a basic CRUD scaffold.
+This is a ready-to-deploy Serverless Service
 
 ## Quick-Start
 
