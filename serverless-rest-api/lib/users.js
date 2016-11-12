@@ -26,7 +26,8 @@ module.exports.create = (event, ctx, cb) => {
     TableName: table,
     Item: data
   };
-console.log(params)
+  
+  console.log(params)
   return dynamoDb.put(params, (error, data) => {
     if (error) {
       console.log(error)
