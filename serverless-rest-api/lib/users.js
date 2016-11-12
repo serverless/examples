@@ -1,10 +1,13 @@
 'use strict';
 
+const config = require('./utils/config')(); // Load ENV vars and config
+
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid');
+const Res = require('./utils/res');
 
-let Res = require('./utils/res');
+const table = 'users-' + process.env.appStage;
 
 // Users - Create
 module.exports.create = (event, ctx, cb) => {
@@ -20,20 +23,16 @@ module.exports.create = (event, ctx, cb) => {
   data.updatedAt = new Date().getTime();
 
   const params = {
-    TableName: 'todos',
+    TableName: table,
     Item: data
   };
-
-  // Return
-  res.status(200).cors().body({ test: 'data' }).end();
-
-  // return dynamoDb.put(params, (error, data) => {
-  //   console.log(error, data)
-  //
-  //   utils.res(cb, { data: "data!" });
-  //   // if (error) {
-  //   //   callback(error);
-  //   // }
-  //   // callback(error, params.Item);
-  // });
+console.log(params)
+  return dynamoDb.put(params, (error, data) => {
+    if (error) {
+      console.log(error)
+      res.status(400).cors().body({ message: error }).end();
+    } else {
+      res.status(200).cors().body({ test: 'data' }).end();
+    }
+  });
 };
