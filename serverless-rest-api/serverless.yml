@@ -28,7 +28,9 @@ functions:
           path: users
           method: post
           cors: true
-          mocks: ${file(./mocks.js):create}
+          mocks:
+            success: ${file(./mocks.js):create_success}
+            error: ${file(./mocks.js):create_error_missing_email}
   show:
     handler: handler.show
     events:
@@ -66,4 +68,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'users'
+        TableName: 'users-${self:provider.stage}'

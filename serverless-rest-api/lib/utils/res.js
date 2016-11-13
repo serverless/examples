@@ -43,11 +43,7 @@ class Res {
   // End - Returns response
   end() {
     // TODO: Stringify body?
-    if (this.res.status !== 200) {
-      return this.cb(this.res);
-    } else {
-      return this.cb(null, this.res);
-    }
+    return this.cb(null, this.res);
   }
 }
 

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = () => {
 
   let config;
@@ -10,4 +12,5 @@ module.exports = () => {
   }
 
   process.env.appStage = config && config.stage ? config.stage : 'dev';
+  process.env.appRegion = config && config.region ? config.region : 'us-east-1';
 }

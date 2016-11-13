@@ -1,8 +1,13 @@
-module.exports.create = function() {
+// Users - Create
+module.exports.create_success = function() {
   let email = 'mock_' + generateRandomString() + '@example.com';
   return {
-    body: { email: email }
+    email: email
   };
+}
+
+module.exports.create_error_missing_email = function() {
+  return {};
 }
 
 function generateRandomString() {
