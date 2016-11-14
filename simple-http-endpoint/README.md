@@ -2,7 +2,7 @@
 
 This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time. While the internal function is name `currentTime` the HTTP endpoint is exposed as `ping`.
 
-# Use Cases
+## Use Cases
 
 - Wrapping an existing internal or external endpoint/service
 
