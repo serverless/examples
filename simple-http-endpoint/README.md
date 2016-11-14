@@ -65,3 +65,7 @@ or as send an HTTP request directly to the endpoint using a tool like curl
 ```bash
 curl https://2e16njizla.execute-api.us-east-1.amazonaws.com/dev/ping
 ```
+
+## Scaling
+
+By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
