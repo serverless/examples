@@ -15,8 +15,6 @@ Work In Progress/Experimental – This library makes serverless functions easie
 The universal handler for *synchronous* functions across providers.  Use this for your function handler and your function will have `req` and `res` properties.
 
 ```
-// Function handler file
-
 const serverless = require('serverless);
 serverless.init();
 
