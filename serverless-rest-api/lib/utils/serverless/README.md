@@ -12,29 +12,22 @@ Work In Progress/Experimental – This library makes serverless functions easie
 
 ### `serverless.sync()`
 
-The universal handler for *synchronous* functions across providers.  Use this for your function handler, like this:
+The universal handler for *synchronous* functions across providers.  Use this for your function handler and your function will have `req` and `res` properties.
 
 ```
 // Function handler file
 
 const serverless = require('serverless);
-const myFunction = require('./myFunction);
-
 serverless.init();
 
-// Function handler
-module.exports = serverless.sync(myFunction)
-```
-
-Your function will then have `req` and `res` parameters, which you can use like this:
-
-```
-// myFunction.js
-
-exports.module = (req, res) => {
+// Function
+const myFunction = (req, res) => {
   console.log('Successfully received data: `, req.body);
   res.status(200).cors().body({ message: 'success!' }).end();
 }
+
+// Function handler
+module.exports = serverless.sync(myFunction)
 ```
 
 ### `req`
