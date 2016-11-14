@@ -13,19 +13,19 @@ module.exports = (event, context, callback) => {
   };
 
   // write the todo to the database
-  dynamoDb.delete(params, (error, result) => {
+  dynamoDb.delete(params, (error) => {
     // handle potential errors
     if (error) {
       console.error(error); // eslint-disable-line no-console
-      callback({ statusCode: 500 });
+      callback(new Error('Couldn\'t remove the todo item.'));
       return;
     }
 
     // create a resonse
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Key),
+      body: JSON.stringify({}),
     };
-    callback(response);
+    callback(null, response);
   });
 };

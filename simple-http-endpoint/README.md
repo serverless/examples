@@ -54,6 +54,8 @@ functions:
   serverless-simple-http-endpoint-dev-currentTime: arn:aws:lambda:us-east-1:488110005556:function:serverless-simple-http-endpoint-dev-currentTime
 ```
 
+## Usage
+
 You can now invoke the Lambda directly and even see the resulting log via
 
 ```bash
@@ -63,7 +65,7 @@ serverless invoke --function currentTime --log
 or as send an HTTP request directly to the endpoint using a tool like curl
 
 ```bash
-curl https://2e16njizla.execute-api.us-east-1.amazonaws.com/dev/ping
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/ping
 ```
 
 ## Scaling

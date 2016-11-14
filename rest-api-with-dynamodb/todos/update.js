@@ -7,24 +7,30 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
-  // TODO add a check that body contains the paramter "text" and it's a string
-  // check that "checked exists"
+
+  // validation
+  if (typeof data.text !== 'string' && typeof data.checked !== 'boolean') {
+    console.error('Validation Failed'); // eslint-disable-line no-console
+    callback(new Error('Couldn\'t create the todo item.'));
+    return;
+  }
+
   const params = {
     TableName: 'todos',
     Item: {
       id: event.pathParameters.id,
       text: data.text,
-      checked: Boolean(data.checked),
+      checked: data.checked,
       updatedAt: timestamp,
     },
   };
 
-  // write the todo to the database
+  // update the todo in the database
   dynamoDb.put(params, (error, result) => {
     // handle potential errors
     if (error) {
       console.error(error); // eslint-disable-line no-console
-      callback({ statusCode: 500 });
+      callback(new Error('Couldn\'t update the todo item.'));
       return;
     }
 
@@ -33,6 +39,6 @@ module.exports = (event, context, callback) => {
       statusCode: 200,
       body: JSON.stringify(result.Item),
     };
-    callback(response);
+    callback(null, response);
   });
 };

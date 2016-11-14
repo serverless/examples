@@ -8,7 +8,12 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
-  // TODO add a check that body contains the paramter "text" and it's a string
+  if (typeof data.text !== 'string') {
+    console.error('Validation Failed'); // eslint-disable-line no-console
+    callback(new Error('Couldn\'t create the todo item.'));
+    return;
+  }
+
   const params = {
     TableName: 'todos',
     Item: {
@@ -25,7 +30,7 @@ module.exports = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error); // eslint-disable-line no-console
-      callback({ statusCode: 500 });
+      callback(new Error('Couldn\'t create the todo item.'));
       return;
     }
 
@@ -34,6 +39,6 @@ module.exports = (event, context, callback) => {
       statusCode: 200,
       body: JSON.stringify(result.Item),
     };
-    callback(response);
+    callback(null, response);
   });
 };

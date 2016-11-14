@@ -26,16 +26,16 @@ functions:
           method: post
           cors: true
 
-  readAll:
-    handler: todos.readAll
+  list:
+    handler: todos.list
     events:
       - http:
           path: todos
           method: get
           cors: true
 
-  readOne:
-    handler: todos.readOne
+  get:
+    handler: todos.get
     events:
       - http:
           path: todos/{id}

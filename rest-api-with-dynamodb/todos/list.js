@@ -13,7 +13,7 @@ module.exports = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error); // eslint-disable-line no-console
-      callback({ statusCode: 500 });
+      callback(new Error('Couldn\'t fetch the todos.'));
       return;
     }
 
@@ -22,6 +22,6 @@ module.exports = (event, context, callback) => {
       statusCode: 200,
       body: JSON.stringify(result.Items),
     };
-    callback(response);
+    callback(null, response);
   });
 };
