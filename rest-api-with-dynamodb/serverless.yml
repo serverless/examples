@@ -1,10 +1,10 @@
-service: serverless-boilerplate
+service: serverless-rest-api-with-dynamodb
+
+frameworkVersion: ">=1.1.0"
 
 provider:
   name: aws
   runtime: nodejs4.3
-  region: us-east-1
-  stage: dev
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -17,41 +17,44 @@ provider:
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
-plugins:
-  - serverless-flow-plugin
-
 functions:
   create:
-    handler: handler.create
+    handler: todos.create
     events:
       - http:
-          path: users
+          path: todos
           method: post
           cors: true
-          mocks:
-            success: ${file(./mocks.js):create_success}
-            error: ${file(./mocks.js):create_error_missing_email}
-  show:
-    handler: handler.show
+
+  list:
+    handler: todos.list
     events:
       - http:
-          path: users/{id}
+          path: todos
           method: get
           cors: true
-          mocks:
-            success: ${file(./mocks.js):show_success}
-  update:
-    handler: handler.update
+
+  get:
+    handler: todos.get
     events:
       - http:
-          path: users/{id}
+          path: todos/{id}
+          method: get
+          cors: true
+
+  update:
+    handler: todos.update
+    events:
+      - http:
+          path: todos/{id}
           method: put
           cors: true
+
   delete:
-    handler: handler.delete
+    handler: todos.delete
     events:
       - http:
-          path: users/{id}
+          path: todos/{id}
           method: delete
           cors: true
 
@@ -62,12 +65,14 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: id
+          -
+            AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          -
+            AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'users-${self:provider.stage}'
+        TableName: 'todos'

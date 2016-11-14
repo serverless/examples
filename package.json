@@ -1,0 +1,23 @@
+{
+  "name": "serverless-examples",
+  "version": "0.0.0",
+  "description": "A compilation of serveral examples and boilerplates",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^3.10.0",
+    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-plugin-import": "^2.2.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "strict": "off"
+    }
+  }
+}

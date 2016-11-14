@@ -1,0 +1,15 @@
+service: serverless-simple-http-endpoint
+
+frameworkVersion: ">=1.1.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  currentTime:
+    handler: handler.endpoint
+    events:
+      - http:
+          path: ping
+          method: get
