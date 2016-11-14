@@ -8,11 +8,9 @@ Work In Progress/Experimental – This library makes serverless functions easie
 * Provide a standard way to load in environment variables and configuration files.
 * Improve the serverless functions user experience.
 
-## API Reference
+## Serverless Function - Synchronous Handler
 
-### Synchronous Serverless Functions
-
-#### `serverless.sync()`
+### `serverless.sync()`
 
 The universal handler for *synchronous* functions across providers.  Use this for your function handler, like this:
 
@@ -39,7 +37,7 @@ exports.module = (req, res) => {
 }
 ```
 
-#### `req`
+### `req`
 
 An instance of the Request class.  This is auto-populated with the request data.  Here is a list of some available properties:
 
@@ -51,7 +49,7 @@ An instance of the Request class.  This is auto-populated with the request data.
 * `req.userAgent`
 * `req.query`
 
-#### `res`
+### `res`
 
 An instance of the Response class.  This comes with express-like convenience methods, like these:
 
@@ -59,22 +57,22 @@ An instance of the Response class.  This comes with express-like convenience met
 res.status(500).body({ message: 'something went wrong' }).headers({}).cors().end()
 ```
 
-#### `res.status(integer)`
+### `res.status(integer)`
 
 Sets the response's HTTP status code via an integer.
 
-#### `res.body(obj)`
+### `res.body(obj)`
 
 Sets the response's body.
 
-#### `res.headers(obj)`
+### `res.headers(obj)`
 
 Sets the response's headers.
 
-#### `res.cors()`
+### `res.cors()`
 
 Auto-sets the CORS header.
 
-#### `res.end()`
+### `res.end()`
 
 Calls the function callback and returns your response.
