@@ -1,10 +1,10 @@
-service: serverless-boilerplate
+service: serverless-rest-api-with-dynamodb
+
+frameworkVersion: ">=1.1.0"
 
 provider:
   name: aws
   runtime: nodejs4.3
-  region: us-east-1
-  stage: dev
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -22,15 +22,23 @@ functions:
     handler: handler.create
     events:
       - http:
-          path: users
+          path: todos
           method: post
           cors: true
 
-  show:
-    handler: handler.show
+  readAll:
+    handler: handler.readAll
     events:
       - http:
-          path: users/{id}
+          path: todos
+          method: get
+          cors: true
+
+  readOne:
+    handler: handler.readOne
+    events:
+      - http:
+          path: todos/{id}
           method: get
           cors: true
 
@@ -38,7 +46,7 @@ functions:
     handler: handler.update
     events:
       - http:
-          path: users/{id}
+          path: todos/{id}
           method: put
           cors: true
 
@@ -46,7 +54,7 @@ functions:
     handler: handler.delete
     events:
       - http:
-          path: users/{id}
+          path: todos/{id}
           method: delete
           cors: true
 
@@ -57,12 +65,14 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          - AttributeName: id
+          -
+            AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          -
+            AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'users-${self:provider.stage}'
+        TableName: 'todos'

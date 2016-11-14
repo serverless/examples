@@ -1,15 +1,11 @@
 {
-  "name": "serverless-crud",
+  "name": "serverless-rest-with-dynamodb",
   "version": "0.1.0",
-  "description": "Serverless CRUD service",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
   "author": "",
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.6.7",
-    "chalk": "^1.1.3",
     "uuid": "^2.0.3"
   }
 }
