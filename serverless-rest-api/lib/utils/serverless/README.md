@@ -2,9 +2,7 @@
 
 This library makes serverless functions easier to use.
 
-## Status
-
-A work in progress...
+**Status:** A work in progress...
 
 ## Goals
 
