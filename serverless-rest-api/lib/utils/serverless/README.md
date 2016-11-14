@@ -1,8 +1,6 @@
 # Serverless Helper Library
 
-This library makes serverless functions easier to use.
-
-**Status:** A work in progress...
+Work In Progress/Experimental – This library makes serverless functions easier to use.
 
 ## Goals
 
