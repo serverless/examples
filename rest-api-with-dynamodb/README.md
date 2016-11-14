@@ -1,10 +1,17 @@
 # Serverless REST API
 
-Work in progress – This is a ready-to-deploy Serverless REST API.g
+This example demonstrates how to setup a [RESTful Web Services](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data. This is just an example and of course you could use any data storage as a backend.
+
+## Structure
+
+This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.js`. In each of these files there is exactly one function which is directly attached to `module.exports`. In order for the Serverless framework to have access to these functions one `todos/index.js` exists which is importing and than exporting all the operations as one module.
+
+The idea behind the `todos` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
 
 ## Use-cases
 
-- A scalable REST interface
+- API for a Web Application
+- API for a Mobile Application
 
 ## Setup
 
