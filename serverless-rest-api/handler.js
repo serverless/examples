@@ -1,5 +1,12 @@
 'use strict';
 
-const users = require('./lib/users.js');
+const serverless = require('./lib/utils/serverless');
+const users = require('./lib/users');
 
-module.exports.create = users.create;
+// Set global config from file and ENV vars
+serverless.init({
+  envFile: 'env.json'
+});
+
+module.exports.create = serverless.sync(users.create);
+module.exports.show = serverless.sync(users.show);

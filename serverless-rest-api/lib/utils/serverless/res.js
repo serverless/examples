@@ -3,7 +3,7 @@
 // Res - Response Class
 class Res {
 
-  constructor(cb) {
+  constructor(config, cb) {
     this.res = {
       status: 200,
       body: {},

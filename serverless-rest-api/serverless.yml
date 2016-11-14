@@ -38,6 +38,8 @@ functions:
           path: users/{id}
           method: get
           cors: true
+          mocks:
+            success: ${file(./mocks.js):show_success}
   update:
     handler: handler.update
     events:

@@ -5,9 +5,13 @@ module.exports.create_success = function() {
     email: email
   };
 }
-
 module.exports.create_error_missing_email = function() {
   return {};
+}
+
+// Users - Show
+module.exports.show_success = function() {
+  return { test: 'hello world' }
 }
 
 function generateRandomString() {
