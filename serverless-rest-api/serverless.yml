@@ -17,9 +17,6 @@ provider:
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
-plugins:
-  - serverless-flow-plugin
-
 functions:
   create:
     handler: handler.create
@@ -28,9 +25,7 @@ functions:
           path: users
           method: post
           cors: true
-          mocks:
-            success: ${file(./mocks.js):create_success}
-            error: ${file(./mocks.js):create_error_missing_email}
+
   show:
     handler: handler.show
     events:
@@ -38,8 +33,7 @@ functions:
           path: users/{id}
           method: get
           cors: true
-          mocks:
-            success: ${file(./mocks.js):show_success}
+
   update:
     handler: handler.update
     events:
@@ -47,6 +41,7 @@ functions:
           path: users/{id}
           method: put
           cors: true
+
   delete:
     handler: handler.delete
     events:
