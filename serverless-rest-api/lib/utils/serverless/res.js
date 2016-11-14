@@ -42,8 +42,15 @@ class Res {
 
   // End - Returns response
   end() {
-    // TODO: Stringify body?
-    return this.cb(null, this.res);
+    const that = this;
+
+    let response = {
+      statusCode: that.res.status,
+      body: typeof that.res.body !== 'string' ? JSON.stringify(that.res.body) : that.res.body,
+      headers: that.res.headers
+    };
+    
+    return that.cb(null, response);
   }
 }
 
