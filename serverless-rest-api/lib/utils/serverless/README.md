@@ -4,8 +4,8 @@ Work In Progress/Experimental – This library makes serverless functions easie
 
 ## Goals
 
-* Provide a two standard function handlers across providers for synchronous and asynchronous functions
-* Provide a universal way to load in environment variables and configuration files
+* Provide two standard function handlers for synchronous and asynchronous functions that work across providers.
+* Provide a standard way to load in environment variables and configuration files.
 * Improve the serverless functions user experience.
 
 ## API Reference
