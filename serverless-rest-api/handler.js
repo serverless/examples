@@ -10,3 +10,5 @@ serverless.init({
 
 module.exports.create = serverless.sync(users.create);
 module.exports.show = serverless.sync(users.show);
+module.exports.update = serverless.sync(users.update);
+module.exports.delete = serverless.sync(users.delete);

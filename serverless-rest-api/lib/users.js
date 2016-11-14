@@ -37,3 +37,13 @@ module.exports.create = (req, res) => {
 module.exports.show = function(req, res) {
   res.body({ message: 'success!' }).end()
 }
+
+// Users - Update
+module.exports.update = function(req, res) {
+  res.body({ message: 'success!' }).end()
+}
+
+// Users - Delete
+module.exports.delete = function(req, res) {
+  res.body({ message: 'success!' }).end()
+}
