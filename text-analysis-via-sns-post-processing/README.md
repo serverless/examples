@@ -18,7 +18,7 @@ You can retrieve the your account ID by running this command (you need the AWS S
 aws sts get-caller-identity --output text --query Account
 ```
 
-# Expalination
+# Explaination
 
 - sns topic will be added by default
 
