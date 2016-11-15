@@ -17,7 +17,8 @@
       "node": true
     },
     "rules": {
-      "strict": "off"
+      "strict": "off",
+      "import/no-unresolved": "off"
     }
   }
 }
