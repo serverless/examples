@@ -1,0 +1,11 @@
+{
+  "name": "serverless-data-pipeline",
+  "version": "0.1.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.6.7",
+    "sentiment": "^2.1.0"
+  }
+}
