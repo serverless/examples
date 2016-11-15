@@ -11,6 +11,7 @@ In case you haven't built any services yet it's recommend to get started with th
 Further advanced examples:
 
 - [rest-api-with-dynamodb example](https://github.com/serverless/examples/tree/master/rest-api-with-dynamodb)
+- [text-analysis-via-sns-post-processing](https://github.com/serverless/examples/tree/master/text-analysis-via-sns-post-processing)
 
 ## Adding more examples
 
