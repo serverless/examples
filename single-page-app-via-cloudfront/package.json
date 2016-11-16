@@ -5,6 +5,6 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "deploy": "aws s3 sync app/ s3://wwwwwwwwwwwwwww5/"
+    "deploy": "aws s3 sync app/ s3://wwwwwwwwwwwwwww7/"
   }
 }
