@@ -1,0 +1,79 @@
+service: single-page-app-via-cloudfront5
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+resources:
+  Resources:
+    WebsiteS3CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Origins:
+            - DomainName: wwwwwwwwwwwwwww5.s3.amazonaws.com
+              # An identifier for the origin which must be unique within the distribution
+              Id: SinglePageApp
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: http-only
+              # In case you want to restrict the bucket access use S3OriginConfig and remove CustomOriginConfig
+              # S3OriginConfig:
+              #   OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
+          Enabled: 'true'
+          DefaultRootObject: index.html
+          # Logging:
+          #   IncludeCookies: 'false'
+          #   Bucket: mylogs.s3.amazonaws.com
+          #   Prefix: myprefix
+          # Aliases:
+          # - mysite.example.com
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            # The origin id defined above
+            TargetOriginId: SinglePageApp
+            ForwardedValues:
+              QueryString: 'false'
+              Cookies:
+                # cookies to forward to the origin of the cache behavior. You can specify none, all, or whitelist
+                Forward: none
+            ViewerProtocolPolicy: allow-all
+          # The certificate to use when viewers use HTTPS to request objects.
+          # ViewerCertificate:
+          #   CloudFrontDefaultCertificate: 'true'
+    WebsiteS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: wwwwwwwwwwwwwww5
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+    WebsiteS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: WebsiteS3Bucket
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+              - s3:GetObject
+              Resource:
+              - Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: WebsiteS3Bucket
+                  - "/*"
