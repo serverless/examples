@@ -83,6 +83,8 @@ Serverless: Web App Domain: dyj5gf0t6nqke.cloudfront.net
 
 Visit the printed domain domain and navigate on the web site. It should automatically redirect you to HTTPS and visiting <yourURL>/about will not result in an error with the status code 404, but rather serves the `index.html` and renders the about page.
 
+This is how it should look like: ![ScreenShot](https://cloud.githubusercontent.com/assets/223045/20391786/287cb310-acd5-11e6-9eaf-89f641ed9e14.png)
+
 ## Further Improvements
 
 Here a list of potential improvements you can do with your CloudFront setup depending on your use-case:
