@@ -1,9 +1,12 @@
 service: single-page-app-via-cloudfront7
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: ">=1.1.0 <2.0.0" # TODO it's only 1.2
+
+plugins:
+  - serverless-single-page-app-plugin
 
 custom:
-  s3Bucket: wwwwwwwwwwwwwww7
+  s3Bucket: yourBucketName123
 
 provider:
   name: aws
@@ -87,6 +90,8 @@ resources:
           #   IncludeCookies: 'false'
           #   Bucket: mylogs.s3.amazonaws.com
           #   Prefix: myprefix
+
+  ## In order to print out the hosted domain via `serverless info` we need to define the DomainName output for CloudFormation
   Outputs:
     WebAppCloudFrontDistributionOutput:
       Value:

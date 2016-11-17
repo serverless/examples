@@ -1,0 +1,7 @@
+{
+  "name": "serverless-single-page-app-plugin",
+  "version": "1.0.0",
+  "description": "A plugin to simplify deploying Single Page Application using S3 and CloudFront",
+  "author": "",
+  "license": "MIT"
+}

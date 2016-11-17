@@ -2,9 +2,10 @@
   "name": "single-page-app-via-cloudfront",
   "version": "1.0.0",
   "description": "Demonstrating how to deploy a Single Page Application with Serverless",
+  "repository": "<replace>",
   "author": "",
   "license": "MIT",
-  "scripts": {
-    "deploy": "aws s3 sync app/ s3://wwwwwwwwwwwwwww7/"
+  "devDependencies": {
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin"
   }
 }

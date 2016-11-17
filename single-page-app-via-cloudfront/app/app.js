@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // Renders the page based on the current URL
 function renderApp() {
   var content;
