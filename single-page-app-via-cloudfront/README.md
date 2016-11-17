@@ -1,6 +1,6 @@
 # Single Page Application
 
-This example demonstrates how to setup a Single Page Application. Our goals here are to serve a static page with low latency. One additional goal is to make sure the client side application can leverage the History API functions `pushState` and `replaceState` to change the current URL without reloading.
+This example demonstrates how to setup a Single Page Application. Our goals here are to serve a static page with low latency. One additional goal is to make sure the client side application can leverage the History API functions `pushState` and `replaceState` to change the current URL without reloading. Further we want to make sure all the content is only served via HTTPS. HTTP requests should get redirected to HTTPS.
 
 To achieve these goals we use S3 in combination with CloudFront. S3 is used to store our static HTML file while CloudFront is responsible for making it available via Amazon's Content Delivery Network.
 
