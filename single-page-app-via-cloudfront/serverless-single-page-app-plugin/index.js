@@ -60,16 +60,15 @@ class ServerlessPlugin {
         'describeStacks',
         { StackName: stackName },
         this.options.stage,
-        this.options.region
+        this.options.region,
       )
       .then((result) => {
-        const output = result.Stacks[0].Outputs.find(
-          (entry) => entry.OutputKey === 'WebAppCloudFrontDistributionOutput'
-        );
+        const outputs = result.Stacks[0].Outputs;
+        const output = outputs.find(entry => entry.OutputKey === 'WebAppCloudFrontDistributionOutput');
         if (output.OutputValue) {
           this.serverless.cli.log(`Web App Domain: ${output.OutputValue}`);
         } else {
-          this.serverless.cli.log(`Web App Domain: Not Found`);
+          this.serverless.cli.log('Web App Domain: Not Found');
         }
       });
   }
