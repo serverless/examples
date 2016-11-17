@@ -11,49 +11,49 @@ provider:
 
 resources:
   Resources:
-    # WebsiteS3CloudFrontDistribution:
-    #   Type: AWS::CloudFront::Distribution
-    #   Properties:
-    #     DistributionConfig:
-    #       Origins:
-    #         - DomainName: wwwwwwwwwwwwwww5.s3.amazonaws.com
-    #           # An identifier for the origin which must be unique within the distribution
-    #           Id: SinglePageApp
-    #           CustomOriginConfig:
-    #             HTTPPort: 80
-    #             HTTPSPort: 443
-    #             OriginProtocolPolicy: http-only
-    #           # In case you want to restrict the bucket access use S3OriginConfig and remove CustomOriginConfig
-    #           # S3OriginConfig:
-    #           #   OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
-    #       Enabled: 'true'
-    #       DefaultRootObject: index.html
-    #       # Logging:
-    #       #   IncludeCookies: 'false'
-    #       #   Bucket: mylogs.s3.amazonaws.com
-    #       #   Prefix: myprefix
-    #       # Aliases:
-    #       # - mysite.example.com
-    #       DefaultCacheBehavior:
-    #         AllowedMethods:
-    #           - DELETE
-    #           - GET
-    #           - HEAD
-    #           - OPTIONS
-    #           - PATCH
-    #           - POST
-    #           - PUT
-    #         # The origin id defined above
-    #         TargetOriginId: SinglePageApp
-    #         ForwardedValues:
-    #           QueryString: 'false'
-    #           Cookies:
-    #             # cookies to forward to the origin of the cache behavior. You can specify none, all, or whitelist
-    #             Forward: none
-    #         ViewerProtocolPolicy: allow-all
-    #       # The certificate to use when viewers use HTTPS to request objects.
-    #       # ViewerCertificate:
-    #       #   CloudFrontDefaultCertificate: 'true'
+    WebAppCloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Origins:
+            - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
+              # An identifier for the origin which must be unique within the distribution
+              Id: WebApp
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: http-only
+              # In case you want to restrict the bucket access use S3OriginConfig and remove CustomOriginConfig
+              # S3OriginConfig:
+              #   OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
+          Enabled: 'true'
+          DefaultRootObject: index.html
+          # Logging:
+          #   IncludeCookies: 'false'
+          #   Bucket: mylogs.s3.amazonaws.com
+          #   Prefix: myprefix
+          # Aliases:
+          # - mysite.example.com
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            # The origin id defined above
+            TargetOriginId: WebApp
+            ForwardedValues:
+              QueryString: 'false'
+              Cookies:
+                # cookies to forward to the origin of the cache behavior. You can specify none, all, or whitelist
+                Forward: none
+            ViewerProtocolPolicy: allow-all
+          # The certificate to use when viewers use HTTPS to request objects.
+          # ViewerCertificate:
+          #   CloudFrontDefaultCertificate: 'true'
     WebAppS3Bucket:
       Type: AWS::S3::Bucket
       Properties:

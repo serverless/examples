@@ -15,3 +15,12 @@ TODO add a config file
 # Deploy
 
 Warning: Whenever you making changes to CloudFront resource in `serverless.yml` the deployment might take a while e.g 15-20 minutes.
+
+TODO get the urls
+
+explain this is for maximum simplicity
+
+improvements you can do:
+- bucket restriction
+- domain Aliases
+- logging
