@@ -1,6 +1,6 @@
 {
   "name": "serverless-rest-with-dynamodb",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Serverless CRUD service exposing a REST HTTP interface",
   "author": "",
   "license": "MIT",

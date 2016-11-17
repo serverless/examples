@@ -30,7 +30,7 @@ In order to deploy the you endpoint simply run
 serverless deploy
 ```
 
-The expected result similar to this:
+The expected result should be similar to:
 
 ```bash
 Serverless: Packaging service…
