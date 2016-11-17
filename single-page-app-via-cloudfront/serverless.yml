@@ -55,11 +55,12 @@ resources:
           # Aliases:
           # - mysite.example.com
           DefaultRootObject: index.html
-          ## Uncomment the following section in case you want to enable logging for CloudFront requests
-          # Logging:
-          #   IncludeCookies: 'false'
-          #   Bucket: mylogs.s3.amazonaws.com
-          #   Prefix: myprefix
+          ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
+          ## The only exception are files that actually exist e.h. app.js, reset.css
+          CustomErrorResponses:
+            - ErrorCode: 404
+              ResponseCode: 200
+              ResponsePagePath: /index.html
           DefaultCacheBehavior:
             AllowedMethods:
               - DELETE
@@ -69,15 +70,20 @@ resources:
               - PATCH
               - POST
               - PUT
-            # The origin id defined above
+            ## The origin id defined above
             TargetOriginId: WebApp
+            ## Defining if and how the QueryString and Cookies are forwarded to the origin which in this case is S3
             ForwardedValues:
               QueryString: 'false'
               Cookies:
-                # Cookies to forward to the origin of the cache behavior. You can specify none, all, or whitelist
                 Forward: none
-            # The protocol that users can use to access the files in the origin. To allow HTTP use `allow-all`
+            ## The protocol that users can use to access the files in the origin. To allow HTTP use `allow-all`
             ViewerProtocolPolicy: redirect-to-https
-          # The certificate to use when viewers use HTTPS to request objects.
+          ## The certificate to use when viewers use HTTPS to request objects.
           ViewerCertificate:
             CloudFrontDefaultCertificate: 'true'
+          ## Uncomment the following section in case you want to enable logging for CloudFront requests
+          # Logging:
+          #   IncludeCookies: 'false'
+          #   Bucket: mylogs.s3.amazonaws.com
+          #   Prefix: myprefix
