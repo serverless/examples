@@ -1,0 +1,16 @@
+{
+  "name": "serverless-babel-plugin",
+  "version": "1.0.0",
+  "description": "A plugin to compile your code with Babel",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "archiver": "^1.2.0",
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "bluebird": "^3.4.6",
+    "glob-all": "^3.1.0",
+    "mkdirp": "^0.5.1",
+    "unzip2": "^0.2.5"
+  }
+}

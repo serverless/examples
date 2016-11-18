@@ -1,0 +1,10 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "strict": "off",
+    "import/no-unresolved": "off"
+  }
+}

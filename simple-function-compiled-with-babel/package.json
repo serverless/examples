@@ -1,0 +1,12 @@
+{
+  "name": "simple-function-compiled-with-babel",
+  "version": "1.0.0",
+  "description": "Demonstrating how to compile all your code with Babel",
+  "repository": "<replace>",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-babel-plugin": "file:./serverless-babel-plugin"
+  },
+  "dependencies": {}
+}
