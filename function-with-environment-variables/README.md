@@ -93,3 +93,21 @@ START RequestId: 9cc33d72-afd3-11e6-b918-19a4e146bf3d Version: $LATEST
 END RequestId: 9cc33d72-afd3-11e6-b918-19a4e146bf3d
 REPORT RequestId: 9cc33d72-afd3-11e6-b918-19a4e146bf3d	Duration: 3.14 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
 ```
+
+Especially helpful for local development you can also invoke the Lambda locally and see the resulting log via
+
+```bash
+serverless invoke local --function=createUser --log
+```
+
+The expected result should be similar to:
+
+```bash
+PASSWORD_ITERATIONS:  4096
+PASSWORD_DERIVED_KEY_LENGTH:  256
+EMAIL_SERVICE_API_KEY:  KEYEXAMPLE1234
+{
+    "statusCode": 200,
+    "body": "{\"message\":\"User created\"}"
+}
+```
