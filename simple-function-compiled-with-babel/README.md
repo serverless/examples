@@ -34,7 +34,7 @@ Serverless: Checking Stack update progress…
 Serverless: Stack update finished…
 
 Service Information
-service: simple-function-compiled-with-babel
+service: function-compiled-with-babel
 stage: dev
 region: us-east-1
 api keys:
@@ -42,7 +42,7 @@ api keys:
 endpoints:
   None
 functions:
-  simple-function-compiled-with-babel-dev-hello: arn:aws:lambda:us-east-1:377024778620:function:simple-function-compiled-with-babel-dev-hello
+  function-compiled-with-babel-dev-hello: arn:aws:lambda:us-east-1:377024778620:function:function-compiled-with-babel-dev-hello
 ```
 
 ## Usage
