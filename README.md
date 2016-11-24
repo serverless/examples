@@ -6,12 +6,9 @@ A collection of ready-to-deploy Serverless Framework boilerplates.
 
 In case you haven't built any services yet it's recommend to get started with the:
 
-- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/simple-http-endpoint)
+- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint)
 
-Further advanced examples:
-
-- [rest-api-with-dynamodb example](https://github.com/serverless/examples/tree/master/rest-api-with-dynamodb)
-- [text-analysis-via-sns-post-processing](https://github.com/serverless/examples/tree/master/text-analysis-via-sns-post-processing)
+Each example contains a README.md with general explanation and an in-depth guide.
 
 ## Adding more examples
 
