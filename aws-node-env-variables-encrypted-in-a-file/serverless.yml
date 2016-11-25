@@ -1,0 +1,21 @@
+service: env-variables-encrypted-in-a-file
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+plugins:
+  - serverless-secrets-plugin
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+
+custom:
+  secrets: ${file(secrets.${opt:stage, self:provider.stage}.yml)}
+
+functions:
+  resetPassword:
+    handler: handler.resetPassword
+    environment:
+      SESSION_KEY: ${self:custom.secrets.SESSION_KEY}
+      EMAIL_SERVICE_API_KEY: ${self:custom.secrets.EMAIL_SERVICE_API_KEY}
