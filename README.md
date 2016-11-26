@@ -6,7 +6,8 @@ A collection of ready-to-deploy Serverless Framework boilerplates.
 
 In case you haven't built any services yet it's recommend to get started with the:
 
-- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint)
+- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) (NodeJS)
+- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) (Python)
 
 Each example contains a README.md with general explanation and an in-depth guide.
 
