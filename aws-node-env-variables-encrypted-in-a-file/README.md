@@ -8,7 +8,7 @@ This example demonstrates how to store secrets like API keys encrypted in your r
 
 ## Why?
 
-While repository hosting services like Github or Bitbucket have very high security standards it's recommended to not store your unencrypted secrets there. In addition in larger teams not everybody needs to have access to theses secrets of your production environment.
+While repository hosting services like Github or Bitbucket have very high security standards it's recommended to not store your unencrypted secrets there. In addition in larger teams not everybody needs to have access to those secrets of your production environment.
 
 Encrypting your secrets per stage and only adding the encrypted files into your repository is a sensible strategy to fulfill the previously described goals. The passwords to decrypt and encrypt the secrets files should only be shared between the necessary developers over a secure channel. In case you are using a Continuous Integration to deploy your infrastructure obviously this system must be aware of the passwords as well.
 
@@ -99,4 +99,4 @@ serverless encrypt --stage prod --password 'v2]83WDneGt9AGXv]X6QfP9NW3^J&K3V'
 
 # Important Note
 
-Make sure the the secrets files are listed in .gitignore to make sure they are never checked into your repository.
+Make sure the the unencrypted secrets files are listed in .gitignore or similar to make sure they are never checked into your repository.
