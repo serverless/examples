@@ -19,3 +19,4 @@ env.yml
 env.json
 admin.env
 tmp
+*.pyc
