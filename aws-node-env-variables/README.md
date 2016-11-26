@@ -4,7 +4,7 @@ This example demonstrates how to use environment variables for AWS Lambdas.
 
 ## Use-cases
 
-- Provide API keys to your Lambdas
+- Provide settings as environment variables to your Lambda functions
 
 ## How it works
 
