@@ -1,5 +1,7 @@
 # Serverless
 
+IMPORTANT NOTE: As pointed out in the [AWS documentation](http://docs.aws.amazon.com/lambda/latest/dg/env_variables.html) for storing sensible the `Ciphertext` should be stored in the environment variables. This tutorial doesn't go into that yet, but we will update it soon accordingly.
+
 This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.
 
 ## Use-cases
