@@ -12,19 +12,44 @@ Running a function recursively will allow you to pass state information to the n
 
 ## Setup
 
-1. Deploy the function with `sls deploy`
+#### 1. Deploy the function with `sls deploy`
 
-2. Then grab the function ARN with `sls info`. The function ARN will look like `arn:aws:lambda:us-east-1:000000000000000:function:xxxxx`
+The `sls deploy` command will give you back the function ARN (Amazon Resource Name) needed for the function to recursively call itself.
 
-3. Change the `functionARN` in the `serverless.yml` file to your functions ARN. This will give the function access to call itself.
+The message should look something like:
 
-```yml
-# serverless.yml
-custom:
-  functionARN: insertYourFunctionARNHERE # arn:aws:lambda:region:000000:function:xxxxx
+```bash
+Service Information
+service: recursive-invocation-example
+stage: dev
+region: us-east-1
+api keys:
+  None
+endpoints:
+  None
+functions:
+  recursive-invocation-example-dev-recursiveExample: arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample
 ```
 
-The `custom: functionARN` value is referenced as a [serverless variable](https://serverless.com/framework/docs/providers/aws/guide/variables/) in the IAM statement the variable syntax `${self:custom:functionARN}`
+The ARN in this example is `arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample`
+
+Run `serverless info` to retrieve this data again if you need it.
+
+#### 2. Take your newly created function's ARN and replace the custom: functionARN value `yourFunctionARN` value in `serverless.yml` with your ARN.
+
+Before:
+```yml
+custom:
+  functionARN: yourFunctionARN
+```
+
+After:
+```yml
+custom:
+  functionARN: arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample
+```
+
+#### 3. Uncomment the IAM statement in `serverless.yml`
 
 ```yml
 provider:
@@ -37,7 +62,13 @@ provider:
        Resource: ${self:custom:functionARN}
 ```
 
+The `custom: functionARN` value is referenced as a [serverless variable](https://serverless.com/framework/docs/providers/aws/guide/variables/) in the IAM statement the variable syntax `${self:custom:functionARN}`
+
 For more information on serverless variables. [Read the variable docs](https://serverless.com/framework/docs/providers/aws/guide/variables/).
+
+#### 4. Redeploy the function to enable the new IAM role.
+
+Run `sls deploy` again to redeploy the service and apply the new IAM role needed for the function to call itself.
 
 ## Invoking
 
