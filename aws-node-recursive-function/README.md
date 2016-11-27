@@ -62,7 +62,7 @@ provider:
        Resource: ${self:custom.functionARN}
 ```
 
-The `custom: functionARN` value is referenced as a [serverless variable](https://serverless.com/framework/docs/providers/aws/guide/variables/) in the IAM statement the variable syntax `${self:custom:functionARN}`
+The `custom: functionARN` value is referenced as a [serverless variable](https://serverless.com/framework/docs/providers/aws/guide/variables/) in the IAM statement the variable syntax `${self:custom.functionARN}`
 
 For more information on serverless variables. [Read the variable docs](https://serverless.com/framework/docs/providers/aws/guide/variables/).
 

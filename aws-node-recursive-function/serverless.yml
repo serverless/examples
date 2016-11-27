@@ -11,7 +11,7 @@ provider:
 #    -  Effect: "Allow"
 #       Action:
 #         - "lambda:InvokeFunction"
-#       Resource: ${self:custom:functionARN}
+#       Resource: ${self:custom.functionARN}
 
 functions:
   recursiveExample:
