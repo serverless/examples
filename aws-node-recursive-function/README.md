@@ -39,12 +39,14 @@ The ARN in this example is `arn:aws:lambda:us-east-1:488110005556:function:recur
 
 Before:
 ```yml
+# in serverless.yml
 custom:
   functionARN: yourFunctionARN
 ```
 
 After:
 ```yml
+# in serverless.yml
 custom:
   functionARN: arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample
 ```
@@ -52,6 +54,7 @@ custom:
 #### 3. Uncomment the IAM statement in `serverless.yml`
 
 ```yml
+# in serverless.yml
 provider:
   name: aws
   runtime: nodejs4.3
