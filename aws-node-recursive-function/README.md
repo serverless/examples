@@ -8,6 +8,7 @@ This is an example of a function that will recursively call itself.
 
 - Functions that run longer that 5 minutes
 - [Use recursive function to process SQS messages](http://theburningmonk.com/2016/04/aws-lambda-use-recursive-function-to-process-sqs-messages-part-1/)
+- [Lamdba chaining](https://github.com/pmuens/serverless-lambda-chaining)
 
 Running a function recursively will allow you to pass state information to the next function call.
 
