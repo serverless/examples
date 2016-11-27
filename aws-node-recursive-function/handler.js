@@ -8,6 +8,7 @@ module.exports.recursiveLambda = (event, context, callback) => {
   /* if numberOfCalls still has value, continue recursive operation */
   if (event.numberOfCalls > 0) {
     console.log('recursive call');
+    /* decrement numberOfCalls so we don't infinitely loop */
     event.numberOfCalls = event.numberOfCalls - 1;
     const params = {
       FunctionName: context.functionName,
