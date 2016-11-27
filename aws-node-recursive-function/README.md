@@ -2,7 +2,9 @@
 
 This is an example of a function that will recursively call itself.
 
-**Warning** It's possible to run into infinite loops with recursive calls. Test your functions locally before deploying to production
+**Warning** It's possible to run into infinite loops with recursive calls.
+
+Test your functions [locally](https://serverless.com/framework/docs/providers/aws/cli-reference/invoke#invoke-local) before deploying to production.
 
 ## Use cases
 
