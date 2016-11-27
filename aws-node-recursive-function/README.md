@@ -14,19 +14,17 @@ Running a function recursively will allow you to pass state information to the n
 
 1. Deploy the function with `sls deploy`
 
-2. Then grab the function ARN with `sls info`
+2. Then grab the function ARN with `sls info`. The function ARN will look like `arn:aws:lambda:us-east-1:000000000000000:function:xxxxx`
 
-The function ARN will look like `arn:aws:lambda:us-east-1:000000000000000:function:xxxxx`
-
-3.  Change the `functionARN` in the `serverless.yml` file to your functions ARN. This will give the function access to call itself.
+3. Change the `functionARN` in the `serverless.yml` file to your functions ARN. This will give the function access to call itself.
 
 ```yml
 # serverless.yml
 custom:
-  functionARN: insertYourFunctionARNHERE
+  functionARN: insertYourFunctionARNHERE # arn:aws:lambda:region:000000:function:xxxxx
 ```
 
-The `custom` `functionARN` is referenced as a serverless variable in the IAM statement `${self:custom:functionARN}`
+The `custom` `functionARN` variable is referenced as a serverless variable in the IAM statement `${self:custom:functionARN}`
 
 ```yml
 provider:
