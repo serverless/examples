@@ -14,6 +14,8 @@ rate(value unit)
 
 `unit` - The unit of time. ( minute | minutes | hour | hours | day | days )
 
+**Example** `rate(5 minutes)`
+
 For more [information on the rate syntax see the AWS docs](http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#RateExpressions)
 
 ## Cron syntax
