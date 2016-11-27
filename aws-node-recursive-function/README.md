@@ -24,7 +24,7 @@ custom:
   functionARN: insertYourFunctionARNHERE # arn:aws:lambda:region:000000:function:xxxxx
 ```
 
-The `custom` `functionARN` variable is referenced as a serverless variable in the IAM statement `${self:custom:functionARN}`
+The `custom: functionARN` value is referenced as a [serverless variable](https://serverless.com/framework/docs/providers/aws/guide/variables/) in the IAM statement the variable syntax `${self:custom:functionARN}`
 
 ```yml
 provider:
