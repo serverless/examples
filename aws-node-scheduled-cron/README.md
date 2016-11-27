@@ -1,14 +1,6 @@
 # AWS Node Scheduled Cron Example
 
-This is an example of creating a function that runs as a cron job.
-
-To see your job running tail your logs with:
-
-```bash
-serverless logs -function cron -tail
-```
-
-For more information on `schedule` event check out [our docs](https://serverless.com/framework/docs/providers/aws/events/schedule/).
+This is an example of creating a function that runs as a cron job using the serverless `schedule` event. For more information on `schedule` event check out [our docs](https://serverless.com/framework/docs/providers/aws/events/schedule/).
 
 Schedule events use the `rate` or `cron` syntax.
 
@@ -42,6 +34,14 @@ All fields are required and time zone is UTC only.
 | Year          | 1970-2199      | , - * /       |
 
 Read the [AWS cron expression syntax](http://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html) docs for more info on how to setup cron
+
+## Running
+
+To see your cron job running tail your logs with:
+
+```bash
+serverless logs -function cron -tail
+```
 
 ## Additonal Resources
 
