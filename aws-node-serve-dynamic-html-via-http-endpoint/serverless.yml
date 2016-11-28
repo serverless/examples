@@ -1,0 +1,16 @@
+# Serving HTML through API Gateway for AWS Lambda
+service: serve-dynamic-html-via-http-endpoint
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  landingPage:
+    handler: handler.landingPage
+    events:
+      - http:
+          method: get
+          path: landing-page
