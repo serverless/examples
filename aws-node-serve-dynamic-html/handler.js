@@ -1,19 +1,16 @@
+'use strict';
 
-// Your function handler
-module.exports.serveHtml = (event, context, callback) => {
-  let dynamicHtml;
-  /* check for GET params and use if available */
+module.exports.landingPage = (event, context, callback) => {
+  let dynamicHtml = '<p>Hey Unknown!</p>';
+  // check for GET params and use if available
   if (event.queryStringParameters && event.queryStringParameters.name) {
-    // yourendpoint.com/{stage}/landing-page?name=bob
-    dynamicHtml = `<p>Hey ${event.queryStringParameters.name}</p>`;
-  } else {
-    dynamicHtml = '';
+    dynamicHtml = `<p>Hey ${event.queryStringParameters.name}!</p>`;
   }
 
   const html = `
   <html>
     <style>
-      h1 { color: blue; }
+      h1 { color: #73757d; }
     </style>
     <body>
       <h1>Landing Page</h1>
@@ -28,6 +25,7 @@ module.exports.serveHtml = (event, context, callback) => {
     },
     body: html,
   };
-  // callback will send HTML back
+
+  // callback is sending HTML back
   callback(null, response);
 };
