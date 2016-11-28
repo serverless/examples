@@ -26,5 +26,10 @@
       "description": "Saves user details into DynamoDB table. Required values are email, first_name and last_name.",
       "githubUrl": "https://github.com/ivanderbu2/serverless-newsletter-signup"
     },
+    {
+      "name": "serverless-slack-cron",
+      "description": "Lambda function which sends messages to Slack channel in regular intervals via cron trigger.",
+      "githubUrl": "https://github.com/ivanderbu2/serverless-slack-cron"
+    },
   ]
 }
