@@ -41,6 +41,11 @@
       "runtime": "python",
       "description": "Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda",
       "githubUrl": "https://github.com/mikaelmork/jwt-auth.serverless"
+    }, 
+    {
+      "name": "sls-access-counter",
+      "description": "Site visitor counter",
+      "githubUrl": "https://github.com/takahashim/sls-access-counter"
     }
   ]
 }
