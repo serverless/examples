@@ -15,6 +15,11 @@
       "name": "plaid cashburndown-service",
       "description": "Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site",
       "githubUrl": "https://github.com/cplee/cashburndown-service"
+    },
+    {
+      "name": "cordis-serverless",
+      "description": "A serverless API for EU Cordis data",
+      "githubUrl": "https://github.com/marzeelabs/cordis-serverless"
     }
   ]
 }
