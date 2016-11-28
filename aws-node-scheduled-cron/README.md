@@ -101,4 +101,4 @@ serverless logs --function secondCron --tail
 
 ## Additonal Resources
 
-For more information on running cron with Serverless check out the [Tutorial: Serverless Scheduled Tasks](https://parall.ax/blog/view/3202/tutorial-serverless-scheduled-tasks) by parallax.
+For more information on running cron with Serverless check out the [Tutorial: Serverless Scheduled Tasks](https://parall.ax/blog/view/3202/tutorial-serverless-scheduled-tasks) by Parallax.
