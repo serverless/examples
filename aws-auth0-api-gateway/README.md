@@ -2,6 +2,8 @@
 
 This is an example of how to protect API endpoints with auth0
 
+[View live demo](http://auth0-serverless-protected-routes-demo.surge.sh/)
+
 ## Use cases
 
 - Protect API routes for authorized users
@@ -38,8 +40,10 @@ This is an example of how to protect API endpoints with auth0
 
 ## Frontend
 
-The frontend is a bare bones vanilla javascript implementation
+The frontend is a bare bones vanilla javascript implementation.
 
 You can replace it with whatever frontend framework you like =)
 
 If you do implement in another framework, please consider adding it our growing list of examples!
+
+API calls are made with the browser's native `fetch` api.
