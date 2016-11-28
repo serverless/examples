@@ -35,6 +35,12 @@
       "name": "giphy-bot",
       "description": "giphy-bot for Facebook chat",
       "githubUrl": "https://github.com/tywong/lambda-workshop-2016/tree/master/giphy-bot"
+    },
+    {
+      "name": "jwt-lambda-python",
+      "runtime": "python",
+      "description": "Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda",
+      "githubUrl": "https://github.com/mikaelmork/jwt-auth.serverless"
     }
   ]
 }
