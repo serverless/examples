@@ -12,6 +12,8 @@ functions:
       - http:
           path: api/public
           method: get
+          integration: lambda
+          cors: true
   privateEndpoint:
     handler: handler.privateEndpoint
     events:
