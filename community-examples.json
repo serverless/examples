@@ -6,4 +6,14 @@
       "url": "http://svdgraaf.nl/2016/09/28/Serverless-Screenshot-Service-With-Lambda.html",
       "githubUrl": "https://github.com/svdgraaf/serverless-screenshot"
     },
+    {
+      "name": "serverless-mailgun-slack",
+      "description": "A Serverless function for posting to a Slack Webhook in response to a Mailgun route",
+      "githubUrl": "https://github.com/Marcus-L/serverless-mailgun-slack"
+    },
+    {
+      "name": "plaid cashburndown-service",
+      "description": "Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site",
+      "githubUrl": "https://github.com/cplee/cashburndown-service"
+    }
 }
