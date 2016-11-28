@@ -26,6 +26,14 @@ This is an example of how to protect API endpoints with auth0
 
 5. Plugin your `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, and the `PUBLIC_ENDPOINT` + `PRIVATE_ENDPOINT` from aws in top of the `frontend/app.js` file.
 
+  ```js
+  // replace these values in app.js
+  const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
+  const AUTH0_DOMAIN = 'your-auth0-domain-here.auth0.com';
+  const PUBLIC_ENDPOINT = 'https://your-aws-endpoint-here.amazonaws.com/dev/api/public';
+  const PRIVATE_ENDPOINT = 'https://your-aws-endpoint-here.us-east-1.amazonaws.com/dev/api/private';
+  ```
+
 6. Deploy Frontend to host of your choosing and make sure you configure the `Allowed Callback URL` and `Allowed Origins` in your auth0 client in the [auth0 dashboard](https://manage.auth0.com)
 
 ## Frontend
