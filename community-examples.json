@@ -20,6 +20,11 @@
       "name": "cordis-serverless",
       "description": "A serverless API for EU Cordis data",
       "githubUrl": "https://github.com/marzeelabs/cordis-serverless"
-    }
+    },
+    {
+      "name": "serverless-newsletter-signup",
+      "description": "Saves user details into DynamoDB table. Required values are email, first_name and last_name.",
+      "githubUrl": "https://github.com/ivanderbu2/serverless-newsletter-signup"
+    },
   ]
 }
