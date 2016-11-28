@@ -42,7 +42,7 @@ Read the [AWS cron expression syntax](http://docs.aws.amazon.com/lambda/latest/d
 To see your cron job running tail your logs with:
 
 ```bash
-serverless logs -function cron -tail
+serverless logs --function cron --tail
 ```
 
 ## Additonal Resources
