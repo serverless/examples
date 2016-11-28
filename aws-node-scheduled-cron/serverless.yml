@@ -8,4 +8,10 @@ functions:
   cron:
     handler: handler.run
     events:
+      # Invoke Lambda function every minute
       - schedule: rate(1 minute)
+  secondCron:
+    handler: handler.run
+    events:
+      # Invoke Lambda function every 2nd minute from Mon-Fri
+      - schedule: cron(0/2 * ? * MON-FRI *)
