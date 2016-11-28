@@ -2,6 +2,7 @@ html, body {
   padding: 0px;
   margin: 0px;
 }
+
 body {
   font-family: "proxima-nova", sans-serif;
   text-align: center;
@@ -62,4 +63,14 @@ h3 {
 }
 .api-actions button:last-of-type, .user-actions button:last-of-type {
   margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .api-actions, .user-actions {
+    flex-direction: column;
+  }
+  .api-actions button:last-of-type, .user-actions button:last-of-type {
+    margin-left: 0px;
+    margin-top: 20px;
+  }
 }
