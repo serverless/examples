@@ -1,4 +1,6 @@
 /* global window document localStorage fetch alert */
+
+// Fill in with your values
 const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
 const AUTH0_DOMAIN = 'your-auth0-domain-here.auth0.com';
 const AUTH0_CALLBACK_URL = window.location.href; // eslint-disable-line
@@ -34,7 +36,7 @@ document.getElementById('btn-login').addEventListener('click', () => {
       localStorage.setItem('profile', JSON.stringify(profile));
 
       document.getElementById('btn-login').style.display = 'none';
-      document.getElementById('btn-logout').style.display = 'inline';
+      document.getElementById('btn-logout').style.display = 'flex';
       document.getElementById('nick').textContent = profile.nickname;
     }
   });
@@ -44,8 +46,9 @@ document.getElementById('btn-login').addEventListener('click', () => {
 document.getElementById('btn-logout').addEventListener('click', () => {
   localStorage.removeItem('userToken');
   localStorage.removeItem('profile');
-  document.getElementById('btn-login').style.display = 'inline';
+  document.getElementById('btn-login').style.display = 'flex';
   document.getElementById('btn-logout').style.display = 'none';
+  document.getElementById('nick').textContent = '';
 });
 
 // Handle public api call
