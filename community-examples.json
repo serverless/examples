@@ -46,6 +46,11 @@
       "name": "sls-access-counter",
       "description": "Site visitor counter",
       "githubUrl": "https://github.com/takahashim/sls-access-counter"
+    },
+    {
+      "name": "sls-form-mail",
+      "description": "Send SNS email from form data",
+      "githubUrl": "https://github.com/takahashim/sls-form-mail"
     }
   ]
 }
