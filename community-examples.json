@@ -31,5 +31,10 @@
       "description": "Lambda function which sends messages to Slack channel in regular intervals via cron trigger.",
       "githubUrl": "https://github.com/ivanderbu2/serverless-slack-cron"
     },
+    {
+      "name": "giphy-bot",
+      "description": "giphy-bot for Facebook chat",
+      "githubUrl": "https://github.com/tywong/lambda-workshop-2016/tree/master/giphy-bot"
+    }
   ]
 }
