@@ -12,6 +12,11 @@
       "githubUrl": "https://github.com/Marcus-L/serverless-mailgun-slack"
     },
     {
+      "name": "pfs-email-serverless",
+      "description": "This is a lambda function created by the serverless framework. It searches through members in our mongodb who have not been sent emails and sends them an email with their custom token to unlock the pledge free stream. It then marks those members off as already receiving the email.",
+      "githubUrl": "https://github.com/SCPR/pfs-email-serverless"
+    }
+    {
       "name": "plaid cashburndown-service",
       "description": "Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site",
       "githubUrl": "https://github.com/cplee/cashburndown-service"
