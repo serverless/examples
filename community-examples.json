@@ -7,6 +7,11 @@
       "githubUrl": "https://github.com/svdgraaf/serverless-screenshot"
     },
     {
+      "name": "serverless-messenger-boilerplate",
+      "description": "Serverless messenger bot boilerplate",
+      "githubUrl": "https://github.com/SC5/serverless-messenger-boilerplate"
+    },
+    {
       "name": "serverless-mailgun-slack",
       "description": "A Serverless function for posting to a Slack Webhook in response to a Mailgun route",
       "githubUrl": "https://github.com/Marcus-L/serverless-mailgun-slack"
