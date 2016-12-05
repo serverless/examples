@@ -6,6 +6,8 @@ provider:
   runtime: nodejs4.3
 
 functions:
+  auth:
+    handler: handler.auth
   publicEndpoint:
     handler: handler.publicEndpoint
     events:
@@ -21,6 +23,7 @@ functions:
           path: api/private
           method: get
           integration: lambda
+          authorizer: auth
           cors:
             origins:
               - '*'
