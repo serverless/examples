@@ -4,7 +4,7 @@ const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
 const AUTH0_CLIENT_SECRET = 'your-auth0-client-secret-here';
 
 // Policy helper function
-const generatePolicy = function(principalId, effect, resource) {
+const generatePolicy = function (principalId, effect, resource) {
   const authResponse = {};
   authResponse.principalId = principalId;
   if (effect && resource) {
