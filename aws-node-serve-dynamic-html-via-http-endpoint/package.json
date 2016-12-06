@@ -1,0 +1,7 @@
+{
+  "name": "aws-node-serve-dynamic-html-via-http-endpoint",
+  "version": "1.0.0",
+  "description": "Hookup an AWS API Gateway endpoint to a Lambda function to render HTML on a `GET` request",
+  "author": "",
+  "license": "MIT"
+}
