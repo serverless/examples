@@ -1,0 +1,35 @@
+
+service: aws-auth0-protected-endpoints
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  auth:
+    handler: handler.auth
+  publicEndpoint:
+    handler: handler.publicEndpoint
+    events:
+      - http:
+          path: api/public
+          method: get
+          integration: lambda
+          cors: true
+  privateEndpoint:
+    handler: handler.privateEndpoint
+    events:
+      - http:
+          path: api/private
+          method: get
+          integration: lambda
+          authorizer: auth # See custom authorizer docs here: http://bit.ly/2gXw9pO
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token

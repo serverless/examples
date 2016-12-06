@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.auth0.com/js/lock-9.0.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="app.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="">
+        <div id='logo'>
+          <img src="https://i.cloudup.com/StzWWrY34s.png" />
+        </div>
+        <h3>Auth0 Serverless Example</h3>
+        <h2>Welcome <span id="nick" class="nickname"></span></h2>
+        <div class='user-actions'>
+          <a id="btn-login" class="btn">
+            Log in
+          </a>
+          <button id="btn-logout" class="btn" style="display:none">
+            Logout
+          </button>
+        </div>
+        <div id="message"></div>
+        <div class='api-actions'>
+          <button id="btn-public" class="btn">Call Public API</button>
+          <button id="btn-private" class="btn">Call Protected API</button>
+        </div>
+        <a href="https://github.com/serverless/examples/">
+          View the source on github
+        </a>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
