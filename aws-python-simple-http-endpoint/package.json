@@ -1,0 +1,7 @@
+{
+  "name": "aws-python-simple-http-endpoint",
+  "version": "1.0.0",
+  "description": "Example demonstrates how to setup a simple HTTP GET endpoint with python",
+  "author": "",
+  "license": "MIT"
+}
