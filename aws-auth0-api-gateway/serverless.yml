@@ -23,7 +23,7 @@ functions:
           path: api/private
           method: get
           integration: lambda
-          authorizer: auth
+          authorizer: auth # See custom authorizer docs here: http://bit.ly/2gXw9pO
           cors:
             origins:
               - '*'
@@ -32,3 +32,4 @@ functions:
               - X-Amz-Date
               - Authorization
               - X-Api-Key
+              - X-Amz-Security-Token

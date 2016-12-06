@@ -1,6 +1,6 @@
 # Auth0 Serverless Example
 
-This is an example of how to protect API endpoints with auth0
+This is an example of how to protect API endpoints with auth0 and a [custom authorizer function](https://serverless.com/framework/docs/providers/aws/events/apigateway#http-endpoints-with-custom-authorizers)
 
 [View live demo](http://auth0-serverless-protected-routes-demo.surge.sh/)
 
