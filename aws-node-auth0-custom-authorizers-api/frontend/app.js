@@ -71,7 +71,7 @@ document.getElementById('btn-public').addEventListener('click', () => {
 // Handle private api call
 document.getElementById('btn-private').addEventListener('click', () => {
   // Call private API with JWT in header
-  const token = localStorage.getItem('userToken')
+  const token = localStorage.getItem('userToken');
   if (!token) {
     document.getElementById('message').textContent = '';
     document.getElementById('message').textContent = 'You must login to call this protected endpoint!';
@@ -92,4 +92,6 @@ document.getElementById('btn-private').addEventListener('click', () => {
       document.getElementById('message').textContent = data.message;
     });
   });
+  // bc linting...
+  return false;
 });
