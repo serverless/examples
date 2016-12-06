@@ -1,8 +1,10 @@
-# Auth0 Serverless Example
+# Custom Authorizers Auth0 + API Gateway Example
 
-This is an example of how to protect API endpoints with auth0 and a [custom authorizer function](https://serverless.com/framework/docs/providers/aws/events/apigateway#http-endpoints-with-custom-authorizers)
+This is an example of how to protect API endpoints with [auth0](https://auth0.com/), JSON Web Tokens (jwt) and a [custom authorizer function](https://serverless.com/framework/docs/providers/aws/events/apigateway#http-endpoints-with-custom-authorizers)
 
-[View live demo](http://auth0-serverless-protected-routes-demo.surge.sh/)
+Custom Authorizers allow you to run an AWS Lambda Function before your targeted AWS Lambda Function. This is useful for Microservice Architectures or when you simply want to do some Authorization before running your business logic.
+
+### [View live demo](http://auth0-serverless-protected-routes-demo.surge.sh/)
 
 ## Use cases
 
