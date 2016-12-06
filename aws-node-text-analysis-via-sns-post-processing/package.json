@@ -1,7 +1,7 @@
 {
   "name": "serverless-data-pipeline",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example demonstrates how to setup a simple data processing pipeline",
   "author": "",
   "license": "MIT",
   "dependencies": {
