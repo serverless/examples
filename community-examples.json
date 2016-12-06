@@ -1,66 +1,65 @@
-{
-  "examples": [
-    {
-      "name": "serverless-screenshot",
-      "description": "Serverless Screenshot Service using PhantomJS",
-      "url": "http://svdgraaf.nl/2016/09/28/Serverless-Screenshot-Service-With-Lambda.html",
-      "githubUrl": "https://github.com/svdgraaf/serverless-screenshot"
-    },
-    {
-      "name": "serverless-messenger-boilerplate",
-      "description": "Serverless messenger bot boilerplate",
-      "githubUrl": "https://github.com/SC5/serverless-messenger-boilerplate"
-    },
-    {
-      "name": "serverless-mailgun-slack",
-      "description": "A Serverless function for posting to a Slack Webhook in response to a Mailgun route",
-      "githubUrl": "https://github.com/Marcus-L/serverless-mailgun-slack"
-    },
-    {
-      "name": "pfs-email-serverless",
-      "description": "This is a lambda function created by the serverless framework. It searches through members in our mongodb who have not been sent emails and sends them an email with their custom token to unlock the pledge free stream. It then marks those members off as already receiving the email.",
-      "githubUrl": "https://github.com/SCPR/pfs-email-serverless"
-    }
-    {
-      "name": "plaid cashburndown-service",
-      "description": "Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site",
-      "githubUrl": "https://github.com/cplee/cashburndown-service"
-    },
-    {
-      "name": "cordis-serverless",
-      "description": "A serverless API for EU Cordis data",
-      "githubUrl": "https://github.com/marzeelabs/cordis-serverless"
-    },
-    {
-      "name": "serverless-newsletter-signup",
-      "description": "Saves user details into DynamoDB table. Required values are email, first_name and last_name.",
-      "githubUrl": "https://github.com/ivanderbu2/serverless-newsletter-signup"
-    },
-    {
-      "name": "serverless-slack-cron",
-      "description": "Lambda function which sends messages to Slack channel in regular intervals via cron trigger.",
-      "githubUrl": "https://github.com/ivanderbu2/serverless-slack-cron"
-    },
-    {
-      "name": "giphy-bot",
-      "description": "giphy-bot for Facebook chat",
-      "githubUrl": "https://github.com/tywong/lambda-workshop-2016/tree/master/giphy-bot"
-    },
-    {
-      "name": "jwt-lambda-python",
-      "runtime": "python",
-      "description": "Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda",
-      "githubUrl": "https://github.com/mikaelmork/jwt-auth.serverless"
-    }, 
-    {
-      "name": "sls-access-counter",
-      "description": "Site visitor counter",
-      "githubUrl": "https://github.com/takahashim/sls-access-counter"
-    },
-    {
-      "name": "sls-form-mail",
-      "description": "Send SNS email from form data",
-      "githubUrl": "https://github.com/takahashim/sls-form-mail"
-    }
-  ]
-}
+[
+  {
+    "name": "serverless-screenshot",
+    "description": "Serverless Screenshot Service using PhantomJS",
+    "url": "http://svdgraaf.nl/2016/09/28/Serverless-Screenshot-Service-With-Lambda.html",
+    "githubUrl": "https://github.com/svdgraaf/serverless-screenshot"
+  },
+  {
+    "name": "serverless-messenger-boilerplate",
+    "description": "Serverless messenger bot boilerplate",
+    "githubUrl": "https://github.com/SC5/serverless-messenger-boilerplate"
+  },
+  {
+    "name": "serverless-mailgun-slack",
+    "description": "A Serverless function for posting to a Slack Webhook in response to a Mailgun route",
+    "githubUrl": "https://github.com/Marcus-L/serverless-mailgun-slack"
+  },
+  {
+    "name": "pfs-email-serverless",
+    "description": "This is a lambda function created by the serverless framework. It searches through members in our mongodb who have not been sent emails and sends them an email with their custom token to unlock the pledge free stream. It then marks those members off as already receiving the email.",
+    "githubUrl": "https://github.com/SCPR/pfs-email-serverless"
+  },
+  {
+    "name": "plaid cashburndown-service",
+    "description": "Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site",
+    "githubUrl": "https://github.com/cplee/cashburndown-service"
+  },
+  {
+    "name": "cordis-serverless",
+    "description": "A serverless API for EU Cordis data",
+    "githubUrl": "https://github.com/marzeelabs/cordis-serverless"
+  },
+  {
+    "name": "serverless-newsletter-signup",
+    "description": "Saves user details into DynamoDB table. Required values are email, first_name and last_name.",
+    "githubUrl": "https://github.com/ivanderbu2/serverless-newsletter-signup"
+  },
+  {
+    "name": "serverless-slack-cron",
+    "description": "Lambda function which sends messages to Slack channel in regular intervals via cron trigger.",
+    "githubUrl": "https://github.com/ivanderbu2/serverless-slack-cron"
+  },
+  {
+    "name": "giphy-bot",
+    "description": "giphy-bot for Facebook chat",
+    "githubUrl": "https://github.com/tywong/lambda-workshop-2016/tree/master/giphy-bot"
+  },
+  {
+    "name": "jwt-lambda-python",
+    "runtime": "python",
+    "description": "Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda",
+    "githubUrl": "https://github.com/mikaelmork/jwt-auth.serverless"
+  },
+  {
+    "name": "sls-access-counter",
+    "description": "Site visitor counter",
+    "githubUrl": "https://github.com/takahashim/sls-access-counter"
+  },
+  {
+    "name": "sls-form-mail",
+    "description": "Send SNS email from form data",
+    "githubUrl": "https://github.com/takahashim/sls-form-mail"
+  }
+]
+

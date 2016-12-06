@@ -1,0 +1,7 @@
+{
+  "name": "aws-node-serve-dynamic-html-via-http-endpoint",
+  "version": "1.0.0",
+  "description": "Example demonstrates how to setup a simple HTTP GET endpoint",
+  "author": "",
+  "license": "MIT"
+}
