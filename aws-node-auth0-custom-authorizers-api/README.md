@@ -1,6 +1,6 @@
-# Custom Authorizers Auth0 + API Gateway Example
+# API Gateway Custom Authorizer Function + Auth0
 
-This is an example of how to protect API endpoints with [auth0](https://auth0.com/), JSON Web Tokens (jwt) and a [custom authorizer function](https://serverless.com/framework/docs/providers/aws/events/apigateway#http-endpoints-with-custom-authorizers)
+This is an example of how to protect API endpoints with [auth0](https://auth0.com/), JSON Web Tokens (jwt) and a [custom authorizer lambda function](https://serverless.com/framework/docs/providers/aws/events/apigateway#http-endpoints-with-custom-authorizers).
 
 Custom Authorizers allow you to run an AWS Lambda Function before your targeted AWS Lambda Function. This is useful for Microservice Architectures or when you simply want to do some Authorization before running your business logic.
 
@@ -31,6 +31,7 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 5. Plugin your `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, and the `PUBLIC_ENDPOINT` + `PRIVATE_ENDPOINT` from aws in top of the `frontend/app.js` file.
 
   ```js
+  /* frontend/app.j */
   // replace these values in app.js
   const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
   const AUTH0_DOMAIN = 'your-auth0-domain-here.auth0.com';
@@ -38,7 +39,7 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
   const PRIVATE_ENDPOINT = 'https://your-aws-endpoint-here.us-east-1.amazonaws.com/dev/api/private';
   ```
 
-6. Deploy Frontend to host of your choosing and make sure you configure the `Allowed Callback URL` and `Allowed Origins` in your auth0 client in the [auth0 dashboard](https://manage.auth0.com)
+6. Deploy Frontend to host of your choosing and make sure to configure the `Allowed Callback URL` and `Allowed Origins` in your auth0 client in the [auth0 dashboard](https://manage.auth0.com). We used `http://auth0-serverless-protected-routes-demo.surge.sh/` for our demo.
 
 ## Frontend
 
@@ -46,6 +47,6 @@ The frontend is a bare bones vanilla javascript implementation.
 
 You can replace it with whatever frontend framework you like =)
 
-If you do implement in another framework, please consider adding it our growing list of examples!
+If you do implement in another framework, please consider adding it our [growing list of examples](https://github.com/serverless/examples/)!
 
 API calls are made with the browser's native `fetch` api.
