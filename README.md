@@ -26,6 +26,7 @@ npm run lint
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE)-->
 | Example | description  |
 |:--------------------------- |:-----|
+| [Aws Auth0 Api Gateway](https://github.com/serverless/examples/tree/master/aws-node-auth0-custom-authorizers-api) | Demonstration of protecting API gateway endpoints with auth0 |
 | [Env Variables Encrypted In A File](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file) | Serverless example managing secrets in an encrypted file |
 | [Serverless Node Env Variables](https://github.com/serverless/examples/tree/master/aws-node-env-variables) | This example demonstrates how to use environment variables for AWS Lambdas. |
 | [Function Compiled With Babel](https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel) | Demonstrating how to compile all your code with Babel |

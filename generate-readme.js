@@ -4,8 +4,7 @@ const markdownMagic = require('markdown-magic'); // eslint-disable-line
 const globby = require('markdown-magic').globby; // eslint-disable-line
 
 const toTitleCase = (str) => { // eslint-disable-line
-  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
-  );
+  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 };
 
 const formatPluginName = (string) => { // eslint-disable-line
