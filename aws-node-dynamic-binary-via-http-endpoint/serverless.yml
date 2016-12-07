@@ -12,3 +12,8 @@ functions:
       - http:
           method: get
           path: image
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_TEMPLATES
+            template:
+              image/png: '{}'
