@@ -41,6 +41,19 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 
 6. Deploy Frontend to host of your choosing and make sure to configure the `Allowed Callback URL` and `Allowed Origins` in your auth0 client in the [auth0 dashboard](https://manage.auth0.com). We used `http://auth0-serverless-protected-routes-demo.surge.sh/` for our demo.
 
+## Custom authorizer functions
+
+[Custom authorizers functions](https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/) are executed before a Lambda function is executed and return an Error or a Policy document.
+
+The Custom authorizer function is passed an `event` object as below:
+```javascript
+{
+  "type": "TOKEN",
+  "authorizationToken": "<Incoming bearer token>",
+  "methodArn": "arn:aws:execute-api:<Region id>:<Account id>:<API id>/<Stage>/<Method>/<Resource path>"
+}
+```
+
 ## Frontend
 
 The frontend is a bare bones vanilla javascript implementation.
