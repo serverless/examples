@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports = (event, context, callback) => {
+module.exports.delete = (event, context, callback) => {
   const params = {
     TableName: 'todos',
     Key: {
