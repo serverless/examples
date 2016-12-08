@@ -7,7 +7,7 @@ const params = {
   TableName: 'todos',
 };
 
-module.exports = (event, context, callback) => {
+module.exports.list = (event, context, callback) => {
   // fetch all todos from the database
   dynamoDb.scan(params, (error, result) => {
     // handle potential errors
