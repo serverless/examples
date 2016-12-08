@@ -1,7 +1,6 @@
 {
-  "name": "serverless-upload-to-s3",
+  "name": "fetch-file-and-store-in-s3",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Bozhao Yu",
   "license": "MIT",
   "dependencies": {

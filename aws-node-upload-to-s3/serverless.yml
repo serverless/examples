@@ -1,5 +1,9 @@
-service: aws-node-upload-to-s3
+service: fetch-file-and-store-in-s3
+
 frameworkVersion: ">=1.1.0"
+
+custom:
+  bucket: <your-bucket-name>
 
 provider:
   name: aws
@@ -7,11 +11,13 @@ provider:
   stage: dev
   region: us-west-1
   iamRoleStatements:
-     - Effect: Allow
+    - Effect: Allow
       Action:
         - s3:*
       Resource: "*"
 
 functions:
-  upload:
-    handler: handler.upload
+  save:
+    handler: handler.save
+    environment:
+      BUCKET: ${self:custom.bucket}
