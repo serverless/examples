@@ -45,11 +45,19 @@ Each example contains a README.md with general explanation and an in-depth guide
 | [Jwt Lambda Python](https://github.com/mikaelmork/jwt-auth.serverless) | Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda |
 | [Pfs Email Serverless](https://github.com/SCPR/pfs-email-serverless) | This is a lambda function created by the serverless framework. It searches through members in our mongodb who have not been sent emails and sends them an email with their custom token to unlock the pledge free stream. It then marks those members off as already receiving the email. |
 | [Plaid Cashburndown Service](https://github.com/cplee/cashburndown-service) | Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site |
+| [Serverless Delivery Framework](https://github.com/99xt/serverless-delivery-framework) | This is a boilerplate for version release pipeline with serverless framework |
+| [Serverless Facebook Quotebot](https://github.com/pmuens/quotebot) | 100% Serverless Facebook messenger chatbot which will respond with inspiring quotes |
+| [Serverless Garden Aid](https://github.com/garden-aid/web-bff) | IoT Garden Aid Backend |
 | [Serverless Mailgun Slack](https://github.com/Marcus-L/serverless-mailgun-slack) | A Serverless function for posting to a Slack Webhook in response to a Mailgun route |
 | [Serverless Messenger Boilerplate](https://github.com/SC5/serverless-messenger-boilerplate) | Serverless messenger bot boilerplate |
 | [Serverless Newsletter Signup](https://github.com/ivanderbu2/serverless-newsletter-signup) | Saves user details into DynamoDB table. Required values are email, first_name and last_name. |
+| [Serverless Npm Registry](https://github.com/craftship/yith) | Serverless private npm registry, proxy and cache. |
+| [Serverless Pokego](https://github.com/jch254/pokego-serverless) | Serverless-powered API to fetch nearby Pokemon Go data |
+| [Serverless React Boilerplate](https://github.com/99xt/serverless-react-boilerplate) | A serverless react boilerplate for offline development |
 | [Serverless Screenshot](https://github.com/svdgraaf/serverless-screenshot) | Serverless Screenshot Service using PhantomJS |
 | [Serverless Slack Cron](https://github.com/ivanderbu2/serverless-slack-cron) | Lambda function which sends messages to Slack channel in regular intervals via cron trigger. |
+| [Serverless Slack Trevorbot](https://github.com/conveyal/trevorbot) | Slack bot for info on where in the world is Trevor Gerhardt? |
+| [Serverless Weekly2pocket App](https://github.com/s0enke/weekly2pocket) | Serverless-powered API for sending posts to pocket app |
 | [Sls Access Counter](https://github.com/takahashim/sls-access-counter) | Site visitor counter |
 | [Sls Form Mail](https://github.com/takahashim/sls-form-mail) | Send SNS email from form data |
 <!-- AUTO-GENERATED-CONTENT:END -->
