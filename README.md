@@ -1,3 +1,5 @@
+[Website](http://www.serverless.com) • [Email Updates](http://eepurl.com/b8dv4P) • [Gitter](https://gitter.im/serverless/serverless) • [Forum](http://forum.serverless.com) • [Meetups](https://github.com/serverless-meetups/main) • [Twitter](https://twitter.com/goserverless) • [Facebook](https://www.facebook.com/serverless) • [Contact Us](mailto:hello@serverless.com)
+
 # Serverless Examples
 
 A collection of ready-to-deploy Serverless Framework boilerplates.
@@ -10,16 +12,6 @@ In case you haven't built any services yet it's recommend to get started with th
 - [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) (Python)
 
 Each example contains a README.md with general explanation and an in-depth guide.
-
-## Adding more examples
-
-We are happy to accept more examples. Please make sure your contribution matches the linting we setup for this repository.
-
-Run the linting via
-
-```bash
-npm run lint
-```
 
 ## Examples
 
@@ -42,6 +34,9 @@ npm run lint
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Community Examples
+
+### [Add it to the plugin list](https://github.com/serverless/examples/blob/master/community-examples.json)
+
 <!-- AUTO-GENERATED-CONTENT:START (COMMUNITY_EXAMPLES_TABLE)-->
 | Example | description  |
 |:--------------------------- |:-----|
@@ -58,3 +53,13 @@ npm run lint
 | [Sls Access Counter](https://github.com/takahashim/sls-access-counter) | Site visitor counter |
 | [Sls Form Mail](https://github.com/takahashim/sls-form-mail) | Send SNS email from form data |
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+## Adding more examples
+
+We are happy to accept more examples. Please make sure your contribution matches the linting we setup for this repository.
+
+Run the linting via
+
+```bash
+npm run lint
+```
