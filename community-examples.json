@@ -11,6 +11,47 @@
     "githubUrl": "https://github.com/SC5/serverless-messenger-boilerplate"
   },
   {
+    "name": "serverless-npm-registry",
+    "description": "Serverless private npm registry, proxy and cache.",
+    "url": "https://craftship.io/open/source/serverless/private/npm/registry/yith/2016/09/26/serverless-yith.html",
+    "githubUrl": "https://github.com/craftship/yith"
+  },
+  {
+    "name": "serverless-pokego",
+    "description": "Serverless-powered API to fetch nearby Pokemon Go data",
+    "githubUrl": "https://github.com/jch254/pokego-serverless"
+  },
+  {
+    "name": "serverless-weekly2pocket-app",
+    "description": "Serverless-powered API for sending posts to pocket app",
+    "githubUrl": "https://github.com/s0enke/weekly2pocket"
+  },
+  {
+    "name": "serverless-facebook-quotebot",
+    "description": "100% Serverless Facebook messenger chatbot which will respond with inspiring quotes",
+    "githubUrl": "https://github.com/pmuens/quotebot"
+  },
+  {
+    "name": "serverless-slack-trevorbot",
+    "description": "Slack bot for info on where in the world is Trevor Gerhardt?",
+    "githubUrl": "https://github.com/conveyal/trevorbot"
+  },
+  {
+    "name": "serverless-garden-aid",
+    "description": "IoT Garden Aid Backend",
+    "githubUrl": "https://github.com/garden-aid/web-bff"
+  },
+  {
+    "name": "serverless-react-boilerplate",
+    "description": "A serverless react boilerplate for offline development",
+    "githubUrl": "https://github.com/99xt/serverless-react-boilerplate"
+  },
+  {
+    "name": "serverless-delivery-framework",
+    "description": "This is a boilerplate for version release pipeline with serverless framework",
+    "githubUrl": "https://github.com/99xt/serverless-delivery-framework"
+  },
+  {
     "name": "serverless-mailgun-slack",
     "description": "A Serverless function for posting to a Slack Webhook in response to a Mailgun route",
     "githubUrl": "https://github.com/Marcus-L/serverless-mailgun-slack"
