@@ -1,5 +1,5 @@
 {
-  "name": "serverless-data-pipeline",
+  "name": "aws-text-analysis-via-sns-post-processing",
   "version": "1.0.0",
   "description": "Example demonstrates how to setup a simple data processing pipeline",
   "author": "",
