@@ -1,5 +1,5 @@
 {
-  "name": "env-variables-encrypted-in-a-file",
+  "name": "aws-env-variables-encrypted-in-a-file",
   "version": "1.0.0",
   "description": "Serverless example managing secrets in an encrypted file",
   "author": "",
