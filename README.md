@@ -75,3 +75,13 @@ Run the linting via
 ```bash
 npm run lint
 ```
+
+Please add a `package.json` with the name since it is used to generate the examples section in this README.md.
+
+## Re-Generating the Examples Section
+
+We are happy to accept more examples. Please make sure your contribution matches the linting we setup for this repository.
+
+```bash
+node generate-readme.js
+```
