@@ -52,6 +52,9 @@
 
       // post to API with native browser Fetch
       const getdata = fetch(API_ENDPOINT, {
+        headers: {
+          "Content-type": "application/json"
+        },
         method: 'POST',
         body: data,
         mode: 'cors',
@@ -60,9 +63,10 @@
 
       getdata.then((response) => {
         response.json().then((data) => {
-          console.log('Message:', data);
+          console.log('Response:', data);
+          const body = JSON.parse(data.body);
           messageDiv.textContent = '';
-          messageDiv.textContent = data.message;
+          messageDiv.textContent = (body && body.message) ? body.message : '';
         });
       });
     });
