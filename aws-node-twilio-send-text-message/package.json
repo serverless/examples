@@ -1,0 +1,14 @@
+{
+  "name": "aws-node-twilio-send-text-message",
+  "version": "0.0.1",
+  "description": "Send a text message via twilio from aws lambda",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "twilio": "^2.11.1"
+  }
+}
