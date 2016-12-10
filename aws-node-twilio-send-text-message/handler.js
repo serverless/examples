@@ -18,7 +18,7 @@ module.exports.sendText = (event, context, callback) => {
     if (error) {
       const errResponse = {
         headers: {
-          "Access-Control-Allow-Origin" : "*" // Required for CORS support to work
+          'Access-Control-Allow-Origin': '*', // Required for CORS support to work
         },
         statusCode: error.status,
         message: error.message,
@@ -27,13 +27,13 @@ module.exports.sendText = (event, context, callback) => {
       return callback(null, errResponse);
     }
     // text message sent! ✅
-    console.log(`message: ${data.body}`);
-    console.log(`date_created: ${data.date_created}`);
+    console.log(`message: ${data.body}`); // eslint-disable-line
+    console.log(`date_created: ${data.date_created}`); // eslint-disable-line
 
     const response = {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin" : "*" // Required for CORS support to work
+        'Access-Control-Allow-Origin': '*', // Required for CORS support to work
       },
       body: JSON.stringify({
         message: data,
