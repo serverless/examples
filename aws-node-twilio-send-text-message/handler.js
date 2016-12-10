@@ -6,13 +6,13 @@ const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken);
 module.exports.sendText = (event, context, callback) => {
   // use twilio SDK to send text message
   const sms = {
-    to: event.to,
-    body: event.message || '',
+    to: event.body.to,
+    body: event.body.message || '',
     from: twilioPhoneNumber,
   };
   // add image to sms if supplied
-  if (event.image) {
-    sms.mediaUrl = event.image;
+  if (event.body.image) {
+    sms.mediaUrl = event.body.image;
   }
   twilioClient.messages.create(sms, (error, data) => { // eslint-disable-line
     if (error) {
@@ -21,8 +21,10 @@ module.exports.sendText = (event, context, callback) => {
           'Access-Control-Allow-Origin': '*', // Required for CORS support to work
         },
         statusCode: error.status,
-        message: error.message,
-        error: JSON.stringify(error),
+        body: JSON.stringify({
+          message: error.message,
+          error: error // eslint-disable-line
+        }),
       };
       return callback(null, errResponse);
     }
@@ -36,7 +38,8 @@ module.exports.sendText = (event, context, callback) => {
         'Access-Control-Allow-Origin': '*', // Required for CORS support to work
       },
       body: JSON.stringify({
-        message: data,
+        message: 'Text message successfully sent!',
+        data: data // eslint-disable-line
       }),
     };
 
