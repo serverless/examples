@@ -15,4 +15,5 @@ functions:
       - http:
           path: api/sendText
           method: post
+          integration: lambda
           cors: true
