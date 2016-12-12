@@ -27,6 +27,8 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
     TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
   ```
 
+  If you want to use encrypted API keys, see our [encrypted environment variables example](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file)
+
 5. Invoke the function and send an SMS message
 
   Update the `to` phone number the `event.json` file and `message` to send in the SMS
