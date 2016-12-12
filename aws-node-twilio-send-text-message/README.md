@@ -9,18 +9,19 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
 
 * Sending users confirmation text messages
 
-## Create a Twilio account.
+## Setup
 
 1. Sign up for a Twilio account. Go to (http://www.twilio.com)
 
-2. Create a [new phone number](https://www.twilio.com/console/phone-numbers/) in your Twilio trial account.
+2. Create a [new phone number](https://www.twilio.com/console/phone-numbers/) in your Twilio trial account
 
-3. Grab your ACCOUNT SID and AUTH TOKEN from the [Twilio console](https://www.twilio.com/console) and plug those into the `serverless.yml` file in the next step.
+3. Grab your ACCOUNT SID and AUTH TOKEN from the [Twilio console](https://www.twilio.com/console) and plug those into the `serverless.yml` file in the next step
 
-4. Set your `env` variables in `serverless.yml` with your Twilio account values.
+4. Set your `env` variables in `serverless.yml` with your Twilio account values
 
   ```yml
   environment:
+    # replace these env variables with your twilio account values
     TWILIO_ACCOUNT_SID: YOUR-TWILIO-ACCOUNT-SID-HERE
     TWILIO_AUTH_TOKEN: YOUR-TWILIO-AUTH-TOKEN-HERE
     TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
@@ -30,12 +31,14 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
 
   Update the `to` phone number the `event.json` file and `message` to send in the SMS
 
-  Then invoke the function passing in the event JSON.
+  Then invoke the function with the serverless CLI. Set the `--path event.json` so the function knows where to send the SMS.
 
   ```bash
   serverless invoke -f sendText --path event.json
   ```
 
-6. (optional) Deploy the frontend application.
+6. (Optional) Deploy the front-end application
 
-  Update the `API_ENDPOINT` variable in `/frontend/index.html` and deploy the `/frontend` folder to a static host of your choice
+  Update the `API_ENDPOINT` variable in the `/frontend/index.html` file and deploy the `/frontend` folder to a static host of your choice.
+
+  We recommend S3, [netlify](https://www.netlify.com/), or [surge.sh](http://surge.sh/) for quick and easy static site hosting.
