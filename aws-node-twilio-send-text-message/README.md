@@ -2,6 +2,8 @@
 
 This example demonstrates how to send SMS messages with the Twilio SDK and AWS lambda.
 
+[Live the live demo](http://twilio-serverless-example.surge.sh)
+
 ## Use Cases:
 
 * Sending users confirmation text messages
@@ -23,4 +25,16 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
     TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
   ```
 
-5. (optional) Update the `API_ENDPOINT` variable in `/frontend/index.html` and deploy the `/frontend` folder to a static host of your choice
+5. Invoke the function and send an SMS message
+
+  Update the `to` phone number the `event.json` file and `message` to send in the SMS
+
+  Then invoke the function passing in the event JSON.
+
+  ```bash
+  serverless invoke -f sendText --path event.json
+  ```
+
+6. (optional) Deploy the frontend application.
+
+  Update the `API_ENDPOINT` variable in `/frontend/index.html` and deploy the `/frontend` folder to a static host of your choice
