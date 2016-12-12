@@ -44,12 +44,8 @@ h3 {
   border: 0;
   background-color: #16214D;
   color: white;
-  min-width: 80px;
-  min-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
+  min-height: 30px;
   min-width: 200px;
 }
 
