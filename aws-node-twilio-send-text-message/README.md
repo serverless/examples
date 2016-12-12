@@ -11,7 +11,7 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
 
 ## Setup
 
-1. Sign up for a Twilio account. Go to (http://www.twilio.com)
+1. Sign up for a [Twilio account](http://www.twilio.com)
 
 2. Create a [new phone number](https://www.twilio.com/console/phone-numbers/) in your Twilio trial account
 
