@@ -26,12 +26,13 @@
         </a>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.1/fetch.js"></script>
   <script>
     // Fill in with your API endpoint
     const API_ENDPOINT = 'https://sq2uyqp3re.execute-api.us-east-1.amazonaws.com/dev/api/sendText';
     const messageDiv = document.getElementById('message')
     // Handle public api call
-    document.getElementById('send-text').addEventListener('click', () => {
+    document.getElementById('send-text').addEventListener('click', function () {
       const text = document.getElementById('text').value
       const number = document.getElementById('phone-number').value
 
@@ -61,13 +62,15 @@
         cache: false,
       });
 
-      getdata.then((response) => {
-        response.json().then((data) => {
+      getdata.then(function(response) {
+        response.json().then(function(data) {
           console.log('Response:', data);
           const body = JSON.parse(data.body);
           messageDiv.textContent = '';
           messageDiv.textContent = (body && body.message) ? body.message : '';
         });
+      }).catch(function(err) {
+      	console.log(err)
       });
     });
   </script>
