@@ -1,5 +1,6 @@
 # Send SMS Message with Twilio
 
+<img align="right" width="316" height="103" src="https://s3-us-west-2.amazonaws.com/assets.site.serverless.com/blog/twilio-logo.jpg">
 This example demonstrates how to send SMS messages with the Twilio SDK and AWS lambda.
 
 [Live the live demo](http://twilio-serverless-example.surge.sh)
