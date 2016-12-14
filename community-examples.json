@@ -101,6 +101,11 @@
     "name": "sls-form-mail",
     "description": "Send SNS email from form data",
     "githubUrl": "https://github.com/takahashim/sls-form-mail"
+  },
+    {
+    "name": "serverless-python-sample",
+    "description": "A simple serverless python sample with REST API endpoints and dependencies",
+    "githubUrl": "https://github.com/bennybauer/serverless-python-sample"
   }
 ]
 
