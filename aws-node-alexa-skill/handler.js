@@ -11,7 +11,7 @@ module.exports.luckyNumber = (event, context, callback) => {
     response: {
       outputSpeech: {
         type: 'PlainText',
-        text: `You lucky number is ${number}`,
+        text: `Your lucky number is ${number}`,
       },
     },
   };
