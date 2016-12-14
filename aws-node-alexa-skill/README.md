@@ -1,4 +1,4 @@
-# Serverless Environment Variables Usage
+# Serverless Alexa Skill Example
 
 This example demonstrates how to setup your own Alexa skill using AWS Lambdas.
 
