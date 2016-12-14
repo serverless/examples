@@ -1,0 +1,13 @@
+service: aws-node-alexa-skill-2
+
+# frameworkVersion: ">=1.4.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  luckyNumber:
+    handler: handler.luckyNumber
+    events:
+      - alexaSkill
