@@ -89,6 +89,7 @@ Next up visit the test page, fill in the utterance and click on `Ask LuckyNumber
 ![Test](https://cloud.githubusercontent.com/assets/223045/21183283/83f1f632-c207-11e6-858d-41b1a3154e91.png)
 ![Test](https://cloud.githubusercontent.com/assets/223045/21183282/83f1f628-c207-11e6-974e-b7c051ffb6eb.png)
 ![Test](https://cloud.githubusercontent.com/assets/223045/21183284/83f708ac-c207-11e6-8199-9489e8f3e494.png)
+![Test](https://cloud.githubusercontent.com/assets/223045/21185805/78c1df06-c212-11e6-9cf9-ce44edc30cdd.gif)
 
 You should have received a response containing the text `Your lucky number is` followed by your lucky number :)
 
