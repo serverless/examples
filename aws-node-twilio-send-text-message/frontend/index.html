@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="app.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="">
+        <div id='logo'>
+          <img src="https://s3-us-west-2.amazonaws.com/assets.site.serverless.com/blog/twilio-logo.jpg" />
+        </div>
+        <h3>Twilio Serverless Example</h3>
+        <div id="message"></div>
+        <div class="inputs">
+          <input id="phone-number" placeholder="Phone Number" />
+          <input id="text" placeholder="Input your text message" />
+        </div>
+        <div class='api-actions'>
+          <button id="send-text" class="btn">Send Text</button>
+        </div>
+        <a href="https://github.com/serverless/examples/">
+          View the source on github
+        </a>
+    </div>
+  </div>
+  <!-- polyfill browser fetch -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.1/fetch.js"></script>
+  <script>
+    // Fill in with your API endpoint
+    const API_ENDPOINT = 'https://sq2uyqp3re.execute-api.us-east-1.amazonaws.com/dev/api/sendText';
+    const messageDiv = document.getElementById('message')
+    // Handle public api call
+    document.getElementById('send-text').addEventListener('click', function () {
+      const text = document.getElementById('text').value
+      const number = document.getElementById('phone-number').value
+
+      if (!text) {
+        messageDiv.innerHTML = 'Enter a message!'
+        return false
+      }
+
+      if (!number) {
+        messageDiv.innerHTML = 'Enter a number!'
+        return false
+      }
+
+      const data = JSON.stringify({
+        to: number,
+        message: text
+      })
+
+      // post to API with native browser Fetch
+      const getdata = fetch(API_ENDPOINT, {
+        headers: {
+          "Content-type": "application/json"
+        },
+        method: 'POST',
+        body: data,
+        mode: 'cors',
+        cache: false,
+      });
+
+      getdata.then(function(response) {
+        response.json().then(function(data) {
+          console.log('Response:', data);
+          const body = JSON.parse(data.body);
+          messageDiv.textContent = '';
+          messageDiv.textContent = (body && body.message) ? body.message : '';
+        });
+      }).catch(function(err) {
+      	console.log(err)
+      });
+    });
+  </script>
+</body>
+</html>
