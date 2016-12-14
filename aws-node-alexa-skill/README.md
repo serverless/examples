@@ -52,6 +52,31 @@ Next click on `Add a new Skill`:
 
 Go through the steps and fill in all the required fields e.g. Intent Schema and Sample Utterances:
 
+Intent Schema
+```
+{
+  "intents": [
+    {
+      "intent": "GetLuckyNumbers",
+      "slots": [
+        {
+          "name": "UpperLimit",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    }
+  ]
+}
+```
+
+Sample Utterances
+```
+GetLuckyNumbers what are my lucky numbers
+GetLuckyNumbers tell me my lucky numbers
+GetLuckyNumbers what are my lucky numbers lower than {UpperLimit}
+GetLuckyNumbers tell me my lucky numbers lower than {UpperLimit}
+```
+
 ![Skill Information](https://cloud.githubusercontent.com/assets/223045/21183279/83eec480-c207-11e6-841b-d8925f0804a5.png)
 ![Interaction Model](https://cloud.githubusercontent.com/assets/223045/21183280/83ef3d84-c207-11e6-87a5-bb8dcbb903f8.png)
 
