@@ -1,6 +1,6 @@
 service: aws-python-alexa-skill
 
-# frameworkVersion: ">=1.4.0 <2.0.0"
+frameworkVersion: ">=1.4.0 <2.0.0"
 
 provider:
   name: aws
