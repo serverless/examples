@@ -8,11 +8,11 @@ This example demonstrates how to setup your own Alexa skill using AWS Lambdas.
 
 ## How it works
 
-In the Alexa Developer Portal you can add you own skill. To do so you need to define the available intents and then connect them to a AWS Lambda. The Lambda you can define and update with Serverless.
+In the Alexa Developer Portal you can add your own skill. To do so you need to define the available intents and then connect them to a Lambda. You can update and define the Lambda with Serverless.
 
 ## Setup
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint simply run
 
 ```bash
 serverless deploy
@@ -42,7 +42,7 @@ functions:
 
 ```
 
-Next we need to setup a Alexa skill. Therefor signup for the Amazon Developer Platform and visit `https://developer.amazon.com/edw/home.html`. There you should see the following screen:
+Next we need to setup an Alexa skill. Once you've signed up for the Amazon Developer Platform visit `https://developer.amazon.com/edw/home.html`. There you should see the following screen:
 
 ![Welcome](https://cloud.githubusercontent.com/assets/223045/21183285/8403b37c-c207-11e6-89c0-d36582010af8.png)
 
