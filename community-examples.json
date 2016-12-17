@@ -116,6 +116,11 @@
     "name": "serverless-AWS-Rekognition-finpics",
     "description": "Use AWS Rekognition to provide a faces search of finpics.com",
     "githubUrl": "https://github.com/rgfindl/finpics"
+  },
+  {
+    "name": "serverless-slack-emojibot",
+    "description": "Serverless slack bot for emoji",
+    "githubUrl": "https://github.com/markhobson/emojibot"
   }
 ]
 
