@@ -109,7 +109,7 @@
   },
   {
     "name": "serverless-msg-gateway",
-    "description": "A messaging aggregator. Connect it to your messaging services; send and receive messages in a standard format.",
+    "description": "A messaging aggregator for kik, skype, twilio, telegram, & messenger. Send and receive messages in a standard format.",
     "githubUrl": "https://github.com/yonahforst/msg-gateway"
   }
 ]
