@@ -121,6 +121,11 @@
     "name": "serverless-slack-emojibot",
     "description": "Serverless slack bot for emoji",
     "githubUrl": "https://github.com/markhobson/emojibot"
+  }, 
+  {
+    "name": "keboola-developer-portal",
+    "description": "Keboola developer portal built with Serverless",
+    "githubUrl": "https://github.com/keboola/developer-portal"
   }
 ]
 
