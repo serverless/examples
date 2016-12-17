@@ -102,10 +102,15 @@
     "description": "Send SNS email from form data",
     "githubUrl": "https://github.com/takahashim/sls-form-mail"
   },
-    {
+  {
     "name": "serverless-python-sample",
     "description": "A simple serverless python sample with REST API endpoints and dependencies",
     "githubUrl": "https://github.com/bennybauer/serverless-python-sample"
+  },
+  {
+    "name": "serverless-msg-gateway",
+    "description": "A messaging aggregator. Connect it to your messaging services; send and receive messages in a standard format.",
+    "githubUrl": "https://github.com/yonahforst/msg-gateway"
   }
 ]
 
