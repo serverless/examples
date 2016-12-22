@@ -126,6 +126,11 @@
     "name": "keboola-developer-portal",
     "description": "Keboola developer portal built with Serverless",
     "githubUrl": "https://github.com/keboola/developer-portal"
-  }
+  },
+  {
+    "name": "serverless-cloudwatch-rds-custom-metrics",
+    "description": "A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless",
+    "githubUrl": "https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics"
+  }  
 ]
 
