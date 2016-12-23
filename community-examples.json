@@ -121,7 +121,7 @@
     "name": "serverless-slack-emojibot",
     "description": "Serverless slack bot for emoji",
     "githubUrl": "https://github.com/markhobson/emojibot"
-  }, 
+  },
   {
     "name": "keboola-developer-portal",
     "description": "Keboola developer portal built with Serverless",
@@ -131,6 +131,11 @@
     "name": "serverless-cloudwatch-rds-custom-metrics",
     "description": "A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless",
     "githubUrl": "https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics"
-  }  
+  },
+  {
+    "name": "jrestless-examples",
+    "description": "[JRestless](https://github.com/bbilger/jrestless) (Java / JAX-RS) examples for [API Gateway Functions](https://github.com/bbilger/jrestless-examples/tree/master/aws/gateway) ([plain JAX-RS](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-showcase), [Spring](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-spring), [binary data requests/responses](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-binary), [custom authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-custom-authorizer) and [Cognito User Pool authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-cognito-authorizer)), [SNS Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/sns/aws-sns-usage-example) (asynchronous communication between functions) and [Service Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/service/aws-service-usage-example) (synchronous HTTP-like communication between functions - transparent through Feign)",
+    "githubUrl": "https://github.com/bbilger/jrestless-examples"
+  }
 ]
 
