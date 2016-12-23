@@ -16,14 +16,14 @@ This service will listen to github webhooks fired by a given repository.
 
 ## Setup
 
-1. Set your webhook secret token in `serverless.yml` by replacing `YOUR-SECRET-HERE` in the environment variables `GITHUB_WEBHOOK_SECRET`.
+1. Set your webhook secret token in `serverless.yml` by replacing `REPLACE-WITH-YOUR-SECRET-HERE` in the environment variables `GITHUB_WEBHOOK_SECRET`.
 
   ```yml
   provider:
     name: aws
     runtime: nodejs4.3
     environment:
-      GITHUB_WEBHOOK_SECRET: YOUR-SECRET-HERE
+      GITHUB_WEBHOOK_SECRET: REPLACE-WITH-YOUR-SECRET-HERE
   ```
 
 2. Deploy the service
@@ -47,11 +47,11 @@ This service will listen to github webhooks fired by a given repository.
 
 3. Configure your webhook in your github repository settings. [Setting up a Webhook](https://developer.github.com/webhooks/creating/#setting-up-a-webhook)
 
-  (1.) Plugin your API POST endpoint. (`https://abcdefg.execute-api.us-east-1.amazonaws.com/dev/webhook` in this example)
+  *(1.)* Plugin your API POST endpoint. (`https://abcdefg.execute-api.us-east-1.amazonaws.com/dev/webhook` in this example)
 
-  (2.) Plugin your secret from `GITHUB_WEBHOOK_SECRET` environment variable
+  *(2.)* Plugin your secret from `GITHUB_WEBHOOK_SECRET` environment variable
 
-  (3.) Choose the types of events you want the github webhook to fire on
+  *(3.)* Choose the types of events you want the github webhook to fire on
 
   ![webhook-steps](https://cloud.githubusercontent.com/assets/532272/21461773/db7cecd2-c922-11e6-9362-6bbf4661fe14.jpg)
 
