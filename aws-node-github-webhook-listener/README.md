@@ -12,7 +12,39 @@ This service will listen to github webhooks fired by a given repository.
 
 ## How it works
 
-<img width="316" alt="github-webhooks" src="https://cloud.githubusercontent.com/assets/532272/21461458/9d67f53e-c91f-11e6-9228-f57e47d9ed76.png">
+┌───────────────┐               ┌───────────┐
+│               │               │           │
+│  Github repo  │               │   Github  │
+│   activity    │────Trigger───▶│  Webhook  │
+│               │               │           │
+└───────────────┘               └───────────┘
+                                      │
+                     ┌────POST────────┘
+                     │
+          ┌──────────▼─────────┐
+          │ ┌────────────────┐ │
+          │ │  API Gateway   │ │
+          │ │    Endpoint    │ │
+          │ └────────────────┘ │
+          └─────────┬──────────┘
+                    │
+                    │
+         ┌──────────▼──────────┐
+         │ ┌────────────────┐  │
+         │ │                │  │
+         │ │     Lambda     │  │
+         │ │    Function    │  │
+         │ │                │  │
+         │ └────────────────┘  │
+         └─────────────────────┘
+                    │
+                    │
+                    ▼
+         ┌────────────────────┐
+         │                    │
+         │      Do stuff      │
+         │                    │
+         └────────────────────┘
 
 ## Setup
 
