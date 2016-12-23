@@ -1,7 +1,7 @@
 {
-  "name": "github-webhook",
+  "name": "aws-github-webhook-listener",
   "version": "1.0.0",
-  "description": "Listener for github webhooks",
+  "description": "Extend your github repositories with this github webhook listener",
   "main": "handler.js",
   "scripts": {
     "deploy": "serverless deploy",
