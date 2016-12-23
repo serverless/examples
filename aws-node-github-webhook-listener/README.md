@@ -12,6 +12,7 @@ This service will listen to github webhooks fired by a given repository.
 
 ## How it works
 
+```
 ┌───────────────┐               ┌───────────┐
 │               │               │           │
 │  Github repo  │               │   Github  │
@@ -45,6 +46,7 @@ This service will listen to github webhooks fired by a given repository.
          │      Do stuff      │
          │                    │
          └────────────────────┘
+```
 
 ## Setup
 
