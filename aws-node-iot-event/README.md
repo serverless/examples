@@ -41,6 +41,8 @@ functions:
 
 In `serverless.yml` the log-function is configured to receive any event from the IoT Topic `my-button`. We now can go to the IoT Console and visit the Tab `Test`.
 
+![iot-console-test](https://cloud.githubusercontent.com/assets/223045/21593597/352be866-d119-11e6-9639-994b9c495571.png)
+
 There fill `mybutton` into the topic input field in the publish section. Replace existing example data with the following example and press the publish button.
 
 ```json
@@ -49,6 +51,8 @@ There fill `mybutton` into the topic input field in the publish section. Replace
   "value": 2
 }
 ```
+
+![iot-console-form](https://cloud.githubusercontent.com/assets/223045/21593596/352be71c-d119-11e6-979a-7aa70abd2bf2.png)
 
 To verify that our event was forwarded to our log-function run
 
