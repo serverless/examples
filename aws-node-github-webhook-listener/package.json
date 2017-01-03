@@ -9,7 +9,4 @@
   },
   "author": "David Wells",
   "license": "MIT",
-  "dependencies": {
-    "crypto": "0.0.3"
-  }
 }
