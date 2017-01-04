@@ -1,8 +1,8 @@
 # Data processing
 
-This example demonstrates how to setup a simple data processing pipeline. The service exposes one HTTP endpoint that allows you to add a text note. This HTTP endpoint returns instantly to provide a good user experience while the actual analysis is deferred. Only message above a certain sentiment level are actually saved.
+This example demonstrates how to setup a simple data processing pipeline. The service exposes one HTTP endpoint that allows you to add a text note. This HTTP endpoint returns instantly to provide a good user experience while the actual analysis is deferred. Only messages above a certain sentiment level are actually saved.
 
-Instead of invoking another Lambda function directly it's best practise to store the note as a message in a SNS queue. The queue has certain benefits compared to invoking the `analyzeNote` function directly. The queue supports retries in case the analyzeNote function fails as well as back-off to avoid too many concurrent invocations.
+Instead of invoking another Lambda function directly it's considered best practice to store the note as a message in a SNS queue. The queue has certain benefits compared to invoking the `analyzeNote` function directly. The queue supports retries in case the analyzeNote function fails as well as back-off to avoid too many concurrent invocations.
 
 ## Setup
 
@@ -18,7 +18,7 @@ You can retrieve the your account ID by running this command (you need the AWS S
 aws sts get-caller-identity --output text --query Account
 ```
 
-# Explaination
+# Explanation
 
 - sns topic will be added by default
 
