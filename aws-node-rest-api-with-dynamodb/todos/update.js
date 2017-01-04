@@ -18,21 +18,21 @@ module.exports.update = (event, context, callback) => {
   const params = {
     TableName: 'todos',
     Key: {
-      id: event.pathParameters.id
+      id: event.pathParameters.id,
     },
     ExpressionAttributeNames: {
       '#c1': 'createdAt',
       '#c2': 'updatedAt',
       '#c3': 'text',
-      '#c4': 'checked'
+      '#c4': 'checked',
     },
     ExpressionAttributeValues: {
       ':d2': timestamp,
       ':d3': data.text,
-      ':d4': data.checked
+      ':d4': data.checked,
     },
     UpdateExpression: 'SET #c1 = if_not_exists(#c1, :d2), #c2 = :d2, #c3 = :d3, #c4 = :d4',
-    ReturnValues: 'ALL_NEW'
+    ReturnValues: 'ALL_NEW',
   };
 
   // update the todo in the database
