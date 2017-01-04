@@ -8,5 +8,5 @@
     "logs": "serverless logs -f githubWebhookListener -t"
   },
   "author": "David Wells",
-  "license": "MIT",
+  "license": "MIT"
 }
