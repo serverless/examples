@@ -1,6 +1,6 @@
 'use strict';
 
-var Facebook = require('./facebook.js');
+const Facebook = require('./facebook.js');
 
 /*
 Example test event
@@ -15,13 +15,12 @@ Example test event
 */
 
 exports.handler = (event, context, callback) => {
-  var facebook = new Facebook();
-  facebook.post(event.data, event.accessToken, function (error, status_id) {
+  const facebook = new Facebook();
+  facebook.post(event.data, event.accessToken, (error, statusId) => {
     if (error) {
-      callback(event.data); //error, send back the event
-    }
-    else {
-      callback(null,status_id);
+      callback(event.data); // error, send back the event
+    } else {
+      callback(null, statusId);
     }
   });
 };
