@@ -6,6 +6,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "~6.18.0",
     "babel-preset-latest": "^6.16.0",
     "serverless-babel-plugin": "^0.1.3"
   },
