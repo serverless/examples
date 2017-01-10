@@ -6,6 +6,11 @@
     "githubUrl": "https://github.com/svdgraaf/serverless-screenshot"
   },
   {
+    "name": "serverless-postgraphql",
+    "description": "GraphQL endpoint for PostgreSQL using postgraphql",
+    "githubUrl": "https://github.com/rentrop/serverless-postgraphql"
+  },
+  {
     "name": "serverless-messenger-boilerplate",
     "description": "Serverless messenger bot boilerplate",
     "githubUrl": "https://github.com/SC5/serverless-messenger-boilerplate"
