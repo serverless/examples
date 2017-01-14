@@ -17,7 +17,30 @@ It is required to build prior to deploying. You can build the deployment artifac
 In order to build using Gradle simply run
 
 ```bash
-./gradlew build
+gradle wrapper # to build the gradle wrapper jar
+./gradlew build # to build the application jar
+```
+
+The expected result should be similar to:
+
+```bash
+Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+:compileJava
+:processResources
+:classes
+:jar
+:assemble
+:buildZip
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
+:check UP-TO-DATE
+:build
+
+BUILD SUCCESSFUL
+
+Total time: 8.195 secs
 ```
 
 ### Maven
@@ -96,7 +119,7 @@ The expected result should be similar to:
     "statusCode": 200,
     "body": "{\"message\":\"Hello, the current time is Wed Jan 04 23:44:37 UTC 2017\"}",
     "headers": {
-        "X-Powered-By": "AWS Lambda & serverless",
+        "X-Powered-By": "AWS Lambda & Serverless",
         "Content-Type": "application/json"
     },
     "isBase64Encoded": false
