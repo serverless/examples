@@ -60,9 +60,9 @@ class ServerlessPlugin {
         'describeStacks',
         { StackName: stackName },
         this.options.stage,
-        this.options.region,
+        this.options.region // eslint-disable-line comma-dangle
       )
-      .then(function (result) {
+      .then(function log(result) {
         const outputs = result.Stacks[0].Outputs;
         const output = outputs.find(entry => entry.OutputKey === 'WebAppCloudFrontDistributionOutput');
         if (output.OutputValue) {
