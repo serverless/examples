@@ -62,7 +62,7 @@ class ServerlessPlugin {
         this.options.stage,
         this.options.region,
       )
-      .then((result) => {
+      .then(function (result) {
         const outputs = result.Stacks[0].Outputs;
         const output = outputs.find(entry => entry.OutputKey === 'WebAppCloudFrontDistributionOutput');
         if (output.OutputValue) {
