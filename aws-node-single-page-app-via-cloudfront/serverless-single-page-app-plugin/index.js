@@ -60,7 +60,7 @@ class ServerlessPlugin {
         'describeStacks',
         { StackName: stackName },
         this.options.stage,
-        this.options.region,
+        this.options.region
       )
       .then(function (result) {
         const outputs = result.Stacks[0].Outputs;
