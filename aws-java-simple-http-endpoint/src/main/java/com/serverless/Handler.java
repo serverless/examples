@@ -18,7 +18,7 @@ public class Handler implements RequestHandler<Map<String, Object>, ApiGatewayRe
 		LOG.info("received: " + input);
 		Response responseBody = new Response("Hello, the current time is " + new Date());
 		Map<String, String> headers = new HashMap<>();
-		headers.put("X-Powered-By", "AWS Lambda & serverless");
+		headers.put("X-Powered-By", "AWS Lambda & Serverless");
 		headers.put("Content-Type", "application/json");
 		return ApiGatewayResponse.builder()
 				.setStatusCode(200)
