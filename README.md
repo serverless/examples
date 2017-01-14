@@ -19,6 +19,7 @@ If you are new to serverless, we recommend getting started with the following ex
 
 - [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) (NodeJS)
 - [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) (Python)
+- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint) (Java)
 
 Each example contains a README.md with an explanation about the service, it's use cases and a guide on deploying.
 
