@@ -11,7 +11,7 @@ module.exports.update = (event, context, callback) => {
   // validation
   if (typeof data.text !== 'string' || typeof data.checked !== 'boolean') {
     console.error('Validation Failed'); // eslint-disable-line no-console
-    callback(new Error('Couldn\'t create the todo item.'));
+    callback(new Error('Couldn\'t update the todo item.'));
     return;
   }
 
@@ -21,17 +21,14 @@ module.exports.update = (event, context, callback) => {
       id: event.pathParameters.id,
     },
     ExpressionAttributeNames: {
-      '#c1': 'createdAt',
-      '#c2': 'updatedAt',
-      '#c3': 'text',
-      '#c4': 'checked',
+      '#todo_text': 'text',
     },
     ExpressionAttributeValues: {
-      ':d2': timestamp,
-      ':d3': data.text,
-      ':d4': data.checked,
+      ':text': data.text,
+      ':checked': data.checked,
+      ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET #c1 = if_not_exists(#c1, :d2), #c2 = :d2, #c3 = :d3, #c4 = :d4',
+    UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
     ReturnValues: 'ALL_NEW',
   };
 
