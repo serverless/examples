@@ -144,7 +144,7 @@
   },
   {
     "name": "sc5-serverless-boilerplate",
-    "description": "A boilerplate that contains setup for test driven development",
+    "description": "A boilerplate that contains setup for test-driven development",
     "githubUrl": "https://github.com/SC5/sc5-serverless-boilerplate"
   },
   {
