@@ -141,6 +141,16 @@
     "name": "jrestless-examples",
     "description": "[JRestless](https://github.com/bbilger/jrestless) (Java / JAX-RS) examples for [API Gateway Functions](https://github.com/bbilger/jrestless-examples/tree/master/aws/gateway) ([plain JAX-RS](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-showcase), [Spring](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-spring), [binary data requests/responses](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-binary), [custom authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-custom-authorizer) and [Cognito User Pool authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-cognito-authorizer)), [SNS Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/sns/aws-sns-usage-example) (asynchronous communication between functions) and [Service Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/service/aws-service-usage-example) (synchronous HTTP-like communication between functions - transparent through Feign)",
     "githubUrl": "https://github.com/bbilger/jrestless-examples"
+  },
+  {
+    "name": "sc5-serverless-boilerplate",
+    "description": "A boilerplate that contains setup for test-driven development",
+    "githubUrl": "https://github.com/SC5/sc5-serverless-boilerplate"
+  },
+  {
+    "name": "serverless-blog-to-podcast",
+    "description": "Service that reads RSS feed and converts the entries to a podcast feed and audio files using Amazon Polly",
+    "githubUrl": "https://github.com/SC5/serverless-blog-to-podcast"
   }
 ]
 
