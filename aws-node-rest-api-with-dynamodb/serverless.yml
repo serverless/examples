@@ -16,13 +16,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource:
-        Fn::Join:
-          - ""
-          - - "arn:aws:dynamodb:"
-            - ${self:provider.region}
-            - ":*:table/"
-            - ${self:service}-${opt:stage, self:provider.stage}
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${env:DYNAMODB_TABLE}"
 
 functions:
   create:
@@ -82,4 +76,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:service}-${opt:stage, self:provider.stage}
+        TableName: ${env:DYNAMODB_TABLE}
