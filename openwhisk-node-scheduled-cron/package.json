@@ -1,0 +1,9 @@
+{
+  "name": "openwhisk-node-scheduled-cron",
+  "version": "0.1.0",
+  "description": "Example of creating a function that runs as a cron job using the serverless schedule event.",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
