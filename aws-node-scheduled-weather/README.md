@@ -25,7 +25,7 @@ Read the [AWS cron expression syntax](http://docs.aws.amazon.com/lambda/latest/d
 
 ### DarkSky
 
-Please visit https://darksky.net/dev/ to register for a free API token. 
+Please visit https://darksky.net/dev/ to register for a free API token.
 
 ### Postmark
 
@@ -37,7 +37,7 @@ Upon setting up access to both external services, you'll be required to update t
 
 ```
 environment:
-  RECIPIENT: 'tom@carrotcreative.com'
+  RECIPIENT: tom@carrotcreative.com
   DARK_SKY_API_KEY: abc123
   POSTMARK_API_KEY: abc123
   POSTMARK_SENDER: devops@carrotcreative.com
