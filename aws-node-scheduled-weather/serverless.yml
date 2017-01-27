@@ -5,7 +5,7 @@ provider:
   name: aws
   runtime: nodejs4.3
   environment:
-    RECIPIENT: 'tom@carrotcreative.com'
+    RECIPIENT: tom@carrotcreative.com
     DARK_SKY_API_KEY: abc123
     POSTMARK_API_KEY: abc123
     POSTMARK_SENDER: devops@carrotcreative.com
