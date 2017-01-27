@@ -1,7 +1,7 @@
 {
   "name": "aws-scheduled-weather",
   "version": "1.0.0",
-  "description": "Example of creating a function that runs as a cron job using the serverless `schedule` event",
+  "description": "Example of creating a function that runs as a cron job using the serverless `schedule` event through pulling weather and sending an email daily.",
   "author": "Tom Milewski <tmilewski@gmail.com>",
   "license": "MIT",
   "dependencies": {
