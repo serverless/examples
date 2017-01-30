@@ -5,17 +5,18 @@ frameworkVersion: ">=1.1.0 <2.0.0"
 provider:
   name: aws
   runtime: nodejs4.3
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:DescribeTable
         - dynamodb:Query
         - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${env:DYNAMODB_TABLE}"
 
 functions:
   create:
@@ -75,4 +76,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'todos'
+        TableName: ${env:DYNAMODB_TABLE}
