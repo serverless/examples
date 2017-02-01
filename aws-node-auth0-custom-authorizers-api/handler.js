@@ -29,7 +29,7 @@ module.exports.auth = (event, context, cb) => {
     const options = {
       audience: AUTH0_CLIENT_ID,
     };
-    jwt.verify(token, new Buffer(AUTH0_CLIENT_SECRET, 'base64'), options, (err, decoded) => {
+    jwt.verify(token, AUTH0_CLIENT_SECRET, options, (err, decoded) => {
       if (err) {
         cb('Unauthorized');
       } else {
