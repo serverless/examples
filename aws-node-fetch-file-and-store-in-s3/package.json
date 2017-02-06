@@ -5,7 +5,6 @@
   "author": "Bozhao Yu",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.7.9",
     "bluebird": "^3.4.6",
     "node-fetch": "^1.6.3"
   }
