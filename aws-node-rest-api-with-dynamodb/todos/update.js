@@ -10,7 +10,7 @@ module.exports.update = (event, context, callback) => {
 
   // validation
   if (typeof data.text !== 'string' || typeof data.checked !== 'boolean') {
-    console.error('Validation Failed'); // eslint-disable-line no-console
+    console.error('Validation Failed');
     callback(new Error('Couldn\'t update the todo item.'));
     return;
   }
@@ -36,7 +36,7 @@ module.exports.update = (event, context, callback) => {
   dynamoDb.update(params, (error, result) => {
     // handle potential errors
     if (error) {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
       callback(new Error('Couldn\'t update the todo item.'));
       return;
     }

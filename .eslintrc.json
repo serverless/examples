@@ -5,6 +5,7 @@
   },
   "rules": {
     "strict": "off",
+    "no-console": "off",
     "import/no-unresolved": "off"
   }
 }

@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-disable no-console */
-
 module.exports.createUser = (event, context, callback) => {
   // logs `4096`
   console.log('PASSWORD_ITERATIONS: ', process.env.PASSWORD_ITERATIONS);
