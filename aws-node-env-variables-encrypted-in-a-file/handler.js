@@ -1,7 +1,5 @@
 'use strict';
 
-/* eslint-disable no-console */
-
 module.exports.resetPassword = (event, context, callback) => {
   console.log('SESSION_KEY: ', process.env.SESSION_KEY);
 

@@ -16,7 +16,7 @@ module.exports.delete = (event, context, callback) => {
   dynamoDb.delete(params, (error) => {
     // handle potential errors
     if (error) {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
       callback(new Error('Couldn\'t remove the todo item.'));
       return;
     }
