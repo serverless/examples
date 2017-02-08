@@ -1,4 +1,4 @@
-/* global window document localStorage fetch alert */
+/* eslint-env browser */
 
 // Fill in with your values
 const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
