@@ -24,7 +24,7 @@ npm install
 In order to deploy the you endpoint simply run
 
 ```bash
-serverless deploy
+DYNAMODB_TABLE=todos serverless deploy --stage dev
 ```
 
 The expected result should be similar to:
