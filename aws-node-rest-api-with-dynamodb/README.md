@@ -4,7 +4,7 @@ This example demonstrates how to setup a [RESTful Web Services](https://en.wikip
 
 ## Structure
 
-This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.js`. In each of these files there is exactly one function which is directly attached to `module.exports`. In order for the Serverless framework to have access to these functions one `todos/index.js` exists which is importing and than exporting all the operations as one module.
+This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.js`. In each of these files there is exactly one function which is directly attached to `module.exports`.
 
 The idea behind the `todos` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
 
@@ -21,7 +21,7 @@ npm install
 
 ## Deploy
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint simply run
 
 ```bash
 serverless deploy
@@ -99,7 +99,10 @@ Example Result:
 curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
 ```
 
-No output
+Example Result:
+```bash
+{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
+```
 
 ### Delete a Todo
 
