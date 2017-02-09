@@ -12,7 +12,7 @@ module.exports.delete = (event, context, callback) => {
     },
   };
 
-  // write the todo to the database
+  // delete the todo from the database
   dynamoDb.delete(params, (error) => {
     // handle potential errors
     if (error) {

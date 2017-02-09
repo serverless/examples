@@ -12,7 +12,7 @@ module.exports.get = (event, context, callback) => {
     },
   };
 
-  // fetch all todos from the database
+  // fetch todo from the database
   dynamoDb.get(params, (error, result) => {
     // handle potential errors
     if (error) {
