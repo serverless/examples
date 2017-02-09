@@ -20,3 +20,5 @@ env.json
 admin.env
 tmp
 *.pyc
+*.swp
+*.swo
