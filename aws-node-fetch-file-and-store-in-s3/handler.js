@@ -2,7 +2,6 @@
 
 const fetch = require('node-fetch');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
-AWS.config.setPromisesDependency(require('bluebird'));
 
 const s3 = new AWS.S3();
 
