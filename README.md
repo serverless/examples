@@ -4,6 +4,7 @@
 
 A collection of ready-to-deploy [Serverless Framework](https://github.com/serverless/serverless) services.
 
+## Table of Contents
 <!-- AUTO-GENERATED-CONTENT:START (TOC) generated w/ `npm run docs` -->
 - [Getting Started](#getting-started)
 - [Examples](#examples)
@@ -15,11 +16,11 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 
 ## Getting Started
 
-If you are new to serverless, we recommend getting started with the following examples.
+If you are new to serverless, we recommend getting started with:
 
-- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) (NodeJS)
-- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) (Python)
-- [simple-http-endpoint example](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint) (Java)
+- Creating an HTTP API Endpoint [(NodeJS)](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) | [(Python)](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) | [(Java)](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint)
+- [Scheduled Cron Example](https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron)
+- [Fetch File & Store in S3](https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3)
 
 Each example contains a README.md with an explanation about the service, it's use cases and a guide on deploying.
 
