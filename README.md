@@ -5,13 +5,16 @@
 A collection of ready-to-deploy [Serverless Framework](https://github.com/serverless/serverless) services.
 
 ## Table of Contents
-<!-- AUTO-GENERATED-CONTENT:START (TOC) generated w/ `npm run docs` -->
+<!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) generated w/ `npm run docs`  -->
+<details>
+<summary>Click to expand</summary>
 - [Getting Started](#getting-started)
 - [Examples](#examples)
 - [Community Examples](#community-examples)
 - [Contributing](#contributing)
   * [Adding example code](#adding-example-code)
   * [Adding a community example](#adding-a-community-example)
+</details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Getting Started
