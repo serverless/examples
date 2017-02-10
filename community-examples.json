@@ -157,6 +157,11 @@
     "description": "Single page app using Serverless (C# runtime) and S3 site hosting. Pledge to do a good thing for the next four years to offset the potential negative effects of the US Presidency",
     "url": "http://www.offsettrump.com",
     "githubUrl": "https://github.com/FLGMwt/offset-trump"
+  },
+  {
+    "name": "serverless-url-shortener",
+    "description": "A simple url-shortener, using Serverless framework",
+    "githubUrl": "https://github.com/aletheia/serverless-url-shortener"
   }
 ]
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -12,11 +12,11 @@ module.exports.delete = (event, context, callback) => {
     },
   };
 
-  // write the todo to the database
+  // delete the todo from the database
   dynamoDb.delete(params, (error) => {
     // handle potential errors
     if (error) {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
       callback(new Error('Couldn\'t remove the todo item.'));
       return;
     }

@@ -1,6 +1,6 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -12,11 +12,11 @@ module.exports.get = (event, context, callback) => {
     },
   };
 
-  // fetch all todos from the database
+  // fetch todo from the database
   dynamoDb.get(params, (error, result) => {
     // handle potential errors
     if (error) {
-      console.error(error); // eslint-disable-line no-console
+      console.error(error);
       callback(new Error('Couldn\'t fetch the todo item.'));
       return;
     }

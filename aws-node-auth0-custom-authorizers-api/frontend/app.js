@@ -23,11 +23,11 @@ document.getElementById('btn-login').addEventListener('click', () => {
   lock.show((err, profile, token) => {
     if (err) {
       // Error callback
-      console.error('Something went wrong: ', err); // eslint-disable-line no-console
+      console.error('Something went wrong: ', err);
       alert('Something went wrong, check the Console errors'); // eslint-disable-line no-alert
     } else {
       // Success calback
-      console.log(token); // eslint-disable-line no-console
+      console.log(token);
 
       // Save the JWT token.
       localStorage.setItem('userToken', token);
@@ -61,7 +61,7 @@ document.getElementById('btn-public').addEventListener('click', () => {
 
   getdata.then((response) => {
     response.json().then((data) => {
-      console.log('Message:', data); // eslint-disable-line no-console
+      console.log('Message:', data);
       document.getElementById('message').textContent = '';
       document.getElementById('message').textContent = data.message;
     });
@@ -87,7 +87,7 @@ document.getElementById('btn-private').addEventListener('click', () => {
 
   getdata.then((response) => {
     response.json().then((data) => {
-      console.log('Token:', data); // eslint-disable-line no-console
+      console.log('Token:', data);
       document.getElementById('message').textContent = '';
       document.getElementById('message').textContent = data.message;
     });

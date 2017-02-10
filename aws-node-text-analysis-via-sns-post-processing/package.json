@@ -5,7 +5,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.6.7",
     "sentiment": "^2.1.0"
   }
 }
