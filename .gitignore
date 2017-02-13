@@ -10,7 +10,7 @@ coverage
 .grunt
 .lock-wscript
 node_modules
-**/.idea
+.idea
 .DS_Store
 .tmp
 .env
