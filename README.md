@@ -42,6 +42,7 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 | [Aws Function Compiled With Babel](https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel) <br/> Demonstrating how to compile all your code with Babel | nodeJS |
 | [Aws Github Webhook Listener](https://github.com/serverless/examples/tree/master/aws-node-github-webhook-listener) <br/> Extend your github repositories with this github webhook listener | nodeJS |
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |
+| [Aws Rest Api Offline](https://github.com/serverless/examples/tree/master/aws-node-rest-api-offline) <br/> Serverless REST API with DynamoDB and offline support | nodeJS |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | nodeJS |
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | nodeJS |
 | [Aws Scheduled Weather](https://github.com/serverless/examples/tree/master/aws-node-scheduled-weather) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event through pulling weather and sending an email daily. | nodeJS |
