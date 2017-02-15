@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>S3 POST Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    <form action="%BUCKET_URL%" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="Content-Type" value="image/png">
+      <input type="hidden" name="AWSAccessKeyId" value="%AWS_ACCESS_KEY%">
+      <input type="hidden" name="acl" value="public-read">
+      <input type="hidden" name="success_action_status" value="201">
+      <input type="hidden" name="policy" value="%POLICY_BASE64%">
+      <input type="hidden" name="signature" value="%SIGNATURE%">
+
+      Destination filename: <input type="text" name="key" value="uploads/image.png">
+      <br>
+      File to upload to S3:
+      <input name="file" type="file">
+      <br>
+      <input type="submit" value="Upload File to S3">
+    </form>
+  </body>
+</html>
