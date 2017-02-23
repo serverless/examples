@@ -118,7 +118,7 @@ We are happy to accept more examples from the community. 🎉
   npm run lint
   ```
 
-2. Add a `package.json` file in your example with the name of the example and a `description` and any `dependancies` used.
+2. Add a `package.json` file in your example with the name of the example and a `description` and any `dependencies` used.
 
 3. Regenerate the README.md with the following command
 
