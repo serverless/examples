@@ -13,7 +13,7 @@ then
 `npm i`
 
 You can then run the compiler by running `tsc` in this directory. It will pull the settings from .tsconfig and extra @types
-from package.json
+from package.json. The output create.js file is what will be uploaded by serverless.
 
 #
 
