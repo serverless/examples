@@ -1,0 +1,29 @@
+service: azfx-node-http
+
+provider:
+  name: azure
+  azureSubId: YourAzureSubscriptionID
+  azureServicePrincipalTenantId: servicePrincipalTenantId
+  azureservicePrincipalClientId: servicePrincipalClientId
+  azureServicePrincipalPassword: servicePrincipalPassword
+  location: West US
+
+plugins:
+  - serverless-azure-functions
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - package.json
+    - .git/**
+
+functions:
+  hello: 
+     handler: handler.hello
+     events: 
+       - http: true
+         x-azure-settings:
+           authLevel : anonymous
+     
+ 
