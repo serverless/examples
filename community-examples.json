@@ -162,6 +162,11 @@
     "name": "serverless-url-shortener",
     "description": "A simple url-shortener, using Serverless framework",
     "githubUrl": "https://github.com/aletheia/serverless-url-shortener"
+  },
+  {
+    "name": "serverless-html-pdf",
+    "description": "Service that convert HTML to PDF using PhantomJS's rasterize example.",
+    "githubUrl": "https://github.com/calvintychan/serverless-html-pdf"
   }
 ]
 
