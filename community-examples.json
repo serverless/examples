@@ -167,6 +167,11 @@
     "name": "serverless-html-pdf",
     "description": "Service that convert HTML to PDF using PhantomJS's rasterize example.",
     "githubUrl": "https://github.com/calvintychan/serverless-html-pdf"
+  },
+  {
+    "name": "serverless-examples-cached-rds-ws",
+    "description": "A serverless framework example project that uses API Gateway, ElastiCache, and RDS PostgreSQL.",
+    "githubUrl": "https://github.com/mugglmenzel/serverless-examples-cached-rds-ws"
   }
 ]
 
