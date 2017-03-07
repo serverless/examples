@@ -172,6 +172,11 @@
     "name": "serverless-examples-cached-rds-ws",
     "description": "A serverless framework example project that uses API Gateway, ElastiCache, and RDS PostgreSQL.",
     "githubUrl": "https://github.com/mugglmenzel/serverless-examples-cached-rds-ws"
+  },
+  {
+    "name": "bittman",
+    "description": "A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun.",
+    "githubUrl": "https://github.com/rhlsthrm/bittman"
   }
 ]
 
