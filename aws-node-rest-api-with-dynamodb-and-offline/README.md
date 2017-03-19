@@ -35,7 +35,10 @@ You can create, retrieve, update, or delete todos with the following commands:
 curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --data '{ "text": "Learn Serverless" }'
 ```
 
-No output
+Example Result:
+```bash
+{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+```
 
 ### List all Todos
 
