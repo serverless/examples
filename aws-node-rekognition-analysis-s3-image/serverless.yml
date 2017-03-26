@@ -1,0 +1,27 @@
+service: rekognition-analysis-s3-image
+
+frameworkVersion: ">=1.8.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: us-east-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "rekognition:*"
+      Resource: "*"   
+
+functions:
+  imageAnalysis:
+    handler: handler.imageAnalysis
+    events:
+      - http:
+          path: analysis
+          method: post    
