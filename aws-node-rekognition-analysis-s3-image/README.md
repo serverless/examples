@@ -10,8 +10,6 @@ This example shows how to analys an image in an S3 bucket with Amazon Rekognitio
 
 You need to create an S3 bucket and upload at least one file. Be sure the permissions on the folder and file allow public access and that CORS is configured to allow access.
 
-Replace the values in `post.json` with the bucket and image name from S3.
-
 ```bash
 npm install
 ```
@@ -50,7 +48,7 @@ functions:
 
 You can now send an HTTP POST request directly to the endpoint using a tool like curl
 
-```json
+```
 {
   "bucket": "mycatphotos",
   "imageName": "cat.jpg"
