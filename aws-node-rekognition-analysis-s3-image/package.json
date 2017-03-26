@@ -1,0 +1,10 @@
+{
+  "name": "aws-node-rekognition-analysis-s3-image",
+  "description": "Analyse an Image from an S3 Bucket with Amazon Rekognition",
+  "version": "1.0.0",
+  "author": "lynnaloo",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.32.0"
+  }
+}
