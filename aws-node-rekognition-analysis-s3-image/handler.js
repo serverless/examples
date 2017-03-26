@@ -6,7 +6,7 @@ const ImageAnalyser = require('./lib/imageAnalyser');
   Analyse an image on S3 using bucket and image name
  */
 module.exports.imageAnalysis = (event, context, callback) => {
-  const data = event.body;
+  const data = JSON.parse(event.body);
 
   const s3Config = {
     bucket: data.bucket,
