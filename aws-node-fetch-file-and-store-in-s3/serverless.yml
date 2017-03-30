@@ -13,8 +13,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - s3:*
-      Resource: "*"
+        - s3:PutObject
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
   save:
