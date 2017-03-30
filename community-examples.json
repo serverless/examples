@@ -177,6 +177,11 @@
     "name": "bittman",
     "description": "A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun.",
     "githubUrl": "https://github.com/rhlsthrm/bittman"
+  },
+  {
+    "name": "adoptable-pet-bot",
+    "description": "Tweets adoptable pets using Serverless (Node.js) and AWS Lambda",
+    "githubUrl": "https://github.com/lynnaloo/adoptable-pet-bot"
   }
 ]
 
