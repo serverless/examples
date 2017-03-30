@@ -182,6 +182,11 @@
     "name": "adoptable-pet-bot",
     "description": "Tweets adoptable pets using Serverless (Node.js) and AWS Lambda",
     "githubUrl": "https://github.com/lynnaloo/adoptable-pet-bot"
+  },
+  {
+    "name": "owntracks-serverless",
+    "description": "A serverless implementation of the OwnTracks HTTP backend",
+    "githubUrl": "https://github.com/dschep/owntracks-serverless"
   }
 ]
 
