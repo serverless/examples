@@ -187,6 +187,11 @@
     "name": "owntracks-serverless",
     "description": "A serverless implementation of the OwnTracks HTTP backend",
     "githubUrl": "https://github.com/dschep/owntracks-serverless"
+  },
+  {
+    "name": "serverless-modern-koa",
+    "description": "Serverless modern koa starter kit",
+    "githubUrl": "https://github.com/barczaG/serverless-modern-koa"
   }
 ]
 
