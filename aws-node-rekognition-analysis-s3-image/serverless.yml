@@ -1,10 +1,12 @@
 service: rekognition-analysis-s3-image
 
-frameworkVersion: ">=1.8.0"
+frameworkVersion: ">=1.10.0"
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
+  memorySize: 512
+  timeout: 10
   stage: dev
   region: us-east-1
 
