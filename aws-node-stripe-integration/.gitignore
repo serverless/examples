@@ -1,0 +1,9 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# Config yaml (local.yaml)
+config/local.yaml
