@@ -16,10 +16,5 @@ module.exports.save = (event, context, callback) => {
         Body: buffer,
       }).promise()
     ))
-    .then(() => {
-      callback(null, 'Saved');
-    })
-    .catch((error) => {
-      callback(error, null);
-    });
+    .then(v => callback(null, v), callback);
 };
