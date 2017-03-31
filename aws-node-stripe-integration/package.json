@@ -1,0 +1,13 @@
+{
+  "name": "aws-node-stripe-integration",
+  "version": "1.0.0",
+  "description": "This example for Stripe integration using AWS Lambda and API Gateway.",
+  "main": "handler.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wokamoto",
+  "license": "ISC"
+}
