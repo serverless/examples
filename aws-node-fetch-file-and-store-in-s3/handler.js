@@ -7,8 +7,8 @@ const s3 = new AWS.S3();
 
 module.exports.save = (event, context, callback) => {
   fetch(event.image_url)
-    .then(response => response.buffer())
     .then(res => (res.ok ? res : Promise.reject({ status: res.status, text: res.statusText })))
+    .then(response => response.buffer())
     .then(buffer => (
       s3.putObject({
         Bucket: process.env.BUCKET,
