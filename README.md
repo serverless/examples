@@ -74,6 +74,7 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 <!-- AUTO-GENERATED-CONTENT:START (COMMUNITY_EXAMPLES_TABLE)  generated w/ `npm run docs` -->
 | Example | Author |
 |:-------|:------:|
+| **[Serverless Reactjs Universal Rendering Boilerplate](http://github.com/TylorShin)** <br/> ReactJS webapp does universal(isomorphic) rendering with Serverless starter kit | [TylorShin](http://github.com/TylorShin) |
 | **[Adoptable Pet Bot](https://github.com/lynnaloo/adoptable-pet-bot)** <br/> Tweets adoptable pets using Serverless (Node.js) and AWS Lambda | [lynnaloo](http://github.com/lynnaloo) |
 | **[Bittman](https://github.com/rhlsthrm/bittman)** <br/> A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun. | [rhlsthrm](http://github.com/rhlsthrm) |
 | **[Cordis Serverless](https://github.com/marzeelabs/cordis-serverless)** <br/> A serverless API for EU Cordis data | [marzeelabs](http://github.com/marzeelabs) |
@@ -112,7 +113,6 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 | **[Serverless Weekly2pocket App](https://github.com/s0enke/weekly2pocket)** <br/> Serverless-powered API for sending posts to pocket app | [s0enke](http://github.com/s0enke) |
 | **[Sls Access Counter](https://github.com/takahashim/sls-access-counter)** <br/> Site visitor counter | [takahashim](http://github.com/takahashim) |
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
-| **[Serverless ReactJS Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless)** <br/> A serverless reactJS boilerplate for universal(isomorphic) rendering | [TylorShin](http://github.com/TylorShin) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
