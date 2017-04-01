@@ -112,6 +112,7 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 | **[Serverless Weekly2pocket App](https://github.com/s0enke/weekly2pocket)** <br/> Serverless-powered API for sending posts to pocket app | [s0enke](http://github.com/s0enke) |
 | **[Sls Access Counter](https://github.com/takahashim/sls-access-counter)** <br/> Site visitor counter | [takahashim](http://github.com/takahashim) |
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
+| **[Serverless ReactJS Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless)** <br/> A serverless reactJS boilerplate for universal(isomorphic) rendering | [TylorShin](http://github.com/TylorShin) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
