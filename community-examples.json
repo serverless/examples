@@ -195,7 +195,7 @@
   },
   {
     "name": "Serverless ReactJS Universal Rendering Boilerplate",
-    "description": "ReactJS webapp does universal(isomorphic) rendering with Serverless starter kit",
-    "githubUrl": "http://github.com/TylorShin"
+    "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
+    "githubUrl": "http://github.com/TylorShin/react-universal-in-serverless"
   }
 ]
