@@ -192,6 +192,10 @@
     "name": "serverless-modern-koa",
     "description": "Serverless modern koa starter kit",
     "githubUrl": "https://github.com/barczaG/serverless-modern-koa"
+  },
+  {
+    "name": "Serverless ReactJS Universal Rendering Boilerplate",
+    "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
+    "githubUrl": "http://github.com/TylorShin/react-universal-in-serverless"
   }
 ]
-
