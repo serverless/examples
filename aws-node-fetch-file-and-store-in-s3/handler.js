@@ -12,7 +12,7 @@ module.exports.save = (event, context, callback) => {
         return response;
       }
       return Promise.reject(new Error(
-            `Failed to fetch ${event.image_url}: ${response.status} ${response.statusText}`));
+            `Failed to fetch ${response.url}: ${response.status} ${response.statusText}`));
     })
     .then(response => response.buffer())
     .then(buffer => (
