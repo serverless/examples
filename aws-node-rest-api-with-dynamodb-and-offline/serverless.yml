@@ -11,7 +11,7 @@ custom:
     start:
       port: 8000
       inMemory: true
-      migration: true
+      migrate: true
     migration:
       dir: offline/migrations
 
