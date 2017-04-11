@@ -177,6 +177,30 @@
     "name": "bittman",
     "description": "A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun.",
     "githubUrl": "https://github.com/rhlsthrm/bittman"
+  },
+  {
+    "name": "adoptable-pet-bot",
+    "description": "Tweets adoptable pets using Serverless (Node.js) and AWS Lambda",
+    "githubUrl": "https://github.com/lynnaloo/adoptable-pet-bot"
+  },
+  {
+    "name": "owntracks-serverless",
+    "description": "A serverless implementation of the OwnTracks HTTP backend",
+    "githubUrl": "https://github.com/dschep/owntracks-serverless"
+  },
+  {
+    "name": "serverless-modern-koa",
+    "description": "Serverless modern koa starter kit",
+    "githubUrl": "https://github.com/barczaG/serverless-modern-koa"
+  },
+  {
+    "name": "Serverless ReactJS Universal Rendering Boilerplate",
+    "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
+    "githubUrl": "https://github.com/TylorShin/react-universal-in-serverless"
+  },
+    {
+    "name": "Open Bot",
+    "description": "An unoptionated Github bot driven by a configuration file in the repository",
+    "githubUrl": "https://github.com/open-bot/open-bot"
   }
 ]
-
