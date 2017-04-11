@@ -1,40 +1,42 @@
 'use strict';
 
-const request = require('request')
+/* eslint-disable import/no-extraneous-dependencies */
 
-function http (url, qs) {
+const request = require('request');
+
+function http(url, qs) {
   const options = {
-    url, qs, json: true
-  }
+    url, qs, json: true,
+  };
 
-  return new Promise(function (resolve, reject) {
-    request(options, function (err, resp) {
+  return new Promise((resolve, reject) => {
+    request(options, (err, resp) => {
       if (err) {
-        console.log(err)
-        return reject({err: err})
+        console.log(err);
+        return reject({ err });
       }
       if (resp.body.status !== 'OK') {
-        console.log(resp.body.status)
-        return reject({err: resp.body.status})
+        console.log(resp.body.status);
+        return reject({ err: resp.body.status });
       }
 
-      resolve(resp.body)
-    })
-  })
+      return resolve(resp.body);
+    });
+  });
 }
 
-function location_from_address (params) {
-  if (!params.address) return Promise.reject('Missing mandatory property: address')
+function locationFromAddress(params) {
+  if (!params.address) return Promise.reject('Missing mandatory property: address');
 
-  return http('https://maps.googleapis.com/maps/api/geocode/json', {address: params.address})
+  return http('https://maps.googleapis.com/maps/api/geocode/json', { address: params.address });
 }
 
-function sunrise_sunset (params) {
-  if (!params.lat) return Promise.reject('Missing mandatory property: lat')
-  if (!params.lng) return Promise.reject('Missing mandatory property: lng')
+function sunriseSunset(params) {
+  if (!params.lat) return Promise.reject('Missing mandatory property: lat');
+  if (!params.lng) return Promise.reject('Missing mandatory property: lng');
 
-  return http('http://api.sunrise-sunset.org/json', {lat: params.lat, lng: params.lng})
+  return http('http://api.sunrise-sunset.org/json', { lat: params.lat, lng: params.lng });
 }
 
-module.exports.location_from_address = location_from_address
-module.exports.sunrise_sunset = sunrise_sunset
+module.exports.locationFromAddress = locationFromAddress;
+module.exports.sunriseSunset = sunriseSunset;

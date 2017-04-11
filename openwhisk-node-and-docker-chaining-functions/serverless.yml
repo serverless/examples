@@ -18,9 +18,9 @@ provider:
 
 functions:
   location_from_address:
-    handler: handler.location_from_address
+    handler: handler.locationFromAddress
   sunrise_sunset:
-    handler: handler.sunrise_sunset
+    handler: handler.sunriseSunset
   jq:
     handler: jamesthomas/openwhisk-jq
     runtime: docker
