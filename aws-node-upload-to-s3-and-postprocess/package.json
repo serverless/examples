@@ -1,0 +1,9 @@
+{
+  "name": "upload-to-s3-and-postprocess",
+  "description": "Upload a files to S3 to trigger a lambda function.",
+  "version": "1.0.0",
+  "author": "Christoph Gysin <christoph.gysin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+  }
+}

@@ -13,7 +13,18 @@ The idea behind the `todos` directory is that in case you want to create a servi
 - API for a Web Application
 - API for a Mobile Application
 
+## FaunaDB Secret
+
+Visit https://fauna.com/serverless-cloud-sign-up to obtain a `FAUNADB_SECRET` to use in `serverless.yml`.
+
 ## Setup
+
+With your FaunaDB Secret in hand, set it in `serverless.yml`
+
+```yml
+  environment:
+    FAUNADB_SECRET: YOUR-SECRET-HERE
+```
 
 To avoid the error message `DistutilsOptionError: must supply either home or prefix/exec-prefix -- not both` first is necessary create a python virtual environment
 
@@ -140,7 +151,3 @@ No output
 ### AWS Lambda
 
 By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
-
-### FaunaDB
-
-Visit https://fauna.com to get more information about how to get an `FAUNADB_SECRET` and set it on `serverless.yml`.
