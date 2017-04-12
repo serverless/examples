@@ -1,4 +1,6 @@
+'use strict';
 
+const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
 // CREATE DOMAIN
 // EXPECTS DATA IN FORMAT:
@@ -8,23 +10,22 @@
     domain: <domain>
   }
 */
-module.exports.create = function(context, event, callback) {
-
-  const simpledb = new AWS.SimpleDB();
-
+module.exports.create = (context, event, callback) => {
   const data = event;
 
-  if(!data.domain){
+  if (!data.domain) {
     console.log('Create domain failed, domain not provided');
     callback(new Error('Couldn\'t create domain.'), null);
     return;
   }
 
-  var params = {
-    DomainName: data.domain
+  const params = {
+    DomainName: data.domain,
   };
 
-  simpledb.createDomain(params, function(err, data) {
+  // query+callback
+  const simpledb = new AWS.SimpleDB();
+  simpledb.createDomain(params, (err) => {
     if (err) {
       console.error(err);
       callback(new Error('Couldn\'t create domain.'));
@@ -38,8 +39,8 @@ module.exports.create = function(context, event, callback) {
 
     callback(null, response);
   });
+};
 
-}
 
 // DELETE DOMAIN
 // EXPECTS DATA IN FORMAT:
@@ -49,23 +50,22 @@ module.exports.create = function(context, event, callback) {
     domain: <domain>
   }
 */
-module.exports.delete = function(context, event, callback) {
-
+module.exports.delete = (context, event, callback) => {
   const simpledb = new AWS.SimpleDB();
 
   const data = event;
 
-  if(!data.domain){
+  if (!data.domain) {
     console.log('Delete domain failed, domain not provided');
     callback(new Error('Couldn\'t delete domain.'), null);
     return;
   }
 
-  var params = {
-    DomainName: data.domain
+  const params = {
+    DomainName: data.domain,
   };
 
-  simpledb.deleteDomain(params, function(err, data) {
+  simpledb.deleteDomain(params, (err) => {
     if (err) {
       console.error(err);
       callback(new Error('Couldn\'t delete domain.'));
@@ -79,5 +79,4 @@ module.exports.delete = function(context, event, callback) {
 
     callback(null, response);
   });
-
-}
+};
