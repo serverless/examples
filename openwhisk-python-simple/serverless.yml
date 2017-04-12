@@ -1,0 +1,12 @@
+service: python-service
+
+provider:
+  name: openwhisk
+  runtime: python
+
+functions:
+  greeting:
+    handler: handler.endpoint
+
+plugins:
+  - serverless-openwhisk

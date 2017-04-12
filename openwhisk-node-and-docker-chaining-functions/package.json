@@ -1,0 +1,9 @@
+{
+  "name": "openwhisk-node-and-docker-chaining-functions",
+  "version": "0.1.0",
+  "description": "Example of chaining function calls using sequences and docker images.",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
