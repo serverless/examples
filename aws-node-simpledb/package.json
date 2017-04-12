@@ -1,0 +1,11 @@
+{
+  "name": "aws-simpledb-example",
+  "version": "1.0.0",
+  "description": "Serverless REST API with Simpledb",
+  "repository": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.40.0"
+  }
+}

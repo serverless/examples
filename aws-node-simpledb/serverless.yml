@@ -1,0 +1,76 @@
+service: serverless-aws-simpledb-example
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  region: #### REGION
+  environment:
+    SIMPLEDB_DOMAIN: ### DOMAIN NAME
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - sdb:DeleteDomain
+        - sdb:CreateDomain
+        - sdb:GetAttributes
+        - sdb:PutAttributes
+        - sdb:DeleteAttributes
+        - sdb:Select
+      Resource: "arn:aws:sbd:${opt:region, self:provider.region}:*:domain/" + #### DOMAIN NAME
+
+functions:
+
+  createdomain:
+    handler: codes/domain.createdomain
+    events:
+      - http:
+          path: domain
+          method: post
+          cors: true
+
+  deletedomain:
+    handler: codes/domain.deletedomain
+    events:
+      - http:
+          path: domain/{id}
+          method: delete
+          cors: true
+
+  createitem:
+    handler: codes/item.create
+    events:
+      - http:
+          path: item/{domain}
+          method: post
+          cors: true
+
+  getitem:
+    handler: codes/item.get
+    events:
+      - http:
+          path: item/{domain}/{id}
+          method: get
+          cors: true
+
+  updateitem:
+    handler: codes/item.update
+    events:
+      - http:
+          path: item/{domain}/{id}
+          method: post
+          cors: true
+
+  deleteitem:
+    handler: codes/item.delete
+    events:
+      - http:
+          path: item/{domain}/{id}
+          method: delete
+          cors: true
+
+  selectitem:
+    handler: codes/item.select
+    events:
+      - http:
+          path: item/select/{domain}
+          method: get
+          cors: true
