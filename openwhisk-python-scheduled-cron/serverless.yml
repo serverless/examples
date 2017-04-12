@@ -1,0 +1,15 @@
+service: python_service
+
+provider:
+  name: openwhisk
+  runtime: python
+
+functions:
+  cron:
+    handler: handler.run
+    events:
+      - schedule: cron(* * * * *)
+
+# remember to run npm install to download the provider plugin.        
+plugins:
+    - serverless-openwhisk
