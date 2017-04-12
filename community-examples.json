@@ -196,6 +196,11 @@
   {
     "name": "Serverless ReactJS Universal Rendering Boilerplate",
     "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
-    "githubUrl": "http://github.com/TylorShin/react-universal-in-serverless"
+    "githubUrl": "https://github.com/TylorShin/react-universal-in-serverless"
+  },
+    {
+    "name": "Open Bot",
+    "description": "An unoptionated Github bot driven by a configuration file in the repository",
+    "githubUrl": "https://github.com/open-bot/open-bot"
   }
 ]
