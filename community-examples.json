@@ -198,9 +198,14 @@
     "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
     "githubUrl": "https://github.com/TylorShin/react-universal-in-serverless"
   },
-    {
+  {
     "name": "Open Bot",
     "description": "An unoptionated Github bot driven by a configuration file in the repository",
     "githubUrl": "https://github.com/open-bot/open-bot"
+  },
+  {
+    "name": "aws-ses-serverless-example",
+    "description": "AWS SES example in NodeJS using lambda",
+    "githubUrl": "https://github.com/lakshmantgld/aws-ses-serverless-example"
   }
 ]
