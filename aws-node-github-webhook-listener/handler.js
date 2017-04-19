@@ -12,6 +12,7 @@ module.exports.githubWebhookListener = (event, context, callback) => {
   const githubEvent = headers['X-GitHub-Event'];
   const id = headers['X-GitHub-Delivery'];
   const calculatedSig = signRequestBody(token, event.body);
+  const eventObj = JSON.parse(event.body);
 
   if (typeof token !== 'string') {
     errMsg = '[401] must provide a \'GITHUB_WEBHOOK_SECRET\' env variable';
@@ -40,7 +41,7 @@ module.exports.githubWebhookListener = (event, context, callback) => {
 
   /* eslint-disable */
   console.log('---------------------------------');
-  console.log(`Github-Event: "${githubEvent}" with action: "${event.body.action}"`);
+  console.log(`Github-Event: "${githubEvent}" with action: "${eventObj.action}"`);
   console.log('---------------------------------');
   console.log('Payload', event.body);
   /* eslint-enable */
