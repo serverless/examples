@@ -207,5 +207,10 @@
     "name": "aws-ses-serverless-example",
     "description": "AWS SES example in NodeJS using lambda",
     "githubUrl": "https://github.com/lakshmantgld/aws-ses-serverless-example"
+  },
+  {
+    "name": "video-preview-and-analysis-service",
+    "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
+    "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
   }
 ]
