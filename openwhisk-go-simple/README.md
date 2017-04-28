@@ -16,7 +16,7 @@ You will also need to set up your OpenWhisk account credentials using environmen
 $ env GOOS=linux GOARCH=amd64 go build handler.go
 ```
 
-## 3. Deploy
+## 4. Deploy
 `serverless deploy` or `sls deploy`. `sls` is shorthand for the Serverless CLI command
 
 ```
@@ -37,7 +37,7 @@ actions:
 go-service-dev-greeting
 ```
 
-## 4. Invoke deployed function
+## 5. Invoke deployed function
 `serverless invoke --function greeting` or `serverless invoke -f greeting`
 
 `-f` is shorthand for `--function`
