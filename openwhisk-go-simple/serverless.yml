@@ -1,0 +1,12 @@
+service: go-service
+
+provider:
+  name: openwhisk
+  runtime: binary 
+
+functions:
+  greeting:
+    handler: handler
+
+plugins:
+  - serverless-openwhisk

@@ -8,12 +8,14 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 <!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) generated w/ `npm run docs`  -->
 <details>
 <summary>Click to expand</summary>
+
 - [Getting Started](#getting-started)
 - [Examples](#examples)
 - [Community Examples](#community-examples)
 - [Contributing](#contributing)
   * [Adding example code](#adding-example-code)
   * [Adding a community example](#adding-a-community-example)
+
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -31,6 +33,12 @@ Each example contains a README.md with an explanation about the service, it's us
 
 Have an example? Submit a PR or [open an issue](https://github.com/serverless/examples/issues). ⚡️
 
+To install any of these you can run:
+
+```bash
+serverless install -u https://github.com/serverless/examples/tree/master/folder-name -n my-project
+```
+
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE) t generated w/ `npm run docs` -->
 | Example | Runtime  |
 |:--------------------------- |:-----|
@@ -42,6 +50,7 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 | [Aws Function Compiled With Babel](https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel) <br/> Demonstrating how to compile all your code with Babel | nodeJS |
 | [Aws Github Webhook Listener](https://github.com/serverless/examples/tree/master/aws-node-github-webhook-listener) <br/> Extend your github repositories with this github webhook listener | nodeJS |
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |
+| [Aws Node Rekognition Analysis S3 Image](https://github.com/serverless/examples/tree/master/aws-node-rekognition-analysis-s3-image) <br/> Analyse an Image from an S3 Bucket with Amazon Rekognition | nodeJS |
 | [Aws Rest Api Offline](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb-and-offline) <br/> Serverless REST API with DynamoDB and offline support | nodeJS |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | nodeJS |
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | nodeJS |
@@ -61,10 +70,18 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
+| [Openwhisk Go Simple](https://github.com/serverless/examples/tree/master/openwhisk-go-simple) <br/> Example demonstrates how to setup a simple Go function with OpenWhisk. | nodeJS |
+| [Openwhisk Node And Docker Chaining Functions](https://github.com/serverless/examples/tree/master/openwhisk-node-and-docker-chaining-functions) <br/> Example of chaining function calls using sequences and docker images. | nodeJS |
 | [Openwhisk Node Chaining Functions](https://github.com/serverless/examples/tree/master/openwhisk-node-chaining-functions) <br/> Example of chaining function calls using sequences and the sdk. | nodeJS |
 | [Openwhisk Node Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-node-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless schedule event. | nodeJS |
 | [Openwhisk Node Simple Http](https://github.com/serverless/examples/tree/master/openwhisk-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk. | nodeJS |
 | [Openwhisk Node Simple](https://github.com/serverless/examples/tree/master/openwhisk-node-simple) <br/> Simple example demonstrating OpenWhisk provider support. | nodeJS |
+| [Openwhisk Python Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-python-scheduled-cron) <br/> Example of creating a Python function that runs as a cron job using the serverless schedule event. | python |
+| [Openwhisk Python Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk. | python |
+| [Openwhisk Python Simple](https://github.com/serverless/examples/tree/master/openwhisk-python-simple) <br/> Example demonstrates how to setup a simple Python function with OpenWhisk. | python |
+| [Openwhisk Swift Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-swift-scheduled-cron) <br/> Example of creating a Swift function that runs as a cron job using the serverless schedule event. | nodeJS |
+| [Openwhisk Swift Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk. | nodeJS |
+| [Openwhisk Swift Simple](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple) <br/> Example demonstrates how to setup a simple Swift function with OpenWhisk. | nodeJS |
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -72,11 +89,20 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 
 [Add an example](https://github.com/serverless/examples/edit/master/community-examples.json)
 
+To install any of these you can run:
+
+```bash
+serverless install -u https://github.com/author/project -n my-project
+```
+
 <!-- AUTO-GENERATED-CONTENT:START (COMMUNITY_EXAMPLES_TABLE)  generated w/ `npm run docs` -->
 | Example | Author |
 |:-------|:------:|
-| **[Serverless Reactjs Universal Rendering Boilerplate](http://github.com/TylorShin/react-universal-in-serverless)** <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | [TylorShin](http://github.com/TylorShin) |
+| **[Aws Api Gateway Serverless Project Written In Go](https://github.com/yunspace/serverless-golang)** <br/> A serverless project that contains an API Gateway endpoint powered by a Lambda function written in golang and built using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim). | [yunspace](http://github.com/yunspace) |
+| **[Open Bot](https://github.com/open-bot/open-bot)** <br/> An unoptionated Github bot driven by a configuration file in the repository | [open-bot](http://github.com/open-bot) |
+| **[Serverless Reactjs Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless)** <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | [TylorShin](http://github.com/TylorShin) |
 | **[Adoptable Pet Bot](https://github.com/lynnaloo/adoptable-pet-bot)** <br/> Tweets adoptable pets using Serverless (Node.js) and AWS Lambda | [lynnaloo](http://github.com/lynnaloo) |
+| **[Aws Ses Serverless Example](https://github.com/lakshmantgld/aws-ses-serverless-example)** <br/> AWS SES example in NodeJS using lambda | [lakshmantgld](http://github.com/lakshmantgld) |
 | **[Bittman](https://github.com/rhlsthrm/bittman)** <br/> A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun. | [rhlsthrm](http://github.com/rhlsthrm) |
 | **[Cordis Serverless](https://github.com/marzeelabs/cordis-serverless)** <br/> A serverless API for EU Cordis data | [marzeelabs](http://github.com/marzeelabs) |
 | **[Giphy Bot](https://github.com/tywong/lambda-workshop-2016/tree/master/giphy-bot)** <br/> giphy-bot for Facebook chat | [tywong](http://github.com/tywong) |
@@ -114,6 +140,7 @@ Have an example? Submit a PR or [open an issue](https://github.com/serverless/ex
 | **[Serverless Weekly2pocket App](https://github.com/s0enke/weekly2pocket)** <br/> Serverless-powered API for sending posts to pocket app | [s0enke](http://github.com/s0enke) |
 | **[Sls Access Counter](https://github.com/takahashim/sls-access-counter)** <br/> Site visitor counter | [takahashim](http://github.com/takahashim) |
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
+| **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
