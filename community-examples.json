@@ -217,5 +217,10 @@
    "name": "video-preview-and-analysis-service",
    "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
    "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
+  },
+  {
+    "name": "Serverless ES6/7 CRUD API",
+    "description": "[Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com)",
+    "githubUrl": "https://github.com/AnomalyInnovations/serverless-stack-demo-api"
   }
 ]
