@@ -72,7 +72,7 @@ Hint: The plugin is simply running the AWS CLI command: `aws S3 sync app/ s3://y
 Now you just need to figure out the deployed URL. You can use the AWS Console UI or run
 
 ```bash
-sldev domainInfo
+sls domainInfo
 ```
 
 The expected result should be similar to

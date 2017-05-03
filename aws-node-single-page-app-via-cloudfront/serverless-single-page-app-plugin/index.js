@@ -62,7 +62,7 @@ class ServerlessPlugin {
         this.options.stage,
         this.options.region // eslint-disable-line comma-dangle
       )
-      .then(function log(result) {
+      .then((result) => {
         const outputs = result.Stacks[0].Outputs;
         const output = outputs.find(entry => entry.OutputKey === 'WebAppCloudFrontDistributionOutput');
         if (output.OutputValue) {
