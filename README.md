@@ -21,17 +21,13 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 
 ## Getting Started
 
-If you are new to serverless, we recommend getting started with:
-
-- Creating an HTTP API Endpoint [(NodeJS)](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) | [(Python)](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) | [(Java)](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint)
-- [Scheduled Cron Example](https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron)
-- [Fetch File & Store in S3](https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3)
-
-Each example contains a README.md with an explanation about the service, it's use cases and a guide on deploying.
+If you are new to serverless, we recommend getting started with by creating an HTTP API Endpoint in [NodeJS](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), [Python](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint), or [Java](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint)
 
 ## Examples
 
-Have an example? Submit a PR or [open an issue](https://github.com/serverless/examples/issues). ⚡️
+Each example contains a `README.md` with an explanation about the service and it's use cases.
+
+**Have an example?** Submit a PR or [open an issue](https://github.com/serverless/examples/issues). ⚡️
 
 To install any of these you can run:
 
@@ -100,6 +96,7 @@ serverless install -u https://github.com/author/project -n my-project
 |:-------|:------:|
 | **[Aws Api Gateway Serverless Project Written In Go](https://github.com/yunspace/serverless-golang)** <br/> A serverless project that contains an API Gateway endpoint powered by a Lambda function written in golang and built using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim). | [yunspace](http://github.com/yunspace) |
 | **[Open Bot](https://github.com/open-bot/open-bot)** <br/> An unoptionated Github bot driven by a configuration file in the repository | [open-bot](http://github.com/open-bot) |
+| **[Serverless Es6/7 Crud Api](https://github.com/AnomalyInnovations/serverless-stack-demo-api)** <br/> [Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com) | [AnomalyInnovations](http://github.com/AnomalyInnovations) |
 | **[Serverless Reactjs Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless)** <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | [TylorShin](http://github.com/TylorShin) |
 | **[Adoptable Pet Bot](https://github.com/lynnaloo/adoptable-pet-bot)** <br/> Tweets adoptable pets using Serverless (Node.js) and AWS Lambda | [lynnaloo](http://github.com/lynnaloo) |
 | **[Aws Ses Serverless Example](https://github.com/lakshmantgld/aws-ses-serverless-example)** <br/> AWS SES example in NodeJS using lambda | [lakshmantgld](http://github.com/lakshmantgld) |
