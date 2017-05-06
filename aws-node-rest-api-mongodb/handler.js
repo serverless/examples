@@ -1,157 +1,126 @@
+const mongoose = require('mongoose');
+const bluebird = require('bluebird');
+const validator = require('validator');
+const UserModel = require('./model/User.js');
 
-var mongoose = require('mongoose')
-var bluebird = require('bluebird')
-var validator = require('validator')
-var UserModel = require('./model/User.js')
-
-mongoose.Promise = bluebird
+mongoose.Promise = bluebird;
 
 
-var mongoString = '' // MongoDB URL
 
 module.exports.user = (event, context, callback) => {
-  
-  var db = mongoose.connect(mongoString).connection
+  const db = mongoose.connect(mongoString).connection;
+  const id = event.pathParameters.id;
 
-  var id = event.pathParameters.id
+  if (!validator.isAlphanumeric(id)) throw Error('Incorrect id');
 
-  if(!validator.isAlphanumeric(id)) throw Error('Incorrect id')
-
-  db.once('open' , () => {
-      
- 
-    
-      UserModel
-      .find({_id : event.pathParameters.id})
-      .then( user => {
-
-        callback(null, { statusCode : 200 , body : JSON.stringify(user)} );
-
+  db.once('open', () => {
+    UserModel
+      .find({ _id: event.pathParameters.id })
+      .then((user) => {
+        callback(null, { statusCode: 200, body: JSON.stringify(user) });
       })
-      .catch(err => {
-
-        callback(err)
-
+      .catch((err) => {
+        callback(err);
       })
-      .finally( () => {
-
-        //Close db connection or node event loop won't exit , and lambda will timeout
-        db.close()
-
-      })
-
-  })
-
-}
+      .finally(() => {
+        // Close db connection or node event loop won't exit , and lambda will timeout
+        db.close();
+      });
+  });
+};
 
 
 module.exports.createUser = (event, context, callback) => {
-  
+  let db = {};
+  let data = {};
+  let errs = {};
+  let user = {};
+  const mongooseId = '_id';
 
-  var db = mongoose.connect(mongoString).connection
-  
-  var data = JSON.parse(event.body)
-  
+  db = mongoose.connect(mongoString).connection;
 
-  var user = new UserModel({name : data.name , firstname : data.firstname , birth : data.birth  , city : data.city , ip : event.requestContext.identity.sourceIp }) 
+  data = JSON.parse(event.body);
 
-  console.log(user)
-  
-  var err = user.validateSync()
-  
-  console.log(err)
+  user = new UserModel({ name: data.name,
+    firstname: data.firstname,
+    birth: data.birth,
+    city: data.city,
+    ip: event.requestContext.identity.sourceIp });
 
-  if(err)
-  {
-    console.log(err)
-    throw Error('Incorrect user data')
+  errs = user.validateSync();
+
+  if (errs) {
+    console.log(errs);
+    throw Error('Incorrect user data');
   }
 
 
-  db.once('open' , () => {
-
-      user
+  db.once('open', () => {
+    user
       .save()
       .then(() => {
-
-        callback(null , { statusCode : 200 , body : JSON.stringify({ id : user._id}) })
-
+        callback(null, { statusCode: 200, body: JSON.stringify({ id: user[mongooseId] }) });
       })
-      .catch(err => {
-
-        callback(err)
-
+      .catch((err) => {
+        callback(err);
       })
-      .finally( () => {
-        db.close()
-      })
-     
-
-  })
-
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
+      .finally(() => {
+        db.close();
+      });
+  });
 };
 
 module.exports.deleteUser = (event, context, callback) => {
-  
-  var db = mongoose.connect(mongoString).connection
-  var id = event.pathParameters.id
+  const db = mongoose.connect(mongoString).connection;
+  const id = event.pathParameters.id;
 
-  if(!validator.isAlphanumeric(id)) throw Error('Incorrect id')
+  if (!validator.isAlphanumeric(id)) throw Error('Incorrect id');
 
-
-  db.once('open' , ()=> {
-
+  db.once('open', () => {
     UserModel
-    .remove({_id : event.pathParameters.id })
-    .then( () => {
-      callback(null , {statusCode : 200 , body : JSON.stringify("Ok") })
-    })
-    .catch( err => {
-      callback(err)
-    })
-    .finally( () =>{
-      db.close()
-    })
-
-  })
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
+      .remove({ _id: event.pathParameters.id })
+      .then(() => {
+        callback(null, { statusCode: 200, body: JSON.stringify('Ok') });
+      })
+      .catch((err) => {
+        callback(err);
+      })
+      .finally(() => {
+        db.close();
+      });
+  });
 };
 
 module.exports.updateUser = (event, context, callback) => {
-  
-  var db = mongoose.connect(mongoString).connection
+  const db = mongoose.connect(mongoString).connection;
+  const data = JSON.parse(event.body);
+  const id = event.pathParameters.id;
+  let errs = {};
+  let user = {};
 
-   var data = JSON.parse(event.body)
-  
-  var id =  event.pathParameters.id
-  
-  if(!validator.isAlphanumeric(id)) throw Error('Incorrect id')
+  if (!validator.isAlphanumeric(id)) throw Error('Incorrect id');
 
-  var user = new UserModel ({ _id : id , name : data.name , firstname : data.firstname  , birth : data.birth,  city : data.city , ip : event.requestContext.identity.sourceIp }) 
-  
-  var err = user.validateSync()
+  user = new UserModel({ _id: id,
+    name: data.name,
+    firstname: data.firstname,
+    birth: data.birth,
+    city: data.city,
+    ip: event.requestContext.identity.sourceIp });
 
-  if(err) throw Error('Incorrect parameter')
-  db.once('open' , ()=> {
+  errs = user.validateSync();
 
-    //.save could be used too
-
-    UserModel.findByIdAndUpdate( id , user)
-    .then( () =>{
-      callback(null , { statusCode : 200 , body : JSON.stringify("Ok") })
-    })
-    .catch( (err) => {
-      callback(err)
-    })
-    .finally(()=>{
-      db.close()
-    })
-      
-  })
-  
+  if (errs) throw Error('Incorrect parameter');
+  db.once('open', () => {
+    // UserModel.save() could be used too
+    UserModel.findByIdAndUpdate(id, user)
+      .then(() => {
+        callback(null, { statusCode: 200, body: JSON.stringify('Ok') });
+      })
+      .catch((err) => {
+        callback(err);
+      })
+      .finally(() => {
+        db.close();
+      });
+  });
 };
