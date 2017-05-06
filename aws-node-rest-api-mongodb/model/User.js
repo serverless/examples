@@ -1,44 +1,48 @@
-var mongoose = require('mongoose')
-var validator = require('validator')
+const mongoose = require('mongoose');
+const validator = require('validator');
 
-module.exports = mongoose.model('User' , { name : { 
-                                                type : String , 
-                                                required : true , 
-                                                validate : {
-                                                    validator : function(name) { 
-                                                    return validator.isAlphanumeric(name) 
-                                                    } 
-                                                } 
-                                            } , 
-                                            firstname : {
-                                                type : String,
-                                                required : true,
-                                                validate : {
-                                                    validator : function(firstname){
-                                                        return validator.isAlphanumeric(firstname)
-                                                    }
-                                                }
-                                            } , 
-                                            birth : {
-                                                type : Date,
-                                                required : true
 
-                                            },
-                                            city : {
-                                                type : String,
-                                                required : true,
-                                                validate : {
-                                                    validator : function(city){
-                                                        return validator.isAlphanumeric(city)
-                                                    }
-                                                }
-                                            } , 
-                                            ip :   {
-                                                type : String,
-                                                required : true,
-                                                validate : { 
-                                                    validator : function(ip){
-                                                        return validator.isIP(ip)
-                                                    }
-                                                }
-                                            }})
+const model = mongoose.model('User', {
+  name: {
+    type: String,
+    required: true,
+    validate: {
+      validator(name) {
+        return validator.isAlphanumeric(name);
+      },
+    },
+  },
+  firstname: {
+    type: String,
+    required: true,
+    validate: {
+      validator(firstname) {
+        return validator.isAlphanumeric(firstname);
+      },
+    },
+  },
+  birth: {
+    type: Date,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+    validate: {
+      validator(city) {
+        return validator.isAlphanumeric(city);
+      },
+    },
+  },
+  ip: {
+    type: String,
+    required: true,
+    validate: {
+      validator(ip) {
+        return validator.isIP(ip);
+      },
+    },
+  },
+});
+
+module.exports = model;
