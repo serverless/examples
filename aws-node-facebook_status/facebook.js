@@ -17,7 +17,6 @@ module.exports = function () {
 
     FB.api('me/feed', 'post', parameters, (res) => {
       if (!res || res.error) {
-        console.log(!res ? 'error occurred' : res.error);
         callback(res.error, null);
       } else {
         callback(null, res.id);

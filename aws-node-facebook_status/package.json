@@ -2,7 +2,8 @@
   "name": "facebookLambda",
   "version": "1.0.0",
   "description": "Post a status update to facebook feed",
-  "main": "facebook.js",
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "fb": "^1.1.1"
   }
