@@ -1,3 +1,8 @@
+<!--
+title: OpenWhisk Serverless Boilerplate example in Go
+description: This example shows a Serverless boilerplate in Go.
+layout: Doc
+-->
 # Serverless Boilerplate - OpenWhisk - Go
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/openwhisk/guide/installation/).

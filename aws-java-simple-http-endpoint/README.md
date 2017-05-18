@@ -1,3 +1,8 @@
+<!--
+title: AWS Simple HTTP Endpoint example in Java
+description: This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.
+layout: Doc
+-->
 # Simple HTTP Endpoint Example
 
 This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.

@@ -1,3 +1,8 @@
+<!--
+title: AWS Data Processing example in NodeJS
+description: This example demonstrates how to setup a simple data processing pipeline.
+layout: Doc
+-->
 # Data processing
 
 This example demonstrates how to setup a simple data processing pipeline. The service exposes one HTTP endpoint that allows you to add a text note. This HTTP endpoint returns instantly to provide a good user experience while the actual analysis is deferred. Only messages above a certain sentiment level are actually saved.

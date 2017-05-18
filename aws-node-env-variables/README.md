@@ -1,3 +1,8 @@
+<!--
+title: AWS Serverless Environment Variables Usage example in NodeJS
+description: This example demonstrates how to use environment variables for AWS Lambdas.
+layout: Doc
+-->
 # Serverless Environment Variables Usage
 
 This example demonstrates how to use environment variables for AWS Lambdas.
