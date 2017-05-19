@@ -227,5 +227,10 @@
     "name": "Serverless ES6/7 CRUD API",
     "description": "[Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com)",
     "githubUrl": "https://github.com/AnomalyInnovations/serverless-stack-demo-api"
+  },
+  {
+    "name": "Hello Lambda w/ TypeScript and Jest",
+    "description": "An AWS Lambda serverless hello world project using TypecScript, Jest and serverless offline",
+    "githubUrl": "https://github.com/meldiner/hello-lambda"
   }
 ]
