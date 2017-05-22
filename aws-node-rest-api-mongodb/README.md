@@ -2,7 +2,7 @@
 
 This example demonstrate how to use a MongoDB database with aws and serverless.
 
-Using Mongoose ODM and Bluebird as Promise framework. 
+Using Mongoose ODM and Bluebird for Promises.
 
 ## Use Cases
 
@@ -17,10 +17,12 @@ serverless deploy
 
 ## Usage
 
+In `handler.js` update the `mongoString` with your mongoDB url.
+
 *Create*
 
 ```bash
-curl -XPOST -H "Content-type: application/json" -d '{ 
+curl -XPOST -H "Content-type: application/json" -d '{
    "name" : "John",
    "firstname" : "Doe",
    "city" : "New York",
@@ -53,7 +55,7 @@ curl -XGET -H "Content-type: application/json" 'https://2c8cx5whk0.execute-api.u
 *UPDATE*
 
 ```bash
-curl -XPUT -H "Content-type: application/json" -d '{ 
+curl -XPUT -H "Content-type: application/json" -d '{
    "name" : "William",
    "firstname" : "Smith",
    "city" : "Miami",

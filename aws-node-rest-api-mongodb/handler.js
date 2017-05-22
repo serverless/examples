@@ -5,7 +5,6 @@ const UserModel = require('./model/User.js');
 
 mongoose.Promise = bluebird;
 
-
 const mongoString = ''; // MongoDB Url
 
 module.exports.user = (event, context, callback) => {
