@@ -1,5 +1,10 @@
 [
  {
+    "name": "jwtAuthorizr",
+    "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
+    "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
+ },
+ {
     "name": "serverless-graphql-api",
     "description": "Serverless GraphQL API using Lambda and DynamoDB",
     "githubUrl": "https://github.com/boazdejong/serverless-graphql-api"
