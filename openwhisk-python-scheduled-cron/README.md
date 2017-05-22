@@ -1,3 +1,8 @@
+<!--
+title: OpenWhisk Serverless Scheduled Cron job example in Python
+description: This example demonstrates scheduleding a cron job.
+layout: Doc
+-->
 # Serverless Boilerplate - OpenWhisk - Python
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/openwhisk/guide/installation/).

@@ -1,3 +1,8 @@
+<!--
+title: GCF Simple HTTP Endpoint example in NodeJS
+description: This example demonstrates how to setup a simple HTTP GET endpoint.
+layout: Doc
+-->
 # Simple HTTP example
 
 # Setup

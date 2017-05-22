@@ -1,3 +1,8 @@
+<!--
+title: OpenWhisk Simple HTTP Endpoint example in Python
+description: This example demonstrates how to setup a simple HTTP GET endpoint.
+layout: Doc
+-->
 # Serverless Boilerplate - OpenWhisk - Python
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/openwhisk/guide/installation/).

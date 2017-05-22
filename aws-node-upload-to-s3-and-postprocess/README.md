@@ -1,3 +1,8 @@
+<!--
+title: AWS Upload a file to S3 to trigger a Lambda function example in NodeJS
+description: This example shows how to upload a file to S3 using a HTML form, and have S3 trigger a lambda function.
+layout: Doc
+-->
 # Upload a file to S3 to trigger a lambda function
 
 This example shows how to upload a file to S3 using a HTML form, and have S3

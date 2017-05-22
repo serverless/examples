@@ -1,3 +1,8 @@
+<!--
+title: OpenWhisk Serverless Simple example in Python
+description: This example demonstrates a simple example in Python.
+layout: Doc
+-->
 # Serverless Boilerplate - OpenWhisk - Python
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/openwhisk/guide/installation/).
