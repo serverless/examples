@@ -1,3 +1,8 @@
+<!--
+title: AWS Serving Dynamic HTML via API Gateway example in NodeJS
+description: This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.
+layout: Doc
+-->
 # Serving Dynamic HTML via API Gateway Example
 
 This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a `GET` request.

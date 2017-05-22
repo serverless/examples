@@ -1,3 +1,8 @@
+<!--
+title: AWS Analyse Image from S3 with Amazon Rekognition example in NodeJS
+description: This example shows how to analys an image in an S3 bucket with Amazon Rekognition and return a list of labels.
+layout: Doc
+-->
 # Analyse Image from S3 with Amazon Rekognition Example
 
 This example shows how to analys an image in an S3 bucket with Amazon Rekognition and return a list of labels.

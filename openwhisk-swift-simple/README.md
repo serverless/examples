@@ -1,3 +1,8 @@
+<!--
+title: OpenWhisk Serverless Simple example in Swift
+description: This example demonstrates a simple example in Swift.
+layout: Doc
+-->
 # Serverless Boilerplate - OpenWhisk - Swift
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/openwhisk/guide/installation/).

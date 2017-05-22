@@ -1,3 +1,8 @@
+<!--
+title: AWS Stripe Integration example in NodeJS
+description: This example for Stripe integration using AWS Lambda and API Gateway.
+layout: Doc
+-->
 # Stripe Integration Example
 
 This example for Stripe integration using AWS Lambda and API Gateway.

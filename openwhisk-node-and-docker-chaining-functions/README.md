@@ -1,3 +1,8 @@
+<!--
+title: OpenWhisk Serverless Boilerplate using Docker example in NodeJS
+description: This example shows a Serverless boilerplate using Docker in NodeJS.
+layout: Doc
+-->
 # Serverless Boilerplate - OpenWhisk - Node.js & Docker
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/openwhisk/guide/installation/).
