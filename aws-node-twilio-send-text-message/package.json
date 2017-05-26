@@ -4,7 +4,7 @@
   "description": "Send a text message via twilio from aws lambda. [See live demo](http://twilio-serverless-example.surge.sh)",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha *.test.js"
   },
   "author": "David Wells",
   "license": "MIT",
