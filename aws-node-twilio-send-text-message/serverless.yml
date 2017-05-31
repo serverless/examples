@@ -14,6 +14,7 @@ package:
     - "*.test.js"
     - 'node_modules/**'
     - '!node_modules/twilio/**'
+    - 'frontend/**'
 
 functions:
   sendText:
