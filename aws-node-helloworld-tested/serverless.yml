@@ -7,6 +7,11 @@ provider:
   name: aws
   runtime: nodejs6.10
 
+# Exclude tests for deployment
+package:
+  exclude:
+    - "*.test.js"
+
 # The `functions` block defines what code to deploy
 functions:
   helloWorld:
