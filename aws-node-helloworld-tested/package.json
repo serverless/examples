@@ -1,0 +1,14 @@
+{
+  "name": "aws-node-helloworld-tested",
+  "version": "0.0.1",
+  "description": "A simple example showing a http helloworld including a unit test.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "mocha handler.test.js"
+  },
+  "author": "Matthias Luebken",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  }
+}

@@ -45,6 +45,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Fetch File And Store In S3](https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3) <br/> Fetch an image from remote source (URL) and then upload the image to a S3 bucket. | nodeJS |
 | [Aws Function Compiled With Babel](https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel) <br/> Demonstrating how to compile all your code with Babel | nodeJS |
 | [Aws Github Webhook Listener](https://github.com/serverless/examples/tree/master/aws-node-github-webhook-listener) <br/> Extend your github repositories with this github webhook listener | nodeJS |
+| [Aws Node Helloworld Tested](https://github.com/serverless/examples/tree/master/aws-node-helloworld-tested) <br/> A simple example showing a http helloworld including a unit test. | nodeJS |
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |
 | [Aws Node Rekognition Analysis S3 Image](https://github.com/serverless/examples/tree/master/aws-node-rekognition-analysis-s3-image) <br/> Analyse an Image from an S3 Bucket with Amazon Rekognition | nodeJS |
 | [Aws Node Restapi Mongodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-mongodb) <br/> Serverless REST API with MongoDB using Mongoose and Bluebird | nodeJS |
