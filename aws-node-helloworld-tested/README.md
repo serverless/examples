@@ -35,7 +35,7 @@ A simple example showing a http helloworld including a unit test.
 
 ## Testout endpoint
 
-    $ curl -sL http://<someid>.execute-api.us-east-1.amazonaws.com/dev/hello-world | jq .message
+    $ curl -sL $(sls info |grep -oEi 'http.*') | jq .message
     "Go Serverless v1.0! Your function executed successfully!"
 
 
