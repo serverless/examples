@@ -2,10 +2,6 @@ service: azfx-node-http
 
 provider:
   name: azure
-  azureSubId: YourAzureSubscriptionID
-  azureServicePrincipalTenantId: servicePrincipalTenantId
-  azureservicePrincipalClientId: servicePrincipalClientId
-  azureServicePrincipalPassword: servicePrincipalPassword
   location: West US
 
 plugins:
@@ -19,11 +15,9 @@ package:
     - .git/**
 
 functions:
-  hello: 
+  hello:
      handler: handler.hello
-     events: 
+     events:
        - http: true
          x-azure-settings:
-           authLevel : anonymous
-     
- 
+           authLevel: anonymous
