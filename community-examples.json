@@ -232,5 +232,10 @@
     "name": "Serverless ES6/7 CRUD API",
     "description": "[Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com)",
     "githubUrl": "https://github.com/AnomalyInnovations/serverless-stack-demo-api"
+  },
+  {
+    "name": "SQS Worker with AWS Lambda and CloudWatch Alarms",
+    "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
+    "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
   }
 ]
