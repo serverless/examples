@@ -237,5 +237,10 @@
     "name": "SQS Worker with AWS Lambda and CloudWatch Alarms",
     "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
     "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
+  },
+  {
+    "name": "serverless-image-manager",
+    "description": "image upload / download with resizing. Used API gateway's binary support & serverless",
+    "githubUrl": "https://github.com/TylorShin/lambda-image-manager"
   }
 ]
