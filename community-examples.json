@@ -237,5 +237,15 @@
     "name": "SQS Worker with AWS Lambda and CloudWatch Alarms",
     "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
     "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
+  },
+  {
+    "name": "AWS Lambda Power Tuning (powered by Step Functions)",
+    "description": "Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration.",
+    "githubUrl": "https://github.com/alexcasalboni/aws-lambda-power-tuning"
+  },
+  {
+    "name": "Amazon Kinesis Streams fan-out via Kinesis Analytics",
+    "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
+    "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
   }
 ]
