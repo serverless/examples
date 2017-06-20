@@ -1,0 +1,11 @@
+{
+  "name": "aws-node-dynamodb-backup",
+  "version": "1.0.0",
+  "description": "Serverless DynamoDB changes backed up to S3",
+  "repository": "",
+  "author": "Kai Hendry <hendry@spuul.com>",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.73.0"
+  }
+}
