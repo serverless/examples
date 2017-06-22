@@ -8,14 +8,12 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 <!-- ⛔️ AUTO-GENERATED-CONTENT:START (TOC:collapse=true&collapseText=Click to expand) generated w/ `npm run docs`  -->
 <details>
 <summary>Click to expand</summary>
-
 - [Getting Started](#getting-started)
 - [Examples](#examples)
 - [Community Examples](#community-examples)
 - [Contributing](#contributing)
   * [Adding example code](#adding-example-code)
   * [Adding a community example](#adding-a-community-example)
-
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -40,6 +38,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 |:--------------------------- |:-----|
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
 | [Aws Auth0 Api Gateway](https://github.com/serverless/examples/tree/master/aws-node-auth0-custom-authorizers-api) <br/> Demonstration of protecting API gateway endpoints with auth0 | nodeJS |
+| [Aws Node Dynamodb Backup](https://github.com/serverless/examples/tree/master/aws-node-dynamodb-backup) <br/> Serverless DynamoDB changes backed up to S3 | nodeJS |
 | [Aws Env Variables Encrypted In A File](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file) <br/> Serverless example managing secrets in an encrypted file | nodeJS |
 | [Aws Env Variables](https://github.com/serverless/examples/tree/master/aws-node-env-variables) <br/> This example demonstrates how to use environment variables for AWS Lambdas. | nodeJS |
 | [Aws Fetch File And Store In S3](https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3) <br/> Fetch an image from remote source (URL) and then upload the image to a S3 bucket. | nodeJS |
