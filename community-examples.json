@@ -237,5 +237,10 @@
     "name": "SQS Worker with AWS Lambda and CloudWatch Alarms",
     "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
     "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
+  },
+  {
+    "name": "grants-api-serverless",
+    "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
+    "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
   }
 ]
