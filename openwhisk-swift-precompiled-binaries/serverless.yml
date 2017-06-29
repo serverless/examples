@@ -1,0 +1,19 @@
+service: swift-packages
+
+provider:
+  name: openwhisk
+  runtime: swift
+
+functions:
+  hello:
+    handler: .build/release/hello
+  welcome:
+    handler: .build/release/welcome
+
+custom:
+  scripts:
+    hooks:
+      'package:initialize': npm run-script compile
+plugins:
+  - serverless-openwhisk
+  - serverless-plugin-scripts
