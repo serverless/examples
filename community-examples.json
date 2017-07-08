@@ -242,5 +242,11 @@
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
-  }
+  },
+  {
+    "name": "honeyLambda",
+    "description": "a simple, serverless application designed to create and monitor URL {honey}tokens, on top of AWS Lambda and Amazon API Gateway",
+    "githubUrl": "https://github.com/0x4D31/honeyLambda"
+  },
+
 ]
