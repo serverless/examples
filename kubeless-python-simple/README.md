@@ -5,7 +5,7 @@ layout: Doc
 -->
 # Serverless Boilerplate - Kubeless - Python
 
-Make sure `minukube`, `kubeless` and `serverless` are installed. See the respective installation guides:
+Make sure `minikube`, `kubeless` and `serverless` are installed. See the respective installation guides:
 * [Minikube](https://github.com/kubernetes/minikube#installation)
 * [Kubeless](https://github.com/kubeless/kubeless/blob/master/README.md#usage)
 * [Serverless](https://github.com/serverless/serverless#quick-start)
