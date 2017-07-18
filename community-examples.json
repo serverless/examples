@@ -247,5 +247,10 @@
     "name": "honeyLambda",
     "description": "a simple, serverless application designed to create and monitor URL {honey}tokens, on top of AWS Lambda and Amazon API Gateway",
     "githubUrl": "https://github.com/0x4D31/honeyLambda"
+  },
+  {
+    "name": "faultline",
+    "description": "Error tracking tool on AWS managed services.",
+    "githubUrl": "https://github.com/faultline/faultline"
   }
 ]
