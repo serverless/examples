@@ -6,7 +6,6 @@
   "exclude": [
     "node_modules"
   ],
-
   "types": [
     "node",
     "aws-sdk"
