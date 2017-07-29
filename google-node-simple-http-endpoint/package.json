@@ -1,0 +1,14 @@
+{
+  "name": "google-node-simple-http-endpoint",
+  "version": "0.1.0",
+  "description": "An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "serverless.com",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-google-cloudfunctions": "^1.1.0"
+  }
+}

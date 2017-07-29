@@ -26,7 +26,7 @@ module.exports.create = (event, context, callback) => {
   };
 
   // write the todo to the database
-  dynamoDb.put(params, (error, result) => {
+  dynamoDb.put(params, (error) => {
     // handle potential errors
     if (error) {
       console.error(error);
@@ -37,7 +37,7 @@ module.exports.create = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Item),
+      body: JSON.stringify(params.Item),
     };
     callback(null, response);
   });

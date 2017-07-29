@@ -1,3 +1,8 @@
+<!--
+title: AWS Serverless IoT Event example in NodeJS
+description: This example demonstrates how to setup a AWS IoT Rule to send events to a Lambda function.
+layout: Doc
+-->
 # Serverless IoT Event
 
 This example demonstrates how to setup a AWS IoT Rule to send events to a Lambda function.

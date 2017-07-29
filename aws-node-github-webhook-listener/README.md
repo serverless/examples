@@ -1,3 +1,8 @@
+<!--
+title: AWS Serverless Github Webhook Listener example in NodeJS
+description: This service will listen to github webhooks fired by a given repository.
+layout: Doc
+-->
 # Serverless Github webhook listener
 
 This service will listen to github webhooks fired by a given repository.

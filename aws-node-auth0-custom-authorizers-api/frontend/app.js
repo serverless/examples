@@ -56,7 +56,7 @@ document.getElementById('btn-public').addEventListener('click', () => {
   // call public API
   const getdata = fetch(PUBLIC_ENDPOINT, {
     method: 'GET',
-    cache: false,
+    cache: 'no-store',
   });
 
   getdata.then((response) => {
@@ -82,7 +82,7 @@ document.getElementById('btn-private').addEventListener('click', () => {
       Authorization: `Bearer ${token}`,
     },
     method: 'GET',
-    cache: false,
+    cache: 'no-store',
   });
 
   getdata.then((response) => {
