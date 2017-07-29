@@ -1,5 +1,5 @@
 {
-  "name": "aws-rest-with-dynamodb",
+  "name": "aws-rest-with-pynamodb",
   "version": "1.0.0",
   "description": "Serverless CRUD service exposing a REST HTTP interface",
   "author": "",
