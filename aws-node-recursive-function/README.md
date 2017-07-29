@@ -1,3 +1,8 @@
+<!--
+title: AWS Recursive Lambda function Invocation example in NodeJS
+description: This is an example of a function that will recursively call itself.
+layout: Doc
+-->
 # Recursive Lambda function Invocation
 
 This is an example of a function that will recursively call itself.

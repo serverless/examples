@@ -1,3 +1,8 @@
+<!--
+title: AWS Single Page Application example in NodeJS
+description: This example demonstrates how to setup a Single Page Application.
+layout: Doc
+-->
 # Single Page Application
 
 This example demonstrates how to setup a Single Page Application. Our goals here are to serve a static page with low latency. One additional goal is to make sure the client side application can leverage the History API functions `pushState` and `replaceState` to change the current URL without reloading. Further we want to make sure all the content is only served via HTTPS. HTTP requests should get redirected to HTTPS.
@@ -72,7 +77,7 @@ Hint: The plugin is simply running the AWS CLI command: `aws S3 sync app/ s3://y
 Now you just need to figure out the deployed URL. You can use the AWS Console UI or run
 
 ```bash
-sldev domainInfo
+sls domainInfo
 ```
 
 The expected result should be similar to

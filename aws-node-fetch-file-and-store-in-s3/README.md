@@ -1,3 +1,8 @@
+<!--
+title: AWS Fetch image from URL and upload to S3 example in NodeJS
+description: This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.
+layout: Doc
+-->
 # Fetch image from URL then upload to s3 Example
 
 This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.

@@ -1,1 +1,2 @@
-secrets.*.yml
+node_modules
+.serverless

@@ -1,5 +1,15 @@
 [
-  {
+ {
+    "name": "jwtAuthorizr",
+    "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
+    "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
+ },
+ {
+    "name": "serverless-graphql-api",
+    "description": "Serverless GraphQL API using Lambda and DynamoDB",
+    "githubUrl": "https://github.com/boazdejong/serverless-graphql-api"
+ },
+ {
     "name": "serverless-screenshot",
     "description": "Serverless Screenshot Service using PhantomJS",
     "url": "http://svdgraaf.nl/2016/09/28/Serverless-Screenshot-Service-With-Lambda.html",
@@ -162,6 +172,80 @@
     "name": "serverless-url-shortener",
     "description": "A simple url-shortener, using Serverless framework",
     "githubUrl": "https://github.com/aletheia/serverless-url-shortener"
+  },
+  {
+    "name": "serverless-html-pdf",
+    "description": "Service that convert HTML to PDF using PhantomJS's rasterize example.",
+    "githubUrl": "https://github.com/calvintychan/serverless-html-pdf"
+  },
+  {
+    "name": "serverless-examples-cached-rds-ws",
+    "description": "A serverless framework example project that uses API Gateway, ElastiCache, and RDS PostgreSQL.",
+    "githubUrl": "https://github.com/mugglmenzel/serverless-examples-cached-rds-ws"
+  },
+  {
+    "name": "bittman",
+    "description": "A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun.",
+    "githubUrl": "https://github.com/rhlsthrm/bittman"
+  },
+  {
+    "name": "adoptable-pet-bot",
+    "description": "Tweets adoptable pets using Serverless (Node.js) and AWS Lambda",
+    "githubUrl": "https://github.com/lynnaloo/adoptable-pet-bot"
+  },
+  {
+    "name": "owntracks-serverless",
+    "description": "A serverless implementation of the OwnTracks HTTP backend",
+    "githubUrl": "https://github.com/dschep/owntracks-serverless"
+  },
+  {
+    "name": "serverless-modern-koa",
+    "description": "Serverless modern koa starter kit",
+    "githubUrl": "https://github.com/barczaG/serverless-modern-koa"
+  },
+  {
+    "name": "Serverless ReactJS Universal Rendering Boilerplate",
+    "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
+    "githubUrl": "https://github.com/TylorShin/react-universal-in-serverless"
+  },
+  {
+    "name": "Open Bot",
+    "description": "An unoptionated Github bot driven by a configuration file in the repository",
+    "githubUrl": "https://github.com/open-bot/open-bot"
+  },
+  {
+    "name": "aws-ses-serverless-example",
+    "description": "AWS SES example in NodeJS using lambda",
+    "githubUrl": "https://github.com/lakshmantgld/aws-ses-serverless-example"
+  },
+  {
+    "name": "AWS API Gateway Serverless project written in Go",
+    "description": "A serverless project that contains an API Gateway endpoint powered by a Lambda function written in golang and built using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim).",
+    "githubUrl": "https://github.com/yunspace/serverless-golang"
+  },
+  {
+   "name": "video-preview-and-analysis-service",
+   "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
+   "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
+  },
+  {
+    "name": "Serverless ES6/7 CRUD API",
+    "description": "[Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com)",
+    "githubUrl": "https://github.com/AnomalyInnovations/serverless-stack-demo-api"
+  },
+  {
+    "name": "SQS Worker with AWS Lambda and CloudWatch Alarms",
+    "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
+    "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
+  },
+  {
+    "name": "grants-api-serverless",
+    "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
+    "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
+  },
+  {
+    "name": "honeyLambda",
+    "description": "a simple, serverless application designed to create and monitor URL {honey}tokens, on top of AWS Lambda and Amazon API Gateway",
+    "githubUrl": "https://github.com/0x4D31/honeyLambda"
   }
 ]
-

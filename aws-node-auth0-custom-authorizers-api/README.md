@@ -1,3 +1,8 @@
+<!--
+title: AWS API Gateway Custom Authorizer Function with Auth0 example in NodeJS
+description: This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function.
+layout: Doc
+-->
 # API Gateway Custom Authorizer Function + Auth0
 
 This is an example of how to protect API endpoints with [auth0](https://auth0.com/), JSON Web Tokens (jwt) and a [custom authorizer lambda function](https://serverless.com/framework/docs/providers/aws/events/apigateway#http-endpoints-with-custom-authorizers).
