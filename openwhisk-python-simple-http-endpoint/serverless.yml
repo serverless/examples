@@ -1,0 +1,16 @@
+service: python-service
+
+provider:
+  name: openwhisk
+  runtime: python
+
+functions:
+  currentTime:
+    handler: handler.endpoint
+    events:
+      - http:
+          path: ping
+          method: get
+
+plugins:
+  - serverless-openwhisk

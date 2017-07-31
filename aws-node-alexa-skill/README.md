@@ -1,3 +1,8 @@
+<!--
+title: AWS Serverless Alexa Skill example in NodeJS
+description: This example demonstrates how to setup your own Alexa skill using AWS Lambdas.
+layout: Doc
+-->
 # Serverless Alexa Skill Example
 
 This example demonstrates how to setup your own Alexa skill using AWS Lambdas.

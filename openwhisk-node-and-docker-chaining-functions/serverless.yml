@@ -1,0 +1,37 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: testing
+
+provider:
+  name: openwhisk
+
+functions:
+  location_from_address:
+    handler: handler.locationFromAddress
+  sunrise_sunset:
+    handler: handler.sunriseSunset
+  jq:
+    handler: jamesthomas/openwhisk-jq
+    runtime: docker
+    parameters: 
+      jq: '.results[0].geometry.location'
+  location_sunrise_sunset:
+    sequence: 
+      - location_from_address
+      - jq
+      - sunrise_sunset
+
+# remember to run npm install to download the provider plugin.        
+plugins:
+    - serverless-openwhisk

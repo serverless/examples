@@ -1,0 +1,22 @@
+service: node-simple-http-endpoint # NOTE: Don't put the word "google" in here
+
+provider:
+  name: google
+  runtime: nodejs
+  project: my-project-1234
+  credentials: ~/.gcloud/keyfile.json # path must be absolute
+
+plugins:
+  - serverless-google-cloudfunctions
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+functions:
+  helloWorld:
+    handler: http
+    events:
+      - http: path

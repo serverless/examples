@@ -1,3 +1,8 @@
+<!--
+title: AWS Serverless REST API with DynamoDB store example in Python
+description: This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.
+layout: Doc
+-->
 # Serverless REST API
 
 This example demonstrates how to setup a [RESTful Web Services](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data. This is just an example and of course you could use any data storage as a backend.

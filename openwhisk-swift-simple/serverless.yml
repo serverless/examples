@@ -1,0 +1,12 @@
+service: swift-service
+
+provider:
+  name: openwhisk
+  runtime: swift
+
+functions:
+  ping:
+    handler: ping.main
+
+plugins:
+  - serverless-openwhisk

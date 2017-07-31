@@ -1,0 +1,38 @@
+service: aws-node-rest-api-mongodb
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+functions:
+  createUser:
+    handler: handler.createUser
+    events:
+      - http:
+          path: user
+          method: post
+          cors: true
+
+  updateUser:
+    handler: handler.updateUser
+    events:
+      - http:
+          path: user/{id}
+          method: put
+          cors: true
+
+  deleteUser:
+    handler: handler.deleteUser
+    events:
+      - http:
+          path: user/{id}
+          method: delete
+          cors: true
+
+  user:
+    handler: handler.user
+    events:
+      - http:
+          path: user/{id}
+          method: get
+          cors: true
