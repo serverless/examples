@@ -1,3 +1,8 @@
+<!--
+title: AWS Function compiled with Babel example in NodeJS
+description: This example demonstrates how to compile your JavaScript code with Babel. In order to do so the 'serverless-babel-plugin' is leveraged.
+layout: Doc
+-->
 # Function compiled with Babel
 
 This example demonstrates how to compile your JavaScript code with Babel. In order to do so the `serverless-babel-plugin` is leveraged.
