@@ -1,4 +1,4 @@
-service: serverless-rest-api-with-dynamodb
+service: sls-typescript-rest-api-with-dynamodb
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
