@@ -239,6 +239,16 @@
     "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
   },
   {
+    "name": "AWS Lambda Power Tuning (powered by Step Functions)",
+    "description": "Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration.",
+    "githubUrl": "https://github.com/alexcasalboni/aws-lambda-power-tuning"
+  },
+  {
+    "name": "Amazon Kinesis Streams fan-out via Kinesis Analytics",
+    "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
+    "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
+ },
+ { 
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
