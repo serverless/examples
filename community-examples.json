@@ -5,6 +5,11 @@
     "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
  },
  {
+    "name": "slack-signup-serverless",
+    "description": "Serverless signup to Slack and more. Lambda with Python, StepFunctions, and Web front end. Python boilerplate included.",
+    "githubUrl": "https://github.com/dzimine/slack-signup-serverless"
+ },
+ {
     "name": "serverless-graphql-api",
     "description": "Serverless GraphQL API using Lambda and DynamoDB",
     "githubUrl": "https://github.com/boazdejong/serverless-graphql-api"
