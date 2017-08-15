@@ -13,5 +13,4 @@ functions:
       - http:
           path: webhook
           method: post
-          integration: lambda
           cors: true
