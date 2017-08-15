@@ -11,7 +11,7 @@ module.exports.githubWebhookListener = (event, context, callback) => {
   const sig = headers['X-Hub-Signature'];
   const githubEvent = headers['X-GitHub-Event'];
   const id = headers['X-GitHub-Delivery'];
-  const calculatedSig = signRequestBody(token, JSON.stringify(event.body));
+  const calculatedSig = signRequestBody(token, event.body);
 
   if (typeof token !== 'string') {
     errMsg = '[401] must provide a \'GITHUB_WEBHOOK_SECRET\' env variable';
