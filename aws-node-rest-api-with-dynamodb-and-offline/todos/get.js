@@ -15,7 +15,11 @@ module.exports.get = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t fetch the todo item.'));
+      callback(null, {
+        statusCode: error.statusCode || 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: 'Couldn\'t fetch the todo item.',
+      });
       return;
     }
 
