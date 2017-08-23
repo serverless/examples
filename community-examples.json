@@ -262,5 +262,10 @@
     "name": "Stack Overflow Monitor",
     "description": "Monitor Stack Overflow questions and post them in a Slack channel",
     "githubUrl": "https://github.com/picsoung/stackoverflowmonitor"
+  },
+  {
+    "name": "Serverless Analytics",
+    "description": "Write your own Google Analytics clone and track website visitors serverless with API Gateway, Kinesis, Lambda, and DynamoDB.",
+    "githubUrl": "https://github.com/sbstjn/serverless-analytics"
   }
 ]
