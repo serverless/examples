@@ -262,5 +262,10 @@
     "name": "Stack Overflow Monitor",
     "description": "Monitor Stack Overflow questions and post them in a Slack channel",
     "githubUrl": "https://github.com/picsoung/stackoverflowmonitor"
+  },
+  {
+    "name": "React & Stripe Serverless Ecommerce",
+    "description": "Serverless E-Commerce App with AWS Lambda, Stripe and React",
+    "githubUrl": "https://github.com/patrick-michelberger/serverless-shop"
   }
 ]
