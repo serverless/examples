@@ -2,6 +2,8 @@
 
 # Serverless Examples
 
+<img align="right" width="300" src="https://s3-us-west-2.amazonaws.com/assets.site.serverless.com/email/sls-getting-started.gif" />
+
 A collection of ready-to-deploy [Serverless Framework](https://github.com/serverless/serverless) services.
 
 ## Table of Contents
