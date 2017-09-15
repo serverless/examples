@@ -10,7 +10,11 @@ module.exports.create = (event, context, callback) => {
   const data = JSON.parse(event.body);
   if (typeof data.text !== 'string') {
     console.error('Validation Failed');
-    callback(new Error('Couldn\'t create the todo item.'));
+    callback(null, {
+      statusCode: 400,
+      headers: { 'Content-Type': 'text/plain' },
+      body: 'Couldn\'t create the todo item.',
+    });
     return;
   }
 
@@ -30,7 +34,11 @@ module.exports.create = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create the todo item.'));
+      callback(null, {
+        statusCode: error.statusCode || 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: 'Couldn\'t create the todo item.',
+      });
       return;
     }
 
