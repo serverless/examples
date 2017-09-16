@@ -272,5 +272,10 @@
     "name": "serverless + medium text-to-speech",
     "description": "Serverless-based, text-to-speech service for Medium articles",
     "githubUrl": "https://github.com/RafalWilinski/serverless-medium-text-to-speech"
+  },
+  {
+    "name": "serverless + java DynamoDB imlementation example",
+    "description": " example for java programmers that want to work with AWS-Lambda and DynamoDB",
+    "githubUrl": "https://github.com/igorbakman/java-lambda-dynamodb"
   }
 ]
