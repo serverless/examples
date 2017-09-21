@@ -9,7 +9,11 @@ module.exports.addNote = (event, context, callback) => {
   const data = JSON.parse(event.body);
   if (typeof data.note !== 'string') {
     console.error('Validation Failed');
-    callback(new Error('Couldn\'t add the note.'));
+    callback(null, {
+      statusCode: 400,
+      headers: { 'Content-Type': 'text/plain' },
+      body: 'Couldn\'t add the note.',
+    });
     return;
   }
 
@@ -21,7 +25,11 @@ module.exports.addNote = (event, context, callback) => {
   sns.publish(params, (error) => {
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t add the note due an internal error. Please try again later.'));
+      callback(null, {
+        statusCode: 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: 'Couldn\'t add the note due an internal error. Please try again later.',
+      });
     }
     // create a resonse
     const response = {
