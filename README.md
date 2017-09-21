@@ -2,6 +2,8 @@
 
 # Serverless Examples
 
+<img align="right" width="300" src="https://s3-us-west-2.amazonaws.com/assets.site.serverless.com/email/sls-getting-started.gif" />
+
 A collection of ready-to-deploy [Serverless Framework](https://github.com/serverless/serverless) services.
 
 ## Table of Contents
@@ -75,6 +77,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Openwhisk Node Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-node-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless schedule event. | nodeJS |
 | [Openwhisk Node Simple Http](https://github.com/serverless/examples/tree/master/openwhisk-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk. | nodeJS |
 | [Openwhisk Node Simple](https://github.com/serverless/examples/tree/master/openwhisk-node-simple) <br/> Simple example demonstrating OpenWhisk provider support. | nodeJS |
+| [Openwhisk Php Simple](https://github.com/serverless/examples/tree/master/openwhisk-php-simple) <br/> Example demonstrates how to setup a simple PHP function with OpenWhisk. | php |
 | [Openwhisk Python Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-python-scheduled-cron) <br/> Example of creating a Python function that runs as a cron job using the serverless schedule event. | python |
 | [Openwhisk Python Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk. | python |
 | [Openwhisk Python Simple](https://github.com/serverless/examples/tree/master/openwhisk-python-simple) <br/> Example demonstrates how to setup a simple Python function with OpenWhisk. | python |
@@ -102,6 +105,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Aws Lambda Power Tuning (Powered By Step Functions)](https://github.com/alexcasalboni/aws-lambda-power-tuning)** <br/> Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration. | [alexcasalboni](http://github.com/alexcasalboni) |
 | **[Amazon Kinesis Streams Fan Out Via Kinesis Analytics](https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics)** <br/> Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling. | [alexcasalboni](http://github.com/alexcasalboni) |
 | **[Open Bot](https://github.com/open-bot/open-bot)** <br/> An unoptionated Github bot driven by a configuration file in the repository | [open-bot](http://github.com/open-bot) |
+| **[React & Stripe Serverless Ecommerce](https://github.com/patrick-michelberger/serverless-shop)** <br/> Serverless E-Commerce App with AWS Lambda, Stripe and React | [patrick-michelberger](http://github.com/patrick-michelberger) |
 | **[Sqs Worker With Aws Lambda And Cloudwatch Alarms](https://github.com/sbstjn/sqs-worker-serverless)** <br/> Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function. | [sbstjn](http://github.com/sbstjn) |
 | **[Serverless Analytics](https://github.com/sbstjn/serverless-analytics)** <br/> Write your own Google Analytics clone and track website visitors serverless with API Gateway, Kinesis, Lambda, and DynamoDB. | [sbstjn](http://github.com/sbstjn) |
 | **[Serverless Es6/7 Crud Api](https://github.com/AnomalyInnovations/serverless-stack-demo-api)** <br/> [Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com) | [AnomalyInnovations](http://github.com/AnomalyInnovations) |
@@ -123,6 +127,8 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Pfs Email Serverless](https://github.com/SCPR/pfs-email-serverless)** <br/> This is a lambda function created by the serverless framework. It searches through members in our mongodb who have not been sent emails and sends them an email with their custom token to unlock the pledge free stream. It then marks those members off as already receiving the email. | [SCPR](http://github.com/SCPR) |
 | **[Plaid Cashburndown Service](https://github.com/cplee/cashburndown-service)** <br/> Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site | [cplee](http://github.com/cplee) |
 | **[Sc5 Serverless Boilerplate](https://github.com/SC5/sc5-serverless-boilerplate)** <br/> A boilerplate that contains setup for test-driven development | [SC5](http://github.com/SC5) |
+| **[Serverless + Java Dynamodb Imlementation Example](https://github.com/igorbakman/java-lambda-dynamodb)** <br/>  example for java programmers that want to work with AWS-Lambda and DynamoDB | [igorbakman](http://github.com/igorbakman) |
+| **[Serverless + Medium Text To Speech](https://github.com/RafalWilinski/serverless-medium-text-to-speech)** <br/> Serverless-based, text-to-speech service for Medium articles | [RafalWilinski](http://github.com/RafalWilinski) |
 | **[Serverless Aws Rekognition Finpics](https://github.com/rgfindl/finpics)** <br/> Use AWS Rekognition to provide a faces search of finpics.com | [rgfindl](http://github.com/rgfindl) |
 | **[Serverless Blog To Podcast](https://github.com/SC5/serverless-blog-to-podcast)** <br/> Service that reads RSS feed and converts the entries to a podcast feed and audio files using Amazon Polly | [SC5](http://github.com/SC5) |
 | **[Serverless Cloudwatch Rds Custom Metrics](https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics)** <br/> A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless | [AndrewFarley](http://github.com/AndrewFarley) |
