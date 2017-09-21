@@ -264,6 +264,11 @@
     "githubUrl": "https://github.com/0x4D31/honeyLambda"
   },
   {
+    "name": "faultline",
+    "description": "Error tracking tool on AWS managed services.",
+    "githubUrl": "https://github.com/faultline/faultline"
+  },
+  {
     "name": "Stack Overflow Monitor",
     "description": "Monitor Stack Overflow questions and post them in a Slack channel",
     "githubUrl": "https://github.com/picsoung/stackoverflowmonitor"
