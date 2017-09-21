@@ -264,6 +264,11 @@
     "githubUrl": "https://github.com/picsoung/stackoverflowmonitor"
   },
   {
+    "name": "Serverless Analytics",
+    "description": "Write your own Google Analytics clone and track website visitors serverless with API Gateway, Kinesis, Lambda, and DynamoDB.",
+    "githubUrl": "https://github.com/sbstjn/serverless-analytics"
+  },
+  {
     "name": "React & Stripe Serverless Ecommerce",
     "description": "Serverless E-Commerce App with AWS Lambda, Stripe and React",
     "githubUrl": "https://github.com/patrick-michelberger/serverless-shop"
