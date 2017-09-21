@@ -9,7 +9,11 @@ module.exports.update = (event, context, callback) => {
   // validation
   if (typeof data.text !== 'string' || typeof data.checked !== 'boolean') {
     console.error('Validation Failed');
-    callback(new Error('Couldn\'t update the todo item.'));
+    callback(null, {
+      statusCode: 400,
+      headers: { 'Content-Type': 'text/plain' },
+      body: 'Couldn\'t update the todo item.',
+    });
     return;
   }
 
@@ -35,7 +39,11 @@ module.exports.update = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t update the todo item.'));
+      callback(null, {
+        statusCode: error.statusCode || 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: 'Couldn\'t update the todo item.',
+      });
       return;
     }
 

@@ -41,6 +41,10 @@ module.exports.incoming = (event, context, callback) => {
       callback(null, response);
     });
   } catch (err) {
-    context.fail(err);
+    callback(null, {
+      statusCode: err.statusCode || 501,
+      headers: { 'Content-Type': 'text/plain' },
+      body: err.message || 'Internal server error',
+    });
   }
 };

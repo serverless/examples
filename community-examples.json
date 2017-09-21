@@ -239,6 +239,16 @@
     "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
   },
   {
+    "name": "AWS Lambda Power Tuning (powered by Step Functions)",
+    "description": "Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration.",
+    "githubUrl": "https://github.com/alexcasalboni/aws-lambda-power-tuning"
+  },
+  {
+    "name": "Amazon Kinesis Streams fan-out via Kinesis Analytics",
+    "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
+    "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
+ },
+ { 
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
@@ -252,5 +262,20 @@
     "name": "faultline",
     "description": "Error tracking tool on AWS managed services.",
     "githubUrl": "https://github.com/faultline/faultline"
+  },
+  {
+    "name": "Stack Overflow Monitor",
+    "description": "Monitor Stack Overflow questions and post them in a Slack channel",
+    "githubUrl": "https://github.com/picsoung/stackoverflowmonitor"
+  },
+  {
+    "name": "React & Stripe Serverless Ecommerce",
+    "description": "Serverless E-Commerce App with AWS Lambda, Stripe and React",
+    "githubUrl": "https://github.com/patrick-michelberger/serverless-shop"
+  },
+  {
+    "name": "serverless + medium text-to-speech",
+    "description": "Serverless-based, text-to-speech service for Medium articles",
+    "githubUrl": "https://github.com/RafalWilinski/serverless-medium-text-to-speech"
   }
 ]
