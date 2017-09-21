@@ -35,6 +35,8 @@ const getRuntime = (dirname) => {
     return 'python';
   } else if (dirname.match(/swift/)) {
     return 'swift';
+  } else if (dirname.match(/php/)) {
+    return 'php';
   }
   return 'nodeJS';
 };
