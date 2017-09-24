@@ -36,7 +36,7 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 5. Plugin your `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, and the `PUBLIC_ENDPOINT` + `PRIVATE_ENDPOINT` from aws in top of the `frontend/app.js` file.
 
   ```js
-  /* frontend/app.j */
+  /* frontend/app.js */
   // replace these values in app.js
   const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
   const AUTH0_DOMAIN = 'your-auth0-domain-here.auth0.com';
