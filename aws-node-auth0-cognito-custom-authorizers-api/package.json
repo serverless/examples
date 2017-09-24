@@ -5,7 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "jsonwebtoken": "^7.1.9",
-    "jwk-to-pem": "^1.2.6"
+    "jwk-to-pem": "^1.2.6",
+    "request": "^2.82.0"
   },
   "author": "Shahzeb Khan"
 }
