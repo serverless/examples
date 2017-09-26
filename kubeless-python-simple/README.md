@@ -5,16 +5,9 @@ layout: Doc
 -->
 # Serverless Boilerplate - Kubeless - Python
 
-Make sure `minikube`, `kubeless` and `serverless` are installed. See the respective installation guides:
-* [Minikube](https://github.com/kubernetes/minikube#installation)
+Make sure `kubeless` and `serverless` are installed. See the respective installation guides:
 * [Kubeless](https://github.com/kubeless/kubeless/blob/master/README.md#usage)
 * [Serverless](https://github.com/serverless/serverless#quick-start)
-
-You will also need to set up your Kubernetes API URL using the following environment variable:
-
-```bash
-$ export KUBE_API_URL=https://192.168.99.100:8443
-```
 
 Please see the [this guide for more information](https://github.com/serverless/serverless-kubeless/blob/master/README.md).
 
@@ -32,7 +25,7 @@ Serverless: Function hello succesfully deployed
 ```
 
 ## 3. Invoke deployed function
-Run `serverless invoke --function hello --data "Bob"`
+Run `serverless invoke --function hello --log --data "Bob"`
 
 In your terminal window you should see the response from Kubernetes.
 
