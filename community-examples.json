@@ -292,5 +292,10 @@
     "name": "serverless + java DynamoDB imlementation example",
     "description": " example for java programmers that want to work with AWS-Lambda and DynamoDB",
     "githubUrl": "https://github.com/igorbakman/java-lambda-dynamodb"
+  },
+    {
+    "name": "AWS Cognito Custom User Pool Example",
+    "description": "Example CloudFormation custom resource backed by a lambda using Cognito User Pools",
+    "githubUrl": "https://github.com/bsdkurt/aws-node-custom-user-pool"
   }
 ]
