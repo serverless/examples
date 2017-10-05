@@ -292,5 +292,10 @@
     "name": "serverless + java DynamoDB imlementation example",
     "description": " example for java programmers that want to work with AWS-Lambda and DynamoDB",
     "githubUrl": "https://github.com/igorbakman/java-lambda-dynamodb"
+  },
+  {
+    "name": "serverless + lambda protobuf responses",
+    "description": "Demo using API Gateway and Lambda with Protocol Buffer",
+    "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
   }
 ]
