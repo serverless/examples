@@ -1,0 +1,23 @@
+# Welcome to serverless. Read the docs at https://serverless.com/framework/docs/
+
+service: helloworld
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+# Exclude tests for deployment
+package:
+  exclude:
+    - "*.test.js"
+
+# The `functions` block defines what code to deploy
+functions:
+  helloWorld:
+    handler: handler.helloworld
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: hello-world
+          method: get
