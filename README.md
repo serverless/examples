@@ -68,6 +68,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-python-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | python |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
 | [Aws Rest With Faunadb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-faunadb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
+| [Aws Rest With Pynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-pynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-python-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | python |
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
