@@ -33,6 +33,10 @@ const getRuntime = (dirname) => {
     return 'nodeJS';
   } else if (dirname.match(/python/)) {
     return 'python';
+  } else if (dirname.match(/swift/)) {
+    return 'swift';
+  } else if (dirname.match(/php/)) {
+    return 'php';
   }
   return 'nodeJS';
 };

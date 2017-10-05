@@ -1,0 +1,13 @@
+{
+  "name": "kubeless-python-simple",
+  "version": "0.0.1",
+  "description": "This example demonstrates how to setup a simple Python function with Kubeless",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "kubernetes-client": "^3.10.1",
+    "serverless-kubeless": "^0.2.0"
+  },
+  "main": "handler.py",
+  "autor": "Bitnami",
+  "license": "ASL"
+}	   
