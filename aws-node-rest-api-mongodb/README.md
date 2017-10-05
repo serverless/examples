@@ -25,7 +25,7 @@ In `handler.js` update the `mongoString` with your mongoDB url.
 curl -XPOST -H "Content-type: application/json" -d '{
    "name" : "John",
    "firstname" : "Doe",
-   "city" : "New York",
+   "city" : "Toronto",
    "birth" : "01/01/1990"
 }' 'https://2c8cx5whk0.execute-api.us-east-1.amazonaws.com/dev/user/'
 ```
@@ -45,7 +45,7 @@ curl -XGET -H "Content-type: application/json" 'https://2c8cx5whk0.execute-api.u
     "name": "John",
     "firstname": "Doe",
     "birth": null,
-    "city": "New York",
+    "city": "Toronto",
     "ip": "01/01/1990",
     "__v": 0
   }
