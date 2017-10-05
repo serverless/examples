@@ -1,0 +1,12 @@
+{
+  "name": "aws-node-auth0-cognito-custom-authorizers-api",
+  "version": "1.0.0",
+  "description": "Authorize your API Gateway with either Auth0 or Cognito RS256 tokens.",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^7.1.9",
+    "jwk-to-pem": "^1.2.6",
+    "request": "^2.82.0"
+  },
+  "author": "Shahzeb Khan"
+}

@@ -2,6 +2,8 @@
 
 # Serverless Examples
 
+<img align="right" width="300" src="https://s3-us-west-2.amazonaws.com/assets.site.serverless.com/email/sls-getting-started.gif" />
+
 A collection of ready-to-deploy [Serverless Framework](https://github.com/serverless/serverless) services.
 
 ## Table of Contents
@@ -39,7 +41,9 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | Example | Runtime  |
 |:--------------------------- |:-----|
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
+| [Aws Node Auth0 Cognito Custom Authorizers Api](https://github.com/serverless/examples/tree/master/aws-node-auth0-cognito-custom-authorizers-api) <br/> Authorize your API Gateway with either Auth0 or Cognito RS256 tokens. | nodeJS |
 | [Aws Auth0 Api Gateway](https://github.com/serverless/examples/tree/master/aws-node-auth0-custom-authorizers-api) <br/> Demonstration of protecting API gateway endpoints with auth0 | nodeJS |
+| [Aws Node Dynamodb Backup](https://github.com/serverless/examples/tree/master/aws-node-dynamodb-backup) <br/> Serverless DynamoDB changes backed up to S3 | nodeJS |
 | [Aws Env Variables Encrypted In A File](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file) <br/> Serverless example managing secrets in an encrypted file | nodeJS |
 | [Aws Env Variables](https://github.com/serverless/examples/tree/master/aws-node-env-variables) <br/> This example demonstrates how to use environment variables for AWS Lambdas. | nodeJS |
 | [Aws Fetch File And Store In S3](https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3) <br/> Fetch an image from remote source (URL) and then upload the image to a S3 bucket. | nodeJS |
@@ -59,6 +63,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Stripe Integration](https://github.com/serverless/examples/tree/master/aws-node-stripe-integration) <br/> This example for Stripe integration using AWS Lambda and API Gateway. | nodeJS |
 | [Aws Text Analysis Via Sns Post Processing](https://github.com/serverless/examples/tree/master/aws-node-text-analysis-via-sns-post-processing) <br/> Example demonstrates how to setup a simple data processing pipeline | nodeJS |
 | [Aws Node Twilio Send Text Message](https://github.com/serverless/examples/tree/master/aws-node-twilio-send-text-message) <br/> Send a text message via twilio from aws lambda. [See live demo](http://twilio-serverless-example.surge.sh) | nodeJS |
+| [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
 | [Upload To S3 And Postprocess](https://github.com/serverless/examples/tree/master/aws-node-upload-to-s3-and-postprocess) <br/> Upload a files to S3 to trigger a lambda function. | nodeJS |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-python-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | python |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
@@ -67,18 +72,22 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
+| [Kubeless Python Simple](https://github.com/serverless/examples/tree/master/kubeless-python-schedule) <br/> This example demonstrates how to setup a simple Python function with Kubeless | python |
+| [Kubeless Python Simple](https://github.com/serverless/examples/tree/master/kubeless-python-simple) <br/> This example demonstrates how to setup a simple Python function with Kubeless | python |
 | [Openwhisk Go Simple](https://github.com/serverless/examples/tree/master/openwhisk-go-simple) <br/> Example demonstrates how to setup a simple Go function with OpenWhisk. | nodeJS |
 | [Openwhisk Node And Docker Chaining Functions](https://github.com/serverless/examples/tree/master/openwhisk-node-and-docker-chaining-functions) <br/> Example of chaining function calls using sequences and docker images. | nodeJS |
 | [Openwhisk Node Chaining Functions](https://github.com/serverless/examples/tree/master/openwhisk-node-chaining-functions) <br/> Example of chaining function calls using sequences and the sdk. | nodeJS |
 | [Openwhisk Node Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-node-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless schedule event. | nodeJS |
 | [Openwhisk Node Simple Http](https://github.com/serverless/examples/tree/master/openwhisk-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk. | nodeJS |
 | [Openwhisk Node Simple](https://github.com/serverless/examples/tree/master/openwhisk-node-simple) <br/> Simple example demonstrating OpenWhisk provider support. | nodeJS |
+| [Openwhisk Php Simple](https://github.com/serverless/examples/tree/master/openwhisk-php-simple) <br/> Example demonstrates how to setup a simple PHP function with OpenWhisk. | php |
 | [Openwhisk Python Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-python-scheduled-cron) <br/> Example of creating a Python function that runs as a cron job using the serverless schedule event. | python |
 | [Openwhisk Python Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk. | python |
 | [Openwhisk Python Simple](https://github.com/serverless/examples/tree/master/openwhisk-python-simple) <br/> Example demonstrates how to setup a simple Python function with OpenWhisk. | python |
-| [Openwhisk Swift Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-swift-scheduled-cron) <br/> Example of creating a Swift function that runs as a cron job using the serverless schedule event. | nodeJS |
-| [Openwhisk Swift Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk. | nodeJS |
-| [Openwhisk Swift Simple](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple) <br/> Example demonstrates how to setup a simple Swift function with OpenWhisk. | nodeJS |
+| [Openwhisk Swift Package With Precompiled Binaries](https://github.com/serverless/examples/tree/master/openwhisk-swift-precompiled-binaries) <br/> Swift packages and pre-compiled binaries on OpenWhisk. | swift |
+| [Openwhisk Swift Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-swift-scheduled-cron) <br/> Example of creating a Swift function that runs as a cron job using the serverless schedule event. | swift |
+| [Openwhisk Swift Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk. | swift |
+| [Openwhisk Swift Simple](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple) <br/> Example demonstrates how to setup a simple Swift function with OpenWhisk. | swift |
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -96,15 +105,24 @@ serverless install -u https://github.com/author/project -n my-project
 | Example | Author |
 |:-------|:------:|
 | **[Aws Api Gateway Serverless Project Written In Go](https://github.com/yunspace/serverless-golang)** <br/> A serverless project that contains an API Gateway endpoint powered by a Lambda function written in golang and built using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim). | [yunspace](http://github.com/yunspace) |
+| **[Aws Cognito Custom User Pool Example](https://github.com/bsdkurt/aws-node-custom-user-pool)** <br/> Example CloudFormation custom resource backed by a lambda using Cognito User Pools | [bsdkurt](http://github.com/bsdkurt) |
+| **[Aws Lambda Power Tuning (Powered By Step Functions)](https://github.com/alexcasalboni/aws-lambda-power-tuning)** <br/> Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration. | [alexcasalboni](http://github.com/alexcasalboni) |
+| **[Amazon Kinesis Streams Fan Out Via Kinesis Analytics](https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics)** <br/> Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling. | [alexcasalboni](http://github.com/alexcasalboni) |
 | **[Open Bot](https://github.com/open-bot/open-bot)** <br/> An unoptionated Github bot driven by a configuration file in the repository | [open-bot](http://github.com/open-bot) |
+| **[React & Stripe Serverless Ecommerce](https://github.com/patrick-michelberger/serverless-shop)** <br/> Serverless E-Commerce App with AWS Lambda, Stripe and React | [patrick-michelberger](http://github.com/patrick-michelberger) |
 | **[Sqs Worker With Aws Lambda And Cloudwatch Alarms](https://github.com/sbstjn/sqs-worker-serverless)** <br/> Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function. | [sbstjn](http://github.com/sbstjn) |
+| **[Serverless Analytics](https://github.com/sbstjn/serverless-analytics)** <br/> Write your own Google Analytics clone and track website visitors serverless with API Gateway, Kinesis, Lambda, and DynamoDB. | [sbstjn](http://github.com/sbstjn) |
 | **[Serverless Es6/7 Crud Api](https://github.com/AnomalyInnovations/serverless-stack-demo-api)** <br/> [Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com) | [AnomalyInnovations](http://github.com/AnomalyInnovations) |
 | **[Serverless Reactjs Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless)** <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | [TylorShin](http://github.com/TylorShin) |
+| **[Stack Overflow Monitor](https://github.com/picsoung/stackoverflowmonitor)** <br/> Monitor Stack Overflow questions and post them in a Slack channel | [picsoung](http://github.com/picsoung) |
 | **[Adoptable Pet Bot](https://github.com/lynnaloo/adoptable-pet-bot)** <br/> Tweets adoptable pets using Serverless (Node.js) and AWS Lambda | [lynnaloo](http://github.com/lynnaloo) |
 | **[Aws Ses Serverless Example](https://github.com/lakshmantgld/aws-ses-serverless-example)** <br/> AWS SES example in NodeJS using lambda | [lakshmantgld](http://github.com/lakshmantgld) |
 | **[Bittman](https://github.com/rhlsthrm/bittman)** <br/> A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun. | [rhlsthrm](http://github.com/rhlsthrm) |
 | **[Cordis Serverless](https://github.com/marzeelabs/cordis-serverless)** <br/> A serverless API for EU Cordis data | [marzeelabs](http://github.com/marzeelabs) |
+| **[Faultline](https://github.com/faultline/faultline)** <br/> Error tracking tool on AWS managed services. | [faultline](http://github.com/faultline) |
 | **[Giphy Bot](https://github.com/tywong/lambda-workshop-2016/tree/master/giphy-bot)** <br/> giphy-bot for Facebook chat | [tywong](http://github.com/tywong) |
+| **[Grants Api Serverless](https://github.com/comicrelief/grants-api-serverless)** <br/> ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch | [comicrelief](http://github.com/comicrelief) |
+| **[Honeylambda](https://github.com/0x4D31/honeyLambda)** <br/> a simple, serverless application designed to create and monitor URL {honey}tokens, on top of AWS Lambda and Amazon API Gateway | [0x4D31](http://github.com/0x4D31) |
 | **[Jrestless Examples](https://github.com/bbilger/jrestless-examples)** <br/> [JRestless](https://github.com/bbilger/jrestless) (Java / JAX-RS) examples for [API Gateway Functions](https://github.com/bbilger/jrestless-examples/tree/master/aws/gateway) ([plain JAX-RS](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-showcase), [Spring](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-spring), [binary data requests/responses](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-binary), [custom authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-custom-authorizer) and [Cognito User Pool authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-cognito-authorizer)), [SNS Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/sns/aws-sns-usage-example) (asynchronous communication between functions) and [Service Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/service/aws-service-usage-example) (synchronous HTTP-like communication between functions - transparent through Feign) | [bbilger](http://github.com/bbilger) |
 | **[Jwt Lambda Python](https://github.com/mikaelmork/jwt-auth.serverless)** <br/> Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda | [mikaelmork](http://github.com/mikaelmork) |
 | **[Jwtauthorizr](https://github.com/serverlessbuch/jwtAuthorizr)** <br/> Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT | [serverlessbuch](http://github.com/serverlessbuch) |
@@ -114,6 +132,9 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Pfs Email Serverless](https://github.com/SCPR/pfs-email-serverless)** <br/> This is a lambda function created by the serverless framework. It searches through members in our mongodb who have not been sent emails and sends them an email with their custom token to unlock the pledge free stream. It then marks those members off as already receiving the email. | [SCPR](http://github.com/SCPR) |
 | **[Plaid Cashburndown Service](https://github.com/cplee/cashburndown-service)** <br/> Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site | [cplee](http://github.com/cplee) |
 | **[Sc5 Serverless Boilerplate](https://github.com/SC5/sc5-serverless-boilerplate)** <br/> A boilerplate that contains setup for test-driven development | [SC5](http://github.com/SC5) |
+| **[Serverless + Java Dynamodb Imlementation Example](https://github.com/igorbakman/java-lambda-dynamodb)** <br/>  example for java programmers that want to work with AWS-Lambda and DynamoDB | [igorbakman](http://github.com/igorbakman) |
+| **[Serverless + Lambda Protobuf Responses](https://github.com/theburningmonk/lambda-protobuf-demo)** <br/> Demo using API Gateway and Lambda with Protocol Buffer | [theburningmonk](http://github.com/theburningmonk) |
+| **[Serverless + Medium Text To Speech](https://github.com/RafalWilinski/serverless-medium-text-to-speech)** <br/> Serverless-based, text-to-speech service for Medium articles | [RafalWilinski](http://github.com/RafalWilinski) |
 | **[Serverless Aws Rekognition Finpics](https://github.com/rgfindl/finpics)** <br/> Use AWS Rekognition to provide a faces search of finpics.com | [rgfindl](http://github.com/rgfindl) |
 | **[Serverless Blog To Podcast](https://github.com/SC5/serverless-blog-to-podcast)** <br/> Service that reads RSS feed and converts the entries to a podcast feed and audio files using Amazon Polly | [SC5](http://github.com/SC5) |
 | **[Serverless Cloudwatch Rds Custom Metrics](https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics)** <br/> A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless | [AndrewFarley](http://github.com/AndrewFarley) |
@@ -140,6 +161,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Serverless Slack Trevorbot](https://github.com/conveyal/trevorbot)** <br/> Slack bot for info on where in the world is Trevor Gerhardt? | [conveyal](http://github.com/conveyal) |
 | **[Serverless Url Shortener](https://github.com/aletheia/serverless-url-shortener)** <br/> A simple url-shortener, using Serverless framework | [aletheia](http://github.com/aletheia) |
 | **[Serverless Weekly2pocket App](https://github.com/s0enke/weekly2pocket)** <br/> Serverless-powered API for sending posts to pocket app | [s0enke](http://github.com/s0enke) |
+| **[Slack Signup Serverless](https://github.com/dzimine/slack-signup-serverless)** <br/> Serverless signup to Slack and more. Lambda with Python, StepFunctions, and Web front end. Python boilerplate included. | [dzimine](http://github.com/dzimine) |
 | **[Sls Access Counter](https://github.com/takahashim/sls-access-counter)** <br/> Site visitor counter | [takahashim](http://github.com/takahashim) |
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
 | **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |

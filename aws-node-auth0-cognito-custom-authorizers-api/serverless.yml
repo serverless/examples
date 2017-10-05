@@ -1,0 +1,34 @@
+
+service: aws-node-auth0-cognito-custom-authorizers-api
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  publicEndpoint:
+    handler: handler.publicEndpoint
+    events:
+      - http:
+          path: api/public
+          method: get
+          integration: lambda
+          cors: true
+  auth:
+    handler: auth.authorize
+  privateEndpoint:
+    handler: handler.privateEndpoint
+    events:
+      - http:
+          path: api/private
+          method: get
+          authorizer: auth
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token

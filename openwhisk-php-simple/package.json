@@ -1,0 +1,9 @@
+{
+  "name": "openwhisk-php-simple",
+  "version": "0.1.0",
+  "description": "Example demonstrates how to setup a simple PHP function with OpenWhisk.",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

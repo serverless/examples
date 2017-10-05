@@ -23,6 +23,10 @@ module.exports.imageAnalysis = (event, context, callback) => {
       callback(null, response);
     })
     .catch((error) => {
-      callback(error, null);
+      callback(null, {
+        statusCode: error.statusCode || 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: error.message || 'Internal server error',
+      });
     });
 };

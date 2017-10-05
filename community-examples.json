@@ -5,6 +5,11 @@
     "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
  },
  {
+    "name": "slack-signup-serverless",
+    "description": "Serverless signup to Slack and more. Lambda with Python, StepFunctions, and Web front end. Python boilerplate included.",
+    "githubUrl": "https://github.com/dzimine/slack-signup-serverless"
+ },
+ {
     "name": "serverless-graphql-api",
     "description": "Serverless GraphQL API using Lambda and DynamoDB",
     "githubUrl": "https://github.com/boazdejong/serverless-graphql-api"
@@ -242,5 +247,65 @@
     "name": "serverless-image-manager",
     "description": "image upload / download with resizing. Used API gateway's binary support & serverless",
     "githubUrl": "https://github.com/TylorShin/lambda-image-manager"
+  },
+  {
+    "name": "AWS Lambda Power Tuning (powered by Step Functions)",
+    "description": "Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration.",
+    "githubUrl": "https://github.com/alexcasalboni/aws-lambda-power-tuning"
+  },
+  {
+    "name": "Amazon Kinesis Streams fan-out via Kinesis Analytics",
+    "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
+    "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
+ },
+ { 
+    "name": "grants-api-serverless",
+    "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
+    "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
+  },
+  {
+    "name": "honeyLambda",
+    "description": "a simple, serverless application designed to create and monitor URL {honey}tokens, on top of AWS Lambda and Amazon API Gateway",
+    "githubUrl": "https://github.com/0x4D31/honeyLambda"
+  },
+  {
+    "name": "faultline",
+    "description": "Error tracking tool on AWS managed services.",
+    "githubUrl": "https://github.com/faultline/faultline"
+  },
+  {
+    "name": "Stack Overflow Monitor",
+    "description": "Monitor Stack Overflow questions and post them in a Slack channel",
+    "githubUrl": "https://github.com/picsoung/stackoverflowmonitor"
+  },
+  {
+    "name": "Serverless Analytics",
+    "description": "Write your own Google Analytics clone and track website visitors serverless with API Gateway, Kinesis, Lambda, and DynamoDB.",
+    "githubUrl": "https://github.com/sbstjn/serverless-analytics"
+  },
+  {
+    "name": "React & Stripe Serverless Ecommerce",
+    "description": "Serverless E-Commerce App with AWS Lambda, Stripe and React",
+    "githubUrl": "https://github.com/patrick-michelberger/serverless-shop"
+  },
+  {
+    "name": "serverless + medium text-to-speech",
+    "description": "Serverless-based, text-to-speech service for Medium articles",
+    "githubUrl": "https://github.com/RafalWilinski/serverless-medium-text-to-speech"
+  },
+  {
+    "name": "serverless + java DynamoDB imlementation example",
+    "description": " example for java programmers that want to work with AWS-Lambda and DynamoDB",
+    "githubUrl": "https://github.com/igorbakman/java-lambda-dynamodb"
+  },
+  {
+    "name": "AWS Cognito Custom User Pool Example",
+    "description": "Example CloudFormation custom resource backed by a lambda using Cognito User Pools",
+    "githubUrl": "https://github.com/bsdkurt/aws-node-custom-user-pool"
+  },
+  {
+    "name": "serverless + lambda protobuf responses",
+    "description": "Demo using API Gateway and Lambda with Protocol Buffer",
+    "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
   }
 ]

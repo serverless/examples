@@ -1,0 +1,17 @@
+{
+  "name": "openwhisk-swift-package-with-precompiled-binaries",
+  "version": "1.0.0",
+  "description": "Swift packages and pre-compiled binaries on OpenWhisk.",
+  "main": "handler.js",
+  "scripts": {
+    "postinstall": "npm link serverless-openwhisk",
+    "compile": "docker run --rm -it -v $(pwd):/swift-package openwhisk/swift3action bash -e -c 'cd /swift-package && swift build -v -c release'"
+  },
+  "keywords": [
+    "serverless",
+    "openwhisk"
+  ],
+  "dependencies": {
+    "serverless-plugin-scripts": "^1.0.2"
+  }
+}
