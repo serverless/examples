@@ -244,6 +244,11 @@
     "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless"
   },
   {
+    "name": "serverless-image-manager",
+    "description": "image upload / download with resizing. Used API gateway's binary support & serverless",
+    "githubUrl": "https://github.com/TylorShin/lambda-image-manager"
+  },
+  {
     "name": "AWS Lambda Power Tuning (powered by Step Functions)",
     "description": "Build a [Step Functions](https://aws.amazon.com/step-functions/) state machine to optimize your AWS Lambda Function memory/power configuration.",
     "githubUrl": "https://github.com/alexcasalboni/aws-lambda-power-tuning"
