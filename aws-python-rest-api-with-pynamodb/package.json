@@ -1,0 +1,10 @@
+{
+  "name": "aws-rest-with-pynamodb",
+  "version": "1.0.0",
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-python-requirements": "^2.4.1"
+  }
+}
