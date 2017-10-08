@@ -1,0 +1,18 @@
+---
+  root: true
+  extends:
+    - airbnb-base
+    - prettier
+    - plugin:jest/recommended
+  plugins:
+    - jest
+    - prettier
+  rules:
+    prettier/prettier:
+      - error
+      -
+        trailingComma: es5
+        singleQuote: true
+  env:
+    node: true
+    jest/globals: true

@@ -1,0 +1,7 @@
+# Default to Unix line endings.
+* text=auto
+
+# Do not attempt to change line endings on these file types.
+*.jpg    -text
+*.min.js -text
+*.png    -text

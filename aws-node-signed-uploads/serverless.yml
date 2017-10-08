@@ -1,0 +1,38 @@
+service: aws-node-singned-uploads
+
+plugins:
+  - serverless-webpack
+  - serverless-offline #serverless-offline needs to be last in the list
+
+custom:
+  webpackIncludeModules: true
+  serverless-offline:
+    port: 4000
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, file(config.json):stage, 'dev'}
+  region: ${opt:region, file(config.json):region, 'eu-central-1'}
+  environment:
+    REGION: ${self:provider.region}
+    # Bucket to which signed uploads will be possible.
+    BUCKET: bananabucket-${self:provider.stage}
+  versionFunctions: false
+  iamRoleStatements:
+  -  Effect: "Allow"
+     Action:
+       - "s3:*"
+     Resource: "*"
+
+functions:
+  upsert-objects:
+    handler: src/upload.handler
+    name: ${self:provider.stage}-${self:service}-upload
+    memorySize: 128
+    events:
+      - http:
+          path: upload
+          method: put
+          private: true
+          cors: true

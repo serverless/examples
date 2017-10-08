@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Service aws-node-singned-uploads: S3 mock for successful operations Replies back with a JSON for a signed upload on success 1`] = `
+Object {
+  "body": "{\\"data\\":\\"https://example.com\\"}",
+  "headers": Object {
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Origin": "*",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`Service aws-node-singned-uploads: S3 mock for successful operations Require a header "x-amz-meta-key" 1`] = `
+Object {
+  "body": "{\\"message\\":\\"Missing x-amz-meta-key header\\"}",
+  "statusCode": 400,
+}
+`;

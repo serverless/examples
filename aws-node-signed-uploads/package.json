@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "name": "aws-node-singned-uploads",
+  "description": "Serverless example for S3 signed uploads",
+  "version": "0.0.1",
+  "scripts": {
+    "codecov": "codecov",
+    "coverage": "npm run test && npm run codecov",
+    "deploy": "serverless deploy -v",
+    "lint": "eslint .",
+    "start": "serverless offline start",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "aws-sdk": "2.130.0",
+    "aws-sdk-mock": "1.7.0",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-env": "1.6.0",
+    "codecov": "2.3.0",
+    "eslint": "4.8.0",
+    "eslint-config-airbnb-base": "12.0.2",
+    "eslint-config-prettier": "2.6.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jest": "21.2.0",
+    "eslint-plugin-prettier": "2.3.1",
+    "jest": "21.2.1",
+    "prettier": "1.7.4",
+    "serverless": "1.23.0",
+    "serverless-offline": "3.16.0",
+    "serverless-webpack": "3.1.1",
+    "webpack": "3.6.0"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  }
+}
