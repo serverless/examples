@@ -1,0 +1,17 @@
+{
+  "name": "aws-node-graphql-api-with-dynamodb",
+  "version": "1.0.0",
+  "description": "GraphQL is cool, and the `graphql` module makes it easy to rapidly create a GraphQL service that validates queries. We use GraphQL at Serverless to query our backend services, and we love how well it fits into the serverless paradigm.",
+  "main": "handler.js",
+  "dependencies": {
+    "aws-sdk": "^2.136.0",
+    "eslint-plugin-react": "^7.4.0",
+    "graphql": "^0.11.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
