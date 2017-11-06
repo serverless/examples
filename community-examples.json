@@ -307,5 +307,10 @@
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
+  },
+  {
+    "name": "Realtime WW2 Alexa Skill",
+    "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
+    "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
   }
 ]
