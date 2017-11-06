@@ -307,5 +307,10 @@
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
+  },
+  {
+    "name": "Serverless Telegram Bot",
+    "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖",
+    "githubUrl": "https://github.com/jonatasbaldin/serverless-telegram-bot"
   }
 ]
