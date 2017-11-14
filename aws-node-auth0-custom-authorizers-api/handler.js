@@ -36,10 +36,13 @@ module.exports.auth = (event, context, callback) => {
     // no auth token!
     return callback('Unauthorized')
   }
-  const options = {}
-  console.log('tokenValue', tokenValue)
+  const options = {
+    audience: AUTH0_CLIENT_ID,
+  }
+  // decode base64 secret. ref: http://bit.ly/2hA6CrO
+  const secret = new Buffer.from(AUTH0_CLIENT_SECRET, 'base64')
   try {
-    jwt.verify(tokenValue, AUTH0_CLIENT_SECRET, options, (verifyError, decoded) => {
+    jwt.verify(tokenValue, secret, options, (verifyError, decoded) => {
       if (verifyError) {
         console.log('verifyError', verifyError)
         // 401 Unauthorized
