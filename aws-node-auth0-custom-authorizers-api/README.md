@@ -22,14 +22,7 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 
 2. Setup an [auth0 client](https://auth0.com/docs/clients) and get your `client id` and `client secrets` from auth0.
 
-3. Plugin your `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` in `handler.js`. These will be used by the JSON web token decoder to validate private api access.
-
-  ```js
-  /* handler.js */
-  // Replace with your auth0 client values
-  const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
-  const AUTH0_CLIENT_SECRET = 'your-auth0-client-secret-here';
-  ```
+3. Plugin your `AUTH0_CLIENT_ID` and `AUTH0_CLIENT_SECRET` in a new file called `secrets.json`. These will be used by the JSON web token decoder to validate private api access.
 
 4. Deploy the service with `serverless-deploy` and grab the public and private endpoints.
 
