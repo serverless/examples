@@ -8,90 +8,105 @@ const PUBLIC_ENDPOINT = 'https://your-aws-endpoint-here.amazonaws.com/dev/api/pu
 const PRIVATE_ENDPOINT = 'https://your-aws-endpoint-here.us-east-1.amazonaws.com/dev/api/private';
 
 // initialize auth0 lock
-const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN); // eslint-disable-line
-
-const jwtToken = localStorage.getItem('userToken');
-if (jwtToken) {
-  document.getElementById('btn-login').style.display = 'none';
-  document.getElementById('btn-logout').style.display = 'inline';
-  const profile = JSON.parse(localStorage.getItem('profile'));
-  document.getElementById('nick').textContent = profile.nickname;
-}
+const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
+  auth: {
+    params: {
+      scope: 'openid email'
+    }
+  }
+})
 
 // Handle login
-document.getElementById('btn-login').addEventListener('click', () => {
-  lock.show((err, profile, token) => {
-    if (err) {
-      // Error callback
-      console.error('Something went wrong: ', err);
-      alert('Something went wrong, check the Console errors'); // eslint-disable-line no-alert
-    } else {
-      // Success calback
-      console.log(token);
-
-      // Save the JWT token.
-      localStorage.setItem('userToken', token);
-
-      // Save the profile
-      localStorage.setItem('profile', JSON.stringify(profile));
-
-      document.getElementById('btn-login').style.display = 'none';
-      document.getElementById('btn-logout').style.display = 'flex';
-      document.getElementById('nick').textContent = profile.nickname;
+lock.on("authenticated", function(authResult) {
+  console.log(authResult)
+  lock.getProfile(authResult.idToken, function(error, profile) {
+    if (error) {
+      // Handle error
+      alert(JSON.stringify(error))
+      return false
     }
+    // authResult.accessToken && authResult.idToken
+    // Save the JWT token.
+    localStorage.setItem('access_token', authResult.accessToken)
+    localStorage.setItem('id_token', authResult.idToken)
+
+    // Save the profile
+    localStorage.setItem('profile', JSON.stringify(profile))
+
+    updateUI()
   });
 });
 
+function updateUI() {
+  const isLoggedIn = localStorage.getItem('id_token')
+  if (isLoggedIn) {
+    // swap buttons
+    document.getElementById('btn-login').style.display = 'none'
+    document.getElementById('btn-logout').style.display = 'inline'
+    const profile = JSON.parse(localStorage.getItem('profile'))
+    // show username
+    document.getElementById('nick').textContent = profile.nickname
+  }
+}
+
+updateUI()
+
+// Handle login
+document.getElementById('btn-login').addEventListener('click', () => {
+  lock.show()
+})
+
 // Handle logout
 document.getElementById('btn-logout').addEventListener('click', () => {
-  localStorage.removeItem('userToken');
-  localStorage.removeItem('profile');
-  document.getElementById('btn-login').style.display = 'flex';
-  document.getElementById('btn-logout').style.display = 'none';
-  document.getElementById('nick').textContent = '';
-});
+  localStorage.removeItem('id_token')
+  localStorage.removeItem('access_token')
+  localStorage.removeItem('profile')
+  document.getElementById('btn-login').style.display = 'flex'
+  document.getElementById('btn-logout').style.display = 'none'
+  document.getElementById('nick').textContent = ''
+})
 
 // Handle public api call
 document.getElementById('btn-public').addEventListener('click', () => {
   // call public API
-  const getdata = fetch(PUBLIC_ENDPOINT, {
-    method: 'GET',
+  fetch(PUBLIC_ENDPOINT, {
     cache: 'no-store',
-  });
-
-  getdata.then((response) => {
-    response.json().then((data) => {
-      console.log('Message:', data);
-      document.getElementById('message').textContent = '';
-      document.getElementById('message').textContent = data.message;
-    });
-  });
-});
+    method: 'POST',
+  })
+  .then(response => response.json())
+  .then((data) => {
+    console.log('Message:', data)
+    document.getElementById('message').textContent = ''
+    document.getElementById('message').textContent = data.message
+  }).catch((e) => {
+    console.log('error', e)
+  })
+})
 
 // Handle private api call
 document.getElementById('btn-private').addEventListener('click', () => {
   // Call private API with JWT in header
-  const token = localStorage.getItem('userToken');
-  if (!token) {
-    document.getElementById('message').textContent = '';
-    document.getElementById('message').textContent = 'You must login to call this protected endpoint!';
-    return false;
-  }
-  const getdata = fetch(PRIVATE_ENDPOINT, {
+  const token = localStorage.getItem('id_token')
+  /*
+   // block request from happening if no JWT token present
+   if (!token) {
+    document.getElementById('message').textContent = ''
+    document.getElementById('message').textContent = 'You must login to call this protected endpoint!'
+    return false
+  }*/
+  // Do request to private endpoint
+  fetch(PRIVATE_ENDPOINT, {
+    method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    method: 'GET',
-    cache: 'no-store',
-  });
-
-  getdata.then((response) => {
-    response.json().then((data) => {
-      console.log('Token:', data);
-      document.getElementById('message').textContent = '';
-      document.getElementById('message').textContent = data.message;
-    });
-  });
-  // bc linting...
-  return false;
-});
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(response => response.json())
+  .then((data) => {
+    console.log('Token:', data)
+    document.getElementById('message').textContent = ''
+    document.getElementById('message').textContent = data.message
+  }).catch((e) => {
+    console.log('error', e)
+  })
+})
