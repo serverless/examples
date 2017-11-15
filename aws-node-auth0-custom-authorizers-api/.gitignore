@@ -1,3 +1,4 @@
 node_modules
 .serverless
 secrets.json
+/frontend/misc.md
