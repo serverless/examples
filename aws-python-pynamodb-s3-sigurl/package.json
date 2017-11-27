@@ -1,8 +1,8 @@
 {
-  "name": "aws-rest-with-pynamodb",
+  "name": "aws-python-pynamodb-s3-sigurl",
   "version": "1.0.0",
-  "description": "Serverless signed uploader service exposing a REST HTTP interface",
-  "author": "",
+  "description": "Serverless signed uploader REST API using s3 events",
+  "author": "Bruce Edge",
   "license": "MIT",
   "dependencies": {
     "serverless-python-requirements": "^2.4.1"
