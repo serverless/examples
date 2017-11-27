@@ -129,7 +129,7 @@ functions:
   update:
     handler: asset/update.update
     name: ${self:custom.stack_name}-update
-    description: TODO Remove
+    description: Mark an RECEIVED asset as UPLOADED, fail if not RECEIVED
     events:
       - http:
           path: asset/{asset_id}

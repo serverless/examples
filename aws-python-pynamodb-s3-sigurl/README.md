@@ -9,7 +9,7 @@ using [Presigned URLs](http://boto3.readthedocs.io/en/latest/guide/s3.html?highl
 to manage asset uploads and downloads. 
 
 The initial POST creates an asset entry in dynamo and returns a presigned upload URL. 
-This is used upload the asset without needing any credentials. 
+This is used to upload the asset without needing any credentials. 
 An s3 event triggers another lambda method to mark the asset as "RECEIVED".
 One can then initiate a PUT to the asset's REST path to mark it as "UPLOADED"
 
@@ -30,8 +30,7 @@ comments you could do so in the same service.
 While this is certainly possible you might consider creating a separate service for each resource. 
 It depends on the use-case and your preference.
 ### API GW Integration model
-The methods that accept no parameters, POST, DELETE, use the default `lambda_proxy` AWS API GW integration.
-The methods that rely on path parameters use `lambda` integration as that reduces the API GW interference in the payload.
+All methods use `lambda` integration as that reduces the API GW interference in the payload.
 ### Logging
 The log_cfg.py is an alternate way to setup the python logging to be more friendly wth AWS lambda.
 The lambda default logging config is to not print any source file or line number which makes it harder to correleate with the source.
