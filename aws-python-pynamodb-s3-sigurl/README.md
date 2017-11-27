@@ -224,7 +224,7 @@ Use the `download_url` returned from the above GET
 ### Download asset with expired URL
 Use the `download_url` returned from the above GET
 ```bash
-%> %> curl -sX GET "<SIGNED_URL>"
+%> curl -sX GET "<SIGNED_URL>"
 <?xml version="1.0" encoding="UTF-8"?>
 <Error>
     <Code>AccessDenied</Code>
