@@ -10,7 +10,7 @@ def event(event, context):
     Triggered by s3 events, object create and remove
 
     """
-    _event = {'Records': [{'eventVersion': '2.0', 'eventSource': 'aws:s3', 'awsRegion': 'us-west-2',
+    _event = {'Records': [{'eventVersion': '2.0', 'eventSource': 'aws:s3', 'awsRegion': 'us-east-1',
                            'eventTime': '2017-11-25T23:57:38.988Z', 'eventName': 'ObjectCreated:Put',
                            'userIdentity': {'principalId': 'AWS:AROAJWJG5IVL3URF4WKKK:su-xx-test-create'},
                            'requestParameters': {'sourceIPAddress': '75.82.111.45'},

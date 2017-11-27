@@ -29,7 +29,7 @@ class AssetModel(Model):
         else:
             region = os.environ['REGION']
             host = os.environ['DYNAMODB_HOST']
-            # 'https://dynamodb.us-west-2.amazonaws.com'
+            # 'https://dynamodb.us-east-1.amazonaws.com'
 
     asset_id = UnicodeAttribute(hash_key=True)
     state = UnicodeAttribute(null=False, default=State.CREATED.name)

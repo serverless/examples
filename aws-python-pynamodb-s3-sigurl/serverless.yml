@@ -21,11 +21,11 @@ package:
 # --app_acroym          signed-uploader
 # --s3_bucket           self:custom.app_acronym
 # --s3_key_base         self:custom.stage
-# --region              us-west-2
+# --region              us-east-1
 # --stage               test
 # --deletion_policy     delete
 custom:
-  app_acronym: sig-uploader
+  app_acronym: sig-s3-uploader
   default_stage: test
   stage: ${opt:stage, self:custom.default_stage}
   stack_name: ${self:custom.app_acronym}-${self:custom.stage}
@@ -46,7 +46,7 @@ custom:
 provider:
   name: aws
   runtime: python3.6
-  region: us-west-2
+  region: us-east-1
   environment:
     DYNAMODB_TABLE: ${self:custom.dynamodb_table}
     DYNAMODB_HOST: ${self:custom.dynamodb_host}
