@@ -18,7 +18,7 @@ This URL can be used to retrieve the asset with no additional credentials.
 
 Also provides "LIST" and "DELETE" methods. 
 
-DynamoDB is used to store the index and tracking data referring to the assets on s3.. 
+DynamoDB is used to store the index and tracking data referring to the assets on s3.
 This is just an example and of course you could use any data storage as a backend.
 
 ## Structure
@@ -54,6 +54,9 @@ The PUT method to mark the asset as UPLOADED is somewhat redundant as the S3 eve
 However the goal was to use a PUT method to mark it received, so the PUT marks a RECEIVED asset as UPLOADED.
 That said, there is no distinction between UPLOADED vs RECEIVED anywhere in the example.
 
+The DELETE method does a `soft delete` which marks the asset as deleted without removing the s3 key. 
+If the file on s3 is deleted, an event is generated which does fully delete the asset in dynamo as well.
+
 ## Setup
 
 ```bash
@@ -87,26 +90,25 @@ Serverless: Checking Stack update progress...
 ............................................
 Serverless: Stack update finished...
 Service Information
-service: sls-signed-uploader-ee
+service: aws-python-pynamodb-s3-sigurl
 stage: dev
-region: us-west-2
-stack: sls-signed-uploader-ee-dev
+region: us-east-1
+stack: aws-python-pynamodb-s3-sigurl-dev
 api keys:
   None
 endpoints:
-  POST - https://c1xblyjsid.execute-api.us-west-2.amazonaws.com/dev/asset
-  GET - https://c1xblyjsid.execute-api.us-west-2.amazonaws.com/dev/asset
-  GET - https://c1xblyjsid.execute-api.us-west-2.amazonaws.com/dev/asset/{asset_id}
-  PUT - https://c1xblyjsid.execute-api.us-west-2.amazonaws.com/dev/asset/{asset_id}
-  DELETE - https://c1xblyjsid.execute-api.us-west-2.amazonaws.com/dev/asset/{asset_id}
+  POST - https://1xith51inb.execute-api.us-east-1.amazonaws.com/dev/asset
+  GET - https://1xith51inb.execute-api.us-east-1.amazonaws.com/dev/asset
+  GET - https://1xith51inb.execute-api.us-east-1.amazonaws.com/dev/asset/{asset_id}
+  PUT - https://1xith51inb.execute-api.us-east-1.amazonaws.com/dev/asset/{asset_id}
+  DELETE - https://1xith51inb.execute-api.us-east-1.amazonaws.com/dev/asset/{asset_id}
 functions:
-  create: sls-signed-uploader-ee-dev-create
-  bucket: sls-signed-uploader-ee-dev-bucket
-  list: sls-signed-uploader-ee-dev-list
-  get: sls-signed-uploader-ee-dev-get
-  update: sls-signed-uploader-ee-dev-update
-  delete: sls-signed-uploader-ee-dev-delete
-Serverless: Removing old service versions...
+  create: aws-python-pynamodb-s3-sigurl-dev-create
+  bucket: aws-python-pynamodb-s3-sigurl-dev-bucket
+  list: aws-python-pynamodb-s3-sigurl-dev-list
+  get: aws-python-pynamodb-s3-sigurl-dev-get
+  update: aws-python-pynamodb-s3-sigurl-dev-update
+  delete: aws-python-pynamodb-s3-sigurl-dev-delete
 ```
 
 ## Usage
