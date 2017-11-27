@@ -67,7 +67,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
 | [Upload To S3 And Postprocess](https://github.com/serverless/examples/tree/master/aws-node-upload-to-s3-and-postprocess) <br/> Upload a files to S3 to trigger a lambda function. | nodeJS |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-python-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | python |
-| [Aws Python Pynamodb S3 Sigurl](https://github.com/serverless/examples/tree/master/aws-python-pynamodb-s3-sigurl) <br/> Serverless signed uploader REST API using s3 events | python |
+| [Aws Python Pynamodb S3 Sigurl](https://github.com/serverless/examples/tree/master/aws-python-pynamodb-s3-sigurl) <br/> Serverless signed uploader REST API using pynamodb, s3 generated events, custom log format, and DRY serverless.yml with custom section | python |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
 | [Aws Rest With Faunadb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-faunadb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
 | [Aws Rest With Pynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-pynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
