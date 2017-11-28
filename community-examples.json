@@ -307,5 +307,10 @@
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
+  },
+  {
+    "name": "Serverless Dashboard For Atom Editor",
+    "description": "Atom editor package which allows you to deploy and visualize your serverless services with Serverless Framework on your editor.",
+    "githubUrl": "https://github.com/horike37/serverless-dashboard-for-atom"
   }
 ]
