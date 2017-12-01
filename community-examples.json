@@ -258,7 +258,7 @@
     "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
  },
- { 
+ {
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
@@ -307,5 +307,10 @@
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
+  },
+  {
+    "name": "Serverless + lambda + vpc + nat + redis",
+    "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
+    "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples"
   }
 ]
