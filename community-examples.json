@@ -312,5 +312,10 @@
     "name": "Serverless + lambda + vpc + nat + redis",
     "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
     "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples"
+  },
+  {
+    "name": "Serverless ffmpeg",
+    "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
+    "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
   }
 ]
