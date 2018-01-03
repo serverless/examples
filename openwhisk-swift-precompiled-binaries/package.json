@@ -5,7 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "postinstall": "npm link serverless-openwhisk",
-    "compile": "docker run --rm -it -v $(pwd):/swift-package openwhisk/swift3action bash -e -c 'cd /swift-package && swift build -v -c release'"
+    "compile": "docker run --rm -it -v $(pwd):/swift-package openwhisk/action-swift-v3.1.1 bash -e -c 'cd /swift-package && swift build -v -c release'"
   },
   "keywords": [
     "serverless",
