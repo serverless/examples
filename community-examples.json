@@ -312,5 +312,10 @@
     "name": "Serverless + lambda + vpc + nat + redis",
     "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
     "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples"
+  },
+  {
+    "name": "Serverless Gitlab CI",
+    "description": "Simple Gitlab CI template for automatic testing and deployments",
+    "githubUrl": "https://github.com/bvincent1/serverless-gitlab-ci"
   }
 ]
