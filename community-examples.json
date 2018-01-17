@@ -1,7 +1,7 @@
 [
  {
     "name": "bablebot",
-    "description": "Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
+    "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
     "githubUrl": "https://github.com/abiglobalhealth/bablebot"
  },
  {
