@@ -89,7 +89,7 @@ OpenWhiskAction(main: hello)
 Binaries must be compiled for the correct platform architecture. This example uses the following Docker command to run the build in the OpenWhisk Swift environment.
 
 ```
-docker run --rm -it -v $(pwd):/swift-package openwhisk/swift3action bash -e -c 'cd /swift-package && swift build -v -c release'
+docker run --rm -it -v $(pwd):/swift-package openwhisk/action-swift-v3.1.1 bash -e -c 'cd /swift-package && swift build -v -c release'
 ```
 
 Plugins for the framework handle running the build scripts using npm prior to deployment.
