@@ -1,5 +1,10 @@
 [
  {
+    "name": "bablebot",
+    "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
+    "githubUrl": "https://github.com/abiglobalhealth/bablebot"
+ },
+ {
     "name": "jwtAuthorizr",
     "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
     "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
@@ -258,7 +263,7 @@
     "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
  },
- { 
+ {
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
@@ -307,6 +312,26 @@
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
+  },
+  {
+    "name": "Serverless + lambda + vpc + nat + redis",
+    "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
+    "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples"
+  },
+  {
+    "name": "Serverless Gitlab CI",
+    "description": "Simple Gitlab CI template for automatic testing and deployments",
+    "githubUrl": "https://github.com/bvincent1/serverless-gitlab-ci"
+  },
+  {   
+    "name": "Serverless ffmpeg",
+    "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
+    "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
+  },
+  {
+    "name": "Serverless SSH Command",
+    "description": "Example of executing ssh command with OpenWhisk",
+    "githubUrl": "https://github.com/upgle/serverless-openwhisk-ssh"
   },
   {
     "name": "Realtime WW2 Alexa Skill",
