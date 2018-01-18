@@ -4,6 +4,6 @@
   "description": "Demonstration of protecting API gateway endpoints with auth0",
   "license": "MIT",
   "dependencies": {
-    "jsonwebtoken": "^7.1.9"
+    "jsonwebtoken": "^8.1.0"
   }
 }
