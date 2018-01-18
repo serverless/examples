@@ -327,5 +327,10 @@
     "name": "Serverless ffmpeg",
     "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
     "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
+  },
+  {
+    "name": "Serverless SSH Command",
+    "description": "Example of executing ssh command with OpenWhisk",
+    "githubUrl": "https://github.com/upgle/serverless-openwhisk-ssh"
   }
 ]
