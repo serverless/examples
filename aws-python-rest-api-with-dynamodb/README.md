@@ -21,7 +21,7 @@ The idea behind the `todos` directory is that in case you want to create a servi
 ## Setup
 
 ```bash
-npm install
+npm install -g serverless
 ```
 
 ## Deploy
