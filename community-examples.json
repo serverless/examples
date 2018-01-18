@@ -322,5 +322,10 @@
     "name": "Serverless Gitlab CI",
     "description": "Simple Gitlab CI template for automatic testing and deployments",
     "githubUrl": "https://github.com/bvincent1/serverless-gitlab-ci"
+  },
+  {   
+    "name": "Serverless ffmpeg",
+    "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
+    "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
   }
 ]
