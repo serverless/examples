@@ -337,5 +337,10 @@
     "name": "Realtime WW2 Alexa Skill",
     "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
     "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
+  },
+  {
+    "name": "Serverless Q&A Example",
+    "description": "Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more",
+    "githubUrl": "https://github.com/jacksoncharles/serverless-qa-template-api"
   }
 ]
