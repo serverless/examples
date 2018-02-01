@@ -337,5 +337,10 @@
     "name": "Realtime WW2 Alexa Skill",
     "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
     "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
+  },
+  {
+    "name": "Serverless Kakao Bot",
+    "description": "Easy development for Kakaotalk Bot with Serverless",
+    "githubUrl": "https://github.com/JisuPark/serverless-kakao-bot"
   }
 ]
