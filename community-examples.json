@@ -1,5 +1,10 @@
 [
  {
+    "name": "Serverless Architecture Boilerplate",
+    "description": "Boilerplate to organize and deploy big projects using Serverless and CloudFormation on AWS",
+    "githubUrl": "https://github.com/msfidelis/serverless-architecture-boilerplate"
+ }, 
+ {
     "name": "bablebot",
     "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
     "githubUrl": "https://github.com/abiglobalhealth/bablebot"
