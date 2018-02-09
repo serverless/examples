@@ -73,8 +73,8 @@ You should get an XML response similar to:
 
 ```xml
 <PostResponse>
-  <Location>https://serverless-fetch-file-and-store-in-s3.s3.amazonaws.com/uploads%2Fimage.png</Location><
-  Bucket>serverless-fetch-file-and-store-in-s3</Bucket>
+  <Location>https://serverless-fetch-file-and-store-in-s3.s3.amazonaws.com/uploads%2Fimage.png</Location>
+  <Bucket>serverless-fetch-file-and-store-in-s3</Bucket>
   <Key>uploads/image.png</Key>
   <ETag>"08c03c6a24e5058b9f3556981a23b1d7"</ETag>
 </PostResponse>
