@@ -322,5 +322,20 @@
     "name": "Serverless Gitlab CI",
     "description": "Simple Gitlab CI template for automatic testing and deployments",
     "githubUrl": "https://github.com/bvincent1/serverless-gitlab-ci"
+  },
+  {   
+    "name": "Serverless ffmpeg",
+    "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
+    "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
+  },
+  {
+    "name": "Serverless SSH Command",
+    "description": "Example of executing ssh command with OpenWhisk",
+    "githubUrl": "https://github.com/upgle/serverless-openwhisk-ssh"
+  },
+  {
+    "name": "Realtime WW2 Alexa Skill",
+    "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
+    "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
   }
 ]
