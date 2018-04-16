@@ -6,8 +6,9 @@
  }, 
  {
     "name": "bablebot",
+    "name": "babelbot",
     "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
-    "githubUrl": "https://github.com/abiglobalhealth/bablebot"
+    "githubUrl": "https://github.com/abiglobalhealth/babelbot"
  },
  {
     "name": "jwtAuthorizr",
@@ -319,6 +320,16 @@
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
   },
   {
+    "name": "Serverless Telegram Bot",
+    "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖",
+    "githubUrl": "https://github.com/jonatasbaldin/serverless-telegram-bot"
+  },
+  {
+    "name": "Serverless Dashboard For Atom Editor",
+    "description": "Atom editor package which allows you to deploy and visualize your serverless services with Serverless Framework on your editor.",
+    "githubUrl": "https://github.com/horike37/serverless-dashboard-for-atom"
+  },
+  {
     "name": "Serverless + lambda + vpc + nat + redis",
     "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
     "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples"
@@ -342,5 +353,15 @@
     "name": "Realtime WW2 Alexa Skill",
     "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
     "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
+  },
+  {
+    "name": "Serverless Kakao Bot",
+    "description": "Easy development for Kakaotalk Bot with Serverless",
+    "githubUrl": "https://github.com/JisuPark/serverless-kakao-bot"
+  },
+  {
+    "name": "Serverless Q&A Example",
+    "description": "Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more",
+    "githubUrl": "https://github.com/jacksoncharles/serverless-qa-template-api"
   }
 ]
