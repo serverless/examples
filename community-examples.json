@@ -1,5 +1,10 @@
 [
  {
+    "name": "babelbot",
+    "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
+    "githubUrl": "https://github.com/abiglobalhealth/babelbot"
+ },
+ {
     "name": "jwtAuthorizr",
     "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
     "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
@@ -258,7 +263,7 @@
     "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
  },
- { 
+ {
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
@@ -312,5 +317,45 @@
     "name": "Serverless Telegram Bot",
     "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖",
     "githubUrl": "https://github.com/jonatasbaldin/serverless-telegram-bot"
+  },
+  {
+    "name": "Serverless Dashboard For Atom Editor",
+    "description": "Atom editor package which allows you to deploy and visualize your serverless services with Serverless Framework on your editor.",
+    "githubUrl": "https://github.com/horike37/serverless-dashboard-for-atom"
+  },
+  {
+    "name": "Serverless + lambda + vpc + nat + redis",
+    "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
+    "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples"
+  },
+  {
+    "name": "Serverless Gitlab CI",
+    "description": "Simple Gitlab CI template for automatic testing and deployments",
+    "githubUrl": "https://github.com/bvincent1/serverless-gitlab-ci"
+  },
+  {   
+    "name": "Serverless ffmpeg",
+    "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
+    "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
+  },
+  {
+    "name": "Serverless SSH Command",
+    "description": "Example of executing ssh command with OpenWhisk",
+    "githubUrl": "https://github.com/upgle/serverless-openwhisk-ssh"
+  },
+  {
+    "name": "Realtime WW2 Alexa Skill",
+    "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
+    "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
+  },
+  {
+    "name": "Serverless Kakao Bot",
+    "description": "Easy development for Kakaotalk Bot with Serverless",
+    "githubUrl": "https://github.com/JisuPark/serverless-kakao-bot"
+  },
+  {
+    "name": "Serverless Q&A Example",
+    "description": "Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more",
+    "githubUrl": "https://github.com/jacksoncharles/serverless-qa-template-api"
   }
 ]
