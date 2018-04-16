@@ -344,6 +344,11 @@
     "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa"
   },
   {
+    "name": "Serverless Kakao Bot",
+    "description": "Easy development for Kakaotalk Bot with Serverless",
+    "githubUrl": "https://github.com/JisuPark/serverless-kakao-bot"
+  },
+  {
     "name": "Serverless Q&A Example",
     "description": "Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more",
     "githubUrl": "https://github.com/jacksoncharles/serverless-qa-template-api"
