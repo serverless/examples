@@ -3,7 +3,7 @@
     "name": "Serverless Architecture Boilerplate",
     "description": "Boilerplate to organize and deploy big projects using Serverless and CloudFormation on AWS",
     "githubUrl": "https://github.com/msfidelis/serverless-architecture-boilerplate"
- }, 
+ },
  {
     "name": "bablebot",
     "name": "babelbot",
@@ -339,7 +339,7 @@
     "description": "Simple Gitlab CI template for automatic testing and deployments",
     "githubUrl": "https://github.com/bvincent1/serverless-gitlab-ci"
   },
-  {   
+  {
     "name": "Serverless ffmpeg",
     "description": "Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket.",
     "githubUrl": "https://github.com/kvaggelakos/serverless-ffmpeg"
@@ -363,5 +363,10 @@
     "name": "Serverless Q&A Example",
     "description": "Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more",
     "githubUrl": "https://github.com/jacksoncharles/serverless-qa-template-api"
+  },
+  {
+    "name": "Personal Access Tokens Cron Check",
+    "description": "Audit for leaked PAT in your Contentful organization. How to use serverless as cronjobs to keep your Personal Access Tokens secure",
+    "githubUrl": "https://github.com/madtrick/cfpat-audit"
   }
 ]
