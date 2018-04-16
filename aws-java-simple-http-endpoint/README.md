@@ -58,9 +58,9 @@ mvn package
 
 Note: you can install Maven with
 
-1. [sdkman](http://sdkman.io/) using "sdk install maven" (yes, use as default)
-2. sudo apt-get install mvn
-3. brew install maven
+1. [sdkman](http://sdkman.io/) using `sdk install maven` (yes, use as default)
+2. `sudo apt-get install mvn`
+3. `brew install maven`
 
 If you use Maven to build, then in `serverless.yml` you have to replace
 
@@ -68,7 +68,7 @@ If you use Maven to build, then in `serverless.yml` you have to replace
 package:
   artifact: build/distributions/aws-java-simple-http-endpoint.zip
 ```
-by
+with
 ```yaml
 package:
   artifact: target/aws-java-simple-http-endpoint.jar
