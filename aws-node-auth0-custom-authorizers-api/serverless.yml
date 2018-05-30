@@ -1,13 +1,16 @@
 
 service: aws-custom-authorizer-auth0
 
+plugins:
+  - serverless-offline
+
 provider:
   name: aws
   runtime: nodejs6.10
   region: us-west-2
   environment:
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
-    AUTH0_CLIENT_SECRET: ${file(./secrets.json):AUTH0_CLIENT_SECRET}
+    AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key)}
 
 functions:
   auth:
