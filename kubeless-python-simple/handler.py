@@ -1,4 +1,3 @@
-def hello(request):
-    name = request.body.getvalue()
-    return "Hello " + name + "!"
+def hello(event, context):
+    return "Hello " + event['data'] + "!"
 
