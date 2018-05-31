@@ -368,5 +368,10 @@
     "name": "Personal Access Tokens Cron Check",
     "description": "Audit for leaked PAT in your Contentful organization. How to use serverless as cronjobs to keep your Personal Access Tokens secure",
     "githubUrl": "https://github.com/madtrick/cfpat-audit"
+  },
+  {
+    "name": "Serverless sns api",
+    "description": "Build a SNS service on AWS, support backend API for SNS by device, by group and by user",
+    "githubUrl": "https://github.com/eddielisc/serverless-sns-api"
   }
 ]
