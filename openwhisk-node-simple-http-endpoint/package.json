@@ -2,11 +2,8 @@
   "name": "openwhisk-node-simple-http",
   "version": "0.1.0",
   "description": "Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk.",
-  "scripts": {
-    "postinstall": "npm link serverless-openwhisk",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
-    "moment-timezone": "^0.5.11"
+    "moment-timezone": "^0.5.11",
+    "serverless-openwhisk": ">=0.13.0"
   }
 }
