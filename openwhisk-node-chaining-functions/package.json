@@ -2,8 +2,7 @@
   "name": "openwhisk-node-chaining-functions",
   "version": "0.1.0",
   "description": "Example of chaining function calls using sequences and the sdk.",
-  "scripts": {
-    "postinstall": "npm link serverless-openwhisk",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {
+    "serverless-openwhisk": ">=0.13.0"
   }
 }
