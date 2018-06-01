@@ -9,13 +9,10 @@ Make sure `serverless` is installed. [See installation guide](https://serverless
 
 You will also need to set up your OpenWhisk account credentials using environment variables or a configuration file. Please see the [this guide for more information](https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/).
 
-## 1. Install Provider Plugin
-`npm install -g serverless-openwhisk` 
-
-## 2. Install Service Dependencies
+## 1. Install Project Dependencies
 `npm install` in this directory to download the modules from `package.json`.
 
-## 3. Deploy
+## 2. Deploy
 `serverless deploy` or `sls deploy`. `sls` is shorthand for the Serverless CLI command
 
 ```
@@ -46,7 +43,7 @@ rules:
 swift_service_cron_schedule_rule
 ```
 
-## 4. Monitor function logs
+## 3. Monitor function logs
 
 After sixty seconds the function should be executed and you can review the
 logging output using `serverless logs --function cron` or `serverless logs -f cron`
