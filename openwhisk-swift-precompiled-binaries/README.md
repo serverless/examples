@@ -35,17 +35,6 @@ Using the framework with the OpenWhisk platform needs you to install the provide
 ####  Install the provider plugin
 
 ```
-$ npm install --global serverless-openwhisk
-```
-
-*Due to an [outstanding issue](https://github.com/serverless/serverless/issues/2895) with provider plugins, the [OpenWhisk provider](https://github.com/serverless/serverless-openwhisk) must be installed as a global module.*
-
-
-#### Link provider plugin to service directory
-
-Using `npm link` will import the provider plugin into the service directory. Running `npm install` will automatically perform this using a `post install` script. This also installs other serverless plugins (`serverless-plugin-scripts`) used in this project.
-
-```
 $ npm install
 ```
 
