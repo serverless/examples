@@ -372,5 +372,10 @@
     "name": "Serverless sns api",
     "description": "Build a SNS service on AWS, support backend API for SNS by device, by group and by user",
     "githubUrl": "https://github.com/eddielisc/serverless-sns-api"
+  },
+  {
+    "name": "Daily Instance Backups with AMI Rotation",
+    "description": "A simple Python application which scans through your entire AWS account for tagged instances, makes daily AMIs of them, and rotates their backups automatically",
+    "githubUrl": "https://github.com/AndrewFarley/AWSAutomatedDailyInstanceAMISnapshots"
   }
 ]
