@@ -377,5 +377,10 @@
     "name": "Daily Instance Backups with AMI Rotation",
     "description": "A simple Python application which scans through your entire AWS account for tagged instances, makes daily AMIs of them, and rotates their backups automatically",
     "githubUrl": "https://github.com/AndrewFarley/AWSAutomatedDailyInstanceAMISnapshots"
+  },
+  {
+    "name": "Serverless Instagram Crawler",
+    "description": "Instagram hashtag Crawler with Lambda & DynamoDB.",
+    "githubUrl": "https://github.com/kimcoder/serverless-instagram-crawler"
   }
 ]
