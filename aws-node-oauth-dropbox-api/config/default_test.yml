@@ -1,0 +1,7 @@
+URL : 'http://localhost:9999/dropbox'
+EMAIL : 'xyzxyz@xyz.xyz'
+EMAIL_INPUT_BOX : 'input[name="login_email"]'
+PASSWORD : 'xyz@123'
+PASSWORD_INPUT_BOX : 'input[name="login_password"]'
+SUBMIT : '.login-button'
+ALLOW : ".button-primary"
