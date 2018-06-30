@@ -39,8 +39,8 @@ run = async ()=> {
   }
 }
 
-describe("OneApi :- Dropbox " , () => {
-  it("OneApi Dropbox :- User Authorization With OAuth", async () => {
+describe("Test :- Dropbox " , () => {
+  it("Test Dropbox :- User Authorization With OAuth", async () => {
     const response = await run()
   }).timeout(15000)
 })
