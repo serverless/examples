@@ -187,6 +187,8 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Sls Access Counter](https://github.com/takahashim/sls-access-counter)** <br/> Site visitor counter | [takahashim](http://github.com/takahashim) |
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
 | **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |
+| **[Java-Spring-Cloud-Function-Aws-Serverless](https://github.com/mbsambangi/aws-java-spring-cloud-function-demo)** <br/> If Java is your choice of programming language - Spring Cloud Function + Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities. | [mbsambangi](http://github.com/mbsambangi) |
+
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
