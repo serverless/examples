@@ -1,10 +1,5 @@
 [
  {
-    "name": "aws-java-spring-cloud-function-demo",
-    "description": "If Java is your choice of programming language-Spring Cloud Function,Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities.",
-    "githubUrl": "https://github.com/mbsambangi/aws-java-spring-cloud-function-demo"
- }, 
- {
     "name": "Serverless Architecture Boilerplate",
     "description": "Boilerplate to organize and deploy big projects using Serverless and CloudFormation on AWS",
     "githubUrl": "https://github.com/msfidelis/serverless-architecture-boilerplate"
@@ -167,6 +162,11 @@
     "description": "A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless",
     "githubUrl": "https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics"
   },
+  {
+    "name": "spring-cloud-function-aws-serverless",
+    "description": "If Java is your choice of programming language-Spring Cloud Function,Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities.",
+    "githubUrl": "https://github.com/mbsambangi/aws-java-spring-cloud-function-demo"
+  }, 
   {
     "name": "jrestless-examples",
     "description": "[JRestless](https://github.com/bbilger/jrestless) (Java / JAX-RS) examples for [API Gateway Functions](https://github.com/bbilger/jrestless-examples/tree/master/aws/gateway) ([plain JAX-RS](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-showcase), [Spring](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-spring), [binary data requests/responses](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-binary), [custom authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-custom-authorizer) and [Cognito User Pool authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-cognito-authorizer)), [SNS Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/sns/aws-sns-usage-example) (asynchronous communication between functions) and [Service Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/service/aws-service-usage-example) (synchronous HTTP-like communication between functions - transparent through Feign)",
