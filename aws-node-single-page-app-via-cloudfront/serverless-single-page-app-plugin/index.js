@@ -35,6 +35,7 @@ class ServerlessPlugin {
       'sync',
       'app/',
       `s3://${s3Bucket}/`,
+      '--delete',
     ];
     const result = spawnSync('aws', args);
     const stdout = result.stdout.toString();
