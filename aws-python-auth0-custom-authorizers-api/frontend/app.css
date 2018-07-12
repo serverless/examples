@@ -1,0 +1,76 @@
+html, body {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  font-family: "proxima-nova", sans-serif;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 100;
+}
+
+#message {
+  min-height: 40px;
+  font-size: 22px;
+}
+
+#logo img {
+  width: 100px;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.btn {
+  font-size: 16px;
+  letter-spacing: 1px;
+  border: 0;
+  background-color: #16214D;
+  color: white;
+  min-width: 80px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.btn:hover {
+  background-color: #44C7F4;
+}
+
+.btn:focus {
+  outline: none !important;
+}
+
+.btn:disabled {
+  background-color: #333;
+  color: #666;
+}
+
+.api-actions, .user-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.api-actions button:last-of-type, .user-actions button:last-of-type {
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .api-actions, .user-actions {
+    flex-direction: column;
+  }
+  .api-actions button:last-of-type, .user-actions button:last-of-type {
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+}

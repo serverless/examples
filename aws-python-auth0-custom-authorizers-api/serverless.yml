@@ -1,0 +1,63 @@
+
+service: aws-custom-authorizer-auth0
+
+package:
+  exclude:
+    - ./**
+  include:
+    - vendored/**
+    - lambda_handlers.py
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: us-east-1
+  environment:
+    AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
+    AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key)}
+    PYTHONPATH: "/var/runtime:/var/task/vendored"
+
+functions:
+  auth:
+    handler: lambda_handlers.auth
+    cors: true
+  publicEndpoint:
+    handler: lambda_handlers.public_endpoint
+    events:
+      - http:
+          path: api/public
+          method: post
+          cors: true
+  privateEndpoint:
+    handler: lambda_handlers.private_endpoint
+    events:
+      - http:
+          path: api/private
+          method: post
+          # See custom authorizer docs here: http://bit.ly/2gXw9pO
+          authorizer: auth
+          cors: true
+
+resources:
+  Resources:
+    # This response is needed for custom authorizer failures cors support ¯\_(ツ)_/¯
+    GatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: EXPIRED_TOKEN
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'
+    AuthFailureGatewayResponse:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+        StatusCode: '401'
