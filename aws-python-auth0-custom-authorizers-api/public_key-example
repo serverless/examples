@@ -1,0 +1,4 @@
+-----BEGIN CERTIFICATE-----
+PUBLIC KEY - can be found in https://manage.auth0.com -> clients -> advanced settings -> Certificates
+Replace this file with public_key
+-----END CERTIFICATE-----
