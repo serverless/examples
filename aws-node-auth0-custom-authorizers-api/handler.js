@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-// Set in `enviroment` of serverless.yml
+// Set in `environment` of serverless.yml
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
 const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY;
 
