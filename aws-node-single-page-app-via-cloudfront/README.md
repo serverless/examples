@@ -11,6 +11,8 @@ To achieve these goals we use S3 in combination with CloudFront. S3 is used to s
 
 ## Prerequisite
 
+[Nodejs](https://nodejs.org/en/) (at least version 8)
+
 The `serverless-single-page-app-plugin` in this example requires the Serverless Framework version 1.2.0 or higher and the AWS Command Line Interface. Learn more [here](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) on how to install the AWS Command Line Interface.
 
 ## Setup
@@ -89,6 +91,21 @@ Serverless: Web App Domain: dyj5gf0t6nqke.cloudfront.net
 Visit the printed domain domain and navigate on the web site. It should automatically redirect you to HTTPS and visiting <yourURL>/about will not result in an error with the status code 404, but rather serves the `index.html` and renders the about page.
 
 This is how it should look like: ![Screenshot](https://cloud.githubusercontent.com/assets/223045/20391786/287cb310-acd5-11e6-9eaf-89f641ed9e14.png)
+
+# Re-deploying
+
+If you make changes to your Single Page Application you might need to invalidate CloudFront's cache to make sure new files are served.
+Meaning, run:
+
+```bash
+serverless syncToS3
+```
+
+To sync your files and then:
+
+```bash
+serverless invalidateCloudFrontCache
+```
 
 ## Further Improvements
 
