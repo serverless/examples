@@ -25,7 +25,7 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 
 ## Getting Started
 
-If you are new to serverless, we recommend getting started with by creating an HTTP API Endpoint in [NodeJS](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), [Python](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint), or [Java](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint)
+If you are new to serverless, we recommend getting started with by creating an HTTP API Endpoint in [NodeJS](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), [Python](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint), [Java](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint), or [Golang](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint).
 
 ## Examples
 
@@ -42,6 +42,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE) t generated w/ `npm run docs` -->
 | Example | Runtime  |
 |:--------------------------- |:-----|
+| [Aws Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
 | [Aws Node Auth0 Cognito Custom Authorizers Api](https://github.com/serverless/examples/tree/master/aws-node-auth0-cognito-custom-authorizers-api) <br/> Authorize your API Gateway with either Auth0 or Cognito RS256 tokens. | nodeJS |
 | [Aws Auth0 Api Gateway](https://github.com/serverless/examples/tree/master/aws-node-auth0-custom-authorizers-api) <br/> Demonstration of protecting API gateway endpoints with auth0 | nodeJS |
