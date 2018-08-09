@@ -30,7 +30,7 @@ callback(null, response);
 
 ## Deploy
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint simply run
 
 ```bash
 serverless deploy
@@ -89,7 +89,7 @@ Of course you can visit the URL in your browser and this is how it should look l
 
 ![Screenshot without a name](https://cloud.githubusercontent.com/assets/223045/20668061/12c6db9a-b56d-11e6-911c-8396d545471a.png)
 
-To greet a specific person provide attach the query parameter with the name of that person e.g. `?name=Nik%20Graf`. The response should now contain the provided name:
+To greet a specific person, provide the query parameter with the name of that person e.g. `?name=Nik%20Graf`. The response should now contain the provided name:
 
 ![Screenshot with a name](https://cloud.githubusercontent.com/assets/223045/20668055/0758b4cc-b56d-11e6-80ce-3e137151311f.png)
 
