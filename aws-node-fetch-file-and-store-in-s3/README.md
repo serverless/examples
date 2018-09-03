@@ -34,7 +34,7 @@ Since this plugin uses the Serverless plugin `serverless-secrets-plugin` you nee
 npm install
 ```
 
-In addition you need to create an S3 bucket you want to store the files in. After you created the bucket add change the bucket name in `serverless.yml` custom settings to your buckets.
+In addition you need to create an S3 bucket you want to store the files in. After you created the bucket change the bucket name in `serverless.yml` custom settings to your buckets.
 
 ```yml
 custom:
