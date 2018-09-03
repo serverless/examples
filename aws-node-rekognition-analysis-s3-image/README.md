@@ -5,7 +5,7 @@ layout: Doc
 -->
 # Analyse Image from S3 with Amazon Rekognition Example
 
-This example shows how to analys an image in an S3 bucket with Amazon Rekognition and return a list of labels.
+This example shows how to analyze an image in an S3 bucket with Amazon Rekognition and return a list of labels.
 
 ## Use-cases
 
