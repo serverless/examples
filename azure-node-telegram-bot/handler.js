@@ -1,22 +1,18 @@
 'use strict';
 
+const request = require('request');
+
 module.exports = (context, req) => {
-    var request = require('request');
+  const token = 'YOUR_API_TOKEN';
+  const BASE_URL = `https://api.telegram.org/bot${token}/sendMessage`;
 
-    const token = "YOUR_API_TOKEN";
+  const chatId = req.body.message.chat.id;
 
-    const BASE_URL = "https://api.telegram.org/bot"+token+"/sendMessage";
+  request.post(BASE_URL).form({ text: 'Hello World!', chat_id: chatId });
 
-    const chatId = req.body.message.chat.id;
-
-    request.post(BASE_URL).form({text :'Hello World!', chat_id: chatId});
-
-    context.res = {
+  const res = {
     // status: 200, /* Defaults to 200 */
-        body: 'ok',
-    };    
-
-    context.done();
+    body: 'ok',
+  };
+  context.done(null, res);
 };
-
-
