@@ -42,6 +42,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE) t generated w/ `npm run docs` -->
 | Example | Runtime  |
 |:--------------------------- |:-----|
+| [Dynamo Stream To Es](https://github.com/serverless/examples/tree/master/aws-golang-dynamo-stream-to-es) <br/> This example deploys a Dynamo DB Table, an ElasticSearch Node, and a lambda triggered off of a Dynamo Stream  which updates an elasticsearch index with the data from the Dynamo Table | golang |
 | [Aws Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
 | [Aws Node Auth0 Cognito Custom Authorizers Api](https://github.com/serverless/examples/tree/master/aws-node-auth0-cognito-custom-authorizers-api) <br/> Authorize your API Gateway with either Auth0 or Cognito RS256 tokens. | nodeJS |
