@@ -192,6 +192,8 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Sls Access Counter](https://github.com/takahashim/sls-access-counter)** <br/> Site visitor counter | [takahashim](http://github.com/takahashim) |
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
 | **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |
+| **[AWS CloudWatch Proxy](https://github.com/abbasdgr8/cloudwatch-proxy)** <br/> 
+Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identifying alerts and notifying via Slack and Email | [abbasdgr8](http://github.com/abbasdgr8) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
