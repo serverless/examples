@@ -80,6 +80,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Serverless Telegram Bot](https://github.com/serverless/examples/tree/master/aws-python-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖  | python |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
+| [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
 | [Kubeless Python Simple](https://github.com/serverless/examples/tree/master/kubeless-python-schedule) <br/> This example demonstrates how to setup a simple Python function with Kubeless | python |
 | [Kubeless Python Simple](https://github.com/serverless/examples/tree/master/kubeless-python-simple) <br/> This example demonstrates how to setup a simple Python function with Kubeless | python |
