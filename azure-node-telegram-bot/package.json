@@ -1,0 +1,17 @@
+{
+  "name": "azure-nodejs",
+  "version": "1.0.0",
+  "description": "Azure Functions sample for the Serverless framework",
+  "main": "handler.js",
+  "keywords": [
+    "azure",
+    "serverless"
+  ],
+  "devDependencies": {
+    "serverless-azure-functions": "*"
+  },
+  "dependencies": {
+    "lint": "^1.1.2",
+    "request": "^2.88.0"
+  }
+}
