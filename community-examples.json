@@ -397,5 +397,10 @@
     "name": "Lambda PubSub via SNS Example",
     "description": "Example illustrating the flow: Lambda (publisher) => SNS => Lambda (consumer)",
     "githubUrl": "https://github.com/didil/serverless-lambda-sns-example"
+  },
+  {
+    "name": "Serverless CloudWatch Proxy",
+    "description": "Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identying alerts and sending notifications via Slack/Email",
+    "githubUrl": "https://github.com/abbasdgr8/cloudwatch-proxy"
   }
 ]
