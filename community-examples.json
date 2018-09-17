@@ -319,6 +319,11 @@
     "githubUrl": "https://github.com/bsdkurt/aws-node-custom-user-pool"
   },
   {
+    "name": "AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito Example",
+    "description": "Step by step guide how to deploy simple web application on top of AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito.",
+    "githubUrl": "https://github.com/andreivmaksimov/serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito"
+  },
+  {
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
