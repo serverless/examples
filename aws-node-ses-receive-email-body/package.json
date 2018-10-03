@@ -1,0 +1,10 @@
+{
+  "name": "aws-node-ses-receive-email-body",
+  "description": "Receive an email, store in S3 bucket, trigger a lambda function.",
+  "version": "1.0.0",
+  "author": "Andreas Heissenberger <andreas@heissenberger.at>",
+  "license": "MIT",
+  "dependencies": {
+    "mailparser": "^2.3.4"
+  }
+}
