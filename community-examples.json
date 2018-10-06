@@ -319,6 +319,11 @@
     "githubUrl": "https://github.com/bsdkurt/aws-node-custom-user-pool"
   },
   {
+    "name": "AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito Example",
+    "description": "Step by step guide how to deploy simple web application on top of AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito.",
+    "githubUrl": "https://github.com/andreivmaksimov/serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito"
+  },
+  {
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
@@ -397,5 +402,10 @@
     "name": "Lambda PubSub via SNS Example",
     "description": "Example illustrating the flow: Lambda (publisher) => SNS => Lambda (consumer)",
     "githubUrl": "https://github.com/didil/serverless-lambda-sns-example"
+  },
+  {
+    "name": "Serverless CloudWatch Proxy",
+    "description": "Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identying alerts and sending notifications via Slack/Email",
+    "githubUrl": "https://github.com/abbasdgr8/cloudwatch-proxy"
   }
 ]
