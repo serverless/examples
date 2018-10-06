@@ -1,0 +1,7 @@
+{
+  "name": "aws-node-ses-receive-email-header",
+  "description": "Receive an email, trigger a lambda function to process header.",
+  "version": "1.0.0",
+  "author": "Andreas Heissenberger <andreas@heissenberger.at>",
+  "license": "MIT"
+}
