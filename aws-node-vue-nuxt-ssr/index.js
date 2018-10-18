@@ -1,12 +1,7 @@
-const sls = require('serverless-http')
-const binaryMimeTypes = require('./binaryMimeTypes')
+const sls = require('serverless-http');
+const binaryMimeTypes = require('./binaryMimeTypes');
+const nuxt = require('./nuxt');
 
-const api = require('./api')
-module.exports.api = sls(api, {
-  binary: binaryMimeTypes
-})
-
-const nuxt = require('./nuxt')
 module.exports.nuxt = sls(nuxt, {
-  binary: binaryMimeTypes
-})
+  binary: binaryMimeTypes,
+});
