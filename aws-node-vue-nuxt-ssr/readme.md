@@ -7,7 +7,7 @@ This project demonstrates how to use Nuxt.js to create a server-side rendered Vu
 
 ## Benefits
 - SEO boost server-side rendering provides
-- Speed of a Single Page Application\
+- Speed of a Single Page Application
 - Cheap hosting in a serverless environment on AWS Lambda
 - Easy deployment with the Serverless Framework
 - Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture.
