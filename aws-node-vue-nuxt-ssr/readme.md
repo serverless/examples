@@ -51,7 +51,7 @@ To accomplish this we need to spin up a simple Express server and configure the 
 
     Build completed in 9.783s
 
-    DONE  Compiled successfully in 9788m                                                                                           01:29:34
+    DONE  Compiled successfully in 9788m                                             01:29:34
 
     Hash: 14102c197254534940dd
     Version: webpack 3.12.0
