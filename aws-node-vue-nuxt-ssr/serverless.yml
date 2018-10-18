@@ -14,11 +14,6 @@ functions:
     events:
       - http: ANY /
       - http: ANY /{proxy+}
-  api:
-    handler: index.api
-    events:
-      - http: ANY /api
-      - http: ANY /api/{proxy+}
 
 plugins:
   - serverless-apigw-binary
