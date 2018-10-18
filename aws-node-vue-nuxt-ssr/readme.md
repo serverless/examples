@@ -20,7 +20,7 @@ To accomplish this we need to spin up a simple Express server and configure the 
 ## Setup
 - Install dependencies:
     ```bash
-    $ npm i
+    $ npm install
     ```
 - [Create public wildcard certificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) for your domain (AWS ACM)
 
@@ -28,7 +28,81 @@ To accomplish this we need to spin up a simple Express server and configure the 
 1. **Deploy service without custom domain:**
     
     ```bash
-    $ sls deploy
+    $ npm run deploy
+    ```
+
+    Output:
+    ```bash
+
+    > aws-node-vue-nuxt-ssr@1.0.0 deploy /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr
+    > npm run build && sls deploy
+
+
+    > aws-node-vue-nuxt-ssr@1.0.0 build /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr
+    > nuxt build
+
+    nuxt:build Building... +0ms
+    nuxt:build App root: /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr/client +0ms
+    nuxt:build Generating /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr/.nuxt files... +0ms
+    nuxt:build Generating files... +40ms
+    nuxt:build Generating routes... +7ms
+    nuxt:build Building files... +24ms
+    ████████████████████ 100% 
+
+    Build completed in 9.783s
+
+    DONE  Compiled successfully in 9788m                                                                                           01:29:34
+
+    Hash: 14102c197254534940dd
+    Version: webpack 3.12.0
+    Time: 9788ms
+                                        Asset       Size  Chunks             Chunk Names
+      layouts/default.c7117c4874fb943756b1.js    1.09 kB       0  [emitted]  layouts/default
+          pages/index.d3fbe26b313c4e3e99b3.js    1.03 kB       1  [emitted]  pages/index
+     pages/dogs/index.471f8b183d02e42ba618.js    1.18 kB       2  [emitted]  pages/dogs/index
+    pages/dogs/_breed.4c44d20092b1baf42153.js    1.36 kB       3  [emitted]  pages/dogs/_breed
+               vendor.e2344f1165d5e54cb7a2.js     157 kB       4  [emitted]  vendor
+                  app.b0ef47f34aef4d684198.js    27.7 kB       5  [emitted]  app
+             manifest.14102c197254534940dd.js    1.56 kB       6  [emitted]  manifest
+                                     LICENSES  705 bytes          [emitted]  
+    
+    + 3 hidden assets
+    Hash: 3be2c5d3c65a2d58b155
+    Version: webpack 3.12.0
+    Time: 507ms
+    
+    Asset               Size            Chunks             Chunk Names
+    server-bundle.json  130 kB          [emitted]  
+    
+    nuxt:build Building done +11s
+
+    Serverless: Packaging service...
+    Serverless: Excluding development dependencies...
+    Serverless: Creating Stack...
+    Serverless: Checking Stack create progress...
+    .....
+    Serverless: Stack create finished...
+    Serverless: Uploading CloudFormation file to S3...
+    Serverless: Uploading artifacts...
+    Serverless: Uploading service .zip file to S3 (42.47 MB)...
+    Serverless: Validating template...
+    Serverless: Updating Stack...
+    Serverless: Checking Stack update progress...
+    .................................
+    Serverless: Stack update finished...
+    Service Information
+    service: serverless-side-rendering-vue-nuxt
+    stage: dev
+    region: us-east-1
+    stack: serverless-side-rendering-vue-nuxt-dev
+    api keys:
+        None
+    endpoints:
+        ANY - https://<api_id>.execute-api.us-east-1.amazonaws.com/dev
+        ANY - https://<api_id>.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+    functions:
+        nuxt: serverless-side-rendering-vue-nuxt-dev-nuxt
+
     ```
 
     Once deployed you'll have your app running on a default API Gateway URI.
@@ -64,17 +138,22 @@ To accomplish this we need to spin up a simple Express server and configure the 
 3. **Re-deploy the service with the domain settings:**
 
     ```bash
-    $ sls deploy
+    $ npm run deploy
     ```
 
     Output:
     ```bash
-
+    [...same as above but also with the domain info]
+    Serverless Domain Manager Summary
+    Domain Name
+        vuessr.yourdomain.com
+    Distribution Domain Name
+        <cdn_id>.cloudfront.net
     ```
 
 
 ## Usage
-Navigate to `vuessr-yourdomain.com` or whichever domain you picked. You'll se the Vue.js SPA running.
+Navigate to `vuessr-yourdomain.com` or whichever domain you picked. You'll see the Vue.js SPA running.
 
 --- 
 
