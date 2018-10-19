@@ -1,3 +1,12 @@
+<!--
+title: TODO
+description: TODO
+layout: Doc
+framework: v1
+platform: Azure
+language: nodeJS
+authorLink: 'https://github.com/'
+-->
 # Azure-line-bot-exmaple
 
 This is simple echo bot on Line messenger.  

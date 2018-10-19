@@ -1,7 +1,13 @@
 <!--
-title: AWS API Gateway Custom Authorizer Function with Auth0 example in Python
-description: This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function in Python 3.
+title: 'AWS API Gateway Custom Authorizer Function with Auth0 example in Python'
+description: 'This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function in Python 3.'
 layout: Doc
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/BrianAndersen78'
+authorName: null
+authorAvatar: 'https://avatars3.githubusercontent.com/u/30560831?v=4&s=140'
 -->
 # API Gateway Custom Authorizer Function + Auth0
 
@@ -42,15 +48,17 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 
 7. You can either run your frontend locally or deploy your frontend to host of your choosing. However in either case, make sure to configure the `Allowed Callback URL` and `Allowed Origins` in your auth0 client in the [auth0 dashboard](https://manage.auth0.com). An example of how to run your frontend locally:
 
-  ```cd frontend;
-  python -m http.server```
+  ```
+  cd frontend;
+  python -m http.server
+  ```
 
 
 ## Custom authorizer functions
 
 [Custom authorizers functions](https://aws.amazon.com/blogs/compute/introducing-custom-authorizers-in-amazon-api-gateway/) are executed before a Lambda function is executed and return an Error or a Policy document.
 
-The Custom authorizer function is passed an `event` object as below:
+The Custom authorizer function is passing an `event` object to API Gateway as below:
 ```javascript
 {
   "type": "TOKEN",
@@ -58,6 +66,7 @@ The Custom authorizer function is passed an `event` object as below:
   "methodArn": "arn:aws:execute-api:<Region id>:<Account id>:<API id>/<Stage>/<Method>/<Resource path>"
 }
 ```
+You will have to change this policy to accommodate your needs. The default reply provided, will only authorize one endpoint!
 
 ## Frontend
 

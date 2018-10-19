@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Simple example in Swift
-description: This example demonstrates a simple example in Swift.
+title: 'OpenWhisk Serverless Simple example in Swift'
+description: 'This example demonstrates a simple example in Swift.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Swift
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Swift
 
@@ -46,7 +52,7 @@ $ serverless invoke -f ping
 }
 $ serverless invoke -f ping -d '{"name": "James"}'
 {
-    "greeting": "Hello James! The time is 2017-03-28 16:24:23"
+    "greeting": "Hello James! The time is 2028 16:24:23"
 }
 ```
 

@@ -1,7 +1,11 @@
 <!--
-title: OpenWhisk Serverless Boilerplate example in Go
-description: This example shows a Serverless boilerplate in Go.
+title: 'OpenWhisk Serverless Boilerplate example in Go'
+description: 'This example shows a Serverless boilerplate in Go.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Go
+authorLink: 'https://github.com/'
 -->
 # Serverless Boilerplate - OpenWhisk - Go
 

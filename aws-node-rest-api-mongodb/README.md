@@ -1,3 +1,15 @@
+<!--
+title: TODO
+description: TODO
+layout: Doc
+framework: v1
+platform: AWS
+language: Go
+authorLink: 'https://github.com/lucianopf'
+authorName: 'Luciano Pellacani Franca'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/8251208?v=4&s=140'
+-->
+
 # Serverless MongoDB Rest API with Mongoose and Bluebird Promises
 
 This example demonstrate how to use a MongoDB database with aws and serverless.
