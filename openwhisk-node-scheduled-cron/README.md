@@ -1,7 +1,11 @@
 <!--
-title: OpenWhisk Serverless Scheduled Cron job example in NodeJS
-description: This example demonstrates scheduleding a cron job in NodeJS.
+title: 'OpenWhisk Serverless Scheduled Cron job example in NodeJS'
+description: 'This example demonstrates scheduleding a cron job in NodeJS.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: nodeJS
+authorLink: 'https://github.com/'
 -->
 # Serverless Boilerplate - OpenWhisk - Node.js
 

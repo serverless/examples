@@ -1,7 +1,11 @@
 <!--
-title: OpenWhisk Serverless Chaining Functions example in NodeJS
-description: This example demonstrates chaining functions in NodeJS.
+title: 'OpenWhisk Serverless Chaining Functions example in NodeJS'
+description: 'This example demonstrates chaining functions in NodeJS.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: nodeJS
+authorLink: 'https://github.com/'
 -->
 # Serverless Boilerplate - OpenWhisk - Node.js
 

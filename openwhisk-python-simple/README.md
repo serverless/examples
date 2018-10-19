@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Simple example in Python
-description: This example demonstrates a simple example in Python.
+title: 'OpenWhisk Serverless Simple example in Python'
+description: 'This example demonstrates a simple example in Python.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Python
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Python
 

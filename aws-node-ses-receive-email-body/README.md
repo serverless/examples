@@ -1,7 +1,13 @@
 <!--
-title: AWS SES receive emails and process body 
-description: This example shows how to process receiving emails, and have S3 trigger a lambda function.
+title: 'AWS SES receive emails and process body'
+description: 'This example shows how to process receiving emails, and have S3 trigger a lambda function.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/aheissenberger'
+authorName: 'Andreas Heissenberger'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/200095?v=4&s=140'
 -->
 # Receive an email, store in S3 bucket, trigger a lambda function
 
@@ -79,13 +85,13 @@ serverless logs --function postprocess
 ```
 
 ```
-START RequestId: 695a6fa8-a740-11e8-ab5d-0fdb1ebfe5ea Version: $LATEST
-<date> <RequestId> date: 2018-10-03T18:46:47.000Z
+START RequestId: 695a6fa8-a711e8-ab5d-0fdb1ebfe5ea Version: $LATEST
+<date> <RequestId> date: 2003T18:46:47.000Z
 <date> <RequestId> subject: Test Subject
 <date> <RequestId> body: Hello World
 
 <date> <RequestId> from: Tim Turbo <tim.turbo@domain.test>
 <date> <RequestId> attachments: []
-END RequestId: 695a6fa8-a740-11e8-ab5d-0fdb1ebfe5ea
-REPORT RequestId: 695a6fa8-a740-11e8-ab5d-0fdb1ebfe5ea  Duration: 55.12 ms Billed Duration: 100 ms  Memory Size: 1024 MB    Max Memory Used: 42 MB
+END RequestId: 695a6fa8-a711e8-ab5d-0fdb1ebfe5ea
+REPORT RequestId: 695a6fa8-a711e8-ab5d-0fdb1ebfe5ea  Duration: 55.12 ms Billed Duration: 100 ms  Memory Size: 1024 MB    Max Memory Used: 42 MB
 ```
