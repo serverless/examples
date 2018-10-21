@@ -1,6 +1,6 @@
 <!--
 title: TODO
-description: TODO
+description: This example demonstrates how to setup a serverless Telegram Bot on Azure.
 layout: Doc
 framework: v1
 platform: Azure

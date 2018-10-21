@@ -1,6 +1,6 @@
 <!--
 title: TODO
-description: TODO
+description: This example demonstrates how to setup a simple HTTP endpoint in Go.
 layout: Doc
 framework: v1
 platform: AWS

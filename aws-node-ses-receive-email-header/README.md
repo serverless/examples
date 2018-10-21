@@ -5,7 +5,9 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
-authorLink: 'https://github.com/'
+authorLink: 'https://github.com/aheissenberger'
+authorName: 'Andreas Heissenberger'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/200095?v=4&s=140'
 -->
 # Receive an email, trigger a lambda function to process header
 

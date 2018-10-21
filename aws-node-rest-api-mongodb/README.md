@@ -1,10 +1,10 @@
 <!--
 title: TODO
-description: TODO
+description: This example demonstrate how to use MongoDB with AWS and Serverless.
 layout: Doc
 framework: v1
 platform: AWS
-language: Go
+language: nodeJS
 authorLink: 'https://github.com/lucianopf'
 authorName: 'Luciano Pellacani Franca'
 authorAvatar: 'https://avatars2.githubusercontent.com/u/8251208?v=4&s=140'

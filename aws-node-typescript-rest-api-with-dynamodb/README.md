@@ -1,6 +1,6 @@
 <!--
 title: TODO
-description: TODO
+description: This example shows your how to create a TypeScript powered REST API with DynamoDB.
 layout: Doc
 framework: v1
 platform: AWS

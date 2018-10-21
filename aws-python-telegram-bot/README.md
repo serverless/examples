@@ -1,6 +1,6 @@
 <!--
 title: TODO
-description: TODO
+description: This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework.
 layout: Doc
 framework: v1
 platform: AWS

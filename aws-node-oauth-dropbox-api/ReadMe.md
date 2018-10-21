@@ -1,11 +1,13 @@
 <!--
 title: TODO
-description: TODO
+description: Connect to Dropbox's API using AWS Lambda.
 layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
-authorLink: 'https://github.com/Jay DeshmukhJay Deshmukh'
+authorLink: 'https://github.com/serverless'
+authorName: Jay Deshmukh
+authorAvatar: 'https://avatars0.githubusercontent.com/u/38460988?v=4&s=140'
 -->
 
 ### 

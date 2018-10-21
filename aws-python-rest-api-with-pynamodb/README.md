@@ -5,7 +5,9 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Python
-authorLink: 'https://github.com/'
+authorLink: 'https://github.com/helveticafire'
+authorName: 'Ben Fitzgerald'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/1323872?v=4&s=140'
 -->
 # Serverless REST API
 

@@ -1,6 +1,6 @@
 <!--
 title: TODO
-description: TODO
+description: This examples shows your how to create a backup of your DynamoDB table to S3.
 layout: Doc
 framework: v1
 platform: AWS
