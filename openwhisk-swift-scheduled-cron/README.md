@@ -1,11 +1,13 @@
 <!--
 title: 'OpenWhisk Serverless Scheduled Cron job example in Swift'
-description: 'This example demonstrates scheduleding a cron job.'
+description: 'This example demonstrates scheduling a cron job.'
 layout: Doc
 framework: v1
 platform: OpenWhisk
 language: Swift
-authorLink: 'https://github.com/'
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Swift
 

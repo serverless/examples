@@ -6,7 +6,7 @@ framework: v1
 platform: AWS
 language: Python
 authorLink: 'https://github.com/BrianAndersen78'
-authorName: null
+authorName: BrianAndersen78
 authorAvatar: 'https://avatars3.githubusercontent.com/u/30560831?v=4&s=140'
 -->
 # API Gateway Custom Authorizer Function + Auth0

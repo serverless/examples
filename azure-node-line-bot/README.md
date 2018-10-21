@@ -1,11 +1,13 @@
 <!--
 title: TODO
-description: TODO
+description: This example demonstrates how to setup a serverless Line Bot using Node.js.
 layout: Doc
 framework: v1
 platform: Azure
 language: nodeJS
-authorLink: 'https://github.com/'
+authorLink: 'https://github.com/jiyeonseo'
+authorName: seojeee
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2231510?v=4&s=140'
 -->
 # Azure-line-bot-exmaple
 

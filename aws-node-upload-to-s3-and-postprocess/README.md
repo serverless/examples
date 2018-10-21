@@ -6,7 +6,7 @@ framework: v1
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/walgarch'
-authorName: null
+authorName: walgarch
 authorAvatar: 'https://avatars1.githubusercontent.com/u/32451330?v=4&s=140'
 -->
 # Upload a file to S3 to trigger a lambda function
