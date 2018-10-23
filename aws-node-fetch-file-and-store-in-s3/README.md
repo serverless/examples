@@ -1,7 +1,13 @@
 <!--
-title: AWS Fetch image from URL and upload to S3 example in NodeJS
-description: This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.
+title: 'AWS Fetch image from URL and upload to S3 example in NodeJS'
+description: 'This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/ScottBrenner'
+authorName: 'Scott Brenner'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/416477?v=4&s=140'
 -->
 # Fetch image from URL then upload to s3 Example
 
@@ -89,9 +95,9 @@ The expected result should be similar to:
 ```bash
 "Saved"
 --------------------------------------------------------------------
-START RequestId: c658859d-bd42-11e6-ac1f-c7a7ee5bd7f3 Version: $LATEST
-END RequestId: c658859d-bd42-11e6-ac1f-c7a7ee5bd7f3
-REPORT RequestId: c658859d-bd42-11e6-ac1f-c7a7ee5bd7f3	Duration: 436.94 ms	Billed Duration: 500 ms 	Memory Size: 1024 MB	Max Memory Used: 29 MB
+START RequestId: c658859d-bd11e6-ac1f-c7a7ee5bd7f3 Version: $LATEST
+END RequestId: c658859d-bd11e6-ac1f-c7a7ee5bd7f3
+REPORT RequestId: c658859d-bd11e6-ac1f-c7a7ee5bd7f3	Duration: 436.94 ms	Billed Duration: 500 ms 	Memory Size: 1024 MB	Max Memory Used: 29 MB
 ```
 
 ## Scaling
