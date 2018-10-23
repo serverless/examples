@@ -1,7 +1,13 @@
 <!--
-title: AWS API Gateway Custom Authorizer Function with Auth0 example in Python
-description: This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function in Python 3.
+title: 'AWS API Gateway Custom Authorizer Function with Auth0 example in Python'
+description: 'This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function in Python 3.'
 layout: Doc
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/BrianAndersen78'
+authorName: BrianAndersen78
+authorAvatar: 'https://avatars3.githubusercontent.com/u/30560831?v=4&s=140'
 -->
 # API Gateway Custom Authorizer Function + Auth0
 

@@ -1,7 +1,13 @@
 <!--
-title: Kubeless Serverless Simple scheduled example in Python
-description: This example demonstrates a simple example in Python for a scheduled function.
+title: 'Kubeless Serverless Simple scheduled example in Python'
+description: 'This example demonstrates a simple example in Python for a scheduled function.'
 layout: Doc
+framework: v1
+platform: Kubeless
+language: Python
+authorLink: 'https://github.com/andresmgot'
+authorName: Andres
+authorAvatar: 'https://avatars0.githubusercontent.com/u/4025665?v=4&s=140'
 -->
 # Serverless Boilerplate - Kubeless - Python
 
@@ -9,7 +15,7 @@ Make sure `kubeless` and `serverless` are installed. See the respective installa
 * [Kubeless](https://github.com/kubeless/kubeless/blob/master/README.md#usage)
 * [Serverless](https://github.com/serverless/serverless#quick-start)
 
-Please see the [this guide for more information](https://github.com/serverless/serverless-kubeless/blob/master/README.md).
+Please see the [this guide for more information](https://github.com/serverless/serverless-kubeless/blob/master).
 
 ## 1. Install Service Dependencies
 Run `npm install` in this directory to download the modules from `package.json`.

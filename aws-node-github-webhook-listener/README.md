@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless Github Webhook Listener example in NodeJS
-description: This service will listen to github webhooks fired by a given repository.
+title: 'AWS Serverless Github Webhook Listener example in NodeJS'
+description: 'This service will listen to github webhooks fired by a given repository.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/adambrgmn'
+authorName: 'Adam Bergman'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13746650?v=4&s=140'
 -->
 # Serverless Github webhook listener
 
@@ -93,7 +99,7 @@ This service will listen to github webhooks fired by a given repository.
 
   **(3.)** Choose the types of events you want the github webhook to fire on
 
-  ![webhook-steps](https://cloud.githubusercontent.com/assets/532272/21461773/db7cecd2-c922-11e6-9362-6bbf4661fe14.jpg)
+  ![webhook-steps](https://cloud.githubusercontent.com/assets/532272/21461773/db7cecd2-c911e6-936bbf4661fe14.jpg)
 
 
 4. Manually trigger/test the webhook from settings or do something in your github repo to trigger a webhook.

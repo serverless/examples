@@ -1,7 +1,13 @@
 <!--
-title: AWS SES receive an email, trigger a lambda function to process header.
-description: This example shows how to process receiving email header, and trigger a lambda function.
+title: 'AWS SES receive an email, trigger a lambda function to process header.'
+description: 'This example shows how to process receiving email header, and trigger a lambda function.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/aheissenberger'
+authorName: 'Andreas Heissenberger'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/200095?v=4&s=140'
 -->
 # Receive an email, trigger a lambda function to process header
 
@@ -88,11 +94,11 @@ serverless logs -t --function processheader
 ```
 
 ```
-START RequestId: eada06fc-c76a-11a8-bf33-fd389a883292 Version: $LATEST
+START RequestId: eada06fc-c76a-11a8-bffd389a883292 Version: $LATEST
 <date> <RequestId>     { from: 'Tim Turbo <tim.turbo@domain.test>',
   to: 'ses-in@domain.test',
   subject: 'Testsubject',
   date: 'Thu, 4 Oct 2018 01:33:06 +0200' }
-END RequestId: eada06fc-c76a-11a8-bf33-fd389a883292
-REPORT RequestId: eada06fc-c76a-11a8-bf33-fd389a883292  Duration: 5.62 ms       Billed Duration: 100 ms         Memory Size: 1024 MB    Max Memory Used: 19 MB
+END RequestId: eada06fc-c76a-11a8-bffd389a883292
+REPORT RequestId: eada06fc-c76a-11a8-bffd389a883292  Duration: 5.62 ms       Billed Duration: 100 ms         Memory Size: 1024 MB    Max Memory Used: 19 MB
 ```
