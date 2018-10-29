@@ -1,0 +1,7 @@
+URL : 'https://xxxxxx.ap-south-1.amazonaws.com/stage/dropbox/' ##change with your lambda url
+EMAIL : 'xxxxxyz@xxxx.xyz'  #change with your email id
+EMAIL_INPUT_BOX : 'input[name="login_email"]'
+PASSWORD : 'xxxx@123' #change with your password 
+PASSWORD_INPUT_BOX : 'input[name="login_password"]'
+SUBMIT : '.login-button'
+ALLOW : ".button-primary"

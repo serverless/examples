@@ -1,0 +1,12 @@
+{
+  "name": "aws-auth0-api-gateway",
+  "version": "1.0.0",
+  "description": "Demonstration of protecting API gateway endpoints with auth0",
+  "license": "MIT",
+  "dependencies": {
+    "serverless": "^1.28.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.18.0"
+  }
+}

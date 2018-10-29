@@ -1,7 +1,13 @@
 <!--
-title: GraphQL query endpoint in NodeJS on AWS with DynamoDB
-description: A single-module GraphQL endpoint with query and mutation functionality.
+title: 'GraphQL query endpoint in NodeJS on AWS with DynamoDB'
+description: 'A single-module GraphQL endpoint with query and mutation functionality.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/gismoranas'
+authorName: 'Gismo Ranas'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/5903107?v=4&s=140'
 -->
 
 # GraphQL query endpoint in NodeJS on AWS with DynamoDB
