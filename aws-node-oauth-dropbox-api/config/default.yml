@@ -1,0 +1,5 @@
+STAGE: 'default'
+HOME_URL: 'http://localhost:9999/'
+CLIENT_ID : 'xxxxxx' ##Change with your Dropbox Client Id
+CLIENT_SECRET : 'xxxxxx' ##Change with your Dropbox Client Secret
+CALLBACK_URL : 'http://localhost:9999/dropbox/callback'

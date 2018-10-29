@@ -1,7 +1,13 @@
 <!--
-title: AWS Upload a file to S3 to trigger a Lambda function example in NodeJS
-description: This example shows how to upload a file to S3 using a HTML form, and have S3 trigger a lambda function.
+title: 'AWS Upload a file to S3 to trigger a Lambda function example in NodeJS'
+description: 'This example shows how to upload a file to S3 using a HTML form, and have S3 trigger a lambda function.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/walgarch'
+authorName: walgarch
+authorAvatar: 'https://avatars1.githubusercontent.com/u/32451330?v=4&s=140'
 -->
 # Upload a file to S3 to trigger a lambda function
 
@@ -87,8 +93,8 @@ serverless logs --function postprocess
 ```
 
 ```
-START RequestId: e2decc94-f2a0-11e6-b641-e3fbcfad7d8c Version: $LATEST
-2017-02-14 12:32:30.350 (+02:00)	e2decc94-f2a0-11e6-b641-e3fbcfad7d8c	New .png object has been created: uploads/image.png (23975 bytes)
-END RequestId: e2decc94-f2a0-11e6-b641-e3fbcfad7d8c
-REPORT RequestId: e2decc94-f2a0-11e6-b641-e3fbcfad7d8c	Duration: 2.84 ms	Billed Duration: 100 msMemory Size: 1024 MB	Max Memory Used: 29 MB
+START RequestId: e2deccf2a0-11e6-b6e3fbcfad7d8c Version: $LATEST
+2014 12:32:30.350 (+02:00)	e2deccf2a0-11e6-b6e3fbcfad7d8c	New .png object has been created: uploads/image.png (23975 bytes)
+END RequestId: e2deccf2a0-11e6-b6e3fbcfad7d8c
+REPORT RequestId: e2deccf2a0-11e6-b6e3fbcfad7d8c	Duration: 2.84 ms	Billed Duration: 100 msMemory Size: 1024 MB	Max Memory Used: 29 MB
 ```

@@ -1,7 +1,13 @@
 <!--
-title: AWS Node Scheduled Cron example in NodeJS
-description: This is an example of creating a function that runs as a cron job using the serverless 'schedule' event.
+title: 'AWS Node Scheduled Cron example in NodeJS'
+description: 'This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/0dj0bz'
+authorName: 'Rob Abbott'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/5679763?v=4&s=140'
 -->
 # AWS Node Scheduled Cron Example
 
@@ -38,13 +44,13 @@ All fields are required and time zone is UTC only.
 | Day-of-month  | 1-31           | , - * ? / L W |
 | Month         | 1-12 or JAN-DEC| , - * /       |
 | Day-of-week   | 1-7 or SUN-SAT | , - * ? / L # |
-| Year          | 1970-2199      | , - * /       |
+| Year          | 192199      | , - * /       |
 
 Read the [AWS cron expression syntax](http://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html) docs for more info on how to setup cron
 
 ## Deploy
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint you simply run
 
 ```bash
 serverless deploy
@@ -88,14 +94,14 @@ The expected result should be similar to:
 
 ```bash
 START RequestId: e6e64a4e-b57d-11e6-9eee-0340b40f6d48 Version: $LATEST
-2016-11-28 16:18:23.755 (+01:00)	e6e64a4e-b57d-11e6-9eee-0340b40f6d48	Your cron function "scheduled-cron-example-dev-cron" ran at Mon Nov 28 2016 15:18:23 GMT+0000 (UTC)
+2028 16:18:23.755 (+01:00)	e6e64a4e-b57d-11e6-9eee-0340b40f6d48	Your cron function "scheduled-cron-example-dev-cron" ran at Mon Nov 28 2016 15:18:23 GMT+0000 (UTC)
 END RequestId: e6e64a4e-b57d-11e6-9eee-0340b40f6d48
 REPORT RequestId: e6e64a4e-b57d-11e6-9eee-0340b40f6d48	Duration: 4.01 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 16 MB
 
-START RequestId: 0a770e6f-b57e-11e6-ba68-f188460981c7 Version: $LATEST
-2016-11-28 16:19:22.921 (+01:00)	0a770e6f-b57e-11e6-ba68-f188460981c7	Your cron function "scheduled-cron-example-dev-cron" ran at Mon Nov 28 2016 15:19:22 GMT+0000 (UTC)
-END RequestId: 0a770e6f-b57e-11e6-ba68-f188460981c7
-REPORT RequestId: 0a770e6f-b57e-11e6-ba68-f188460981c7	Duration: 0.69 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 16 MB
+START RequestId: 0a770e6f-b57e-11e6-baf188460981c7 Version: $LATEST
+2028 16:19:22.921 (+01:00)	0a770e6f-b57e-11e6-baf188460981c7	Your cron function "scheduled-cron-example-dev-cron" ran at Mon Nov 28 2016 15:19:22 GMT+0000 (UTC)
+END RequestId: 0a770e6f-b57e-11e6-baf188460981c7
+REPORT RequestId: 0a770e6f-b57e-11e6-baf188460981c7	Duration: 0.69 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 16 MB
 ```
 
 Since this only shows you the logs of the first cron job simply change the function name and run the command again:
