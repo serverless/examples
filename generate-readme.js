@@ -37,6 +37,8 @@ const getRuntime = (dirname) => {
     return 'swift';
   } else if (dirname.match(/php/)) {
     return 'php';
+  } else if (dirname.match(/ruby/)) {
+    return 'ruby';
   } else if (dirname.match(/golang/)) {
     return 'golang';
   }
