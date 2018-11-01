@@ -1,3 +1,14 @@
+<!--
+title: 'Serverless-side rendering with Vue.js and Nuxt.js'
+description: 'This project demonstrates how to use Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway.'
+layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/adnanrahic'
+authorName: adnanrahic
+authorAvatar: 'https://avatars1.githubusercontent.com/u/15029531?s=400&v=4'
+-->
 # Serverless-side rendering with Vue.js and Nuxt.js
 
 This project demonstrates how to use Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. 
