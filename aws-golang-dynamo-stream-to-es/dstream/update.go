@@ -11,12 +11,15 @@ import (
 	es "github.com/olivere/elastic"
 )
 
-// Elasticsearch is an ES Client which will perform Updates for Dynamo Items
+// Elasticsearch is an ES Client which will perform Elasticsearch Updates for Dynamo Items
 type Elasticsearch struct {
 	*es.Client
 }
 
-// Update will index the item based on the details given
+// Update takes a reference to adstream.Details object;
+// which is used to figure out which Elasticsearch Index to update;
+// And an item map[string]events.DynamoDBAttributeValue which will be turned into JSON
+// then indexed into Elasticsearch
 func (e *Elasticsearch) Update(d *Details, item map[string]events.DynamoDBAttributeValue) (*es.IndexResponse, error) {
 	tmp := eventStreamToMap(item)
 	var i interface{}
@@ -60,7 +63,7 @@ func (d *Details) index() string {
 	return strings.ToLower(d.TableName)
 }
 
-// Ugly Hack because
+// ugly hack because the types
 // events.DynamoDBAttributeValue != *dynamodb.AttributeValue
 func eventStreamToMap(attribute interface{}) map[string]*dynamodb.AttributeValue {
 	// Map to be returned
