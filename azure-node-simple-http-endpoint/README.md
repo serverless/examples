@@ -1,7 +1,13 @@
 <!--
-title: Azure Simple HTTP Endpoint example in NodeJS
-description: In this example, we deploy an HTTP Node.js Azure Function. This example shows you how to read properties off of a query string or the request body, then set a result back to Azure.
+title: 'Azure Simple HTTP Endpoint example in NodeJS'
+description: 'In this example, we deploy an HTTP Node.js Azure Function. This example shows you how to read properties off of a query string or the request body, then set a result back to Azure.'
 layout: Doc
+framework: v1
+platform: Azure
+language: nodeJS
+authorLink: 'https://github.com/fiveisprime'
+authorName: 'Matt Hernandez'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/1186948?v=4&s=140'
 -->
 # Simple HTTP example
 
