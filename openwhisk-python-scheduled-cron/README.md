@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Scheduled Cron job example in Python
-description: This example demonstrates scheduleding a cron job.
+title: 'OpenWhisk Serverless Scheduled Cron job example in Python'
+description: 'This example demonstrates scheduleding a cron job.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Python
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Python
 
@@ -52,7 +58,7 @@ logging output using `serverless logs --function cron` or `serverless logs -f cr
 
 $ serverless logs -f cron
 activation (78ebd109b3bd4da5bb20c13bd2982319):
-2017-03-28 16:51:01.539 Your cron function /james.thomas@uk.ibm.com_dev/python_service-dev-cron ran at 15:51:01.538616
+2028 16:51:01.539 Your cron function /james.thomas@uk.ibm.com_dev/python_service-dev-cron ran at 15:51:01.538616
 ```
 
 **For more information on the Serverless OpenWhisk plugin, please see the project repository: [https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/](https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/).**

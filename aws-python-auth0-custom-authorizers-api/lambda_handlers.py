@@ -14,7 +14,7 @@ AUTH0_CLIENT_PUBLIC_KEY = os.getenv('AUTH0_CLIENT_PUBLIC_KEY')
 def auth(event, context):
     whole_auth_token = event.get('authorizationToken')
     if not whole_auth_token:
-        return create_401_response()
+        raise Exception('Unauthorized')
 
     print('Client token: ' + whole_auth_token)
     print('Method ARN: ' + event['methodArn'])
@@ -24,9 +24,8 @@ def auth(event, context):
     token_method = token_parts[0]
 
     if not (token_method.lower() == 'bearer' and auth_token):
-        response = create_401_response()
-        print(f'Returning 401 response: {response}')
-        return response
+        print("Failing due to invalid token_method or missing auth_token")
+        raise Exception('Unauthorized')
 
     try:
         principal_id = jwt_verify(auth_token, AUTH0_CLIENT_PUBLIC_KEY)
@@ -34,7 +33,7 @@ def auth(event, context):
         return policy
     except Exception as e:
         print(f'Exception encountered: {e}')
-        return create_401_response()
+        raise Exception('Unauthorized')
 
 
 def public_endpoint(event, context):
@@ -91,16 +90,6 @@ def create_200_response(message):
         'Access-Control-Allow-Credentials': True,
     }
     return create_aws_lambda_response(200, {'message': message}, headers)
-
-
-def create_401_response():
-    headers = {
-        # Required for CORS support to work
-        'Access-Control-Allow-Origin': '*',
-        # Required for cookies, authorization headers with HTTPS
-        'Access-Control-Allow-Credentials': True,
-    }
-    return create_aws_lambda_response(401, 'Bleh Unauthorized', headers)
 
 
 def create_aws_lambda_response(status_code, message, headers):
