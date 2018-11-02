@@ -11,7 +11,7 @@ As with all serverless projects, you must have severless installed! Listed here 
 
 Once you have serverless installed on your system run these commands to get the project set up.
 ```
-cd sls-go-examples/dynamo-stream-to-es
+cd aws-golang-dynamo-stream-to-es
 npm install
 make
 ./node_modules/serverless/bin/serverless deploy 
