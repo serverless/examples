@@ -1,7 +1,13 @@
 <!--
-title: API Gateway Authorizer Function for Auth0 or AWS Cognito using RS256 JSON Web Key Sets tokens.
-description: Authorize your API Gateway with either Auth0 or Cognito JWKS RS256 tokens.
+title: 'API Gateway Authorizer Function for Auth0 or AWS Cognito using RS256 JSON Web Key Sets tokens.'
+description: 'Authorize your API Gateway with either Auth0 or Cognito JWKS RS256 tokens.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/shahzeb1'
+authorName: 'Shahzeb K.'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/1383831?v=4&s=140'
 -->
 # API Gateway Authorizer Function for Auth0 or AWS Cognito using the [JWKS](https://auth0.com/docs/jwks) method.
 

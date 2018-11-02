@@ -1,7 +1,13 @@
 <!--
-title: AWS Send SMS Message with Twilio example in NodeJS
-description: This example demonstrates how to send SMS messages with the Twilio SDK and AWS lambda.
+title: 'AWS Send SMS Message with Twilio example in NodeJS'
+description: 'This example demonstrates how to send SMS messages with the Twilio SDK and AWS lambda.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/darrenhgc'
+authorName: 'Darren Holland'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/28113106?v=4&s=140'
 -->
 # Send SMS Message with Twilio
 

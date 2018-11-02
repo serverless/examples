@@ -1,7 +1,13 @@
 <!--
-title: AWS Node Scheduled Weather example in NodeJS
-description: This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. It retrieves weather information at 10am (UTC) and emails it to a predefined recipient. 
+title: 'AWS Node Scheduled Weather example in NodeJS'
+description: 'This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event. It retrieves weather information at 10am (UTC) and emails it to a predefined recipient.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # AWS Node Scheduled Weather Example
 
@@ -22,7 +28,7 @@ All fields are required and time zone is UTC only.
 | Day-of-month  | 1-31           | , - * ? / L W |
 | Month         | 1-12 or JAN-DEC| , - * /       |
 | Day-of-week   | 1-7 or SUN-SAT | , - * ? / L # |
-| Year          | 1970-2199      | , - * /       |
+| Year          | 192199      | , - * /       |
 
 Read the [AWS cron expression syntax](http://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html) docs for more info on how to setup cron
 
