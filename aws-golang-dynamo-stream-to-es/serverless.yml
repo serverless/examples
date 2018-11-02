@@ -41,9 +41,9 @@ package:
     - ./bin/**
 
 functions:
-  dynamo-stream-to-es:
-    name: dynamo-stream-to-es
-    handler: bin/dynamo-stream-to-es
+  aws-golang-dynamo-stream-to-es:
+    name: aws-golang-dynamo-stream-to-es
+    handler: bin/aws-golang-dynamo-stream-to-es
     memorySize: 128
     timeout: 60
     events:

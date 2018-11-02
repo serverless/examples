@@ -8,7 +8,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 )
 
-// DynamoDetails is
+// DynamoDetails is a wrapper around the DynamoDBAPI interface,
+// it defines behavior for accessing DynamoDB Table metadata
 type DynamoDetails struct {
 	dynamodbiface.DynamoDBAPI
 }
@@ -30,14 +31,13 @@ func (d *DynamoDetails) Get(tableName string) (details *Details, err error) {
 		return nil, err
 	}
 
-	// We need a hash key to uniquely identify records
-	// If we don't find one that's an error.
+	// We NEED a hash key to uniquely identify records
 	hashKey := findAttributeByKeyType(out.Table.KeySchema, "HASH")
 	if hashKey == "" {
 		return nil, errors.New("Hash Key not found")
 	}
 
-	// range keys are nice, but we don't necessarily need one to uniquely identify a Dynamo Record
+	// range keys are nice but we don't necessarily need one to uniquely identify a Dynamo Record
 	var rangeKey string
 	r := findAttributeByKeyType(out.Table.KeySchema, "RANGE")
 	rangeKey = r
