@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/rand"
 	"time"
@@ -9,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/satori/go.uuid"
 )
 
 func init() {
@@ -30,6 +30,12 @@ type puppy struct {
 }
 
 func main() {
+	tableName := flag.String("table-name", "", "Table Name is the name of the table to seed with data")
+	flag.Parse()
+	if tableName == nil {
+		panic("no table name given")
+	}
+
 	var (
 		N                = 100
 		p                *puppy
