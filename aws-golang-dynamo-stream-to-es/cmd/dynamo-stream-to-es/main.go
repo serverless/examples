@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/olivere/elastic"
+	"github.com/serverless/examples/aws-golang-dynamo-stream-to-es/dstream"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -13,8 +14,11 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
-	"github.com/beeceej/sls-go-examples/dynamo-stream-to-es/pkg"
 )
+
+var awsSession = session.Must(session.NewSession(&aws.Config{}))
+var dynamoSvc = dynamodb.New(awsSession)
+var esclient = new(dstream.Elasticsearch)
 
 func handler(e events.DynamoDBEvent) error {
 	var item map[string]events.DynamoDBAttributeValue
@@ -25,8 +29,6 @@ func handler(e events.DynamoDBEvent) error {
 			fallthrough
 		case "MODIFY":
 			tableName := strings.Split(v.EventSourceArn, "/")[1]
-			session := session.Must(session.NewSession(&aws.Config{}))
-			var dynamoSvc = dynamodb.New(session)
 			item = v.Change.NewImage
 			details, err := (&dstream.DynamoDetails{
 				DynamoDBAPI: dynamoSvc,
@@ -34,7 +36,7 @@ func handler(e events.DynamoDBEvent) error {
 			if err != nil {
 				return err
 			}
-			esclient := new(dstream.Elasticsearch)
+
 			svc, err := elastic.NewClient(
 				elastic.SetSniff(false),
 				elastic.SetURL(fmt.Sprintf("https://%s", os.Getenv("ELASTIC_SEARCH_URL"))),

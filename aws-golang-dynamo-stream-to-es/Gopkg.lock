@@ -9,8 +9,8 @@
     "lambda/messages",
     "lambdacontext"
   ]
-  revision = "e630af386f8aad6ec9fc899b951cf62d37cfe56f"
-  version = "v1.4.0"
+  revision = "2d482ef09017ae953b1e8d5a6ddac5b696663a3c"
+  version = "v1.6.0"
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
@@ -32,6 +32,7 @@
     "aws/request",
     "aws/session",
     "aws/signer/v4",
+    "internal/ini",
     "internal/sdkio",
     "internal/sdkrand",
     "internal/sdkuri",
@@ -48,23 +49,8 @@
     "service/dynamodb/dynamodbiface",
     "service/sts"
   ]
-  revision = "2d51b5082ad9f540e68761c27522b0677b9a75c0"
-  version = "v1.15.13"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/fnproject/fdk-go"
-  packages = [
-    ".",
-    "utils"
-  ]
-  revision = "1eb29530716f262bad5b83eb9a5b3f7483636949"
-
-[[projects]]
-  name = "github.com/go-ini/ini"
-  packages = ["."]
-  revision = "358ee7663966325963d4e8b2e1fbd570c5195153"
-  version = "v1.38.1"
+  revision = "97a47d14fbb0744966b484d5b089cdc9814b493b"
+  version = "v1.15.67"
 
 [[projects]]
   name = "github.com/jmespath/go-jmespath"
@@ -80,7 +66,7 @@
     "jlexer",
     "jwriter"
   ]
-  revision = "03f2033d19d5860aef995fe360ac7d395cd8ce65"
+  revision = "60711f1a8329503b04e1c88535f419d0bb440bff"
 
 [[projects]]
   name = "github.com/olivere/elastic"
@@ -89,8 +75,8 @@
     "config",
     "uritemplates"
   ]
-  revision = "e3492b022a109ac0e52a6d42d5bfb835050fa7f4"
-  version = "v6.1.27"
+  revision = "425e5369a8f054f4f447f7c8ee1bf605f48425ab"
+  version = "v6.2.11"
 
 [[projects]]
   name = "github.com/pkg/errors"
@@ -98,15 +84,9 @@
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
-[[projects]]
-  name = "github.com/satori/go.uuid"
-  packages = ["."]
-  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
-  version = "v1.2.0"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "75c9958bbea9acbdea0a8c8276a4b998ae7c39bc81143deb8f887e078a036060"
+  inputs-digest = "e6e7522fd73485572d7ef1fa60959a3d6f408ee85663bc5ec89c556002f53692"
   solver-name = "gps-cdcl"
   solver-version = 1

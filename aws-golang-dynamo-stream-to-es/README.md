@@ -1,46 +1,42 @@
-# Dynamo Stream To ES
-## Disclaimer, deploying cloud information costs $$, elasticsearch is not part of the free tier as such, deploy with caution.
+# DynamoDB Stream To ES
+## Deploying cloud information costs $$, Elasticsearch is not part of the free tier, as such please deploy with caution.
 
 This serverless project acts as an example for:
-* Creating a Dynamo DB Table via Cloudformation
-* Creating a 1 node Elasticserach Cluster via Cloudformation
-* Creating a generic Go function which maps the keyspace from Dynamo DB to ElasticSearch
+* Creating a DynamoDB Table via Cloudformation
+* Creating a single-node Elasticsearch Cluster via Cloudformation
+* Creating a generic Go function which maps the keyspace from DynamoDB to ElasticSearch
 
-to deploy the example you must first have npm installed on your system [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+As with all serverless projects, you must have severless installed! Listed here is a good way to get set up! 
+[https://github.com/serverless/serverless#quick-start](https://github.com/serverless/serverless#quick-start)
 
-cd into `sls-go-examples/dynamo-stream-to-es`
+Once you have serverless installed on your system run these commands to get the project set up.
+```
+cd sls-go-examples/dynamo-stream-to-es
+npm install
+make
+./node_modules/serverless/bin/serverless deploy 
+# or if you've installed serverless globally 
+#sls deploy
+```
 
-run npm install which will install the serverless CLI. Once you have serverless on your machine you may run `./node_modules/serverless/bin/serverless deploy` This will deploy the serverless project to your AWS Account. This example will very likely take ~15min to deploy (because of elasticsearch).
+This particular example will take ~15 minutes to deploy (Elasticearch takes some time).
+Grab a coffee and sit back! <sup>1</sup>
 
-In production the deployment of data stores (dynamodb, rds variants, elasticsearch) should probably not be tied to an application deployment.
-
-
-## To build for AWS Lambda (linux binaries) and deploy:
-
-`$ make`
-
-This project depends on the `dep` tool, if you don't have it you may install it [here](https://github.com/golang/dep)
-
-`$ npm install`
-
-`$ make`
-
-`$ node_modules/serverless/bin/serverless deploy`
+<sup>1</sup>
+In production the deployment of persistent data stores (dynamodb, rds variants, elasticsearch) 
+should be decoupled from application code
 
 ## Seeding Your Dynamo Table with Data
+```
+go run cmd/seed-dynamo/main.go --table-name="$YOUR_TABLE_NAME
+```
 
-make sure `cmd/seed-dynamo/main.go` refers to the table you've created, then run
-
-`$ go run cmd/seed-dynamo/main.go`
-
-Once data is written to Dynamo, your lambda function will trigger off of the Dynamo Stream events, and data should begin flowing into elastic search.
+Once data is written to Dynamo, your lambda function will trigger the DynamoDB Stream events and data should begin to flow into Elasticsearch.
 
 You should be able to create a Kibana index by navigating to your Kibana endpoint (found in the AWS Console) and clicking on the management tab. You should see something like this:
 
 ![kibana](docs/kibana.png)
 
-Follow the instructiosn to create the index, and you should now be able to query your data like so:
+Follow the instructions to create the index, and you should now be able to query your data like so:
 
 ![query](docs/query.png)
-
-If you have any questions/issues/improvements, please open up a PR or leave an Issue, I'd be more than happy to help!

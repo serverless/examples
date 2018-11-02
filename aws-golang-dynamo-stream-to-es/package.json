@@ -1,7 +1,7 @@
 {
-  "name": "dynamo-stream-to-es",
+  "name": "aws-dynamo-stream-to-es",
   "version": "1.0.0",
-  "description": "This example deploys a Dynamo DB Table, an ElasticSearch Node, and a lambda triggered off of a Dynamo Stream  which updates an elasticsearch index with the data from the Dynamo Table",
+  "description": "This example deploys a Dynamo DB Table, an ElasticSearch Node, and a lambda triggered off of a Dynamo Stream which updates an elasticsearch index with the data from the Dynamo Table",
   "main": "",
   "keywords": ["Go","serverless","aws","dynamodb","elasticsearch"],
   "author": "",
