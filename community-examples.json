@@ -407,5 +407,15 @@
     "name": "Serverless CloudWatch Proxy",
     "description": "Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identying alerts and sending notifications via Slack/Email",
     "githubUrl": "https://github.com/abbasdgr8/cloudwatch-proxy"
+  },
+  {
+    "name": "Serverless-side rendering with Vue.js and Nuxt.js",
+    "description": "Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture.",
+    "githubUrl": "https://github.com/adnanrahic/serverless-side-rendering-vue-nuxt"
+  },
+  {
+    "name": "aws-mfa-enforce",
+    "description": "Serverless function to automate enforcement of Multi-Factor Authentication (MFA) to all AWS IAM users with access to AWS Management Console.",
+    "githubUrl": "https://github.com/Chan9390/aws-mfa-enforce"
   }
 ]

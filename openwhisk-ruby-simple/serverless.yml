@@ -1,0 +1,12 @@
+service: php-service
+
+provider:
+  name: openwhisk
+  runtime: ruby
+
+functions:
+  greeting:
+    handler: handler.main
+
+plugins:
+  - serverless-openwhisk
