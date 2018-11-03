@@ -1,0 +1,24 @@
+service: python-simple-http-endpoint
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+provider:
+  name: google
+  runtime: python3.7
+  region: us-central1
+  project: sebito91
+  credentials: ~/.gcloud/keyfile.json # path must be absolute
+
+functions:
+  currentTime:
+    handler: handler.endpoint
+    events:
+      - http:
+          path: ping
+          method: get
