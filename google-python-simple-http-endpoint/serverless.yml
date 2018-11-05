@@ -10,10 +10,9 @@ package:
 
 provider:
   name: google
-  runtime: python3.7
-  region: us-central1
+  runtime: python37
   project: sebito91
-  credentials: ~/.gcloud/keyfile.json # path must be absolute
+  credentials: ~/.gcloud/serverless_keyfile.json # path must be absolute
 
 functions:
   currentTime:
