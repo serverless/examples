@@ -65,6 +65,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Ses Receive Email Body](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body) <br/> Receive an email, store in S3 bucket, trigger a lambda function. | nodeJS |
 | [Aws Node Ses Receive Email Header](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header) <br/> Receive an email, trigger a lambda function to process header. | nodeJS |
 | [Aws Serve Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | nodeJS |
+| [Aws Simpledb Example](https://github.com/serverless/examples/tree/master/aws-node-simpledb) <br/> Serverless REST API with Simpledb | nodeJS |
 | [Aws Single Page App Via Cloudfront](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront) <br/> Demonstrating how to deploy a Single Page Application with Serverless | nodeJS |
 | [Serverless Single Page App Plugin](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront/serverless-single-page-app-plugin) <br/> A plugin to simplify deploying Single Page Application using S3 and CloudFront | nodeJS |
 | [Aws Node Stripe Integration](https://github.com/serverless/examples/tree/master/aws-node-stripe-integration) <br/> This example for Stripe integration using AWS Lambda and API Gateway. | nodeJS |
