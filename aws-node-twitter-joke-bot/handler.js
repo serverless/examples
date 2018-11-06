@@ -6,6 +6,7 @@ const { tweetJoke } = require('./helpers/twitter');
 module.exports.bot = (event, context, callback) => {
   // Call jokes api to get a joke
   getDadJoke()
+    // eslint-disable-next-line consistent-return
     .then((json) => {
       // Check for a successful response
       // Bail if not!
@@ -22,15 +23,16 @@ module.exports.bot = (event, context, callback) => {
       tweetJoke(joke)
         .then((response) => {
           console.log(JSON.stringify(response));
-          return callback(null, { statusCode: json.status, body: JSON.stringify({ message: response }) })
+          // eslint-disable-next-line max-len
+          return callback(null, { statusCode: json.status, body: JSON.stringify({ message: response }) });
         })
         .catch((error) => {
           console.error(error);
-          return callback(null, { statusCode: 500, body: JSON.stringify({ error }) })
+          return callback(null, { statusCode: 500, body: JSON.stringify({ error }) });
         });
     })
     .catch((error) => {
       console.error(error);
-      return callback(null, { statusCode: 500, body: JSON.stringify({ error }) })
+      return callback(null, { statusCode: 500, body: JSON.stringify({ error }) });
     });
 };
