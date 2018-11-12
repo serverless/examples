@@ -1,4 +1,4 @@
-service: php-service
+service: ruby-service
 
 provider:
   name: openwhisk
