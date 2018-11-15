@@ -1,0 +1,7 @@
+{
+  "name": "aws-golang-stream-kinesis-to-elasticsearch",
+  "version": "0.0.1",
+  "description": "Pull data from AWS Kinesis streams and forward to elasticsearch",
+  "author": "Sebastian Borza <sebastian@serverless.com>",
+  "license": "MIT"
+}
