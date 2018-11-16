@@ -15,10 +15,10 @@ type Elastic struct {
 }
 
 // NewClient instantiates a connection to elasticsearch for direct push
-func NewClient(host string) (*Elastic, error) {
+func NewClient(host, schema string) (*Elastic, error) {
 	client, err := elastic.NewClient(
 		elastic.SetURL(host),
-		elastic.SetScheme("http"),
+		elastic.SetScheme(schema),
 		elastic.SetSniff(false),
 		elastic.SetErrorLog(log.New(os.Stderr, "ELASTIC ", log.LstdFlags)),
 		elastic.SetInfoLog(log.New(os.Stdout, "", log.LstdFlags)),
