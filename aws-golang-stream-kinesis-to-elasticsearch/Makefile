@@ -4,7 +4,7 @@ build:
 
 .PHONY: clean
 clean:
-	rm -rf ./bin ./vendor Gopkg.lock
+	rm -rf ./bin ./vendor
 
 .PHONY: deploy
 deploy: clean build
