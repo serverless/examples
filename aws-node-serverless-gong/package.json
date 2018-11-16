@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "~2",
+    "slack-node": "0.1.8"
+  }
+}
