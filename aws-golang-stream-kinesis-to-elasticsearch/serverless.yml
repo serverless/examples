@@ -1,4 +1,4 @@
-service: apm-agent-test
+service: aws-golang-kinesis-to-elasticsearch
 
 frameworkVersion: ">=1.28.0 <2.0.0"
 
@@ -7,21 +7,110 @@ provider:
   runtime: go1.x
 
 functions:
-  hello:
-    handler: bin/hello
+  streamer:
+    name: aws-golang-kinesis-stream-to-elasticsearch
+    handler: bin/stream
+    timeout: 10
     events:
-      - http:
-          path: hello
-          method: get
-  world:
-    handler: bin/world
-    events:
-      - http:
-          path: world
-          method: get
+      - stream:
+          type: kinesis
+          batchSize: 100
+          startingPosition: TRIM_HORIZON
+          enabled: true
+          arn:
+            Fn::GetAtt:
+              - STREAMNAMEHERE
+              - Arn
 
 package:
  exclude:
    - ./**
  include:
    - ./bin/**
+
+# lifted from nodejs community example -- https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics
+resources:
+  Resources:
+    TransactionsStream:
+      Type: AWS::Kinesis::Stream
+      Properties:
+        Name: Transactions
+        ShardCount: 1
+    PositiveTransactionsStream:
+      Type: AWS::Kinesis::Stream
+      Properties:
+        Name: PositiveTransactions
+        ShardCount: 1
+    NegativeTransactionsStream:
+      Type: AWS::Kinesis::Stream
+      Properties:
+        Name: NegativeTransactions
+        ShardCount: 1
+    KinesisAnalyticsIAMRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Sid: 'KinesisAnalyticsAssumeRole'
+              Effect: Allow
+              Principal:
+                Service: kinesisanalytics.amazonaws.com
+              Action: 'sts:AssumeRole'
+        Policies:
+          - PolicyName: kinesis-stream-fanout-kinesis-analytics
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: "Allow"
+                  Action:
+                    - "kinesis:DescribeStream"
+                    - "kinesis:GetShardIterator"
+                    - "kinesis:GetRecords"
+                  Resource:
+                    'Fn::GetAtt':
+                      - TransactionsStream
+                      - Arn
+                - Effect: "Allow"
+                  Action:
+                    - "kinesis:DescribeStream"
+                    - "kinesis:PutRecord"
+                    - "kinesis:PutRecords"
+                  Resource:
+                    'Fn::GetAtt':
+                      - PositiveTransactionsStream
+                      - Arn
+                - Effect: "Allow"
+                  Action:
+                    - "kinesis:DescribeStream"
+                    - "kinesis:PutRecord"
+                    - "kinesis:PutRecords"
+                  Resource:
+                    'Fn::GetAtt':
+                      - NegativeTransactionsStream
+                      - Arn
+  Outputs:
+    TransactionsStreamARN:
+      Description: Transactions Kinesis Stream ARN
+      Value:
+        'Fn::GetAtt':
+          - TransactionsStream
+          - Arn
+    PositiveTransactionsStreamARN:
+      Description: Positive Transactions Kinesis Stream ARN
+      Value:
+        'Fn::GetAtt':
+          - PositiveTransactionsStream
+          - Arn
+    NegativeTransactionsStreamARN:
+      Description: Negative Transactions Kinesis Stream ARN
+      Value:
+        'Fn::GetAtt':
+          - NegativeTransactionsStream
+          - Arn
+    KinesisAnalyticsIAMRoleARN:
+      Description: IAM Role ARN for Kinesis Analytics
+      Value:
+        'Fn::GetAtt':
+          - KinesisAnalyticsIAMRole
+          - Arn

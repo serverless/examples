@@ -12,7 +12,7 @@ import (
 const host = "http://es.signalmalt.com"
 
 func handler(ctx context.Context, event events.KinesisEvent) error {
-	client, err := elastic.NewClient()
+	client, err := elastic.NewClient(host)
 	if err != nil {
 		return err
 	}

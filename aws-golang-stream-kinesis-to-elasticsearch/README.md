@@ -1,6 +1,6 @@
 <!--
 title: TODO
-description: This example demonstrates how to setup a simple HTTP endpoint in Go.
+description: This example demonstrates how to stream kinesis information into elasticsearch in a golang runtime 
 layout: Doc
 framework: v1
 platform: AWS
