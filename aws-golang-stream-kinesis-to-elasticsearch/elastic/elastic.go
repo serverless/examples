@@ -14,10 +14,8 @@ type Elastic struct {
 	Client *elastic.Client
 }
 
-const host = "http://es.signalmalt.com"
-
 // NewClient instantiates a connection to elasticsearch for direct push
-func NewClient() (*Elastic, error) {
+func NewClient(host string) (*Elastic, error) {
 	client, err := elastic.NewClient(
 		elastic.SetURL(host),
 		elastic.SetScheme("http"),

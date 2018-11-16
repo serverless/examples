@@ -5,8 +5,11 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+
 	elastic "github.com/serverless/examples/aws-golang-stream-kinesis-to-elasticsearch/elastic"
 )
+
+const host = "http://es.signalmalt.com"
 
 func handler(ctx context.Context, event events.KinesisEvent) error {
 	client, err := elastic.NewClient()
