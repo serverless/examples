@@ -43,6 +43,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | Example | Runtime  |
 |:--------------------------- |:-----|
 | [Aws Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
+| [Aws Golang Stream Kinesis To Elasticsearch](https://github.com/serverless/examples/tree/master/aws-golang-stream-kinesis-to-elasticsearch) <br/> Pull data from AWS Kinesis streams and forward to elasticsearch | golang |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
 | [Aws Node Auth0 Cognito Custom Authorizers Api](https://github.com/serverless/examples/tree/master/aws-node-auth0-cognito-custom-authorizers-api) <br/> Authorize your API Gateway with either Auth0 or Cognito RS256 tokens. | nodeJS |
 | [Aws Auth0 Api Gateway](https://github.com/serverless/examples/tree/master/aws-node-auth0-custom-authorizers-api) <br/> Demonstration of protecting API gateway endpoints with auth0 | nodeJS |
