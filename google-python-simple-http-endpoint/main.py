@@ -24,7 +24,7 @@ def endpoint(request):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": body
     }
 
-    return response
+    return json.dumps(response, indent=4)
