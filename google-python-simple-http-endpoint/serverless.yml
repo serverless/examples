@@ -21,6 +21,4 @@ functions:
   currentTime:
     handler: endpoint
     events:
-      - http:
-          path: ping
-          method: get
+      - http: path
