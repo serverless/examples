@@ -1,0 +1,75 @@
+
+service: ${file(env.configs.yml):feature}
+
+frameworkVersion: ">=1.6.0 <2.1.0"
+
+provider:
+  name: aws
+  stackName: ${self:custom.featurealias}
+  runtime: dotnetcore2.1
+  stage: ${file(env.configs.yml):stage}
+  region: ${file(env.configs.yml):region}
+  accountId: ${file(env.configs.yml):accountId}
+  environment:
+    DYNAMODB_TABLE:  ${file(env.configs.yml):dynamoTable}
+
+    
+  
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - dynamodb:Query
+    - dynamodb:Scan
+    - dynamodb:GetItem
+    - dynamodb:PutItem
+    - dynamodb:UpdateItem
+    - dynamodb:DeleteItem
+    Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+  
+custom:
+  featurealias:  ${file(env.configs.yml):feature}-${file(env.configs.yml):environment}
+
+functions:
+  create:
+    handler: HandsOnLambda.Functions::HandsOnLambda.Functions.Todos.CreateFunction::Handle
+    events:
+    - http:
+        path: todos
+        method: post
+        cors: true
+
+  get:
+    handler: HandsOnLambda.Functions::HandsOnLambda.Functions.Todos.GetFunction::Handle
+    events:
+    - http:
+        path: todos/{id}
+        method: get
+        cors: true
+
+  update:
+    handler:  HandsOnLambda.Functions::HandsOnLambda.Functions.Todos.UpdateFunction::Handle
+    events:
+    - http:
+        path: todos/{id}
+        method: put
+        cors: true
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+        -
+          AttributeName: id
+          AttributeType: S
+        KeySchema:
+        -
+          AttributeName: id
+          KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        
