@@ -13,7 +13,8 @@ provider:
   environment:
     DYNAMODB_TABLE:  ${file(env.configs.yml):dynamoTable}
 
-    
+package:
+  artifact: bin/release/netcoreapp2.1/deploy-package.zip
   
   iamRoleStatements:
   - Effect: Allow
@@ -31,7 +32,7 @@ custom:
 
 functions:
   create:
-    handler: HandsOnLambda.Functions::HandsOnLambda.Functions.Todos.CreateFunction::Handle
+    handler: TodoLambda.Functions::TodoLambda.Functions.Todos.CreateFunction::Handle
     events:
     - http:
         path: todos
@@ -39,7 +40,7 @@ functions:
         cors: true
 
   get:
-    handler: HandsOnLambda.Functions::HandsOnLambda.Functions.Todos.GetFunction::Handle
+    handler: TodoLambda.Functions::TodoLambda.Functions.Todos.GetFunction::Handle
     events:
     - http:
         path: todos/{id}
@@ -47,7 +48,7 @@ functions:
         cors: true
 
   update:
-    handler:  HandsOnLambda.Functions::HandsOnLambda.Functions.Todos.UpdateFunction::Handle
+    handler:  TodoLambda.Functions::TodoLambda.Functions.Todos.UpdateFunction::Handle
     events:
     - http:
         path: todos/{id}

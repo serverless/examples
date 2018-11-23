@@ -17,13 +17,13 @@ namespace TodoLambda.Functions.Todos
     {
     }
 
-    protected internal UpdateFunction(IServiceProvider serviceProvider)
+    public UpdateFunction(IServiceProvider serviceProvider)
     {
       _serviceProvider = serviceProvider;
     }
 
     [LambdaSerializer(typeof(JsonSerializer))]
-    public async Task<Item> Handle(UpdateItemRequest request)
+    public async Task<Item> Run(UpdateItemRequest request)
     {
       var mediator = _serviceProvider.GetService<IMediator>();
       return await mediator.Send(request);

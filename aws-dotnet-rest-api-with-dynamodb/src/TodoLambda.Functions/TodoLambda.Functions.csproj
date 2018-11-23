@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="5.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
     <PackageReference Include="Amazon.Lambda.Logging.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.4.0" />
@@ -23,6 +22,11 @@
   </ItemGroup>
 
 
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\TodoLambda.Domain\TodoLambda.Domain.csproj" />
   </ItemGroup>
