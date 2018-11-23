@@ -9,15 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetServerless.Functions.Lambda
 {
-  public class GetFunction
+  public class GetItemFunction
   {
     private readonly IServiceProvider _serviceProvider;
 
-    public GetFunction() : this(Startup.BuildContainer())
+    public GetItemFunction() : this(Startup.BuildContainer())
     {
     }
 
-    public GetFunction(IServiceProvider serviceProvider)
+    public GetItemFunction(IServiceProvider serviceProvider)
     {
       _serviceProvider = serviceProvider;
     }

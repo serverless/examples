@@ -9,21 +9,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetServerless.Functions.Lambda
 {
-  public class UpdateFunction
+  public class CreateItemFunction
   {
     private readonly IServiceProvider _serviceProvider;
 
-    public UpdateFunction() : this(Startup.BuildContainer())
+    public CreateItemFunction() : this(Startup.BuildContainer())
     {
     }
 
-    public UpdateFunction(IServiceProvider serviceProvider)
+    public CreateItemFunction(IServiceProvider serviceProvider)
     {
       _serviceProvider = serviceProvider;
     }
 
     [LambdaSerializer(typeof(JsonSerializer))]
-    public async Task<Item> Run(UpdateItemRequest request)
+    public async Task<Item> Run(CreateItemRequest request)
     {
       var mediator = _serviceProvider.GetService<IMediator>();
       return await mediator.Send(request);

@@ -15,9 +15,9 @@ using Xunit;
 
 namespace DotNetServerless.Functions.Tests.Lambda
 {
-  public class CreateFunctionTests
+  public class CreateItemFunctionTests
   {
-    public CreateFunctionTests()
+    public CreateItemFunctionTests()
     {
       _mockRepository = new Mock<IItemRepository>();
       _mockRepository.Setup(_ => _.Save(It.IsAny<Item>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Document());
@@ -32,10 +32,10 @@ namespace DotNetServerless.Functions.Tests.Lambda
         .AddTransient(_ => new DynamoDbConfiguration())
         .AddTransient(_ => _mockRepository.Object);
 
-      _sut = new CreateFunction(services.BuildServiceProvider());
+      _sut = new CreateItemFunction(services.BuildServiceProvider());
     }
 
-    private readonly CreateFunction _sut;
+    private readonly CreateItemFunction _sut;
     private readonly Mock<IItemRepository> _mockRepository;
 
     [Fact]
