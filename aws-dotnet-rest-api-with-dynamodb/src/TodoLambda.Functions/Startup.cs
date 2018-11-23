@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TodoLambda.Domain.Infrastructure;
@@ -27,6 +28,7 @@ namespace TodoLambda.Functions
       var services = new ServiceCollection();
 
       services
+        .AddMediatR()
         .AddTransient(typeof(IAwsClientFactory<>), typeof(AwsClientFactory<>))
         .AddTransient<IItemRepository, ItemDynamoRepository>()
         .BindAndConfigure(configurationRoot.GetSection("DYNAMODB_TABLE"), new DynamoDbConfiguration());

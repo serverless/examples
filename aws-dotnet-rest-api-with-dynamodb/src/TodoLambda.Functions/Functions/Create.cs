@@ -9,25 +9,23 @@ using TodoLambda.Domain.Requests;
 
 namespace TodoLambda.Functions.Todos
 {
-  public class GetFunction
+  public class CreateFunction
   {
     private readonly IServiceProvider _serviceProvider;
 
-    public GetFunction() : this(Startup.BuildContainer())
+    public CreateFunction() : this(Startup.BuildContainer())
     {
     }
 
-    protected internal GetFunction(IServiceProvider serviceProvider)
+    public CreateFunction(IServiceProvider serviceProvider)
     {
       _serviceProvider = serviceProvider;
     }
 
     [LambdaSerializer(typeof(JsonSerializer))]
-    public async Task<Item> Handle(Guid id)
+    public async Task<Item> Run(CreateItemRequest request)
     {
-      var request = new GetItemRequest {Id = id};
       var mediator = _serviceProvider.GetService<IMediator>();
-
       return await mediator.Send(request);
     }
   }
