@@ -1,6 +1,6 @@
 <!--
 title: Typescript HTTP Endpoint
-description: This example demonstrates how to setup a simple Typescript HTTP endpoint on GCP
+description: 'This example demonstrates how to setup a simple Typescript HTTP endpoint on GCP'
 layout: Doc
 framework: v1
 platform: 'Google Cloud'
