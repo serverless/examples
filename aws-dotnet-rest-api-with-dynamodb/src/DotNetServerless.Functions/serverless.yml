@@ -32,7 +32,7 @@ custom:
 
 functions:
   create:
-    handler: TodoLambda.Functions::TodoLambda.Functions.Todos.CreateFunction::Handle
+    handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.CreateItemFunction::Run
     events:
     - http:
         path: todos
@@ -40,7 +40,7 @@ functions:
         cors: true
 
   get:
-    handler: TodoLambda.Functions::TodoLambda.Functions.Todos.GetFunction::Handle
+    handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.GetItemFunction::Run
     events:
     - http:
         path: todos/{id}
@@ -48,7 +48,7 @@ functions:
         cors: true
 
   update:
-    handler:  TodoLambda.Functions::TodoLambda.Functions.Todos.UpdateFunction::Handle
+    handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.UpdateItemFunction::Run
     events:
     - http:
         path: todos/{id}
