@@ -1,12 +1,12 @@
 <!--
 title: 'GCF Simple HTTP Endpoint example in Python'
-description: 'This example demonstrates how to setup a simple python HTTP GET endpoint on GCP Cloud Functions. When you ping the endpoint we've set up you'll see the time returned for the given request type.'
+description: This example demonstrates how to setup a simple python HTTP GET endpoint on GCP Cloud Functions. When you ping the endpoint we've set up you'll see the time returned for the given request type.
 layout: Doc
 framework: v1
 platform: 'Google Cloud'
 language: Python
 authorLink: 'https://github.com/sebito91'
-authorName: 'Sebastian Borza
+authorName: 'Sebastian Borza'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/3159454?v=4&s=140'
 -->
 
