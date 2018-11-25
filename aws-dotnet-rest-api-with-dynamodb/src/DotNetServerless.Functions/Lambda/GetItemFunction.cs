@@ -2,12 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using DotNetServerless.Domain.Entity;
 using DotNetServerless.Domain.Requests;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
 
 namespace DotNetServerless.Functions.Lambda
 {
@@ -24,7 +22,7 @@ namespace DotNetServerless.Functions.Lambda
       _serviceProvider = serviceProvider;
     }
 
-    [LambdaSerializer(typeof(JsonSerializer))]
+    [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
     public async Task<APIGatewayProxyResponse> Run(APIGatewayProxyRequest request)
     {
       var requestModel = JsonConvert.DeserializeObject<GetItemRequest>(request.Body);
