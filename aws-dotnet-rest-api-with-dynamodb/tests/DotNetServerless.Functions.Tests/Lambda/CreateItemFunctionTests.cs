@@ -12,6 +12,7 @@ using DotNetServerless.Domain.Requests;
 using DotNetServerless.Functions.Lambda;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -26,17 +27,12 @@ namespace DotNetServerless.Functions.Tests.Lambda
       _mockRepository = new Mock<IItemRepository>();
       _mockRepository.Setup(_ => _.Save(It.IsAny<Item>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
-      var services = new ServiceCollection();
+      var serviceCollection = Startup.BuildContainer();
 
-      services
-        .AddMediatR()
-        .AddTransient<IAwsClientFactory<AmazonDynamoDBClient>>(_ =>
-          new AwsClientFactory<AmazonDynamoDBClient>(new AwsBasicConfiguration
-            {AccessKey = "Test", SecretKey = "Test"}))
-        .AddTransient(_ => new DynamoDbConfiguration())
-        .AddTransient(_ => _mockRepository.Object);
+      serviceCollection.Replace(new ServiceDescriptor(typeof(IItemRepository), _ => _mockRepository.Object,
+        ServiceLifetime.Transient));
 
-      _sut = new CreateItemFunction(services.BuildServiceProvider());
+      _sut = new CreateItemFunction(serviceCollection.BuildServiceProvider());
     }
 
     private readonly CreateItemFunction _sut;
@@ -45,7 +41,7 @@ namespace DotNetServerless.Functions.Tests.Lambda
     [Fact]
     public async Task run_should_trigger_mediator_handler_and_repository()
     {
-      await _sut.Run(new APIGatewayProxyRequest{ Body = JsonConvert.SerializeObject(new CreateItemRequest())});
+      await _sut.Run(new APIGatewayProxyRequest {Body = JsonConvert.SerializeObject(new CreateItemRequest())});
       _mockRepository.Verify(_ => _.Save(It.IsAny<Item>(), It.IsAny<CancellationToken>()), Times.Once);
     }
   }

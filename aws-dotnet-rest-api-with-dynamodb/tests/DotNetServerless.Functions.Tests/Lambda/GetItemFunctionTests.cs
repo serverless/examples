@@ -13,6 +13,7 @@ using DotNetServerless.Domain.Requests;
 using DotNetServerless.Functions.Lambda;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 using Newtonsoft.Json;
 using Xunit;
@@ -26,17 +27,12 @@ namespace DotNetServerless.Functions.Tests.Lambda
       _mockRepository = new Mock<IItemRepository>();
       _mockRepository.Setup(_ => _.GetById<Item>(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(new List<Item>{ new Item{ Id = Guid.NewGuid()}});
 
-      var services = new ServiceCollection();
+      var serviceCollection = Startup.BuildContainer();
 
-      services
-        .AddMediatR()
-        .AddTransient<IAwsClientFactory<AmazonDynamoDBClient>>(_ =>
-          new AwsClientFactory<AmazonDynamoDBClient>(new AwsBasicConfiguration
-            {AccessKey = "Test", SecretKey = "Test"}))
-        .AddTransient(_ => new DynamoDbConfiguration())
-        .AddTransient(_ => _mockRepository.Object);
+      serviceCollection.Replace(new ServiceDescriptor(typeof(IItemRepository), _ => _mockRepository.Object,
+        ServiceLifetime.Transient));
 
-      _sut = new GetItemFunction(services.BuildServiceProvider());
+      _sut = new GetItemFunction(serviceCollection.BuildServiceProvider());
     }
 
     private readonly GetItemFunction _sut;

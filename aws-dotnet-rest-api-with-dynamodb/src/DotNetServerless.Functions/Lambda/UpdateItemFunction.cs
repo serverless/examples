@@ -13,7 +13,9 @@ namespace DotNetServerless.Functions.Lambda
   {
     private readonly IServiceProvider _serviceProvider;
 
-    public UpdateItemFunction() : this(Startup.BuildContainer())
+    public UpdateItemFunction() : this(Startup
+      .BuildContainer()
+    .BuildServiceProvider())
     {
     }
 

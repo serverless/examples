@@ -12,7 +12,7 @@ namespace DotNetServerless.Functions
 {
   public class Startup
   {
-    public static IServiceProvider BuildContainer()
+    public static IServiceCollection BuildContainer()
     {
       var configuration = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -23,7 +23,7 @@ namespace DotNetServerless.Functions
     }
 
 
-    private static IServiceProvider ConfigureServices(IConfigurationRoot configurationRoot)
+    private static IServiceCollection ConfigureServices(IConfigurationRoot configurationRoot)
     {
       var services = new ServiceCollection();
 
@@ -34,7 +34,7 @@ namespace DotNetServerless.Functions
         .BindAndConfigure(configurationRoot.GetSection("DynamoDbConfiguration"), new DynamoDbConfiguration())
         .BindAndConfigure(configurationRoot.GetSection("AwsBasicConfiguration"), new AwsBasicConfiguration());
 
-      return services.BuildServiceProvider();
+      return services;
     }
   }
 }
