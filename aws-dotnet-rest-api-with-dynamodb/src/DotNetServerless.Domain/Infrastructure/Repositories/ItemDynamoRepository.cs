@@ -2,59 +2,54 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
-using Amazon.DynamoDBv2.Model;
 using DotNetServerless.Domain.Entity;
 using DotNetServerless.Domain.Infrastructure.Configs;
-using Newtonsoft.Json;
 
 namespace DotNetServerless.Domain.Infrastructure.Repositories
 {
   public class ItemDynamoRepository : IItemRepository
   {
-    private readonly Table _table;
+    private readonly AmazonDynamoDBClient _client;
+    private readonly DynamoDBOperationConfig _configuration;
 
     public ItemDynamoRepository(DynamoDbConfiguration configuration,
       IAwsClientFactory<AmazonDynamoDBClient> clientFactory)
     {
-      _table = Table.LoadTable(clientFactory.GetAwsClient(), configuration.TableName);
-    }
-
-    public async Task<Document> Save(Item item, CancellationToken cancellationToken)
-    {
-      var doc = Document.FromJson(JsonConvert.SerializeObject(item));
-      return await _table.PutItemAsync(doc, cancellationToken);
-    }
-
-    public async Task<T> GetById<T>(string id, CancellationToken cancellationToken)
-    {
-      var attributeValues = new List<AttributeValue>
+      _client = clientFactory.GetAwsClient();
+      _configuration = new DynamoDBOperationConfig
       {
-        new AttributeValue
-        {
-          N = id
-        }
+        OverrideTableName = configuration.TableName,
+        SkipVersionCheck = true
       };
+    }
 
-      var scanFilter = new ScanFilter();
-      scanFilter.AddCondition("Id", ScanOperator.Equal, attributeValues);
-
-      var search = _table.Scan(scanFilter);
-
-      var result = default(T);
-
-      while (!search.IsDone)
+    public async Task Save(Item item, CancellationToken cancellationToken)
+    {
+      using (var context = new DynamoDBContext(_client))
       {
-        var documents = await search.GetNextSetAsync(cancellationToken);
+        await context.SaveAsync(item, _configuration, cancellationToken);
+      }
+    }
 
-        foreach (var document in documents)
+    public async Task<IEnumerable<T>> GetById<T>(string id, CancellationToken cancellationToken)
+    {
+      var resultList = new List<T>();
+      using (var context = new DynamoDBContext(_client))
+      {
+
+        var scanCondition = new ScanCondition(nameof(Item.Id), ScanOperator.Equal, id);
+        var search = context.ScanAsync<T>(new[] { scanCondition }, _configuration);
+
+        while (!search.IsDone)
         {
-          var json = document.ToJson();
-          result = JsonConvert.DeserializeObject<T>(json);
+          var entities = await search.GetNextSetAsync(cancellationToken);
+          resultList.AddRange(entities);
         }
       }
 
-      return result;
+      return resultList;
     }
   }
 }

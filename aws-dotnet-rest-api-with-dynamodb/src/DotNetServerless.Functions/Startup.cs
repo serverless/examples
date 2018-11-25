@@ -31,7 +31,8 @@ namespace DotNetServerless.Functions
         .AddMediatR()
         .AddTransient(typeof(IAwsClientFactory<>), typeof(AwsClientFactory<>))
         .AddTransient<IItemRepository, ItemDynamoRepository>()
-        .BindAndConfigure(configurationRoot.GetSection("DYNAMODB_TABLE"), new DynamoDbConfiguration());
+        .BindAndConfigure(configurationRoot.GetSection("DynamoDbConfiguration"), new DynamoDbConfiguration())
+        .BindAndConfigure(configurationRoot.GetSection("AwsBasicConfiguration"), new AwsBasicConfiguration());
 
       return services.BuildServiceProvider();
     }

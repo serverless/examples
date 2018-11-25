@@ -1,5 +1,13 @@
 {
   "name": "samueleresca-test",
   "description": "",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "scripts": {
+    "build": "dotnet restore && dotnet lambda package --configuration release --framework netcoreapp2.1 --output-package bin/release/netcoreapp2.1/deploy-package.zip",
+    "tests": " dotnet test ../../tests/DotNetServerless.Functions.Tests/DotNetServerless.Functions.Tests.csproj",
+    "deploy": "npm run build && npm run tests && node_modules/.bin/serverless deploy --verbose"
+  },
+  "devDependencies": {
+    "serverless": "^1.33.2"
+  }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DotNetServerless.Domain.Entity;
@@ -20,7 +21,7 @@ namespace DotNetServerless.Domain.Handlers
     public async Task<Item> Handle(GetItemRequest request, CancellationToken cancellationToken)
     {
       var result = await _itemRepository.GetById<Item>(request.Id.ToString(), cancellationToken);
-      return result;
+      return result.FirstOrDefault();
     }
   }
 }
