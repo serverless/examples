@@ -11,21 +11,15 @@ provider:
   region: ${file(env.configs.yml):region}
   accountId: ${file(env.configs.yml):accountId}
   environment:
-    DYNAMODB_TABLE:  ${file(env.configs.yml):dynamoTable}
+    DynamoDbConfiguration__TableName: ${file(env.configs.yml):dynamoTable}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DynamoDbConfiguration__TableName}"
 
 package:
   artifact: bin/release/netcoreapp2.1/deploy-package.zip
-  
-  iamRoleStatements:
-  - Effect: Allow
-    Action:
-    - dynamodb:Query
-    - dynamodb:Scan
-    - dynamodb:GetItem
-    - dynamodb:PutItem
-    - dynamodb:UpdateItem
-    - dynamodb:DeleteItem
-    Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
   
 custom:
   featurealias:  ${file(env.configs.yml):feature}-${file(env.configs.yml):environment}
@@ -34,26 +28,26 @@ functions:
   create:
     handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.CreateItemFunction::Run
     events:
-    - http:
-        path: todos
-        method: post
-        cors: true
+      - http:
+          path: todos
+          method: post
+          cors: true
 
   get:
     handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.GetItemFunction::Run
     events:
-    - http:
-        path: todos/{id}
-        method: get
-        cors: true
+      - http:
+          path: todos/{id}
+          method: get
+          cors: true
 
   update:
     handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.UpdateItemFunction::Run
     events:
-    - http:
-        path: todos/{id}
-        method: put
-        cors: true
+      - http:
+          path: todos/{id}
+          method: put
+          cors: true
 
 resources:
   Resources:
@@ -62,15 +56,17 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-        -
-          AttributeName: id
-          AttributeType: S
+          - AttributeName: Code
+            AttributeType: S
+          - AttributeName: Id
+            AttributeType: S
         KeySchema:
-        -
-          AttributeName: id
-          KeyType: HASH
+          - AttributeName: Code
+            KeyType: HASH
+          - AttributeName: Id
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        TableName: ${self:provider.environment.DynamoDbConfiguration__TableName}
         

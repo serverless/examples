@@ -1,16 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
+using Amazon.Lambda.APIGatewayEvents;
 using DotNetServerless.Domain.Entity;
 using DotNetServerless.Domain.Infrastructure;
 using DotNetServerless.Domain.Infrastructure.Configs;
 using DotNetServerless.Domain.Infrastructure.Repositories;
+using DotNetServerless.Domain.Requests;
 using DotNetServerless.Functions.Lambda;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace DotNetServerless.Functions.Tests.Lambda
@@ -20,7 +24,7 @@ namespace DotNetServerless.Functions.Tests.Lambda
     public GetItemFunctionTests()
     {
       _mockRepository = new Mock<IItemRepository>();
-      _mockRepository.Setup(_ => _.Save(It.IsAny<Item>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Document());
+      _mockRepository.Setup(_ => _.GetById<Item>(It.IsAny<string>(), It.IsAny<CancellationToken>())).ReturnsAsync(new List<Item>{ new Item{ Id = Guid.NewGuid()}});
 
       var services = new ServiceCollection();
 
@@ -41,7 +45,7 @@ namespace DotNetServerless.Functions.Tests.Lambda
     [Fact]
     public async Task run_should_trigger_mediator_handler_and_repository()
     {
-      await _sut.Run(new Guid());
+      await _sut.Run(new APIGatewayProxyRequest{ Body = JsonConvert.SerializeObject(new GetItemRequest())});
       _mockRepository.Verify(_ => _.GetById<Item>(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
     }
   }

@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using Amazon.Lambda.Serialization.Json;
-using DotNetServerless.Domain.Entity;
 using DotNetServerless.Domain.Requests;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace DotNetServerless.Functions.Lambda
 {
@@ -22,11 +22,15 @@ namespace DotNetServerless.Functions.Lambda
       _serviceProvider = serviceProvider;
     }
 
-    [LambdaSerializer(typeof(JsonSerializer))]
-    public async Task<Item> Run(CreateItemRequest request)
+    [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+    public async Task<APIGatewayProxyResponse> Run(APIGatewayProxyRequest request)
     {
+      var requestModel = JsonConvert.DeserializeObject<CreateItemRequest>(request.Body);
       var mediator = _serviceProvider.GetService<IMediator>();
-      return await mediator.Send(request);
+      
+      var result = await mediator.Send(requestModel);
+
+      return new APIGatewayProxyResponse { StatusCode =  201,  Body = JsonConvert.SerializeObject(result)};
     }
   }
 }
