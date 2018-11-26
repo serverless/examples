@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
-using DotNetServerless.Domain.Entity;
-using DotNetServerless.Domain.Infrastructure.Repositories;
-using DotNetServerless.Domain.Requests;
+using DotNetServerless.Application.Entities;
+using DotNetServerless.Application.Infrastructure.Repositories;
+using DotNetServerless.Application.Requests;
 using MediatR;
 
-namespace DotNetServerless.Domain.Handlers
+namespace DotNetServerless.Application.Handlers
 {
   public class UpdateItemHandler : IRequestHandler<UpdateItemRequest, Item>
   {

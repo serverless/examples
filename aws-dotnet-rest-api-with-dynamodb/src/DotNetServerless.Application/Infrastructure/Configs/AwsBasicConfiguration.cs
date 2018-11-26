@@ -4,7 +4,7 @@ using Amazon;
 using Amazon.Runtime;
 using Newtonsoft.Json;
 
-namespace DotNetServerless.Domain.Infrastructure.Configs
+namespace DotNetServerless.Application.Infrastructure.Configs
 {
   public interface IAwsBasicConfiguration
   {

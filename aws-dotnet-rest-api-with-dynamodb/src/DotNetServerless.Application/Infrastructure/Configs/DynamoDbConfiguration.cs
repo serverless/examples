@@ -1,4 +1,4 @@
-namespace DotNetServerless.Domain.Infrastructure.Configs
+namespace DotNetServerless.Application.Infrastructure.Configs
 {
 
   public class DynamoDbConfiguration

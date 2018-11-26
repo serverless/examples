@@ -1,8 +1,8 @@
 using System;
 using Amazon.Runtime;
-using DotNetServerless.Domain.Infrastructure.Configs;
+using DotNetServerless.Application.Infrastructure.Configs;
 
-namespace DotNetServerless.Domain.Infrastructure
+namespace DotNetServerless.Application.Infrastructure
 {
   public interface IAwsClientFactory<out T>
   {

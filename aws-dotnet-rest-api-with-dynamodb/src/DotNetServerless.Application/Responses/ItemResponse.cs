@@ -1,6 +1,6 @@
 using System;
 
-namespace DotNetServerless.Domain.Responses
+namespace DotNetServerless.Application.Responses
 {
   public class ItemResponse
   {

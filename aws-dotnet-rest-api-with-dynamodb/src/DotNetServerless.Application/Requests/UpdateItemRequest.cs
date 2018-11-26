@@ -1,10 +1,11 @@
-using DotNetServerless.Domain.Entity;
+using DotNetServerless.Application.Entities;
 using MediatR;
 
-namespace DotNetServerless.Domain.Requests
+namespace DotNetServerless.Application.Requests
 {
-  public class CreateItemRequest : IRequest<Item>
+  public class UpdateItemRequest : IRequest<Item>
   {
+    public string Id { get; set; }
     public string Description { get; set; }
     public string Code { get; set; }
     public bool IsChecked { get; set; }
@@ -13,6 +14,7 @@ namespace DotNetServerless.Domain.Requests
     {
       return new Item
       {
+        Id = Id,
         Description = Description,
         Code = Code,
         IsChecked = IsChecked
