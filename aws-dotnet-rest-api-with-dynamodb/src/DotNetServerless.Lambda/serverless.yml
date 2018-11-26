@@ -26,26 +26,26 @@ custom:
 
 functions:
   create:
-    handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.CreateItemFunction::Run
+    handler: DotNetServerless.Lambda::DotNetServerless.Lambda.Functions.CreateItemFunction::Run
     events:
       - http:
-          path: todos
+          path: items
           method: post
           cors: true
 
   get:
-    handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.GetItemFunction::Run
+    handler: DotNetServerless.Lambda::DotNetServerless.Lambda.Functions.GetItemFunction::Run
     events:
       - http:
-          path: todos/{id}
+          path: items/{id}
           method: get
           cors: true
 
   update:
-    handler: DotNetServerless.Functions::DotNetServerless.Functions.Lambda.UpdateItemFunction::Run
+    handler: DotNetServerless.Lambda::DotNetServerless.Lambda.Functions.UpdateItemFunction::Run
     events:
       - http:
-          path: todos/{id}
+          path: items
           method: put
           cors: true
 
