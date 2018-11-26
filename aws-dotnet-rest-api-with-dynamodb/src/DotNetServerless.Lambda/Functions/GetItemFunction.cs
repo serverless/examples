@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
-namespace DotNetServerless.Functions.Lambda
+namespace DotNetServerless.Lambda.Functions
 {
   public class GetItemFunction
   {
@@ -27,7 +27,7 @@ namespace DotNetServerless.Functions.Lambda
     [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
     public async Task<APIGatewayProxyResponse> Run(APIGatewayProxyRequest request)
     {
-      var requestModel = new GetItemRequest {Id = new Guid(request.QueryStringParameters["id"])}; 
+      var requestModel = new GetItemRequest {Id = new Guid(request.PathParameters["id"])}; 
       var mediator = _serviceProvider.GetService<IMediator>();
 
       var result = await mediator.Send(requestModel);

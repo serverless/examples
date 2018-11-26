@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DotNetServerless.Functions.Extensions
+namespace DotNetServerless.Lambda.Extensions
 {
   public static class ServiceCollectionExtensions
   {

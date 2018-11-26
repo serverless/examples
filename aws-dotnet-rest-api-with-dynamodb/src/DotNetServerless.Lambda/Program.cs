@@ -1,4 +1,4 @@
-﻿namespace DotNetServerless.Functions
+﻿namespace DotNetServerless.Lambda
 {
   public class Program
   {

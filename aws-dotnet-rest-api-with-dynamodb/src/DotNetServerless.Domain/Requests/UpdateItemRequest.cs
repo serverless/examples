@@ -6,7 +6,7 @@ namespace DotNetServerless.Domain.Requests
 {
   public class UpdateItemRequest : IRequest<Item>
   {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     public string Code { get; set; }
     public string Description { get; set; }
     public bool IsChecked { get; set; }

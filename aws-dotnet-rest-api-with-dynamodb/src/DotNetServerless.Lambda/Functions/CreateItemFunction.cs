@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
-namespace DotNetServerless.Functions.Lambda
+namespace DotNetServerless.Lambda.Functions
 {
   public class CreateItemFunction
   {

@@ -20,7 +20,7 @@ namespace DotNetServerless.Domain.Handlers
     public async Task<Item> Handle(CreateItemRequest request, CancellationToken cancellationToken)
     {
       var item = request.Map();
-      item.Id = Guid.NewGuid();
+      item.Id = Guid.NewGuid().ToString();
 
       await _itemRepository.Save(item, cancellationToken);
 
