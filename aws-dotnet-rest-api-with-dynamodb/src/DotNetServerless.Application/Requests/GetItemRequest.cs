@@ -1,8 +1,8 @@
 using System;
-using DotNetServerless.Domain.Entity;
+using DotNetServerless.Application.Entities;
 using MediatR;
 
-namespace DotNetServerless.Domain.Requests
+namespace DotNetServerless.Application.Requests
 {
   public class GetItemRequest : IRequest<Item>
   {

@@ -1,9 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
-using DotNetServerless.Domain.Entity;
-using DotNetServerless.Domain.Infrastructure.Repositories;
-using DotNetServerless.Domain.Requests;
+using DotNetServerless.Application.Entities;
+using DotNetServerless.Application.Infrastructure.Repositories;
+using DotNetServerless.Application.Requests;
 using DotNetServerless.Lambda;
 using DotNetServerless.Lambda.Functions;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using DotNetServerless.Domain.Entity;
+using DotNetServerless.Application.Entities;
 
-namespace DotNetServerless.Domain.Infrastructure.Repositories
+namespace DotNetServerless.Application.Infrastructure.Repositories
 {
   public interface IItemRepository
   {

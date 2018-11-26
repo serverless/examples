@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using DotNetServerless.Domain.Requests;
+using DotNetServerless.Application.Requests;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

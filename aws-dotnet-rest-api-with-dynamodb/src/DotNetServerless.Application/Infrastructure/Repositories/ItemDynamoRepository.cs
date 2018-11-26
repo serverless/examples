@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
-using DotNetServerless.Domain.Entity;
-using DotNetServerless.Domain.Infrastructure.Configs;
+using DotNetServerless.Application.Entities;
+using DotNetServerless.Application.Infrastructure.Configs;
 
-namespace DotNetServerless.Domain.Infrastructure.Repositories
+namespace DotNetServerless.Application.Infrastructure.Repositories
 {
   public class ItemDynamoRepository : IItemRepository
   {

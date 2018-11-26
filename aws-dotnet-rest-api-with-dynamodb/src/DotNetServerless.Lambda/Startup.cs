@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using DotNetServerless.Domain.Infrastructure;
-using DotNetServerless.Domain.Infrastructure.Configs;
-using DotNetServerless.Domain.Infrastructure.Repositories;
+using DotNetServerless.Application.Infrastructure;
+using DotNetServerless.Application.Infrastructure.Configs;
+using DotNetServerless.Application.Infrastructure.Repositories;
 using DotNetServerless.Lambda.Extensions;
 using MediatR;
 using Microsoft.Extensions.Configuration;

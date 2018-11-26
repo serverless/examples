@@ -29,7 +29,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\DotNetServerless.Domain\DotNetServerless.Domain.csproj" />
+    <ProjectReference Include="..\DotNetServerless.Application\DotNetServerless.Application.csproj" />
   </ItemGroup>
 
 </Project>

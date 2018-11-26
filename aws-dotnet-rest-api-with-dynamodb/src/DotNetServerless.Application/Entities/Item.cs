@@ -1,7 +1,6 @@
-using System;
 using Amazon.DynamoDBv2.DataModel;
 
-namespace DotNetServerless.Domain.Entity
+namespace DotNetServerless.Application.Entities
 {
   public class Item
   {
