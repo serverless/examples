@@ -27,7 +27,7 @@ namespace DotNetServerless.Lambda.Functions
     [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
     public async Task<APIGatewayProxyResponse> Run(APIGatewayProxyRequest request)
     {
-      var requestModel = JsonConvert.DeserializeObject<CreateItemRequest>(request.Body);
+      var requestModel = JsonConvert.DeserializeObject<UpdateItemRequest>(request.Body);
       var mediator = _serviceProvider.GetService<IMediator>();
       var result = await mediator.Send(requestModel);
       
