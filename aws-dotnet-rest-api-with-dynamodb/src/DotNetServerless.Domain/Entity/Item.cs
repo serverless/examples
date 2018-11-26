@@ -6,7 +6,7 @@ namespace DotNetServerless.Domain.Entity
   public class Item
   {
     [DynamoDBHashKey]
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     [DynamoDBRangeKey]
     public string Code { get; set; }
     [DynamoDBProperty]

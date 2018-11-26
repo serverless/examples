@@ -4,14 +4,15 @@ using Amazon.Lambda.APIGatewayEvents;
 using DotNetServerless.Domain.Entity;
 using DotNetServerless.Domain.Infrastructure.Repositories;
 using DotNetServerless.Domain.Requests;
-using DotNetServerless.Functions.Lambda;
+using DotNetServerless.Lambda;
+using DotNetServerless.Lambda.Functions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace DotNetServerless.Functions.Tests.Lambda
+namespace DotNetServerless.Tests.Functions
 {
   public class UpdateItemFunctionTests
   {

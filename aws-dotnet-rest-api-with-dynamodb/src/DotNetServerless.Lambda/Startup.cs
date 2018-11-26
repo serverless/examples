@@ -2,12 +2,12 @@
 using DotNetServerless.Domain.Infrastructure;
 using DotNetServerless.Domain.Infrastructure.Configs;
 using DotNetServerless.Domain.Infrastructure.Repositories;
-using DotNetServerless.Functions.Extensions;
+using DotNetServerless.Lambda.Extensions;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DotNetServerless.Functions
+namespace DotNetServerless.Lambda
 {
   public class Startup
   {
