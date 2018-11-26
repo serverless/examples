@@ -91,6 +91,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
 | [Gcp Node Typescript Simple](https://github.com/serverless/examples/tree/master/google-node-typescript-http-endpoint) <br/> Simple HTTP example for GCP functions by Serverless framework with Typescript | nodeJS |
+| [Google Python Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Kubeless Python Simple](https://github.com/serverless/examples/tree/master/kubeless-python-schedule) <br/> This example demonstrates how to setup a simple Python function with Kubeless | python |
 | [Kubeless Python Simple](https://github.com/serverless/examples/tree/master/kubeless-python-simple) <br/> This example demonstrates how to setup a simple Python function with Kubeless | python |
 | [Openwhisk Go Simple](https://github.com/serverless/examples/tree/master/openwhisk-go-simple) <br/> Example demonstrates how to setup a simple Go function with OpenWhisk. | nodeJS |
