@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2.Model;
@@ -37,6 +39,13 @@ namespace DotNetServerless.Tests.Functions
     {
       await _sut.Run(new APIGatewayProxyRequest{ Body = JsonConvert.SerializeObject(new UpdateItemRequest())});
       _mockRepository.Verify(_ => _.Save(It.IsAny<Item>(), It.IsAny<CancellationToken>()), Times.Once);
+    }
+    
+    [Fact]
+    public async Task run_should_return_200_when_updates()
+    {
+      var result = await _sut.Run(new APIGatewayProxyRequest {Body = JsonConvert.SerializeObject(new UpdateItemRequest())});
+      Assert.Equal(result.StatusCode, 200);
     }
   }
 }
