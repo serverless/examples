@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\DotNetServerless.Functions\DotNetServerless.Functions.csproj" />
+      <ProjectReference Include="..\..\src\DotNetServerless.Lambda\DotNetServerless.Lambda.csproj" />
     </ItemGroup>
 
 </Project>
