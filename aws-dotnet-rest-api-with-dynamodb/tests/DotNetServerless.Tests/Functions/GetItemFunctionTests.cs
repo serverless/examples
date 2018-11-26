@@ -42,19 +42,21 @@ namespace DotNetServerless.Tests.Functions
       _mockRepository.Verify(_ => _.GetById<Item>(It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Once);
     }
     
-    [Fact]
-    public async Task run_should_return_200_when_find_the_record()
+    [Theory]
+    [InlineData(200)]
+    public async Task run_should_return_200_when_find_the_record(int statusCode)
     {
       var result = await _sut.Run(new APIGatewayProxyRequest{ PathParameters = new Dictionary<string, string>
       {
         { "id", Guid.NewGuid().ToString()}
       }});
       
-      Assert.Equal(result.StatusCode, 200);
+      Assert.Equal(result.StatusCode, statusCode);
     }
     
-    [Fact]
-    public async Task run_should_return_404_when_NOT_find_the_record()
+    [Theory]
+    [InlineData(404)]
+    public async Task run_should_return_404_when_NOT_find_the_record(int statusCode)
     {
       _mockRepository.Setup(_ => _.GetById<Item>(It.IsAny<string>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(new List<Item>());
@@ -64,7 +66,7 @@ namespace DotNetServerless.Tests.Functions
         { "id", Guid.NewGuid().ToString()}
       }});
       
-      Assert.Equal(result.StatusCode, 404);
+      Assert.Equal(result.StatusCode, statusCode);
     }
   }
 }
