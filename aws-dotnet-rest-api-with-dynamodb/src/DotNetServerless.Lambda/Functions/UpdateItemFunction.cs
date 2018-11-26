@@ -30,8 +30,8 @@ namespace DotNetServerless.Lambda.Functions
       var requestModel = JsonConvert.DeserializeObject<UpdateItemRequest>(request.Body);
       var mediator = _serviceProvider.GetService<IMediator>();
       var result = await mediator.Send(requestModel);
-      
-      return new APIGatewayProxyResponse { StatusCode =  201,  Body = JsonConvert.SerializeObject(result)};
+
+      return new APIGatewayProxyResponse { StatusCode =  200,  Body = JsonConvert.SerializeObject(result)};
     }
   }
 }

@@ -38,5 +38,12 @@ namespace DotNetServerless.Tests.Functions
       await _sut.Run(new APIGatewayProxyRequest {Body = JsonConvert.SerializeObject(new CreateItemRequest())});
       _mockRepository.Verify(_ => _.Save(It.IsAny<Item>(), It.IsAny<CancellationToken>()), Times.Once);
     }
+    
+    [Fact]
+    public async Task run_should_return_201_created()
+    {
+      var result = await _sut.Run(new APIGatewayProxyRequest {Body = JsonConvert.SerializeObject(new CreateItemRequest())});
+      Assert.Equal(result.StatusCode, 201);
+    }
   }
 }
