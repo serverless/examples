@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using DotNetServerless.Domain.Infrastructure;
 using DotNetServerless.Domain.Infrastructure.Configs;
 using DotNetServerless.Domain.Infrastructure.Repositories;

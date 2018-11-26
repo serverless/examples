@@ -1,15 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Lambda.APIGatewayEvents;
 using DotNetServerless.Domain.Entity;
-using DotNetServerless.Domain.Infrastructure;
-using DotNetServerless.Domain.Infrastructure.Configs;
 using DotNetServerless.Domain.Infrastructure.Repositories;
 using DotNetServerless.Domain.Requests;
 using DotNetServerless.Functions.Lambda;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
