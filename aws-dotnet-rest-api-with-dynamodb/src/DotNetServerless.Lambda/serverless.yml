@@ -5,13 +5,14 @@ frameworkVersion: ">=1.6.0 <2.1.0"
 
 provider:
   name: aws
-  stackName: ${self:custom.featurealias}
+  stackName: ${file(env.configs.yml):feature}-${file(env.configs.yml):environment}
   runtime: dotnetcore2.1
   stage: ${file(env.configs.yml):stage}
   region: ${file(env.configs.yml):region}
   accountId: ${file(env.configs.yml):accountId}
   environment:
     DynamoDbConfiguration__TableName: ${file(env.configs.yml):dynamoTable}
+    
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -21,9 +22,6 @@ provider:
 package:
   artifact: bin/release/netcoreapp2.1/deploy-package.zip
   
-custom:
-  featurealias:  ${file(env.configs.yml):feature}-${file(env.configs.yml):environment}
-
 functions:
   create:
     handler: DotNetServerless.Lambda::DotNetServerless.Lambda.Functions.CreateItemFunction::Run
@@ -51,7 +49,7 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    ItemsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
