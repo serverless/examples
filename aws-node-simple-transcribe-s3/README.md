@@ -2,6 +2,12 @@
 title: Simple AWS Transcribe example in NodeJS
 description: This example demonstrates how to setup a lambda function to transcribe your audio file (.wav format) into a text transcription. The lambda will be triggered whenever a new audio file is uploaded to S3 and the transcription (JSON format) will be saved to a S3 bucket.
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/t49tran'
+authorName: 'Duong Tran'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/2223362?v=4&s=140'
 -->
 # Simple AWS Transcribe example in NodeJS
 
