@@ -7,7 +7,6 @@ provider:
   name: aws
   stackName: ${file(env.configs.yml):feature}-${file(env.configs.yml):environment}
   runtime: dotnetcore2.1
-  stage: ${file(env.configs.yml):stage}
   region: ${file(env.configs.yml):region}
   accountId: ${file(env.configs.yml):accountId}
   environment:
