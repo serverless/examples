@@ -1,3 +1,14 @@
+<!--
+title: Joke Twitter Bot
+description: Twitter bot that will periodically tweet out a joke obtained from a joke API.
+layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/Fixy250185'
+authorName: 'Craig Sweaton'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/26969518?v=4&s=140'
+-->
 # Joke Twitter Bot
 
 ## Description
