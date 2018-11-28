@@ -1,4 +1,4 @@
-node_modules
+git node_modules
 .serverless
 *.swp
 *.*~
