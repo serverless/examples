@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p layer
 cd layer
 rm -rf *
 curl -O https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz
