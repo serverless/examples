@@ -43,6 +43,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | Example | Runtime  |
 |:--------------------------- |:-----|
 | [Aws Dotnet Rest Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-dotnet-rest-api-with-dynamodb/src/DotNetServerless.Lambda) <br/> Reading/Writing operations using .NET Core and DynamoDB | dotnet |
+| [Aws Lambda Layer](https://github.com/serverless/examples/tree/master/aws-ffmpeg-layer)  | nodeJS |
 | [Aws Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Aws Golang Stream Kinesis To Elasticsearch](https://github.com/serverless/examples/tree/master/aws-golang-stream-kinesis-to-elasticsearch) <br/> Pull data from AWS Kinesis streams and forward to elasticsearch | golang |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
