@@ -1,4 +1,4 @@
-node_modules
+git node_modules
 .serverless
 *.swp
 *.*~
@@ -34,3 +34,5 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+env.configs.yml
