@@ -43,6 +43,8 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | Example | Runtime  |
 |:--------------------------- |:-----|
 | [Aws Dynamo Stream To Es](https://github.com/serverless/examples/tree/master/aws-golang-dynamo-stream-to-es) <br/> This example deploys a Dynamo DB Table, an ElasticSearch Node, and a lambda triggered off of a Dynamo Stream which updates an elasticsearch index with the data from the Dynamo Table | golang |
+| [Aws Dotnet Rest Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-dotnet-rest-api-with-dynamodb/src/DotNetServerless.Lambda) <br/> Reading/Writing operations using .NET Core and DynamoDB | dotnet |
+| [Aws Lambda Layer](https://github.com/serverless/examples/tree/master/aws-ffmpeg-layer)  | nodeJS |
 | [Aws Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Aws Golang Stream Kinesis To Elasticsearch](https://github.com/serverless/examples/tree/master/aws-golang-stream-kinesis-to-elasticsearch) <br/> Pull data from AWS Kinesis streams and forward to elasticsearch | golang |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
@@ -90,6 +92,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
+| [Google Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
 | [Gcp Node Typescript Simple](https://github.com/serverless/examples/tree/master/google-node-typescript-http-endpoint) <br/> Simple HTTP example for GCP functions by Serverless framework with Typescript | nodeJS |
 | [Google Python Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
