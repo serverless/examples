@@ -1,6 +1,6 @@
 <!--
-title: 'Kubeless Serverless Simple scheduled example in Python'
-description: 'This example demonstrates a simple example in Python for a scheduled function.'
+title: 'Kubeless Serverless Simple scheduled function example in Python'
+description: 'This example demonstrates a simple sexample in Python for a scheduled function.'
 layout: Doc
 framework: v1
 platform: Kubeless

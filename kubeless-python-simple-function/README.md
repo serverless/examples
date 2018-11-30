@@ -1,6 +1,6 @@
 <!--
-title: 'Kubeless Serverless Simple example in Python'
-description: 'This example demonstrates a simple example in Python.'
+title: 'Kubeless Serverless Simple function example in Python'
+description: 'This example demonstrates a simple function example in Python.'
 layout: Doc
 framework: v1
 platform: Kubeless
