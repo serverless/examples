@@ -1,0 +1,28 @@
+service: golang-simple-http-endpoint
+
+frameworkVersion: ">=1.33.0 <2.0.0"
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+plugins:
+  - serverless-google-cloudfunctions
+
+# The GCF credentials can be a little tricky to set up. Luckily we've documented this for you here:
+# https://serverless.com/framework/docs/providers/google/guide/credentials/
+#
+# NOTE: the golang runtime is currently in alpha state, you must have access from google to use the alpha toolchain
+provider:
+  name: google
+  runtime: go111                           # currently both vendored and go.mod repos are supported
+  project: sborza-91                    # replace with your project name here
+  credentials: ~/.gcloud/slsframework.json # path must be absolute, change to whichever keyfile you need
+
+functions:
+  hello:
+    handler: Hello
+    events:
+      - http: path
