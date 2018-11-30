@@ -1,34 +1,34 @@
-# DynamoDB Stream To ES
+# DynamoDB Stream To Elasticsearch 
 ## Deploying cloud information costs $$, Elasticsearch is not part of the free tier, as such please deploy with caution.
 
 This serverless project acts as an example for:
 * Creating a DynamoDB Table via Cloudformation
 * Creating a single-node Elasticsearch Cluster via Cloudformation
-* Creating a generic Go function which maps the keyspace from DynamoDB to ElasticSearch
+* Creating a generic Go function which maps the keyspace from DynamoDB to Elasticsearch
 
 As with all serverless projects, you must have severless installed! Listed here is a good way to get set up! 
 [https://github.com/serverless/serverless#quick-start](https://github.com/serverless/serverless#quick-start)
 
 Once you have serverless installed on your system run these commands to get the project set up.
 ```
-cd aws-golang-dynamo-stream-to-es
+cd aws-golang-dynamo-stream-to-elasticsearch
 npm install
 make
 ./node_modules/serverless/bin/serverless deploy 
 # or if you've installed serverless globally 
-#sls deploy
+# sls deploy
 ```
 
-This particular example will take ~15 minutes to deploy (Elasticearch takes some time).
+This particular example will take ~15 minutes to deploy (Elasticsearch takes some time).
 Grab a coffee and sit back! <sup>1</sup>
 
 <sup>1</sup>
 In production the deployment of persistent data stores (dynamodb, rds variants, elasticsearch) 
 should be decoupled from application code
 
-## Seeding Your Dynamo Table with Data
+## Seeding Your DynamoDB Table with Data
 ```
-go run cmd/seed-dynamo/main.go --table-name="$YOUR_TABLE_NAME
+go run cmd/seed-dynamo/main.go --table-name="$YOUR_TABLE_NAME"
 ```
 
 Once data is written to Dynamo, your lambda function will trigger the DynamoDB Stream events and data should begin to flow into Elasticsearch.
