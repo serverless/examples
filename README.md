@@ -42,7 +42,6 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE) t generated w/ `npm run docs` -->
 | Example | Runtime  |
 |:--------------------------- |:-----|
-
 | [Aws Dotnet Rest Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-dotnet-rest-api-with-dynamodb/src/DotNetServerless.Lambda) <br/> Reading/Writing operations using .NET Core and DynamoDB | dotnet |
 | [Aws Lambda Layer](https://github.com/serverless/examples/tree/master/aws-ffmpeg-layer)  | nodeJS |
 | [Aws Golang Dynamo Stream To Es](https://github.com/serverless/examples/tree/master/aws-golang-dynamo-stream-to-es) <br/> This example deploys a Dynamo DB Table, an ElasticSearch Node, and a lambda triggered off of a Dynamo Stream which updates an elasticsearch index with the data from the Dynamo Table | golang |
