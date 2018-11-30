@@ -1,5 +1,5 @@
 {
-  "name": "kubeless-python-simple",
+  "name": "kubeless-python-simple-scheduled-function",
   "version": "0.0.1",
   "description": "This example demonstrates how to setup a simple Python function with Kubeless",
   "dependencies": {
