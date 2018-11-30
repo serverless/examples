@@ -88,6 +88,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-python-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | python |
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Serverless Telegram Bot](https://github.com/serverless/examples/tree/master/aws-python-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖  | python |
+| [Aws Ruby Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | ruby |
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
