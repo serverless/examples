@@ -6,7 +6,7 @@ function signRequestBody(key, body) {
   return `sha1=${crypto.createHmac('sha1', key).update(body, 'utf-8').digest('hex')}`;
 }
 // webhook handler function
-exports.gongHandler = async event => {
+exports.gongHandler = async (event) => {
   // get the GitHub secret from the environment variables
   const token = process.env.GITHUB_WEBHOOK_SECRET;
   const calculatedSig = signRequestBody(token, event.body);
@@ -22,6 +22,7 @@ exports.gongHandler = async event => {
   const url = repository.url;
   // set variables for a release event
   let releaseVersion, releaseUrl, author = null;
+
   if (githubEvent === 'release') {
     releaseVersion = release.tag_name;
     releaseUrl = release.html_url;
@@ -56,12 +57,12 @@ exports.gongHandler = async event => {
   // send slack message
   if (githubEvent === 'release') {
     slack.webhook({
-      channel: "#gong-test", // your desired channel here
-      username: "gongbot",  // be creative!
-      icon_emoji: ":gong:", // because Slack is for emojis
+      channel: '#gong-test', // your desired channel here
+      username: 'gongbot',  // be creative!
+      icon_emoji: ':gong:', // because Slack is for emojis
       // customize your message below
-      text: `It's time to celebrate! ${author} pushed release version ${releaseVersion}. See it here: ${releaseUrl}!\n:gong:  https://youtu.be/8nBOF5sJrSE?t=11`
-    }, function(err, response) {
+      text: `It's time to celebrate! ${author} pushed release version ${releaseVersion}. See it here: ${releaseUrl}!\n:gong:  https://youtu.be/8nBOF5sJrSE?t=11`,
+    }, function (err, response) {
       console.log(response);
       if (err) {
         console.log('Something went wrong');
@@ -75,7 +76,7 @@ exports.gongHandler = async event => {
   console.log(`\nGithub-Event: "${githubEvent}" on this repo: "${repo}" at the url: ${url}.`);
   console.log(event.body);
   console.log('---------------------------------');
-  
+
   // return a 200 response if the GitHub tokens match
   const response = {
     statusCode: 200,
