@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const AUTH0_CLIENT_ID = 'your-auth0-client-id-here';
-const AUTH0_CLIENT_SECRET = 'your-auth0-client-secret-here';
+// Set in `environment` of serverless.yml
+const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
+const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY;
 
 // Policy helper function
 const generatePolicy = (principalId, effect, resource) => {
@@ -22,31 +23,65 @@ const generatePolicy = (principalId, effect, resource) => {
 };
 
 // Reusable Authorizer function, set on `authorizer` field in serverless.yml
-module.exports.auth = (event, context, cb) => {
-  if (event.authorizationToken) {
-    // remove "bearer " from token
-    const token = event.authorizationToken.substring(7);
-    const options = {
-      audience: AUTH0_CLIENT_ID,
-    };
-    jwt.verify(token, AUTH0_CLIENT_SECRET, options, (err, decoded) => {
-      if (err) {
-        cb('Unauthorized');
-      } else {
-        cb(null, generatePolicy(decoded.sub, 'Allow', event.methodArn));
+module.exports.auth = (event, context, callback) => {
+  console.log('event', event);
+  if (!event.authorizationToken) {
+    return callback('Unauthorized');
+  }
+
+  const tokenParts = event.authorizationToken.split(' ');
+  const tokenValue = tokenParts[1];
+
+  if (!(tokenParts[0].toLowerCase() === 'bearer' && tokenValue)) {
+    // no auth token!
+    return callback('Unauthorized');
+  }
+  const options = {
+    audience: AUTH0_CLIENT_ID,
+  };
+
+  try {
+    jwt.verify(tokenValue, AUTH0_CLIENT_PUBLIC_KEY, options, (verifyError, decoded) => {
+      if (verifyError) {
+        console.log('verifyError', verifyError);
+        // 401 Unauthorized
+        console.log(`Token invalid. ${verifyError}`);
+        return callback('Unauthorized');
       }
+      // is custom authorizer function
+      console.log('valid from customAuthorizer', decoded);
+      return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn));
     });
-  } else {
-    cb('Unauthorized');
+  } catch (err) {
+    console.log('catch error. Invalid token', err);
+    return callback('Unauthorized');
   }
 };
 
 // Public API
-module.exports.publicEndpoint = (event, context, cb) => {
-  cb(null, { message: 'Welcome to our Public API!' });
-};
+module.exports.publicEndpoint = (event, context, callback) => callback(null, {
+  statusCode: 200,
+  headers: {
+      /* Required for CORS support to work */
+    'Access-Control-Allow-Origin': '*',
+      /* Required for cookies, authorization headers with HTTPS */
+    'Access-Control-Allow-Credentials': true,
+  },
+  body: JSON.stringify({
+    message: 'Hi ⊂◉‿◉つ from Public API',
+  }),
+});
 
 // Private API
-module.exports.privateEndpoint = (event, context, cb) => {
-  cb(null, { message: 'Only logged in users can see this' });
-};
+module.exports.privateEndpoint = (event, context, callback) => callback(null, {
+  statusCode: 200,
+  headers: {
+      /* Required for CORS support to work */
+    'Access-Control-Allow-Origin': '*',
+      /* Required for cookies, authorization headers with HTTPS */
+    'Access-Control-Allow-Credentials': true,
+  },
+  body: JSON.stringify({
+    message: 'Hi ⊂◉‿◉つ from Private API. Only logged in users can see this',
+  }),
+});

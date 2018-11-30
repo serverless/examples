@@ -1,0 +1,10 @@
+{
+  "name": "aws-python-pynamodb-s3-sigurl",
+  "version": "1.0.0",
+  "description": "Serverless signed uploader REST API using pynamodb, s3 generated events, custom log format, and DRY serverless.yml with custom section",
+  "author": "Bruce Edge",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-python-requirements": "^2.4.1"
+  }
+}

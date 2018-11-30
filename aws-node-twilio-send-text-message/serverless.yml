@@ -9,6 +9,13 @@ provider:
     TWILIO_AUTH_TOKEN: YOUR-TWILIO-AUTH-TOKEN-HERE
     TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
 
+package:
+  exclude:
+    - "*.test.js"
+    - 'node_modules/**'
+    - '!node_modules/twilio/**'
+    - 'frontend/**'
+
 functions:
   sendText:
     handler: handler.sendText

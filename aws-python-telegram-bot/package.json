@@ -1,0 +1,24 @@
+{
+  "name": "serverless-telegram-bot",
+  "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖 ",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonatasbaldin/serverless-telegram-bot.git"
+  },
+  "keywords": [
+    "python",
+    "aws",
+    "lambda",
+    "serverless"
+  ],
+  "author": "jonatasbaldin",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-python-requirements": "^3.0.9"
+  },
+  "bugs": {
+    "url": "https://github.com/jonatasbaldin/serverless-telegram-bot/issues"
+  },
+  "homepage": "https://github.com/jonatasbaldin/serverless-telegram-bot#readme"
+}

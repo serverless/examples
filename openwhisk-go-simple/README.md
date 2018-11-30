@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Boilerplate example in Go
-description: This example shows a Serverless boilerplate in Go.
+title: 'OpenWhisk Serverless Boilerplate example in Go'
+description: 'This example shows a Serverless boilerplate in Go.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Go
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Go
 
@@ -9,19 +15,16 @@ Make sure `serverless` is installed. [See installation guide](https://serverless
 
 You will also need to set up your OpenWhisk account credentials using environment variables or a configuration file. Please see the [this guide for more information](https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/).
 
-## 1. Install Provider Plugin
-`npm install -g serverless-openwhisk` 
-
-## 2. Install Service Dependencies
+## 1. Install Project Dependencies
 `npm install` in this directory to download the modules from `package.json`.
 
-## 3. Compile Go Binary
+## 2. Compile Go Binary
 
 ```
 $ env GOOS=linux GOARCH=amd64 go build handler.go
 ```
 
-## 4. Deploy
+## 3. Deploy
 `serverless deploy` or `sls deploy`. `sls` is shorthand for the Serverless CLI command
 
 ```
@@ -42,7 +45,7 @@ actions:
 go-service-dev-greeting
 ```
 
-## 5. Invoke deployed function
+## 4. Invoke deployed function
 `serverless invoke --function greeting` or `serverless invoke -f greeting`
 
 `-f` is shorthand for `--function`

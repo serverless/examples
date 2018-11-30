@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Simple example in Python
-description: This example demonstrates a simple example in Python.
+title: 'OpenWhisk Serverless Simple example in Python'
+description: 'This example demonstrates a simple example in Python.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Python
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Python
 
@@ -9,13 +15,10 @@ Make sure `serverless` is installed. [See installation guide](https://serverless
 
 You will also need to set up your OpenWhisk account credentials using environment variables or a configuration file. Please see the [this guide for more information](https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/).
 
-## 1. Install Provider Plugin
-`npm install -g serverless-openwhisk` 
-
-## 2. Install Service Dependencies
+## 1. Install Project Dependencies
 `npm install` in this directory to download the modules from `package.json`.
 
-## 3. Deploy
+## 2. Deploy
 `serverless deploy` or `sls deploy`. `sls` is shorthand for the Serverless CLI command
 
 ```
@@ -36,7 +39,7 @@ actions:
 python-service-dev-greeting
 ```
 
-## 4. Invoke deployed function
+## 3. Invoke deployed function
 `serverless invoke --function greeting` or `serverless invoke -f greeting`
 
 `-f` is shorthand for `--function`

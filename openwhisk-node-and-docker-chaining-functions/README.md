@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Boilerplate using Docker example in NodeJS
-description: This example shows a Serverless boilerplate using Docker in NodeJS.
+title: 'OpenWhisk Serverless Boilerplate using Docker example in NodeJS'
+description: 'This example shows a Serverless boilerplate using Docker in NodeJS.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: nodeJS
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Node.js & Docker
 
@@ -9,13 +15,10 @@ Make sure `serverless` is installed. [See installation guide](https://serverless
 
 You will also need to set up your OpenWhisk account credentials using environment variables or a configuration file. Please see the [this guide for more information](https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/).
 
-## 1. Install Provider Plugin
-`npm install -g serverless-openwhisk` 
-
-## 2. Install Service Dependencies
+## 1. Install Service Dependencies & Provider Plugin
 `npm install` in this directory to download the modules from `package.json`.
 
-## 3. Deploy
+## 2. Deploy
 `serverless deploy` or `sls deploy`. `sls` is shorthand for the Serverless CLI command
 
 ```
@@ -38,7 +41,7 @@ actions:
 testing-dev-location_sunrise_sunset    testing-dev-sunrise_sunset    testing-dev-location_from_address    testing-dev-jq
 ```
 
-## 4. Invoke sequence function
+## 3. Invoke sequence function
 `serverless invoke -f location_sunrise_sunset -d '{"address": "london"}'`
 
 `-f` is also shorthand for `--function`

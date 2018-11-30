@@ -5,7 +5,7 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "kubernetes-client": "^3.10.1",
-    "serverless-kubeless": "^0.2.0"
+    "serverless-kubeless": "^0.4.0"
   },
   "main": "handler.py",
   "autor": "Bitnami",

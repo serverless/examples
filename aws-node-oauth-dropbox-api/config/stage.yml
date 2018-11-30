@@ -1,0 +1,5 @@
+STAGE: 'default'
+HOME_URL: 'https://xxxxxx.amazonaws.com/stage/dropbox'  ##change with your lamba url
+CLIENT_ID : 'xxxxxx' ##Change with your Dropbox Client Id
+CLIENT_SECRET : 'xxxxxx' ##Change with your Dropbox Client Secret
+CALLBACK_URL : 'https://xxxxxx.amazonaws.com/stage/dropbox/callback' ##change with your lamba url

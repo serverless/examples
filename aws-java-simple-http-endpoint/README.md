@@ -1,7 +1,13 @@
 <!--
-title: AWS Simple HTTP Endpoint example in Java
-description: This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.
+title: 'AWS Simple HTTP Endpoint example in Java'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.'
 layout: Doc
+framework: v1
+platform: AWS
+language: Java
+authorLink: 'https://github.com/DoWhileGeek'
+authorName: 'Joeseph Rodrigues'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/1767769?v=4&s=140'
 -->
 # Simple HTTP Endpoint Example
 
@@ -58,9 +64,9 @@ mvn package
 
 Note: you can install Maven with
 
-1. [sdkman](http://sdkman.io/) using "sdk install maven" (yes, use as default)
-2. sudo apt-get install mvn
-3. brew install maven
+1. [sdkman](http://sdkman.io/) using `sdk install maven` (yes, use as default)
+2. `sudo apt-get install mvn`
+3. `brew install maven`
 
 If you use Maven to build, then in `serverless.yml` you have to replace
 
@@ -68,7 +74,7 @@ If you use Maven to build, then in `serverless.yml` you have to replace
 package:
   artifact: build/distributions/aws-java-simple-http-endpoint.zip
 ```
-by
+with
 ```yaml
 package:
   artifact: target/aws-java-simple-http-endpoint.jar
@@ -131,7 +137,7 @@ The expected result should be similar to:
 }
 --------------------------------------------------------------------
 START RequestId: XXXXXXX Version: $LATEST
-2017-01-04 23:44:37 <XXXXXXX> INFO  com.serverless.Handler:18 - received: {}
+2004 23:44:37 <XXXXXXX> INFO  com.serverless.Handler:18 - received: {}
 END RequestId: XXXXXXX
 REPORT RequestId: XXXXXXX	Duration: 0.51 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 53 MB
 ```
