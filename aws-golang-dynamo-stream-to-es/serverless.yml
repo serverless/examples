@@ -1,12 +1,12 @@
-service: dynamo-stream-to-es
+service: aws-golang-dynamo-stream-to-elasticsearch
 
 provider:
   name: aws
   runtime: go1.x
   environment:
-    ELASTIC_SEARCH_URL: 
+    ELASTIC_SEARCH_URL:
       Fn::GetAtt: ["PuppySearch", "DomainEndpoint"]
-       
+
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -75,30 +75,30 @@ resources:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
         TableName: puppies
-    PuppySearch: 
+    PuppySearch:
       Type: "AWS::Elasticsearch::Domain"
       Properties:
         ElasticsearchVersion: "6.3"
         DomainName: "puppy-search"
-        ElasticsearchClusterConfig: 
+        ElasticsearchClusterConfig:
           DedicatedMasterEnabled: false
           InstanceCount: "1"
           ZoneAwarenessEnabled: false
           InstanceType: "t2.small.elasticsearch"
-        EBSOptions: 
+        EBSOptions:
           EBSEnabled: true
           Iops: 0
           VolumeSize: 10
           VolumeType: "gp2"
-        AccessPolicies: 
+        AccessPolicies:
           Version: "2012-10-17"
-          Statement: 
-            - 
+          Statement:
+            -
               Effect: "Allow"
-              Principal: 
+              Principal:
                 AWS: "*"
               Action: "es:*"
               Resource: "*"
-        AdvancedOptions: 
+        AdvancedOptions:
           rest.action.multi.allow_explicit_index: "true"
-  
+
