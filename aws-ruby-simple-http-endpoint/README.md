@@ -8,7 +8,7 @@ Inspired by the [aws-node-simple-http-endpoint](https://github.com/serverless/ex
 
 ## Deploy 
 
-In order to deploy the you endpoint simply run:
+In order to deploy the endpoint, simply run:
 
 ```bash
 sls deploy
