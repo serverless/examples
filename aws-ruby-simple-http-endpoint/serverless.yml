@@ -1,0 +1,15 @@
+service: serverless-ruby-simple-http-endpoint
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: ruby2.5
+
+functions:
+  current_time:
+    handler: handler.endpoint
+    events:
+      - http:
+          path: ping
+          method: get
