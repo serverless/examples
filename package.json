@@ -1,7 +1,7 @@
 {
   "name": "serverless-examples",
   "version": "0.0.0",
-  "description": "A compilation of serveral examples and boilerplates",
+  "description": "A compilation of several examples and boilerplates",
   "scripts": {
     "lint": "eslint .",
     "docs": "node generate-readme.js"

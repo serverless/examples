@@ -44,6 +44,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 |:--------------------------- |:-----|
 | [Aws Dotnet Rest Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-dotnet-rest-api-with-dynamodb/src/DotNetServerless.Lambda) <br/> Reading/Writing operations using .NET Core and DynamoDB | dotnet |
 | [Aws Lambda Layer](https://github.com/serverless/examples/tree/master/aws-ffmpeg-layer)  | nodeJS |
+| [Aws Dynamo Stream To Es](https://github.com/serverless/examples/tree/master/aws-golang-dynamo-stream-to-es) <br/> This example deploys a Dynamo DB Table, an ElasticSearch Node, and a lambda triggered off of a Dynamo Stream which updates an elasticsearch index with the data from the Dynamo Table | golang |
 | [Aws Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Aws Golang Stream Kinesis To Elasticsearch](https://github.com/serverless/examples/tree/master/aws-golang-stream-kinesis-to-elasticsearch) <br/> Pull data from AWS Kinesis streams and forward to elasticsearch | golang |
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-node-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | nodeJS |
@@ -66,6 +67,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | nodeJS |
 | [Aws Scheduled Weather](https://github.com/serverless/examples/tree/master/aws-node-scheduled-weather) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event through pulling weather and sending an email daily. | nodeJS |
 | [Aws Serve Dynamic Html Via Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-serve-dynamic-html-via-http-endpoint) <br/> Hookup an AWS API Gateway endpoint to a Lambda function to render HTML on a `GET` request | nodeJS |
+| [Aws Node Serverless Gong](https://github.com/serverless/examples/tree/master/aws-node-serverless-gong) <br/> A simple serverless gong using GitHub webhooks and a Slack app | nodeJS |
 | [Aws Node Ses Receive Email Body](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body) <br/> Receive an email, store in S3 bucket, trigger a lambda function. | nodeJS |
 | [Aws Node Ses Receive Email Header](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header) <br/> Receive an email, trigger a lambda function to process header. | nodeJS |
 | [Aws Serve Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | nodeJS |
@@ -88,6 +90,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-python-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | python |
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
 | [Serverless Telegram Bot](https://github.com/serverless/examples/tree/master/aws-python-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖  | python |
+| [Aws Ruby Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | ruby |
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
