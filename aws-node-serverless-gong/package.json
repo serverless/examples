@@ -1,0 +1,11 @@
+{
+  "name": "aws-node-serverless-gong",
+  "version": "1.0.0",
+  "description": "A simple serverless gong using GitHub webhooks and a Slack app",
+  "author": "Anna Spysz",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "~2",
+    "slack-node": "0.1.8"
+  }
+}
