@@ -36,7 +36,7 @@ Serverless: Your function ran successfully.
 
 ## Deploy
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint, simply run:
 
 ```bash
 serverless deploy
