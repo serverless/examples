@@ -1,0 +1,33 @@
+{
+  "name": "aws-node-vue-nuxt-ssr",
+  "version": "1.0.0",
+  "description": "Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture.",
+  "main": "index.js",
+  "engines": {
+    "node": "8.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "deploy": "npm run build && sls deploy",
+    "start-server": "npm run build && node app.js",
+    "start-sls": "npm run build && sls offline start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "nuxt": "^1.4.2",
+    "serverless-apigw-binary": "^0.4.4",
+    "serverless-http": "^1.6.0"
+  },
+  "devDependencies": {
+    "serverless-domain-manager": "^2.6.0",
+    "serverless-offline": "^3.25.7"
+  }
+}

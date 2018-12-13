@@ -1,7 +1,13 @@
 <!--
-title: AWS Simple HTTP Endpoint example in Python
-description: This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.
+title: 'AWS Simple HTTP Endpoint example in Python'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.'
 layout: Doc
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Simple HTTP Endpoint Example
 
@@ -58,9 +64,9 @@ The expected result should be similar to:
     "statusCode": 200
 }
 --------------------------------------------------------------------
-START RequestId: a26699d3-b3ee-11e6-9802-f33f952e8294 Version: $LATEST
-END RequestId: a26699d3-b3ee-11e6-9802-f33f952e8294
-REPORT RequestId: a26699d3-b3ee-11e6-9802-f33f952e8294	Duration: 0.23 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
+START RequestId: a26699d3-b3ee-11e6-98f33f952e8294 Version: $LATEST
+END RequestId: a26699d3-b3ee-11e6-98f33f952e8294
+REPORT RequestId: a26699d3-b3ee-11e6-98f33f952e8294	Duration: 0.23 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
 ```
 
 Finally you can send an HTTP request directly to the endpoint using a tool like curl

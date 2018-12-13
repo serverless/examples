@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless REST API with DynamoDB and offline support example in NodeJS
-description: This example demonstrates how to run a service locally, using the 'serverless-offline' plugin. It provides a REST API to manage Todos stored in DynamoDB.
+title: 'AWS Serverless REST API with DynamoDB and offline support example in NodeJS'
+description: 'This example demonstrates how to run a service locally, using the ''serverless-offline'' plugin. It provides a REST API to manage Todos stored in DynamoDB.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/adambrgmn'
+authorName: 'Adam Bergman'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13746650?v=4&s=140'
 -->
 # Serverless REST API with DynamoDB and offline support
 
@@ -44,7 +50,7 @@ curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --da
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
 ```
 
 ### List all Todos
@@ -55,7 +61,7 @@ curl -H "Content-Type:application/json" http://localhost:3000/todos
 
 Example output:
 ```bash
-[{"text":"Deploy my first service","id":"ac90fe80-aa83-11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"20679390-aa85-11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
+[{"text":"Deploy my first service","id":"ac90feaa11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"206793aa11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
 ```
 
 ### Get one Todo
@@ -67,7 +73,7 @@ curl -H "Content-Type:application/json" http://localhost:3000/todos/<id>
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
 ```
 
 ### Update a Todo
@@ -79,7 +85,7 @@ curl -X PUT -H "Content-Type:application/json" http://localhost:3000/todos/<id> 
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa81-11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
+{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
 ```
 
 ### Delete a Todo

@@ -1,7 +1,13 @@
 <!--
-title: AWS Simple HTTP Endpoint example in NodeJS
-description: This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.
+title: 'AWS Simple HTTP Endpoint example in NodeJS'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Simple HTTP Endpoint Example
 
@@ -30,7 +36,7 @@ Serverless: Your function ran successfully.
 
 ## Deploy
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint, simply run:
 
 ```bash
 serverless deploy
