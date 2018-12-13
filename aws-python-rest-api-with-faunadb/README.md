@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless REST API with FaunaDB store example in Python
-description: This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. FaunaDB is used to store the data.
+title: 'AWS Serverless REST API with FaunaDB store example in Python'
+description: 'This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. FaunaDB is used to store the data.'
 layout: Doc
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Serverless REST API
 

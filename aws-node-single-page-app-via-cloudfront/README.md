@@ -1,7 +1,13 @@
 <!--
-title: AWS Single Page Application example in NodeJS
-description: This example demonstrates how to setup a Single Page Application.
+title: 'AWS Single Page Application example in NodeJS'
+description: 'This example demonstrates how to setup a Single Page Application.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/erezrokah'
+authorName: 'Erez Rokah'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/26760571?v=4&s=140'
 -->
 # Single Page Application
 
@@ -29,7 +35,7 @@ The `serverless-single-page-app-plugin` plugin in this example is there to simpl
 
 # Deploy
 
-Warning: Whenever you making changes to CloudFront resource in `serverless.yml` the deployment might take a while e.g 15-20 minutes.
+Warning: Whenever you making changes to CloudFront resource in `serverless.yml` the deployment might take a while e.g 20 minutes.
 
 In order to deploy the Single Page Application you need to setup the infrastructure first by running
 
@@ -90,7 +96,7 @@ Serverless: Web App Domain: dyj5gf0t6nqke.cloudfront.net
 
 Visit the printed domain domain and navigate on the web site. It should automatically redirect you to HTTPS and visiting <yourURL>/about will not result in an error with the status code 404, but rather serves the `index.html` and renders the about page.
 
-This is how it should look like: ![Screenshot](https://cloud.githubusercontent.com/assets/223045/20391786/287cb310-acd5-11e6-9eaf-89f641ed9e14.png)
+This is how it should look like: ![Screenshot](https://cloud.githubusercontent.com/assets/223045/20391786/287cb3acd5-11e6-9eaf-89f641ed9e14.png)
 
 # Re-deploying
 
