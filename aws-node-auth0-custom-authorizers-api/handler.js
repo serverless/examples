@@ -56,9 +56,6 @@ module.exports.auth = (event, context, callback) => {
     console.log('catch error. Invalid token', err);
     return callback('Unauthorized');
   }
-
-  // if for any reason you get here...
-  return callback('Unauthorized');
 };
 
 // Public API

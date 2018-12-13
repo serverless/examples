@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Serverless Scheduled Cron job example in Swift
-description: This example demonstrates scheduleding a cron job.
+title: 'OpenWhisk Serverless Scheduled Cron job example in Swift'
+description: 'This example demonstrates scheduling a cron job.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Swift
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Swift
 
@@ -52,10 +58,10 @@ logging output using `serverless logs --function cron` or `serverless logs -f cr
 
 $ serverless logs -f cron
 activation (96d31322bab24cf1940e7b05b428ee34):
-2017-03-28 17:47:05.084 Compiling
-2017-03-28 17:47:06.943 swiftc status is 0
-2017-03-28 17:47:06.943 Linking
-2017-03-28 17:47:07.073 Swift function (/james.thomas@uk.ibm.com_dev/swift_service-dev-cron) was called @ 2017-03-28 16:47:07
+2028 17:47:05.084 Compiling
+2028 17:47:06.943 swiftc status is 0
+2028 17:47:06.943 Linking
+2028 17:47:07.073 Swift function (/james.thomas@uk.ibm.com_dev/swift_service-dev-cron) was called @ 2028 16:47:07
 ```
 
 **For more information on the Serverless OpenWhisk plugin, please see the project repository: [https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/](https://serverless.com/framework/docs/providers/openwhisk/guide/credentials/).**
