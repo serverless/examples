@@ -324,6 +324,16 @@
     "githubUrl": "https://github.com/andreivmaksimov/serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito"
   },
   {
+    "name": "Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 1",
+    "description": "From this tutorial you'll learn how to add AWS EKS Cluster with Spot Instances to your cloud environment managed by Serverless framework",
+    "githubUrl": "https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo"
+  },
+  {
+    "name": "Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 2",
+    "description": "From this article you'll learn how to configure AWS Lambda functions to allow them manage your EKS Kubernetes cluster and run triggered jobs",
+    "githubUrl": "https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo/tree/part2"
+  },
+  {
     "name": "serverless + lambda protobuf responses",
     "description": "Demo using API Gateway and Lambda with Protocol Buffer",
     "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo"
@@ -407,5 +417,20 @@
     "name": "Serverless CloudWatch Proxy",
     "description": "Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identying alerts and sending notifications via Slack/Email",
     "githubUrl": "https://github.com/abbasdgr8/cloudwatch-proxy"
+  },
+  {
+    "name": "Serverless-side rendering with Vue.js and Nuxt.js",
+    "description": "Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture.",
+    "githubUrl": "https://github.com/adnanrahic/serverless-side-rendering-vue-nuxt"
+  },
+  {
+    "name": "aws-mfa-enforce",
+    "description": "Serverless function to automate enforcement of Multi-Factor Authentication (MFA) to all AWS IAM users with access to AWS Management Console.",
+    "githubUrl": "https://github.com/Chan9390/aws-mfa-enforce"
+  },
+  {
+    "name": "vanity-stargazer",
+    "description": "Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack",
+    "githubUrl": "https://github.com/silvermullet/vanity-stargazer"
   }
 ]

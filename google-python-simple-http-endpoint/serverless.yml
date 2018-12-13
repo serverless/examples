@@ -1,0 +1,24 @@
+service: python-simple-http-endpoint
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+plugins:
+  - serverless-google-cloudfunctions
+
+provider:
+  name: google
+  runtime: python37
+  project: <projectnamehere-1234>
+  credentials: ~/.gcloud/keyfile.json # path must be absolute
+
+functions:
+  currentTime:
+    handler: endpoint
+    events:
+      - http: path

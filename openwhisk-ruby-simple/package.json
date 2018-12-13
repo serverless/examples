@@ -1,0 +1,8 @@
+{
+  "name": "openwhisk-ruby-simple",
+  "version": "0.1.0",
+  "description": "Example demonstrates how to setup a simple Ruby function with OpenWhisk.",
+  "dependencies": {
+    "serverless-openwhisk": ">=0.13.0"
+  }
+}

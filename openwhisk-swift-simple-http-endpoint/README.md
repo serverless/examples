@@ -1,7 +1,13 @@
 <!--
-title: OpenWhisk Simple HTTP Endpoint example in Swift
-description: This example demonstrates how to setup a simple HTTP GET endpoint.
+title: 'OpenWhisk Simple HTTP Endpoint example in Swift'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint.'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Swift
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless Boilerplate - OpenWhisk - Swift
 

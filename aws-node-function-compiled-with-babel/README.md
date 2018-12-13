@@ -1,7 +1,13 @@
 <!--
-title: AWS Function compiled with Babel example in NodeJS
-description: This example demonstrates how to compile your JavaScript code with Babel. In order to do so the 'serverless-babel-plugin' is leveraged.
+title: 'AWS Function compiled with Babel example in NodeJS'
+description: 'This example demonstrates how to compile your JavaScript code with Babel. In order to do so the ''serverless-babel-plugin'' is leveraged.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Function compiled with Babel
 
@@ -68,8 +74,8 @@ The expected result should be similar to:
     }
 }
 --------------------------------------------------------------------
-START RequestId: 4388ee49-affe-11e6-9e69-1bde31ed2e43 Version: $LATEST
-2016-11-21 16:22:07.748 (+01:00)	4388ee49-affe-11e6-9e69-1bde31ed2e43	{ response: { statusCode: 200, body: { message: 'Success!' } } }
-END RequestId: 4388ee49-affe-11e6-9e69-1bde31ed2e43
-REPORT RequestId: 4388ee49-affe-11e6-9e69-1bde31ed2e43	Duration: 23.13 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 17 MB
+START RequestId: 4388eeaffe-11e6-9e1bde31ed2e43 Version: $LATEST
+2021 16:22:07.748 (+01:00)	4388eeaffe-11e6-9e1bde31ed2e43	{ response: { statusCode: 200, body: { message: 'Success!' } } }
+END RequestId: 4388eeaffe-11e6-9e1bde31ed2e43
+REPORT RequestId: 4388eeaffe-11e6-9e1bde31ed2e43	Duration: 23.13 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 17 MB
 ```

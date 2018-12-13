@@ -1,3 +1,15 @@
+<!--
+title: TODO
+description: This example shows your how to create a TypeScript powered REST API with DynamoDB.
+layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/QuantumInformation'
+authorName: Nikos
+authorAvatar: 'https://avatars0.githubusercontent.com/u/216566?v=4&s=140'
+-->
+
 # Introduction
 
 TypeScript (ts) offers type safety which is helpful when working with the AWS SDK, which comes with ts definitions (d.ts)
