@@ -1,5 +1,10 @@
 [
  {
+    "name": "Spiderless, Web Spider on Serverless",
+    "description": "A web spider / scraper / website change detector built with Lambda, API Gateway, DynamoDB and SNS",
+    "githubUrl": "https://github.com/slashbit/spider-less"
+ },
+ {
     "name": "AWS-Demo-Java-Spring-Cloud-Function-Serverless",
     "description": "If Java is your choice of programming language-Spring Cloud Function,Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities.",
     "githubUrl": "https://github.com/mbsambangi/aws-java-spring-cloud-function-demo"
