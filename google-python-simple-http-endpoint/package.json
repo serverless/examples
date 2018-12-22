@@ -1,0 +1,14 @@
+{
+  "name": "google-python-simple-http-endpoint",
+  "version": "0.0.1",
+  "description": "Example demonstrates how to setup a simple HTTP GET endpoint with python",
+  "author": "Sebastian Borza <sebito91@gmail.com>",
+  "license": "MIT",
+  "main": "handler.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "serverless-google-cloudfunctions": "^2.1.0"
+  }
+}

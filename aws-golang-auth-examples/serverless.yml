@@ -1,0 +1,40 @@
+service: hello-world
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: eu-west-1
+  memorySize: 128
+
+package:
+  exclude:
+  - ./**
+  include:
+  - ./bin/**
+
+functions:
+  authorize:
+    handler: bin/auth
+  authorize2:
+    handler: bin/auth2
+  hello-world:
+    handler: bin/hello-world
+    events:
+    - http:
+        path: /hello
+        method: get
+    - http:
+        path: /
+        method: get
+        authorizer:
+          name: authorize
+          resultTtlInSeconds: 0
+  hello-world2:
+    handler: bin/hello-world2
+    events:
+    - http:
+        path: me
+        method: get
+        authorizer:
+          name: authorize2
+          resultTtlInSeconds: 0

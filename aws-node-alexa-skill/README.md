@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless Alexa Skill example in NodeJS
-description: This example demonstrates how to setup your own Alexa skill using AWS Lambdas.
+title: 'AWS Serverless Alexa Skill example in NodeJS'
+description: 'This example demonstrates how to setup your own Alexa skill using AWS Lambdas.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Serverless Alexa Skill Example
 
@@ -49,11 +55,11 @@ functions:
 
 Next we need to setup an Alexa skill. Once you've signed up for the Amazon Developer Platform visit `https://developer.amazon.com/edw/home.html`. There you should see the following screen:
 
-![Welcome](https://cloud.githubusercontent.com/assets/223045/21183285/8403b37c-c207-11e6-89c0-d36582010af8.png)
+![Welcome](https://cloud.githubusercontent.com/assets/223045/21183285/8403b37c-c211e6-89c0-d36582010af8.png)
 
 Next click on `Add a new Skill`:
 
-![Add Skill](https://cloud.githubusercontent.com/assets/223045/21183286/84051262-c207-11e6-8422-945b6b45e83b.png)
+![Add Skill](https://cloud.githubusercontent.com/assets/223045/21183286/840512c211e6-84945b6b45e83b.png)
 
 Go through the steps and fill in all the required fields e.g. Intent Schema and Sample Utterances:
 
@@ -82,19 +88,19 @@ GetLuckyNumbers what are my lucky numbers lower than {UpperLimit}
 GetLuckyNumbers tell me my lucky numbers lower than {UpperLimit}
 ```
 
-![Skill Information](https://cloud.githubusercontent.com/assets/223045/21183279/83eec480-c207-11e6-841b-d8925f0804a5.png)
-![Interaction Model](https://cloud.githubusercontent.com/assets/223045/21183280/83ef3d84-c207-11e6-87a5-bb8dcbb903f8.png)
+![Skill Information](https://cloud.githubusercontent.com/assets/223045/21183279/83eec4c211e6-841b-d8925f0804a5.png)
+![Interaction Model](https://cloud.githubusercontent.com/assets/223045/21183280/83ef3dc211e6-87a5-bb8dcbb903f8.png)
 
 Fill in the Lambda ARN which was printed or run `serverless info` to retrieve the ARN again.
 
-![Configuration](https://cloud.githubusercontent.com/assets/223045/21183281/83f17086-c207-11e6-89b7-2f6d96ac559c.png)
+![Configuration](https://cloud.githubusercontent.com/assets/223045/21183281/83f170c211e6-89b7-2f6d96ac559c.png)
 
 Next up visit the test page, fill in the utterance and click on `Ask LuckyNumbers`.
 
-![Test](https://cloud.githubusercontent.com/assets/223045/21183283/83f1f632-c207-11e6-858d-41b1a3154e91.png)
-![Test](https://cloud.githubusercontent.com/assets/223045/21183282/83f1f628-c207-11e6-974e-b7c051ffb6eb.png)
-![Test](https://cloud.githubusercontent.com/assets/223045/21183284/83f708ac-c207-11e6-8199-9489e8f3e494.png)
-![Test](https://cloud.githubusercontent.com/assets/223045/21185805/78c1df06-c212-11e6-9cf9-ce44edc30cdd.gif)
+![Test](https://cloud.githubusercontent.com/assets/223045/21183283/83f1f6c211e6-858d-41b1a3154e91.png)
+![Test](https://cloud.githubusercontent.com/assets/223045/21183282/83f1f6c211e6-974e-b7c051ffb6eb.png)
+![Test](https://cloud.githubusercontent.com/assets/223045/21183284/83f708ac-c211e6-819489e8f3e494.png)
+![Test](https://cloud.githubusercontent.com/assets/223045/21185805/78c1dfc211e6-9cf9-ce44edc30cdd.gif)
 
 You should have received a response containing the text `Your lucky number is` followed by your lucky number :)
 

@@ -1,7 +1,13 @@
 <!--
-title: AWS Storing Encrypted Secrets example in NodeJS
-description: This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.
+title: 'AWS Storing Encrypted Secrets example in NodeJS'
+description: 'This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Serverless
 
