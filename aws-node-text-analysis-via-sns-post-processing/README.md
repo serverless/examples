@@ -1,7 +1,13 @@
 <!--
-title: AWS Data Processing example in NodeJS
-description: This example demonstrates how to setup a simple data processing pipeline.
+title: 'AWS Data Processing example in NodeJS'
+description: 'This example demonstrates how to setup a simple data processing pipeline.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/adambrgmn'
+authorName: 'Adam Bergman'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13746650?v=4&s=140'
 -->
 # Data processing
 
@@ -83,10 +89,10 @@ serverless logs --function analyzeNote
 This command will show you the logged output and looks liked this
 
 ```bash
-START RequestId: 75a970ba-ab54-11e6-809d-435833490828 Version: $LATEST
-2016-11-15 17:56:32.497 (+01:00)	75a970ba-ab54-11e6-809d-435833490828	Positive note - will be published: This is such a great Day
-END RequestId: 75a970ba-ab54-11e6-809d-435833490828
-REPORT RequestId: 75a970ba-ab54-11e6-809d-435833490828	Duration: 3.45 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
+START RequestId: 75a970ba-ab11e6-809d-435833490828 Version: $LATEST
+2015 17:56:32.497 (+01:00)	75a970ba-ab11e6-809d-435833490828	Positive note - will be published: This is such a great Day
+END RequestId: 75a970ba-ab11e6-809d-435833490828
+REPORT RequestId: 75a970ba-ab11e6-809d-435833490828	Duration: 3.45 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
 ```
 
 You can play with the system and see which notes will be published and which won't.

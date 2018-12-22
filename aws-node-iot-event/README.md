@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless IoT Event example in NodeJS
-description: This example demonstrates how to setup a AWS IoT Rule to send events to a Lambda function.
+title: 'AWS Serverless IoT Event example in NodeJS'
+description: 'This example demonstrates how to setup a AWS IoT Rule to send events to a Lambda function.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Serverless IoT Event
 
@@ -46,7 +52,7 @@ functions:
 
 In `serverless.yml` the log-function is configured to receive any event from the IoT Topic `mybutton`. We now can go to the IoT Console and visit the Tab `Test`.
 
-![iot-console-test](https://cloud.githubusercontent.com/assets/223045/21593597/352be866-d119-11e6-9639-994b9c495571.png)
+![iot-console-test](https://cloud.githubusercontent.com/assets/223045/21593597/352be8d111e6-96994b9c495571.png)
 
 There fill `mybutton` into the topic input field in the publish section. Replace existing example data with the following example and press the publish button.
 
@@ -57,7 +63,7 @@ There fill `mybutton` into the topic input field in the publish section. Replace
 }
 ```
 
-![iot-console-form](https://cloud.githubusercontent.com/assets/223045/21593596/352be71c-d119-11e6-979a-7aa70abd2bf2.png)
+![iot-console-form](https://cloud.githubusercontent.com/assets/223045/21593596/352be71c-d111e6-979a-7aa70abd2bf2.png)
 
 To verify that our event was forwarded to our log-function run
 
@@ -68,10 +74,10 @@ serverless logs --function log
 The expected result should be similar to:
 
 ```bash
-START RequestId: 24192153-d10f-11e6-936c-a98ff4127599 Version: $LATEST
-2017-01-02 18:16:04.768 (+01:00)	24192153-d10f-11e6-936c-a98ff4127599	{ message: 'My first IoT event', value: 2 }
-END RequestId: 24192153-d10f-11e6-936c-a98ff4127599
-REPORT RequestId: 24192153-d10f-11e6-936c-a98ff4127599	Duration: 23.53 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 8 MB
+START RequestId: 241921d10f-11e6-936c-a98ff4127599 Version: $LATEST
+2002 18:16:04.768 (+01:00)	241921d10f-11e6-936c-a98ff4127599	{ message: 'My first IoT event', value: 2 }
+END RequestId: 241921d10f-11e6-936c-a98ff4127599
+REPORT RequestId: 241921d10f-11e6-936c-a98ff4127599	Duration: 23.53 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 8 MB
 ```
 
 In the output you can see the IoT event that has been triggered from the test console.
