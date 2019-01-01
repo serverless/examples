@@ -432,5 +432,10 @@
     "name": "vanity-stargazer",
     "description": "Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack",
     "githubUrl": "https://github.com/silvermullet/vanity-stargazer"
+  },
+  {
+    "name": "Fotopia Serverless",
+    "description": "A photo archive web app including API, storage and face detection using serverless framework",
+    "githubUrl": "https://github.com/mbudm/fotopia-serverless"
   }
 ]
