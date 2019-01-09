@@ -442,5 +442,10 @@
     "name": "Fotopia Serverless",
     "description": "A photo archive web app including API, storage and face detection using serverless framework",
     "githubUrl": "https://github.com/mbudm/fotopia-serverless"
+  },
+  {
+    "name": "Commenting Service",
+    "description": "An API using Serverless framework, Typescript, GraphQl and Redis database",
+    "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService"
   }
 ]
