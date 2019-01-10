@@ -1,35 +1,35 @@
 [
- {
+  {
     "name": "AWS-Demo-Java-Spring-Cloud-Function-Serverless",
     "description": "If Java is your choice of programming language-Spring Cloud Function,Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities.",
     "githubUrl": "https://github.com/mbsambangi/aws-java-spring-cloud-function-demo"
- }, 	
- {
+  },
+  {
     "name": "Serverless Architecture Boilerplate",
     "description": "Boilerplate to organize and deploy big projects using Serverless and CloudFormation on AWS",
     "githubUrl": "https://github.com/msfidelis/serverless-architecture-boilerplate"
- },
- {
+  },
+  {
     "name": "bablebot",
     "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
     "githubUrl": "https://github.com/abiglobalhealth/babelbot"
- },
- {
+  },
+  {
     "name": "jwtAuthorizr",
     "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
     "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
- },
- {
+  },
+  {
     "name": "slack-signup-serverless",
     "description": "Serverless signup to Slack and more. Lambda with Python, StepFunctions, and Web front end. Python boilerplate included.",
     "githubUrl": "https://github.com/dzimine/slack-signup-serverless"
- },
- {
+  },
+  {
     "name": "serverless-graphql-api",
     "description": "Serverless GraphQL API using Lambda and DynamoDB",
     "githubUrl": "https://github.com/boazdejong/serverless-graphql-api"
- },
- {
+  },
+  {
     "name": "serverless-screenshot",
     "description": "Serverless Screenshot Service using PhantomJS",
     "url": "http://svdgraaf.nl/2016/09/28/Serverless-Screenshot-Service-With-Lambda.html",
@@ -166,7 +166,7 @@
     "name": "serverless-cloudwatch-rds-custom-metrics",
     "description": "A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless",
     "githubUrl": "https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics"
-  }, 
+  },
   {
     "name": "jrestless-examples",
     "description": "[JRestless](https://github.com/bbilger/jrestless) (Java / JAX-RS) examples for [API Gateway Functions](https://github.com/bbilger/jrestless-examples/tree/master/aws/gateway) ([plain JAX-RS](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-showcase), [Spring](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-spring), [binary data requests/responses](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-binary), [custom authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-custom-authorizer) and [Cognito User Pool authorizers](https://github.com/bbilger/jrestless-examples/blob/master/aws/gateway/aws-gateway-security-cognito-authorizer)), [SNS Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/sns/aws-sns-usage-example) (asynchronous communication between functions) and [Service Functions](https://github.com/bbilger/jrestless-examples/blob/master/aws/service/aws-service-usage-example) (synchronous HTTP-like communication between functions - transparent through Feign)",
@@ -244,9 +244,9 @@
     "githubUrl": "https://github.com/yunspace/serverless-golang"
   },
   {
-   "name": "video-preview-and-analysis-service",
-   "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
-   "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
+    "name": "video-preview-and-analysis-service",
+    "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
+    "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
   },
   {
     "name": "Serverless ES6/7 CRUD API",
@@ -272,8 +272,8 @@
     "name": "Amazon Kinesis Streams fan-out via Kinesis Analytics",
     "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
- },
- {
+  },
+  {
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
@@ -432,5 +432,10 @@
     "name": "vanity-stargazer",
     "description": "Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack",
     "githubUrl": "https://github.com/silvermullet/vanity-stargazer"
+  },
+  {
+    "name": "Commenting API",
+    "description": "A commenting api using Serverless Typescript GraphQl and Redis",
+    "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService"
   }
 ]
