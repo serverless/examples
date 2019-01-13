@@ -1,6 +1,6 @@
 <!--
 title: 'Node.js AWS Lambda connecting to Heroku Postgres'
-description: 'An example app showing how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation.'
+description: 'Shows how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation.'
 layout: Doc
 framework: v1
 platform: AWS
