@@ -1,7 +1,7 @@
 {
-  "name": "my-service",
+  "name": "aws-lambda-and-heroku-postgres",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shows how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation.",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
