@@ -1,4 +1,4 @@
-service: my-service # NOTE: update this with your service name
+service: aws-lambda-and-heroku-postgres # NOTE: update this with your service name
 
 provider:
   name: aws
