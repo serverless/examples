@@ -1,8 +1,13 @@
 <!--
-title: OpenWhisk Swift example with external libraries and pre-compiled binaries
-description: This example shows you how to use external packages and deploy
-binaries
+title: 'OpenWhisk Swift example with external libraries and pre-compiled binaries'
+description: 'This example shows you how to use external packages and deploy binaries'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Swift
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless OpenWhisk Swift Template
 
@@ -33,17 +38,6 @@ Account credentials for OpenWhisk can be provided through a configuration file o
 Using the framework with the OpenWhisk platform needs you to install the provider plugin and link this to your service. 
 
 ####  Install the provider plugin
-
-```
-$ npm install --global serverless-openwhisk
-```
-
-*Due to an [outstanding issue](https://github.com/serverless/serverless/issues/2895) with provider plugins, the [OpenWhisk provider](https://github.com/serverless/serverless-openwhisk) must be installed as a global module.*
-
-
-#### Link provider plugin to service directory
-
-Using `npm link` will import the provider plugin into the service directory. Running `npm install` will automatically perform this using a `post install` script. This also installs other serverless plugins (`serverless-plugin-scripts`) used in this project.
 
 ```
 $ npm install
@@ -89,7 +83,7 @@ OpenWhiskAction(main: hello)
 Binaries must be compiled for the correct platform architecture. This example uses the following Docker command to run the build in the OpenWhisk Swift environment.
 
 ```
-docker run --rm -it -v $(pwd):/swift-package openwhisk/swift3action bash -e -c 'cd /swift-package && swift build -v -c release'
+docker run --rm -it -v $(pwd):/swift-package openwhisk/action-swift-v3.1.1 bash -e -c 'cd /swift-package && swift build -v -c release'
 ```
 
 Plugins for the framework handle running the build scripts using npm prior to deployment.

@@ -1,0 +1,23 @@
+service: scrapper-lambda
+provider:
+  name: aws
+  profile: <your aws profile>
+  runtime: nodejs8.10
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-chrome
+  
+package:
+  exclude:
+    - node_modules/puppeteer/.local-chromium/**
+
+functions:
+  hello:
+    handler: handler.hello
+    memorySize: 1536MB
+    timeout: 60
+    events:
+      - http:
+          path: /
+          method: get

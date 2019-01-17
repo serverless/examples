@@ -1,0 +1,12 @@
+{
+  "name": "aws-golang-dynamo-stream-to-elasticsearch",
+  "version": "1.0.0",
+  "description": "This example deploys a DynamoDB Table, an Elasticsearch Node, and a lambda triggered off of a Dynamo Stream which updates an elasticsearch index with the data from the Dynamo Table",
+  "main": "",
+  "keywords": ["Go","serverless","aws","dynamodb","elasticsearch"],
+  "author": "Brian Jones <brian.jones@beeceej.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless": "^1.30.3"
+  }
+}

@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless REST API with DynamoDB store and presigned URLs example in Python 3.6.
-description: This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Assets. DynamoDB is used to store the data.
+title: 'AWS Serverless REST API with DynamoDB store and presigned URLs example in Python 3.6.'
+description: 'This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Assets. DynamoDB is used to store the data.'
 layout: Doc
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/bedge'
+authorName: 'Bruce Edge'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/499317?v=4&s=140'
 -->
 # Serverless REST API
 This example demonstrates how to setup a [RESTful Web Service](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) 
@@ -142,8 +148,8 @@ The $URL is the base URL specified in the POST endpoint above.
 <Error>
     <Code>AccessDenied</Code>
     <Message>Request has expired</Message>
-    <Expires>2017-11-27T01:03:04Z</Expires>
-    <ServerTime>2017-11-27T01:05:41Z</ServerTime>
+    <Expires>2027T01:03:04Z</Expires>
+    <ServerTime>2027T01:05:41Z</ServerTime>
     <RequestId>D4EFA3C1A8DDD525</RequestId>
     <HostId>vS12oM24ZidzjG0JZon/y/8XD8whCKD/0JZappUNOekOJ3Eqp10Q5ne0emPVM/Mx6K1lYr0bi6c=</HostId>
 </Error>
@@ -178,22 +184,22 @@ The $URL is the base URL specified in the POST endpoint above.
   "body": {
     "items": [
       {
-        "asset_id": "312aba96-d30f-11e7-b004-129b5a655d2d",
-        "createdAt": "2017-11-27T01:05:21.830944+0000",
+        "asset_id": "312abad30f-11e7-b0129b5a655d2d",
+        "createdAt": "2027T01:05:21.830944+0000",
         "state": "UPLOADED",
-        "updatedAt": "2017-11-27T01:07:05.311962+0000"
+        "updatedAt": "2027T01:07:05.311962+0000"
       },
       {
-        "asset_id": "0add1bcc-d30f-11e7-b004-129b5a655d2d",
-        "createdAt": "2017-11-27T01:05:21.830944+0000",
+        "asset_id": "0add1bcc-d30f-11e7-b0129b5a655d2d",
+        "createdAt": "2027T01:05:21.830944+0000",
         "state": "UPLOADED",
-        "updatedAt": "2017-11-27T01:06:19.413445+0000"
+        "updatedAt": "2027T01:06:19.413445+0000"
       },
       {
-        "asset_id": "57226e20-d30e-11e7-bda4-129b5a655d2d",
-        "createdAt": "2017-11-27T01:00:20.296693+0000",
+        "asset_id": "57226ed30e-11e7-bda4-129b5a655d2d",
+        "createdAt": "2027T01:00:20.296693+0000",
         "state": "CREATED",
-        "updatedAt": "2017-11-27T01:02:57.750625+0000"
+        "updatedAt": "2027T01:02:57.750625+0000"
       }
     ]
   }
@@ -203,7 +209,7 @@ The $URL is the base URL specified in the POST endpoint above.
 ### Get one Asset download URL
 
 ```bash
-%> curl -sX GET "$URL/57226e20-d30e-11e7-bda4-129b5a655d2d" | jsonpp
+%> curl -sX GET "$URL/57226ed30e-11e7-bda4-129b5a655d2d" | jsonpp
 {
   "statusCode": 202,
   "body": {
@@ -228,8 +234,8 @@ Use the `download_url` returned from the above GET
 <Error>
     <Code>AccessDenied</Code>
     <Message>Request has expired</Message>
-    <Expires>2017-11-27T03:15:54Z</Expires>
-    <ServerTime>2017-11-27T03:17:25Z</ServerTime>
+    <Expires>2027T03:15:54Z</Expires>
+    <ServerTime>2027T03:17:25Z</ServerTime>
     <RequestId>09B6B5DD49895A40</RequestId>
     <HostId>mlN7TDikYBhehryCiGXtROuNCZL+/50kfvA0Ui2NP2JPVyTCY9hIbQxlsayB2rdxefhHfKn77mI=</HostId>
 </Error>
@@ -237,7 +243,7 @@ Use the `download_url` returned from the above GET
 
 ### Delete an asset
 ```bash
-%> curl -sX DELETE "$URL/312aba96-d30f-11e7-b004-129b5a655d2d" | jsonpp
+%> curl -sX DELETE "$URL/312abad30f-11e7-b0129b5a655d2d" | jsonpp
 {
   "statusCode": 204
 }

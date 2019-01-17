@@ -1,0 +1,4 @@
+-----BEGIN CERTIFICATE-----
+PUBLIC KEY - can be found in `https://manage.auth0.com -> applications->${YOUR_APP_NAME}->settings->Show Advanced Settings->Certificates->DOWNLOAD CERTIFICATE.`
+You should download the certificate in PEM format and save it as a new file called `public_key`
+-----END CERTIFICATE-----

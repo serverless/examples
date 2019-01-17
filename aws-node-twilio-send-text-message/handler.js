@@ -1,48 +1,36 @@
+const Messenger = require('./messenger.js');
+
 const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
-const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken);
+const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken); // eslint-disable-line
 
 module.exports.sendText = (event, context, callback) => {
-  // use twilio SDK to send text message
-  const sms = {
-    to: event.body.to,
-    body: event.body.message || '',
-    from: twilioPhoneNumber,
+  const messenger = new Messenger(twilioClient);
+
+  const response = {
+    headers: { 'Access-Control-Allow-Origin': '*' }, // CORS requirement
+    statusCode: 200,
   };
-  // add image to sms if supplied
-  if (event.body.image) {
-    sms.mediaUrl = event.body.image;
-  }
-  twilioClient.messages.create(sms, (error, data) => { // eslint-disable-line
-    if (error) {
-      const errResponse = {
-        headers: {
-          'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-        },
-        statusCode: error.status,
-        body: JSON.stringify({
-          message: error.message,
-          error: error // eslint-disable-line
-        }),
-      };
-      return callback(null, errResponse);
-    }
+
+  Object.assign(event, { from: process.env.TWILIO_PHONE_NUMBER });
+
+  messenger.send(event)
+  .then((message) => {
     // text message sent! ✅
-    console.log(`message: ${data.body}`); // eslint-disable-line
-    console.log(`date_created: ${data.date_created}`); // eslint-disable-line
-
-    const response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-      },
-      body: JSON.stringify({
-        message: 'Text message successfully sent!',
-        data: data // eslint-disable-line
-      }),
-    };
-
+    console.log(`message ${message.body}`);
+    console.log(`date_created: ${message.date_created}`);
+    response.body = JSON.stringify({
+      message: 'Text message successfully sent!',
+      data: message,
+    });
+    callback(null, response);
+  })
+  .catch((error) => {
+    response.statusCode = error.status;
+    response.body = JSON.stringify({
+      message: error.message,
+      error: error, // eslint-disable-line
+    });
     callback(null, response);
   });
 };

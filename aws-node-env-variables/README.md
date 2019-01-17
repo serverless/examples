@@ -1,7 +1,13 @@
 <!--
-title: AWS Serverless Environment Variables Usage example in NodeJS
-description: This example demonstrates how to use environment variables for AWS Lambdas.
+title: 'AWS Serverless Environment Variables Usage example in NodeJS'
+description: 'This example demonstrates how to use environment variables for AWS Lambdas.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/rupakg'
+authorName: 'Rupak Ganguly'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Serverless Environment Variables Usage
 
@@ -73,12 +79,12 @@ The expected result should be similar to:
     "body": "{\"message\":\"User created\"}"
 }
 --------------------------------------------------------------------
-START RequestId: 78b0785d-afd3-11e6-8582-a7abb1cd48ef Version: $LATEST
-2016-11-21 11:15:48.575 (+01:00)	78b0785d-afd3-11e6-8582-a7abb1cd48ef	PASSWORD_ITERATIONS:  4096
-2016-11-21 11:15:48.576 (+01:00)	78b0785d-afd3-11e6-8582-a7abb1cd48ef	PASSWORD_DERIVED_KEY_LENGTH:  256
-2016-11-21 11:15:48.576 (+01:00)	78b0785d-afd3-11e6-8582-a7abb1cd48ef	EMAIL_SERVICE_API_KEY:  KEYEXAMPLE1234
-END RequestId: 78b0785d-afd3-11e6-8582-a7abb1cd48ef
-REPORT RequestId: 78b0785d-afd3-11e6-8582-a7abb1cd48ef	Duration: 3.36 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
+START RequestId: 78b0785d-afd3-11e6-85a7abb1cd48ef Version: $LATEST
+2021 11:15:48.575 (+01:00)	78b0785d-afd3-11e6-85a7abb1cd48ef	PASSWORD_ITERATIONS:  4096
+2021 11:15:48.576 (+01:00)	78b0785d-afd3-11e6-85a7abb1cd48ef	PASSWORD_DERIVED_KEY_LENGTH:  256
+2021 11:15:48.576 (+01:00)	78b0785d-afd3-11e6-85a7abb1cd48ef	EMAIL_SERVICE_API_KEY:  KEYEXAMPLE1234
+END RequestId: 78b0785d-afd3-11e6-85a7abb1cd48ef
+REPORT RequestId: 78b0785d-afd3-11e6-85a7abb1cd48ef	Duration: 3.36 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
 ```
 
 ```bash
@@ -93,10 +99,10 @@ The expected result should be similar to:
     "body": "{\"message\":\"Password sent.\"}"
 }
 --------------------------------------------------------------------
-START RequestId: 9cc33d72-afd3-11e6-b918-19a4e146bf3d Version: $LATEST
-2016-11-21 11:16:48.838 (+01:00)	9cc33d72-afd3-11e6-b918-19a4e146bf3d	EMAIL_SERVICE_API_KEY:  KEYEXAMPLE1234
-END RequestId: 9cc33d72-afd3-11e6-b918-19a4e146bf3d
-REPORT RequestId: 9cc33d72-afd3-11e6-b918-19a4e146bf3d	Duration: 3.14 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
+START RequestId: 9cc33dafd3-11e6-b919a4e146bf3d Version: $LATEST
+2021 11:16:48.838 (+01:00)	9cc33dafd3-11e6-b919a4e146bf3d	EMAIL_SERVICE_API_KEY:  KEYEXAMPLE1234
+END RequestId: 9cc33dafd3-11e6-b919a4e146bf3d
+REPORT RequestId: 9cc33dafd3-11e6-b919a4e146bf3d	Duration: 3.14 ms	Billed Duration: 100 ms 	Memory Size: 1024 MB	Max Memory Used: 15 MB
 ```
 
 Especially helpful for local development you can also invoke the Lambda locally and see the resulting log via

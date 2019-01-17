@@ -1,7 +1,13 @@
 <!--
-title: AWS Serving Dynamic HTML via API Gateway example in NodeJS
-description: This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.
+title: 'AWS Serving Dynamic HTML via API Gateway example in NodeJS'
+description: 'This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/slate71'
+authorName: 'Lukas Andersen'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/2078561?v=4&s=140'
 -->
 # Serving Dynamic HTML via API Gateway Example
 
@@ -30,7 +36,7 @@ callback(null, response);
 
 ## Deploy
 
-In order to deploy the you endpoint simply run
+In order to deploy the endpoint simply run
 
 ```bash
 serverless deploy
@@ -89,7 +95,7 @@ Of course you can visit the URL in your browser and this is how it should look l
 
 ![Screenshot without a name](https://cloud.githubusercontent.com/assets/223045/20668061/12c6db9a-b56d-11e6-911c-8396d545471a.png)
 
-To greet a specific person provide attach the query parameter with the name of that person e.g. `?name=Nik%20Graf`. The response should now contain the provided name:
+To greet a specific person, provide the query parameter with the name of that person e.g. `?name=Nik%20Graf`. The response should now contain the provided name:
 
 ![Screenshot with a name](https://cloud.githubusercontent.com/assets/223045/20668055/0758b4cc-b56d-11e6-80ce-3e137151311f.png)
 

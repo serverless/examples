@@ -1,19 +1,18 @@
 {
   "name": "serverless-examples",
   "version": "0.0.0",
-  "description": "A compilation of serveral examples and boilerplates",
+  "description": "A compilation of several examples and boilerplates",
   "scripts": {
     "lint": "eslint .",
     "docs": "node generate-readme.js"
   },
   "license": "MIT",
   "dependencies": {
-    "eslint": "^3.10.0",
+    "eslint": "^5.10.0",
     "eslint-config-airbnb-base": "^10.0.1",
-    "eslint-plugin-import": "^2.2.0",
-    "markdown-magic": "^0.1.13"
+    "eslint-plugin-import": "^2.14.0"
   },
   "devDependencies": {
-    "markdown-magic": "^0.1.14"
+    "markdown-magic": "^0.1.25"
   }
 }
