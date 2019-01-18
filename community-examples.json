@@ -1,5 +1,5 @@
 [
- {
+{
     "name": "Spiderless, Web Spider on Serverless",
     "description": "A web spider / scraper / website change detector built with Lambda, API Gateway, DynamoDB and SNS",
     "githubUrl": "https://github.com/slashbit/spider-less"
@@ -442,5 +442,10 @@
     "name": "Fotopia Serverless",
     "description": "A photo archive web app including API, storage and face detection using serverless framework",
     "githubUrl": "https://github.com/mbudm/fotopia-serverless"
+  },
+  {
+    "name": "Commenting API",
+    "description": "A commenting api using Serverless Typescript GraphQl and Redis",
+    "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService"
   }
 ]
