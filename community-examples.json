@@ -114,7 +114,7 @@
   {
     "name": "serverless-newsletter-signup",
     "description": "Saves user details into DynamoDB table. Required values are email, first_name and last_name.",
-    "githubUrl": "https://github.com/ivanderbu2/serverless-newsletter-signup"
+    "githubUrl": "https://github.com/dschep/serverless-newsletter-signup"
   },
   {
     "name": "serverless-slack-cron",
