@@ -7,7 +7,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs8.10
   stage: dev
   region: us-west-1
   iamRoleStatements:
