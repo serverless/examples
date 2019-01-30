@@ -66,7 +66,7 @@ This service will listen to github webhooks fired by a given repository.
   ```yml
   provider:
     name: aws
-    runtime: nodejs4.3
+    runtime: nodejs8.10
     environment:
       GITHUB_WEBHOOK_SECRET: REPLACE-WITH-YOUR-SECRET-HERE
   ```

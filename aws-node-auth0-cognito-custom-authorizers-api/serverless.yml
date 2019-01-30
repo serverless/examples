@@ -3,7 +3,7 @@ service: aws-node-auth0-cognito-custom-authorizers-api
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs8.10
 
 functions:
   publicEndpoint:
