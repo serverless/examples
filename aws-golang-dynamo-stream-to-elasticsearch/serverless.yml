@@ -90,15 +90,17 @@ resources:
           Iops: 0
           VolumeSize: 10
           VolumeType: "gp2"
-        AccessPolicies:
-          Version: "2012-10-17"
-          Statement:
-            -
-              Effect: "Allow"
-              Principal:
-                AWS: "*"
-              Action: "es:*"
-              Resource: "*"
+
+        ## Attention! Before you enable this lines, check out the README to avoid an open access policy
+        # AccessPolicies:
+        #   Version: "2012-10-17"
+        #   Statement:
+        #     -
+        #       Effect: "Allow"
+        #       Principal:
+        #         AWS: "*"
+        #       Action: "es:*"
+        #       Resource: "*"
         AdvancedOptions:
           rest.action.multi.allow_explicit_index: "true"
 
