@@ -452,5 +452,10 @@
     "name": "Commenting API",
     "description": "A commenting api using Serverless Typescript GraphQl and Redis",
     "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService"
+  },
+  {
+    "name": "reddelete",
+    "description": "Periodically deletes a user's Reddit comments below a defined score",
+    "githubUrl": "https://github.com/ScottBrenner/reddelete"
   }
 ]
