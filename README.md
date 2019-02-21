@@ -13,12 +13,14 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 <details>
 <summary>Click to expand</summary>
 
-- [Getting Started](#getting-started)
-- [Examples](#examples)
-- [Community Examples](#community-examples)
-- [Contributing](#contributing)
-  * [Adding example code](#adding-example-code)
-  * [Adding a community example](#adding-a-community-example)
+- [Serverless Examples](#serverless-examples)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [Examples](#examples)
+  - [Community Examples](#community-examples)
+  - [Contributing](#contributing)
+    - [Adding example code](#adding-example-code)
+    - [Adding a community example](#adding-a-community-example)
 
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -64,7 +66,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |
 | [Aws Lambda And Mongodb Atlas](https://github.com/serverless/examples/tree/master/aws-node-mongodb-atlas) <br/> Shows how to connect AWS Lambda to MongoDB Atlas. | nodeJS |
 | [Dropbox](https://github.com/serverless/examples/tree/master/aws-node-oauth-dropbox-api) <br/> dropbox integration | nodeJS |
-| [Aws Node Puppeteer](https://github.com/serverless/examples/tree/master/aws-node-puppeteer) <br/> When it comes to AWS Lambda function , they have their own limits as follows ![AWS Limits](./images/aws_limits.png) So , When you try to use Puppeteer your deployment package size(unzipped)  easily go's above 250 mb because When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API. | nodeJS |
+| [Aws Node Puppeteer](https://github.com/serverless/examples/tree/master/aws-node-puppeteer) <br/> When it comes to AWS Lambda function , they have their own limits as follows ![AWS Limits](./images/aws_limits.png) So , When you try to use Puppeteer your deployment package size(unzipped)  easily go's above 250 mb because When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API. | nodeJS |
 | [Aws Node Rekognition Analysis S3 Image](https://github.com/serverless/examples/tree/master/aws-node-rekognition-analysis-s3-image) <br/> Analyse an Image from an S3 Bucket with Amazon Rekognition | nodeJS |
 | [Aws Node Restapi Mongodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-mongodb) <br/> Serverless REST API with MongoDB using Mongoose and Bluebird | nodeJS |
 | [Aws Rest Api Offline](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb-and-offline) <br/> Serverless REST API with DynamoDB and offline support | nodeJS |
@@ -147,6 +149,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Daily Instance Backups With Ami Rotation](https://github.com/AndrewFarley/AWSAutomatedDailyInstanceAMISnapshots)** <br/> A simple Python application which scans through your entire AWS account for tagged instances, makes daily AMIs of them, and rotates their backups automatically | [AndrewFarley](http://github.com/AndrewFarley) |
 | **[Dropbucket   Serverless File Sharing](https://github.com/marksteele/drop-bucket)** <br/> A serverless file sharing app powered by Cognito/S3/Lambda/API Gateway. Includes a React single-page app UI and virus scanning. | [marksteele](http://github.com/marksteele) |
 | **[Fotopia Serverless](https://github.com/mbudm/fotopia-serverless)** <br/> A photo archive web app including API, storage and face detection using serverless framework | [mbudm](http://github.com/mbudm) |
+| **[json-server-less-λ](https://github.com/pharindoko/json-server-less-lambda)** <br/> simple & cheap serverless REST API using [json-server](https://github.com/typicode/json-server) in combination with AWS Lambda / S3 and the serverless framework | [pharindoko](http://github.com/pharindoko) |
 | **[Lambda Pubsub Via Sns Example](https://github.com/didil/serverless-lambda-sns-example)** <br/> Example illustrating the flow: Lambda (publisher) => SNS => Lambda (consumer) | [didil](http://github.com/didil) |
 | **[Open Bot](https://github.com/open-bot/open-bot)** <br/> An unoptionated Github bot driven by a configuration file in the repository | [open-bot](http://github.com/open-bot) |
 | **[Personal Access Tokens Cron Check](https://github.com/madtrick/cfpat-audit)** <br/> Audit for leaked PAT in your Contentful organization. How to use serverless as cronjobs to keep your Personal Access Tokens secure | [madtrick](http://github.com/madtrick) |
