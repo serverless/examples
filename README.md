@@ -75,6 +75,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Serverless Gong](https://github.com/serverless/examples/tree/master/aws-node-serverless-gong) <br/> A simple serverless gong using GitHub webhooks and a Slack app | nodeJS |
 | [Aws Node Ses Receive Email Body](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body) <br/> Receive an email, store in S3 bucket, trigger a lambda function. | nodeJS |
 | [Aws Node Ses Receive Email Header](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header) <br/> Receive an email, trigger a lambda function to process header. | nodeJS |
+| [Aws Node Singned Uploads](https://github.com/serverless/examples/tree/master/aws-node-signed-uploads) <br/> Serverless example for S3 signed uploads | nodeJS |
 | [Aws Serve Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | nodeJS |
 | [Aws Node Simple Transcribe S3](https://github.com/serverless/examples/tree/master/aws-node-simple-transcribe-s3) <br/> Example demonstrates how to setup a lambda function to transcribe audio file | nodeJS |
 | [Aws Single Page App Via Cloudfront](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront) <br/> Demonstrating how to deploy a Single Page Application with Serverless | nodeJS |
@@ -176,6 +177,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Stack Overflow Monitor](https://github.com/picsoung/stackoverflowmonitor)** <br/> Monitor Stack Overflow questions and post them in a Slack channel | [picsoung](http://github.com/picsoung) |
 | **[Adoptable Pet Bot](https://github.com/lynnaloo/adoptable-pet-bot)** <br/> Tweets adoptable pets using Serverless (Node.js) and AWS Lambda | [lynnaloo](http://github.com/lynnaloo) |
 | **[Aws Mfa Enforce](https://github.com/Chan9390/aws-mfa-enforce)** <br/> Serverless function to automate enforcement of Multi-Factor Authentication (MFA) to all AWS IAM users with access to AWS Management Console. | [Chan9390](http://github.com/Chan9390) |
+| **[Aws Node Signed Uploads](https://github.com/kalinchernev/aws-node-signed-uploads)** <br/> Upload files larger than 10MB with AWS Lambda and API Gateway. Can be developed and tested locally. | [kalinchernev](http://github.com/kalinchernev) |
 | **[Aws Ses Serverless Example](https://github.com/lakshmantgld/aws-ses-serverless-example)** <br/> AWS SES example in NodeJS using lambda | [lakshmantgld](http://github.com/lakshmantgld) |
 | **[Bablebot](https://github.com/abiglobalhealth/babelbot)** <br/> Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own! | [abiglobalhealth](http://github.com/abiglobalhealth) |
 | **[Bittman](https://github.com/rhlsthrm/bittman)** <br/> A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun. | [rhlsthrm](http://github.com/rhlsthrm) |
