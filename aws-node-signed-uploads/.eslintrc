@@ -2,11 +2,5 @@
   root: true
   extends:
     - airbnb-base
-  rules:
-    prettier/prettier:
-      - error
-      -
-        trailingComma: es5
-        singleQuote: true
   env:
     node: true
