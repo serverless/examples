@@ -462,5 +462,10 @@
     "name": "json-server-less-λ",
     "description": "A simple & cheap serverless REST API using [json-server](https://github.com/typicode/json-server) in combination with AWS Lambda / S3 and the serverless framework",
     "githubUrl": "https://github.com/pharindoko/json-server-less-lambda"
+  },
+  {
+    "name": "serverless-node-api-dynamodb-neo4j",
+    "description": "Architecture example to stream DynamoDB data to a read-model using Neo4j",
+    "githubUrl": "https://github.com/noetix/serverless-node-api-dynamodb-neo4j"
   }
 ]
