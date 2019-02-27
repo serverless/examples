@@ -1,0 +1,210 @@
+service: appsync-aurora-example
+
+plugins:
+  - serverless-appsync-plugin
+
+excludeDevDependencies: false
+package:
+  exclude:
+    - mapping-templates/**
+    - scripts/**
+    - src/**
+
+custom:
+  appSync:
+    name: ${self:service}-${self:provider.stage}
+    authenticationType: AWS_IAM
+    serviceRole: ${self:service}-AppSyncServiceRole
+    mappingTemplates: []
+    dataSources: []
+  db:
+    database: app
+    username: user
+    password: password
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-central-1'}
+  vpc:
+    securityGroupIds:
+      - Ref: LambdaSecurityGroup
+    subnetIds:
+      - Ref: Subnet1
+      - Ref: Subnet2
+      - Ref: Subnet3
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ec2:CreateNetworkInterface
+        - ec2:DescribeNetworkInterfaces
+        - ec2:DeleteNetworkInterface
+      Resource: '*'
+  logRetentionInDays: 7
+  environment:
+    NODE_ENV: production
+    STAGE: ${opt:stage, 'dev'}
+    COMMIT_HASH: ${env:CIRCLE_SHA1, 'dev'}
+    MYSQL_HOST:
+      Fn::GetAtt: DBCluster.Endpoint.Address
+    MYSQL_PORT:
+      Fn::GetAtt: DBCluster.Endpoint.Port
+    MYSQL_DB: ${self:custom.db.database}
+    MYSQL_USER: ${self:custom.db.username}
+    MYSQL_PASSWORD: ${self:custom.db.password}
+
+functions: {}
+
+resources:
+  Resources:
+    AppSyncLambdaServiceRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: Lambda-${self:custom.appSync.serviceRole}
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - appsync.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+          - PolicyName: Lambda-${self:custom.appSync.serviceRole}-Policy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - lambda:invokeFunction
+                  Resource: []
+
+    VPC:
+      Type: AWS::EC2::VPC
+      Properties:
+        CidrBlock: '10.0.0.0/16'
+
+    Subnet1:
+      DependsOn: VPC
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: VPC
+        AvailabilityZone:
+          Fn::Select: ['0', { Fn::GetAZs: '' }]
+        CidrBlock: '10.0.0.0/24'
+
+    Subnet2:
+      DependsOn: VPC
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: VPC
+        AvailabilityZone:
+          Fn::Select: ['1', { Fn::GetAZs: '' }]
+        CidrBlock: '10.0.1.0/24'
+
+    Subnet3:
+      DependsOn: VPC
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: VPC
+        AvailabilityZone:
+          Fn::Select: ['2', { Fn::GetAZs: '' }]
+        CidrBlock: '10.0.2.0/24'
+
+    LambdaSecurityGroup:
+      DependsOn: VPC
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: SecurityGroup for functions
+        VpcId:
+          Ref: VPC
+
+    DBSubnetGroup:
+      Type: AWS::RDS::DBSubnetGroup
+      Properties:
+        DBSubnetGroupDescription: Subnet for RDS
+        SubnetIds:
+          - Ref: Subnet1
+          - Ref: Subnet2
+          - Ref: Subnet3
+
+    DBSecurityGroup:
+      DependsOn: VPC
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: SecurityGroup for RDS
+        VpcId:
+          Ref: VPC
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: 3306
+            ToPort: 3306
+            SourceSecurityGroupId:
+              Ref: LambdaSecurityGroup
+
+    DBCluster:
+      Type: AWS::RDS::DBCluster
+      Properties:
+        Engine: aurora
+        EngineMode: serverless
+        DatabaseName: ${self:custom.db.database}
+        MasterUsername: ${self:custom.db.username}
+        MasterUserPassword: ${self:custom.db.password}
+        ScalingConfiguration:
+          MaxCapacity: 2
+        VpcSecurityGroupIds:
+          - Fn::GetAtt: DBSecurityGroup.GroupId
+        DBSubnetGroupName:
+          Ref: DBSubnetGroup
+
+    IdentityPool:
+      Type: AWS::Cognito::IdentityPool
+      Properties:
+        AllowUnauthenticatedIdentities: true
+
+    AuthenticatedRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: ${self:service}-AuthenticatedRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Federated: cognito-identity.amazonaws.com
+              Action: sts:AssumeRoleWithWebIdentity
+              Condition:
+                StringEquals:
+                  cognito-identity.amazonaws.com:aud:
+                    Ref: IdentityPool
+                ForAnyValue:StringLike:
+                  cognito-identity.amazonaws.com:amr: authenticated
+        Policies:
+          - PolicyName: ${self:service}-AuthenticatedPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action: appsync:GraphQL
+                  Resource:
+                    - Fn::Join:
+                        - '/'
+                        - - 'arn:aws:appsync:*:*:apis'
+                          - Fn::GetAtt: GraphQlApi.ApiId
+
+    IdentityPoolRoleAttachment:
+      DependsOn: AuthenticatedRole
+      Type: AWS::Cognito::IdentityPoolRoleAttachment
+      Properties:
+        IdentityPoolId:
+          Ref: IdentityPool
+        Roles:
+          authenticated:
+            Fn::GetAtt: AuthenticatedRole.Arn
+          unauthenticated:
+            Fn::GetAtt: AuthenticatedRole.Arn

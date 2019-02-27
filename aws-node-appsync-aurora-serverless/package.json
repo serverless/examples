@@ -1,0 +1,29 @@
+{
+  "name": "aws-node-appsync-aurora-serverless",
+  "version": "1.0.0",
+  "description": "GraphQL API with AWS AppSync and a serverless Aurora backend",
+  "author": "Philipp Jardas <philipp@jardas.de>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "del dist serverless.yml",
+    "build": "npm run clean && rollup -c rollup.config.js",
+    "deploy": "npm run build && node scripts/serverless-appsync.js && serverless deploy",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "mysql2": "^1.6.5",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {
+    "del-cli": "^1.1.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.1.0",
+    "js-yaml": "^3.12.1",
+    "rollup": "^0.67.3",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "serverless": "^1.34.0",
+    "serverless-appsync-plugin": "^1.0.9"
+  }
+}
