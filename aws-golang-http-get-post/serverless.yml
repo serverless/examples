@@ -63,6 +63,16 @@ functions:
             parameter:
               paths:
                 name: true
+  getquery:
+    handler: bin/getQueryBin
+    events:
+      - http:
+          path: getQ
+          method: get
+          request:
+            parameters:
+              querystrings:
+                name: true
   post:
     handler: bin/postBin
     events:
