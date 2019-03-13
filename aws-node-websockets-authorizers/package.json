@@ -1,0 +1,7 @@
+{
+  "name": "aws-nodejs-websockets-authorizers",
+  "version": "1.0.0",
+  "description": "Simple example that demonstrates how to use authorizer functions with websocket events",
+  "author": "",
+  "license": "MIT"
+}
