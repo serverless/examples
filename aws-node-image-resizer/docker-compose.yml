@@ -1,0 +1,8 @@
+version: "3"
+services:
+  image-resize:
+    build: .
+    volumes:
+      - ./secrets:/deploy/secrets
+    env_file:
+      - ./secrets/secrets.env
