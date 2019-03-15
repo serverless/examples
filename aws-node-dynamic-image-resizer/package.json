@@ -1,0 +1,45 @@
+{
+  "name": "aws-node-dynamic-image-resizer",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Sebastian Borza",
+  "scripts": {
+    "eslint": "eslint ./src",
+    "deploy": "SLS_DEBUG=* sls deploy --stage $STAGE --region $REGION --verbose",
+    "deploy:local": "export $(cat ./config/.env | xargs) && serverless deploy --stage $STAGE --region $REGION --verbose",
+    "remove:stack": "export $(cat ./config/.env | xargs) && sls remove -s $STAGE",
+    "offline": "export $(cat ./config/.env | xargs) && serverless offline start --stage $STAGE",
+    "add:env": "./config/push-secret.sh"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.3.1",
+    "babel-runtime": "^7.0.0-beta.3",
+    "lodash": "^4.17.11",
+    "serverless-offline": "^4.7.0",
+    "serverless-webpack": "^5.2.0",
+    "sharp": "^0.21.3",
+    "source-map-support": "^0.5.10",
+    "stream": "^0.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "aws-sdk": "^2.409.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.1.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "jest": "^23.6.0",
+    "serverless": "^1.35.1",
+    "webpack": "^4.28.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  }
+}
