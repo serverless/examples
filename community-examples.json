@@ -467,5 +467,10 @@
     "name": "serverless-node-api-dynamodb-neo4j",
     "description": "Architecture example to stream DynamoDB data to a read-model using Neo4j",
     "githubUrl": "https://github.com/noetix/serverless-node-api-dynamodb-neo4j"
+  },
+  {
+    "name": "serverless-python-rds-cron",
+    "description": "A serverless python example that periodically removes entries from AWS RDS",
+    "githubUrl": "https://github.com/caulagi/serverless-python-rds-cron"
   }
 ]
