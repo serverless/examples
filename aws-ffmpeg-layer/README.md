@@ -2,6 +2,7 @@
 ```
 git clone https://github.com/serverless/examples
 cd examples/aws-ffmpeg-layer
+./build.sh
 sls deploy
 ```
 
