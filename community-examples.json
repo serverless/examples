@@ -1,5 +1,10 @@
 [
   {
+    "name": "Serverless Lambda S3 Demonstration",
+    "description": "This project demonstrates how the Serverless Framework can be used to deploy a NodeJS Lambda function that responds to events in an S3 bucket.",
+    "githubUrl": "https://github.com/johncmunson/serverless-lambda-s3"
+  },
+  {
     "name": "DropBucket - Serverless file sharing",
     "description": "A serverless file sharing app powered by Cognito/S3/Lambda/API Gateway. Includes a React single-page app UI and virus scanning.",
     "githubUrl": "https://github.com/marksteele/drop-bucket"
