@@ -60,7 +60,6 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Function Compiled With Babel](https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel) <br/> Demonstrating how to compile all your code with Babel | nodeJS |
 | [Serverless Github Check](https://github.com/serverless/examples/tree/master/aws-node-github-check)  | nodeJS |
 | [Aws Github Webhook Listener](https://github.com/serverless/examples/tree/master/aws-node-github-webhook-listener) <br/> Extend your github repositories with this github webhook listener | nodeJS |
-| [Aws Node Shared API Gateway](https://github.com/serverless/examples/tree/master/aws-node-shared-gateway) <br/> Demonstration of a shared API Gateway between multiple Lambdas. | nodeJS |
 | [Aws Node Graphql Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-node-graphql-api-with-dynamodb) <br/> A single-module GraphQL endpoint with query and mutation functionality. | nodeJS |
 | [Aws Lambda And Heroku Postgres](https://github.com/serverless/examples/tree/master/aws-node-heroku-postgres) <br/> Shows how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation. | nodeJS |
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |
@@ -77,6 +76,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Serverless Gong](https://github.com/serverless/examples/tree/master/aws-node-serverless-gong) <br/> A simple serverless gong using GitHub webhooks and a Slack app | nodeJS |
 | [Aws Node Ses Receive Email Body](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body) <br/> Receive an email, store in S3 bucket, trigger a lambda function. | nodeJS |
 | [Aws Node Ses Receive Email Header](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header) <br/> Receive an email, trigger a lambda function to process header. | nodeJS |
+| [Shared Aws Api Gateway Nodejs](https://github.com/serverless/examples/tree/master/aws-node-shared-gateway) <br/> A sample of implementing shared API gateway with multiple Node Lambdas. | nodeJS |
 | [Aws Node Singned Uploads](https://github.com/serverless/examples/tree/master/aws-node-signed-uploads) <br/> Serverless example for S3 signed uploads | nodeJS |
 | [Aws Serve Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | nodeJS |
 | [Aws Node Simple Transcribe S3](https://github.com/serverless/examples/tree/master/aws-node-simple-transcribe-s3) <br/> Example demonstrates how to setup a lambda function to transcribe audio file | nodeJS |
