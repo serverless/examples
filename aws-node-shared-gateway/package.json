@@ -1,0 +1,14 @@
+{
+  "name": "shared-aws-api-gateway-nodejs",
+  "version": "1.0.0",
+  "description": "A sample of implementing shared API gateway with multiple Node Lambdas.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  }
+}
