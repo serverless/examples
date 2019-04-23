@@ -140,6 +140,12 @@ resources:
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
 ```
 
+We need to run `serverless deploy` again to update the changes made in `serverless.yml`:
+
+```
+$ serverless deploy
+```
+
 To use it we need the [aws-sdk](https://www.npmjs.com/package/aws-sdk), In this example, I use the SDK's vanilla DocumentClient to access DynamoDB records.
 ```sh
 $ npm install --save aws-sdk
