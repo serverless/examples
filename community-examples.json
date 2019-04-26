@@ -480,7 +480,7 @@
   },
   {
     "name": "Nietzsche",
-    "description": "A serverless nodejs application that fetches quotes from Goodreads and saves it to DynamoDB",
+    "description": "A serverless application that fetches quotes from Goodreads and saves it to DynamoDB with example use cases using `Lambda`, `SNS`, `SQS`, `Step Functions`, `DynamoDB`, `API Gateway`, `CloudWatch`",
     "githubUrl": "https://github.com/rpidanny/Nietzsche"
   }
 ]
