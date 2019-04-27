@@ -10,7 +10,7 @@ authorName: 'Francisco Ortiz'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/4025821?v=4&s=140'
 -->
 # Serverless Github Check
-Serverless Github Check. This repo is part of the [Serverless November Challengue](https://serverless.com/blog/no-server-november-challenge/)
+Serverless Github Check. This repo is part of the [Serverless November Challenge](https://serverless.com/blog/no-server-november-challenge/)
 
 ### Use Case
 
