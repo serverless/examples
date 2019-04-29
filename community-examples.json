@@ -477,5 +477,10 @@
     "name": "serverless-python-rds-cron",
     "description": "A serverless python example that periodically removes entries from AWS RDS",
     "githubUrl": "https://github.com/caulagi/serverless-python-rds-cron"
+  },
+  {
+    "name": "Nietzsche",
+    "description": "A serverless application that fetches quotes from Goodreads and saves it to DynamoDB with example use cases using `Lambda`, `SNS`, `SQS`, `Step Functions`, `DynamoDB`, `API Gateway`, `CloudWatch`",
+    "githubUrl": "https://github.com/rpidanny/Nietzsche"
   }
 ]
