@@ -482,5 +482,10 @@
     "name": "Nietzsche",
     "description": "A serverless application that fetches quotes from Goodreads and saves it to DynamoDB with example use cases using `Lambda`, `SNS`, `SQS`, `Step Functions`, `DynamoDB`, `API Gateway`, `CloudWatch`",
     "githubUrl": "https://github.com/rpidanny/Nietzsche"
+  },
+  {
+    "name": "aws-node-websockets",
+    "description": "Starting place for Serverless websockets on aws. Deployed to your aws out-of-the-box, includes dynamodb to manage connections",
+    "githubUrl": "https://github.com/Ascendzor/aws-node-websockets"
   }
 ]
