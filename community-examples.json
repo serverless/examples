@@ -482,5 +482,10 @@
     "name": "Nietzsche",
     "description": "A serverless application that fetches quotes from Goodreads and saves it to DynamoDB with example use cases using `Lambda`, `SNS`, `SQS`, `Step Functions`, `DynamoDB`, `API Gateway`, `CloudWatch`",
     "githubUrl": "https://github.com/rpidanny/Nietzsche"
+  },
+  {
+    "name": "serverless DotNet BoilerPlate",
+    "description": "A serverless starter solution for .NET Core, ready for local debugging in VS Code, HTTP Endpoint, etc.",
+    "githubUrl": "https://github.com/pharindoko/serverlessDotNetSample"
   }
 ]
