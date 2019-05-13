@@ -10,15 +10,12 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  async asyncData({ store, route }) {
-    const { data } = await axios.get(
-      "https://api.thedogapi.com/v1/images/search?size=thumb&has_breeds=true&limit=50"
-    );
+  async asyncData({ store, $http, route }) {
+    const dogs = await $http.$get("images/search?size=thumb&has_breeds=true&limit=50");
 
     const reg = new RegExp(route.params.breed, "g");
-    const filteredDogs = data.filter(dog => 
+    const filteredDogs = dogs.filter(dog =>
       dog.breeds[0]
         .name
         .toLowerCase()
