@@ -163,4 +163,4 @@ Navigate to `vuessr-yourdomain.com` or whichever domain you picked. You'll see t
 
 ---
 
-I've written a detailed tutorial about the process. You can check it out [here](https://dev.to/adnanrahic/a-crash-course-on-serverless-side-rendering-with-vuejs-nuxtjs-and-aws-lambda-1nk4).
+I've written a detailed tutorial about the process. You can check it out [here](https://dev.to/adnanrahic/a-crash-course-on-serverless-side-rendering-with-vuejs-nuxtjs-and-aws-lambda-1nk4). (**NOTE:** Some parts are outdated and are for `nuxt@1`. Please refer to this example for using with `nuxt@2`)
