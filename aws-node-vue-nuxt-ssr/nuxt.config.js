@@ -1,7 +1,6 @@
-const env = require('./secrets.json').NODE_ENV;
-
 module.exports = {
   mode: 'universal',
+
   head: {
     title: 'Vue Nuxt Test',
     meta: [
@@ -10,16 +9,18 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Nuxt.js project' },
     ],
   },
-  build: {
-    vendor: ['axios'],
-    publicPath: `/${env}/_nuxt/`,
-  },
+
   srcDir: 'client/',
-  performance: {
-    gzip: false,
+
+  modules: [
+    '@nuxt/http',
+  ],
+
+  http: {
+    baseURL: 'https://api.thedogapi.com/v1/',
   },
-  router: {
-    base: '/',
+
+  render: {
+    compressor: false,
   },
-  dev: false,
 };

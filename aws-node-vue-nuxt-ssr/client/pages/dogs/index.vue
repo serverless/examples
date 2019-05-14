@@ -10,13 +10,10 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  async asyncData({ params }) {
-    const { data } = await axios.get(
-      "https://api.thedogapi.com/v1/images/search?size=thumb&limit=10"
-    );
-    return { dogs: data };
+  async asyncData({ params, $http }) {
+    const dogs = await $http.$get("images/search?size=thumb&limit=10");
+    return { dogs };
   },
   head() {
     return {
