@@ -7,13 +7,10 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  async asyncData({ params }) {
-    const { data } = await axios.get(
-      "https://api.thedogapi.com/v1/images/search?limit=1"
-    );
-    return { dog: data[0] };
+  async asyncData({ params, $http }) {
+    const dogs = await $http.$get("https://api.thedogapi.com/v1/images/search?limit=1");
+    return { dog: dogs[0] };
   }
 };
 </script>
