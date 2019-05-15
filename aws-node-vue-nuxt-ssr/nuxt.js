@@ -1,11 +1,8 @@
-const express = require('express');
-const { Nuxt } = require('nuxt');
-const path = require('path');
+const { Nuxt } = require('nuxt-start');
+
 const config = require('./nuxt.config.js');
 
-const app = express();
-const nuxt = new Nuxt(config);
-app.use('/_nuxt', express.static(path.join(__dirname, '.nuxt', 'dist')));
-app.use(nuxt.render);
+const nuxt = new Nuxt({ ...config, dev: false });
 
-module.exports = app;
+module.exports = (req, res) =>
+  nuxt.ready().then(() => nuxt.server.app(req, res));
