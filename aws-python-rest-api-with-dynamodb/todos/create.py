@@ -13,7 +13,6 @@ def create(event, context):
     if 'text' not in data:
         logging.error("Validation Failed")
         raise Exception("Couldn't create the todo item.")
-        return
 
     timestamp = int(time.time() * 1000)
 
