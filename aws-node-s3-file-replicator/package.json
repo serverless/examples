@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "author": "Bozhao Yu",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "aws-sdk": "^2.467.0"
   }
 }
