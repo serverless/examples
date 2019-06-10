@@ -13,7 +13,11 @@ def create(event, context):
     if 'text' not in data:
         logging.error("Validation Failed")
         raise Exception("Couldn't create the todo item.")
-
+  
+    # Set the timezone
+    os.environ['TZ'] = 'UTC'
+    time.tzset()
+    
     timestamp = int(time.time() * 1000)
 
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
