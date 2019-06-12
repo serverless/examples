@@ -1,0 +1,11 @@
+{
+  "name": "aws-fetch-file-and-store-in-s3",
+  "description": "Fetch an image from remote source (URL) and then upload the image to a S3 bucket.",
+  "version": "1.0.0",
+  "author": "Bozhao Yu",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.467.0"
+  }
+}

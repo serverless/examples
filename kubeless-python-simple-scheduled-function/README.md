@@ -15,7 +15,7 @@ Make sure `kubeless` and `serverless` are installed. See the respective installa
 * [Kubeless](https://github.com/kubeless/kubeless/blob/master/README.md#usage)
 * [Serverless](https://github.com/serverless/serverless#quick-start)
 
-Please see the [this guide for more information](https://github.com/serverless/serverless-kubeless/blob/master).
+Please see the [this guide for more information](https://github.com/serverless/serverless-kubeless).
 
 ## 1. Install Service Dependencies
 Run `npm install` in this directory to download the modules from `package.json`.
