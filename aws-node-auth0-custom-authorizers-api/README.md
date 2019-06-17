@@ -32,7 +32,7 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 
 4. Get your `public key` (under `applications->${YOUR_APP_NAME}->settings->Show Advanced Settings->Certificates->DOWNLOAD CERTIFICATE`). Download it as `PEM` format and save it as a new file called `public_key`
 
-5. Deploy the service with `serverless-deploy` and grab the public and private endpoints.
+5. Deploy the service with `serverless deploy` and grab the public and private endpoints.
 
 6. Plugin your `AUTH0_CLIENT_ID`, `AUTH0_DOMAIN`, and the `PUBLIC_ENDPOINT` + `PRIVATE_ENDPOINT` from aws in top of the `frontend/app.js` file.
 
