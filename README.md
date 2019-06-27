@@ -78,7 +78,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Ses Receive Email Body](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body) <br/> Receive an email, store in S3 bucket, trigger a lambda function. | nodeJS |
 | [Aws Node Ses Receive Email Header](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header) <br/> Receive an email, trigger a lambda function to process header. | nodeJS |
 | [Shared Aws Api Gateway Nodejs](https://github.com/serverless/examples/tree/master/aws-node-shared-gateway) <br/> A sample of implementing shared API gateway with multiple Node Lambdas. | nodeJS |
-| [Aws Node Singned Uploads](https://github.com/serverless/examples/tree/master/aws-node-signed-uploads) <br/> Serverless example for S3 signed uploads | nodeJS |
+| [Aws Node Signed Uploads](https://github.com/serverless/examples/tree/master/aws-node-signed-uploads) <br/> Serverless example for S3 signed uploads | nodeJS |
 | [Aws Serve Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | nodeJS |
 | [Aws Node Simple Transcribe S3](https://github.com/serverless/examples/tree/master/aws-node-simple-transcribe-s3) <br/> Example demonstrates how to setup a lambda function to transcribe audio file | nodeJS |
 | [Aws Single Page App Via Cloudfront](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront) <br/> Demonstrating how to deploy a Single Page Application with Serverless | nodeJS |
