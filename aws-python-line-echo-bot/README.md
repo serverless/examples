@@ -1,3 +1,15 @@
+<!--
+title: 'AWS python line echo bot'
+description: 'This example echo bot on line message.'
+layout: Doc
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/louis70109'
+authorName: 'NiJia'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/6940010?s=460&v=4'
+-->
+
 # AWS-python-line-echo-bot
 
 This is a simple echo bot on LINE bot (python)
