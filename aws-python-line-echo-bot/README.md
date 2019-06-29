@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars2.githubusercontent.com/u/6940010?s=460&v=4'
 
 # AWS-python-line-echo-bot
 
-This is a simple echo bot on LINE bot (python)
+This is a simple echo bot on LINE bot. (python)
 
 ## Bebore you start
 
