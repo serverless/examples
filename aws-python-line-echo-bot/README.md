@@ -9,31 +9,29 @@ This is a simple echo bot on LINE bot (python)
 
 ## Get Started
 
-1. Install serverless via npm
+### Install serverless via npm
 
 ```bash=
 $ npm install -g serverless
 ```
 
-2. Setup your AWS ceritficate
+### Setup your AWS ceritficate
 
 ```bash=
 export AWS_ACCESS_KEY_ID=<your-key-here>
 export AWS_SECRET_ACCESS_KEY=<your-secret-key-here>
 ```
 
-3. Setup you line bot secret & key
+### Setup you line bot secret & key
 
 ```python=
 line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
 handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 ```
 
-4. Deploy the webhhok function
+### Deploy the webhhok function
 
 ```bash=
 npm install
 serverless deploy
 ```
-
-![Echo bot](https://i.imgur.com/Tn1XS13.png)
