@@ -12,7 +12,6 @@ def webhook(event, context):
     handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 
     msg = json.loads(event['body'])
-    # print(msg)
     line_bot_api.reply_message(
         msg['events'][0]['replyToken'],
         TextSendMessage(text=msg['events'][0]['message']['text'])
