@@ -35,3 +35,5 @@ handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 npm install
 serverless deploy
 ```
+
+![Echo bot](https://i.imgur.com/Tn1XS13.png)
