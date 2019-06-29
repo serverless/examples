@@ -10,6 +10,5 @@ functions:
       - http:
           path: /webhook
           method: POST
-
 plugins:
   - serverless-python-requirements

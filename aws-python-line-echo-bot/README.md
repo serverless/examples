@@ -29,7 +29,7 @@ line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
 handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 ```
 
-5. Deploy the webhhok function
+4. Deploy the webhhok function
 
 ```bash=
 npm install
