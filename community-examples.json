@@ -464,9 +464,9 @@
     "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService"
   },
   {
-    "name": "json-server-less-λ",
+    "name": "JSON-Serverless",
     "description": "A simple & cheap serverless REST API using [json-server](https://github.com/typicode/json-server) in combination with AWS Lambda / S3 and the serverless framework",
-    "githubUrl": "https://github.com/pharindoko/json-server-less-lambda"
+    "githubUrl": "https://github.com/pharindoko/json-serverless"
   },
   {
     "name": "serverless-node-api-dynamodb-neo4j",
