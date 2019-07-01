@@ -1,0 +1,13 @@
+DependsOn: ServerlessVPCGA
+Type: AWS::RDS::DBInstance
+Properties:
+  DBInstanceClass: db.t2.small
+  DBSubnetGroupName:
+    Ref: ServerlessSubnetGroup
+  Engine: aurora
+  EngineVersion: "5.6"
+  PubliclyAccessible: true
+  DBParameterGroupName:
+    Ref: AuroraRDSInstanceParameter
+  DBClusterIdentifier:
+    Ref: AuroraRDSCluster
