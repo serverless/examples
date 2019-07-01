@@ -1,0 +1,11 @@
+DependsOn: ServerlessVPC
+Type: AWS::EC2::Subnet
+Properties:
+  VpcId:
+    Ref: ServerlessVPC
+  AvailabilityZone: ${self:provider.region}c
+  CidrBlock: ${self:custom.AURORA.VPC_CIDR}.0.2.0/24
+  Tags: 
+    - 
+      Key: "Name"
+      Value: "ServerlessSubnetC"
