@@ -60,6 +60,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Function Compiled With Babel](https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel) <br/> Demonstrating how to compile all your code with Babel | nodeJS |
 | [Serverless Github Check](https://github.com/serverless/examples/tree/master/aws-node-github-check)  | nodeJS |
 | [Aws Github Webhook Listener](https://github.com/serverless/examples/tree/master/aws-node-github-webhook-listener) <br/> Extend your github repositories with this github webhook listener | nodeJS |
+| [Graphql Api And Serverless](https://github.com/serverless/examples/tree/master/aws-node-graphql-and-rds)  | nodeJS |
 | [Aws Node Graphql Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-node-graphql-api-with-dynamodb) <br/> A single-module GraphQL endpoint with query and mutation functionality. | nodeJS |
 | [Aws Lambda And Heroku Postgres](https://github.com/serverless/examples/tree/master/aws-node-heroku-postgres) <br/> Shows how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation. | nodeJS |
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |

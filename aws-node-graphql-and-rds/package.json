@@ -1,0 +1,20 @@
+{
+    "name": "graphql-api-and-serverless",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "scripts": {
+        "func": "serverless deploy function --function graphql",
+        "deploy": "serverless deploy",
+        "remove": "serverless remove"
+    },
+    "dependencies": {
+        "graphql-yoga": "^1.17.4",
+        "pg": "^7.11.0",
+        "serverless-mysql": "^1.4.0",
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "serverless-pseudo-parameters": "^2.4.0"
+    }
+}
