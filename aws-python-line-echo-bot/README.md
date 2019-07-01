@@ -1,15 +1,3 @@
-<!--
-title: 'AWS python line echo bot'
-description: 'This example echo bot on line message.'
-layout: Doc
-framework: v1
-platform: AWS
-language: Python
-authorLink: 'https://github.com/louis70109'
-authorName: 'NiJia'
-authorAvatar: 'https://avatars2.githubusercontent.com/u/6940010?s=460&v=4'
--->
-
 # AWS-python-line-echo-bot
 
 This is a simple echo bot on LINE bot. (python)
@@ -21,31 +9,31 @@ This is a simple echo bot on LINE bot. (python)
 
 ## Get Started
 
-### Install serverless via npm
+1.  Install serverless via npm
 
 ```bash=
 $ npm install -g serverless
 ```
 
-### Setup your AWS ceritficate
+2. Setup your AWS ceritficate
 
 ```bash=
-export AWS_ACCESS_KEY_ID=<your-key-here>
-export AWS_SECRET_ACCESS_KEY=<your-secret-key-here>
+$ export AWS_ACCESS_KEY_ID=<your-key-here>
+$ export AWS_SECRET_ACCESS_KEY=<your-secret-key-here>
 ```
 
-### Setup you line bot secret & key
+3. Setup you line bot secret & key
 
 ```python=
 line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
 handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 ```
 
-### Deploy the webhhok function
+4. Deploy the webhhok function
 
 ```bash=
-npm install
-serverless deploy
+$ npm install
+$ serverless deploy
 ```
 
 ![Echo bot](https://i.imgur.com/Tn1XS13.png)
