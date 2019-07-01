@@ -1,0 +1,9 @@
+Type: AWS::RDS::DBParameterGroup
+Properties:
+  Description: Parameter group for the Serverless Aurora RDS DB.
+  Family: aurora5.6
+  Parameters:
+    sql_mode: IGNORE_SPACE
+    max_connections: 100
+    wait_timeout: 900
+    interactive_timeout: 900
