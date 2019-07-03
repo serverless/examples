@@ -1,0 +1,12 @@
+{
+  "name": "aws-python-line-echo-bot",
+  "description": "this is echo bot on LINE message",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-python-requirements": "^4.3.0"
+  },
+  "main": "handler.py",
+  "autor": "NiJia",
+  "license": "MIT"
+}
