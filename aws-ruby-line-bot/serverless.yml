@@ -7,7 +7,7 @@ provider:
   runtime: ruby2.5
 
 functions:
-  current_time:
+  webhook:
     handler: handler.webhook
     events:
       - http:
