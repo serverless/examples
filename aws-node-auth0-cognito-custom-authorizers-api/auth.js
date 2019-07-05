@@ -3,11 +3,13 @@
 const jwk = require('jsonwebtoken');
 const jwkToPem = require('jwk-to-pem');
 const request = require('request');
+const RSAKey = require('rsa-key');
 
-// For Auth0:       https://<project>.auth0.com/
+// For Auth0:       https://<project>.auth0.com/ (url should end with '/' )
 // refer to:        http://bit.ly/2hoeRXk
-// For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id>/
+// For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id> (url should NOT end with '/')
 // refer to:        http://amzn.to/2fo77UI
+
 const iss = 'https://<url>.com/';
 
 // Generate policy to allow this user on this API:
@@ -34,9 +36,10 @@ module.exports.authorize = (event, context, cb) => {
   if (event.authorizationToken) {
     // Remove 'bearer ' from token:
     const token = event.authorizationToken.substring(7);
+
     // Make a request to the iss + .well-known/jwks.json URL:
     request(
-      { url: `${iss}.well-known/jwks.json`, json: true },
+      { url: (iss[iss.length-1] == '/') ? (iss+'.well-known/jwks.json') : (iss+'/.well-known/jwks.json'), json: true },
       (error, response, body) => {
         if (error || response.statusCode !== 200) {
           console.log('Request error:', error);
@@ -44,7 +47,7 @@ module.exports.authorize = (event, context, cb) => {
         }
         const keys = body;
         // Based on the JSON of `jwks` create a Pem:
-        const k = keys.keys[0];
+        const k = keys.keys[keys.keys.length-1];
         const jwkArray = {
           kty: k.kty,
           n: k.n,
@@ -52,8 +55,11 @@ module.exports.authorize = (event, context, cb) => {
         };
         const pem = jwkToPem(jwkArray);
 
+        const key = new RSAKey(pem);
+        const cert = key.exportKey();
+
         // Verify the token:
-        jwk.verify(token, pem, { issuer: iss }, (err, decoded) => {
+        jwk.verify(token, cert, { issuer: iss }, (err, decoded) => {
           if (err) {
             console.log('Unauthorized user:', err.message);
             cb('Unauthorized');
