@@ -1,0 +1,6 @@
+Type: AWS::RDS::DBClusterParameterGroup
+Properties:
+  Description: Parameter group for the Serverless Aurora RDS DB.
+  Family: aurora5.6
+  Parameters:
+    character_set_database: "utf32"
