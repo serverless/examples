@@ -40,7 +40,7 @@ npm install
 serverless deploy
 ```
 
-Now you can test you chatbot, have fun!
+Now you can test your chatbot, have fun!
 ![Echo bot](https://i.imgur.com/ekiLRHS.png)
 
 # References
