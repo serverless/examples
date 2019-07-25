@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "aws-node-singned-uploads",
+  "name": "aws-node-signed-uploads",
   "description": "Serverless example for S3 signed uploads",
   "version": "1.0.0",
   "scripts": {
