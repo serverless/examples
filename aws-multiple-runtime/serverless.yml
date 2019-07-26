@@ -11,7 +11,7 @@ functions:
           path: greet
     handler: web/handler.hello
   time:
-    runtime: nodejs6.10
+    runtime: nodejs8.10
     events:
       - http:
           method: get
