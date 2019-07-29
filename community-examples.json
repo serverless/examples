@@ -492,5 +492,11 @@
     "name": "Serverless Load Balancer",
     "description": "A sample that shows how to combine a load balancer with (vpc/subnet configuration) with a lambda.",
     "githubUrl": "https://github.com/pharindoko/serverless-load-balancer"
+  }, 
+  {
+    
+    "name": "[Unly] Boilerplates Generator",
+    "description": "A boilerplates generator, meant to help to quick-start Serverless (AWS Lambda/API GW) and OSS projects, using good defaults _(sentry for automated error handling, staging/prod environments, built-in support for env vars, jest support, babel/webpack)_, yet flexible to fit your needs.",
+    "githubUrl": "https://github.com/UnlyEd/boilerplates-generator"
   }
 ]
