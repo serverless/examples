@@ -1,0 +1,36 @@
+type User {
+	UUID: String
+	Name: String
+	Posts: [Post]
+}
+
+type Post {
+	UUID: String
+	Text: String
+}
+
+input UserInput {
+	Name: String
+	Posts: [PostInput]
+}
+
+input PostInput{
+	Text: String
+}
+
+type Mutation {
+	mysql_createUser(input: UserInput!): User
+	postgresql_createUser(input: UserInput!): User
+	aurora_createUser(input: UserInput!): User
+}
+
+type Query {
+	mysql_getUser(uuid: String!): User
+	postgresql_getUser(uuid: String!): User
+	aurora_getUser(uuid: String!): User
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

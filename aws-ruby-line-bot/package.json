@@ -1,0 +1,10 @@
+{
+  "name": "aws-ruby-line-bot",
+  "version": "1.0.0",
+  "description": "Example demonstrates how to setup a simple Line echo bot on AWS",
+  "author": "NiJia",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-hooks-plugin": "^1.1.0"
+  }
+}

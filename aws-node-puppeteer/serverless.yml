@@ -16,7 +16,7 @@ functions:
   hello:
     handler: handler.hello
     memorySize: 1536MB
-    timeout: 60
+    timeout: 30
     events:
       - http:
           path: /
