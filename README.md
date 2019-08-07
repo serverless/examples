@@ -131,6 +131,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Openwhisk Swift Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-swift-scheduled-cron) <br/> Example of creating a Swift function that runs as a cron job using the serverless schedule event. | swift |
 | [Openwhisk Swift Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk. | swift |
 | [Openwhisk Swift Simple](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple) <br/> Example demonstrates how to setup a simple Swift function with OpenWhisk. | swift |
+| [Twilio.node Forward Call](https://github.com/serverless/examples/tree/master/twilio-node-forward-call) <br/> Example demonstrating Twilio Runtime support with an endpoint return TwiML to forward a phone call | nodeJS |
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 
