@@ -1,0 +1,33 @@
+service: your-service # update this with your service name
+
+provider:
+  name: twilio
+
+  # Twilio access credentials (mandatory)
+  config:
+    accountSid: ${env:TWILIO_ACCOUNT_SID}
+    authToken: ${env:TWILIO_AUTH_TOKEN}
+
+  # Twilio runtime supports several domains
+  # your functions and assets will be available under
+  # -> defaulting to 'dev'
+  environment: ${env:TWILIO_RUNTIME_ENV, 'dev'}
+
+  # Environment variables passed to your functions
+  # available in the Twilio runtim via `context` parameter
+  environmentVars:
+    MY_PHONE_NUMBER: ${env:MY_PHONE_NUMBER}
+
+# Twilio runtime has to be added as a plugin
+plugins:
+  - '@twilio-labs/serverless-twilio-runtime'
+
+functions:
+  # Function name
+  forward-call:
+    # Path to the JS handler function in the project (without file extension '.js')
+    handler: forward-call
+    # URL path of the function after deployment
+    path: /forward-call
+    # visibility of the function (can be "public" or "protected")
+    access: public
