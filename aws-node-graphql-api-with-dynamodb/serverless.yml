@@ -2,7 +2,7 @@ service: graphql-api
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs10.x
   environment:
     DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
   iamRoleStatements:
