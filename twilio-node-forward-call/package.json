@@ -1,0 +1,9 @@
+{
+  "name": "twilio.node-forward-call",
+  "version": "1.0.-",
+  "description": "Example demonstrating Twilio Runtime support with an endpoint that returns TwiML to forward a phone call",
+  "dependencies": {},
+  "devDependencies": {
+    "@twilio-labs/serverless-twilio-runtime": "^1.0.5"
+  }
+}

@@ -131,6 +131,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Openwhisk Swift Scheduled Cron](https://github.com/serverless/examples/tree/master/openwhisk-swift-scheduled-cron) <br/> Example of creating a Swift function that runs as a cron job using the serverless schedule event. | swift |
 | [Openwhisk Swift Simple Http Endpoint](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk. | swift |
 | [Openwhisk Swift Simple](https://github.com/serverless/examples/tree/master/openwhisk-swift-simple) <br/> Example demonstrates how to setup a simple Swift function with OpenWhisk. | swift |
+| [Twilio.node Forward Call](https://github.com/serverless/examples/tree/master/twilio-node-forward-call) <br/> Example demonstrating Twilio Runtime support with an endpoint that returns TwiML to forward a phone call | nodeJS |
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -213,6 +214,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Serverless + Medium Text To Speech](https://github.com/RafalWilinski/serverless-medium-text-to-speech)** <br/> Serverless-based, text-to-speech service for Medium articles | [RafalWilinski](http://github.com/RafalWilinski) |
 | **[Serverless Dotnet Boilerplate](https://github.com/pharindoko/serverlessDotNetSample)** <br/> A serverless starter solution for .NET Core, ready for local debugging in VS Code, HTTP Endpoint, etc. | [pharindoko](http://github.com/pharindoko) |
 | **[Serverless Aws Rekognition Finpics](https://github.com/rgfindl/finpics)** <br/> Use AWS Rekognition to provide a faces search of finpics.com | [rgfindl](http://github.com/rgfindl) |
+| **[Serverless Api Typescript Template](https://github.com/JoshuaToth/serverless-api-typescript-template)** <br/> A starter template for a Serverless API using Typescript and Jest | [JoshuaToth](http://github.com/JoshuaToth) |
 | **[Serverless Blog To Podcast](https://github.com/SC5/serverless-blog-to-podcast)** <br/> Service that reads RSS feed and converts the entries to a podcast feed and audio files using Amazon Polly | [SC5](http://github.com/SC5) |
 | **[Serverless Cloudwatch Rds Custom Metrics](https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics)** <br/> A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless | [AndrewFarley](http://github.com/AndrewFarley) |
 | **[Serverless Delivery Framework](https://github.com/99xt/serverless-delivery-framework)** <br/> This is a boilerplate for version release pipeline with serverless framework | [99xt](http://github.com/99xt) |
