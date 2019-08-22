@@ -1,6 +1,6 @@
 <!--
-title: '.NET REST API with DynamoDB'
-description: 'Setup a REST API w/ DynamoDB using .NET Core 2.1'
+title: 'Dot Net REST API with DynamoDB'
+description: 'Setup a REST API w/ DynamoDB using Dot Net Core 2.1'
 framework: v1
 platform: AWS
 language: CSharp
