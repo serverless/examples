@@ -8,4 +8,5 @@ install:
 
 script:
   - npm run docs
+  - npm run validate
   - ./check-if-readme-is-up-to-date.sh
