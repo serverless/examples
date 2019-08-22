@@ -1,3 +1,14 @@
+<!--
+title: 'The Serverless Gong'
+description: 'A serverless gong with GitHub and Slack webhooks'
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/bildungsroman'
+authorName: 'Anna Spysz'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/5382821?v=4&s=140'
+-->
+
 # The Serverless Gong! 🔔
 
 A serverless gong with GitHub and Slack webhooks - made for the [No Server November Challenge](https://serverless.com/blog/no-server-november-challenge/).

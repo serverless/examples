@@ -1,3 +1,14 @@
+<!--
+title: .'Serverless Email Sign-Up Form'
+description: 'This example demonstrates how to deploy a Fullstack serverless application'
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/trilom'
+authorName: 'Bryan Killian'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/7476973?v=4&s=140'
+-->
+
 # Example – Serverless Email Sign-Up Form
 
 This demo application helps you test Serverless Framework Enterprise's main features:

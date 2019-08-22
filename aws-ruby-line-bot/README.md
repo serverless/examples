@@ -1,3 +1,14 @@
+<!--
+title: 'Ruby LINE bot'
+description: 'This example shows you how to create a LINE bot using Ruby.'
+framework: v1
+platform: AWS
+language: Ruby
+authorLink: 'https://github.com/knugie'
+authorName: 'Wolfgang Teuber'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/1446195?v=4&s=140'
+-->
+
 # AWS-ruby-line-echo-bot
 
 Follow this [project](https://github.com/serverless/examples/tree/master/aws-python-line-echo-bot),
