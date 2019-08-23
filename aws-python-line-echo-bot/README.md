@@ -1,3 +1,14 @@
+<!--
+title: 'Simple LINE bot'
+description: 'This is a simple echo bot on LINE bot.'
+framework: v1
+platform: AWS
+language: Python
+authorLink: 'https://github.com/NiJia'
+authorName: 'NiJia'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/418548?v=4&s=140'
+-->
+
 # AWS-python-line-echo-bot
 
 This is a simple echo bot on LINE bot. (python)

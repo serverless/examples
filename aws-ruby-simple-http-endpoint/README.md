@@ -1,3 +1,14 @@
+<!--
+title: .'AWS Simple HTTP Endpoint example in Ruby'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.'
+framework: v1
+platform: AWS
+language: Ruby
+authorLink: 'https://github.com/josephyi'
+authorName: 'Joseph Yi'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/1994863?v=4&s=140'
+-->
+
 # Simple HTTP Endpoint Example
 
 Inspired by the [aws-node-simple-http-endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), in Ruby!
