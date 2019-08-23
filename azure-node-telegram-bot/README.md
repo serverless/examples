@@ -23,8 +23,8 @@ This example of telegram bot using Azure Function with Serverless Framework.
 1. Clone the ripo and install dependencies
 ```shall
 # Clone the repo
-$ git clone git@github.com:serverless/examples.git/azure-node-simple-http-endpoint
-$ cd example/azure-node-telegram-bot
+$ git clone git@github.com:serverless/examples.git serverless-examples
+$ cd serverless-examples/azure-node-telegram-bot
 
 # Install the Serverless Framework
 $ npm install serverless -g
