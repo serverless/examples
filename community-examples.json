@@ -497,5 +497,10 @@
     "name": "serverless-api-typescript-template",
     "description": "A starter template for a Serverless API using Typescript and Jest",
     "githubUrl": "https://github.com/JoshuaToth/serverless-api-typescript-template"
+  },
+  {
+    "name": "Demo project for serverless-migrate-plugin",
+    "description": "An example about how to use migrations in your serverless project with serverless-migrate-plugin",
+    "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
   }
 ]
