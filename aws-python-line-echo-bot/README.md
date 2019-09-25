@@ -13,10 +13,10 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/418548?v=4&s=140'
 
 This is a simple echo bot on LINE bot. (python)
 
-## Bebore you start
+## Before you start
 
-1. Line developer account
-2. [Line Message API](https://developers.line.biz/en/docs/messaging-api/getting-started/)
+1. LINE developer account
+2. [LINE Messaging API](https://developers.line.biz/en/docs/messaging-api/getting-started/)
 
 ## Get Started
 
@@ -40,7 +40,7 @@ line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
 handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 ```
 
-4. Deploy the webhhok function
+4. Deploy the webhook function
 
 ```bash=
 $ npm install
