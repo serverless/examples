@@ -1,5 +1,5 @@
 {
-  "name": "api-project",
+  "name": "aws-rest-with-dynamodb",
   "version": "1.0.0",
   "description": "Serverless CRUD service exposing a REST HTTP interface",
   "author": "",
