@@ -1,3 +1,14 @@
+<!--
+title: 'Ruby LINE bot'
+description: 'This example shows you how to create a LINE bot using Ruby.'
+framework: v1
+platform: AWS
+language: Ruby
+authorLink: 'https://github.com/knugie'
+authorName: 'Wolfgang Teuber'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/1446195?v=4&s=140'
+-->
+
 # AWS-ruby-line-echo-bot
 
 Follow this [project](https://github.com/serverless/examples/tree/master/aws-python-line-echo-bot),
@@ -6,10 +17,10 @@ I use my first language(ruby) to build this on serverless,
 
 so you can use this project in others case.
 
-# Bebore you start
+# Before you start
 
-1. Line developer account
-2. [Line Message API](https://developers.line.biz/en/docs/messaging-api/getting-started/)
+1. LINE developer account
+2. [LINE Messaging API](https://developers.line.biz/en/docs/messaging-api/getting-started/)
 
 # Get Started
 
@@ -33,7 +44,7 @@ config.channel_secret = "YOUR_LINE_CHANNEL_SECRET"
 config.channel_token = "YOUR_LINE_CHANNEL_TOKEN"
 ```
 
-4. Deploy the webhhok function
+4. Deploy the webhook function
 
 ```bash=
 npm install
