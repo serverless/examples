@@ -1,12 +1,13 @@
 <!--
 title: 'AWS S3 File Replicator'
-description: 'This example creates 2 AWS S3 buckets and copies files in one bucket to the other.'
+description: 'This example creates 2 AWS S3 buckets and copies files in one bucket to the other'
 layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/ac360'
 authorName: 'Austen Collins'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/2752551?v=4&s=140'
 -->
 # AWS S3 File Replicator
 

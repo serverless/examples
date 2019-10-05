@@ -1,0 +1,13 @@
+service: aws-node-telegram-echo-bot
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  webhook:
+    handler: handler.webhook
+    events:
+      - http:
+          path: webhook
+          method: post
