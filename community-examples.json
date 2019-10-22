@@ -502,5 +502,11 @@
     "name": "Demo project for serverless-migrate-plugin",
     "description": "An example about how to use migrations in your serverless project with serverless-migrate-plugin",
     "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
+  },
+    {
+    "name": "Golang serverless starter",
+    "description": "Echo function with API Gateway that uses TravisCI automatic deployment",
+    "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
   }
+  
 ]
