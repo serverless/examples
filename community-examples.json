@@ -506,6 +506,6 @@
   {
     "name": "Golang serverless starter",
     "description": "Echo function with API Gateway that uses TravisCI automatic deployment",
-    "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
+    "githubUrl": "https://github.com/emilhein/golang-serverless-starter"
   }
 ]
