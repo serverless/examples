@@ -1,3 +1,14 @@
+<!--
+title: 'AWS Python Rest API with Pymongo'
+description: 'AWS Python Rest API with Pymongo Example'
+layout: Doc
+framework: v1
+platform: AWS
+language: python
+authorLink: 'https://github.com/gsweene2'
+authorName: 'Garrett Sweeney'
+authorAvatar: ''
+-->
 # aws-python-rest-api-with-dynamodb
 
 ## Create the Mongo Atlas backend
