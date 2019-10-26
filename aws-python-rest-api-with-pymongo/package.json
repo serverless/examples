@@ -1,0 +1,10 @@
+{
+  "name": "aws-python-rest-api-with-pymongo",
+  "version": "1.0.0",
+  "description": "Serverless pymongo example",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-python-requirements": "^5.0.0"
+  }
+}
