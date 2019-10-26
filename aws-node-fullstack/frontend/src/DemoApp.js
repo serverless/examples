@@ -84,7 +84,6 @@ const DemoApp = () => {
   const submitForm = (event) => {
 
     event.preventDefault()
-    debugger
     const name = refFormName.current.value
     const email = refFormEmail.current.value
 
