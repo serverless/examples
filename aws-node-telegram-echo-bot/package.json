@@ -1,0 +1,16 @@
+{
+  "name": "aws-node-line-echo-bot",
+  "version": "1.0.0",
+  "description": "This is a simple echo bot on Telegram",
+  "main": "handler.js",
+  "keywords": [
+    "aws",
+    "nodejs",
+    "telegram",
+    "chatbot",
+    "serverless"
+  ],
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}

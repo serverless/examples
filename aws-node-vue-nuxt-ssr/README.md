@@ -11,7 +11,7 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/15029531?s=400&v=4'
 -->
 # Serverless-side rendering with Vue.js and Nuxt.js
 
-This project demonstrates how to use Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. 
+This project demonstrates how to use Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway.
 
 ## Use-cases
 - Develop single-page apps without worrying about SEO optimization.
@@ -37,7 +37,7 @@ To accomplish this we need to spin up a simple Express server and configure the 
 
 ## Deploy
 1. **Deploy service without custom domain:**
-    
+
     ```bash
     $ npm run deploy
     ```
@@ -52,40 +52,35 @@ To accomplish this we need to spin up a simple Express server and configure the 
     > aws-node-vue-nuxt-ssr@1.0.0 build /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr
     > nuxt build
 
-    nuxt:build Building... +0ms
-    nuxt:build App root: /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr/client +0ms
-    nuxt:build Generating /home/raha/code/serverless/examples/aws-node-vue-nuxt-ssr/.nuxt files... +0ms
-    nuxt:build Generating files... +40ms
-    nuxt:build Generating routes... +7ms
-    nuxt:build Building files... +24ms
-    ████████████████████ 100% 
+    Hash: 969f557230f1916aaab2
+    Version: webpack 4.31.0
+    Time: 5531ms
+    Built at: 05/14/2019 12:22:28 AM
+                            Asset       Size  Chunks             Chunk Names
+    ../server/client.manifest.json   6.81 KiB          [emitted]
+        1aeb026dc2ca77c8b429.js  952 bytes       3  [emitted]  pages/dogs/index
+        775caefedab77dd6e1a6.js    147 KiB       1  [emitted]  commons.app
+        92fcd17f0b85f40f90ad.js   1.15 KiB       2  [emitted]  pages/dogs/_breed
+        9f5aaac1c101c273e65f.js  845 bytes       4  [emitted]  pages/index
+                        LICENSES  464 bytes          [emitted]
+        cf8b2abbbaec4a0c7b76.js   2.27 KiB       5  [emitted]  runtime
+        fa6324eac05d1b7d36b0.js   42.3 KiB       0  [emitted]  app
+    + 2 hidden assets
+    Entrypoint app = cf8b2abbbaec4a0c7b76.js 775caefedab77dd6e1a6.js fa6324eac05d1b7d36b0.js
 
-    Build completed in 9.783s
-
-    DONE  Compiled successfully in 9788m                                             01:29:34
-
-    Hash: 14102c197254534940dd
-    Version: webpack 3.12.0
-    Time: 9788ms
-                                        Asset       Size  Chunks             Chunk Names
-      layouts/default.c7117c4874fb943756b1.js    1.09 kB       0  [emitted]  layouts/default
-          pages/index.d3fbe26b313c4e3e99b3.js    1.03 kB       1  [emitted]  pages/index
-     pages/dogs/index.471f8b183d02e42ba618.js    1.18 kB       2  [emitted]  pages/dogs/index
-    pages/dogs/_breed.4c44d20092b1baf42153.js    1.36 kB       3  [emitted]  pages/dogs/_breed
-               vendor.e2344f1165d5e54cb7a2.js     157 kB       4  [emitted]  vendor
-                  app.b0ef47f34aef4d684198.js    27.7 kB       5  [emitted]  app
-             manifest.14102c197254534940dd.js    1.56 kB       6  [emitted]  manifest
-                                     LICENSES  705 bytes          [emitted]  
-    
-    + 3 hidden assets
-    Hash: 3be2c5d3c65a2d58b155
-    Version: webpack 3.12.0
-    Time: 507ms
-    
-    Asset               Size            Chunks             Chunk Names
-    server-bundle.json  130 kB          [emitted]  
-    
-    nuxt:build Building done +11s
+    Hash: ac61088f50920f2fc1a4
+    Version: webpack 4.31.0
+    Time: 1266ms
+    Built at: 05/14/2019 12:22:30 AM
+                    Asset       Size  Chunks             Chunk Names
+    92cd2f7d0e5f9c484439.js  641 bytes       2  [emitted]  pages/dogs/index
+    bbeb65244f57ade7cfbe.js  828 bytes       1  [emitted]  pages/dogs/_breed
+    e3465bc88d2bf9e1b91d.js  536 bytes       3  [emitted]  pages/index
+                server.js   25.1 KiB       0  [emitted]  app
+    server.manifest.json  483 bytes          [emitted]
+    + 4 hidden assets
+    Entrypoint app = server.js server.js.map
+    Done in 9.03s
 
     Serverless: Packaging service...
     Serverless: Excluding development dependencies...
@@ -166,6 +161,6 @@ To accomplish this we need to spin up a simple Express server and configure the 
 ## Usage
 Navigate to `vuessr-yourdomain.com` or whichever domain you picked. You'll see the Vue.js SPA running.
 
---- 
+---
 
-I've written a detailed tutorial about the process. You can check it out [here](https://dev.to/adnanrahic/a-crash-course-on-serverless-side-rendering-with-vuejs-nuxtjs-and-aws-lambda-1nk4).
+I've written a detailed tutorial about the process. You can check it out [here](https://dev.to/adnanrahic/a-crash-course-on-serverless-side-rendering-with-vuejs-nuxtjs-and-aws-lambda-1nk4). (**NOTE:** Some parts are outdated and are for `nuxt@1`. Please refer to this example for using with `nuxt@2`)

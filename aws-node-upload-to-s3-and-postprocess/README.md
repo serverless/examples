@@ -86,7 +86,7 @@ You should get an XML response similar to:
 </PostResponse>
 ```
 
-After a while, the postprocess function gets triggerd by an S3 event:
+After a while, the postprocess function gets triggered by an S3 event:
 
 ```bash
 serverless logs --function postprocess
