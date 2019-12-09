@@ -1,3 +1,14 @@
+<!--
+title: .'AWS Golang Auth'
+description: 'This example shows you how to setup auth in front of a AWS Lambda function'
+framework: v1
+platform: AWS
+language: Go
+authorLink: 'https://github.com/srbry'
+authorName: 'srbry'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/16936753?v=4&s=140'
+-->
+
 # Go Serverless Examples
 
 A few example of AWS lambda functions written in GoLang.

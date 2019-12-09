@@ -1,3 +1,14 @@
+<!--
+title: .'DynamoDB Stream To Elasticsearch'
+description: 'Stream data from DynamoDB to Elasticsearch'
+framework: v1
+platform: AWS
+language: Go
+authorLink: 'https://github.com/jalie'
+authorName: 'Jan Liesendahl'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/548657?v=4&s=140'
+-->
+
 # DynamoDB Stream To Elasticsearch 
 ## Deploying cloud information costs $$, Elasticsearch is not part of the free tier, as such please deploy with caution.
 

@@ -1,6 +1,6 @@
 <!--
 title: 'A Simple Serverless GraphQL API for MySQL, Postgres and Aurora'
-description: 'This is an example project that uses 3 RDS databases to illustrate the differences between using each of them
+description: 'This is an example project that uses 3 RDS databases to illustrate the differences between using each of them'
 layout: Doc
 framework: v1
 platform: AWS
