@@ -280,3 +280,6 @@ Dynamo now also supports an auto-scaling option to eliminate the need for manual
 
 In case you expect a lot of traffic fluctuation we recommend to checkout this guide on how to auto scale DynamoDB [https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/](https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/)
 
+## Troubleshoot
+
+If you experience any issue while building requirements, please refer to the [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements) readme and use an alternate method to build requirements (pipenv, docker, binary path override).
