@@ -5,6 +5,6 @@
   "author": "Bruce Edge",
   "license": "MIT",
   "dependencies": {
-    "serverless-python-requirements": "^2.4.1"
+    "serverless-python-requirements": "^5.0.1"
   }
 }
