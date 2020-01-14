@@ -1,3 +1,14 @@
+<!--
+title: 'AWS SQS Standard Example (NodeJS & Typescript)'
+description: 'This example demonstrates how to setup a SQS with Typescript.'
+layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/jmpfrazao'
+authorName: 'Miguel Frazao'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/28927258?s=460&v=4'
+-->
 # Simple SQS Standard Example
 
 This example demonstrates how to setup a SQS Standard and send messages through the message body and attributes.
