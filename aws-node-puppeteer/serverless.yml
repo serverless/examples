@@ -2,7 +2,7 @@ service: scrapper-lambda
 provider:
   name: aws
   profile: <your aws profile>
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
 plugins:
   - serverless-offline
