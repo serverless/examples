@@ -502,5 +502,10 @@
     "name": "Demo project for serverless-migrate-plugin",
     "description": "An example about how to use migrations in your serverless project with serverless-migrate-plugin",
     "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
+  },
+  {
+    "name": "Serverless SNS SQS offline Example ",
+    "description": "Minimal example of running serverless-offline with SQS and SNS in local environment.",
+    "githubUrl": "https://github.com/kenyipp/serverless-sns-sqs-offline-example"
   }
 ]
