@@ -4,7 +4,7 @@ frameworkVersion: ">=1.10.0"
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   memorySize: 512
   timeout: 10
   stage: dev

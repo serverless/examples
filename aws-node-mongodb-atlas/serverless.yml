@@ -2,7 +2,7 @@ service: my-service # NOTE: update this with your service name
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
 functions:
   hello:

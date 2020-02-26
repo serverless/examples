@@ -15,7 +15,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   stage: ${opt:stage, env:AWS_STAGE, 'dev'}
   region: ${opt:region, env:AWS_REGION, 'eu-central-1'}
   environment:

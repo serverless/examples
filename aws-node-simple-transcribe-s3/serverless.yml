@@ -2,7 +2,7 @@ service: aws-node-simple-transcribe-s3
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   environment:
     S3_AUDIO_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-records
     S3_TRANSCRIPTION_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-transcriptions
