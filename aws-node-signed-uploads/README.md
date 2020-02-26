@@ -1,3 +1,14 @@
+<!--
+title: 'AWS Node Signed Uploads'
+description: 'The approach implemented in this service is useful when you want to use Amazon API Gateway and you want to solve the 10MB payload limit'
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/kalinchernev'
+authorName: 'Kalin Chernev'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/1923476?v=4&s=140'
+-->
+
 # AWS Node Signed Uploads
 
 ## Requirements

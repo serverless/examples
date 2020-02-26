@@ -492,5 +492,15 @@
     "name": "Serverless Load Balancer",
     "description": "A sample that shows how to combine a load balancer with (vpc/subnet configuration) with a lambda.",
     "githubUrl": "https://github.com/pharindoko/serverless-load-balancer"
+  },
+  {
+    "name": "serverless-api-typescript-template",
+    "description": "A starter template for a Serverless API using Typescript and Jest",
+    "githubUrl": "https://github.com/JoshuaToth/serverless-api-typescript-template"
+  },
+  {
+    "name": "Demo project for serverless-migrate-plugin",
+    "description": "An example about how to use migrations in your serverless project with serverless-migrate-plugin",
+    "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
   }
 ]
