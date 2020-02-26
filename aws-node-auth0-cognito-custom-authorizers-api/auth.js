@@ -6,7 +6,7 @@ const request = require('request');
 
 // For Auth0:       https://<project>.auth0.com/
 // refer to:        http://bit.ly/2hoeRXk
-// For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id>/
+// For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id>
 // refer to:        http://amzn.to/2fo77UI
 const iss = 'https://<url>.com/';
 
@@ -36,7 +36,7 @@ module.exports.authorize = (event, context, cb) => {
     const token = event.authorizationToken.substring(7);
     // Make a request to the iss + .well-known/jwks.json URL:
     request(
-      { url: `${iss}.well-known/jwks.json`, json: true },
+      { url: `${iss}/.well-known/jwks.json`, json: true },
       (error, response, body) => {
         if (error || response.statusCode !== 200) {
           console.log('Request error:', error);
