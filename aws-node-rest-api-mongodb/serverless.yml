@@ -2,7 +2,7 @@ service: aws-node-rest-api-mongodb
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
 functions:
   createUser:

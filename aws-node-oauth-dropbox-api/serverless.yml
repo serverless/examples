@@ -1,7 +1,7 @@
 service: dropbox
 provider:
   profile: personal
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   name: aws
   region: ap-south-1
   timeout: 60
