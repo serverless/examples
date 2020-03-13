@@ -23,5 +23,6 @@
     "typescript": "^3.2.4",
     "webpack": "^4.29.0"
   },
-  "author": "Miguel Frazao (https://github.com/jmpfrazao/serverless-ts-standard-sqs)"
+  "author": "Miguel Frazao (https://github.com/jmpfrazao/serverless-ts-standard-sqs)",
+  "license": "MIT"
 }
