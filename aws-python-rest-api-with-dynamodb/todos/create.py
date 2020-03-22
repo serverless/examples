@@ -3,7 +3,6 @@ import logging
 import os
 import time
 import uuid
-from datetime import datetime
 
 import boto3
 dynamodb = boto3.resource('dynamodb')
@@ -15,7 +14,7 @@ def create(event, context):
         logging.error("Validation Failed")
         raise Exception("Couldn't create the todo item.")
     
-    timestamp = str(datetime.utcnow().timestamp())
+    timestamp = str(time.time())
 
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 
