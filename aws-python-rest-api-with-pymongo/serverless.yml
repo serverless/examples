@@ -1,0 +1,51 @@
+service: serverless-pymongo-item-api
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-python-requirements
+
+provider:
+  name: aws
+  runtime: python3.7
+  environment:
+    MONGO_DB_USER: ${env:MONGO_DB_USER}
+    MONGO_DB_PASS: ${env:MONGO_DB_PASS}
+    MONGO_DB_NAME: ${env:MONGO_DB_NAME}
+    MONGO_DB_URL: ${env:MONGO_DB_URL}
+    MONGO_COLLECTION_NAME: ${env:MONGO_COLLECTION_NAME}
+  iamManagedPolicies:
+    - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+
+functions:
+  create:
+    handler: item/create.create
+    events:
+      - http:
+          path: item
+          method: post
+          cors: true
+
+  list:
+    handler: item/list.list
+    events:
+      - http:
+          path: item
+          method: get
+          cors: true
+
+  get:
+    handler: item/get.get
+    events:
+      - http:
+          path: item/{id}
+          method: get
+          cors: true
+
+  delete:
+    handler: item/delete.delete
+    events:
+      - http:
+          path: item/{id}
+          method: delete
+          cors: true
