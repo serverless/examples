@@ -5,7 +5,7 @@ provider:
   region: us-east-1
   stage: dev
   memorySize: 256
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   role: LambdaRole
   environment:
     #aurora
