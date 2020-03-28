@@ -9,7 +9,7 @@ authorLink: 'https://github.com/gsweene2'
 authorName: 'Garrett Sweeney'
 authorAvatar: ''
 -->
-# aws-python-rest-api-with-dynamodb
+# aws-python-rest-api-with-pymongo
 
 ## Create the Mongo Atlas backend
 
