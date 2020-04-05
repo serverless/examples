@@ -37,7 +37,14 @@ class ServerlessPlugin {
   }
 
   runAwsCommand(args) {
-    const result = spawnSync('aws', args);
+    let command = 'aws';
+    if (this.serverless.variables.service.provider.region) {
+      command = `${command} --region ${this.serverless.variables.service.provider.region}`;
+    }
+    if (this.serverless.variables.service.provider.profile) {
+      command = `${command} --profile ${this.serverless.variables.service.provider.profile}`;
+    }
+    const result = spawnSync(command, args);
     const stdout = result.stdout.toString();
     const sterr = result.stderr.toString();
     if (stdout) {
