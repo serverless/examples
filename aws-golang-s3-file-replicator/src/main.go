@@ -18,9 +18,9 @@ func Handler(ctx context.Context, S3Event events.S3Event) {
 
 	svc := s3.New(session.New())
 	input := &s3.CopyObjectInput{
-		Bucket:     aws.String(os.Getenv("OUTPUT_BUCKET")),
 		CopySource: aws.String("/" + S3Event.Records[0].S3.Bucket.Name + "/" + S3Event.Records[0].S3.Object.Key),
-		Key:        aws.String(S3Event.Records[0].S3.Object.Key),
+		Bucket:     aws.String(os.Getenv("OUTPUT_BUCKET")),       // target bucket
+		Key:        aws.String(S3Event.Records[0].S3.Object.Key), // target object name
 	}
 
 	_, err := svc.CopyObject(input)
