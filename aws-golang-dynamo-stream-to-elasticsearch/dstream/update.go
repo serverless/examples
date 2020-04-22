@@ -99,7 +99,56 @@ func eventStreamToMap(attribute interface{}) map[string]*dynamodb.AttributeValue
 			m[k] = &dynamodb.AttributeValue{
 				N: &n,
 			}
+		case events.DataTypeList:
+			m[k] = &dynamodb.AttributeValue{
+				L: eventStreamToList(v),
+			}
 		}
 	}
 	return m
+}
+
+// ugly hack because the types
+// events.DynamoDBAttributeValue != *dynamodb.AttributeValue
+func eventStreamToList(attribute interface{}) []*dynamodb.AttributeValue {
+	// List to be returned
+	l := make([]*dynamodb.AttributeValue, 0)
+
+	var tmp []events.DynamoDBAttributeValue
+
+	switch t := attribute.(type) {
+	case []events.DynamoDBAttributeValue:
+		tmp = t
+	case events.DynamoDBAttributeValue:
+		tmp = t.List()
+	}
+
+	for _, v := range tmp {
+		switch v.DataType() {
+		case events.DataTypeString:
+			s := v.String()
+			l = append(l, &dynamodb.AttributeValue{
+				S: &s,
+			})
+		case events.DataTypeBoolean:
+			b := v.Boolean()
+			l = append(l, &dynamodb.AttributeValue{
+				BOOL: &b,
+			})
+		case events.DataTypeMap:
+			l = append(l, &dynamodb.AttributeValue{
+				M: eventStreamToMap(v),
+			})
+		case events.DataTypeNumber:
+			n := v.Number()
+			l = append(l, &dynamodb.AttributeValue{
+				N: &n,
+			})
+		case events.DataTypeList:
+			l = append(l, &dynamodb.AttributeValue{
+				L: eventStreamToList(v),
+			})
+		}
+	}
+	return l
 }
