@@ -81,7 +81,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Ses Receive Email Body](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body) <br/> Receive an email, store in S3 bucket, trigger a lambda function. | nodeJS |
 | [Aws Node Ses Receive Email Header](https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header) <br/> Receive an email, trigger a lambda function to process header. | nodeJS |
 | [Shared Aws Api Gateway Nodejs](https://github.com/serverless/examples/tree/master/aws-node-shared-gateway) <br/> A sample of implementing shared API gateway with multiple Node Lambdas. | nodeJS |
-| [Aws Node Singned Uploads](https://github.com/serverless/examples/tree/master/aws-node-signed-uploads) <br/> Serverless example for S3 signed uploads | nodeJS |
+| [Aws Node Signed Uploads](https://github.com/serverless/examples/tree/master/aws-node-signed-uploads) <br/> Serverless example for S3 signed uploads | nodeJS |
 | [Aws Serve Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | nodeJS |
 | [Aws Node Simple Transcribe S3](https://github.com/serverless/examples/tree/master/aws-node-simple-transcribe-s3) <br/> Example demonstrates how to setup a lambda function to transcribe audio file | nodeJS |
 | [Aws Single Page App Via Cloudfront](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront) <br/> Demonstrating how to deploy a Single Page Application with Serverless | nodeJS |
@@ -93,6 +93,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Baddadjokesbot](https://github.com/serverless/examples/tree/master/aws-node-twitter-joke-bot)  | nodeJS |
 | [Nest Serverless](https://github.com/serverless/examples/tree/master/aws-node-typescript-nest) <br/> serverless app | nodeJS |
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
+| [Aws Node Typescript Sqs Standard](https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard) <br/> Serverless example using Standard SQS with TypeScript | nodeJS |
 | [Upload To S3 And Postprocess](https://github.com/serverless/examples/tree/master/aws-node-upload-to-s3-and-postprocess) <br/> Upload a files to S3 to trigger a lambda function. | nodeJS |
 | [Aws Node Vue Nuxt Ssr](https://github.com/serverless/examples/tree/master/aws-node-vue-nuxt-ssr) <br/> Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture. | nodeJS |
 | [Aws Nodejs Websockets Authorizers](https://github.com/serverless/examples/tree/master/aws-node-websockets-authorizers) <br/> Simple example that demonstrates how to use authorizer functions with websocket events | nodeJS |
@@ -102,6 +103,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Python Pynamodb S3 Sigurl](https://github.com/serverless/examples/tree/master/aws-python-pynamodb-s3-sigurl) <br/> Serverless signed uploader REST API using pynamodb, s3 generated events, custom log format, and DRY serverless.yml with custom section | python |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
 | [Aws Rest With Faunadb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-faunadb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
+| [Aws Python Rest Api With Pymongo](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-pymongo) <br/> Serverless pymongo example | python |
 | [Aws Rest With Pynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-pynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
 | [Aws Scheduled Cron](https://github.com/serverless/examples/tree/master/aws-python-scheduled-cron) <br/> Example of creating a function that runs as a cron job using the serverless `schedule` event | python |
 | [Aws Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with python | python |
@@ -181,8 +183,8 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Serverless Kakao Bot](https://github.com/JisuPark/serverless-kakao-bot)** <br/> Easy development for Kakaotalk Bot with Serverless | [JisuPark](http://github.com/JisuPark) |
 | **[Serverless Lambda S3 Demonstration](https://github.com/johncmunson/serverless-lambda-s3)** <br/> This project demonstrates how the Serverless Framework can be used to deploy a NodeJS Lambda function that responds to events in an S3 bucket. | [johncmunson](http://github.com/johncmunson) |
 | **[Serverless Load Balancer](https://github.com/pharindoko/serverless-load-balancer)** <br/> A sample that shows how to combine a load balancer with (vpc/subnet configuration) with a lambda. | [pharindoko](http://github.com/pharindoko) |
-| **[Serverless Q&a Example](https://github.com/jacksoncharles/serverless-qa-template-api)** <br/> Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more | [jacksoncharles](http://github.com/jacksoncharles) |
 | **[Serverless Reactjs Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless)** <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | [TylorShin](http://github.com/TylorShin) |
+| **[Serverless Sns Sqs Offline Example ](https://github.com/kenyipp/serverless-sns-sqs-offline-example)** <br/> Minimal example of running serverless-offline with SQS and SNS in local environment. | [kenyipp](http://github.com/kenyipp) |
 | **[Serverless Ssh Command](https://github.com/upgle/serverless-openwhisk-ssh)** <br/> Example of executing ssh command with OpenWhisk | [upgle](http://github.com/upgle) |
 | **[Serverless Telegram Bot](https://github.com/jonatasbaldin/serverless-telegram-bot)** <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖 | [jonatasbaldin](http://github.com/jonatasbaldin) |
 | **[Serverless Ffmpeg](https://github.com/kvaggelakos/serverless-ffmpeg)** <br/> Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket. | [kvaggelakos](http://github.com/kvaggelakos) |

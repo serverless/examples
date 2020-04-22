@@ -1,4 +1,4 @@
-service: aws-node-singned-uploads
+service: aws-node-signed-uploads
 
 plugins:
   - serverless-webpack
