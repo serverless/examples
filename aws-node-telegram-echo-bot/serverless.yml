@@ -2,7 +2,7 @@ service: aws-node-telegram-echo-bot
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
 functions:
   webhook:

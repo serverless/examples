@@ -70,7 +70,7 @@ custom:
 # in serverless.yml
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   iamRoleStatements:
     -  Effect: "Allow"
        Action:
