@@ -502,5 +502,10 @@
     "name": "Serverless SNS SQS offline Example ",
     "description": "Minimal example of running serverless-offline with SQS and SNS in local environment.",
     "githubUrl": "https://github.com/kenyipp/serverless-sns-sqs-offline-example"
+  },
+  {
+    "name": "Serverless RDS Log Sync S3",
+    "description": "Annotated exmaple of a periodic scheduled task to sync changed RDS log files to an S3 bucket.",
+    "githubUrl": "https://github.com/drocco007/serverless-aws-rds-logs-s3"
   }
 ]
