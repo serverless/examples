@@ -15,7 +15,6 @@ provider:
 functions:
   auth:
     handler: handler.auth
-    cors: true
   publicEndpoint:
     handler: handler.publicEndpoint
     events:
