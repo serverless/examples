@@ -1,0 +1,51 @@
+service: aws-node-rest-api-typescript
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    NODE_ENV: dev
+
+plugins:
+  - serverless-plugin-typescript 
+  - serverless-offline
+
+package:
+  exclude:
+    - config/.env.stg
+    - config/.env.pro
+  include:
+    - config/.env.dev
+
+functions:
+  create:
+    handler: app/handler.create
+    events:
+      - http:
+          path: books
+          method: post
+  update:
+    handler: app/handler.update
+    events:
+      - http:
+          path: books/{id}
+          method: put
+  find:
+    handler: app/handler.find
+    events:
+      - http:
+          path: books
+          method: get
+  findOne:
+    handler: app/handler.findOne
+    events:
+      - http:
+          path: books/{id}
+          method: get
+
+  deleteOne:
+    handler: app/handler.deleteOne
+    events:
+      - http:
+          path: books/{id}
+          method: delete
