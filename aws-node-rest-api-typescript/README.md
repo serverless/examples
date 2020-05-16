@@ -17,9 +17,9 @@ This is simple REST API example for AWS Lambda By Serverless framwork with TypeS
 
 * REST API with typescript
 * MongoDB Atlas data storage
-* Mocha unit tests
-* Nyc coverage report
-* TSLint code inspection
+* Multi-environment management under Serverless
+* Mocha unit tests and lambda-tester interface test
+* AWS lambda function log view
 
 ## Invoke the function locally
 
