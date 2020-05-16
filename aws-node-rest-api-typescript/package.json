@@ -1,0 +1,60 @@
+{
+  "name": "aws-node-typescript-rest-api",
+  "version": "1.0.0",
+  "description": "This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and MongoDB Atlas.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "local": "serverless offline",
+    "deploy": "serverless deploy",
+    "test": "cross-env NODE_ENV=dev mocha -r ts-node/register tests/*.test.ts --exit",
+    "coverage": "nyc --reporter lcov npm run test"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.51",
+    "@types/chai": "^4.2.11",
+    "@types/dotenv-safe": "^8.1.0",
+    "@types/lambda-tester": "^3.6.0",
+    "@types/mocha": "^7.0.2",
+    "@types/mongoose": "^5.7.14",
+    "@types/sinon": "^9.0.0",
+    "@types/supertest": "^2.0.8",
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "istanbul": "^0.4.5",
+    "lambda-tester": "^4.0.1",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
+    "serverless-offline": "^5.12.1",
+    "serverless-plugin-typescript": "^1.1.9",
+    "sinon": "^9.0.2",
+    "ts-node": "^8.9.1",
+    "tslint": "^6.1.2",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "^3.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Q-Angelo/aws-node-typescript-rest-api.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "TypeScript",
+    "ServerLess",
+    "MongoDB Atlas",
+    "AWS Lambda"
+  ],
+  "author": "May",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Q-Angelo/aws-node-typescript-rest-api/issues"
+  },
+  "homepage": "https://github.com/Q-Angelo/aws-node-typescript-rest-api#readme"
+}

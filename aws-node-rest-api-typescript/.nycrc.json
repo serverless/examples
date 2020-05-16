@@ -1,0 +1,11 @@
+{
+	"all": true,
+	"report-dir": "./coverage",
+	"extension": [".ts"],
+	"exclude": [
+		"app/model/dto/**.ts", 
+		"app/model/vo/**.ts",
+		"coverage",
+		"tests"
+	]
+}
