@@ -8,7 +8,7 @@ dotenv.config({
 });
 
 import { books } from './model';
-import { BooksController } from './contrller/books';
+import { BooksController } from './controller/books';
 const booksController = new BooksController(books);
 
 export const create: Handler = (event: any, context: Context) => {
