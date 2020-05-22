@@ -1,0 +1,43 @@
+service: dropbox
+provider:
+  profile: personal
+  runtime: nodejs12.x
+  name: aws
+  region: ap-south-1
+  timeout: 60
+  stage: ${opt:stage}
+  environment:
+    CLIENT_SECRET: ${file(./config/${self:provider.stage}.yml):CLIENT_SECRET}
+    CLIENT_ID: ${file(./config/${self:provider.stage}.yml):CLIENT_ID}
+    STAGE: ${file(./config/${opt:stage}.yml):STAGE}
+    CALLBACK_URL: ${file(./config/${self:provider.stage}.yml):CALLBACK_URL}
+    
+plugins:
+  - serverless-offline
+  - serverless-plugin-optimize
+custom:
+  serverless-offline:
+    port: 9999
+    host: 0.0.0.0
+    babelOptions:
+      presets: ["es2015", "latest"]
+  optimize:
+    minify: true
+
+
+functions:
+  dropbox_step1:
+    handler: dropbox/handler.step1
+    events:
+      - http:
+          method: get
+          path: dropbox
+          cors: true
+          
+  dropbox_step2:
+    handler: dropbox/handler.step2
+    events:
+      - http:
+          method: get
+          path: dropbox/callback
+          cors: true

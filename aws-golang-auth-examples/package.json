@@ -1,0 +1,21 @@
+{
+  "name": "aws-golang-auth-examples",
+  "version": "1.0.0",
+  "description": "These example shows how to run a Golang lambda with authentication",
+  "main": "",
+  "keywords": [
+    "Go",
+    "serverless",
+    "aws",
+    "dynamodb",
+    "auth",
+    "tdd",
+    "test",
+    "testing"
+  ],
+  "author": "Sam Bryant <srbry@hotmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless": "^1.30.3"
+  }
+}

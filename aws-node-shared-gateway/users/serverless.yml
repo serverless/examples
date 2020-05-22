@@ -1,0 +1,17 @@
+service: eshop-users
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-southeast-1
+  apiGateway:
+    restApiId:
+      "Fn::ImportValue": SharedGW-restApiId
+    restApiRootResourceId:
+      "Fn::ImportValue": SharedGW-rootResourceId
+functions:
+  get-users:
+    handler: handler.getUsers
+    events:
+      - http:
+          path: users/list
+          method: get

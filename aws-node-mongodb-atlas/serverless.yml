@@ -1,0 +1,11 @@
+service: my-service # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: GET hello

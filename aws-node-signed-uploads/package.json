@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "aws-node-signed-uploads",
+  "description": "Serverless example for S3 signed uploads",
+  "version": "1.0.0",
+  "scripts": {
+    "deploy": "serverless deploy -v",
+    "lint": "eslint .",
+    "start": "serverless offline start"
+  },
+  "devDependencies": {
+    "aws-sdk": "2.223.1",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.4",
+    "babel-preset-env": "1.6.1",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.10.0",
+    "serverless": "1.26.1",
+    "serverless-offline": "3.20.1",
+    "serverless-webpack": "5.1.1",
+    "webpack": "4.5.0"
+  },
+  "author": "Kalin Chernev <kalin.chernev@gmail.com>",
+  "license": "MIT"
+}

@@ -1,0 +1,46 @@
+service: aws-node-ses-receive-email-body
+
+frameworkVersion: ">=1.1.0"
+
+custom:
+  bucket: sesreceiveemailbody
+  bucketRef: S3BucketSesreceiveemailbody
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+
+functions:
+  postprocess:
+    handler: handler.postprocess
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+
+resources:
+  Resources:
+    S3EMailBucketPermissions:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: 
+          Ref: ${self:custom.bucketRef}
+        PolicyDocument:
+          Statement:
+            - Principal: 
+                Service: "ses.amazonaws.com"
+              Action:
+                - s3:PutObject
+              Effect: Allow
+              Sid: "AllowSESPuts"
+              Resource: 
+                Fn::Join: ['', ['arn:aws:s3:::', Ref: "${self:custom.bucketRef}", '/*'] ]
+              Condition:
+                StringEquals:
+                  "aws:Referer": { Ref: AWS::AccountId }

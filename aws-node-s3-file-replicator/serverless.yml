@@ -1,0 +1,37 @@
+service: replicator
+
+custom:
+  inputBucket: input-bucket-12345 # Change to unique name
+  outputBucket: output-bucket-12345 # Change to unique name
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.outputBucket}/*"
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+        - s3:GetObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.inputBucket}/*"
+
+functions:
+  replicate:
+    handler: handler.replicate
+    environment:
+      OUTPUT_BUCKET: ${self:custom.outputBucket}
+    events:
+      - s3: ${self:custom.inputBucket}
+
+resources:
+  Resources:
+    S3BucketOutputs:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.outputBucket}

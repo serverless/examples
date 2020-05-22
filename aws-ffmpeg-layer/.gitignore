@@ -1,0 +1,3 @@
+.serverless/
+node_modules/
+layer/

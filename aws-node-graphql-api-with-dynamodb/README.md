@@ -1,7 +1,13 @@
 <!--
-title: GraphQL query endpoint in NodeJS on AWS with DynamoDB
-description: A single-module GraphQL endpoint with query and mutation functionality.
+title: 'GraphQL query endpoint in NodeJS on AWS with DynamoDB'
+description: 'A single-module GraphQL endpoint with query and mutation functionality.'
 layout: Doc
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/gismoranas'
+authorName: 'Gismo Ranas'
+authorAvatar: 'https://avatars0.githubusercontent.com/u/5903107?v=4&s=140'
 -->
 
 # GraphQL query endpoint in NodeJS on AWS with DynamoDB
@@ -132,6 +138,12 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+```
+
+We need to run `serverless deploy` again to update the changes made in `serverless.yml`:
+
+```
+$ serverless deploy
 ```
 
 To use it we need the [aws-sdk](https://www.npmjs.com/package/aws-sdk), In this example, I use the SDK's vanilla DocumentClient to access DynamoDB records.
