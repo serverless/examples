@@ -1,8 +1,13 @@
 <!--
-title: OpenWhisk Swift example with external libraries and pre-compiled binaries
-description: This example shows you how to use external packages and deploy
-binaries
+title: 'OpenWhisk Swift example with external libraries and pre-compiled binaries'
+description: 'This example shows you how to use external packages and deploy binaries'
 layout: Doc
+framework: v1
+platform: OpenWhisk
+language: Swift
+authorLink: 'https://github.com/jthomas'
+authorName: 'James Thomas'
+authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'
 -->
 # Serverless OpenWhisk Swift Template
 

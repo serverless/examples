@@ -1,0 +1,27 @@
+service: gifmaker
+frameworkVersion: ">=1.34.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+
+functions:
+  mkgif:
+    handler: handler.mkgif
+    events:
+      - s3: ${self:custom.bucket}
+    layers:
+      - {Ref: FfmpegLambdaLayer}
+
+layers:
+  ffmpeg:
+    path: layer
+
+custom:
+  bucket: ${env:BUCKET, 'ffmpeg-layer-gif-maker'}

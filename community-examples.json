@@ -1,30 +1,50 @@
 [
- {
+  {
+    "name": "Serverless Lambda S3 Demonstration",
+    "description": "This project demonstrates how the Serverless Framework can be used to deploy a NodeJS Lambda function that responds to events in an S3 bucket.",
+    "githubUrl": "https://github.com/johncmunson/serverless-lambda-s3"
+  },
+  {
+    "name": "DropBucket - Serverless file sharing",
+    "description": "A serverless file sharing app powered by Cognito/S3/Lambda/API Gateway. Includes a React single-page app UI and virus scanning.",
+    "githubUrl": "https://github.com/marksteele/drop-bucket"
+  },
+  {
+    "name": "Spiderless, Web Spider on Serverless",
+    "description": "A web spider / scraper / website change detector built with Lambda, API Gateway, DynamoDB and SNS",
+    "githubUrl": "https://github.com/slashbit/spider-less"
+  },
+  {
+    "name": "AWS-Demo-Java-Spring-Cloud-Function-Serverless",
+    "description": "If Java is your choice of programming language-Spring Cloud Function,Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities.",
+    "githubUrl": "https://github.com/mbsambangi/aws-java-spring-cloud-function-demo"
+  },
+  {
     "name": "Serverless Architecture Boilerplate",
     "description": "Boilerplate to organize and deploy big projects using Serverless and CloudFormation on AWS",
     "githubUrl": "https://github.com/msfidelis/serverless-architecture-boilerplate"
- },
- {
+  },
+  {
     "name": "bablebot",
     "description": "Lambda + API Gateway: Zero-to-chatbot in <10 lines of JS. Built-in integrations for Messenger, Telegram, Kik, Line, Twilio, Skype, and Wechat. Or roll your own!",
     "githubUrl": "https://github.com/abiglobalhealth/babelbot"
- },
- {
+  },
+  {
     "name": "jwtAuthorizr",
     "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
     "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr"
- },
- {
+  },
+  {
     "name": "slack-signup-serverless",
     "description": "Serverless signup to Slack and more. Lambda with Python, StepFunctions, and Web front end. Python boilerplate included.",
     "githubUrl": "https://github.com/dzimine/slack-signup-serverless"
- },
- {
+  },
+  {
     "name": "serverless-graphql-api",
     "description": "Serverless GraphQL API using Lambda and DynamoDB",
     "githubUrl": "https://github.com/boazdejong/serverless-graphql-api"
- },
- {
+  },
+  {
     "name": "serverless-screenshot",
     "description": "Serverless Screenshot Service using PhantomJS",
     "url": "http://svdgraaf.nl/2016/09/28/Serverless-Screenshot-Service-With-Lambda.html",
@@ -104,7 +124,7 @@
   {
     "name": "serverless-newsletter-signup",
     "description": "Saves user details into DynamoDB table. Required values are email, first_name and last_name.",
-    "githubUrl": "https://github.com/ivanderbu2/serverless-newsletter-signup"
+    "githubUrl": "https://github.com/dschep/serverless-newsletter-signup"
   },
   {
     "name": "serverless-slack-cron",
@@ -234,14 +254,19 @@
     "githubUrl": "https://github.com/lakshmantgld/aws-ses-serverless-example"
   },
   {
+    "name": "aws-node-signed-uploads",
+    "description": "Upload files larger than 10MB with AWS Lambda and API Gateway. Can be developed and tested locally.",
+    "githubUrl": "https://github.com/kalinchernev/aws-node-signed-uploads"
+  },
+  {
     "name": "AWS API Gateway Serverless project written in Go",
     "description": "A serverless project that contains an API Gateway endpoint powered by a Lambda function written in golang and built using [eawsy/aws-lambda-go-shim](https://github.com/eawsy/aws-lambda-go-shim).",
     "githubUrl": "https://github.com/yunspace/serverless-golang"
   },
   {
-   "name": "video-preview-and-analysis-service",
-   "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
-   "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
+    "name": "video-preview-and-analysis-service",
+    "description": "An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file.",
+    "githubUrl": "https://github.com/laardee/video-preview-and-analysis-service"
   },
   {
     "name": "Serverless ES6/7 CRUD API",
@@ -267,8 +292,8 @@
     "name": "Amazon Kinesis Streams fan-out via Kinesis Analytics",
     "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics"
- },
- {
+  },
+  {
     "name": "grants-api-serverless",
     "description": "ES6 API to consume data from an external API, ingest into Elasticsearch and return a queryable endpoint on top of Elasticsearch",
     "githubUrl": "https://github.com/comicrelief/grants-api-serverless"
@@ -312,6 +337,21 @@
     "name": "AWS Cognito Custom User Pool Example",
     "description": "Example CloudFormation custom resource backed by a lambda using Cognito User Pools",
     "githubUrl": "https://github.com/bsdkurt/aws-node-custom-user-pool"
+  },
+  {
+    "name": "AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito Example",
+    "description": "Step by step guide how to deploy simple web application on top of AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito.",
+    "githubUrl": "https://github.com/andreivmaksimov/serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito"
+  },
+  {
+    "name": "Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 1",
+    "description": "From this tutorial you'll learn how to add AWS EKS Cluster with Spot Instances to your cloud environment managed by Serverless framework",
+    "githubUrl": "https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo"
+  },
+  {
+    "name": "Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 2",
+    "description": "From this article you'll learn how to configure AWS Lambda functions to allow them manage your EKS Kubernetes cluster and run triggered jobs",
+    "githubUrl": "https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo/tree/part2"
   },
   {
     "name": "serverless + lambda protobuf responses",
@@ -359,11 +399,6 @@
     "githubUrl": "https://github.com/JisuPark/serverless-kakao-bot"
   },
   {
-    "name": "Serverless Q&A Example",
-    "description": "Inspired by the AWS example forum. A multitenancy Q&A template for surveys, forums and more",
-    "githubUrl": "https://github.com/jacksoncharles/serverless-qa-template-api"
-  },
-  {
     "name": "Personal Access Tokens Cron Check",
     "description": "Audit for leaked PAT in your Contentful organization. How to use serverless as cronjobs to keep your Personal Access Tokens secure",
     "githubUrl": "https://github.com/madtrick/cfpat-audit"
@@ -387,5 +422,95 @@
     "name": "Serverless Next.js Example",
     "description": "Next.js example project for development & deploy.",
     "githubUrl": "https://github.com/kimcoder/serverless-nextjs"
+  },
+  {
+    "name": "Serving binary files",
+    "description": "Small example showing how to serve binary files using Serverless on AWS with the serverless-apigw-binary plugin, using generated Excel files as an example",
+    "githubUrl": "https://github.com/thomastoye/serverless-binary-files-xlsx"
+  },
+  {
+    "name": "Lambda PubSub via SNS Example",
+    "description": "Example illustrating the flow: Lambda (publisher) => SNS => Lambda (consumer)",
+    "githubUrl": "https://github.com/didil/serverless-lambda-sns-example"
+  },
+  {
+    "name": "Serverless CloudWatch Proxy",
+    "description": "Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identying alerts and sending notifications via Slack/Email",
+    "githubUrl": "https://github.com/abbasdgr8/cloudwatch-proxy"
+  },
+  {
+    "name": "Serverless-side rendering with Vue.js and Nuxt.js",
+    "description": "Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture.",
+    "githubUrl": "https://github.com/adnanrahic/serverless-side-rendering-vue-nuxt"
+  },
+  {
+    "name": "aws-mfa-enforce",
+    "description": "Serverless function to automate enforcement of Multi-Factor Authentication (MFA) to all AWS IAM users with access to AWS Management Console.",
+    "githubUrl": "https://github.com/Chan9390/aws-mfa-enforce"
+  },
+  {
+    "name": "vanity-stargazer",
+    "description": "Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack",
+    "githubUrl": "https://github.com/silvermullet/vanity-stargazer"
+  },
+  {
+    "name": "Fotopia Serverless",
+    "description": "A photo archive web app including API, storage and face detection using serverless framework",
+    "githubUrl": "https://github.com/mbudm/fotopia-serverless"
+  },
+  {
+    "name": "Commenting API",
+    "description": "A commenting api using Serverless Typescript GraphQl and Redis",
+    "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService"
+  },
+  {
+    "name": "JSON-Serverless",
+    "description": "A simple & cheap serverless REST API using [json-server](https://github.com/typicode/json-server) in combination with AWS Lambda / S3 and the serverless framework",
+    "githubUrl": "https://github.com/pharindoko/json-serverless"
+  },
+  {
+    "name": "serverless-node-api-dynamodb-neo4j",
+    "description": "Architecture example to stream DynamoDB data to a read-model using Neo4j",
+    "githubUrl": "https://github.com/noetix/serverless-node-api-dynamodb-neo4j"
+  },
+  {
+    "name": "serverless-python-rds-cron",
+    "description": "A serverless python example that periodically removes entries from AWS RDS",
+    "githubUrl": "https://github.com/caulagi/serverless-python-rds-cron"
+  },
+  {
+    "name": "Nietzsche",
+    "description": "A serverless application that fetches quotes from Goodreads and saves it to DynamoDB with example use cases using `Lambda`, `SNS`, `SQS`, `Step Functions`, `DynamoDB`, `API Gateway`, `CloudWatch`",
+    "githubUrl": "https://github.com/rpidanny/Nietzsche"
+  },
+  {
+    "name": "serverless DotNet BoilerPlate",
+    "description": "A serverless starter solution for .NET Core, ready for local debugging in VS Code, HTTP Endpoint, etc.",
+    "githubUrl": "https://github.com/pharindoko/serverlessDotNetSample"
+  },
+  {
+    "name": "Serverless Load Balancer",
+    "description": "A sample that shows how to combine a load balancer with (vpc/subnet configuration) with a lambda.",
+    "githubUrl": "https://github.com/pharindoko/serverless-load-balancer"
+  },
+  {
+    "name": "serverless-api-typescript-template",
+    "description": "A starter template for a Serverless API using Typescript and Jest",
+    "githubUrl": "https://github.com/JoshuaToth/serverless-api-typescript-template"
+  },
+  {
+    "name": "Demo project for serverless-migrate-plugin",
+    "description": "An example about how to use migrations in your serverless project with serverless-migrate-plugin",
+    "githubUrl": "https://github.com/EliuX/serverless-migrate-plugin/tree/master/example"
+  },
+  {
+    "name": "Serverless SNS SQS offline Example ",
+    "description": "Minimal example of running serverless-offline with SQS and SNS in local environment.",
+    "githubUrl": "https://github.com/kenyipp/serverless-sns-sqs-offline-example"
+  },
+  {
+    "name": "Serverless RDS Log Sync S3",
+    "description": "Annotated exmaple of a periodic scheduled task to sync changed RDS log files to an S3 bucket.",
+    "githubUrl": "https://github.com/drocco007/serverless-aws-rds-logs-s3"
   }
 ]

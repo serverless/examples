@@ -1,0 +1,20 @@
+{
+  "name": "aws-node-puppeteer",
+  "version": "1.0.0",
+  "description": "When it comes to AWS Lambda function , they have their own limits as follows ![AWS Limits](./images/aws_limits.png) So , When you try to use Puppeteer your deployment package size(unzipped)  easily go's above 250 mb because When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API.",
+  "main": "chrome-script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@serverless-chrome/lambda": "^1.0.0-55",
+    "chrome-launcher": "^0.12.0",
+    "puppeteer": "^2.1.0",
+    "serverless-offline": "^5.12.1",
+    "serverless-plugin-chrome": "^1.0.0-55.3",
+    "superagent": "^5.2.1"
+  }
+}

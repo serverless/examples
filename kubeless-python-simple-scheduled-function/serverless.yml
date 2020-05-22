@@ -1,0 +1,14 @@
+service: python-clock
+
+provider:
+  name: kubeless
+  runtime: python2.7
+
+plugins:
+  - serverless-kubeless
+
+functions:
+  clock:
+    handler: handler.printClock
+    events:
+      - schedule: '* * * * *'

@@ -37,6 +37,12 @@ const getRuntime = (dirname) => {
     return 'swift';
   } else if (dirname.match(/php/)) {
     return 'php';
+  } else if (dirname.match(/ruby/)) {
+    return 'ruby';
+  } else if (dirname.match(/golang/)) {
+    return 'golang';
+  } else if (dirname.match(/dotnet/)) {
+    return 'dotnet';
   }
   return 'nodeJS';
 };
@@ -50,7 +56,7 @@ const config = {
     <!-- AUTO-GENERATED-CONTENT:END -->
      */
     SERVERLESS_EXAMPLE_TABLE() {
-      const examples = globby.sync(['**/package.json', '!node_modules/**/package.json', '!**/node_modules/**/package.json', '!package.json']);
+      const examples = globby.sync(['**/package.json', '!node_modules/**/package.json', '!**/node_modules/**/package.json', '!package.json', '!**/bin/**/netcoreapp2.1/**/package.json']);
       // Make table header
       let md = '| Example | Runtime  |\n';
       md += '|:--------------------------- |:-----|\n';

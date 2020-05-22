@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "8.10"
+        },
+        "modules": false,
+        "loose": true
+      }
+    ]
+  ]
+}

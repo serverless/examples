@@ -1,0 +1,22 @@
+service: baddadjokesbot
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-west-1'}
+
+custom:
+  env: ${file(./${self:provider.stage}.env.json)}
+
+functions:
+  bot:
+    handler: handler.bot
+    events:
+      - schedule: rate(5 hours)
+    environment:
+      JOKES_API_URL: ${self:custom.env.JOKES_API_URL}
+      TWITTER_CONSUMER_KEY: ${self:custom.env.TWITTER_CONSUMER_KEY}
+      TWITTER_CONSUMER_SECRET: ${self:custom.env.TWITTER_CONSUMER_SECRET}
+      TWITTER_ACCESS_TOKEN_KEY: ${self:custom.env.TWITTER_ACCESS_TOKEN_KEY}
+      TWITTER_ACCESS_TOKEN_SECRET: ${self:custom.env.TWITTER_ACCESS_TOKEN_SECRET}

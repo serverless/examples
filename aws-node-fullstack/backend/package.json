@@ -1,0 +1,16 @@
+{
+  "name": "sfe-demo-leadcapture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Serverless.com",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^3.13.0",
+    "serverless-finch": "^2.3.2"
+  },
+  "devDependencies": {
+    "@serverless/enterprise-plugin": "latest"
+  }
+}

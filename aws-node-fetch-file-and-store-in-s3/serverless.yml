@@ -7,13 +7,14 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs12.x
   stage: dev
   region: us-west-1
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:PutObject
+        - s3:PutObjectAcl
       Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:

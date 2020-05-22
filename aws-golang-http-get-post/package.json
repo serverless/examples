@@ -1,0 +1,7 @@
+{
+  "name": "aws-golang-http-get-post",
+  "version": "1.29.2",
+  "description": "Example on Making Parameterized Get and Post Request with Golang",
+  "author": "Pramono Winata <pramono_winata@gyahoo.com>",
+  "license": "MIT"
+}

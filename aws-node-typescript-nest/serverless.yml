@@ -1,0 +1,29 @@
+service:
+  name: serverless-nest-example
+
+plugins:
+  - '@hewmen/serverless-plugin-typescript'  
+  - serverless-plugin-optimize
+  - serverless-offline
+  # - serverless-plugin-warmup
+
+# custom:
+#   # Enable warmup on all functions (only for production and staging)
+#   warmup:      
+#       - production
+#       - staging
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+package:
+  individually: true
+
+functions:
+  main:
+    handler: src/main.handler
+    events:
+      - http:
+          method: any
+          path: /{proxy+}

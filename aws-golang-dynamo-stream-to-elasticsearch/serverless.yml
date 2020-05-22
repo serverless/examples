@@ -1,0 +1,106 @@
+service: aws-golang-dynamo-stream-to-elasticsearch
+
+provider:
+  name: aws
+  runtime: go1.x
+  environment:
+    ELASTICSEARCH_URL:
+      Fn::GetAtt: ["PuppySearch", "DomainEndpoint"]
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - 'dynamodb:ListTables'
+        - 'dynamodb:DescribeTable'
+        - 'dynamodb:DescribeStream'
+        - 'dynamodb:ListStreams'
+        - 'dynamodb:GetShardIterator'
+        - 'dynamodb:BatchGetItem'
+        - 'dynamodb:GetItem'
+        - 'dynamodb:Query'
+        - 'dynamodb:Scan'
+        - 'dynamodb:DescribeReservedCapacity'
+        - 'dynamodb:DescribeReservedCapacityOfferings'
+        - 'dynamodb:GetRecords'
+      Resource:
+        - { "Fn::GetAtt": ["PuppyDemo", "Arn"] }
+    - Effect: Allow
+      Action:
+        - es:ESHttpPost
+        - es:ESHttpPut
+        - es:ESHttpDelete
+        - es:ESHttpGet
+      Resource:
+        - { "Fn::GetAtt": ["PuppySearch", "DomainArn"] }
+        - { "Fn::Join": ["", ["Fn::GetAtt": ["PuppySearch", "DomainArn"], "/*"]] }
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  aws-golang-dynamo-stream-to-elasticsearch:
+    name: aws-golang-dynamo-stream-to-elasticsearch
+    handler: bin/aws-golang-dynamo-stream-to-elasticsearch
+    memorySize: 128
+    timeout: 60
+    events:
+      - stream:
+          type: dynamodb
+          batchSize: 100
+          enabled: true
+          arn: { "Fn::GetAtt": ["PuppyDemo", "StreamArn"] }
+
+resources:
+  Resources:
+    PuppyDemo:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: puppies
+    PuppySearch:
+      Type: "AWS::Elasticsearch::Domain"
+      Properties:
+        ElasticsearchVersion: "6.3"
+        DomainName: "puppy-search"
+        ElasticsearchClusterConfig:
+          DedicatedMasterEnabled: false
+          InstanceCount: "1"
+          ZoneAwarenessEnabled: false
+          InstanceType: "t2.small.elasticsearch"
+        EBSOptions:
+          EBSEnabled: true
+          Iops: 0
+          VolumeSize: 10
+          VolumeType: "gp2"
+
+        ## Attention! Before you enable this lines, check out the README to avoid an open access policy
+        # AccessPolicies:
+        #   Version: "2012-10-17"
+        #   Statement:
+        #     -
+        #       Effect: "Allow"
+        #       Principal:
+        #         AWS: "*"
+        #       Action: "es:*"
+        #       Resource: "*"
+        AdvancedOptions:
+          rest.action.multi.allow_explicit_index: "true"
+

@@ -1,0 +1,31 @@
+service: aws-node-ses-receive-email-header
+
+frameworkVersion: ">=1.1.0"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+
+functions:
+  processheader:
+    handler: handler.processheader
+  processacceptreject:
+    handler: handler.processacceptreject
+
+resources:
+  Resources:
+    GiveSESPermissionToInvokeProcessheaderLambdaFunction:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: { "Fn::GetAtt": [ "ProcessheaderLambdaFunction", "Arn" ] }
+        Principal: ses.amazonaws.com
+        Action: 'lambda:InvokeFunction'
+        SourceAccount: { Ref: AWS::AccountId }
+    GiveSESPermissionToInvokeProcessacceptrejectLambdaFunction:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: { "Fn::GetAtt": [ "ProcessacceptrejectLambdaFunction", "Arn" ] }
+        Principal: ses.amazonaws.com
+        Action: 'lambda:InvokeFunction'
+        SourceAccount: { Ref: AWS::AccountId }

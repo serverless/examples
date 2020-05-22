@@ -1,0 +1,71 @@
+service:
+  name: ${self:custom.serviceName}
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: dev-fii
+
+  usagePlan:
+    quota:
+      limit: 100
+      offset: 2
+      period: MONTH
+    throttle:
+      burstLimit: 100
+      rateLimit: 50
+
+custom:
+  serviceName: image-resizing
+  stage: ${opt:stage, self:custom.defaultStage}
+  bucket: dynamic-image-resizing
+  webpack:
+    includeModules:
+      forceExclude:
+        - aws-sdk
+  defaultStage: dev
+  stages:
+    - ${opt:stage}
+    - dev
+    - integration
+    - production
+
+functions:
+  resize:
+    handler: src/handlers/resizer/index.handler
+    events:
+      - http:
+          path: /{size}/{image}
+          method: get
+    environment:
+      # Provide your bucket name here
+      BUCKET: dynamic-image-resizing
+      REGION: us-east-1
+    # layers:
+    #   - {Ref: ImageLibsLambdaLayer}
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "s3:GetObject"
+        Resource: "arn:aws:s3:::dynamic-image-resizing/*"
+      - Effect: "Allow"
+        Action:
+          - "s3:PutObject"
+        Resource: "arn:aws:s3:::dynamic-image-resizing/*"
+
+package:
+  exclude:
+    - layer/**
+    - node_modules/**
+    - '!node_modules/babel-runtime/**'
+    - '!node_modules/sharp/**'
+
+# layers:
+#   imageLibs:
+#     path: layer
+#     compatibleRuntimes:
+#       - nodejs12.x
