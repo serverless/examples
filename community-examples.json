@@ -382,5 +382,10 @@
     "name": "Serverless Instagram Crawler",
     "description": "Instagram hashtag Crawler with Lambda & DynamoDB.",
     "githubUrl": "https://github.com/kimcoder/serverless-instagram-crawler"
+  },
+  {
+    "name": "Serverless Next.js Example",
+    "description": "Next.js example project for development & deploy.",
+    "githubUrl": "https://github.com/kimcoder/serverless-nextjs"
   }
 ]
