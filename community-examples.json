@@ -512,5 +512,10 @@
     "name": "Serverless RDS Log Sync S3",
     "description": "Annotated exmaple of a periodic scheduled task to sync changed RDS log files to an S3 bucket.",
     "githubUrl": "https://github.com/drocco007/serverless-aws-rds-logs-s3"
+  },
+  {
+    "name": "GoLive",
+    "description": "Boilerplate to live stream using AWS MediaLive and MediaStore",
+    "githubUrl": "https://github.com/adimoraret/golive/"
   }
 ]
