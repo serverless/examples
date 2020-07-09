@@ -92,6 +92,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Text Analysis Via Sns Post Processing](https://github.com/serverless/examples/tree/master/aws-node-text-analysis-via-sns-post-processing) <br/> Example demonstrates how to setup a simple data processing pipeline | nodeJS |
 | [Aws Node Twilio Send Text Message](https://github.com/serverless/examples/tree/master/aws-node-twilio-send-text-message) <br/> Send a text message via twilio from aws lambda. [See live demo](http://twilio-serverless-example.surge.sh) | nodeJS |
 | [Baddadjokesbot](https://github.com/serverless/examples/tree/master/aws-node-twitter-joke-bot)  | nodeJS |
+| [Aws Node Typescript Kinesis](https://github.com/serverless/examples/tree/master/aws-node-typescript-kinesis) <br/> Serverless example using Kinesis with TypeScript | nodeJS |
 | [Nest Serverless](https://github.com/serverless/examples/tree/master/aws-node-typescript-nest) <br/> serverless app | nodeJS |
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
 | [Aws Node Typescript Sqs Standard](https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard) <br/> Serverless example using Standard SQS with TypeScript | nodeJS |
@@ -111,9 +112,9 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Serverless Telegram Bot](https://github.com/serverless/examples/tree/master/aws-python-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖  | python |
 | [Aws Ruby Line Bot](https://github.com/serverless/examples/tree/master/aws-ruby-line-bot) <br/> Example demonstrates how to setup a simple Line echo bot on AWS | ruby |
 | [Aws Ruby Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | ruby |
-| [Azure Node Line Bot](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Line Bot Functions sample for the Serverless framework | nodeJS |
+| [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
-| [Azure Node Telegram Bot](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Telegrame Bot Functions sample for the Serverless framework | nodeJS |
+| [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Google Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
 | [Gcp Node Typescript Simple](https://github.com/serverless/examples/tree/master/google-node-typescript-http-endpoint) <br/> Simple HTTP example for GCP functions by Serverless framework with Typescript | nodeJS |
