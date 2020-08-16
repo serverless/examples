@@ -517,5 +517,10 @@
     "name": "GoLive",
     "description": "Boilerplate to live stream using AWS MediaLive and MediaStore",
     "githubUrl": "https://github.com/adimoraret/golive/"
+  },
+  {
+    "name": "Serverless AppSync offline TypeScript with CircleCI",
+    "description": "A Serverless Framework template that allows you to launch an AppSync emulator locally and proceed with development. Lambda Function build by TypeScript/Webpack.",
+    "githubUrl": "https://github.com/daisuke-awaji/serverless-appsync-offline-typescript-template"
   }
 ]
