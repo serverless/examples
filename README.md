@@ -71,6 +71,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Puppeteer](https://github.com/serverless/examples/tree/master/aws-node-puppeteer) <br/> When it comes to AWS Lambda function , they have their own limits as follows ![AWS Limits](./images/aws_limits.png) So , When you try to use Puppeteer your deployment package size(unzipped)  easily go's above 250 mb because When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API. | nodeJS |
 | [Aws Node Rekognition Analysis S3 Image](https://github.com/serverless/examples/tree/master/aws-node-rekognition-analysis-s3-image) <br/> Analyse an Image from an S3 Bucket with Amazon Rekognition | nodeJS |
 | [Aws Node Restapi Mongodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-mongodb) <br/> Serverless REST API with MongoDB using Mongoose and Bluebird | nodeJS |
+| [Aws Node Rest Api Typescript](https://github.com/serverless/examples/tree/master/aws-node-rest-api-typescript-simple)  | nodeJS |
 | [Aws Node Typescript Rest Api](https://github.com/serverless/examples/tree/master/aws-node-rest-api-typescript) <br/> This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and MongoDB Atlas. | nodeJS |
 | [Aws Rest Api Offline](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb-and-offline) <br/> Serverless REST API with DynamoDB and offline support | nodeJS |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | nodeJS |
@@ -92,6 +93,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Text Analysis Via Sns Post Processing](https://github.com/serverless/examples/tree/master/aws-node-text-analysis-via-sns-post-processing) <br/> Example demonstrates how to setup a simple data processing pipeline | nodeJS |
 | [Aws Node Twilio Send Text Message](https://github.com/serverless/examples/tree/master/aws-node-twilio-send-text-message) <br/> Send a text message via twilio from aws lambda. [See live demo](http://twilio-serverless-example.surge.sh) | nodeJS |
 | [Baddadjokesbot](https://github.com/serverless/examples/tree/master/aws-node-twitter-joke-bot)  | nodeJS |
+| [Aws Node Typescript Kinesis](https://github.com/serverless/examples/tree/master/aws-node-typescript-kinesis) <br/> Serverless example using Kinesis with TypeScript | nodeJS |
 | [Nest Serverless](https://github.com/serverless/examples/tree/master/aws-node-typescript-nest) <br/> serverless app | nodeJS |
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
 | [Aws Node Typescript Sqs Standard](https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard) <br/> Serverless example using Standard SQS with TypeScript | nodeJS |
@@ -111,9 +113,9 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Serverless Telegram Bot](https://github.com/serverless/examples/tree/master/aws-python-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖  | python |
 | [Aws Ruby Line Bot](https://github.com/serverless/examples/tree/master/aws-ruby-line-bot) <br/> Example demonstrates how to setup a simple Line echo bot on AWS | ruby |
 | [Aws Ruby Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | ruby |
-| [Azure Node Line Bot](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Line Bot Functions sample for the Serverless framework | nodeJS |
+| [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |
-| [Azure Node Telegram Bot](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Telegrame Bot Functions sample for the Serverless framework | nodeJS |
+| [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-telegram-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Google Golang Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-golang-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with golang | golang |
 | [Google Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint) <br/> An example of making http endpoints with the Google Cloud Functions Serverless Framework plugin. | nodeJS |
 | [Gcp Node Typescript Simple](https://github.com/serverless/examples/tree/master/google-node-typescript-http-endpoint) <br/> Simple HTTP example for GCP functions by Serverless framework with Typescript | nodeJS |
@@ -255,6 +257,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
 | **[Vanity Stargazer](https://github.com/silvermullet/vanity-stargazer)** <br/> Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack | [silvermullet](http://github.com/silvermullet) |
 | **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |
+| **[Serverless Image Labelling](https://github.com/nileshprasad137/serverless-image-labeller)** <br/> Serverless image labelling using AWS Rekognition, s3, DynamoDB. | [nileshprasad137](http://github.com/nileshprasad137) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
