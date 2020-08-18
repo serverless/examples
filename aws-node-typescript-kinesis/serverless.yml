@@ -1,0 +1,42 @@
+service:
+  name: aws-node-typescript-kinesis
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - kinesis:PutRecord
+        - kinesis:PutRecords
+      Resource:
+        - Fn::GetAtt: [ kinesisStream, Arn ]
+
+functions:
+  producer:
+    handler: handler.producer
+    events:
+      - http:
+          method: post
+          path: producer
+
+  consumer:
+    handler: handler.consumer
+    events:
+      - stream:
+          type: kinesis
+          arn:
+            Fn::GetAtt:
+              - kinesisStream
+              - Arn
+resources:
+  Resources:
+    kinesisStream:
+      Type: AWS::Kinesis::Stream
+      Properties:
+        Name: eventStream
+        RetentionPeriodHours: 24
+        ShardCount: 1
