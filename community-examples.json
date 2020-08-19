@@ -519,6 +519,11 @@
     "githubUrl": "https://github.com/adimoraret/golive/"
   },
   {
+    "name": "Serverless Image Labeller",
+    "description": "Serverless image labelling using Rekognition, s3, DynamoDB.",
+    "githubUrl": "https://github.com/nileshprasad137/serverless-image-labeller"
+  },
+  {
     "name": "Serverless AppSync offline TypeScript with CircleCI",
     "description": "A Serverless Framework template that allows you to launch an AppSync emulator locally and proceed with development. Lambda Function build by TypeScript/Webpack.",
     "githubUrl": "https://github.com/daisuke-awaji/serverless-appsync-offline-typescript-template"

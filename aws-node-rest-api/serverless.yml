@@ -1,0 +1,15 @@
+org: serverlessinc
+app: aws-node-rest-api
+service: aws-node-rest-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
