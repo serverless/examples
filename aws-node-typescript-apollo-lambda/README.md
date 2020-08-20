@@ -12,6 +12,8 @@ authorAvatar: 'https://avatars3.githubusercontent.com/u/28927258?s=460&v=4'
 # Apollo Lambda GraphQL API Example
 This example demonstrates how to setup a lambda graphql API with apollo
 
+- I used apiKeys to secure the endpoints but you can add custom authorizers
+
 ## Use Cases
 - Small graphql API
 - Creating a temporary lambda API that can easily be converted to standard GraphQL API
