@@ -95,6 +95,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Nest Serverless](https://github.com/serverless/examples/tree/master/aws-node-typescript-nest) <br/> serverless app | nodeJS |
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
 | [Aws Node Typescript Sqs Standard](https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard) <br/> Serverless example using Standard SQS with TypeScript | nodeJS |
+| [Aws Node Typescript GraphQL Apollo Lambda](https://github.com/serverless/examples/tree/master/aws-node-typescript-apollo-lambda) <br/> Serverless example for apollo lambda with TypeScript | nodeJS |
 | [Upload To S3 And Postprocess](https://github.com/serverless/examples/tree/master/aws-node-upload-to-s3-and-postprocess) <br/> Upload a files to S3 to trigger a lambda function. | nodeJS |
 | [Aws Node Vue Nuxt Ssr](https://github.com/serverless/examples/tree/master/aws-node-vue-nuxt-ssr) <br/> Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture. | nodeJS |
 | [Aws Nodejs Websockets Authorizers](https://github.com/serverless/examples/tree/master/aws-node-websockets-authorizers) <br/> Simple example that demonstrates how to use authorizer functions with websocket events | nodeJS |
