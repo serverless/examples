@@ -517,5 +517,10 @@
     "name": "GoLive",
     "description": "Boilerplate to live stream using AWS MediaLive and MediaStore",
     "githubUrl": "https://github.com/adimoraret/golive/"
+  },
+  {
+    "name": "Serverless Image Labeller",
+    "description": "Serverless image labelling using Rekognition, s3, DynamoDB.",
+    "githubUrl": "https://github.com/nileshprasad137/serverless-image-labeller"
   }
 ]

@@ -1,0 +1,15 @@
+org: serverlessinc
+app: aws-python-rest-api
+service: aws-python-rest-api
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
