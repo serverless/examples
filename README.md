@@ -184,6 +184,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Serverless Dashboard For Atom Editor](https://github.com/horike37/serverless-dashboard-for-atom)** <br/> Atom editor package which allows you to deploy and visualize your serverless services with Serverless Framework on your editor. | [horike37](http://github.com/horike37) |
 | **[Serverless Es6/7 Crud Api](https://github.com/AnomalyInnovations/serverless-stack-demo-api)** <br/> [Serverless Stack](http://serverless-stack.com) examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for [React.js single-page app](http://demo.serverless-stack.com) | [AnomalyInnovations](http://github.com/AnomalyInnovations) |
 | **[Serverless Gitlab Ci](https://github.com/bvincent1/serverless-gitlab-ci)** <br/> Simple Gitlab CI template for automatic testing and deployments | [bvincent1](http://github.com/bvincent1) |
+| **[Serverless Image Labeller](https://github.com/nileshprasad137/serverless-image-labeller)** <br/> Serverless image labelling using Rekognition, s3, DynamoDB. | [nileshprasad137](http://github.com/nileshprasad137) |
 | **[Serverless Instagram Crawler](https://github.com/kimcoder/serverless-instagram-crawler)** <br/> Instagram hashtag Crawler with Lambda & DynamoDB. | [kimcoder](http://github.com/kimcoder) |
 | **[Serverless Kakao Bot](https://github.com/JisuPark/serverless-kakao-bot)** <br/> Easy development for Kakaotalk Bot with Serverless | [JisuPark](http://github.com/JisuPark) |
 | **[Serverless Lambda S3 Demonstration](https://github.com/johncmunson/serverless-lambda-s3)** <br/> This project demonstrates how the Serverless Framework can be used to deploy a NodeJS Lambda function that responds to events in an S3 bucket. | [johncmunson](http://github.com/johncmunson) |
@@ -258,7 +259,6 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
 | **[Vanity Stargazer](https://github.com/silvermullet/vanity-stargazer)** <br/> Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack | [silvermullet](http://github.com/silvermullet) |
 | **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |
-| **[Serverless Image Labelling](https://github.com/nileshprasad137/serverless-image-labeller)** <br/> Serverless image labelling using AWS Rekognition, s3, DynamoDB. | [nileshprasad137](http://github.com/nileshprasad137) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
