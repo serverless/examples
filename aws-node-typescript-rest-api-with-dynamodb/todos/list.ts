@@ -9,6 +9,7 @@ const params = {
 
 module.exports.list = (event, context, callback) => {
   // fetch all todos from the database
+  // For production workloads you should design your tables and indexes so that your applications can use Query instead of Scan.
   dynamoDb.scan(params, (error, result) => {
     // handle potential errors
     if (error) {
