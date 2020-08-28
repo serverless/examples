@@ -93,6 +93,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Text Analysis Via Sns Post Processing](https://github.com/serverless/examples/tree/master/aws-node-text-analysis-via-sns-post-processing) <br/> Example demonstrates how to setup a simple data processing pipeline | nodeJS |
 | [Aws Node Twilio Send Text Message](https://github.com/serverless/examples/tree/master/aws-node-twilio-send-text-message) <br/> Send a text message via twilio from aws lambda. [See live demo](http://twilio-serverless-example.surge.sh) | nodeJS |
 | [Baddadjokesbot](https://github.com/serverless/examples/tree/master/aws-node-twitter-joke-bot)  | nodeJS |
+| [Aws Node Typescript Apollo Lambda](https://github.com/serverless/examples/tree/master/aws-node-typescript-apollo-lambda) <br/> Serverless example for apollo lambda | nodeJS |
 | [Aws Node Typescript Kinesis](https://github.com/serverless/examples/tree/master/aws-node-typescript-kinesis) <br/> Serverless example using Kinesis with TypeScript | nodeJS |
 | [Nest Serverless](https://github.com/serverless/examples/tree/master/aws-node-typescript-nest) <br/> serverless app | nodeJS |
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
