@@ -518,6 +518,10 @@
     "description": "Boilerplate to live stream using AWS MediaLive and MediaStore",
     "githubUrl": "https://github.com/adimoraret/golive/"
   },
+  { "name": "HTTP Headers Checks",
+    "description": "Serverless Application to check integrity of the headers of a given HTTP server",
+    "githubUrl": "https://github.com/authdog/http-headers-check"
+  },
   {
     "name": "Serverless Image Labeller",
     "description": "Serverless image labelling using Rekognition, s3, DynamoDB.",
