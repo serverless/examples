@@ -1,0 +1,28 @@
+{
+  "name": "aws-node-typescript-sqs-standard",
+  "version": "1.0.0",
+  "description": "Serverless example using Standard SQS with TypeScript",
+  "main": "sender.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
+  },
+  "dependencies": {
+    "aws-lambda": "^0.1.2",
+    "aws-sdk": "^2.553.0",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.14.22",
+    "eslint": "^6.6.0",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.20.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0"
+  },
+  "author": "Miguel Frazao (https://github.com/jmpfrazao/serverless-ts-standard-sqs)",
+  "license": "MIT"
+}

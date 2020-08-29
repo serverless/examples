@@ -14,7 +14,7 @@
   "dependencies": {
     "@babel/runtime": "^7.3.1",
     "babel-runtime": "^7.0.0-beta.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "serverless-offline": "^4.7.0",
     "serverless-webpack": "^5.2.0",
     "sharp": "^0.21.3",

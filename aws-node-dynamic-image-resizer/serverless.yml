@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   profile: dev-fii
 
   usagePlan:
@@ -68,4 +68,4 @@ package:
 #   imageLibs:
 #     path: layer
 #     compatibleRuntimes:
-#       - nodejs8.10
+#       - nodejs12.x

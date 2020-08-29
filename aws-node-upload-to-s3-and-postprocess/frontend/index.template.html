@@ -6,12 +6,14 @@
 
   <body>
     <form action="%BUCKET_URL%" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="Content-Type" value="image/png">
-      <input type="hidden" name="AWSAccessKeyId" value="%AWS_ACCESS_KEY%">
       <input type="hidden" name="acl" value="public-read">
+      <input type="hidden" name="Content-Type" value="image/png">
+      <input type="hidden" name="x-amz-credential" value="%CREDENTIAL%">
+      <input type="hidden" name="x-amz-algorithm" value="AWS4-HMAC-SHA256">
+      <input type="hidden" name="x-amz-date" value="%DATE%">
       <input type="hidden" name="success_action_status" value="201">
-      <input type="hidden" name="policy" value="%POLICY_BASE64%">
-      <input type="hidden" name="signature" value="%SIGNATURE%">
+      <input type="hidden" name="Policy" value="%POLICY_BASE64%">
+      <input type="hidden" name="x-amz-signature" value="%SIGNATURE%">
 
       Destination filename: <input type="text" name="key" value="uploads/image.png">
       <br>

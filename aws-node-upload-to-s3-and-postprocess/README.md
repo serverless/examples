@@ -23,10 +23,12 @@ trigger a lambda function.
 - Edit `serverless.yml` and choose a unique S3 bucket name.
 - Edit `generate-form.js` and fill in your `aws_access_key_id`,
   `aws_secret_access_key` and `bucket_name`.
+- Run `yarn install` to install crypto-js dependency for `generate-form.js`.
 - Generate the HTML form:
 
 
 ```bash
+yarn install
 node generate-form.js
 ```
 

@@ -47,14 +47,16 @@ provider:
 #    variable1: value1
 
 package:
+ individually: true
  exclude:
    - ./**
- include:
-   - ./bin/**
 
 functions:
   get:
     handler: bin/getBin
+    package:
+      include:
+        - ./bin/getBin
     events:
       - http:
           path: get/{name}
@@ -65,6 +67,9 @@ functions:
                 name: true
   getquery:
     handler: bin/getQueryBin
+    package:
+      include:
+        - ./bin/getQueryBin
     events:
       - http:
           path: getQ
@@ -75,6 +80,9 @@ functions:
                 name: true
   post:
     handler: bin/postBin
+    package:
+      include:
+        - ./bin/getQueryBin
     events:
       - http:
           path: post
