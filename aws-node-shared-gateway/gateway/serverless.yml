@@ -1,7 +1,7 @@
 service: shared-gateway
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   region: ap-southeast-1
 resources:
   Resources:

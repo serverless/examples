@@ -2,7 +2,7 @@ service: aws-lambda-and-heroku-postgres # NOTE: update this with your service na
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   stage: dev
 
 functions:

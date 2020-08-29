@@ -6,7 +6,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
   region: us-west-2
   environment:
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
@@ -15,7 +15,6 @@ provider:
 functions:
   auth:
     handler: handler.auth
-    cors: true
   publicEndpoint:
     handler: handler.publicEndpoint
     events:

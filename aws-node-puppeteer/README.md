@@ -1,3 +1,14 @@
+<!--
+title: 'Running Puppeteer on AWS Lambda'
+description: 'This example shows you how to run Puppeteer on AWS Lambda'
+framework: v1
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/emaildano'
+authorName: 'Daniel Olson'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/1872327?v=4&s=140'
+-->
+
 ### Running Puppeteer on AWS Lambda Using Serverless Framework
 
 ### Instructions to run locally 
@@ -80,7 +91,7 @@ module.exports.getChrome = async () => {
 };
 ```
 
-`@@serverless-chrome/lambda` provide scaffolding for using Headless Chrome during a serverless function invocation. Serverless Chrome takes care of building and bundling the Chrome binaries and making sure Chrome is running when your serverless function executes. In addition, this project also provides a few example services for common patterns (e.g. taking a screenshot of a page, printing to PDF, some scraping, etc.)
+`@serverless-chrome/lambda` provide scaffolding for using Headless Chrome during a serverless function invocation. Serverless Chrome takes care of building and bundling the Chrome binaries and making sure Chrome is running when your serverless function executes. In addition, this project also provides a few example services for common patterns (e.g. taking a screenshot of a page, printing to PDF, some scraping, etc.)
 
 
 ## 5.Connect Puppeteer With Headless Chrome
