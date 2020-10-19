@@ -1,0 +1,6 @@
+name: aws-node-rest-api
+org: serverlessinc
+description: Deploys a Node REST API service with traditional Serverless Framework 
+keywords: aws, serverless, faas, lambda, node
+repo: https://github.com/serverless/examples/aws-node-rest-api
+license: MIT
