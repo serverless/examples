@@ -1,0 +1,6 @@
+name: aws-python-rest-api
+org: serverlessinc
+description: Deploys a Python REST API service with traditional Serverless Framework
+keywords: aws, serverless, faas, lambda, python
+repo: https://github.com/serverless/examples/aws-python-rest-api
+license: MIT
