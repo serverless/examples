@@ -21,7 +21,7 @@ You will also need to set up your OpenWhisk account credentials using environmen
 ## 2. Compile Go Binary
 
 ```
-$ env GOOS=linux GOARCH=amd64 go build handler.go
+$ env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags '-s -w -extldflags "-static"' handler.go
 ```
 
 ## 3. Deploy
