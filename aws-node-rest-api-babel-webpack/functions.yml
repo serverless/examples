@@ -1,0 +1,11 @@
+getTeste:
+  name: teste-${self:custom.stage}-query
+  description: Test Query for sample api gateway lambda
+  handler: ${self:custom.basePath, ''}src/index.handler
+  memorySize: 128
+  timeout: 30
+  events:
+    - http:
+        path: test
+        method: get
+        cors: true

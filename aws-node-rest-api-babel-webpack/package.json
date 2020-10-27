@@ -1,0 +1,36 @@
+{
+  "name": "serverless-babel-webpack-sample",
+  "version": "1.0.1",
+  "description": "A simple way to create an AWS API Gateway lambda",
+  "scripts": {
+    "lint": "eslint .",
+    "start:local": "sls offline",
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:qa": "sls deploy --stage qa",
+    "deploy:staging": "sls deploy --stage staging",
+    "deploy:prod": "AWS_PROFILE=your-production-profile SLS_STAGE=prod  serverless deploy --stage prod"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-plugin-import": "^2.16.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-source-map-support": "^2.0.1",
+    "serverless-offline": "^6.5.0",
+    "webpack": "^4.29.3"
+  },
+  "dependencies": {
+    "serverless-webpack": "^5.2.0",
+    "source-map-support": "^0.5.10",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "engines": {
+    "node": ">= 12.18",
+    "yarn": ">= 1.22.5"
+  },
+  "author": "Paulo Rodrigues <pcqrodrigues@gmail.com>",
+  "license": "MIT",
+  "private": true
+}

@@ -1,0 +1,2 @@
+default:
+  SLS_STAGE: ${self:custom.stage}
