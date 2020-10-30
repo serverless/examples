@@ -1,0 +1,41 @@
+service:
+    name: service-bus-trigger-example
+
+plugins:
+    - serverless-azure-functions
+    - serverless-webpack
+    - serverless-dotenv-plugin
+
+provider:
+    name: azure
+    stage: ${opt:env}
+    runtime: nodejs10
+    region: '<Region>'
+    type: premium
+    subscriptionId: '<AzureSubscriptionId'
+    resourceGroup: '<AzureResourceGroup>'
+    environment:
+        SERVICE_BUS_CONNECTION_STRING: '<AzureServiceBusConnectionString>'
+ 
+
+functions:
+    sendMessage:
+        handler: src/controller/messageSenderController.sendMessage
+        events:
+            - http:
+              x-azure-settings:
+                name: req
+                methods:
+                    - post
+                route: api/v3/send
+                authLevel: anonymous
+    
+    sampleHandler:
+        handler: src/controller/triggerFunctionController.sampleHandler
+        events:
+            - serviceBus:
+              x-azure-settings:
+                name: req
+                queueName: myqueuename
+                accessRights: manage
+                connection: SERVICE_BUS_CONNECTION_STRING
