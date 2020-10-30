@@ -124,4 +124,4 @@ The console would show the output message which should look something like this 
 [2020-10-30T08:20:11.023] [2020-10-30T13:50:11.022+05:30][INFO][src\controller\triggerFunctionController.ts]: Azure function has been trigged with message {"id":10,"name":"Kurshit","gender":"Male","age":27} in service bus
 [2020-10-30T08:20:11.026] Executed 'Functions.sampleHandler' (Succeeded, Id=abbb78d1-a19c-4ea7-b8a7-3ae6e9c6e66d, Duration=39ms)
 
-``` 
+```
