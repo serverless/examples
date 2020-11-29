@@ -1,0 +1,27 @@
+service: rust-service
+
+provider:
+  name: openwhisk
+  runtime: binary
+  # memorySize: 128
+  # stage: api # we attach the stage ie dev or prod in the path
+
+package: 
+#  individually: true # creates one artifact for each function
+  exclude:
+    - ./**
+  include:
+    - ./target/x86_64-unknown-linux-musl/release/test
+
+# remember to run npm install to download the provider plugin.
+plugins:
+  - serverless-openwhisk
+
+
+functions:
+  test_test:
+    handler: target/x86_64-unknown-linux-musl/release/test
+    events:
+      - http:
+          path: test/test
+          method: get
