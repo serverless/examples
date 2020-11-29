@@ -1,0 +1,9 @@
+{
+  "name": "aws-rust-simple-http-endpoint",
+  "version": "0.0.1",
+  "description": "Example demonstrates how to setup a simple HTTP GET endpoint with rust",
+  "author": "Jonee Ryan Ty",
+  "devDependencies": {
+    "serverless-rust": "^0.3.8"
+  }
+}
