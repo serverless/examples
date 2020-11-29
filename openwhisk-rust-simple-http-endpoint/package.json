@@ -1,0 +1,8 @@
+{
+  "name": "openwhisk-rust-simple-http-endpoint",
+  "version": "0.1.0",
+  "description": "Example demonstrates how to setup a simple Rust function with OpenWhisk.",
+  "dependencies": {
+    "serverless-openwhisk": ">=0.13.0"
+  }
+}
