@@ -2,11 +2,14 @@
 title: 'AWS Serverless Boilerplate example in Rust'
 description: 'This example shows a Serverless boilerplate in Rust.'
 layout: Doc
+framework: v1+
 platform: AWS
 language: Rust
 authorLink: 'https://github.com/jonee'
 authorName: 'Jonee Ryan Ty'
+authorAvatar:
 -->
+
 # Serverless Boilerplate - AWS - Rust
 
 Make sure `serverless` is installed. [See installation guide](https://serverless.com/framework/docs/providers/AWS/guide/installation/).
