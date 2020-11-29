@@ -2,11 +2,14 @@
 title: 'OpenWhisk Serverless Boilerplate example in Rust'
 description: 'This example shows a Serverless boilerplate in Rust.'
 layout: Doc
+framework: v1+
 platform: OpenWhisk
 language: Rust
 authorLink: 'https://github.com/jonee'
 authorName: 'Jonee Ryan Ty'
+authorAvatar:
 -->
+
 # Serverless Boilerplate - OpenWhisk - Rust
 
 (This example is largely based on the openwhisk-go-simple by James Thomas but adapted for Rust)
