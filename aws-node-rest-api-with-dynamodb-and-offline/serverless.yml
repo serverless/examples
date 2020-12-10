@@ -1,6 +1,6 @@
 service: serverless-rest-api-with-dynamodb
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: ">=1.1.0 <=2.4.0"
 
 plugins:
   - serverless-dynamodb-local
@@ -14,6 +14,8 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
+    # Comment if you don't have a DynamoDB running locally
+      noStart: true
     migration:
       dir: offline/migrations
 
