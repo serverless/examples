@@ -1,6 +1,6 @@
 <!--
 title: 'AWS Simple HTTP Endpoint example in Python'
-description: 'This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the Serverless Framework v1.'
+description: 'This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the traditional Serverless Framework.'
 layout: Doc
 framework: v1
 platform: AWS
@@ -10,11 +10,11 @@ authorName: 'Serverless, inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
-This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the Serverless Framework v1.
+This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the traditional Serverless Framework.
 
 # Serverless Framework Python REST API on AWS
 
-This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the Serverless Framework v1.
+This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the traditional Serverless Framework.
 
 This template does not include any kind of persistence (database). For a more advanced examples check out the [examples repo](https://github.com/serverless/examples/) which includes DynamoDB, Mongo, Fauna and other examples.
 
