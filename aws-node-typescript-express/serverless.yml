@@ -1,9 +1,11 @@
-service:
-  name: serverless-typescript-express
+service: serverless-typescript-express
 
 provider:
   name: aws
   runtime: nodejs12.x
+  apiGateway:
+    shouldStartNameWithService: true
+  lambdaHashingVersion: 20201221
 
 plugins:
   - serverless-plugin-typescript
