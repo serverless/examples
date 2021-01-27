@@ -3,7 +3,6 @@ import * as express from "express";
 const app = express();
 
 app.get("/hello", (req, res, next) => {
-  console.log("asdf")
   return res.status(200).json({
     message: "Hello, World!",
   });
