@@ -2,7 +2,7 @@
 title: 'AWS Express application example with Typescript'
 description: 'This example demonstrates how to build an [express](https://github.com/expressjs/express) application for AWS Lambda.'
 layout: Doc
-framework: v1
+framework: v2
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/HoseungJang'
