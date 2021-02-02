@@ -541,5 +541,10 @@
     "name": "Serverless Screenshot to S3",
     "description": "An example serverless stack which takes a screenshot using aws-chrome-lambda and puts it in s3. NodeJS.",
     "githubUrl": "https://github.com/slaytr/aws-node-screenshot-to-s3"
+  },
+  {
+    "name": "Express Application With Lambda",
+    "description": "This example demonstrates how to build an express application for AWS Lambda based on serverless framework.",
+    "githubUrl": "https://github.com/HoseungJang/serverless-lambda-express-example"
   }
 ]
