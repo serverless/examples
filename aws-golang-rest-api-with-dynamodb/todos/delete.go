@@ -44,7 +44,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// Checking for errors, return error
 	if err != nil {
 		fmt.Println("Got error calling DeleteItem: ", err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
 
 	return events.APIGatewayProxyResponse{StatusCode: 204}, nil

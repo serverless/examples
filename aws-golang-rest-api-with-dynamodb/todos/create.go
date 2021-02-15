@@ -30,30 +30,38 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// Create DynamoDB client
 	svc := dynamodb.New(sess)
 
+	// New uuid for item id
 	itemUuid := uuid.New().String()
 
 	fmt.Println("Generated new item uuid:", itemUuid)
 
+	// Unmarshal to Item to access object properties
 	itemString := request.Body
 	itemStruct := Item{}
 	json.Unmarshal([]byte(itemString), &itemStruct)
 
+	if itemStruct.Title == "" {
+		return events.APIGatewayProxyResponse{StatusCode: 400}, nil
+	}
+
+	// Create new item of type item
 	item := Item{
 		Id:      itemUuid,
 		Title:   itemStruct.Title,
 		Details: itemStruct.Details,
 	}
 
+	// Marshal to dynamobb item
 	av, err := dynamodbattribute.MarshalMap(item)
 	if err != nil {
 		fmt.Println("Error marshalling item: ", err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
 
 	tableName := os.Getenv("DYNAMODB_TABLE")
 
+	// Build put item input
 	fmt.Println("Putting item: %v", av)
-
 	input := &dynamodb.PutItemInput{
 		Item:      av,
 		TableName: aws.String(tableName),
@@ -65,15 +73,16 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// Checking for errors, return error
 	if err != nil {
 		fmt.Println("Got error calling PutItem: ", err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
 
-	item_marshalled, err := json.Marshal(item)
+	// Marshal item to return
+	itemMarshalled, err := json.Marshal(item)
 
-	fmt.Println("Returning item: ", string(item_marshalled))
+	fmt.Println("Returning item: ", string(itemMarshalled))
 
 	//Returning response with AWS Lambda Proxy Response
-	return events.APIGatewayProxyResponse{Body: string(item_marshalled), StatusCode: 200}, nil
+	return events.APIGatewayProxyResponse{Body: string(itemMarshalled), StatusCode: 200}, nil
 }
 
 func main() {

@@ -40,7 +40,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// Checking for errors, return error
 	if err != nil {
 		fmt.Println("Query API call failed: ", err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
 
 	var itemArray []Item
@@ -55,7 +55,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 		if err != nil {
 			fmt.Println("Got error unmarshalling: ", err.Error())
-			return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+			return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 		}
 
 		itemArray = append(itemArray, item)
@@ -66,7 +66,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	itemArrayString, err := json.Marshal(itemArray)
 	if err != nil {
 		fmt.Println("Got error marshalling result: ", err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
 
 	return events.APIGatewayProxyResponse{Body: string(itemArrayString), StatusCode: 200}, nil

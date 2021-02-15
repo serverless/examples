@@ -1,4 +1,3 @@
-org: garrettdsweeney
 app: aws-golang-rest-api-with-dynamodb
 service: aws-golang-rest-api-with-dynamodb
 
