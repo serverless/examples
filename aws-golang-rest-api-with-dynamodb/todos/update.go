@@ -68,10 +68,10 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// Checking for errors, return error
 	if err != nil {
 		fmt.Println(err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
 
-	return events.APIGatewayProxyResponse{Body: string("Done"), StatusCode: 200}, nil
+	return events.APIGatewayProxyResponse{StatusCode: 204}, nil
 }
 
 func main() {

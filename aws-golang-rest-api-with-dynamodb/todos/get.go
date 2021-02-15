@@ -47,8 +47,13 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	// Checking for errors, return error
 	if err != nil {
 		fmt.Println(err.Error())
-		return events.APIGatewayProxyResponse{Body: "Yikes", StatusCode: 500}, nil
+		return events.APIGatewayProxyResponse{StatusCode: 500}, nil
 	}
+
+	// Checking type
+	if len(result.Item) == 0 {
+        return events.APIGatewayProxyResponse{StatusCode: 404}, nil
+    }
 
 	// Created item of type Item
 	item := Item{}
