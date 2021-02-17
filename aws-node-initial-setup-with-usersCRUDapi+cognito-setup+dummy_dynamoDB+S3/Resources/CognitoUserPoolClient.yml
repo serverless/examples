@@ -1,0 +1,35 @@
+Type: "AWS::Cognito::UserPoolClient"
+Properties:
+  ClientName: ${self:custom.userPoolClientName}
+  GenerateSecret: False
+  SupportedIdentityProviders:
+    - "COGNITO"
+  AllowedOAuthFlowsUserPoolClient: true
+  AllowedOAuthFlows:
+    - "code"
+  CallbackURLs: 
+    - ${file(./Resources/StageVariables.yml):CallbackURLs.${self:provider.stage}}
+  LogoutURLs: 
+    - ${file(./Resources/StageVariables.yml):LogoutURLs.${self:provider.stage}}
+  DefaultRedirectURI: ${file(./Resources/StageVariables.yml):DefaultRedirectURI.${self:provider.stage}}
+  AllowedOAuthScopes:
+    - "phone"
+    - "email"
+    - "openid"
+    - "profile"
+    - "aws.cognito.signin.user.admin"
+  ReadAttributes:
+    - "email"
+    - "email_verified"
+    - "name"
+    - "picture"
+    - "profile"
+    - "zoneinfo"
+  WriteAttributes:
+    - "name"
+    - "email"
+    - "picture"
+    - "profile"
+    - "zoneinfo"
+  UserPoolId:
+    Ref: CognitoUserPool

@@ -1,0 +1,35 @@
+{
+  "name": "initial-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bundle": "./node_modules/.bin/webpack",
+    "formatCheck": "prettier --check --ignore-path .gitignore \"./**/*.{js,json}\"",
+    "format": "prettier --write --ignore-path .gitignore \"./**/*.{js,json}\""
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "file-type": "^16.0.1",
+    "prettier": "^1.19.1",
+    "serverless-cognito-add-custom-attributes": "^0.3.0",
+    "serverless-domain-manager": "^3.3.2",
+    "serverless-dotenv-plugin": "^2.4.2",
+    "serverless-offline": "^6.8.0",
+    "serverless-plugin-webpack": "^1.5.1",
+    "serverless-pseudo-parameters": "^2.5.0",
+    "serverless-webpack": "^5.3.5",
+    "uuid": "^8.3.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "zip-webpack-plugin": "^3.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

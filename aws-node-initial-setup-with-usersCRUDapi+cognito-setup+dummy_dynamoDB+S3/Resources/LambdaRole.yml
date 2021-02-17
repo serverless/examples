@@ -1,0 +1,22 @@
+- Effect: "Allow"
+  Action:
+    - "s3:*"
+  Resource: "*"
+- Effect: "Allow"
+  Action:
+    - "lambda:*"
+  Resource: "*"
+- Effect: "Allow"
+  Action:
+    - "cognito-idp:*"
+    - "cognito-identity:*"
+  Resource: "arn:aws:cognito-idp:#{AWS::Region}:#{AWS::AccountId}:userpool/#{CognitoUserPool}"
+- Effect: "Allow"
+  Action:
+    - "ses:SendEmail"
+    - "ses:SendRawEmail"
+  Resource: "*"  
+- Effect: "Allow"
+  Action:
+    - "dynamodb:*"
+  Resource: "*"  
