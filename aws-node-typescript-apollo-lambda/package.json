@@ -1,0 +1,31 @@
+{
+  "name": "aws-node-typescript-apollo-lambda",
+  "version": "1.0.0",
+  "description": "Serverless example for apollo lambda",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "serverless deploy",
+    "dev": "serverless offline --apiKey your-api-key-that-is-at-least-characters-long",
+    "lint": "tslint -p tsconfig.json -c tslint.json"
+  },
+  "dependencies": {
+    "apollo-server-lambda": "^2.16.1",
+    "graphql": "^15.3.0",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.14.22",
+    "eslint": "^6.6.0",
+    "serverless": "^1.79.0",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "serverless-offline": "^6.5.0",
+    "serverless-plugin-typescript": "^1.1.9",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.20.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "^3.2.4"
+  },
+  "author": "Miguel Frazao (https://github.com/jmpfrazao/aws-node-typescript-apollo-lambda)",
+  "license": "MIT"
+}

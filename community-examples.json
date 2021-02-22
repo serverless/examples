@@ -494,6 +494,11 @@
     "githubUrl": "https://github.com/pharindoko/serverless-load-balancer"
   },
   {
+    "name": "[Unly] Boilerplates Generator",
+    "description": "A boilerplates generator, meant to help to quick-start Serverless (AWS Lambda/API GW) and OSS projects, using good defaults _(sentry for automated error handling, staging/prod environments, built-in support for env vars, jest support, babel/webpack)_, yet flexible to fit your needs.",
+    "githubUrl": "https://github.com/UnlyEd/boilerplates-generator"
+  },
+  {
     "name": "serverless-api-typescript-template",
     "description": "A starter template for a Serverless API using Typescript and Jest",
     "githubUrl": "https://github.com/JoshuaToth/serverless-api-typescript-template"
@@ -512,5 +517,34 @@
     "name": "Serverless RDS Log Sync S3",
     "description": "Annotated exmaple of a periodic scheduled task to sync changed RDS log files to an S3 bucket.",
     "githubUrl": "https://github.com/drocco007/serverless-aws-rds-logs-s3"
+  },
+  {
+    "name": "GoLive",
+    "description": "Boilerplate to live stream using AWS MediaLive and MediaStore",
+    "githubUrl": "https://github.com/adimoraret/golive/"
+  },
+  { "name": "HTTP Headers Checks",
+    "description": "Serverless Application to check integrity of the headers of a given HTTP server",
+    "githubUrl": "https://github.com/authdog/http-headers-check"
+  },
+  {
+    "name": "Serverless Image Labeller",
+    "description": "Serverless image labelling using Rekognition, s3, DynamoDB.",
+    "githubUrl": "https://github.com/nileshprasad137/serverless-image-labeller"
+  },
+  {
+    "name": "Serverless AppSync offline TypeScript with CircleCI",
+    "description": "A Serverless Framework template that allows you to launch an AppSync emulator locally and proceed with development. Lambda Function build by TypeScript/Webpack.",
+    "githubUrl": "https://github.com/daisuke-awaji/serverless-appsync-offline-typescript-template"
+  },
+  {
+    "name": "Serverless Screenshot to S3",
+    "description": "An example serverless stack which takes a screenshot using aws-chrome-lambda and puts it in s3. NodeJS.",
+    "githubUrl": "https://github.com/slaytr/aws-node-screenshot-to-s3"
+  },
+  {
+    "name": "Express Application With Lambda",
+    "description": "This example demonstrates how to build an express application for AWS Lambda based on serverless framework.",
+    "githubUrl": "https://github.com/HoseungJang/serverless-lambda-express-example"
   }
 ]

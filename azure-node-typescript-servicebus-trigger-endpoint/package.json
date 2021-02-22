@@ -1,0 +1,41 @@
+{
+    "name": "service-bus-trigger-example",
+    "version": "1.0.0",
+    "description": "Serverless application for asset model creation",
+    "main": "handler.js",
+    "scripts": {
+        "prettier-check": "prettier --config .prettierrc ./src/**/*.ts --check",
+        "prettier-format": "prettier --config .prettierrc ./src/**/*.ts --write",
+        "lint": "eslint . --ext .ts",
+        "lint-and-fix": "eslint . --ext .ts --fix"
+    },
+    "dependencies": {
+        "@azure/functions": "^1.0.3",
+        "@azure/service-bus": "^1.1.10",
+        "azure-functions-core-tools": "^2.7.1846",
+        "serverless-azure-functions": "^2.0.9",
+        "serverless-dotenv-plugin": "^2.1.1",
+        "serverless-plugin-resource-tagging": "^1.0.11"
+    },
+    "devDependencies": {
+        "@types/node": "^10.17.40",
+        "@typescript-eslint/eslint-plugin": "^3.6.0",
+        "@typescript-eslint/parser": "^3.6.0",
+        "eslint": "^7.4.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "ts-loader": "^5.3.3",
+        "install": "0.13.0",
+        "prettier": "^2.0.5",
+        "serverless-offline": "^6.4.0",
+        "serverless-webpack": "^5.2.0",
+        "ts-jest": "^26.1.1",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.2.4",
+        "webpack": "^4.29.0",
+        "webpack-node-externals": "^1.7.2",
+        "winston": "^3.3.3"
+    },
+    "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
+    "license": "MIT"
+}

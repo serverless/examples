@@ -1,0 +1,16 @@
+# files
+.DS_Store
+.env*
+.vscode
+*.log
+
+# package directories
+node_modules
+jspm_packages
+.build
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack

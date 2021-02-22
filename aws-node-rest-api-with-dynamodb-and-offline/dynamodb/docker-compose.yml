@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  dynamodb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - aws-rest-api-dynamodb:/home/dynamodblocal/db
+
+volumes:
+  aws-rest-api-dynamodb:
+    driver: local
