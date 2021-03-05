@@ -1,0 +1,6 @@
+name: aws-python-scheduled-cron
+org: serverlessinc
+description: Deploys a Python Scheduled Cron service with traditional Serverless Framework
+keywords: aws, serverless, faas, lambda, python
+repo: https://github.com/serverless/examples/aws-python-scheduled-cron
+license: MIT

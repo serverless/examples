@@ -1,18 +1,22 @@
 service: aws-python-scheduled-cron
 
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: '2'
+variablesResolutionMode: '20210219'
+configValidationMode: 'error'
+
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
 
 functions:
-  cron:
+  rateHandler:
     handler: handler.run
     events:
       # Invoke Lambda function every minute
       - schedule: rate(1 minute)
-  secondCron:
+  cronHandler:
     handler: handler.run
     events:
       # Invoke Lambda function every 2nd minute from Mon-Fri
