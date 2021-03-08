@@ -89,6 +89,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Simple Transcribe S3](https://github.com/serverless/examples/tree/master/aws-node-simple-transcribe-s3) <br/> Example demonstrates how to setup a lambda function to transcribe audio file | nodeJS |
 | [Aws Single Page App Via Cloudfront](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront) <br/> Demonstrating how to deploy a Single Page Application with Serverless | nodeJS |
 | [Serverless Single Page App Plugin](https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront/serverless-single-page-app-plugin) <br/> A plugin to simplify deploying Single Page Application using S3 and CloudFront | nodeJS |
+| [Aws Node Sqs Worker](https://github.com/serverless/examples/tree/master/aws-node-sqs-worker) <br/> Serverless Framework Node SQS Producer-Consumer on AWS | nodeJS |
 | [Aws Node Stripe Integration](https://github.com/serverless/examples/tree/master/aws-node-stripe-integration) <br/> This example for Stripe integration using AWS Lambda and API Gateway. | nodeJS |
 | [Aws Node Line Echo Bot](https://github.com/serverless/examples/tree/master/aws-node-telegram-echo-bot) <br/> This is a simple echo bot on Telegram | nodeJS |
 | [Aws Text Analysis Via Sns Post Processing](https://github.com/serverless/examples/tree/master/aws-node-text-analysis-via-sns-post-processing) <br/> Example demonstrates how to setup a simple data processing pipeline | nodeJS |
