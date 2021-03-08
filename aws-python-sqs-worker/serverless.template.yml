@@ -1,0 +1,6 @@
+name: aws-python-sqs-worker
+org: serverlessinc
+description: Deploys a Python SQS Producer-Consumer service with traditional Serverless Framework
+keywords: aws, serverless, faas, lambda, python, sqs
+repo: https://github.com/serverless/examples/aws-python-sqs-worker
+license: MIT

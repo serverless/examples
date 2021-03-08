@@ -1,0 +1,7 @@
+{
+  "name": "aws-python-sqs-worker",
+  "version": "1.0.0",
+  "description": "Serverless Framework Python SQS Producer-Consumer on AWS",
+  "author": "",
+  "license": "MIT"
+}

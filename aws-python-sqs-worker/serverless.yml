@@ -1,0 +1,59 @@
+service: aws-python-sqs-worker
+
+frameworkVersion: '2'
+variablesResolutionMode: '20210219'
+configValidationMode: 'error'
+
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: '20201221'
+  stage: dev
+  apiGateway:
+    shouldStartNameWithService: true
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+          Resource:
+            - Fn::GetAtt: [ WorkerQueue, Arn ]
+
+functions:
+  producer:
+    handler: handler.producer
+    events:
+      - http:
+          method: post
+          path: produce
+    environment:
+      QUEUE_URL: !Ref WorkerQueue
+
+  consumer:
+    handler: handler.consumer
+    events:
+      - sqs:
+          batchSize: 1
+          arn:
+            Fn::GetAtt:
+              - WorkerQueue
+              - Arn
+
+resources:
+  Resources:
+    WorkerQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: workerQueue-${self:provider.stage}
+        RedrivePolicy:
+          deadLetterTargetArn:
+            Fn::GetAtt:
+              - WorkerDLQ
+              - Arn
+          maxReceiveCount: 5
+    WorkerDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: workerDlq-${self:provider.stage}
