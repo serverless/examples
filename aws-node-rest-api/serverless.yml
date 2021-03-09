@@ -2,9 +2,17 @@ org: serverlessinc
 app: aws-node-rest-api
 service: aws-node-rest-api
 
+frameworkVersion: '2'
+variablesResolutionMode: '20210219'
+configValidationMode: 'error'
+
+
 provider:
   name: aws
   runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+  apiGateway:
+    shouldStartNameWithService: true
 
 functions:
   hello:
