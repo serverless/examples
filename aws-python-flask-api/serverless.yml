@@ -1,0 +1,31 @@
+service: aws-python-flask-api
+
+frameworkVersion: '2'
+variablesResolutionMode: '20210219'
+configValidationMode: 'error'
+
+custom:
+  wsgi:
+    app: app.app
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: '20201221'
+  apiGateway:
+    shouldStartNameWithService: true
+
+functions:
+  api:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
