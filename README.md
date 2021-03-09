@@ -108,6 +108,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Alexa Skill](https://github.com/serverless/examples/tree/master/aws-python-alexa-skill) <br/> This example demonstrates how to use an AWS Lambdas for your custom Alexa skill. | python |
 | [Aws Auth0 Api Gateway](https://github.com/serverless/examples/tree/master/aws-python-auth0-custom-authorizers-api) <br/> Demonstration of protecting API gateway endpoints with auth0 | python |
 | [Aws Python Flask Api](https://github.com/serverless/examples/tree/master/aws-python-flask-api) <br/> Example of a Python Flask API service with traditional Serverless Framework | python |
+| [Aws Python Flask Dynamodb Api](https://github.com/serverless/examples/tree/master/aws-python-flask-dynamodb-api) <br/> Example of a Python Flask API service backed by DynamoDB with traditional Serverless Framework | python |
 | [Aws Python Line Echo Bot](https://github.com/serverless/examples/tree/master/aws-python-line-echo-bot) <br/> this is echo bot on LINE message | python |
 | [Aws Python Pynamodb S3 Sigurl](https://github.com/serverless/examples/tree/master/aws-python-pynamodb-s3-sigurl) <br/> Serverless signed uploader REST API using pynamodb, s3 generated events, custom log format, and DRY serverless.yml with custom section | python |
 | [Aws Rest With Dynamodb](https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-dynamodb) <br/> Serverless CRUD service exposing a REST HTTP interface | python |
