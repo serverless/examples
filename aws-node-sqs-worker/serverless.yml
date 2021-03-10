@@ -29,7 +29,8 @@ functions:
           method: post
           path: produce
     environment:
-      QUEUE_URL: !Ref WorkerQueue
+      QUEUE_URL:
+        Ref: WorkerQueue
 
   consumer:
     handler: handler.consumer
