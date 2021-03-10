@@ -1,0 +1,6 @@
+name: aws-python-flask-dynamodb-api
+org: serverlessinc
+description: Deploys a Python Flask API service, backed by DynamoDB, with traditional Serverless Framework
+keywords: aws, serverless, faas, lambda, python, flask, dynamodb
+repo: https://github.com/serverless/examples/aws-python-flask-dynamodb-api
+license: MIT
