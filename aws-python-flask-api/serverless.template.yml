@@ -1,0 +1,6 @@
+name: aws-python-flask-api
+org: serverlessinc
+description: Deploys a Python Flask API service with traditional Serverless Framework
+keywords: aws, serverless, faas, lambda, python, flask
+repo: https://github.com/serverless/examples/aws-python-flask-api
+license: MIT
