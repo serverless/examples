@@ -18,12 +18,6 @@ This template demonstrates how to make a simple REST API with Python running on 
 
 This template does not include any kind of persistence (database). For a more advanced examples check out the [examples repo](https://github.com/serverless/examples/) which includes DynamoDB, Mongo, Fauna and other examples.
 
-## Setup
-
-Run this command to initialize a new project in a new working directory.
-
-`sls init aws-python-rest-api`
-
 ## Usage
 
 ### Deployment
