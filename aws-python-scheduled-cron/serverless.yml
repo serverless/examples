@@ -1,8 +1,6 @@
 service: aws-python-scheduled-cron
 
 frameworkVersion: '2'
-variablesResolutionMode: '20210219'
-configValidationMode: 'error'
 
 
 provider:
