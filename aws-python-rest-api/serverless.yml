@@ -3,16 +3,12 @@ app: aws-python-rest-api
 service: aws-python-rest-api
 
 frameworkVersion: '2'
-variablesResolutionMode: '20210219'
-configValidationMode: 'error'
 
 
 provider:
   name: aws
   runtime: python3.8
   lambdaHashingVersion: '20201221'
-  apiGateway:
-    shouldStartNameWithService: true
 
 functions:
   hello:

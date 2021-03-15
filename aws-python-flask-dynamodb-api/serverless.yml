@@ -1,8 +1,6 @@
 service: aws-python-flask-dynamodb-api
 
 frameworkVersion: '2'
-variablesResolutionMode: '20210219'
-configValidationMode: 'error'
 
 custom:
   tableName: 'users-table-${self:provider.stage}'
@@ -27,8 +25,6 @@ provider:
             - dynamodb:DeleteItem
           Resource:
             - Fn::GetAtt: [ UsersTable, Arn ]
-  apiGateway:
-    shouldStartNameWithService: true
   environment:
     USERS_TABLE: ${self:custom.tableName}
 
