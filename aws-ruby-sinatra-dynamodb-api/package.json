@@ -1,0 +1,10 @@
+{
+  "name": "aws-ruby-sinatra-dynamodb-api",
+  "version": "1.0.0",
+  "description": "Example of a Ruby Sinatra API service backed by DynamoDB with traditional Serverless Framework",
+  "author": "",
+  "devDependencies": {
+    "serverless-rack": "^1.0.6",
+    "serverless-ruby-layer": "^1.4.0"
+  }
+}
