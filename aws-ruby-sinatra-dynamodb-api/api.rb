@@ -1,12 +1,22 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/json'
 require 'aws-sdk-dynamodb'
 
-dynamodb_client = if ENV['IS_OFFLINE']
-                    Aws::DynamoDB::Client.new(region: 'localhost', endpoint: 'http://localhost:8000')
-                  else
-                    Aws::DynamoDB::Client.new
-                  end
+client_options = if ENV['IS_OFFLINE']
+                   {
+                     region: 'localhost',
+                     endpoint: 'http://localhost:8000',
+                     credentials: Aws::Credentials.new(
+                       'DEFAULT_ACCESS_KEY',
+                       'DEFAULT_SECRET'
+                     )
+                   }
+                 else
+                   {}
+                 end
+dynamodb_client = Aws::DynamoDB::Client.new(client_options)
 
 get '/users/:user_id' do
   result = dynamodb_client.get_item(
@@ -26,7 +36,9 @@ post '/users' do
   user_id = request_payload['user_id']
   name = request_payload['name']
 
-  return json error: "Please provide both 'user_id' and 'name'" unless user_id && name
+  unless user_id && name
+    return json error: "Please provide both 'user_id' and 'name'"
+  end
 
   dynamodb_client.put_item(
     item: {
