@@ -1,0 +1,6 @@
+name: aws-ruby-sinatra-dynamodb-api
+org: serverlessinc
+description: Deploys a Ruby Sinatra API service, backed by DynamoDB, with traditional Serverless Framework
+keywords: aws, serverless, faas, lambda, ruby, sinatra, dynamodb
+repo: https://github.com/serverless/examples/aws-ruby-sinatra-dynamodb-api
+license: MIT
