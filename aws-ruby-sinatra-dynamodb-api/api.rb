@@ -36,9 +36,7 @@ post '/users' do
   user_id = request_payload['user_id']
   name = request_payload['name']
 
-  unless user_id && name
-    return json error: "Please provide both 'user_id' and 'name'"
-  end
+  return json error: "Please provide both 'user_id' and 'name'" unless user_id && name
 
   dynamodb_client.put_item(
     item: {
