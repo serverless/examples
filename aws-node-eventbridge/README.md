@@ -5,6 +5,9 @@ layout: Doc
 framework: v2
 platform: AWS
 language: nodeJS
+authorLink: 'https://github.com/WayneGreeley'
+authorName: 'Wayne Greeley'
+authorAvatar: 'https://avatars.githubusercontent.com/u/28657024?s=60&v=4'
 -->
 # Serverless EventBridge example
 
