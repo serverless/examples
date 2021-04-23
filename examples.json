@@ -1,7 +1,7 @@
 [
     {
         "title": "Dot Net REST API with DynamoDB",
-        "name": "dot-net-rest-api-with-dynamodb",
+        "name": "aws-dotnet-rest-api-with-dynamodb",
         "description": "Setup a REST API w/ DynamoDB using Dot Net Core 2.1",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-dotnet-rest-api-with-dynamodb",
         "framework": "v1",
@@ -13,7 +13,7 @@
     },
     {
         "title": "AWS FFmepg Layer",
-        "name": "aws-ffmepg-layer",
+        "name": "aws-ffmpeg-layer",
         "description": "AWS FFmepg Layer & a service using it to create GIFs",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ffmpeg-layer",
         "framework": "v1",
@@ -25,7 +25,7 @@
     },
     {
         "title": "AWS Golang Auth",
-        "name": "aws-golang-auth",
+        "name": "aws-golang-auth-examples",
         "description": "This example shows you how to setup auth in front of a AWS Lambda function",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-auth-examples",
         "framework": "v1",
@@ -37,7 +37,7 @@
     },
     {
         "title": "DynamoDB Stream To Elasticsearch",
-        "name": "dynamodb-stream-to-elasticsearch",
+        "name": "aws-golang-dynamo-stream-to-elasticsearch",
         "description": "Stream data from DynamoDB to Elasticsearch",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-dynamo-stream-to-elasticsearch",
         "framework": "v1",
@@ -49,7 +49,7 @@
     },
     {
         "title": "Google map api",
-        "name": "google-map-api",
+        "name": "aws-golang-googlemap",
         "description": "Serverless example using golang to hit google map api",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-googlemap",
         "framework": "v1",
@@ -61,7 +61,7 @@
     },
     {
         "title": "HTTP GET and POST",
-        "name": "http-get-and-post",
+        "name": "aws-golang-http-get-post",
         "description": "Boilerplate code for Golang with GET and POST example",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-http-get-post",
         "framework": "v1",
@@ -85,7 +85,7 @@
     },
     {
         "title": "AWS S3 Bucket Replicator in Golang",
-        "name": "aws-s3-bucket-replicator-in-golang",
+        "name": "aws-golang-s3-file-replicator",
         "description": "Boilerplate code for Golang with S3 object create event and replicator example",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-s3-file-replicator",
         "framework": "v1",
@@ -97,7 +97,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-golang-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP endpoint in Go.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint",
         "framework": "v1",
@@ -109,7 +109,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-golang-stream-kinesis-to-elasticsearch",
         "description": "This example demonstrates how to stream kinesis information into elasticsearch in a golang runtime",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-golang-stream-kinesis-to-elasticsearch",
         "framework": "v1",
@@ -121,7 +121,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in Java",
-        "name": "aws-simple-http-endpoint-example-in-java",
+        "name": "aws-java-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint",
         "framework": "v1",
@@ -133,7 +133,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-multiple-runtime",
         "description": "This example demonstrates how you can run multiple runtimes in AWS Lambda.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-multiple-runtime",
         "framework": "v1",
@@ -145,7 +145,7 @@
     },
     {
         "title": "AWS Serverless Alexa Skill example in NodeJS",
-        "name": "aws-serverless-alexa-skill-example-in-nodejs",
+        "name": "aws-node-alexa-skill",
         "description": "This example demonstrates how to setup your own Alexa skill using AWS Lambdas.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-alexa-skill",
         "framework": "v1",
@@ -157,7 +157,7 @@
     },
     {
         "title": "API Gateway Authorizer Function for Auth0 or AWS Cognito using RS256 JSON Web Key Sets tokens.",
-        "name": "api-gateway-authorizer-function-for-auth0-or-aws-cognito-using-rs256-json-web-key-sets-tokens",
+        "name": "aws-node-auth0-cognito-custom-authorizers-api",
         "description": "Authorize your API Gateway with either Auth0 or Cognito JWKS RS256 tokens.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-auth0-cognito-custom-authorizers-api",
         "framework": "v1",
@@ -169,7 +169,7 @@
     },
     {
         "title": "AWS API Gateway Custom Authorizer Function with Auth0 example in NodeJS",
-        "name": "aws-api-gateway-custom-authorizer-function-with-auth0-example-in-nodejs",
+        "name": "aws-node-auth0-custom-authorizers-api",
         "description": "This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-auth0-custom-authorizers-api",
         "framework": "v1",
@@ -181,7 +181,7 @@
     },
     {
         "title": "Dynamic Image Resizing API",
-        "name": "dynamic-image-resizing-api",
+        "name": "aws-node-dynamic-image-resizer",
         "description": "This example shows you how to setup a dynamic image resizer API",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-dynamic-image-resizer",
         "framework": "v1",
@@ -193,7 +193,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-node-dynamodb-backup",
         "description": "This examples shows your how to create a backup of your DynamoDB table to S3.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-dynamodb-backup",
         "framework": "v1",
@@ -205,7 +205,7 @@
     },
     {
         "title": "AWS Storing Encrypted Secrets example in NodeJS",
-        "name": "aws-storing-encrypted-secrets-example-in-nodejs",
+        "name": "aws-node-env-variables-encrypted-in-a-file",
         "description": "This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file",
         "framework": "v1",
@@ -217,7 +217,7 @@
     },
     {
         "title": "AWS Serverless Environment Variables Usage example in NodeJS",
-        "name": "aws-serverless-environment-variables-usage-example-in-nodejs",
+        "name": "aws-node-env-variables",
         "description": "This example demonstrates how to use environment variables for AWS Lambdas.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-env-variables",
         "framework": "v1",
@@ -229,7 +229,7 @@
     },
     {
         "title": "Serverless Framework Node Express API on AWS",
-        "name": "serverless-framework-node-express-api-on-aws",
+        "name": "aws-node-express-api",
         "description": "This template demonstrates how to develop and deploy a simple Node Express API running on AWS Lambda using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-express-api",
         "framework": "v2",
@@ -241,7 +241,7 @@
     },
     {
         "title": "Serverless Framework Node Express API service backed by DynamoDB on AWS",
-        "name": "serverless-framework-node-express-api-service-backed-by-dynamodb-on-aws",
+        "name": "aws-node-express-dynamodb-api",
         "description": "This template demonstrates how to develop and deploy a simple Node Express API service backed by DynamoDB running on AWS Lambda using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-express-dynamodb-api",
         "framework": "v2",
@@ -253,7 +253,7 @@
     },
     {
         "title": "AWS Fetch image from URL and upload to S3 example in NodeJS",
-        "name": "aws-fetch-image-from-url-and-upload-to-s3-example-in-nodejs",
+        "name": "aws-node-fetch-file-and-store-in-s3",
         "description": "This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3",
         "framework": "v1",
@@ -265,7 +265,7 @@
     },
     {
         "title": "Serverless Email Sign Up Form",
-        "name": "serverless-email-sign-up-form",
+        "name": "aws-node-fullstack",
         "description": "This example demonstrates how to deploy a Fullstack serverless application",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-fullstack",
         "framework": "v1",
@@ -277,7 +277,7 @@
     },
     {
         "title": "AWS Function compiled with Babel example in NodeJS",
-        "name": "aws-function-compiled-with-babel-example-in-nodejs",
+        "name": "aws-node-function-compiled-with-babel",
         "description": "This example demonstrates how to compile your JavaScript code with Babel. In order to do so the 'serverless-babel-plugin' is leveraged.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-function-compiled-with-babel",
         "framework": "v1",
@@ -289,7 +289,7 @@
     },
     {
         "title": "Serverless Github Check",
-        "name": "serverless-github-check",
+        "name": "aws-node-github-check",
         "description": "The idea is to validate that all Pull Requests are related to a specific trello card.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-github-check",
         "framework": "v1",
@@ -301,7 +301,7 @@
     },
     {
         "title": "AWS Serverless Github Webhook Listener example in NodeJS",
-        "name": "aws-serverless-github-webhook-listener-example-in-nodejs",
+        "name": "aws-node-github-webhook-listener",
         "description": "This service will listen to github webhooks fired by a given repository.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-github-webhook-listener",
         "framework": "v1",
@@ -313,7 +313,7 @@
     },
     {
         "title": "A Simple Serverless GraphQL API for MySQL, Postgres and Aurora",
-        "name": "a-simple-serverless-graphql-api-for-mysql-postgres-and-aurora",
+        "name": "aws-node-graphql-and-rds",
         "description": "This is an example project that uses 3 RDS databases to illustrate the differences between using each of them",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-graphql-and-rds",
         "framework": "v1",
@@ -325,7 +325,7 @@
     },
     {
         "title": "GraphQL query endpoint in NodeJS on AWS with DynamoDB",
-        "name": "graphql-query-endpoint-in-nodejs-on-aws-with-dynamodb",
+        "name": "aws-node-graphql-api-with-dynamodb",
         "description": "A single-module GraphQL endpoint with query and mutation functionality.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-graphql-api-with-dynamodb",
         "framework": "v1",
@@ -337,7 +337,7 @@
     },
     {
         "title": "Node.js AWS Lambda connecting to Heroku Postgres",
-        "name": "nodejs-aws-lambda-connecting-to-heroku-postgres",
+        "name": "aws-node-heroku-postgres",
         "description": "Shows how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-heroku-postgres",
         "framework": "v1",
@@ -349,7 +349,7 @@
     },
     {
         "title": "AWS Serverless IoT Event example in NodeJS",
-        "name": "aws-serverless-iot-event-example-in-nodejs",
+        "name": "aws-node-iot-event",
         "description": "This example demonstrates how to setup a AWS IoT Rule to send events to a Lambda function.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-iot-event",
         "framework": "v1",
@@ -361,7 +361,7 @@
     },
     {
         "title": "Node.js AWS Lambda connecting to MongoDB Atlas",
-        "name": "nodejs-aws-lambda-connecting-to-mongodb-atlas",
+        "name": "aws-node-mongodb-atlas",
         "description": "Shows how to connect AWS Lambda to MongoDB Atlas.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-mongodb-atlas",
         "framework": "v1",
@@ -373,7 +373,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-node-oauth-dropbox-api",
         "description": "Connect to Dropbox's API using AWS Lambda.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-oauth-dropbox-api",
         "framework": "v1",
@@ -385,7 +385,7 @@
     },
     {
         "title": "Running Puppeteer on AWS Lambda",
-        "name": "running-puppeteer-on-aws-lambda",
+        "name": "aws-node-puppeteer",
         "description": "This example shows you how to run Puppeteer on AWS Lambda",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-puppeteer",
         "framework": "v1",
@@ -397,7 +397,7 @@
     },
     {
         "title": "AWS Recursive Lambda function Invocation example in NodeJS",
-        "name": "aws-recursive-lambda-function-invocation-example-in-nodejs",
+        "name": "aws-node-recursive-function",
         "description": "This is an example of a function that will recursively call itself.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-recursive-function",
         "framework": "v1",
@@ -409,7 +409,7 @@
     },
     {
         "title": "AWS Analyse Image from S3 with Amazon Rekognition example in NodeJS",
-        "name": "aws-analyse-image-from-s3-with-amazon-rekognition-example-in-nodejs",
+        "name": "aws-node-rekognition-analysis-s3-image",
         "description": "This example shows how to analyze an image in an S3 bucket with Amazon Rekognition and return a list of labels.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rekognition-analysis-s3-image",
         "framework": "v1",
@@ -421,7 +421,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-node-rest-api-mongodb",
         "description": "This example demonstrate how to use MongoDB with AWS and Serverless.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rest-api-mongodb",
         "framework": "v1",
@@ -433,7 +433,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in NodeJS with Typescript",
-        "name": "aws-simple-http-endpoint-example-in-nodejs-with-typescript",
+        "name": "aws-node-rest-api-typescript-simple",
         "description": "This template demonstrates how to make a simple REST API with Node.js and Typescript running on AWS Lambda and API Gateway using the Serverless Framework v1.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rest-api-typescript-simple",
         "framework": "v1",
@@ -445,7 +445,7 @@
     },
     {
         "title": "Serverless Nodejs Rest API with TypeScript And MongoDB Atlas",
-        "name": "serverless-nodejs-rest-api-with-typescript-and-mongodb-atlas",
+        "name": "aws-node-rest-api-typescript",
         "description": "This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and MongoDB Atlas.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rest-api-typescript",
         "framework": "v1",
@@ -457,7 +457,7 @@
     },
     {
         "title": "AWS Serverless REST API with DynamoDB and offline support example in NodeJS",
-        "name": "aws-serverless-rest-api-with-dynamodb-and-offline-support-example-in-nodejs",
+        "name": "aws-node-rest-api-with-dynamodb-and-offline",
         "description": "This example demonstrates how to run a service locally, using the 'serverless-offline' plugin. It provides a REST API to manage Todos stored in DynamoDB.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb-and-offline",
         "framework": "v1",
@@ -469,7 +469,7 @@
     },
     {
         "title": "AWS Serverless REST API example in NodeJS",
-        "name": "aws-serverless-rest-api-example-in-nodejs",
+        "name": "aws-node-rest-api-with-dynamodb",
         "description": "This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb",
         "framework": "v1",
@@ -481,7 +481,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in NodeJS",
-        "name": "aws-simple-http-endpoint-example-in-nodejs",
+        "name": "aws-node-rest-api",
         "description": "This template demonstrates how to make a simple REST API with Node.js running on AWS Lambda and API Gateway using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-rest-api",
         "framework": "v2",
@@ -493,7 +493,7 @@
     },
     {
         "title": "AWS S3 File Replicator",
-        "name": "aws-s3-file-replicator",
+        "name": "aws-node-s3-file-replicator",
         "description": "This example creates 2 AWS S3 buckets and copies files in one bucket to the other",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-s3-file-replicator",
         "framework": "v1",
@@ -505,7 +505,7 @@
     },
     {
         "title": "AWS Node Scheduled Cron example in NodeJS",
-        "name": "aws-node-scheduled-cron-example-in-nodejs",
+        "name": "aws-node-scheduled-cron",
         "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-scheduled-cron",
         "framework": "v1",
@@ -517,7 +517,7 @@
     },
     {
         "title": "AWS Node Scheduled Weather example in NodeJS",
-        "name": "aws-node-scheduled-weather-example-in-nodejs",
+        "name": "aws-node-scheduled-weather",
         "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. It retrieves weather information at 10am (UTC) and emails it to a predefined recipient.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-scheduled-weather",
         "framework": "v1",
@@ -529,7 +529,7 @@
     },
     {
         "title": "AWS Serving Dynamic HTML via API Gateway example in NodeJS",
-        "name": "aws-serving-dynamic-html-via-api-gateway-example-in-nodejs",
+        "name": "aws-node-serve-dynamic-html-via-http-endpoint",
         "description": "This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-serve-dynamic-html-via-http-endpoint",
         "framework": "v1",
@@ -541,7 +541,7 @@
     },
     {
         "title": "The Serverless Gong",
-        "name": "the-serverless-gong",
+        "name": "aws-node-serverless-gong",
         "description": "A serverless gong with GitHub and Slack webhooks",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-serverless-gong",
         "framework": "v1",
@@ -553,7 +553,7 @@
     },
     {
         "title": "AWS SES receive emails and process body",
-        "name": "aws-ses-receive-emails-and-process-body",
+        "name": "aws-node-ses-receive-email-body",
         "description": "This example shows how to process receiving emails, and have S3 trigger a lambda function.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-body",
         "framework": "v1",
@@ -565,7 +565,7 @@
     },
     {
         "title": "AWS SES receive an email, trigger a lambda function to process header.",
-        "name": "aws-ses-receive-an-email-trigger-a-lambda-function-to-process-header",
+        "name": "aws-node-ses-receive-email-header",
         "description": "This example shows how to process receiving email header, and trigger a lambda function.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-ses-receive-email-header",
         "framework": "v1",
@@ -577,7 +577,7 @@
     },
     {
         "title": "Shared AWS API Gateway with multiple Node Lambdas",
-        "name": "shared-aws-api-gateway-with-multiple-node-lambdas",
+        "name": "aws-node-shared-gateway",
         "description": "A sample of implementing shared API gateway with multiple Node Lambdas",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-shared-gateway",
         "framework": "v1",
@@ -601,7 +601,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in NodeJS",
-        "name": "aws-simple-http-endpoint-example-in-nodejs",
+        "name": "aws-node-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint",
         "framework": "v1",
@@ -613,7 +613,7 @@
     },
     {
         "title": "Simple AWS Transcribe example in NodeJS",
-        "name": "simple-aws-transcribe-example-in-nodejs",
+        "name": "aws-node-simple-transcribe-s3",
         "description": "This example demonstrates how to setup a lambda function to transcribe your audio file (.wav format) into a text transcription. The lambda will be triggered whenever a new audio file is uploaded to S3 and the transcription (JSON format) will be saved to a S3 bucket.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-simple-transcribe-s3",
         "framework": "v1",
@@ -625,7 +625,7 @@
     },
     {
         "title": "AWS Single Page Application example in NodeJS",
-        "name": "aws-single-page-application-example-in-nodejs",
+        "name": "aws-node-single-page-app-via-cloudfront",
         "description": "This example demonstrates how to setup a Single Page Application.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-single-page-app-via-cloudfront",
         "framework": "v1",
@@ -637,7 +637,7 @@
     },
     {
         "title": "Serverless Framework Node SQS Producer Consumer on AWS",
-        "name": "serverless-framework-node-sqs-producer-consumer-on-aws",
+        "name": "aws-node-sqs-worker",
         "description": "This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-sqs-worker",
         "framework": "v2",
@@ -649,7 +649,7 @@
     },
     {
         "title": "AWS Stripe Integration example in NodeJS",
-        "name": "aws-stripe-integration-example-in-nodejs",
+        "name": "aws-node-stripe-integration",
         "description": "This example for Stripe integration using AWS Lambda and API Gateway.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-stripe-integration",
         "framework": "v1",
@@ -661,7 +661,7 @@
     },
     {
         "title": "Simple Telegram bot",
-        "name": "simple-telegram-bot",
+        "name": "aws-node-telegram-echo-bot",
         "description": "This is a simple echo bot on Telegram.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-telegram-echo-bot",
         "framework": "v1",
@@ -673,7 +673,7 @@
     },
     {
         "title": "AWS Data Processing example in NodeJS",
-        "name": "aws-data-processing-example-in-nodejs",
+        "name": "aws-node-text-analysis-via-sns-post-processing",
         "description": "This example demonstrates how to setup a simple data processing pipeline.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-text-analysis-via-sns-post-processing",
         "framework": "v1",
@@ -685,7 +685,7 @@
     },
     {
         "title": "AWS Send SMS Message with Twilio example in NodeJS",
-        "name": "aws-send-sms-message-with-twilio-example-in-nodejs",
+        "name": "aws-node-twilio-send-text-message",
         "description": "This example demonstrates how to send SMS messages with the Twilio SDK and AWS lambda.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-twilio-send-text-message",
         "framework": "v1",
@@ -697,7 +697,7 @@
     },
     {
         "title": "Joke Twitter Bot",
-        "name": "joke-twitter-bot",
+        "name": "aws-node-twitter-joke-bot",
         "description": "Twitter bot that will periodically tweet out a joke obtained from a joke API.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-twitter-joke-bot",
         "framework": "v1",
@@ -709,7 +709,7 @@
     },
     {
         "title": "AWS Apollo Lambda (NodeJS & Typescript)",
-        "name": "aws-apollo-lambda-nodejs-and-typescript",
+        "name": "aws-node-typescript-apollo-lambda",
         "description": "This example provides a setup for a Lambda Graphql API with apollo",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-typescript-apollo-lambda",
         "framework": "v1",
@@ -721,7 +721,7 @@
     },
     {
         "title": "AWS Kinesis Data Streams Example (NodeJS & Typescript)",
-        "name": "aws-kinesis-data-streams-example-nodejs-and-typescript",
+        "name": "aws-node-typescript-kinesis",
         "description": "Produce and Consume data on a Kinesis Data Stream with Typescript.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-typescript-kinesis",
         "framework": "v1",
@@ -733,7 +733,7 @@
     },
     {
         "title": "AWS Nest application example (NodeJS & Typescript)",
-        "name": "aws-nest-application-example-nodejs-and-typescript",
+        "name": "aws-node-typescript-nest",
         "description": "This example demonstrates how to setup a simple [Nest](https://github.com/nestjs/nest) application.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-typescript-nest",
         "framework": "v1",
@@ -745,7 +745,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-node-typescript-rest-api-with-dynamodb",
         "description": "This example shows your how to create a TypeScript powered REST API with DynamoDB.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb",
         "framework": "v1",
@@ -757,7 +757,7 @@
     },
     {
         "title": "AWS SQS Standard Example (NodeJS & Typescript)",
-        "name": "aws-sqs-standard-example-nodejs-and-typescript",
+        "name": "aws-node-typescript-sqs-standard",
         "description": "This example demonstrates how to setup a SQS with Typescript.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard",
         "framework": "v1",
@@ -769,7 +769,7 @@
     },
     {
         "title": "AWS Upload a file to S3 to trigger a Lambda function example in NodeJS",
-        "name": "aws-upload-a-file-to-s3-to-trigger-a-lambda-function-example-in-nodejs",
+        "name": "aws-node-upload-to-s3-and-postprocess",
         "description": "This example shows how to upload a file to S3 using a HTML form, and have S3 trigger a lambda function.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-upload-to-s3-and-postprocess",
         "framework": "v1",
@@ -781,7 +781,7 @@
     },
     {
         "title": "Serverless side rendering with Vue.js and Nuxt.js",
-        "name": "serverless-side-rendering-with-vuejs-and-nuxtjs",
+        "name": "aws-node-vue-nuxt-ssr",
         "description": "This project demonstrates how to use Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-vue-nuxt-ssr",
         "framework": "v1",
@@ -793,7 +793,7 @@
     },
     {
         "title": "Simple Websocket Authorizers",
-        "name": "simple-websocket-authorizers",
+        "name": "aws-node-websockets-authorizers",
         "description": "The example shows you how to deploy simple websocket authorizers",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-node-websockets-authorizers",
         "framework": "v1",
@@ -805,7 +805,7 @@
     },
     {
         "title": "AWS Serverless Alexa Skill example in Python",
-        "name": "aws-serverless-alexa-skill-example-in-python",
+        "name": "aws-python-alexa-skill",
         "description": "This example demonstrates how to setup your own Alexa skill using AWS Lambdas.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-alexa-skill",
         "framework": "v1",
@@ -817,7 +817,7 @@
     },
     {
         "title": "AWS API Gateway Custom Authorizer Function with Auth0 example in Python",
-        "name": "aws-api-gateway-custom-authorizer-function-with-auth0-example-in-python",
+        "name": "aws-python-auth0-custom-authorizers-api",
         "description": "This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function in Python 3.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-auth0-custom-authorizers-api",
         "framework": "v1",
@@ -829,7 +829,7 @@
     },
     {
         "title": "Serverless Framework Python Flask API on AWS",
-        "name": "serverless-framework-python-flask-api-on-aws",
+        "name": "aws-python-flask-api",
         "description": "This template demonstrates how to develop and deploy a simple Python Flask API running on AWS Lambda using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-flask-api",
         "framework": "v2",
@@ -841,7 +841,7 @@
     },
     {
         "title": "Serverless Framework Python Flask API backed by DynamoDB on AWS",
-        "name": "serverless-framework-python-flask-api-backed-by-dynamodb-on-aws",
+        "name": "aws-python-flask-dynamodb-api",
         "description": "This template demonstrates how to develop and deploy a simple Python Flask API service backed by DynamoDB running on AWS Lambda using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-flask-dynamodb-api",
         "framework": "v2",
@@ -853,7 +853,7 @@
     },
     {
         "title": "Simple LINE bot",
-        "name": "simple-line-bot",
+        "name": "aws-python-line-echo-bot",
         "description": "This is a simple echo bot on LINE bot.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-line-echo-bot",
         "framework": "v1",
@@ -865,7 +865,7 @@
     },
     {
         "title": "AWS Serverless REST API with DynamoDB store and presigned URLs example in Python 3.6.",
-        "name": "aws-serverless-rest-api-with-dynamodb-store-and-presigned-urls-example-in-python-36",
+        "name": "aws-python-pynamodb-s3-sigurl",
         "description": "This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Assets. DynamoDB is used to store the data.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-pynamodb-s3-sigurl",
         "framework": "v1",
@@ -877,7 +877,7 @@
     },
     {
         "title": "AWS Serverless REST API with DynamoDB store example in Python",
-        "name": "aws-serverless-rest-api-with-dynamodb-store-example-in-python",
+        "name": "aws-python-rest-api-with-dynamodb",
         "description": "This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-dynamodb",
         "framework": "v1",
@@ -889,7 +889,7 @@
     },
     {
         "title": "AWS Serverless REST API with FaunaDB store example in Python",
-        "name": "aws-serverless-rest-api-with-faunadb-store-example-in-python",
+        "name": "aws-python-rest-api-with-faunadb",
         "description": "This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. FaunaDB is used to store the data.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-faunadb",
         "framework": "v1",
@@ -913,7 +913,7 @@
     },
     {
         "title": "AWS Serverless REST API with DynamoDB store example in Python",
-        "name": "aws-serverless-rest-api-with-dynamodb-store-example-in-python",
+        "name": "aws-python-rest-api-with-pynamodb",
         "description": "This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-rest-api-with-pynamodb",
         "framework": "v1",
@@ -925,7 +925,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in Python",
-        "name": "aws-simple-http-endpoint-example-in-python",
+        "name": "aws-python-rest-api",
         "description": "This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-rest-api",
         "framework": "v2",
@@ -937,7 +937,7 @@
     },
     {
         "title": "AWS Python Scheduled Cron example in Python",
-        "name": "aws-python-scheduled-cron-example-in-python",
+        "name": "aws-python-scheduled-cron",
         "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-scheduled-cron",
         "framework": "v1",
@@ -949,7 +949,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in Python",
-        "name": "aws-simple-http-endpoint-example-in-python",
+        "name": "aws-python-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint",
         "framework": "v1",
@@ -961,7 +961,7 @@
     },
     {
         "title": "Serverless Framework Python SQS Producer Consumer on AWS",
-        "name": "serverless-framework-python-sqs-producer-consumer-on-aws",
+        "name": "aws-python-sqs-worker",
         "description": "This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the traditional Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-sqs-worker",
         "framework": "v2",
@@ -973,7 +973,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "aws-python-telegram-bot",
         "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-python-telegram-bot",
         "framework": "v1",
@@ -985,7 +985,7 @@
     },
     {
         "title": "Ruby LINE bot",
-        "name": "ruby-line-bot",
+        "name": "aws-ruby-line-bot",
         "description": "This example shows you how to create a LINE bot using Ruby.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-line-bot",
         "framework": "v1",
@@ -997,7 +997,7 @@
     },
     {
         "title": "AWS Simple HTTP Endpoint example in Ruby",
-        "name": "aws-simple-http-endpoint-example-in-ruby",
+        "name": "aws-ruby-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint",
         "framework": "v1",
@@ -1009,7 +1009,7 @@
     },
     {
         "title": "AWS Serverless Boilerplate example in Rust",
-        "name": "aws-serverless-boilerplate-example-in-rust",
+        "name": "aws-rust-simple-http-endpoint",
         "description": "This example shows a Serverless boilerplate in Rust.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-rust-simple-http-endpoint",
         "framework": "v1+",
@@ -1021,7 +1021,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "azure-node-line-bot",
         "description": "This example demonstrates how to setup a serverless Line Bot using Node.js.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/azure-node-line-bot",
         "framework": "v1",
@@ -1033,7 +1033,7 @@
     },
     {
         "title": "Azure Simple HTTP Endpoint example in NodeJS",
-        "name": "azure-simple-http-endpoint-example-in-nodejs",
+        "name": "azure-node-simple-http-endpoint",
         "description": "In this example, we deploy an HTTP Node.js Azure Function. This example shows you how to read properties off of a query string or the request body, then set a result back to Azure.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint",
         "framework": "v1",
@@ -1045,7 +1045,7 @@
     },
     {
         "title": "TODO",
-        "name": "todo",
+        "name": "azure-node-telegram-bot",
         "description": "This example demonstrates how to setup a serverless Telegram Bot on Azure.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/azure-node-telegram-bot",
         "framework": "v1",
@@ -1057,7 +1057,7 @@
     },
     {
         "title": "Using Azure Service Queue to trigger Azure Function",
-        "name": "using-azure-service-queue-to-trigger-azure-function",
+        "name": "azure-node-typescript-servicebus-trigger-endpoint",
         "description": "This example demonstrates how to trigger an Azure function when a message arrives in Service Bus Queue",
         "githubUrl": "https://github.com/serverless/examples/tree/master/azure-node-typescript-servicebus-trigger-endpoint",
         "framework": "v1",
@@ -1069,7 +1069,7 @@
     },
     {
         "title": "GCF Simple HTTP Endpoint example in golang",
-        "name": "gcf-simple-http-endpoint-example-in-golang",
+        "name": "google-golang-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple golang HTTP GET endpoint on GCP Cloud Functions. When you ping the endpoint we've set up you'll see the time returned for the given request type.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/google-golang-simple-http-endpoint",
         "framework": "v1",
@@ -1081,7 +1081,7 @@
     },
     {
         "title": "GCF Simple HTTP Endpoint example in NodeJS",
-        "name": "gcf-simple-http-endpoint-example-in-nodejs",
+        "name": "google-node-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/google-node-simple-http-endpoint",
         "framework": "v1",
@@ -1093,7 +1093,7 @@
     },
     {
         "title": "Typescript HTTP Endpoint",
-        "name": "typescript-http-endpoint",
+        "name": "google-node-typescript-http-endpoint",
         "description": "This example demonstrates how to setup a simple Typescript HTTP endpoint on GCP.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/google-node-typescript-http-endpoint",
         "framework": "v1",
@@ -1105,7 +1105,7 @@
     },
     {
         "title": "GCF Simple HTTP Endpoint example in Python",
-        "name": "gcf-simple-http-endpoint-example-in-python",
+        "name": "google-python-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple python HTTP GET endpoint on GCP Cloud Functions. When you ping the endpoint we've set up you'll see the time returned for the given request type.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/google-python-simple-http-endpoint",
         "framework": "v1",
@@ -1117,7 +1117,7 @@
     },
     {
         "title": "Kubeless Serverless Simple function example in Python",
-        "name": "kubeless-serverless-simple-function-example-in-python",
+        "name": "kubeless-python-simple-function",
         "description": "This example demonstrates a simple function example in Python.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/kubeless-python-simple-function",
         "framework": "v1",
@@ -1129,7 +1129,7 @@
     },
     {
         "title": "Kubeless Serverless Simple scheduled function example in Python",
-        "name": "kubeless-serverless-simple-scheduled-function-example-in-python",
+        "name": "kubeless-python-simple-scheduled-function",
         "description": "This example demonstrates a simple sexample in Python for a scheduled function.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/kubeless-python-simple-scheduled-function",
         "framework": "v1",
@@ -1141,7 +1141,7 @@
     },
     {
         "title": "OpenWhisk Serverless Boilerplate example in Go",
-        "name": "openwhisk-serverless-boilerplate-example-in-go",
+        "name": "openwhisk-go-simple",
         "description": "This example shows a Serverless boilerplate in Go.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-go-simple",
         "framework": "v1",
@@ -1153,7 +1153,7 @@
     },
     {
         "title": "OpenWhisk Serverless Boilerplate using Docker example in NodeJS",
-        "name": "openwhisk-serverless-boilerplate-using-docker-example-in-nodejs",
+        "name": "openwhisk-node-and-docker-chaining-functions",
         "description": "This example shows a Serverless boilerplate using Docker in NodeJS.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-node-and-docker-chaining-functions",
         "framework": "v1",
@@ -1165,7 +1165,7 @@
     },
     {
         "title": "OpenWhisk Serverless Chaining Functions example in NodeJS",
-        "name": "openwhisk-serverless-chaining-functions-example-in-nodejs",
+        "name": "openwhisk-node-chaining-functions",
         "description": "This example demonstrates chaining functions in NodeJS.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-node-chaining-functions",
         "framework": "v1",
@@ -1177,7 +1177,7 @@
     },
     {
         "title": "OpenWhisk Serverless Scheduled Cron job example in NodeJS",
-        "name": "openwhisk-serverless-scheduled-cron-job-example-in-nodejs",
+        "name": "openwhisk-node-scheduled-cron",
         "description": "This example demonstrates scheduleding a cron job in NodeJS.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-node-scheduled-cron",
         "framework": "v1",
@@ -1189,7 +1189,7 @@
     },
     {
         "title": "OpenWhisk Simple HTTP Endpoint example in NodeJS",
-        "name": "openwhisk-simple-http-endpoint-example-in-nodejs",
+        "name": "openwhisk-node-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-node-simple-http-endpoint",
         "framework": "v1",
@@ -1201,7 +1201,7 @@
     },
     {
         "title": "OpenWhisk Serverless Simple example in NodeJS",
-        "name": "openwhisk-serverless-simple-example-in-nodejs",
+        "name": "openwhisk-node-simple",
         "description": "This example demonstrates a simple example in NodeJS.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-node-simple",
         "framework": "v1",
@@ -1213,7 +1213,7 @@
     },
     {
         "title": "OpenWhisk Serverless Simple example in PHP",
-        "name": "openwhisk-serverless-simple-example-in-php",
+        "name": "openwhisk-php-simple",
         "description": "This example demonstrates a simple example in PHP.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-php-simple",
         "framework": "v1",
@@ -1225,7 +1225,7 @@
     },
     {
         "title": "OpenWhisk Serverless Scheduled Cron job example in Python",
-        "name": "openwhisk-serverless-scheduled-cron-job-example-in-python",
+        "name": "openwhisk-python-scheduled-cron",
         "description": "This example demonstrates scheduleding a cron job.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-python-scheduled-cron",
         "framework": "v1",
@@ -1237,7 +1237,7 @@
     },
     {
         "title": "OpenWhisk Simple HTTP Endpoint example in Python",
-        "name": "openwhisk-simple-http-endpoint-example-in-python",
+        "name": "openwhisk-python-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-python-simple-http-endpoint",
         "framework": "v1",
@@ -1249,7 +1249,7 @@
     },
     {
         "title": "OpenWhisk Serverless Simple example in Python",
-        "name": "openwhisk-serverless-simple-example-in-python",
+        "name": "openwhisk-python-simple",
         "description": "This example demonstrates a simple example in Python.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-python-simple",
         "framework": "v1",
@@ -1261,7 +1261,7 @@
     },
     {
         "title": "OpenWhisk Serverless Simple example in Ruby",
-        "name": "openwhisk-serverless-simple-example-in-ruby",
+        "name": "openwhisk-ruby-simple",
         "description": "This example demonstrates a simple example in Ruby.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-ruby-simple",
         "framework": "v1",
@@ -1273,7 +1273,7 @@
     },
     {
         "title": "OpenWhisk Serverless Boilerplate example in Rust",
-        "name": "openwhisk-serverless-boilerplate-example-in-rust",
+        "name": "openwhisk-rust-simple-http-endpoint",
         "description": "This example shows a Serverless boilerplate in Rust.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-rust-simple-http-endpoint",
         "framework": "v1+",
@@ -1285,7 +1285,7 @@
     },
     {
         "title": "OpenWhisk Swift example with external libraries and pre compiled binaries",
-        "name": "openwhisk-swift-example-with-external-libraries-and-pre-compiled-binaries",
+        "name": "openwhisk-swift-precompiled-binaries",
         "description": "This example shows you how to use external packages and deploy binaries",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-swift-precompiled-binaries",
         "framework": "v1",
@@ -1297,7 +1297,7 @@
     },
     {
         "title": "OpenWhisk Serverless Scheduled Cron job example in Swift",
-        "name": "openwhisk-serverless-scheduled-cron-job-example-in-swift",
+        "name": "openwhisk-swift-scheduled-cron",
         "description": "This example demonstrates scheduling a cron job.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-swift-scheduled-cron",
         "framework": "v1",
@@ -1309,7 +1309,7 @@
     },
     {
         "title": "OpenWhisk Simple HTTP Endpoint example in Swift",
-        "name": "openwhisk-simple-http-endpoint-example-in-swift",
+        "name": "openwhisk-swift-simple-http-endpoint",
         "description": "This example demonstrates how to setup a simple HTTP GET endpoint.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-swift-simple-http-endpoint",
         "framework": "v1",
@@ -1321,7 +1321,7 @@
     },
     {
         "title": "OpenWhisk Serverless Simple example in Swift",
-        "name": "openwhisk-serverless-simple-example-in-swift",
+        "name": "openwhisk-swift-simple",
         "description": "This example demonstrates a simple example in Swift.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/openwhisk-swift-simple",
         "framework": "v1",
@@ -1333,7 +1333,7 @@
     },
     {
         "title": "Twilio Forward a Call",
-        "name": "twilio-forward-a-call",
+        "name": "twilio-node-forward-call",
         "description": "This example projects helps you deploy a serverless function to the Twilio runtime. The function responds the TwiML configuration to forward phone call.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/twilio-node-forward-call",
         "framework": "v1",
