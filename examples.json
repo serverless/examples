@@ -319,9 +319,9 @@
         "framework": "v1",
         "language": "node",
         "platform": "aws",
-        "authorLink": "’https://github.com/chief-wizard'",
-        "authorName": "‘Chief Wizard’",
-        "authorAvatar": "‘https://avatars3.githubusercontent.com/u/40777040?v=4&s=140"
+        "authorLink": "https://github.com/chief-wizard",
+        "authorName": "Chief Wizard",
+        "authorAvatar": "https://avatars3.githubusercontent.com/u/40777040?v=4&s=140"
     },
     {
         "title": "GraphQL query endpoint in NodeJS on AWS with DynamoDB",
