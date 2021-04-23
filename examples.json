@@ -1345,42 +1345,42 @@
     },
     {
         "title": "Serverless Lambda S3 Demonstration",
-        "name": "serverless-lambda-s3-demonstration",
+        "name": "serverless-lambda-s3",
         "description": "This project demonstrates how the Serverless Framework can be used to deploy a NodeJS Lambda function that responds to events in an S3 bucket.",
         "githubUrl": "https://github.com/johncmunson/serverless-lambda-s3",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ohncmunson",
-        "authorName": "ohncmunson",
+        "authorLink": "https://github.com/johncmunson",
+        "authorName": "johncmunson",
         "authorAvatar": "https://avatars.githubusercontent.com/u/19480078?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Spiderless, Web Spider on Serverless",
-        "name": "spiderless-web-spider-on-serverless",
+        "name": "spider-less",
         "description": "A web spider / scraper / website change detector built with Lambda, API Gateway, DynamoDB and SNS",
         "githubUrl": "https://github.com/slashbit/spider-less",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/lashbit",
-        "authorName": "lashbit",
+        "authorLink": "https://github.com/slashbit",
+        "authorName": "slashbit",
         "authorAvatar": "https://avatars.githubusercontent.com/u/5327840?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "AWS Demo Java Spring Cloud Function Serverless",
-        "name": "aws-demo-java-spring-cloud-function-serverless",
+        "name": "aws-java-spring-cloud-function-demo",
         "description": "If Java is your choice of programming language-Spring Cloud Function,Serverless Framework makes a great technology stack. It boosts developer productivity by decoupling from Vendor specific FaaS API, and deployment activities.",
         "githubUrl": "https://github.com/mbsambangi/aws-java-spring-cloud-function-demo",
         "framework": "latest",
         "language": "java",
         "platform": "aws",
-        "authorLink": "https://github.com/bsambangi",
-        "authorName": "bsambangi",
+        "authorLink": "https://github.com/mbsambangi",
+        "authorName": "mbsambangi",
         "authorAvatar": "https://avatars.githubusercontent.com/u/22281980?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Architecture Boilerplate",
@@ -1390,23 +1390,23 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/sfidelis",
-        "authorName": "sfidelis",
+        "authorLink": "https://github.com/msfidelis",
+        "authorName": "msfidelis",
         "authorAvatar": "https://avatars.githubusercontent.com/u/13524134?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "JwtAuthorizr",
-        "name": "jwtauthorizr",
+        "name": "jwtAuthorizr",
         "description": "Custom JWT Authorizer Lambda function for Amazon API Gateway with Bearer JWT",
         "githubUrl": "https://github.com/serverlessbuch/jwtAuthorizr",
         "framework": ">=1.2.0 <2.0.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/erverlessbuch",
-        "authorName": "erverlessbuch",
+        "authorLink": "https://github.com/serverlessbuch",
+        "authorName": "serverlessbuch",
         "authorAvatar": "https://avatars.githubusercontent.com/u/24709654?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Slack signup serverless",
@@ -1416,10 +1416,10 @@
         "framework": ">=1.2.0 <2.0.0",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/zimine",
-        "authorName": "zimine",
+        "authorLink": "https://github.com/dzimine",
+        "authorName": "dzimine",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1294734?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless graphql api",
@@ -1429,10 +1429,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/oazdejong",
-        "authorName": "oazdejong",
+        "authorLink": "https://github.com/boazdejong",
+        "authorName": "boazdejong",
         "authorAvatar": "https://avatars.githubusercontent.com/u/4102106?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless screenshot",
@@ -1442,10 +1442,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/vdgraaf",
-        "authorName": "vdgraaf",
+        "authorLink": "https://github.com/svdgraaf",
+        "authorName": "svdgraaf",
         "authorAvatar": "https://avatars.githubusercontent.com/u/19777?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless postgraphql",
@@ -1455,10 +1455,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/entrop",
-        "authorName": "entrop",
+        "authorLink": "https://github.com/rentrop",
+        "authorName": "rentrop",
         "authorAvatar": "https://avatars.githubusercontent.com/u/9575579?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless messenger boilerplate",
@@ -1468,49 +1468,49 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/C5",
-        "authorName": "C5",
+        "authorLink": "https://github.com/SC5",
+        "authorName": "SC5",
         "authorAvatar": "https://avatars.githubusercontent.com/u/3158015?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless npm registry",
-        "name": "serverless-npm-registry",
+        "name": "yith",
         "description": "Serverless private npm registry, proxy and cache.",
         "githubUrl": "https://github.com/craftship/yith",
         "framework": ">=1.20.2",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/raftship",
-        "authorName": "raftship",
+        "authorLink": "https://github.com/craftship",
+        "authorName": "craftship",
         "authorAvatar": "https://avatars.githubusercontent.com/u/16784624?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless facebook quotebot",
-        "name": "serverless-facebook-quotebot",
+        "name": "quotebot",
         "description": "100% Serverless Facebook messenger chatbot which will respond with inspiring quotes",
         "githubUrl": "https://github.com/pmuens/quotebot",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/muens",
-        "authorName": "muens",
+        "authorLink": "https://github.com/pmuens",
+        "authorName": "pmuens",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1606004?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless slack trevorbot",
-        "name": "serverless-slack-trevorbot",
+        "name": "trevorbot",
         "description": "Slack bot for info on where in the world is Trevor Gerhardt?",
         "githubUrl": "https://github.com/conveyal/trevorbot",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/onveyal",
-        "authorName": "onveyal",
+        "authorLink": "https://github.com/conveyal",
+        "authorName": "conveyal",
         "authorAvatar": "https://avatars.githubusercontent.com/u/3592637?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Pfs email serverless",
@@ -1520,23 +1520,23 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/CPR",
-        "authorName": "CPR",
+        "authorLink": "https://github.com/SCPR",
+        "authorName": "SCPR",
         "authorAvatar": "https://avatars.githubusercontent.com/u/855010?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Plaid cashburndown service",
-        "name": "plaid-cashburndown-service",
+        "name": "cashburndown-service",
         "description": "Service for calculating cash burndown with plaid. Frontend code can be found here: https://github.com/cplee/cashburndown-site",
         "githubUrl": "https://github.com/cplee/cashburndown-service",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/plee",
-        "authorName": "plee",
+        "authorLink": "https://github.com/cplee",
+        "authorName": "cplee",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2239057?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Cordis serverless",
@@ -1546,10 +1546,10 @@
         "framework": "1.4.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/arzeelabs",
-        "authorName": "arzeelabs",
+        "authorLink": "https://github.com/marzeelabs",
+        "authorName": "marzeelabs",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2045852?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless newsletter signup",
@@ -1559,10 +1559,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/schep",
-        "authorName": "schep",
+        "authorLink": "https://github.com/dschep",
+        "authorName": "dschep",
         "authorAvatar": "https://avatars.githubusercontent.com/u/667763?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless slack cron",
@@ -1572,10 +1572,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/vanderbu2",
-        "authorName": "vanderbu2",
+        "authorLink": "https://github.com/ivanderbu2",
+        "authorName": "ivanderbu2",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2388543?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Sls access counter",
@@ -1585,10 +1585,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/akahashim",
-        "authorName": "akahashim",
+        "authorLink": "https://github.com/takahashim",
+        "authorName": "takahashim",
         "authorAvatar": "https://avatars.githubusercontent.com/u/10401?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Sls form mail",
@@ -1598,10 +1598,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/akahashim",
-        "authorName": "akahashim",
+        "authorLink": "https://github.com/takahashim",
+        "authorName": "takahashim",
         "authorAvatar": "https://avatars.githubusercontent.com/u/10401?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless python sample",
@@ -1611,23 +1611,23 @@
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/ennybauer",
-        "authorName": "ennybauer",
+        "authorLink": "https://github.com/bennybauer",
+        "authorName": "bennybauer",
         "authorAvatar": "https://avatars.githubusercontent.com/u/3007059?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless slack emojibot",
-        "name": "serverless-slack-emojibot",
+        "name": "emojibot",
         "description": "Serverless slack bot for emoji",
         "githubUrl": "https://github.com/markhobson/emojibot",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/arkhobson",
-        "authorName": "arkhobson",
+        "authorLink": "https://github.com/markhobson",
+        "authorName": "markhobson",
         "authorAvatar": "https://avatars.githubusercontent.com/u/178443?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless cloudwatch rds custom metrics",
@@ -1637,10 +1637,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ndrewFarley",
-        "authorName": "ndrewFarley",
+        "authorLink": "https://github.com/AndrewFarley",
+        "authorName": "AndrewFarley",
         "authorAvatar": "https://avatars.githubusercontent.com/u/470163?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Sc5 serverless boilerplate",
@@ -1650,10 +1650,10 @@
         "framework": ">=1.2.0 <2.0.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/C5",
-        "authorName": "C5",
+        "authorLink": "https://github.com/SC5",
+        "authorName": "SC5",
         "authorAvatar": "https://avatars.githubusercontent.com/u/14107257?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless blog to podcast",
@@ -1663,10 +1663,10 @@
         "framework": ">=1.2.0 <2.0.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/C5",
-        "authorName": "C5",
+        "authorLink": "https://github.com/SC5",
+        "authorName": "SC5",
         "authorAvatar": "https://avatars.githubusercontent.com/u/3158015?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Offset trump",
@@ -1676,10 +1676,10 @@
         "framework": "latest",
         "language": "csharp",
         "platform": "aws",
-        "authorLink": "https://github.com/LGMwt",
-        "authorName": "LGMwt",
+        "authorLink": "https://github.com/FLGMwt",
+        "authorName": "FLGMwt",
         "authorAvatar": "https://avatars.githubusercontent.com/u/4138357?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless url shortener",
@@ -1689,10 +1689,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/letheia",
-        "authorName": "letheia",
+        "authorLink": "https://github.com/aletheia",
+        "authorName": "aletheia",
         "authorAvatar": "https://avatars.githubusercontent.com/u/653823?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless html pdf",
@@ -1702,10 +1702,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/alvintychan",
-        "authorName": "alvintychan",
+        "authorLink": "https://github.com/calvintychan",
+        "authorName": "calvintychan",
         "authorAvatar": "https://avatars.githubusercontent.com/u/11818?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless examples cached rds ws",
@@ -1715,10 +1715,10 @@
         "framework": "latest",
         "language": "java",
         "platform": "aws",
-        "authorLink": "https://github.com/ugglmenzel",
-        "authorName": "ugglmenzel",
+        "authorLink": "https://github.com/mugglmenzel",
+        "authorName": "mugglmenzel",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1062212?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Bittman",
@@ -1728,10 +1728,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/hlsthrm",
-        "authorName": "hlsthrm",
+        "authorLink": "https://github.com/rhlsthrm",
+        "authorName": "rhlsthrm",
         "authorAvatar": "https://avatars.githubusercontent.com/u/11512787?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Adoptable pet bot",
@@ -1741,10 +1741,10 @@
         "framework": ">=1.8.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ynnaloo",
-        "authorName": "ynnaloo",
+        "authorLink": "https://github.com/lynnaloo",
+        "authorName": "lynnaloo",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1610195?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Owntracks serverless",
@@ -1754,10 +1754,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/schep",
-        "authorName": "schep",
+        "authorLink": "https://github.com/dschep",
+        "authorName": "dschep",
         "authorAvatar": "https://avatars.githubusercontent.com/u/667763?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless modern koa",
@@ -1767,23 +1767,23 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/arczaG",
-        "authorName": "arczaG",
+        "authorLink": "https://github.com/barczaG",
+        "authorName": "barczaG",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1392454?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless ReactJS Universal Rendering Boilerplate",
-        "name": "serverless-reactjs-universal-rendering-boilerplate",
+        "name": "react-universal-in-serverless",
         "description": "ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless",
         "githubUrl": "https://github.com/TylorShin/react-universal-in-serverless",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ylorShin",
-        "authorName": "ylorShin",
+        "authorLink": "https://github.com/TylorShin",
+        "authorName": "TylorShin",
         "authorAvatar": "https://avatars.githubusercontent.com/u/9796103?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Open Bot",
@@ -1793,10 +1793,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/pen-bot",
-        "authorName": "pen-bot",
+        "authorLink": "https://github.com/open-bot",
+        "authorName": "open-bot",
         "authorAvatar": "https://avatars.githubusercontent.com/u/26090214?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Aws ses serverless example",
@@ -1806,10 +1806,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/akshmantgld",
-        "authorName": "akshmantgld",
+        "authorLink": "https://github.com/lakshmantgld",
+        "authorName": "lakshmantgld",
         "authorAvatar": "https://avatars.githubusercontent.com/u/6481030?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Aws node signed uploads",
@@ -1819,62 +1819,62 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/alinchernev",
-        "authorName": "alinchernev",
+        "authorLink": "https://github.com/kalinchernev",
+        "authorName": "kalinchernev",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1923476?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "SQS Worker with AWS Lambda and CloudWatch Alarms",
-        "name": "sqs-worker-with-aws-lambda-and-cloudwatch-alarms",
+        "name": "sqs-worker-serverless",
         "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
         "githubUrl": "https://github.com/sbstjn/sqs-worker-serverless",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/bstjn",
-        "authorName": "bstjn",
+        "authorLink": "https://github.com/sbstjn",
+        "authorName": "sbstjn",
         "authorAvatar": "https://avatars.githubusercontent.com/u/248965?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless image manager",
-        "name": "serverless-image-manager",
+        "name": "lambda-image-manager",
         "description": "image upload / download with resizing. Used API gateway's binary support & serverless",
         "githubUrl": "https://github.com/TylorShin/lambda-image-manager",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ylorShin",
-        "authorName": "ylorShin",
+        "authorLink": "https://github.com/TylorShin",
+        "authorName": "TylorShin",
         "authorAvatar": "https://avatars.githubusercontent.com/u/9796103?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Amazon Kinesis Streams fan out via Kinesis Analytics",
-        "name": "amazon-kinesis-streams-fan-out-via-kinesis-analytics",
+        "name": "kinesis-streams-fan-out-kinesis-analytics",
         "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
         "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/lexcasalboni",
-        "authorName": "lexcasalboni",
+        "authorLink": "https://github.com/alexcasalboni",
+        "authorName": "alexcasalboni",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2457588?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "HoneyLambda",
-        "name": "honeylambda",
+        "name": "honeyLambda",
         "description": "a simple, serverless application designed to create and monitor URL {honey}tokens, on top of AWS Lambda and Amazon API Gateway",
         "githubUrl": "https://github.com/0x4D31/honeyLambda",
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/x4D31",
-        "authorName": "x4D31",
+        "authorLink": "https://github.com/0x4D31",
+        "authorName": "0x4D31",
         "authorAvatar": "https://avatars.githubusercontent.com/u/11577776?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Faultline",
@@ -1884,23 +1884,23 @@
         "framework": ">=1.24.1 <2.0.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/aultline",
-        "authorName": "aultline",
+        "authorLink": "https://github.com/faultline",
+        "authorName": "faultline",
         "authorAvatar": "https://avatars.githubusercontent.com/u/27847548?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Stack Overflow Monitor",
-        "name": "stack-overflow-monitor",
+        "name": "stackoverflowmonitor",
         "description": "Monitor Stack Overflow questions and post them in a Slack channel",
         "githubUrl": "https://github.com/picsoung/stackoverflowmonitor",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/icsoung",
-        "authorName": "icsoung",
+        "authorLink": "https://github.com/picsoung",
+        "authorName": "picsoung",
         "authorAvatar": "https://avatars.githubusercontent.com/u/172072?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Analytics",
@@ -1910,10 +1910,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/bstjn",
-        "authorName": "bstjn",
+        "authorLink": "https://github.com/sbstjn",
+        "authorName": "sbstjn",
         "authorAvatar": "https://avatars.githubusercontent.com/u/248965?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless + medium text to speech",
@@ -1923,75 +1923,75 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/afalWilinski",
-        "authorName": "afalWilinski",
+        "authorLink": "https://github.com/RafalWilinski",
+        "authorName": "RafalWilinski",
         "authorAvatar": "https://avatars.githubusercontent.com/u/3391616?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless + java DynamoDB imlementation example",
-        "name": "serverless-java-dynamodb-imlementation-example",
+        "name": "java-lambda-dynamodb",
         "description": " example for java programmers that want to work with AWS-Lambda and DynamoDB",
         "githubUrl": "https://github.com/igorbakman/java-lambda-dynamodb",
         "framework": "latest",
         "language": "java",
         "platform": "aws",
-        "authorLink": "https://github.com/gorbakman",
-        "authorName": "gorbakman",
+        "authorLink": "https://github.com/igorbakman",
+        "authorName": "igorbakman",
         "authorAvatar": "https://avatars.githubusercontent.com/u/4776228?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "AWS Cognito Custom User Pool Example",
-        "name": "aws-cognito-custom-user-pool-example",
+        "name": "aws-node-custom-user-pool",
         "description": "Example CloudFormation custom resource backed by a lambda using Cognito User Pools",
         "githubUrl": "https://github.com/bsdkurt/aws-node-custom-user-pool",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/sdkurt",
-        "authorName": "sdkurt",
+        "authorLink": "https://github.com/bsdkurt",
+        "authorName": "bsdkurt",
         "authorAvatar": "https://avatars.githubusercontent.com/u/4834782?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito Example",
-        "name": "aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito-example",
+        "name": "serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito",
         "description": "Step by step guide how to deploy simple web application on top of AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito.",
         "githubUrl": "https://github.com/andreivmaksimov/serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ndreivmaksimov",
-        "authorName": "ndreivmaksimov",
+        "authorLink": "https://github.com/andreivmaksimov",
+        "authorName": "andreivmaksimov",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1902417?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda   Part 1",
-        "name": "run-your-kubernetes-workloads-on-amazon-ec2-spot-instances-with-amazon-eks-and-lambda-part-1",
+        "name": "aws-eks-spot-instances-serverless-framework-demo",
         "description": "From this tutorial you'll learn how to add AWS EKS Cluster with Spot Instances to your cloud environment managed by Serverless framework",
         "githubUrl": "https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo",
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/ndreivmaksimov",
-        "authorName": "ndreivmaksimov",
+        "authorLink": "https://github.com/andreivmaksimov",
+        "authorName": "andreivmaksimov",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1902417?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless + lambda protobuf responses",
-        "name": "serverless-lambda-protobuf-responses",
+        "name": "lambda-protobuf-demo",
         "description": "Demo using API Gateway and Lambda with Protocol Buffer",
         "githubUrl": "https://github.com/theburningmonk/lambda-protobuf-demo",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/heburningmonk",
-        "authorName": "heburningmonk",
+        "authorLink": "https://github.com/theburningmonk",
+        "authorName": "theburningmonk",
         "authorAvatar": "https://avatars.githubusercontent.com/u/546969?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Telegram Bot",
@@ -2001,23 +2001,23 @@
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/onatasbaldin",
-        "authorName": "onatasbaldin",
+        "authorLink": "https://github.com/jonatasbaldin",
+        "authorName": "jonatasbaldin",
         "authorAvatar": "https://avatars.githubusercontent.com/u/8570364?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless + lambda + vpc + nat + redis",
-        "name": "serverless-lambda-vpc-nat-redis",
+        "name": "aws-lambda-vpc-nat-examples",
         "description": "Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource",
         "githubUrl": "https://github.com/ittus/aws-lambda-vpc-nat-examples",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/ttus",
-        "authorName": "ttus",
+        "authorLink": "https://github.com/ittus",
+        "authorName": "ittus",
         "authorAvatar": "https://avatars.githubusercontent.com/u/5120965?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Gitlab CI",
@@ -2027,10 +2027,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/vincent1",
-        "authorName": "vincent1",
+        "authorLink": "https://github.com/bvincent1",
+        "authorName": "bvincent1",
         "authorAvatar": "https://avatars.githubusercontent.com/u/6344504?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless ffmpeg",
@@ -2040,23 +2040,23 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/vaggelakos",
-        "authorName": "vaggelakos",
+        "authorLink": "https://github.com/kvaggelakos",
+        "authorName": "kvaggelakos",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1001352?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Realtime WW2 Alexa Skill",
-        "name": "realtime-ww2-alexa-skill",
+        "name": "realtime-ww2-alexa",
         "description": "An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel).",
         "githubUrl": "https://github.com/ceilfors/realtime-ww2-alexa",
         "framework": ">=1.22.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/eilfors",
-        "authorName": "eilfors",
+        "authorLink": "https://github.com/ceilfors",
+        "authorName": "ceilfors",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1336981?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Kakao Bot",
@@ -2066,36 +2066,36 @@
         "framework": "=1.26.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/isuPark",
-        "authorName": "isuPark",
+        "authorLink": "https://github.com/JisuPark",
+        "authorName": "JisuPark",
         "authorAvatar": "https://avatars.githubusercontent.com/u/4257693?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Personal Access Tokens Cron Check",
-        "name": "personal-access-tokens-cron-check",
+        "name": "cfpat-audit",
         "description": "Audit for leaked PAT in your Contentful organization. How to use serverless as cronjobs to keep your Personal Access Tokens secure",
         "githubUrl": "https://github.com/madtrick/cfpat-audit",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/adtrick",
-        "authorName": "adtrick",
+        "authorLink": "https://github.com/madtrick",
+        "authorName": "madtrick",
         "authorAvatar": "https://avatars.githubusercontent.com/u/48772?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Daily Instance Backups with AMI Rotation",
-        "name": "daily-instance-backups-with-ami-rotation",
+        "name": "AWSAutomatedDailyInstanceAMISnapshots",
         "description": "A simple Python application which scans through your entire AWS account for tagged instances, makes daily AMIs of them, and rotates their backups automatically",
         "githubUrl": "https://github.com/AndrewFarley/AWSAutomatedDailyInstanceAMISnapshots",
         "framework": ">=1.26.0 <2.0.0",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/ndrewFarley",
-        "authorName": "ndrewFarley",
+        "authorLink": "https://github.com/AndrewFarley",
+        "authorName": "AndrewFarley",
         "authorAvatar": "https://avatars.githubusercontent.com/u/470163?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Instagram Crawler",
@@ -2105,75 +2105,75 @@
         "framework": ">=1.1.0 <2.0.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/imcoder",
-        "authorName": "imcoder",
+        "authorLink": "https://github.com/kimcoder",
+        "authorName": "kimcoder",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2926726?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Next.js Example",
-        "name": "serverless-nextjs-example",
+        "name": "serverless-nextjs",
         "description": "Next.js example project for development & deploy.",
         "githubUrl": "https://github.com/kimcoder/serverless-nextjs",
         "framework": "latest",
         "language": "",
         "platform": "",
-        "authorLink": "https://github.com/imcoder",
-        "authorName": "imcoder",
+        "authorLink": "https://github.com/kimcoder",
+        "authorName": "kimcoder",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2926726?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serving binary files",
-        "name": "serving-binary-files",
+        "name": "serverless-binary-files-xlsx",
         "description": "Small example showing how to serve binary files using Serverless on AWS with the serverless-apigw-binary plugin, using generated Excel files as an example",
         "githubUrl": "https://github.com/thomastoye/serverless-binary-files-xlsx",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/homastoye",
-        "authorName": "homastoye",
+        "authorLink": "https://github.com/thomastoye",
+        "authorName": "thomastoye",
         "authorAvatar": "https://avatars.githubusercontent.com/u/3396772?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Lambda PubSub via SNS Example",
-        "name": "lambda-pubsub-via-sns-example",
+        "name": "serverless-lambda-sns-example",
         "description": "Example illustrating the flow: Lambda (publisher) => SNS => Lambda (consumer)",
         "githubUrl": "https://github.com/didil/serverless-lambda-sns-example",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/idil",
-        "authorName": "idil",
+        "authorLink": "https://github.com/didil",
+        "authorName": "didil",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1284255?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless CloudWatch Proxy",
-        "name": "serverless-cloudwatch-proxy",
+        "name": "cloudwatch-proxy",
         "description": "Logging adapter that consumes log streams from AWS CloudWatch, streams them to other log destinations. Also capable of identying alerts and sending notifications via Slack/Email",
         "githubUrl": "https://github.com/abbasdgr8/cloudwatch-proxy",
         "framework": "=1.30.0",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/bbasdgr8",
-        "authorName": "bbasdgr8",
+        "authorLink": "https://github.com/abbasdgr8",
+        "authorName": "abbasdgr8",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1814309?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless side rendering with Vue.js and Nuxt.js",
-        "name": "serverless-side-rendering-with-vuejs-and-nuxtjs",
+        "name": "serverless-side-rendering-vue-nuxt",
         "description": "Sample project for using Nuxt.js to create a server-side rendered Vue.js app on AWS Lambda and AWS API Gateway. Can easily integrate with your own API or 3rd party APIs such as headless CMS, e-commerce or serverless architecture.",
         "githubUrl": "https://github.com/adnanrahic/serverless-side-rendering-vue-nuxt",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/dnanrahic",
-        "authorName": "dnanrahic",
+        "authorLink": "https://github.com/adnanrahic",
+        "authorName": "adnanrahic",
         "authorAvatar": "https://avatars.githubusercontent.com/u/15029531?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Aws mfa enforce",
@@ -2183,10 +2183,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/han9390",
-        "authorName": "han9390",
+        "authorLink": "https://github.com/Chan9390",
+        "authorName": "Chan9390",
         "authorAvatar": "https://avatars.githubusercontent.com/u/12944530?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Vanity stargazer",
@@ -2196,10 +2196,10 @@
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/ilvermullet",
-        "authorName": "ilvermullet",
+        "authorLink": "https://github.com/silvermullet",
+        "authorName": "silvermullet",
         "authorAvatar": "https://avatars.githubusercontent.com/u/29214768?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Fotopia Serverless",
@@ -2209,23 +2209,23 @@
         "framework": ">=1.1.0 <2.0.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/budm",
-        "authorName": "budm",
+        "authorLink": "https://github.com/mbudm",
+        "authorName": "mbudm",
         "authorAvatar": "https://avatars.githubusercontent.com/u/2467577?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Commenting API",
-        "name": "commenting-api",
+        "name": "serverless_typescript_graphQl_commentingService",
         "description": "A commenting api using Serverless Typescript GraphQl and Redis",
         "githubUrl": "https://github.com/AyoubEd/serverless_typescript_graphQl_commentingService",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/youbEd",
-        "authorName": "youbEd",
+        "authorLink": "https://github.com/AyoubEd",
+        "authorName": "AyoubEd",
         "authorAvatar": "https://avatars.githubusercontent.com/u/20077848?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless node api dynamodb neo4j",
@@ -2235,10 +2235,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/oetix",
-        "authorName": "oetix",
+        "authorLink": "https://github.com/noetix",
+        "authorName": "noetix",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1192279?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless python rds cron",
@@ -2248,36 +2248,36 @@
         "framework": ">=1.2.0 <2.0.0",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/aulagi",
-        "authorName": "aulagi",
+        "authorLink": "https://github.com/caulagi",
+        "authorName": "caulagi",
         "authorAvatar": "https://avatars.githubusercontent.com/u/222507?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Nietzsche",
-        "name": "nietzsche",
+        "name": "Nietzsche",
         "description": "A serverless application that fetches quotes from Goodreads and saves it to DynamoDB with example use cases using `Lambda`, `SNS`, `SQS`, `Step Functions`, `DynamoDB`, `API Gateway`, `CloudWatch`",
         "githubUrl": "https://github.com/rpidanny/Nietzsche",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/pidanny",
-        "authorName": "pidanny",
+        "authorLink": "https://github.com/rpidanny",
+        "authorName": "rpidanny",
         "authorAvatar": "https://avatars.githubusercontent.com/u/6696862?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless DotNet BoilerPlate",
-        "name": "serverless-dotnet-boilerplate",
+        "name": "serverlessDotNetSample",
         "description": "A serverless starter solution for .NET Core, ready for local debugging in VS Code, HTTP Endpoint, etc.",
         "githubUrl": "https://github.com/pharindoko/serverlessDotNetSample",
         "framework": "latest",
         "language": "csharp",
         "platform": "aws",
-        "authorLink": "https://github.com/harindoko",
-        "authorName": "harindoko",
+        "authorLink": "https://github.com/pharindoko",
+        "authorName": "pharindoko",
         "authorAvatar": "https://avatars.githubusercontent.com/u/5619511?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Load Balancer",
@@ -2287,10 +2287,10 @@
         "framework": ">=1.4.6",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/harindoko",
-        "authorName": "harindoko",
+        "authorLink": "https://github.com/pharindoko",
+        "authorName": "pharindoko",
         "authorAvatar": "https://avatars.githubusercontent.com/u/5619511?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless api typescript template",
@@ -2300,10 +2300,10 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/oshuaToth",
-        "authorName": "oshuaToth",
+        "authorLink": "https://github.com/JoshuaToth",
+        "authorName": "JoshuaToth",
         "authorAvatar": "https://avatars.githubusercontent.com/u/10456811?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless SNS SQS offline Example ",
@@ -2313,36 +2313,36 @@
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/enyipp",
-        "authorName": "enyipp",
+        "authorLink": "https://github.com/kenyipp",
+        "authorName": "kenyipp",
         "authorAvatar": "https://avatars.githubusercontent.com/u/24988208?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless RDS Log Sync S3",
-        "name": "serverless-rds-log-sync-s3",
+        "name": "serverless-aws-rds-logs-s3",
         "description": "Annotated exmaple of a periodic scheduled task to sync changed RDS log files to an S3 bucket.",
         "githubUrl": "https://github.com/drocco007/serverless-aws-rds-logs-s3",
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/rocco007",
-        "authorName": "rocco007",
+        "authorLink": "https://github.com/drocco007",
+        "authorName": "drocco007",
         "authorAvatar": "https://avatars.githubusercontent.com/u/1424858?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "HTTP Headers Checks",
-        "name": "http-headers-checks",
+        "name": "http-headers-check",
         "description": "Serverless Application to check integrity of the headers of a given HTTP server",
         "githubUrl": "https://github.com/authdog/http-headers-check",
         "framework": ">=1.30.3 <3.2.0",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/uthdog",
-        "authorName": "uthdog",
+        "authorLink": "https://github.com/authdog",
+        "authorName": "authdog",
         "authorAvatar": "https://avatars.githubusercontent.com/u/34599569?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Image Labeller",
@@ -2352,48 +2352,48 @@
         "framework": "latest",
         "language": "python",
         "platform": "aws",
-        "authorLink": "https://github.com/ileshprasad137",
-        "authorName": "ileshprasad137",
+        "authorLink": "https://github.com/nileshprasad137",
+        "authorName": "nileshprasad137",
         "authorAvatar": "https://avatars.githubusercontent.com/u/16336390?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless AppSync offline TypeScript with CircleCI",
-        "name": "serverless-appsync-offline-typescript-with-circleci",
+        "name": "serverless-appsync-offline-typescript-template",
         "description": "A Serverless Framework template that allows you to launch an AppSync emulator locally and proceed with development. Lambda Function build by TypeScript/Webpack.",
         "githubUrl": "https://github.com/daisuke-awaji/serverless-appsync-offline-typescript-template",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/aisuke-awaji",
-        "authorName": "aisuke-awaji",
+        "authorLink": "https://github.com/daisuke-awaji",
+        "authorName": "daisuke-awaji",
         "authorAvatar": "https://avatars.githubusercontent.com/u/20736455?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Serverless Screenshot to S3",
-        "name": "serverless-screenshot-to-s3",
+        "name": "aws-node-screenshot-to-s3",
         "description": "An example serverless stack which takes a screenshot using aws-chrome-lambda and puts it in s3. NodeJS.",
         "githubUrl": "https://github.com/slaytr/aws-node-screenshot-to-s3",
         "framework": "2",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/laytr",
-        "authorName": "laytr",
+        "authorLink": "https://github.com/slaytr",
+        "authorName": "slaytr",
         "authorAvatar": "https://avatars.githubusercontent.com/u/14005795?v=4",
-        "isCommunity": true
+        "community": true
     },
     {
         "title": "Express Application With Lambda",
-        "name": "express-application-with-lambda",
+        "name": "serverless-lambda-express-example",
         "description": "This example demonstrates how to build an express application for AWS Lambda based on serverless framework.",
         "githubUrl": "https://github.com/HoseungJang/serverless-lambda-express-example",
         "framework": "latest",
         "language": "node",
         "platform": "aws",
-        "authorLink": "https://github.com/oseungJang",
-        "authorName": "oseungJang",
+        "authorLink": "https://github.com/HoseungJang",
+        "authorName": "HoseungJang",
         "authorAvatar": "https://avatars.githubusercontent.com/u/39669819?v=4",
-        "isCommunity": true
+        "community": true
     }
 ]
