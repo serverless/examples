@@ -48,6 +48,12 @@ install dependencies with:
 npm install
 ```
 
+and
+
+```
+pip install -r requirements.txt
+```
+
 and then perform deployment with:
 
 ```
