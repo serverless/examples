@@ -1,0 +1,59 @@
+service: aws-ruby-sinatra-dynamodb-api
+
+frameworkVersion: "2"
+
+custom:
+  tableName: "users-table-${self:provider.stage}"
+
+provider:
+  name: aws
+  runtime: ruby2.7
+  lambdaHashingVersion: "20201221"
+  apiGateway:
+    shouldStartNameWithService: true
+  stage: dev
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [UsersTable, Arn]
+  environment:
+    USERS_TABLE: ${self:custom.tableName}
+
+functions:
+  api:
+    handler: rack_adapter.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+plugins:
+  - serverless-rack
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}
