@@ -1,5 +1,3 @@
-org: serverlessinc
-app: aws-python-rest-api
 service: aws-python-rest-api
 
 frameworkVersion: '2'
