@@ -1,5 +1,3 @@
-org: serverlessinc
-app: aws-node-rest-api
 service: aws-node-rest-api
 
 frameworkVersion: '2'
