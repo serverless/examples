@@ -1,0 +1,19 @@
+service: awsNodeTypescript
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: '20201221'
+  memorySize: 256
+  region: us-east-1
+  apiGateway:
+    shouldStartNameWithService: true
+  stage: dev
+  
+functions:
+  hello:
+    handler: dist/handlers/hello.handler
+    events:
+      - http:
+          method: GET
+          path: /hello

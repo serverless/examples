@@ -1,0 +1,40 @@
+{
+  "name": "aws-node-typescript-oop",
+  "version": "1.0.0",
+  "description": "Serverless Application",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "rimraf dist && tsc && sls deploy -v",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:unit": "npm test -- --watch -c jest-unit.config.js"
+  },
+  "keywords": [
+    "Serverless Application"
+  ],
+  "author": "viniciusmotta8@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.77",
+    "@types/http-errors": "^1.8.0",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "eslint": "^7.29.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "@middy/core": "^2.4.2",
+    "@middy/http-error-handler": "^2.4.2",
+    "@middy/http-event-normalizer": "^2.4.2",
+    "@middy/http-json-body-parser": "^2.4.2",
+    "aws-lambda": "^1.0.6",
+    "http-errors": "^1.8.0"
+  }
+}

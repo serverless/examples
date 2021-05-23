@@ -100,6 +100,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Typescript Apollo Lambda](https://github.com/serverless/examples/tree/master/aws-node-typescript-apollo-lambda) <br/> Serverless example for apollo lambda | nodeJS |
 | [Aws Node Typescript Kinesis](https://github.com/serverless/examples/tree/master/aws-node-typescript-kinesis) <br/> Serverless example using Kinesis with TypeScript | nodeJS |
 | [Nest Serverless](https://github.com/serverless/examples/tree/master/aws-node-typescript-nest) <br/> serverless app | nodeJS |
+| [Aws Node Typescript Oop](https://github.com/serverless/examples/tree/master/aws-node-typescript-oop) <br/> Serverless Application | nodeJS |
 | [Typescript Example](https://github.com/serverless/examples/tree/master/aws-node-typescript-rest-api-with-dynamodb)  | nodeJS |
 | [Aws Node Typescript Sqs Standard](https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard) <br/> Serverless example using Standard SQS with TypeScript | nodeJS |
 | [Upload To S3 And Postprocess](https://github.com/serverless/examples/tree/master/aws-node-upload-to-s3-and-postprocess) <br/> Upload a files to S3 to trigger a lambda function. | nodeJS |
