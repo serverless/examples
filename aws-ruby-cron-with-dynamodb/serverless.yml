@@ -1,0 +1,60 @@
+service: aws-ruby-cron-with-dynamodb
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  profile: ${self:custom.deployment.profile.${self:provider.stage}}
+  region: ${self:custom.deployment.region.${self:provider.stage}}
+  runtime: ruby2.7
+  environment:
+    stage: ${self:provider.stage}
+    region: ${self:provider.region}
+    service: ${self:service}
+    tableName: ${self:custom.tableName}
+  logRetentionInDays: 30
+  tags:
+    Application: ${self:service}
+    Stage: ${self:provider.stage}
+  lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource:
+        - !GetAtt Table.Arn
+
+functions:
+  create-meal-order:
+    handler: src/handlers/create_meal_order/handler.run
+    events:
+      - schedule: rate(30 minutes)
+
+resources:
+  Resources:
+    Table:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: Application
+            Value: ${self:service}
+          - Key: Stage
+            Value: ${self:provider.stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+plugins:
+  - serverless-ruby-layer
+  - serverless-export-env
+custom:
+  tableName: ${self:service}-${self:provider.stage}
+  rubyLayer:
+    include_functions:
+      - create-meal-order

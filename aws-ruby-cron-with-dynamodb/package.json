@@ -1,0 +1,13 @@
+{
+  "name": "serverless-ruby-dynamodb-cron",
+  "version": "1.0.0",
+  "description": "A serverless ruby example that periodically updates entries in DynamoDB via cron job.",
+  "author": "Daniel Aniszkiewicz",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-ruby-layer": "^1.5.0"
+  },
+  "devDependencies": {
+    "serverless-export-env": "github:arabold/serverless-export-env"
+  }
+}
