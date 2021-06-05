@@ -1020,7 +1020,7 @@
         "authorAvatar": "https://avatars0.githubusercontent.com/u/1446195?v=4&s=140"
     },
     {
-        "title": "AWS Ruby scheduled cron example",
+        "title": "AWS Ruby scheduled cron example backed by DynamoDB",
         "name": "aws-ruby-cron-with-dynamodb",
         "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. With the usage of the AWS Lambda function, it creates a record to the DynamoDB each and every 30 minutes.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-cron-with-dynamodb",
