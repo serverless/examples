@@ -1020,6 +1020,30 @@
         "authorAvatar": "https://avatars0.githubusercontent.com/u/1446195?v=4&s=140"
     },
     {
+        "title": "AWS Simple HTTP Endpoint example in Ruby",
+        "name": "aws-ruby-simple-http-endpoint",
+        "description": "This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.",
+        "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint",
+        "framework": "v1",
+        "language": "ruby",
+        "platform": "aws",
+        "authorLink": "https://github.com/josephyi",
+        "authorName": "Joseph Yi",
+        "authorAvatar": "https://avatars0.githubusercontent.com/u/1994863?v=4&s=140"
+    },
+    {
+        "title": "Serverless Framework Ruby Sinatra API backed by DynamoDB on AWS",
+        "name": "aws-ruby-sinatra-dynamodb-api",
+        "description": "This template demonstrates how to develop and deploy a simple Ruby Sinatra API service backed by DynamoDB running on AWS Lambda using the traditional Serverless Framework.",
+        "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-sinatra-dynamodb-api",
+        "framework": "v2",
+        "language": "ruby",
+        "platform": "aws",
+        "authorLink": "https://github.com/serverless",
+        "authorName": "Serverless, inc.",
+        "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+    },
+    {
         "title": "AWS Ruby scheduled cron example backed by DynamoDB",
         "name": "aws-ruby-cron-with-dynamodb",
         "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. With the usage of the AWS Lambda function, it creates a record to the DynamoDB each and every 30 minutes.",
@@ -1030,30 +1054,6 @@
         "authorLink": "https://github.com/pigius",
         "authorName": "Daniel Aniszkiewicz",
         "authorAvatar": "https://avatars.githubusercontent.com/u/8863200?v=4&s=140"
-    },
-    {
-        "title": "Serverless Framework Ruby Sinatra API backed by DynamoDB on AWS",
-        "name": "aws-ruby-sinatra-dynamodb-api",
-        "description": "This template demonstrates how to develop and deploy a simple Ruby Sinatra API service backed by DynamoDB running on AWS Lambda using the traditional Serverless Framework.",
-        "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-sinatra-dynamodb-api",
-        "framework": "v2",
-        "language": "ruby",
-        "platform": "aws",
-        "authorLink": "https://github.com/serverless",
-        "authorName": "Serverless, inc.",
-        "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
-    },
-    {
-        "title": "Serverless Framework Ruby Sinatra API backed by DynamoDB on AWS",
-        "name": "aws-ruby-sinatra-dynamodb-api",
-        "description": "This template demonstrates how to develop and deploy a simple Ruby Sinatra API service backed by DynamoDB running on AWS Lambda using the traditional Serverless Framework.",
-        "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-sinatra-dynamodb-api",
-        "framework": "v2",
-        "language": "ruby",
-        "platform": "aws",
-        "authorLink": "https://github.com/serverless",
-        "authorName": "Serverless, inc.",
-        "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
     },
     {
         "title": "AWS Serverless Boilerplate example in Rust",
