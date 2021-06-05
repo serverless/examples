@@ -2,7 +2,6 @@
 
 require 'aws-sdk-dynamodb'
 require 'logger'
-require 'dotenv/load'
 
 class DynamoDBAdapter
 
