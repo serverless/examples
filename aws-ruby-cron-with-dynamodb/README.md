@@ -16,7 +16,7 @@ This is an example of creating a function that runs as a cron job using the serv
 
 ## Diagram
 
-![diagram](./images/aws-ruby-cron-diagram.png)
+![diagram](./images/aws-serverless-ruby-diagram.png)
 
 ## Setup
 
