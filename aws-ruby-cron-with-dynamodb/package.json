@@ -1,7 +1,7 @@
 {
   "name": "serverless-ruby-dynamodb-cron",
   "version": "1.0.0",
-  "description": "A serverless ruby example that periodically updates entries in DynamoDB via cron job.",
+  "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. With the usage of the AWS Lambda function, it creates a record to the DynamoDB each and every 30 minutes.",
   "author": "Daniel Aniszkiewicz",
   "license": "MIT",
   "dependencies": {
