@@ -8,6 +8,7 @@ provider:
   profile: ${self:custom.deployment.profile.${self:provider.stage}}
   region: ${self:custom.deployment.region.${self:provider.stage}}
   runtime: ruby2.7
+  memorySize: 128
   environment:
     stage: ${self:provider.stage}
     region: ${self:provider.region}
@@ -54,6 +55,7 @@ plugins:
   - serverless-ruby-layer
   - serverless-export-env
 custom:
+  deployment: ${file(config/deployment.yml):deployment}
   tableName: ${self:service}-${self:provider.stage}
   rubyLayer:
     include_functions:
