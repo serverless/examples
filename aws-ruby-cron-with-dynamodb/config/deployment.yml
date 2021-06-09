@@ -1,9 +1,0 @@
-deployment:
-  profile:
-    dev: default
-    staging: default
-    prod: default
-  region:
-    dev: us-east-1
-    staging: us-east-1
-    prod: us-east-1

@@ -4,27 +4,28 @@ frameworkVersion: '2'
 
 provider:
   name: aws
-  stage: ${opt:stage, 'dev'}
-  profile: ${self:custom.deployment.profile.${self:provider.stage}}
-  region: ${self:custom.deployment.region.${self:provider.stage}}
+  region: us-east-1
   runtime: ruby2.7
-  memorySize: 128
+  memorySize: 256
+  timeout: 10
   environment:
-    stage: ${self:provider.stage}
+    stage: ${sls:stage}
     region: ${self:provider.region}
     service: ${self:service}
     tableName: ${self:custom.tableName}
   logRetentionInDays: 30
   tags:
     Application: ${self:service}
-    Stage: ${self:provider.stage}
+    Stage: ${sls:stage}
   lambdaHashingVersion: 20201221
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:PutItem
-      Resource:
-        - !GetAtt Table.Arn
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource:
+            - !GetAtt Table.Arn
 
 functions:
   create-meal-order:
@@ -42,7 +43,7 @@ resources:
           - Key: Application
             Value: ${self:service}
           - Key: Stage
-            Value: ${self:provider.stage}
+            Value: ${sls:stage}
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
@@ -55,8 +56,7 @@ plugins:
   - serverless-ruby-layer
   - serverless-export-env
 custom:
-  deployment: ${file(config/deployment.yml):deployment}
-  tableName: ${self:service}-${self:provider.stage}
+  tableName: ${self:service}-${sls:stage}
   rubyLayer:
     include_functions:
       - create-meal-order

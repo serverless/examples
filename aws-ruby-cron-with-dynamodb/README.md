@@ -81,34 +81,6 @@ layers:
   gem: arn:aws:lambda:us-east-1:862403288926:layer:aws-ruby-cron-with-dynamodb-dev-ruby-bundle:1
 ```
 
-## Deplyoment to the Serverless Dashboard
-
-In order to deploy with dashboard, you need to first login with:
-
-```
- sls login
-```
-Then choose the option:
-```
-Add an existing Serverless Framework project
-```
-Then add extra properties related to your Serverless Dashboard account (`organization`, `app`, `service`) to your `serverless.yml`
-
-And at the end:
-
-```bash
-sls deploy
-```
-
-In case of deployment to the Serverless Dashboard, additionally, you will see:
-``` bash
-Serverless: Publishing service to the Serverless Dashboard...
-Serverless: Successfully published your service to the Serverless Dashboard: https://app.serverless.com/YOUR_ORG/apps/YOUR_APP/YOUR_SERVICE_NAME/dev/us-east-1
-```
-
-There is no additional step required. Your defined schedule becomes active right away after deployment.
-
-
 ## Configuration
 Within the `serverless.yml` in functions section
 ```
@@ -179,7 +151,6 @@ logRetentionInDays: 30
 
 |Path|Explanation|
 |-|-|-|
-|`./config`| mostly config file for deployment|`deployment.yml` is included in `serverless.yml`, in this file, you can setup your stages and aws profiles (from `~/.aws/credentials`) here. Extra deployment configuration could be also added here (VPC, Slack notifications and etc )
 |`./src`|All code for the project.|
 |`./src/handlers/create_meal_order`|Each Lambda function has its own folder.
 |`./src/common/`|Space for common, reusable pieces of code.

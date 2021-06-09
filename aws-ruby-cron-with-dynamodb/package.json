@@ -8,6 +8,6 @@
     "serverless-ruby-layer": "^1.5.0"
   },
   "devDependencies": {
-    "serverless-export-env": "github:arabold/serverless-export-env"
+    "serverless-export-env": "2.0.0"
   }
 }
