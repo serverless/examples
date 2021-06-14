@@ -1044,6 +1044,18 @@
         "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
     },
     {
+        "title": "AWS Ruby scheduled cron example backed by DynamoDB",
+        "name": "aws-ruby-cron-with-dynamodb",
+        "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. With the usage of the AWS Lambda function, it creates a record to the DynamoDB each and every 30 minutes.",
+        "githubUrl": "https://github.com/serverless/examples/tree/master/aws-ruby-cron-with-dynamodb",
+        "framework": "v2",
+        "language": "ruby",
+        "platform": "aws",
+        "authorLink": "https://github.com/pigius",
+        "authorName": "Daniel Aniszkiewicz",
+        "authorAvatar": "https://avatars.githubusercontent.com/u/8863200?v=4&s=140"
+    },
+    {
         "title": "AWS Serverless Boilerplate example in Rust",
         "name": "aws-rust-simple-http-endpoint",
         "description": "This example shows a Serverless boilerplate in Rust.",
