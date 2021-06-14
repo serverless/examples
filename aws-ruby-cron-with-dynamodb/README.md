@@ -36,7 +36,7 @@ for deploying with a specific `profile` (located in `~/.aws/credentials`) you ca
 AWS_PROFILE=YOUR_PROFILE_NAME sls deploy
 ```
 
-for deploying to the specific stage, let's say `staging` (those are defined in `config/deployment.yml`) do:
+for deploying to the specific stage, let's say `staging` do:
 
 ```bash
 sls deploy --stage staging
