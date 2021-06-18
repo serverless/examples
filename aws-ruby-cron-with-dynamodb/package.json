@@ -1,0 +1,13 @@
+{
+  "name": "serverless-ruby-dynamodb-cron",
+  "version": "1.0.0",
+  "description": "This is an example of creating a function that runs as a cron job using the serverless 'schedule' event. With the usage of the AWS Lambda function, it creates a record to the DynamoDB each and every 30 minutes.",
+  "author": "Daniel Aniszkiewicz",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-ruby-layer": "^1.5.0"
+  },
+  "devDependencies": {
+    "serverless-export-env": "2.0.0"
+  }
+}
