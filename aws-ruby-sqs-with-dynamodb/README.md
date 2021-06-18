@@ -184,6 +184,9 @@ For this example, there are two serverless plugins used:
 |`'aws-sdk-sqs'`| It's a part of the AWS SDK for Ruby. Used for SQS, in the case of this example - produces and handles messages from the queue.
 |`'dry-schema'`| For the purpose of the validation of the incoming requests. Validate both schema and data types.
 
+## Eject from the Lift plugin
+
+A very cool aspect is the [eject](https://github.com/getlift/lift#ejecting)|. In case your project grows beyond the plugin, you can eject from `Lift` at any time, as the plugin is based on `CloudFormation`. You're not chained to Lift at all.
 
 ## Remove service
 
