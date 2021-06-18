@@ -1,5 +1,5 @@
 <!--
-title: 'AWS Ruby SQS with DynamoDB example'
+title: 'Serverless AWS Ruby SQS with DynamoDB example'
 description: 'Serverless ruby example that creates DynamoDB records with the usage of SQS, API Gateway, and AWS Lambda functions.'
 layout: Doc
 framework: v2
@@ -9,7 +9,7 @@ authorLink: 'https://github.com/pigius'
 authorName: 'Daniel Aniszkiewicz'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/8863200?s=200&v=4'
 -->
-# AWS Ruby SQS with DynamoDB example
+# Serverless AWS Ruby SQS with DynamoDB example
 
 This is an example of the usage of the `SQS` with `DynamoDB`, `API Gateway`, and `AWS Lambda` functions, and `Cloudwatch` for monitoring. The service is for the purpose of creating lottery coupons for people. Each and every coupon consists of the `id`, `first_name`, `last_name` and `coupon_value` as well as of `created_at` timestamp. API Gateway is triggering producing an SQS message, and then the consumer will create a record within the DynamoDB table. The incoming requests are validated with the usage of `dry-schema`.
 
@@ -64,7 +64,7 @@ Serverless: Excluding development dependencies...
 Serverless: Clearing previous build ruby layer build
 [ '2.1' ]
 Serverless: Installing gem using local bundler
-Serverless: Zipping the gemfiles to /Users/Daniel_Aniszkiewicz/Desktop/examples/aws-ruby-sqs-with-dynamodb/.serverless/ruby_layer/gemLayer.zip
+Serverless: Zipping the gemfiles to examples/aws-ruby-sqs-with-dynamodb/.serverless/ruby_layer/gemLayer.zip
 Serverless: Configuring Layer and GEM_PATH to the functions
 Serverless: Uploading CloudFormation file to S3...
 Serverless: Uploading artifacts...
