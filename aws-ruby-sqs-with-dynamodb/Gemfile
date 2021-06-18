@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+
+gem 'aws-sdk-dynamodb'
+gem 'aws-sdk-sqs'
+gem 'dry-schema', '~> 1.6', '>= 1.6.2'
