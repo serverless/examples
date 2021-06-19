@@ -30,10 +30,7 @@ Regarding Lift queue construct:
 
 ## Setup
 
-
 `npm install` to install all needed packages.
-
-
 
 ## Deployment
 
@@ -138,6 +135,11 @@ Same for the `lotteryQueueWorker` function.
 ## SQS
 
 It is possible to configure email alerts in case messages end up in the `dead letter` queue. Within the queue construct edit the `alarm` value to your email.
+
+Make sure, that you confirm the subscription to the AWS Notification through your email:
+
+![aws-notification](./images/aws-notification.png)
+
 
 For more options, it's possible to set up more [settings](https://github.com/getlift/lift/blob/master/docs/queue.md).
 
