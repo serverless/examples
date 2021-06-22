@@ -161,7 +161,7 @@ logRetentionInDays: 30
 |`./src/handlers/worker`|Lambda function for consuming sqs messages.
 |`./src/common/`|Space for common, reusable pieces of code.
 |`./src/common/adapters/dynamo_db_adapter.rb`|Adapter for communication with DynamoDB with the usage of AWS SDK for Ruby. Only used for creating new records.
-|`./src/common/adapters/dynamo_db_adapter.rb`|Adapter for communication with SQS with the usage of AWS SDK for Ruby. Only used for sending new messages to SQS.
+|`./src/common/adapters/sqs_adapter.rb`|Adapter for communication with SQS with the usage of AWS SDK for Ruby. Only used for sending new messages to SQS.
 |`./src/common/services/create_lottery_coupon_service.rb`| The service object pattern is widely used within ruby/rails developers. A class that is responsible for doing only one thing. In our case is creating a lottery coupon record to the DynamoDB.
 |`./src/common/services/create_sqs_message_service.rb`| In our case is sending a message to SQS.
 |`./src/common/helpers/requests_helper.rb`| Helper methods for requests. In our case, for parsing and symbolize hash keys.
