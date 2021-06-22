@@ -169,11 +169,11 @@ logRetentionInDays: 30
 |`./src/common/serializers/error_serializer.rb`| Error serializer for `422` error. It gathers the dry-schema validation errors and puts them in a proper structure.
 |`./src/common/validators/lottery_coupon_validator.rb`| Validator for the lottery coupon record. It's validating the incoming request against the dry-schema structure and returns errors and information on whether the params are incorrect.
 
-## Serverless plugin
+## Serverless plugins
 
 For this example, there are two serverless plugins used:
 
-|Gem|Explanation|
+|Plugin|Explanation|
 |-|-|-|
 |[serverless-ruby-layer](https://www.npmjs.com/package/serverless-ruby-layer)| For bundling ruby gems from `Gemfile` and deploys them to the lambda layer.
 |[serverless-lift](https://www.npmjs.com/package/serverless-lift)| For using AWS CDK construct within the Serverless Framework. In this example, [queue construct](https://github.com/getlift/lift/blob/master/docs/queue.md).|
