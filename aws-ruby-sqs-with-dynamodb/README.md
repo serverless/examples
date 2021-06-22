@@ -154,37 +154,36 @@ logRetentionInDays: 30
 
 ## Structure
 
-|Path|Explanation|
-|-|-|-|
-|`./src`|All code for the project.|
-|`./src/handlers/handler`|Lambda function for producing sqs messages.
-|`./src/handlers/worker`|Lambda function for consuming sqs messages.
-|`./src/common/`|Space for common, reusable pieces of code.
-|`./src/common/adapters/dynamo_db_adapter.rb`|Adapter for communication with DynamoDB with the usage of AWS SDK for Ruby. Only used for creating new records.
-|`./src/common/adapters/sqs_adapter.rb`|Adapter for communication with SQS with the usage of AWS SDK for Ruby. Only used for sending new messages to SQS.
-|`./src/common/services/create_lottery_coupon_service.rb`| The service object pattern is widely used within ruby/rails developers. A class that is responsible for doing only one thing. In our case is creating a lottery coupon record to the DynamoDB.
-|`./src/common/services/create_sqs_message_service.rb`| In our case is sending a message to SQS.
-|`./src/common/helpers/requests_helper.rb`| Helper methods for requests. In our case, for parsing and symbolize hash keys.
-|`./src/common/schemas/lottery_coupon_schema.rb`| Schemas for entities within the application. In our case, the schema with required keys and data types for lottery coupon.
-|`./src/common/serializers/error_serializer.rb`| Error serializer for `422` error. It gathers the dry-schema validation errors and puts them in a proper structure.
-|`./src/common/validators/lottery_coupon_validator.rb`| Validator for the lottery coupon record. It's validating the incoming request against the dry-schema structure and returns errors and information on whether the params are incorrect.
-
+| Path                                                     | Explanation                                                                                                                                                                                    |
+|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `./src`                                                  | All code for the project.                                                                                                                                                                      |
+| `./src/handlers/handler`                                 | Lambda function for producing sqs messages.                                                                                                                                                    |
+| `./src/handlers/worker`                                  | Lambda function for consuming sqs messages.                                                                                                                                                    |
+| `./src/common/`                                          | Space for common, reusable pieces of code.                                                                                                                                                     |
+| `./src/common/adapters/dynamo_db_adapter.rb`             | Adapter for communication with DynamoDB with the usage of AWS SDK for Ruby. Only used for creating new records.                                                                                |
+| `./src/common/adapters/sqs_adapter.rb`                   | Adapter for communication with SQS with the usage of AWS SDK for Ruby. Only used for sending new messages to SQS.                                                                              |
+| `./src/common/services/create_lottery_coupon_service.rb` | The service object pattern is widely used within ruby/rails developers. A class that is responsible for doing only one thing. In our case is creating a lottery coupon record to the DynamoDB. |
+| `./src/common/services/create_sqs_message_service.rb`    | In our case is sending a message to SQS.                                                                                                                                                       |
+| `./src/common/helpers/requests_helper.rb`                | Helper methods for requests. In our case, for parsing and symbolize hash keys.                                                                                                                 |
+| `./src/common/schemas/lottery_coupon_schema.rb`          | Schemas for entities within the application. In our case, the schema with required keys and data types for lottery coupon.                                                                     |
+| `./src/common/serializers/error_serializer.rb`           | Error serializer for 422 error. It gathers the dry-schema validation errors and puts them in a proper structure.                                                                               |
+| `./src/common/validators/lottery_coupon_validator.rb`    | Validator for the lottery coupon record. It's validating the incoming request against the dry-schema structure and returns errors and information on whether the params are incorrect.         |
 ## Serverless plugins
 
 For this example, there are two serverless plugins used:
 
-|Plugin|Explanation|
-|-|-|-|
-|[serverless-ruby-layer](https://www.npmjs.com/package/serverless-ruby-layer)| For bundling ruby gems from `Gemfile` and deploys them to the lambda layer.
-|[serverless-lift](https://www.npmjs.com/package/serverless-lift)| For using AWS CDK construct within the Serverless Framework. In this example, [queue construct](https://github.com/getlift/lift/blob/master/docs/queue.md).|
+| Plugin                | Explanation                                                                                    |
+|-----------------------|------------------------------------------------------------------------------------------------|
+| [serverless-ruby-layer](https://www.npmjs.com/package/serverless-ruby-layer) | For bundling ruby gems from `Gemfile` and deploys them to the lambda layer.                      |
+| [serverless-lift](https://www.npmjs.com/package/serverless-lift)       | For using AWS CDK construct within the Serverless Framework. In this example, [queue construct](https://github.com/getlift/lift/blob/master/docs/queue.md). |
 
 ## Ruby gems
 
-|Gem|Explanation|
-|-|-|-|
-|`'aws-sdk-dynamodb'`| It's a part of the AWS SDK for Ruby. Used for DynamoDB, in the case of this example - the creation of the new record.
-|`'aws-sdk-sqs'`| It's a part of the AWS SDK for Ruby. Used for SQS, in the case of this example - produces and handles messages from the queue.
-|`'dry-schema'`| For the purpose of the validation of the incoming requests. Validate both schema and data types.
+| Gem                | Explanation                                                                                                                    |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| `aws-sdk-dynamodb` | It's a part of the AWS SDK for Ruby. Used for DynamoDB, in the case of this example - the creation of the new record.          |
+| `aws-sdk-sqs`      | It's a part of the AWS SDK for Ruby. Used for SQS, in the case of this example - produces and handles messages from the queue. |
+| `dry-schema`       | For the purpose of the validation of the incoming requests. Validate both schema and data types.                               |
 
 ## Eject from the Lift plugin
 
