@@ -4,8 +4,6 @@ frameworkVersion: '2'
 
 provider:
   name: aws
-  profile: personal
-  region: eu-central-1
   runtime: ruby2.7
   memorySize: 256
   lambdaHashingVersion: 20201221
