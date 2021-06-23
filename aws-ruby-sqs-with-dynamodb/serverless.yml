@@ -15,10 +15,6 @@ provider:
             - dynamodb:PutItem
           Resource:
             - !GetAtt Table.Arn
-        - Effect: Allow
-          Action:
-             - sqs:SendMessage
-          Resource: ${construct:lotteryQueue.queueArn}
 
 constructs:
     lotteryQueue:
