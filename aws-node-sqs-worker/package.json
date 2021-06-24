@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "description": "Serverless Framework Node SQS Producer-Consumer on AWS",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "serverless-lift": "^1.1.2"
+  }
 }
