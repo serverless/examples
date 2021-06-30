@@ -2,7 +2,7 @@
 
 build: gomodgen
 	export GO111MODULE=on
-	env GOOS=linux go build -ldflags="-s -w" -o bin/replicator src/main.go
+	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/replicator src/main.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
