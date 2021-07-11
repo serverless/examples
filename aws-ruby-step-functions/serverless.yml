@@ -1,0 +1,174 @@
+service: serverless-ruby-step-functions
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: ruby2.7
+  memorySize: 256
+  lambdaHashingVersion: 20201221
+  logRetentionInDays: 30
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:UpdateItem
+            - dynamodb:PutItem
+          Resource:
+            - !GetAtt TicketsTable.Arn
+            - !GetAtt ParkingLotSpacesTable.Arn        
+functions:
+  buy-ticket:
+    handler: src/handlers/buy_ticket/handler.run
+    environment:
+      TABLE_NAME: ${self:custom.TicketsTable}
+  reserve-parking-lot-space:
+    handler: src/handlers/reserve_parking_lot_space/handler.run
+    environment:
+      TABLE_NAME: ${self:custom.ParkingLotSpacesTable}
+  return-ticket:
+    handler: src/handlers/return_ticket/handler.run
+    environment:
+      TABLE_NAME: ${self:custom.TicketsTable}
+  release-parking-space:
+    handler: src/handlers/release_parking_space/handler.run
+    environment:
+      TABLE_NAME: ${self:custom.ParkingLotSpacesTable}
+  check-weather:
+    handler: src/handlers/check_weather/handler.run
+plugins:
+  - serverless-ruby-layer
+  - serverless-step-functions
+custom:
+  TicketsTable: ${self:service}-tickets
+  ParkingLotSpacesTable: ${self:service}-parking-lot-spaces
+
+  rubyLayer:
+    include_functions:
+      - buy-ticket
+      - reserve-parking-lot-space
+      - return-ticket
+      - release-parking-space
+      - check-weather
+resources:
+  Resources:
+    TicketsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.TicketsTable}
+        Tags:
+          - Key: Application
+            Value: ${self:service}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+    ParkingLotSpacesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.ParkingLotSpacesTable}
+        Tags:
+          - Key: Application
+            Value: ${self:service}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+stepFunctions:
+  stateMachines:
+    myStateMachine:
+      name: organize-nice-weekend-state-machine
+      definition:
+        StartAt: OrganizeNiceWeekend
+        States:
+          OrganizeNiceWeekend:
+            Type: Parallel
+            Next: Transform properties
+            Branches:
+            - StartAt: BuyTicket
+              States:
+                BuyTicket:
+                  Type: Task
+                  Resource:
+                    Fn::GetAtt: [buy-ticket, Arn]
+                  ResultPath: $.ticket_id
+                  End: true
+            - StartAt: ReserveParkingLotSpace
+              States:
+                ReserveParkingLotSpace:
+                  Type: Task
+                  Resource:
+                    Fn::GetAtt: [reserve-parking-lot-space, Arn]
+                  ResultPath: $.reservation_parking_id
+                  End: true
+          Transform properties:
+            Type: Pass
+            Next: Wait For Arrival Date
+            Parameters:
+              ticket_id.$: $[0].ticket_id
+              check_in_date.$: $[0].check_in_date
+              reservation_id.$: $[1].reservation_parking_id
+          Wait For Arrival Date:
+            Type: Wait
+            TimestampPath: "$.check_in_date"
+            Next: CheckWeather
+          CheckWeather:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [check-weather, Arn]
+            ResultPath: $.weather
+            Next: Decide based on Weather
+          Decide based on Weather:
+            Type: Choice
+            Choices:
+            - Variable: "$.weather"
+              StringMatches: 'bad'
+              Next: CancelPlans
+            Default: Organize Nice Weekend Successful
+          CancelPlans:
+            Type: Parallel
+            Next: Organize Nice Weekend Cancelled
+            Branches:
+            - StartAt: ReturnTicket
+              States:
+                ReturnTicket:
+                  Type: Task
+                  Resource:
+                    Fn::GetAtt: [return-ticket, Arn]
+                  InputPath: $.ticket_id
+                  Catch:
+                  - ErrorEquals:
+                    - States.ALL
+                    ResultPath: $.ReturnTicketError
+                    Next: ReturnTicket
+                  ResultPath: $.ReturnTicketResult
+                  End: true
+            - StartAt: ReleaseParkingSpace
+              States:
+                ReleaseParkingSpace:
+                  Type: Task
+                  Resource:
+                    Fn::GetAtt: [release-parking-space, Arn]
+                  InputPath: $.reservation_id
+                  Catch:
+                  - ErrorEquals:
+                    - States.ALL
+                    ResultPath: $.ReleaseParkingSpaceError
+                    Next: ReleaseParkingSpace
+                  ResultPath: $.ReleaseParkingSpaceResult
+                  End: true
+          Organize Nice Weekend Successful:
+            Type: Succeed
+          Organize Nice Weekend Cancelled:
+            Type: Fail
+            Cause: Plans cancelled due to error.
+            Error: CancelPlansError
+  validate: true

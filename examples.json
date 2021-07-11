@@ -1056,6 +1056,18 @@
         "authorAvatar": "https://avatars.githubusercontent.com/u/8863200?v=4&s=140"
     },
     {
+        "title": "Serverless AWS Ruby Step Functions",
+        "name": "serverless-ruby-step-functions",
+        "description": "Serverless ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.",
+        "githubUrl": "https://github.com/serverless/examples/tree/master/serverless-ruby-step-functions",
+        "framework": "v2",
+        "language": "ruby",
+        "platform": "aws",
+        "authorLink": "https://github.com/pigius",
+        "authorName": "Daniel Aniszkiewicz",
+        "authorAvatar": "https://avatars.githubusercontent.com/u/8863200?v=4&s=140"
+    },
+    {
         "title": "Serverless AWS Ruby SQS with DynamoDB example",
         "name": "aws-ruby-sqs-with-dynamodb",
         "description": "A serverless ruby example that creates DynamoDB records with the usage of SQS, API Gateway, and AWS Lambda functions.",

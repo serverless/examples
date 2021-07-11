@@ -1,0 +1,13 @@
+{
+  "name": "Serverless AWS Ruby Step Functions",
+  "version": "1.0.0",
+  "description": "Serverless ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.",
+  "author": "Daniel Aniszkiewicz",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-ruby-layer": "^1.5.0"
+  },
+  "devDependencies": {
+    "serverless-step-functions": "^2.32.0"
+  }
+}
