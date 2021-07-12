@@ -17,8 +17,6 @@ class DynamoDBAdapter
   end
 
   def update_item(item_id)
-    puts 'item_id'
-    puts item_id
     @client.update_item(update_item_params(item_id))
     logger.info("Updated dynamoDB item with id=#{item_id}")
   rescue Aws::DynamoDB::Errors => error
