@@ -12,13 +12,18 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 # Serverless Framework Python SQS Producer-Consumer on AWS
 
-This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the traditional Serverless Framework and [Lift](https://github.com/getlift/lift) plugin. It allows to accept messages, for which computation might be time or resource intensive, and offload their processing to an asynchronous background process for a faster and more resilient system.
+This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the Serverless Framework and the [Lift](https://github.com/getlift/lift) plugin. It allows to accept messages, for which computation might be time or resource intensive, and offload their processing to an asynchronous background process for a faster and more resilient system.
 
 ## Anatomy of the template
 
-This template defines one function `producer` and one Lift construct - `jobs`. Producer function is triggered by `http` event type, accepts JSON payload and sends it to a corresponding SQS queue for further processing. To learn more about `http` event configuration options, please refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/). Jobs construct is responsible for two things. It creates SQS queue along with corresponding "dead-letter queue" and defines `worker` function that is responsible for processing events from created SQS queue. For more details about `queue` construct type and Lift plugin in general, please refer to [docs](https://github.com/getlift/lift/blob/master/docs/queue.md). For more details about SQS processing with AWS Lambda, please refer to official [AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html). 
+This template defines one function `producer` and one Lift construct - `jobs`. The producer function is triggered by `http` event type, accepts JSON payloads and sends it to a SQS queue for asynchronous processing. The SQS queue is created by the `jobs` queue construct of the Lift plugin. The queue is set up with a "dead-letter queue" (to receive failed messages) and a `worker` Lambda function that processes the SQS messages.
 
-## Usage
+To learn more:
+
+- about `http` event configuration options, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/)
+- about the `queue` construct, refer to [the `queue` documentation in Lift](https://github.com/getlift/lift/blob/master/docs/queue.md)
+- about the Lift plugin in general, refer to [the Lift project](https://github.com/getlift/lift)
+- about SQS processing with AWS Lambda, please refer to the official [AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
 
 ### Deployment
 
