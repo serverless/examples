@@ -61,7 +61,7 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  GET - https://2e16njizla.execute-api.us-east-1.amazonaws.com/dev/ping
+  GET - https://2e16njizla.execute-api.us-east-1.amazonaws.com/ping
 functions:
   serverless-simple-http-endpoint-dev-currentTime: arn:aws:lambda:us-east-1:488110005556:function:serverless-simple-http-endpoint-dev-currentTime
 ```
@@ -77,7 +77,7 @@ serverless invoke --function currentTime --log
 or as send an HTTP request directly to the endpoint using a tool like curl
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/ping
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/ping
 ```
 
 ## Scaling

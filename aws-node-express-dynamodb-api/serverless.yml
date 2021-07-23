@@ -1,15 +1,13 @@
 service: aws-node-express-dynamodb-api
-
 frameworkVersion: '2'
 
 custom:
-  tableName: 'users-table-${self:provider.stage}'
+  tableName: 'users-table-${sls:stage}'
 
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: '20201221'
-  stage: dev
   iam:
     role:
       statements:
@@ -30,12 +28,7 @@ functions:
   api:
     handler: handler.handler
     events:
-      - http:
-          path: /
-          method: ANY
-      - http:
-          path: /{proxy+}
-          method: ANY
+      - httpApi: '*'
 
 resources:
   Resources:
@@ -48,7 +41,5 @@ resources:
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+        BillingMode: PAY_PER_REQUEST
         TableName: ${self:custom.tableName}

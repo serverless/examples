@@ -1,7 +1,5 @@
 service: aws-node-express-api
-
 frameworkVersion: '2'
-
 
 provider:
   name: aws
@@ -12,9 +10,4 @@ functions:
   api:
     handler: handler.handler
     events:
-      - http:
-          path: /
-          method: ANY
-      - http:
-          path: /{proxy+}
-          method: ANY
+      - httpApi: '*'
