@@ -1,14 +1,15 @@
-service: serverless-simple-http-endpoint
+service: serverless-http-api
 frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
 
 functions:
-  currentTime:
-    handler: handler.endpoint
+  hello:
+    handler: handler.hello
     events:
       - httpApi:
-          path: /ping
+          path: /
           method: get

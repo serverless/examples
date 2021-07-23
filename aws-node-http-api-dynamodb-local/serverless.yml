@@ -1,0 +1,93 @@
+service: serverless-http-api-dynamodb-local
+frameworkVersion: '2'
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    # Comment if you don't have a DynamoDB running locally
+      noStart: true
+    migration:
+      dir: offline/migrations
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
+  httpApi:
+    cors: true
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  create:
+    handler: todos/create.create
+    events:
+      - httpApi:
+          path: /todos
+          method: post
+
+  list:
+    handler: todos/list.list
+    events:
+      - httpApi:
+          path: /todos
+          method: get
+
+  get:
+    handler: todos/get.get
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: get
+
+  update:
+    handler: todos/update.update
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: put
+
+  delete:
+    handler: todos/delete.delete
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: delete
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
