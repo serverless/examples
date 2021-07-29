@@ -1,11 +1,10 @@
 service: aws-java-simple-http-endpoint
-
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: java8
-  
+
 package:
   artifact: build/distributions/aws-java-simple-http-endpoint.zip
 
@@ -13,6 +12,6 @@ functions:
   currentTime:
     handler: com.serverless.Handler
     events:
-      - http:
-          path: ping
+      - httpApi:
+          path: /ping
           method: get
