@@ -6,14 +6,14 @@ functions:
   hello:
     runtime: python3.6
     events:
-      - http:
+      - httpApi:
           method: get
-          path: greet
+          path: /greet
     handler: web/handler.hello
   time:
     runtime: nodejs12.x
     events:
-      - http:
+      - httpApi:
           method: get
-          path: time
+          path: /time
     handler: api/handler.timestamp
