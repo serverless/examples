@@ -1,4 +1,4 @@
-service: serverless-ruby-step-functions
+service: aws-ruby-step-functions
 
 frameworkVersion: '2'
 
@@ -41,9 +41,9 @@ plugins:
   - serverless-ruby-layer
   - serverless-step-functions
 custom:
-  TicketsTable: ${self:service}-tickets
-  ParkingLotSpacesTable: ${self:service}-parking-lot-spaces
-
+  TicketsTable: ${self:service}-tickets-${sls:stage}
+  ParkingLotSpacesTable: ${self:service}-parking-lot-spaces-${sls:stage}
+  StateMachineName: organize-nice-weekend-state-machine-${sls:stage}
   rubyLayer:
     include_functions:
       - buy-ticket
@@ -85,25 +85,25 @@ resources:
 stepFunctions:
   stateMachines:
     myStateMachine:
-      name: organize-nice-weekend-state-machine
+      name: ${self:custom.StateMachineName}
       definition:
-        StartAt: OrganizeNiceWeekend
+        StartAt: Organize Nice Weekend
         States:
-          OrganizeNiceWeekend:
+          Organize Nice Weekend:
             Type: Parallel
             Next: Transform properties
             Branches:
-            - StartAt: BuyTicket
+            - StartAt: Buy Ticket
               States:
-                BuyTicket:
+                Buy Ticket:
                   Type: Task
                   Resource:
                     Fn::GetAtt: [buy-ticket, Arn]
                   ResultPath: $.ticket_id
                   End: true
-            - StartAt: ReserveParkingLotSpace
+            - StartAt: Reserve Parking Lot Space
               States:
-                ReserveParkingLotSpace:
+                Reserve Parking Lot Space:
                   Type: Task
                   Resource:
                     Fn::GetAtt: [reserve-parking-lot-space, Arn]
@@ -119,8 +119,8 @@ stepFunctions:
           Wait For Arrival Date:
             Type: Wait
             TimestampPath: "$.check_in_date"
-            Next: CheckWeather
-          CheckWeather:
+            Next: Check Weather
+          Check Weather:
             Type: Task
             Resource:
               Fn::GetAtt: [check-weather, Arn]
@@ -131,15 +131,15 @@ stepFunctions:
             Choices:
             - Variable: "$.weather"
               StringMatches: 'bad'
-              Next: CancelPlans
+              Next: Cancel Plans
             Default: Organize Nice Weekend Successful
-          CancelPlans:
+          Cancel Plans:
             Type: Parallel
             Next: Organize Nice Weekend Cancelled
             Branches:
-            - StartAt: ReturnTicket
+            - StartAt: Return Ticket
               States:
-                ReturnTicket:
+                Return Ticket:
                   Type: Task
                   Resource:
                     Fn::GetAtt: [return-ticket, Arn]
@@ -148,12 +148,12 @@ stepFunctions:
                   - ErrorEquals:
                     - States.ALL
                     ResultPath: $.ReturnTicketError
-                    Next: ReturnTicket
+                    Next: Return Ticket
                   ResultPath: $.ReturnTicketResult
                   End: true
-            - StartAt: ReleaseParkingSpace
+            - StartAt: Release Parking Space
               States:
-                ReleaseParkingSpace:
+                Release Parking Space:
                   Type: Task
                   Resource:
                     Fn::GetAtt: [release-parking-space, Arn]
@@ -162,7 +162,7 @@ stepFunctions:
                   - ErrorEquals:
                     - States.ALL
                     ResultPath: $.ReleaseParkingSpaceError
-                    Next: ReleaseParkingSpace
+                    Next: Release Parking Space
                   ResultPath: $.ReleaseParkingSpaceResult
                   End: true
           Organize Nice Weekend Successful:
@@ -170,5 +170,5 @@ stepFunctions:
           Organize Nice Weekend Cancelled:
             Type: Fail
             Cause: Plans cancelled due to error.
-            Error: CancelPlansError
+            Error: Cancel Plans Error
   validate: true

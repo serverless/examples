@@ -82,20 +82,20 @@ Service Information
 service: serverless-ruby-step-functions
 stage: dev
 region: us-east-1
-stack: serverless-ruby-step-functions-dev
+stack: aws-ruby-step-functions-dev
 resources: 23
 api keys:
   None
 endpoints:
   None
 functions:
-  buy-ticket: serverless-ruby-step-functions-dev-buy-ticket
-  reserve-parking-lot-space: serverless-ruby-step-functions-dev-reserve-parking-lot-space
-  return-ticket: serverless-ruby-step-functions-dev-return-ticket
-  release-parking-space: serverless-ruby-step-functions-dev-release-parking-space
-  check-weather: serverless-ruby-step-functions-dev-check-weather
+  buy-ticket: aws-ruby-step-functions-dev-buy-ticket
+  reserve-parking-lot-space: aws-ruby-step-functions-dev-reserve-parking-lot-space
+  return-ticket: aws-ruby-step-functions-dev-return-ticket
+  release-parking-space: aws-ruby-step-functions-dev-release-parking-space
+  check-weather: aws-ruby-step-functions-dev-check-weather
 layers:
-  gem: arn:aws:lambda:YOUR_REGION:XXXXXXXXXXX:layer:serverless-ruby-step-functions-dev-ruby-bundle:59
+  gem: arn:aws:lambda:YOUR_REGION:XXXXXXXXXXX:layer:aws-ruby-step-functions-dev-ruby-bundle:59
 ```
 
 ## Usage
