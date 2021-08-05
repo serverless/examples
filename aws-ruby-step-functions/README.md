@@ -1,6 +1,6 @@
 <!--
-title: 'Serverless AWS Ruby Step Functions'
-description: 'Serverless ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.'
+title: 'Ruby AWS Ruby Step Functions'
+description: 'Ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.'
 layout: Doc
 framework: v2
 platform: AWS

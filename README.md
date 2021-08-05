@@ -13,14 +13,12 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 <details>
 <summary>Click to expand</summary>
 
-- [Serverless Examples](#serverless-examples)
-  - [Table of Contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-  - [Examples](#examples)
-  - [Community Examples](#community-examples)
-  - [Contributing](#contributing)
-    - [Adding example code](#adding-example-code)
-    - [Adding a community example](#adding-a-community-example)
+- [Getting Started](#getting-started)
+- [Examples](#examples)
+- [Community Examples](#community-examples)
+- [Contributing](#contributing)
+  * [Adding example code](#adding-example-code)
+  * [Adding a community example](#adding-a-community-example)
 
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -126,7 +124,8 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Ruby Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-ruby-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint | ruby |
 | [Aws Ruby Sinatra Dynamodb Api](https://github.com/serverless/examples/tree/master/aws-ruby-sinatra-dynamodb-api) <br/> Example of a Ruby Sinatra API service backed by DynamoDB with traditional Serverless Framework | ruby |
 | [Serverless Ruby Sqs Dynamodb](https://github.com/serverless/examples/tree/master/aws-ruby-sqs-with-dynamodb) <br/> A serverless ruby example that creates DynamoDB records with the usage of SQS, API Gateway, and AWS Lambda functions. | ruby |
-| [Serverless Aws Ruby Step Functions](https://github.com/serverless/examples/tree/master/aws-ruby-step-functions) <br/> Serverless ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows. | ruby |
+| [Serverless Ruby Sqs Dynamodb](https://github.com/serverless/examples/tree/master/aws-ruby-sqs-with-dynamodb/src) <br/> A serverless ruby example that creates DynamoDB records with usage of SQS, API Gateway, and AWS Lambda functions | ruby |
+| [Aws Ruby Step Functions](https://github.com/serverless/examples/tree/master/aws-ruby-step-functions) <br/> Ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows. | ruby |
 | [Aws Rust Simple Http Endpoint](https://github.com/serverless/examples/tree/master/aws-rust-simple-http-endpoint) <br/> Example demonstrates how to setup a simple HTTP GET endpoint with rust | nodeJS |
 | [Azure Nodejs](https://github.com/serverless/examples/tree/master/azure-node-line-bot) <br/> Azure Functions sample for the Serverless framework | nodeJS |
 | [Azure Node Simple Http Endpoint](https://github.com/serverless/examples/tree/master/azure-node-simple-http-endpoint) <br/> An example of making http endpoints with the Azure Functions Serverless Framework plugin | nodeJS |

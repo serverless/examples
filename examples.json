@@ -1056,9 +1056,9 @@
         "authorAvatar": "https://avatars.githubusercontent.com/u/8863200?v=4&s=140"
     },
     {
-        "title": "Serverless AWS Ruby Step Functions",
-        "name": "serverless-ruby-step-functions",
-        "description": "Serverless ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.",
+        "title": "AWS Ruby Step Functions",
+        "name": "ruby-step-functions",
+        "description": "AWS Ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.",
         "githubUrl": "https://github.com/serverless/examples/tree/master/serverless-ruby-step-functions",
         "framework": "v2",
         "language": "ruby",
