@@ -1,13 +1,10 @@
 service: aws-python-sqs-worker
-
 frameworkVersion: '2'
-
 
 provider:
   name: aws
   runtime: python3.8
   lambdaHashingVersion: '20201221'
-  stage: dev
 
 constructs:
   jobs:
@@ -19,11 +16,15 @@ functions:
   producer:
     handler: handler.producer
     events:
-      - http:
+      - httpApi:
           method: post
-          path: produce
+          path: /produce
     environment:
       QUEUE_URL: ${construct:jobs.queueUrl}
 
 plugins:
   - serverless-lift
+
+package:
+  patterns:
+    - '!node_modules/**'

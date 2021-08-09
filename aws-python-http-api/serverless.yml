@@ -1,14 +1,15 @@
-service: aws-python-simple-http-endpoint
+service: aws-python-http-api
 frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: python3.8
+  lambdaHashingVersion: '20201221'
 
 functions:
-  currentTime:
-    handler: handler.endpoint
+  hello:
+    handler: handler.hello
     events:
       - httpApi:
-          path: /ping
+          path: /
           method: get
