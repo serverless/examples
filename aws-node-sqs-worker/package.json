@@ -4,7 +4,7 @@
   "description": "Serverless Framework Node SQS Producer-Consumer on AWS",
   "author": "",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "serverless-lift": "^1.1.2"
   }
 }
