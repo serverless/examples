@@ -1,0 +1,7 @@
+{
+  "name": "aws-http-with-dynamodb",
+  "version": "1.0.0",
+  "description": "Serverless HTTP API",
+  "author": "",
+  "license": "MIT"
+}

@@ -28,15 +28,13 @@ To learn more:
 
 ### Deployment
 
-This example is made to work with the Serverless Framework dashboard, which includes advanced features such as CI/CD, monitoring, metrics, etc.
-
-In order to deploy with dashboard, you need to first login with:
+Install dependencies with:
 
 ```
-serverless login
+npm install
 ```
 
-and then perform deployment with:
+Then deploy:
 
 ```
 serverless deploy
@@ -68,7 +66,7 @@ resources: 17
 api keys:
   None
 endpoints:
-  POST - https://xxx.execute-api.us-east-1.amazonaws.com/dev/produce
+  POST - https://xxxx.execute-api.us-east-1.amazonaws.com/produce
 functions:
   producer: aws-python-sqs-worker-dev-producer
   jobsWorker: aws-python-sqs-worker-dev-jobsWorker
@@ -85,7 +83,7 @@ _Note_: In current form, after deployment, your API is public and can be invoked
 After successful deployment, you can now call the created API endpoint with `POST` request to invoke `producer` function:
 
 ```bash
-curl --request POST 'https://xxxxxx.execute-api.us-east-1.amazonaws.com/dev/produce' --header 'Content-Type: application/json' --data-raw '{"name": "John"}'
+curl --request POST 'https://xxxxxx.execute-api.us-east-1.amazonaws.com/produce' --header 'Content-Type: application/json' --data-raw '{"name": "John"}'
 ```
 
 In response, you should see output similar to:
