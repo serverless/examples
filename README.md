@@ -13,14 +13,12 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 <details>
 <summary>Click to expand</summary>
 
-- [Serverless Examples](#serverless-examples)
-  - [Table of Contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-  - [Examples](#examples)
-  - [Community Examples](#community-examples)
-  - [Contributing](#contributing)
-    - [Adding example code](#adding-example-code)
-    - [Adding a community example](#adding-a-community-example)
+- [Getting Started](#getting-started)
+- [Examples](#examples)
+- [Community Examples](#community-examples)
+- [Contributing](#contributing)
+  * [Adding example code](#adding-example-code)
+  * [Adding a community example](#adding-a-community-example)
 
 </details>
 <!-- AUTO-GENERATED-CONTENT:END -->
