@@ -1,6 +1,6 @@
 build:
 	dep ensure -v
-	env GOOS=linux go build -ldflags="-s -w" -o bin/stream main.go
+	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/stream main.go
 
 .PHONY: clean
 clean:

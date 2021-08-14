@@ -1,0 +1,68 @@
+service: serverless-ruby-sqs-dynamodb
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: ruby2.7
+  memorySize: 256
+  lambdaHashingVersion: 20201221
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource:
+            - !GetAtt Table.Arn
+
+constructs:
+    lotteryQueue:
+        type: queue
+        worker:
+            handler: src/handlers/lottery/worker.run
+            environment:
+              TABLE_NAME: ${self:custom.tableName}
+        alarm: ${self:custom.alertEmail}
+        batchSize: 5
+        
+functions:
+  createLotteryCoupon:
+    handler: src/handlers/lottery/handler.run
+    events:
+      - http:
+          method: post
+          path: lottery
+    environment:
+        QUEUE_URL: ${construct:lotteryQueue.queueUrl}
+
+plugins:
+  - serverless-ruby-layer
+  - serverless-lift
+
+custom:
+  tableName: ${self:service}-${sls:stage}
+  rubyLayer:
+    include_functions:
+      - createLotteryCoupon
+      - lotteryQueueWorker
+  alertEmail: mail@example.com
+
+resources:
+  Resources:
+    Table:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: Application
+            Value: ${self:service}
+          - Key: Stage
+            Value: ${sls:stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
