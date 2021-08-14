@@ -103,7 +103,7 @@ There are two possible of usage:
 
 ## Via Api Gateway
 
-  After the deployment, grab the POST enpdoint for this service. You can make a API call either by cURL or some tools like Postman.
+  After the deployment, grab the POST endpoint for this service. You can make a API call either by cURL or some tools like Postman.
 
 Use payload like:
 
