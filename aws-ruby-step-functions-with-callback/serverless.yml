@@ -17,10 +17,17 @@ provider:
           Action:
             - states:SendTaskFailure
             - states:SendTaskSuccess
-            - comprehend:DetectPiiEntities
-            - dynamodb:PutItem
           Resource:
             - '*'
+        - Effect: Allow
+          Action:
+            - comprehend:DetectPiiEntities
+          Resource:
+            - '*'
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource:
             - !GetAtt Table.Arn
 functions:
   check-comment:
