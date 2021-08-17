@@ -106,7 +106,7 @@ stepFunctions:
             Type: Choice
             Choices:
             - Variable: $.result
-              StringEquals: no result
+              StringEquals: No result
               Next: Save to DB
             Default: Redact Comment
           Redact Comment:
