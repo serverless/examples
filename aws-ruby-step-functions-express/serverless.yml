@@ -15,9 +15,12 @@ provider:
         - Effect: Allow
           Action:
             - ses:SendEmail
-            - dynamodb:PutItem
           Resource:
             - "arn:aws:ses:${self:provider.region}:*:*"
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource:
             - !GetAtt Table.Arn
 functions:
   send-email:
