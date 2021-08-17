@@ -175,6 +175,11 @@ As we use `Standard` workflow type, feel free to check the executions:
 ![executions](./images/output.png)
 
 
+If there are no detections, the redaction process will not be triggered, so flow will look like this:
+
+![without-redaction](./images/data-without-pii.png)
+
+
 ## Log retention
 
 The log retention is setup for 30 days. To change it simply change the value of this attribute in `serverless.yml` file:
