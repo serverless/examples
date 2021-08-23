@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/neilime'
 authorName: 'Emilien Escalle'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/314088?s=140&v=4'

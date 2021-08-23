@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 1
 authorLink: 'https://github.com/chief-wizard'
 authorName: 'Chief Wizard'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/40777040?v=4&s=140'

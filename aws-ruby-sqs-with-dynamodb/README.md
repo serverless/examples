@@ -5,6 +5,7 @@ layout: Doc
 framework: v2
 platform: AWS
 language: Ruby
+priority: 5
 authorLink: 'https://github.com/pigius'
 authorName: 'Daniel Aniszkiewicz'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/8863200?s=200&v=4'

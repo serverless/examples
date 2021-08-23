@@ -4,6 +4,7 @@ description: 'This example shows you how to setup auth in front of a AWS Lambda 
 framework: v1
 platform: AWS
 language: Go
+priority: 10
 authorLink: 'https://github.com/srbry'
 authorName: 'srbry'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/16936753?v=4&s=140'

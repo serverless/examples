@@ -4,6 +4,7 @@ description: 'Boilerplate code for Golang with S3 object create event and replic
 framework: v1
 platform: AWS
 language: Go
+priority: 10
 authorLink: 'https://github.com/p0n2'
 authorName: 'p0n2'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/59630164'

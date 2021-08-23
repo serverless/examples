@@ -4,6 +4,7 @@ description: 'This is a simple echo bot on LINE bot.'
 framework: v1
 platform: AWS
 language: Python
+priority: 10
 authorLink: 'https://github.com/NiJia'
 authorName: 'NiJia'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/418548?v=4&s=140'

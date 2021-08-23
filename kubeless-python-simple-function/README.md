@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: Kubeless
 language: Python
+priority: 10
 authorLink: 'https://github.com/andresmgot'
 authorName: Andres
 authorAvatar: 'https://avatars0.githubusercontent.com/u/4025665?v=4&s=140'

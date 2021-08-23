@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/welkie'
 authorName: 'Matt Welke'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/7719209'

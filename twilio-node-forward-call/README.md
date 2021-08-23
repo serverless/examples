@@ -4,6 +4,7 @@ description: 'This example projects helps you deploy a serverless function to th
 framework: v1
 platform: Twilio
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/stefanjudis'
 authorName: 'Stefan Judis'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/962099?v=4&s=140'

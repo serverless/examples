@@ -4,6 +4,7 @@ description: 'Boilerplate code for Golang CRUD Operations'
 framework: v1
 platform: AWS
 language: Go
+priority: 10
 authorLink: 'https://github.com/gsweene2'
 authorName: 'Garrett Sweeney'
 authorAvatar: 'https://avatars.githubusercontent.com/u/14845943?s=400&u=6d79e8f042cd3d30643ba4598515cae24be69ec3&v=4'

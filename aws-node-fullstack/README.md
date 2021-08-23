@@ -4,6 +4,7 @@ description: 'This example demonstrates how to deploy a Fullstack serverless app
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/trilom'
 authorName: 'Bryan Killian'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/7476973?v=4&s=140'

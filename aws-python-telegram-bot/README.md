@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Python
+priority: 10
 authorLink: 'https://github.com/jonatasbaldin'
 authorName: 'Jonatas Baldin'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/8570364?v=4&s=140'

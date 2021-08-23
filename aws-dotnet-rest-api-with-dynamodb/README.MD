@@ -4,6 +4,7 @@ description: 'Setup a REST API w/ DynamoDB using Dot Net Core 2.1'
 framework: v1
 platform: AWS
 language: CSharp
+priority: 10
 authorLink: 'https://github.com/samueleresca'
 authorName: 'Samuele Resca'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/8921095?v=4&s=140'

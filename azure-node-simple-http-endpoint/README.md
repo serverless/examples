@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: Azure
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/fiveisprime'
 authorName: 'Matt Hernandez'
 authorAvatar: 'https://avatars2.githubusercontent.com/u/1186948?v=4&s=140'

@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/Fixy250185'
 authorName: 'Craig Sweaton'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/26969518?v=4&s=140'
