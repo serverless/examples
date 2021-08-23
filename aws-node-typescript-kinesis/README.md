@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/billkidwell'
 authorName: 'Bill Kidwell'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/46457910?s=460&u=7c6d271ea7527f05e6c053cab571d32ffb3dbd38&v=4'

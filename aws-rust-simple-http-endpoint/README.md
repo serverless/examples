@@ -5,6 +5,7 @@ layout: Doc
 framework: v1+
 platform: AWS
 language: Rust
+priority: 10
 authorLink: 'https://github.com/jonee'
 authorName: 'Jonee Ryan Ty'
 authorAvatar:

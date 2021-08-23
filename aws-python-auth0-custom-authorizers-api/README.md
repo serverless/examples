@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Python
+priority: 10
 authorLink: 'https://github.com/BrianAndersen78'
 authorName: BrianAndersen78
 authorAvatar: 'https://avatars3.githubusercontent.com/u/30560831?v=4&s=140'

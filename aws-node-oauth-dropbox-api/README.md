@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/serverless'
 authorName: Jay Deshmukh
 authorAvatar: 'https://avatars0.githubusercontent.com/u/38460988?v=4&s=140'

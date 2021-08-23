@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: python
+priority: 10
 authorLink: 'https://github.com/gsweene2'
 authorName: 'Garrett Sweeney'
 authorAvatar: ''

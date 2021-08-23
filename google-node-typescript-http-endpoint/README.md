@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: 'Google Cloud'
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/jiyeonseo'
 authorName: seojeee
 authorAvatar: 'https://avatars2.githubusercontent.com/u/2231510?v=4&s=140'

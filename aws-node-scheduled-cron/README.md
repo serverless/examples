@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 1
 authorLink: 'https://github.com/0dj0bz'
 authorName: 'Rob Abbott'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/5679763?v=4&s=140'

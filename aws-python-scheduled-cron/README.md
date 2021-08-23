@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Python
+priority: 2
 authorLink: 'https://github.com/rupakg'
 authorName: 'Rupak Ganguly'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
