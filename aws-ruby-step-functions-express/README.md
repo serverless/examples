@@ -99,7 +99,7 @@ Later on within `serverless.yml` edit in `custom` section, both `sender` and `re
 
 ## Usage
 
-There are two possible of usage:
+There are two possible ways of invoking the example:
 
 ## Via Api Gateway
 
