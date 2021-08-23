@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AZURE
 language: typescript
+priority: 10
 authorLink: 'https://github.com/Kurshit'
 authorName: 'Kurshit Kukreja'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/30333780?s=400&u=53af20c512014f0b7250ed6ac003be1c5cfbddd7&v=4'

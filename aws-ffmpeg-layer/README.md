@@ -4,6 +4,7 @@ description: 'AWS FFmepg Layer & a service using it to create GIFs'
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/tdhopper'
 authorName: 'Timothy Hopper'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/611122?v=4&s=140'

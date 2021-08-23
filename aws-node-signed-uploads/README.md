@@ -4,6 +4,7 @@ description: 'The approach implemented in this service is useful when you want t
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/kalinchernev'
 authorName: 'Kalin Chernev'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/1923476?v=4&s=140'

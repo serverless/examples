@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/kaihendry'
 authorName: 'Kai Hendry'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/765871?v=4&s=140'

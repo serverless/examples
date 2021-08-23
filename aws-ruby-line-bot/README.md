@@ -4,6 +4,7 @@ description: 'This example shows you how to create a LINE bot using Ruby.'
 framework: v1
 platform: AWS
 language: Ruby
+priority: 10
 authorLink: 'https://github.com/knugie'
 authorName: 'Wolfgang Teuber'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/1446195?v=4&s=140'

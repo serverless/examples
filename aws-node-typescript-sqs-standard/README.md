@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/jmpfrazao'
 authorName: 'Miguel Frazao'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/28927258?s=460&v=4'
