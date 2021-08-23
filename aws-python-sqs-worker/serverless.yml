@@ -8,14 +8,12 @@ provider:
   runtime: python3.8
   lambdaHashingVersion: '20201221'
   stage: dev
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - sqs:SendMessage
-          Resource:
-            - Fn::GetAtt: [ WorkerQueue, Arn ]
+
+constructs:
+  jobs:
+    type: queue
+    worker:
+      handler: handler.consumer
 
 functions:
   producer:
@@ -25,32 +23,7 @@ functions:
           method: post
           path: produce
     environment:
-      QUEUE_URL:
-        Ref: WorkerQueue
+      QUEUE_URL: ${construct:jobs.queueUrl}
 
-  consumer:
-    handler: handler.consumer
-    events:
-      - sqs:
-          batchSize: 1
-          arn:
-            Fn::GetAtt:
-              - WorkerQueue
-              - Arn
-
-resources:
-  Resources:
-    WorkerQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: workerQueue-${self:provider.stage}
-        RedrivePolicy:
-          deadLetterTargetArn:
-            Fn::GetAtt:
-              - WorkerDLQ
-              - Arn
-          maxReceiveCount: 5
-    WorkerDLQ:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: workerDlq-${self:provider.stage}
+plugins:
+  - serverless-lift

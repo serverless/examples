@@ -4,6 +4,7 @@ description: 'This example shows you how to run Puppeteer on AWS Lambda'
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/emaildano'
 authorName: 'Daniel Olson'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/1872327?v=4&s=140'

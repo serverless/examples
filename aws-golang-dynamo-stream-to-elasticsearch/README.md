@@ -4,6 +4,7 @@ description: 'Stream data from DynamoDB to Elasticsearch'
 framework: v1
 platform: AWS
 language: Go
+priority: 10
 authorLink: 'https://github.com/jalie'
 authorName: 'Jan Liesendahl'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/548657?v=4&s=140'

@@ -4,6 +4,7 @@ description: 'This example demonstrates how to setup a simple HTTP GET endpoint.
 framework: v1
 platform: AWS
 language: Ruby
+priority: 10
 authorLink: 'https://github.com/josephyi'
 authorName: 'Joseph Yi'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/1994863?v=4&s=140'

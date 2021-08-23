@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Java
+priority: 10
 authorLink: 'https://github.com/DoWhileGeek'
 authorName: 'Joeseph Rodrigues'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/1767769?v=4&s=140'

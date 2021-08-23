@@ -5,9 +5,10 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
-authorLink: ’https://github.com/chief-wizard'
-authorName: ‘Chief Wizard’
-authorAvatar: ‘https://avatars3.githubusercontent.com/u/40777040?v=4&s=140
+priority: 1
+authorLink: 'https://github.com/chief-wizard'
+authorName: 'Chief Wizard'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/40777040?v=4&s=140'
 -->
 
 # A Simple Serverless GraphQL API for MySQL, Postgres and Aurora

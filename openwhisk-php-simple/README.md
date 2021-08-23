@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: OpenWhisk
 language: PHP
+priority: 10
 authorLink: 'https://github.com/jthomas'
 authorName: 'James Thomas'
 authorAvatar: 'https://avatars2.githubusercontent.com/u/2322?v=4&s=140'

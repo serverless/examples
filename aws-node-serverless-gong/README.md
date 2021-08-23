@@ -4,6 +4,7 @@ description: 'A serverless gong with GitHub and Slack webhooks'
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/bildungsroman'
 authorName: 'Anna Spysz'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/5382821?v=4&s=140'

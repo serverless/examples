@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: 'Google Cloud'
 language: Python
+priority: 10
 authorLink: 'https://github.com/sebito91'
 authorName: 'Sebastian Borza'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/3159454?v=4&s=140'
