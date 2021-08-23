@@ -102,7 +102,7 @@ endpoints:
 
 ## Usage
 
-There are two possible of usage:
+There are two possible ways of invoking the example:
 
 ## Via Api Gateway
 
