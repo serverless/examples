@@ -150,29 +150,30 @@ logRetentionInDays: 30
 
 ## Structure
 
-|Path|Explanation|
-|-|-|-|
-|`./src`|All code for the project.|
-|`./src/handlers/create_meal_order`|Each Lambda function has its own folder.
-|`./src/common/`|Space for common, reusable pieces of code.
-|`./src/common/adapters/dynamo_db_adapter.rb`|Adapter for communication with DynamoDB with the usage of AWS SDK for Ruby. Only used for creating new records.
-|`./src/common/services/create_meal_order_service.rb`| The service object pattern is widely used within ruby/rails developers. A class that is responsible for doing only one thing. In our case is creating a meal order to the DynamoDB.
-
+| Path                                                     | Explanation                                                                                                                                                                                    |
+|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `./src`                                                  | All code for the project.                                                                                                                                                                      |
+| `./src/handlers/create_meal_order`                                 | Lambda function for creating a meal order.                                                                                                                                                    |
+| `./src/common/`                                          | Space for common, reusable pieces of code.                                                                                                                                                     |
+| `./src/common/adapters/dynamo_db_adapter.rb`             | Adapter for communication with DynamoDB with the usage of AWS SDK for Ruby. Only used for creating new records.                                                                                |
+| `./src/common/services/create_meal_order_service.rb`             | TThe service object pattern is widely used within ruby/rails developers. A class that is responsible for doing only one thing. In our case is creating a meal order to the DynamoDB.                                                                                |
+                                                                                     
 ## Serverless plugin
 
 For this example, there are two serverless plugins used:
 
-|Gem|Explanation|
-|-|-|-|
-|[serverless-ruby-layer](https://www.npmjs.com/package/serverless-ruby-layer)| For bundling ruby gems from `Gemfile` and deploys them to the lambda layer.
-|[serverless-export-env](https://www.npmjs.com/package/serverless-export-env)| For exporting the environment variables defined in `serverless.yml` into a `.env` file, so we can access these environment variables. For the purpose of this project, mostly for the DynamoDB Table name, region, a profile.|
+| Plugin                | Explanation                                                                                    |
+|-----------------------|------------------------------------------------------------------------------------------------|
+| [serverless-ruby-layer](https://www.npmjs.com/package/serverless-ruby-layer) | For bundling ruby gems from `Gemfile` and deploys them to the lambda layer.                      |
+| [serverless-export-env](https://www.npmjs.com/package/serverless-export-env)       | or exporting the environment variables defined in `serverless.yml` into a `.env` file, so we can access these environment variables. For the purpose of this project, mostly for the DynamoDB Table name, region, a profile. |
 
 ## Ruby gems
 
-|Gem|Explanation|
-|-|-|-|
-|`'aws-sdk-dynamodb'`| It's a part of the AWS SDK for Ruby. Used for DynamoDB, in the case of this example - creation of the new record.
-|`'faker'`| For generating fake meal order name.|
+| Gem                | Explanation                                                                                                                    |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| `aws-sdk-dynamodb` | It's a part of the AWS SDK for Ruby. Used for DynamoDB, in the case of this example - the creation of the new record.          |
+| `faker`      | For generating fake meal order name. |
+
 
 ## Remove service
 
