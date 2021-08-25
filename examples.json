@@ -1944,7 +1944,7 @@
   {
     "title": "Amazon Kinesis Streams fan out via Kinesis Analytics",
     "name": "kinesis-streams-fan-out-kinesis-analytics",
-    "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
+    "description": "Use Amazon Kinesis Analytics to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics",
     "framework": "latest",
     "language": "node",
