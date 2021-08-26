@@ -9,11 +9,11 @@
   "author": "David Wells",
   "license": "MIT",
   "dependencies": {
-    "twilio": "^2.11.1"
+    "twilio": "^3.65.0"
   },
   "devDependencies": {
     "chai": "^4.0.0",
-    "mocha": "^3.4.2",
+    "mocha": "^9.0.2",
     "sinon": "^2.3.2"
   }
 }

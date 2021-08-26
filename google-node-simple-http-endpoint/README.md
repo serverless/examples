@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: 'Google Cloud'
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/pmuens'
 authorName: 'Philipp Muens'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/1606004?v=4&s=140'

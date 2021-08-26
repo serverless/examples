@@ -1,0 +1,105 @@
+service: aws-ruby-step-functions
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: ruby2.7
+  region: eu-west-1
+  memorySize: 256
+  lambdaHashingVersion: 20201221
+  logRetentionInDays: 30
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - ses:SendEmail
+          Resource:
+            - "arn:aws:ses:${self:provider.region}:*:*"
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource:
+            - !GetAtt Table.Arn
+functions:
+  send-email:
+    handler: src/handlers/send_email/handler.run
+    environment:
+      sender: ${self:custom.sender}
+      recipient: ${self:custom.recipient}
+
+plugins:
+  - serverless-ruby-layer
+  - serverless-step-functions
+
+resources:
+  Resources:
+    Table:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: Application
+            Value: ${self:service}
+          - Key: Stage
+            Value: ${sls:stage}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+custom:
+  StateMachineName: add-employee-and-send-email-state-machine-${sls:stage}
+  tableName: ${self:service}-${sls:stage}
+  sender: sender@email.com
+  recipient: recipient@mail.com
+  rubyLayer:
+    include_functions:
+      - send-email
+
+stepFunctions:
+  stateMachines:
+    myStateMachine:
+      type: EXPRESS
+      name: ${self:custom.StateMachineName}
+      events:
+        - http:
+            path: employees/add
+            method: POST
+      definition:
+        StartAt: Save to DynamoDB
+        States:
+          Save to DynamoDB:
+            Type: Task
+            Resource: arn:aws:states:::dynamodb:putItem
+            Parameters:
+              TableName: ${self:custom.tableName}
+              Item:
+                id:
+                  S.$: $.id
+                JobTitle:
+                  S.$: $.jobTitle
+            Next: Is Save Successful
+          Is Save Successful:
+            Type: Choice
+            Choices:
+            - Variable: "$.SdkHttpMetadata.HttpStatusCode"
+              NumericEquals: 200
+              Next: SES notification
+            Default: Fail Execution
+          SES notification:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [send-email, Arn]
+            Catch:
+            - ErrorEquals: ["States.ALL"] 
+              Next: Fail Execution
+            Next: Success Execution
+          Fail Execution:
+            Type: Fail
+          Success Execution:
+            Type: Succeed
+  validate: true

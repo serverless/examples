@@ -15,7 +15,7 @@ def producer(event, context):
     status_code = 200
     message = ''
 
-    if not event['body']:
+    if not event.get('body'):
         return {'statusCode': 400, 'body': json.dumps({'message': 'No body was found'})}
 
     try:

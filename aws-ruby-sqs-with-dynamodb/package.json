@@ -1,0 +1,11 @@
+{
+  "name": "serverless-ruby-sqs-dynamodb",
+  "version": "1.0.0",
+  "description": "A serverless ruby example that creates DynamoDB records with the usage of SQS, API Gateway, and AWS Lambda functions.",
+  "author": "Daniel Aniszkiewicz",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-lift": "^1.1.1",
+    "serverless-ruby-layer": "^1.5.0"
+  }
+}

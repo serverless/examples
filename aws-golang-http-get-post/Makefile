@@ -2,9 +2,9 @@
 
 build:
 	dep ensure -v
-	env GOOS=linux go build -ldflags="-s -w" -o bin/getBin getFolder/getExample.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/postBin postFolder/postExample.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/getQueryBin getFolder/getQueryExample.go
+	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getBin getFolder/getExample.go
+	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/postBin postFolder/postExample.go
+	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getQueryBin getFolder/getQueryExample.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock

@@ -4,6 +4,7 @@ description: 'This is a simple echo bot on Telegram.'
 framework: v1
 platform: AWS
 language: NodeJS
+priority: 10
 authorLink: 'https://github.com/hrchu'
 authorName: 'Peter Chu'
 authorAvatar: 'https://avatars2.githubusercontent.com/u/3183314?s=460&v=4'

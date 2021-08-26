@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/adambrgmn'
 authorName: 'Adam Bergman'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13746650?v=4&s=140'

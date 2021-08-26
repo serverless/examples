@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 1
 authorLink: 'https://github.com/darrenhgc'
 authorName: 'Darren Holland'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/28113106?v=4&s=140'
@@ -30,27 +31,37 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
 
 4. Set your `env` variables in `serverless.yml` with your Twilio account values
 
-  ```yml
-  environment:
-    # replace these env variables with your twilio account values
-    TWILIO_ACCOUNT_SID: YOUR-TWILIO-ACCOUNT-SID-HERE
-    TWILIO_AUTH_TOKEN: YOUR-TWILIO-AUTH-TOKEN-HERE
-    TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
-  ```
+      ```yml
+      environment:
+        # replace these env variables with your twilio account values
+        TWILIO_ACCOUNT_SID: YOUR-TWILIO-ACCOUNT-SID-HERE
+        TWILIO_AUTH_TOKEN: YOUR-TWILIO-AUTH-TOKEN-HERE
+        TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
+      ```
+    
+      If you want to use encrypted API keys, see our [encrypted environment variables example](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file)
+      
+5. Install the dependencies required by the service 
+      ```bash
+      npm i --only=prod
+      ```
+      
+6. Deploy the service 
+      ```bash
+      serverless deploy
+      ```
 
-  If you want to use encrypted API keys, see our [encrypted environment variables example](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file)
+7. Invoke the function and send an SMS message
 
-5. Invoke the function and send an SMS message
+      Update the `to` phone number the `event.json` file and `message` to send in the SMS
+    
+      Then invoke the function with the serverless CLI. Set the `--path event.json` so the function knows where to send the SMS.
+    
+      ```bash
+      serverless invoke -f sendText --path event.json
+      ```
 
-  Update the `to` phone number the `event.json` file and `message` to send in the SMS
-
-  Then invoke the function with the serverless CLI. Set the `--path event.json` so the function knows where to send the SMS.
-
-  ```bash
-  serverless invoke -f sendText --path event.json
-  ```
-
-6. (Optional) Deploy the front-end application
+8. (Optional) Deploy the front-end application
 
   Update the `API_ENDPOINT` variable in the `/frontend/index.html` file and deploy the `/frontend` folder to a static host of your choice.
 

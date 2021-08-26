@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Python
+priority: 2
 authorLink: 'https://github.com/rupakg'
 authorName: 'Rupak Ganguly'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
@@ -16,7 +17,7 @@ This template demonstrates how to develop and deploy a simple cron-like service 
 
 ## Schedule event type
 
-This examples defines two functions, `cron` and `secondCron`, both of which are triggered by an event of `schedule` type, which is used for configuring functions to be executed at specific time or in specific intervals. For detailed information about `schedule` event, please refer to corresponding section of Serverless [docs](https://serverless.com/framework/docs/providers/aws/events/schedule/).
+This examples defines two functions, `rateHandler` and `cronHandler`, both of which are triggered by an event of `schedule` type, which is used for configuring functions to be executed at specific time or in specific intervals. For detailed information about `schedule` event, please refer to corresponding section of Serverless [docs](https://serverless.com/framework/docs/providers/aws/events/schedule/).
 
 When defining `schedule` events, we need to use `rate` or `cron` expression syntax.
 

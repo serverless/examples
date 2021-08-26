@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: Python
+priority: 10
 authorLink: 'https://github.com/bedge'
 authorName: 'Bruce Edge'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/499317?v=4&s=140'

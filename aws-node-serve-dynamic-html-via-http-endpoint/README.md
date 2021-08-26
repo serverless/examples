@@ -5,6 +5,7 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
+priority: 10
 authorLink: 'https://github.com/slate71'
 authorName: 'Lukas Andersen'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/2078561?v=4&s=140'
