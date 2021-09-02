@@ -1,6 +1,5 @@
 service: aws-golang-simple-http-endpoint
-
-frameworkVersion: ">=1.28.0 <2.0.0"
+frameworkVersion: '2'
 
 provider:
   name: aws
@@ -10,14 +9,14 @@ functions:
   hello:
     handler: bin/hello
     events:
-      - http:
-          path: hello
+      - httpApi:
+          path: /hello
           method: get
   world:
     handler: bin/world
     events:
-      - http:
-          path: world
+      - httpApi:
+          path: /world
           method: get
 
 package:
