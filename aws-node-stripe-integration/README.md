@@ -37,7 +37,7 @@ stripe:
 ```
 
 ### Deploy!
-```bash:development
+```bash
 $ serverless deploy -v
 ```
 
