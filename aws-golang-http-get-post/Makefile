@@ -1,10 +1,9 @@
 .PHONY: build clean deploy
 
 build:
-	dep ensure -v
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getBin getFolder/getExample.go
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/postBin postFolder/postExample.go
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getQueryBin getFolder/getQueryExample.go
+	cd getFolder && env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ../bin/getBin getExample.go && cd ..
+	cd getFolder && env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ../bin/getQueryBin getQueryExample.go && cd ..
+	cd postFolder && env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o ../bin/postBin ./postExample.go && cd ..
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
