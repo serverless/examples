@@ -1,0 +1,17 @@
+service: aws-kotlin-simple-http-endpoint
+frameworkVersion: ">=2"
+
+provider:
+  name: aws
+  runtime: java11
+
+package:
+  artifact: build/distributions/${self:service}.zip
+
+functions:
+  currentTime:
+    handler: com.serverless.Handler
+    events:
+      - httpApi:
+          path: /ping
+          method: get
