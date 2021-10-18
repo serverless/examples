@@ -1,0 +1,6 @@
+name: aws-node-http-api-typescript
+org: serverlessinc
+description: Deploys a Node HTTP API service with Serverless Framework and Typescript
+keywords: aws, serverless, faas, lambda, node, typescript
+repo: https://github.com/serverless/examples/aws-node-http-api-typescript
+license: MIT
