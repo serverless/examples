@@ -5,7 +5,7 @@ Properties:
   MasterUserPassword: ${self:custom.PASSWORD}
   AllocatedStorage: 20
   DBName: ${self:custom.DB_NAME}
-  DBInstanceClass: db.t2.micro
+  DBInstanceClass: db.t4g.small
   VPCSecurityGroups:
   - !GetAtt ServerlessSecurityGroup.GroupId
   DBSubnetGroupName:
