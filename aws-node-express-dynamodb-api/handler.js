@@ -34,28 +34,41 @@ app.get("/users/:userId", async function (req, res) {
 });
 
 app.post("/users", async function (req, res) {
-  const { userId, name } = req.body;
+  const { userId, name, token } = req.body;
   if (typeof userId !== "string") {
     res.status(400).json({ error: '"userId" must be a string' });
   } else if (typeof name !== "string") {
     res.status(400).json({ error: '"name" must be a string' });
+  } else if (typeof token !== "string") {
+    res.status(400).json({ error: '"token" must be a string' });
   }
 
   const params = {
-    TableName: USERS_TABLE,
-    Item: {
-      userId: userId,
-      name: name,
-    },
+    // idempotence check
+    ClientRequestToken: token,
+    TransactItems: [
+        {
+            Update: {
+                TableName: USERS_TABLE,
+                Key: { userId:  userId },
+                UpdateExpression: 'set #a = :v',
+                ExpressionAttributeNames: {'#a' : 'name'},
+                ExpressionAttributeValues: {
+                    ':v': name
+                }
+            }
+        }
+    ]
   };
-
+  
   try {
-    await dynamoDbClient.put(params).promise();
+    await dynamoDbClient.transactWrite(params).promise();
     res.json({ userId, name });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Could not create user" });
   }
+
 });
 
 app.use((req, res, next) => {
