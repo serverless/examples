@@ -1,11 +1,11 @@
 const AWS = require("aws-sdk");
 const express = require("express");
 const serverless = require("serverless-http");
-
 const app = express();
 
 const USERS_TABLE = process.env.USERS_TABLE;
 const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+
 
 app.use(express.json());
 
@@ -34,18 +34,15 @@ app.get("/users/:userId", async function (req, res) {
 });
 
 app.post("/users", async function (req, res) {
-  const { userId, name, token } = req.body;
+  const { userId, name } = req.body;
   if (typeof userId !== "string") {
     res.status(400).json({ error: '"userId" must be a string' });
   } else if (typeof name !== "string") {
     res.status(400).json({ error: '"name" must be a string' });
-  } else if (typeof token !== "string") {
-    res.status(400).json({ error: '"token" must be a string' });
   }
 
   const params = {
-    // idempotence check
-    ClientRequestToken: token,
+    ClientRequestToken: req.context.awsRequestId,
     TransactItems: [
         {
             Update: {
@@ -61,7 +58,7 @@ app.post("/users", async function (req, res) {
     ]
   };
   
-  try {
+  try{
     await dynamoDbClient.transactWrite(params).promise();
     res.json({ userId, name });
   } catch (error) {
@@ -78,4 +75,8 @@ app.use((req, res, next) => {
 });
 
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(app,{
+  request:(req,event,context)=>{
+    req.context=context
+  }
+});
