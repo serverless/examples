@@ -1,5 +1,5 @@
 {
-  "name": "aws-node-express-dynamodb-api",
+  "name": "idempotent-aws-node-express-dynamodb-api",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
