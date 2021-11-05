@@ -171,10 +171,13 @@ dynamodb_client = boto3.client('dynamodb')
 with
 
 ```python
-dynamodb_client = boto3.client('dynamodb')
-
 if os.environ.get('IS_OFFLINE'):
-    dynamodb_client = boto3.client('dynamodb', region_name='localhost', endpoint_url='http://localhost:8000')
+    dynamodb_client = boto3.client(
+        'dynamodb', region_name='localhost', endpoint_url='http://localhost:8000',
+        aws_access_key_id='DEFAULT_ACCESS_KEY', aws_secret_access_key='DEFAULT_SECRET'
+    )
+else:
+    dynamodb_client = boto3.client('dynamodb')
 ```
 
 Now you can start DynamoDB local with the following command:
