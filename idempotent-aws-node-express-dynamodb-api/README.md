@@ -11,13 +11,35 @@ authorName: 'Serverless, inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
-# Serverless Framework Node Express API on AWS with Idempotence Guaranteed
+# Serverless Framework Node Express API on AWS with Idempotence Guarantee
 
 This template demonstrates how to add idempotence in a simple Node Express API service, backed by DynamoDB database, running on AWS Lambda using the traditional Serverless Framework. It is based on the example of [Serverless Framework Node Express API on AWS](../aws-node-express-dynamodb-api/README.md).
 
+## What is idempotence
+
+Idempotence means multiple invocations of a function have the same side-effect as one invocation.
+
+## Why we need idempotence
+
+AWS Lambda uses retry to perform fault tolerance.
+When your function fails because of out of memory or some other reasons, it will be directly retried until it finishes successfully.
+For serverless functions with side-effect, retry may cause data inconsistency.
+For example, retrying a function purchasing a product may cause multiple deduction of money.
+Therefore, AWS Lambda requires programmers to write [idempotent function](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-function-idempotent/).
+
 ## Anatomy of the template
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http). Additionally, it also handles provisioning of a DynamoDB database that is used for storing data about users. It uses context from the request as the `clientRequestToken` parameter in the [transactional write api](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html) of DynamoDB to enable the guarantee of idempotence. The `express` application exposes two endpoints, `POST /users` and `GET /user/{userId}`, which allow to create and retrieve users.
+This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http). Additionally, it also handles provisioning of a DynamoDB database that is used for storing data about users. The `express` application exposes two endpoints, `POST /users` and `GET /user/{userId}`, which allow to create and retrieve users.
+
+## How to guarantee idempotence
+
+The side effect of the function is writing the username.
+AWS DynamoDB provides an [idempotent transactional write API](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html), which  writes name for only once and does nothing on retry.
+It needs an argument `clientRequestToken` to check whether the current transactional write is a retry.
+The `clientRequestToken` should be a universally unique identifier.
+Then we use [`awsRequestId`](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html) to be the `clientRequestToken`.
+This is a unique identifier provided by AWS Lambda.
+When Lambda retries a function, it will use the same `awsRequestId` as that in the first invocation.
 
 ## Usage
 
