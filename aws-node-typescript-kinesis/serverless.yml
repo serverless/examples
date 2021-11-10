@@ -7,13 +7,15 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - kinesis:PutRecord
-        - kinesis:PutRecords
-      Resource:
-        - Fn::GetAtt: [ kinesisStream, Arn ]
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - kinesis:PutRecord
+            - kinesis:PutRecords
+          Resource:
+            - Fn::GetAtt: [ kinesisStream, Arn ]
 
 functions:
   producer:

@@ -6,7 +6,8 @@ provider:
   stage: dev
   memorySize: 256
   runtime: nodejs12.x
-  role: LambdaRole
+  iam:
+    role: LambdaRole
   environment:
     #aurora
     AURORA_HOST: ${self:custom.AURORA.HOST}

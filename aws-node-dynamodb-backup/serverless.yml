@@ -9,18 +9,20 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: staging
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-      Resource: "arn:aws:s3:::${self:custom.bucket}/${self:custom.prefix}/${self:custom.dynamoDBTableName}/*"
-    - Effect: Allow
-      Action:
-        - "dynamodb:GetRecords"
-        - "dynamodb:GetShardIterator"
-        - "dynamodb:DescribeStream"
-        - "dynamodb:ListStreams"
-      Resource: "arn:aws:dynamodb:ap-southeast-1:*:table/${self:custom.dynamoDBTableName}/stream/*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+          Resource: "arn:aws:s3:::${self:custom.bucket}/${self:custom.prefix}/${self:custom.dynamoDBTableName}/*"
+        - Effect: Allow
+          Action:
+            - "dynamodb:GetRecords"
+            - "dynamodb:GetShardIterator"
+            - "dynamodb:DescribeStream"
+            - "dynamodb:ListStreams"
+          Resource: "arn:aws:dynamodb:ap-southeast-1:*:table/${self:custom.dynamoDBTableName}/stream/*"
 
 functions:
   backup:

@@ -1,6 +1,6 @@
 service: aws-node-ses-receive-email-body
 
-frameworkVersion: ">=1.1.0"
+frameworkVersion: ">=2.24.0"
 
 custom:
   bucket: sesreceiveemailbody
@@ -10,11 +10,13 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: "*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:*
+          Resource: "*"
 
 functions:
   postprocess:
