@@ -6,33 +6,34 @@ provider:
   environment:
     ELASTICSEARCH_URL:
       Fn::GetAtt: ["PuppySearch", "DomainEndpoint"]
-
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - 'dynamodb:ListTables'
-        - 'dynamodb:DescribeTable'
-        - 'dynamodb:DescribeStream'
-        - 'dynamodb:ListStreams'
-        - 'dynamodb:GetShardIterator'
-        - 'dynamodb:BatchGetItem'
-        - 'dynamodb:GetItem'
-        - 'dynamodb:Query'
-        - 'dynamodb:Scan'
-        - 'dynamodb:DescribeReservedCapacity'
-        - 'dynamodb:DescribeReservedCapacityOfferings'
-        - 'dynamodb:GetRecords'
-      Resource:
-        - { "Fn::GetAtt": ["PuppyDemo", "Arn"] }
-    - Effect: Allow
-      Action:
-        - es:ESHttpPost
-        - es:ESHttpPut
-        - es:ESHttpDelete
-        - es:ESHttpGet
-      Resource:
-        - { "Fn::GetAtt": ["PuppySearch", "DomainArn"] }
-        - { "Fn::Join": ["", ["Fn::GetAtt": ["PuppySearch", "DomainArn"], "/*"]] }
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 'dynamodb:ListTables'
+            - 'dynamodb:DescribeTable'
+            - 'dynamodb:DescribeStream'
+            - 'dynamodb:ListStreams'
+            - 'dynamodb:GetShardIterator'
+            - 'dynamodb:BatchGetItem'
+            - 'dynamodb:GetItem'
+            - 'dynamodb:Query'
+            - 'dynamodb:Scan'
+            - 'dynamodb:DescribeReservedCapacity'
+            - 'dynamodb:DescribeReservedCapacityOfferings'
+            - 'dynamodb:GetRecords'
+          Resource:
+            - { "Fn::GetAtt": ["PuppyDemo", "Arn"] }
+        - Effect: Allow
+          Action:
+            - es:ESHttpPost
+            - es:ESHttpPut
+            - es:ESHttpDelete
+            - es:ESHttpGet
+          Resource:
+            - { "Fn::GetAtt": ["PuppySearch", "DomainArn"] }
+            - { "Fn::Join": ["", ["Fn::GetAtt": ["PuppySearch", "DomainArn"], "/*"]] }
 
 package:
   exclude:

@@ -7,11 +7,13 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
-#  iamRoleStatements:
-#    -  Effect: "Allow"
-#       Action:
-#         - "lambda:InvokeFunction"
-#       Resource: ${self:custom.functionARN}
+#  iam:
+#    role:
+#      statements:
+#        -  Effect: "Allow"
+#           Action:
+#             - "lambda:InvokeFunction"
+#           Resource: ${self:custom.functionARN}
 
 functions:
   recursiveExample:

@@ -7,12 +7,14 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - sqs:SendMessage
-      Resource:
-        - Fn::GetAtt: [ receiverQueue, Arn ]
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+          Resource:
+            - Fn::GetAtt: [ receiverQueue, Arn ]
       
 functions:
   sender:

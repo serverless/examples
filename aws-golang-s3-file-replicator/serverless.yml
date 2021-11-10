@@ -1,5 +1,5 @@
 service: aws-golang-s3-file-replicator
-frameworkVersion: ">=1.28.0 <2.0.0"
+frameworkVersion: ">=2.24.0"
 
 custom:
   inputBucket: replicator-input-101
@@ -12,15 +12,17 @@ provider:
   region: ap-northeast-1
   memorySize: 128
   timeout: 30
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: "arn:aws:s3:::${self:custom.outputBucket}/*"
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: "arn:aws:s3:::${self:custom.inputBucket}/*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:*
+          Resource: "arn:aws:s3:::${self:custom.outputBucket}/*"
+        - Effect: Allow
+          Action:
+            - s3:*
+          Resource: "arn:aws:s3:::${self:custom.inputBucket}/*"
 
 package:
   exclude:

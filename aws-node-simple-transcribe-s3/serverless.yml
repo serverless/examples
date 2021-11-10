@@ -7,18 +7,20 @@ provider:
     S3_AUDIO_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-records
     S3_TRANSCRIPTION_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-transcriptions
     LANGUAGE_CODE: en-US
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-      Resource:
-        - 'arn:aws:s3:::${self:provider.environment.S3_AUDIO_BUCKET}/*'
-        - 'arn:aws:s3:::${self:provider.environment.S3_TRANSCRIPTION_BUCKET}/*'
-    - Effect: Allow
-      Action:
-        - transcribe:StartTranscriptionJob
-      Resource: '*'
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+          Resource:
+            - 'arn:aws:s3:::${self:provider.environment.S3_AUDIO_BUCKET}/*'
+            - 'arn:aws:s3:::${self:provider.environment.S3_TRANSCRIPTION_BUCKET}/*'
+        - Effect: Allow
+          Action:
+            - transcribe:StartTranscriptionJob
+          Resource: '*'
 
 functions:
   transcribe:

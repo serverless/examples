@@ -1,6 +1,6 @@
 service: aws-python-pynamodb-s3-sigurl
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: ">=2.24.0"
 
 plugins:
   - serverless-python-requirements
@@ -54,22 +54,23 @@ provider:
     S3_BUCKET: ${self:custom.s3_bucket}
     S3_KEY_BASE: ${self:custom.s3_key_base}
     URL_DEFAULT_TTL: ${self:custom.url_default_ttl}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:DescribeTable
-      Resource: ${self:custom.dynamodb_arn}
-
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: ${self:custom.s3_role_resource}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:DescribeTable
+          Resource: ${self:custom.dynamodb_arn}
+        - Effect: Allow
+          Action:
+            - s3:*
+          Resource: ${self:custom.s3_role_resource}
 
 functions:
   create:
