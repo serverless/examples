@@ -1,6 +1,6 @@
 service: aws-python # NOTE: update this with your service name
 
-frameworkVersion: '2'
+frameworkVersion: '2 || 3'
 
 
 provider:

@@ -1,6 +1,6 @@
 service: aws-python-scheduled-cron
 
-frameworkVersion: '2'
+frameworkVersion: '2 || 3'
 
 
 provider:

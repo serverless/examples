@@ -1,6 +1,6 @@
 service: aws-node # NOTE: update this with your service name
 
-frameworkVersion: '2'
+frameworkVersion: '2 || 3'
 
 
 provider:

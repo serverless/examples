@@ -1,6 +1,6 @@
 service: aws-node-scheduled-cron
 
-frameworkVersion: '2'
+frameworkVersion: '2 || 3'
 
 
 provider:
