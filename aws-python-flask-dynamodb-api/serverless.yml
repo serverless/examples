@@ -1,6 +1,6 @@
 service: aws-python-flask-dynamodb-api
 
-frameworkVersion: '2'
+frameworkVersion: '2 || 3'
 
 custom:
   tableName: 'users-table-${self:provider.stage}'
