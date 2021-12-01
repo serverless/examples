@@ -26,11 +26,11 @@ Make a note of the API endpoint that is logged to the console during deployment.
 
 ```
 endpoints:
-GET https://xxx.api-gw.mybluemix.net/swift-service/ping --> swift-service-dev-ping
+GET https://xxx.api-gw.mybluemix.net/swift-service/time --> swift-service-dev-time
 ```
 
 ## 3. Invoke deployed function
-`serverless invoke --function ping` or `serverless invoke -f ping`
+`serverless invoke --function time` or `serverless invoke -f time`
 
 `-f` is shorthand for `--function`
 
@@ -49,14 +49,14 @@ be the API gateway root path, logged during deployment, and your configured
 function path.
 
 ```
-$ http get https://xxx.api-gw.mybluemix.net/swift-service/ping
+$ http get https://xxx.api-gw.mybluemix.net/swift-service/time
 HTTP/1.1 200 OK
 ...
 {
     "message": "Hello stranger, the current time is 16:00:11.837331"
 }
 
-$ http get https://xxx.api-gw.mybluemix.net/swift-service/ping?name=James
+$ http get https://xxx.api-gw.mybluemix.net/swift-service/time?name=James
 HTTP/1.1 200 OK
 ...
 {

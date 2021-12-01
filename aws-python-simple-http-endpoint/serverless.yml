@@ -10,5 +10,5 @@ functions:
     handler: handler.endpoint
     events:
       - httpApi:
-          path: /ping
+          path: /time
           method: get
