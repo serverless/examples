@@ -1,6 +1,6 @@
 <!--
 title: 'AWS Simple HTTP Endpoint example in Python'
-description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time.'
 layout: Doc
 framework: v1
 platform: AWS
@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Simple HTTP Endpoint Example
 
-This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time. While the internal function is name `currentTime` the HTTP endpoint is exposed as `ping`.
+This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time. While the internal function is name `currentTime` the HTTP endpoint is exposed as `time`.
 
 ## Use Cases
 
@@ -42,7 +42,7 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  GET - https://f7r5srabr3.execute-api.us-east-1.amazonaws.com/ping
+  GET - https://f7r5srabr3.execute-api.us-east-1.amazonaws.com/time
 functions:
   currentTime: aws-python-simple-http-endpoint-dev-currentTime
 ```
@@ -71,7 +71,7 @@ REPORT RequestId: a26699d3-b3ee-11e6-98f33f952e8294	Duration: 0.23 ms	Billed Dur
 Finally you can send an HTTP request directly to the endpoint using a tool like curl
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/ping
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/time
 ```
 
 The expected result should be similar to:

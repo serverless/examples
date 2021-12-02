@@ -1,6 +1,6 @@
 <!--
 title: 'AWS Simple HTTP Endpoint example in Java'
-description: 'This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you fetch it, it will reply with the current time.'
 layout: Doc
 framework: v1
 platform: AWS
@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars3.githubusercontent.com/u/1767769?v=4&s=140'
 -->
 # Simple HTTP Endpoint Example
 
-This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you ping it, it will reply with the current time.
+This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you fetch it, it will reply with the current time.
 
 [Jackson](https://github.com/FasterXML/jackson) is used to serialize objects to JSON.
 
@@ -110,7 +110,7 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  GET - https://XXXXXXX.execute-api.us-east-1.amazonaws.com/ping
+  GET - https://XXXXXXX.execute-api.us-east-1.amazonaws.com/time
 functions:
   aws-java-simple-http-endpoint-dev-currentTime: arn:aws:lambda:us-east-1:XXXXXXX:function:aws-java-simple-http-endpoint-dev-currentTime
 
@@ -146,7 +146,7 @@ REPORT RequestId: XXXXXXX	Duration: 0.51 ms	Billed Duration: 100 ms 	Memory Size
 Finally you can send an HTTP request directly to the endpoint using a tool like curl
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/ping
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/time
 ```
 
 The expected result should be similar to:

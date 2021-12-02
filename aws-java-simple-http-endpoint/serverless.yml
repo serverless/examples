@@ -13,5 +13,5 @@ functions:
     handler: com.serverless.Handler
     events:
       - httpApi:
-          path: /ping
+          path: /time
           method: get

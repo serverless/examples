@@ -1,6 +1,6 @@
 <!--
 title: .'AWS Simple HTTP Endpoint example in Ruby'
-description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time.'
 framework: v1
 platform: AWS
 language: Ruby
@@ -47,7 +47,7 @@ stack: serverless-ruby-simple-http-endpoint-dev
 api keys:
   None
 endpoints:
-  GET - https://spmfbzc6ja.execute-api.us-east-1.amazonaws.com/ping
+  GET - https://spmfbzc6ja.execute-api.us-east-1.amazonaws.com/time
 functions:
   current_time: serverless-ruby-simple-http-endpoint-dev-current_time
 layers:
@@ -59,7 +59,7 @@ Serverless: Removing old service artifacts from S3...
 Send an HTTP request directly to the endpoint using a tool like curl:
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/ping
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/time
 ```
 
 ## Scaling

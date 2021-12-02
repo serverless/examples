@@ -5,11 +5,11 @@ provider:
   runtime: swift
 
 functions:
-  ping:
-    handler: ping.main
+  time:
+    handler: time.main
     events:
       - http:
-          path: ping
+          path: time
           method: get
 
 

@@ -9,7 +9,7 @@ functions:
     handler: handler.endpoint
     events:
       - http:
-          path: ping
+          path: time
           method: get
 
 plugins:
