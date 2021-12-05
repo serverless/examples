@@ -281,6 +281,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Sls Form Mail](https://github.com/takahashim/sls-form-mail)** <br/> Send SNS email from form data | [takahashim](http://github.com/takahashim) |
 | **[Vanity Stargazer](https://github.com/silvermullet/vanity-stargazer)** <br/> Github vanity-stargazer is a serverless application to handle posting Github new star gazers to Slack | [silvermullet](http://github.com/silvermullet) |
 | **[Video Preview And Analysis Service](https://github.com/laardee/video-preview-and-analysis-service)** <br/> An event-driven service that generates labels using Amazon Rekognition and creates preview GIF animation from a video file. | [laardee](http://github.com/laardee) |
+| **[Idempotent Serverless Applications Examples](https://github.com/Nsupyq/idempotent-serverless-functions)** <br/> Examples of how to write idempotent serverless functions. | [Nsupyq](https://github.com/Nsupyq) |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Contributing
