@@ -551,5 +551,10 @@
     "name": "Idempotent Serverless Functions",
     "description": "This repository demonstrates how to ensure the idempotence of serverless functions running on AWS Lambda.",
     "githubUrl": "https://github.com/Nsupyq/idempotent-serverless-functions"
+  },
+  {
+    "name": "File uploads using S3 presigned URLs",
+    "description": "A Serverless photo upload service with API Gateway, S3 presigned URLs and Lambda.",
+    "githubUrl": "https://github.com/marchetti2/aws-node-serverless-upload-presigned-url"
   }
 ]
