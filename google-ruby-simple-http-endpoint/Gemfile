@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+ffargs =
+  if ::File.directory? "vendor/functions_framework"
+    { path: "vendor/functions_framework" }
+  else
+    {}
+  end
+  
+gem "functions_framework", **ffargs
