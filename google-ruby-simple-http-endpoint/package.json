@@ -4,11 +4,10 @@
   "description": "Example demonstrates how to setup a simple HTTP GET endpoint with Ruby",
   "author": "Allie Coleman <colemanja91@gmail.com>",
   "license": "MIT",
-  "main": "app.rb",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
+  "devDependencies": {
     "serverless-google-cloudfunctions": "^4.5.0"
   }
 }
