@@ -1,0 +1,47 @@
+service: thumbnailer
+frameworkVersion: "2"
+
+# add custom and globally unique names below
+custom:
+  SOURCE_BUCKET_NAME: 37dd9963-e04f-4393-8ab3-images
+  OUTPUT_BUCKET_NAME: 37dd9963-e04f-4393-8ab3-images-thumb
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.OUTPUT_BUCKET_NAME}/*"
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+        - s3:GetObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.SOURCE_BUCKET_NAME}/*"
+    - Effect: Allow
+      Action:
+        - logs:PutLogEvents
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+      Resource:
+        - arn:aws:logs:*:*:*
+
+functions:
+  shrinkToThumbnail:
+    handler: handler.shrinkToThumbnail
+    environment:
+      OUTPUT_BUCKET: ${self:custom.OUTPUT_BUCKET_NAME}
+    events:
+      - s3:
+          bucket: ${self:custom.SOURCE_BUCKET_NAME}
+          event: s3:ObjectCreated:*
+
+resources:
+  Resources:
+    SourceBucketThumb:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.OUTPUT_BUCKET_NAME}
