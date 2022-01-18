@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "types": [
+    "node",
+    "aws-sdk"
+  ]
+}

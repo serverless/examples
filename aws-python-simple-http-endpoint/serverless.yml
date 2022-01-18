@@ -1,15 +1,14 @@
 service: aws-python-simple-http-endpoint
-
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: '2'
 
 provider:
   name: aws
-  runtime: python2.7 # or python3.7, supported as of November 2018
+  runtime: python3.8
 
 functions:
   currentTime:
     handler: handler.endpoint
     events:
-      - http:
-          path: ping
+      - httpApi:
+          path: /time
           method: get

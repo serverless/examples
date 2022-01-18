@@ -546,5 +546,20 @@
     "name": "Express Application With Lambda",
     "description": "This example demonstrates how to build an express application for AWS Lambda based on serverless framework.",
     "githubUrl": "https://github.com/HoseungJang/serverless-lambda-express-example"
+  },
+  {
+    "name": "Idempotent Serverless Functions",
+    "description": "This repository demonstrates how to ensure the idempotence of serverless functions running on AWS Lambda.",
+    "githubUrl": "https://github.com/Nsupyq/idempotent-serverless-functions"
+  },
+  {
+    "name": "File uploads using S3 presigned URLs",
+    "description": "A Serverless photo upload service with API Gateway, S3 presigned URLs and Lambda.",
+    "githubUrl": "https://github.com/marchetti2/aws-node-serverless-upload-presigned-url"
+  },
+  {
+    "name": "Monorepo Typescript microservices",
+    "description": "An opinionated Serverless template with several Typescript microservices in a monorepo",
+    "githubUrl": "https://github.com/fargito/serverless-monorepo-microservices-template"
   }
 ]

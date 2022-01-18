@@ -1,6 +1,5 @@
 service: aws-rust-simple-http-endpoint
-
-#frameworkVersion: ">=1.28.0 <2.0.0"
+frameworkVersion: '2'
 
 provider:
   name: aws
@@ -23,8 +22,8 @@ functions:
   test_test:
     handler: test
     events:
-      - http:
-          path: test/test
+      - httpApi:
+          path: /test/test
           method: get
 
 custom:

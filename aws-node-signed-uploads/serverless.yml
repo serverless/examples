@@ -22,11 +22,13 @@ provider:
     REGION: ${self:provider.region}
     BUCKET: { Ref: Uploads }
   versionFunctions: false
-  iamRoleStatements:
-  -  Effect: "Allow"
-     Action:
-       - "s3:*"
-     Resource: "*"
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:*"
+          Resource: "*"
 
 functions:
   upsert-objects:

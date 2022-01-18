@@ -1,0 +1,38 @@
+service: serverless-http-api-mongodb
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  httpApi:
+    cors: true
+
+functions:
+  createUser:
+    handler: handler.createUser
+    events:
+      - httpApi:
+          path: /user
+          method: post
+
+  updateUser:
+    handler: handler.updateUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: put
+
+  deleteUser:
+    handler: handler.deleteUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: delete
+
+  user:
+    handler: handler.user
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get

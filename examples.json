@@ -337,7 +337,7 @@
     "authorLink": "https://github.com/gismoranas",
     "authorName": "Gismo Ranas",
     "authorAvatar": "https://avatars0.githubusercontent.com/u/5903107?v=4&s=140",
-    "priority": 1
+    "priority": 10
   },
   {
     "title": "Node.js AWS Lambda connecting to Heroku Postgres",
@@ -1944,7 +1944,7 @@
   {
     "title": "Amazon Kinesis Streams fan out via Kinesis Analytics",
     "name": "kinesis-streams-fan-out-kinesis-analytics",
-    "description": "Use [Amazon Kinesis Analytics](https://aws.amazon.com/kinesis/analytics/) to fan-out your Kinesis Streams and avoid read throttling.",
+    "description": "Use Amazon Kinesis Analytics to fan-out your Kinesis Streams and avoid read throttling.",
     "githubUrl": "https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics",
     "framework": "latest",
     "language": "node",

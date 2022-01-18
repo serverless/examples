@@ -7,11 +7,13 @@ provider:
   runtime: nodejs12.x
   region: us-east-1
   stage: dev
-  iamRoleStatements:
-    - Effect: "Allow"
-      Resource: "*"
-      Action:
-        - "sns:*"
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Resource: "*"
+          Action:
+            - "sns:*"
 
 functions:
   addNote:

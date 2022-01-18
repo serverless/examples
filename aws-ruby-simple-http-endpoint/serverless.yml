@@ -1,6 +1,5 @@
 service: serverless-ruby-simple-http-endpoint
-
-frameworkVersion: ">=2.1.0 <3.0.0"
+frameworkVersion: '2'
 
 provider:
   name: aws
@@ -10,6 +9,6 @@ functions:
   current_time:
     handler: handler.endpoint
     events:
-      - http:
-          path: ping
+      - httpApi:
+          path: /time
           method: get

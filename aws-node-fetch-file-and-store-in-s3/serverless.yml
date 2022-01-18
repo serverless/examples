@@ -1,6 +1,6 @@
 service: fetch-file-and-store-in-s3
 
-frameworkVersion: ">=1.1.0"
+frameworkVersion: ">=2.24.0"
 
 custom:
   bucket: <your-bucket-name>
@@ -10,12 +10,14 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-west-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:PutObjectAcl
-      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:PutObjectAcl
+          Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
   save:

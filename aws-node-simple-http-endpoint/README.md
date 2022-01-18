@@ -1,6 +1,6 @@
 <!--
 title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time.'
+description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time.'
 layout: Doc
 framework: v1
 platform: AWS
@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
 # Simple HTTP Endpoint Example
 
-This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time. While the internal function is name `currentTime` the HTTP endpoint is exposed as `ping`.
+This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time. While the internal function is name `currentTime` the HTTP endpoint is exposed as `time`.
 
 ## Use Cases
 
@@ -61,7 +61,7 @@ region: us-east-1
 api keys:
   None
 endpoints:
-  GET - https://2e16njizla.execute-api.us-east-1.amazonaws.com/dev/ping
+  GET - https://2e16njizla.execute-api.us-east-1.amazonaws.com/time
 functions:
   serverless-simple-http-endpoint-dev-currentTime: arn:aws:lambda:us-east-1:488110005556:function:serverless-simple-http-endpoint-dev-currentTime
 ```
@@ -77,9 +77,9 @@ serverless invoke --function currentTime --log
 or as send an HTTP request directly to the endpoint using a tool like curl
 
 ```bash
-curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/dev/ping
+curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/time
 ```
 
 ## Scaling
 
-By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
+By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 1000. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).

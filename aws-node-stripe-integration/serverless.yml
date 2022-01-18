@@ -24,13 +24,15 @@ provider:
   region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "lambda:InvokeAsync"
-#        - "lambda:InvokeFunction"
-#      Resource: 
-#        - "*"
+#  iam:
+#    role:
+#      statements:
+#        - Effect: "Allow"
+#          Action:
+#            - "lambda:InvokeAsync"
+#            - "lambda:InvokeFunction"
+#          Resource: 
+#            - "*"
 
 # you can define service wide environment variables here
 #  environment:
