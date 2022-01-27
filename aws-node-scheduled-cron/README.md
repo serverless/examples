@@ -2,7 +2,7 @@
 title: 'AWS Node Scheduled Cron example in NodeJS'
 description: 'This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event.'
 layout: Doc
-framework: v1
+framework: v3
 platform: AWS
 language: nodeJS
 priority: 1
@@ -95,37 +95,13 @@ serverless deploy
 After running deploy, you should see output similar to:
 
 ```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-node-scheduled-cron.zip file to S3 (124.47 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.............................................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-scheduled-cron
-stage: dev
-region: us-east-1
-stack: aws-node-scheduled-cron-dev
-resources: 16
-api keys:
-  None
-endpoints:
-  None
+Deploying aws-node-scheduled-cron-project to stage dev (us-east-1)
+
+✔ Service deployed to stack aws-node-scheduled-cron-project-dev (205s)
+
 functions:
-  rateHandler: aws-node-scheduled-cron-dev-rateHandler
-  cronHandler: aws-node-scheduled-cron-dev-cronHandler
-layers:
-  None
-Serverless: Publishing service to the Serverless Dashboard...
-Serverless: Successfully published your service to the Serverless Dashboard: https://app.serverless.com/xxxx/apps/xxxx/aws-node-scheduled-cron/dev/us-east-1
+  rateHandler: aws-node-scheduled-cron-project-dev-rateHandler (2.9 kB)
+  cronHandler: aws-node-scheduled-cron-project-dev-cronHandler (2.9 kB)
 ```
 
 There is no additional step required. Your defined schedules becomes active right away after deployment.

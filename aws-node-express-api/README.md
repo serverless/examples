@@ -2,7 +2,7 @@
 title: 'Serverless Framework Node Express API on AWS'
 description: 'This template demonstrates how to develop and deploy a simple Node Express API running on AWS Lambda using the traditional Serverless Framework.'
 layout: Doc
-framework: v2
+framework: v3
 platform: AWS
 language: nodeJS
 priority: 1
@@ -38,34 +38,13 @@ serverless deploy
 After running deploy, you should see output similar to:
 
 ```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-node-express-api.zip file to S3 (711.23 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.................................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-express-api
-stage: dev
-region: us-east-1
-stack: aws-node-express-api-dev
-resources: 12
-api keys:
-  None
-endpoints:
-  ANY - https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
+Deploying aws-node-express-api-project to stage dev (us-east-1)
+
+✔ Service deployed to stack aws-node-express-api-project-dev (196s)
+
+endpoint: ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
 functions:
-  api: aws-node-express-api-dev-api
-layers:
-  None
+  api: aws-node-express-api-project-dev-api (766 kB)
 ```
 
 _Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [`httpApi` event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).

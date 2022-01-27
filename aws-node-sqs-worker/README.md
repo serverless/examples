@@ -2,7 +2,7 @@
 title: 'Serverless Framework Node SQS Producer-Consumer on AWS'
 description: 'This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the traditional Serverless Framework.'
 layout: Doc
-framework: v2
+framework: v3
 platform: AWS
 language: nodeJS
 priority: 1
@@ -43,37 +43,15 @@ serverless deploy
 After running deploy, you should see output similar to:
 
 ```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-node-sqs-worker.zip file to S3 (21.45 MB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-................................................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-sqs-worker
-stage: dev
-region: us-east-1
-stack: aws-node-sqs-worker-dev
-resources: 17
-api keys:
-  None
-endpoints:
-  POST - https://xxxx.execute-api.us-east-1.amazonaws.com/produce
+Deploying aws-node-sqs-worker-project to stage dev (us-east-1)
+
+✔ Service deployed to stack aws-node-sqs-worker-project-dev (175s)
+
+endpoint: POST - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/produce
 functions:
-  producer: aws-node-sqs-worker-dev-producer
-  jobsWorker: aws-node-sqs-worker-dev-jobsWorker
-layers:
-  None
-jobs:
-  queueUrl: https://sqs.us-east-1.amazonaws.com/xxxx/aws-node-sqs-worker-dev-jobs
+  producer: aws-node-sqs-worker-project-dev-producer (167 kB)
+  jobsWorker: aws-node-sqs-worker-project-dev-jobsWorker (167 kB)
+jobs: https://sqs.us-east-1.amazonaws.com/000000000000/aws-node-sqs-worker-project-dev-jobs
 ```
 
 
