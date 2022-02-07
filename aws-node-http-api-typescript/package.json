@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.61",
+    "@types/aws-lambda": "^8.10.92",
     "serverless": "^3.1.1",
-    "serverless-plugin-typescript": "^1.1.9",
-    "typescript": "^3.9.7"
+    "serverless-plugin-typescript": "^2.1.1",
+    "typescript": "^4.5.5"
   }
 }
