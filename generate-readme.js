@@ -56,7 +56,7 @@ const config = {
     <!-- AUTO-GENERATED-CONTENT:END -->
      */
     SERVERLESS_EXAMPLE_TABLE() {
-      const examples = globby.sync(['**/package.json', '!node_modules/**/package.json', '!**/node_modules/**/package.json', '!package.json', '!**/bin/**/netcoreapp2.1/**/package.json']);
+      const examples = globby.sync(['**/package.json', '!node_modules/**/package.json', '!**/node_modules/**/package.json', '!package.json', '!**/bin/**/netcoreapp2.1/**/package.json', '!legacy/**']);
       // Make table header
       let md = '| Example | Runtime  |\n';
       md += '|:--------------------------- |:-----|\n';
