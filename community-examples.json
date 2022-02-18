@@ -561,5 +561,10 @@
     "name": "Monorepo Typescript microservices",
     "description": "An opinionated Serverless template with several Typescript microservices in a monorepo",
     "githubUrl": "https://github.com/fargito/serverless-monorepo-microservices-template"
+  },
+  {
+    "name": "Serverless AWS Node Notifications",
+    "description": "This template demonstrates how to make a simple HTTP API Endpoint with Node.js running on AWS Lambda and API Gateway using the Serverless Framework to send notifications using Courier.",
+    "githubUrl": "https://github.com/trycourier/aws-node-notifications"
   }
 ]
