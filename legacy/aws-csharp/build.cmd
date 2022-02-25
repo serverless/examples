@@ -1,3 +1,3 @@
 dotnet restore
-dotnet tool install -g Amazon.Lambda.Tools --framework netcoreapp3.1
-dotnet lambda package --configuration Release --framework netcoreapp3.1 --output-package bin/Release/netcoreapp3.1/hello.zip
+dotnet tool install -g Amazon.Lambda.Tools --framework net6.0
+dotnet lambda package --configuration Release --framework net6.0 --output-package bin/Release/net6.0/hello.zip
