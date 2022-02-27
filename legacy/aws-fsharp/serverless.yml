@@ -22,7 +22,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: dotnetcore3.1
+  runtime: dotnet6
 
 # you can overwrite defaults here
 #  stage: dev
@@ -52,7 +52,7 @@ provider:
 
 # you can add packaging information here
 package:
-  artifact: bin/Release/netcoreapp3.1/deploy-package.zip
+  artifact: bin/Release/net6.0/deploy-package.zip
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
