@@ -5,11 +5,16 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <AssemblyName>CsharpHandlers</AssemblyName>
     <PackageId>aws-csharp</PackageId>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="2.1.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Amazon.Lambda.Core" />
   </ItemGroup>
 
 </Project>
