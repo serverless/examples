@@ -14,12 +14,7 @@ functions:
   api:
     handler: wsgi_handler.handler
     events:
-      - http:
-          path: /
-          method: ANY
-      - http:
-          path: /{proxy+}
-          method: ANY
+      - httpApi: '*'
 
 plugins:
   - serverless-wsgi
