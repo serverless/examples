@@ -23,7 +23,7 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 
 ## Getting Started
 
-If you are new to serverless, we recommend getting started with by creating an HTTP API Endpoint in [NodeJS](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), [Python](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint), [Java](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint), or [Golang](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint).
+If you are new to serverless, we recommend getting started with by creating an HTTP API Endpoint in [NodeJS](https://github.com/serverless/examples/tree/v3/aws-node-simple-http-endpoint), [Python](https://github.com/serverless/examples/tree/v3/aws-python-simple-http-endpoint), [Java](https://github.com/serverless/examples/tree/v3/aws-java-simple-http-endpoint), or [Golang](https://github.com/serverless/examples/tree/v3/aws-golang-simple-http-endpoint).
 
 ## Examples
 
@@ -34,7 +34,7 @@ Each example contains a `README.md` with an explanation about the service and it
 To install any of these you can run:
 
 ```bash
-serverless install -u https://github.com/serverless/examples/tree/master/folder-name -n my-project
+serverless install -u https://github.com/serverless/examples/tree/v3/folder-name -n my-project
 ```
 
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE) t generated w/ `npm run docs` -->
@@ -320,6 +320,6 @@ We are happy to accept more examples from the community. 🎉
 
 We love hearing about projects happening in the community. Feel free to add your serverless project to our growing list.
 
-1. Add `link`, `title`, and `description` to the [community-examples.json](https://github.com/serverless/examples/edit/master/community-examples.json) file.
+1. Add `link`, `title`, and `description` to the [community-examples.json](https://github.com/serverless/examples/edit/v3/community-examples.json) file.
 
 2. Open a new pull request with your example. ⚡️
