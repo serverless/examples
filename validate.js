@@ -35,13 +35,13 @@ globby(['*/*', '!node_modules'], {
       const exampleFileFrontmatter = yml(example).data;
       let msg;
       if (isEmptyObject(exampleFileFrontmatter)) {
-        msg = `no frontmatter found! Please update ${file} \n\nHere's an example frontmatter for reference: https://raw.githubusercontent.com/serverless/examples/master/aws-node-simple-http-endpoint/README.md
+        msg = `no frontmatter found! Please update ${file} \n\nHere's an example frontmatter for reference: https://raw.githubusercontent.com/serverless/examples/v3/aws-node-simple-http-endpoint/README.md
         `;
         throw new Error(msg);
       }
 
       if (!hasSameProps(exampleData, exampleFileFrontmatter)) {
-        msg = `incomplete frontmatter in ${file} \n\nFollowing properties are required: ${Object.keys(exampleData)} \n\nHere's an example frontmatter for reference: https://raw.githubusercontent.com/serverless/examples/master/aws-node-simple-http-endpoint/README.md
+        msg = `incomplete frontmatter in ${file} \n\nFollowing properties are required: ${Object.keys(exampleData)} \n\nHere's an example frontmatter for reference: https://raw.githubusercontent.com/serverless/examples/v3/aws-node-simple-http-endpoint/README.md
         `;
         throw new Error(msg);
       }

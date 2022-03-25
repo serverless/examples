@@ -63,7 +63,7 @@ const config = {
       examples.forEach((example) => {
         const data = JSON.parse(fs.readFileSync(example, 'utf8'));
         const dirname = path.dirname(example);
-        const exampleUrl = `https://github.com/serverless/examples/tree/master/${dirname}`;
+        const exampleUrl = `https://github.com/serverless/examples/tree/v3/${dirname}`;
         const runtime = getRuntime(dirname);
         const description = (data.description) ? `<br/> ${data.description}` : '';
         // add table rows
