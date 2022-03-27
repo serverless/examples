@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const atob = require("atob");
+const atob = require('atob');
 
-exports.pubSub = (event, callback) => {
+exports.pubSub = (event) => {
   if (event && event.data) {
     const decoded = atob(event.data);
     console.log(decoded);
