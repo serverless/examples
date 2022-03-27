@@ -1,0 +1,48 @@
+service: node-logging-sink-subscription
+
+frameworkVersion: "3"
+
+provider:
+  name: google
+  runtime: nodejs14
+  project: <project_id>  # project id is here
+  credentials: ~/.gcloud/keyfile.json # path must be absolute
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+functions:
+  handler:
+    handler: pubSub
+    events:
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: 'projects/${self:provider.project, ""}/topics/node-logging-event-topic'
+
+resources:
+  resources:
+    - type: pubsub.v1.topic
+      name: node-logging-event-topic
+      properties:
+        topic: node-logging-event-topic
+      accessControl:
+        gcpIamPolicy:
+          bindings:
+          - role: roles/pubsub.publisher
+            members:
+            - "serviceAccount:cloud-logs@system.gserviceaccount.com"
+    - type: logging.v2.sink
+      name: node-logging-event-sink
+      properties:
+        sink: node-logging-event-sink
+        destination: 'pubsub.googleapis.com/projects/${self:provider.project, ""}/topics/node-logging-event-topic'
+        filter: protoPayload.methodName:("storage.buckets.create")
+      metadata:
+        dependsOn:
+          - node-logging-event-topic
+
+plugins:
+  - serverless-google-cloudfunctions

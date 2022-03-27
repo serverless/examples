@@ -1,0 +1,12 @@
+{
+  "name": "google-node-logging-sink-subscription",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "atob": "^2.1.2"
+  },
+  "devDependencies": {
+    "serverless-google-cloudfunctions": "^4.5.0"
+  }
+}
