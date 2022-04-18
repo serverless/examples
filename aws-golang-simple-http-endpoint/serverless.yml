@@ -1,5 +1,6 @@
 service: aws-golang-simple-http-endpoint
-frameworkVersion: '2'
+
+frameworkVersion: ">=2.0"
 
 provider:
   name: aws
