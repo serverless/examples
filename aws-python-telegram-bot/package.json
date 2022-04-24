@@ -15,7 +15,7 @@
   "author": "jonatasbaldin",
   "license": "MIT",
   "dependencies": {
-    "serverless-python-requirements": "^3.0.9"
+    "serverless-python-requirements": "^5.4.0"
   },
   "bugs": {
     "url": "https://github.com/jonatasbaldin/serverless-telegram-bot/issues"
