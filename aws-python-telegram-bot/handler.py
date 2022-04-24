@@ -45,7 +45,7 @@ def webhook(event, context):
     bot = configure_telegram()
     logger.info('Event: {}'.format(event))
 
-    if event.get('httpMethod') == 'POST' and event.get('body'): 
+    if event.get('requestContext', {}).get('http', {}).get('method') == 'POST' and event.get('body'): 
         logger.info('Message received')
         update = telegram.Update.de_json(json.loads(event.get('body')), bot)
         chat_id = update.message.chat.id
@@ -72,7 +72,7 @@ def set_webhook(event, context):
     logger.info('Event: {}'.format(event))
     bot = configure_telegram()
     url = 'https://{}/{}/'.format(
-        event.get('headers').get('Host'),
+        event.get('headers').get('host'),
         event.get('requestContext').get('stage'),
     )
     webhook = bot.set_webhook(url)
