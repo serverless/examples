@@ -1,0 +1,16 @@
+{
+  "name": "AWS Node Typescript Warmup Lambda Example",
+  "description": "The following simple example shows how to solve the cold start problem of AWS lambda functions, through keeping function warm using Serverless WarmUp Plugin.",
+  "version": "1.0.0",
+  "author": "Daniel Aniszkiewicz",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.94",
+    "serverless": "^3.15.0",
+    "serverless-plugin-typescript": "^2.1.2",
+    "serverless-plugin-warmup": "^7.1.0",
+    "serverless-plugin-warmup-ts-bridge-v2": "^0.1.8",
+    "typescript": "^4.6.3"
+  }
+}

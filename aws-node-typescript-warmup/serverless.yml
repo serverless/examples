@@ -1,0 +1,35 @@
+service: aws-node-typescript-warmup
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  region: eu-central-1
+  runtime: nodejs14.x
+  logRetentionInDays: 30
+
+functions:
+  myImportantFunction:
+    handler: src/handlers/myImportantFunction.handler
+    url: true
+    warmup:
+      officeHours:
+        enabled: true
+
+plugins:
+  - serverless-plugin-warmup-ts-bridge-v2
+  - serverless-plugin-warmup
+  - serverless-plugin-typescript
+
+custom:
+  warmup:
+    officeHours:
+      memorySize: 1024
+      package:
+        individually: true
+        patterns:
+          - "!../**"
+          - "!../../**"
+          - ./serverless_sdk/*
+          - ./s_warmUpPluginOfficeHours.js
+      events:
+        - schedule: "cron(0/45 7-18 ? * MON-FRI *)"

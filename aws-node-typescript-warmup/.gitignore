@@ -1,0 +1,4 @@
+/.build
+/.serverless
+/node_modules
+/.warmup
