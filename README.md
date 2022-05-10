@@ -25,6 +25,11 @@ A collection of ready-to-deploy [Serverless Framework](https://github.com/server
 
 If you are new to serverless, we recommend getting started with by creating an HTTP API Endpoint in [NodeJS](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), [Python](https://github.com/serverless/examples/tree/master/aws-python-simple-http-endpoint), [Java](https://github.com/serverless/examples/tree/master/aws-java-simple-http-endpoint), or [Golang](https://github.com/serverless/examples/tree/master/aws-golang-simple-http-endpoint).
 
+
+| <br>**[Try Serverless Console](https://bit.ly/3kL8ACL)**<br>Monitor, observe, and trace your serverless architectures. Real-time dev mode provides streaming logs from your AWS Lambda Functions.<br><br> |
+|---|
+
+
 ## Examples
 
 Each example contains a `README.md` with an explanation about the service and it's use cases.
