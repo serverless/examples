@@ -2499,5 +2499,44 @@
     "authorName": "HoseungJang",
     "authorAvatar": "https://avatars.githubusercontent.com/u/39669819?v=4",
     "community": true
+  },
+  {
+    "title": "Laravel application on AWS Lambda",
+    "name": "bref-laravel",
+    "description": "A serverless Laravel application running on AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/base",
+    "framework": "latest",
+    "language": "php",
+    "platform": "aws",
+    "authorLink": "https://github.com/brefphp",
+    "authorName": "Bref",
+    "authorAvatar": "https://avatars.githubusercontent.com/u/45861341?v=4",
+    "community": true
+  },
+  {
+    "title": "Laravel application on AWS Lambda",
+    "name": "bref-laravel",
+    "description": "Laravel Queues with SQS and AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/queues",
+    "framework": "latest",
+    "language": "php",
+    "platform": "aws",
+    "authorLink": "https://github.com/brefphp",
+    "authorName": "Bref",
+    "authorAvatar": "https://avatars.githubusercontent.com/u/45861341?v=4",
+    "community": true
+  },
+  {
+    "title": "Laravel application on AWS Lambda",
+    "name": "bref-laravel",
+    "description": "Laravel Queues with SQS and AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/queues",
+    "framework": "latest",
+    "language": "php",
+    "platform": "aws",
+    "authorLink": "https://github.com/brefphp",
+    "authorName": "Bref",
+    "authorAvatar": "https://avatars.githubusercontent.com/u/45861341?v=4",
+    "community": true
   }
 ]
