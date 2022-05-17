@@ -1,6 +1,6 @@
 service: aws-python-flask-api
 
-frameworkVersion: '2 || 3'
+frameworkVersion: '3'
 
 custom:
   wsgi:
@@ -9,18 +9,12 @@ custom:
 provider:
   name: aws
   runtime: python3.8
-  lambdaHashingVersion: '20201221'
 
 functions:
   api:
     handler: wsgi_handler.handler
     events:
-      - http:
-          path: /
-          method: ANY
-      - http:
-          path: /{proxy+}
-          method: ANY
+      - httpApi: '*'
 
 plugins:
   - serverless-wsgi

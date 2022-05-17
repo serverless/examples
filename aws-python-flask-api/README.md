@@ -2,7 +2,7 @@
 title: 'Serverless Framework Python Flask API on AWS'
 description: 'This template demonstrates how to develop and deploy a simple Python Flask API running on AWS Lambda using the traditional Serverless Framework.'
 layout: Doc
-framework: v2
+framework: v3
 platform: AWS
 language: Python
 priority: 2
@@ -18,7 +18,7 @@ This template demonstrates how to develop and deploy a simple Python Flask API s
 
 ## Anatomy of the template
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to configured `http` events. To learn more about `http` event configuration options, please refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/). As the events are configured in a way to accept all incoming requests, `Flask` framework is responsible for routing and handling requests internally. The implementation takes advantage of `serverless-wsgi`, which allows you to wrap WSGI applications such as Flask apps. To learn more about `serverless-wsgi`, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi). Additionally, the template relies on `serverless-python-requirements` plugin for packaging dependencies from `requirements.txt` file. For more details about `serverless-python-requirements` configuration, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
+This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to configured `httpApi` events. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the events are configured in a way to accept all incoming requests, `Flask` framework is responsible for routing and handling requests internally. The implementation takes advantage of `serverless-wsgi`, which allows you to wrap WSGI applications such as Flask apps. To learn more about `serverless-wsgi`, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi). Additionally, the template relies on `serverless-python-requirements` plugin for packaging dependencies from `requirements.txt` file. For more details about `serverless-python-requirements` configuration, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
 
 ## Usage
 
@@ -64,43 +64,16 @@ serverless deploy
 After running deploy, you should see output similar to:
 
 ```bash
-erverless: Using Python specified in "runtime": python3.8
-Serverless: Packaging Python WSGI handler...
-Serverless: Generated requirements from /home/xxx/xxx/xxx/examples/aws-python-flask-api/requirements.txt in /home/xxx/xxx/xxx/examples/aws-python-flask-api/.serverless/requirements.txt...
-Serverless: Using static cache of requirements found at /home/xxx/.cache/serverless-python-requirements/62f10436f9a1bb8040df30ef2db5736c8015b18256bf0b6f1b0cbb2640030244_slspyc ...
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Injecting required Python packages to package...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-python-flask-api.zip file to S3 (1.3 MB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.................................
-Serverless: Stack update finished...
-Service Information
-service: aws-python-flask-api
-stage: dev
-region: us-east-1
-stack: aws-python-flask-api-dev
-resources: 12
-api keys:
-  None
-endpoints:
-  ANY - https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
-  ANY - https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+Deploying aws-python-flask-api-project to stage dev (us-east-1)
+
+✔ Service deployed to stack aws-python-flask-api-project-dev (182s)
+
+endpoint: ANY - https://xxxxxxxx.execute-api.us-east-1.amazonaws.com
 functions:
-  api: aws-python-flask-api-dev-api
-layers:
-  None
+  api: aws-python-flask-api-project-dev-api (1.5 MB)
 ```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
+_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).
 
 ### Invocation
 
