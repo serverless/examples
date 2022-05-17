@@ -561,5 +561,10 @@
     "name": "Monorepo Typescript microservices",
     "description": "An opinionated Serverless template with several Typescript microservices in a monorepo",
     "githubUrl": "https://github.com/fargito/serverless-monorepo-microservices-template"
+  },
+  {
+    "name": "AWS Node Typescript Warmup Lambda Example",
+    "description": "The following simple example shows how to solve the cold start problem of AWS lambda functions, through keeping function warm using Serverless WarmUp Plugin.",
+    "githubUrl": "https://github.com/Pigius/AWS-Node-Typescript-Warmup-Lambda-Example"
   }
 ]
