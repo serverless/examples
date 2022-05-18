@@ -566,5 +566,10 @@
     "name": "Google Logging event subscription",
     "description": "This example demonstrates how to trigger a cloud functions when a specific event occurs in Google Cloud Platform project.",
     "githubUrl": "https://github.com/gnokoheat/serverless-gcp-logging-event-subscription"
+  },
+  {
+    "name": "AWS Node Typescript Warmup Lambda Example",
+    "description": "The following simple example shows how to solve the cold start problem of AWS lambda functions, through keeping function warm using Serverless WarmUp Plugin.",
+    "githubUrl": "https://github.com/Pigius/AWS-Node-Typescript-Warmup-Lambda-Example"
   }
 ]
