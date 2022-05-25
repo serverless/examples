@@ -13,5 +13,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "title": "GraphQL query endpoint in NodeJS on AWS with DynamoDB"
 }

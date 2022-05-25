@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-python-requirements": "^5.0.1"
-  }
+  },
+  "title": "AWS Serverless REST API with DynamoDB store and presigned URLs example in Python 3.6."
 }

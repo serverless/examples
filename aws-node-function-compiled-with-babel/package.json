@@ -10,5 +10,6 @@
     "babel-preset-latest": "^6.16.0",
     "serverless-babel-plugin": "^0.1.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "title": "AWS compiling a Lambda function with Babel"
 }

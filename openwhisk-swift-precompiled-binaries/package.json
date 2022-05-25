@@ -13,5 +13,6 @@
   "dependencies": {
     "serverless-plugin-scripts": "^1.0.2",
     "serverless-openwhisk": ">=0.13.0"
-  }
+  },
+  "title": "Openwhisk Swift Package With Precompiled Binaries"
 }

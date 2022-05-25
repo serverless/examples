@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-python-requirements": "^2.0.0-beta.6"
-  }
+  },
+  "title": "AWS Rest With Faunadb"
 }

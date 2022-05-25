@@ -24,5 +24,6 @@
     "webpack": "^4.29.0"
   },
   "author": "Miguel Frazao (https://github.com/jmpfrazao/serverless-ts-standard-sqs)",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS SQS Standard Example (NodeJS & Typescript)"
 }

@@ -138,7 +138,7 @@
   },
   {
     "name": "jwt-lambda-python",
-    "runtime": "python",
+    "language": "python",
     "description": "Minimal proof-of-concept implementation of JWT with Serverless / AWS Lambda",
     "githubUrl": "https://github.com/mikaelmork/jwt-auth.serverless"
   },
@@ -482,6 +482,16 @@
     "name": "serverless DotNet BoilerPlate",
     "description": "A serverless starter solution for .NET Core, ready for local debugging in VS Code, HTTP Endpoint, etc.",
     "githubUrl": "https://github.com/pharindoko/serverlessDotNetSample"
+  },
+  {
+    "name": "bref-laravel",
+    "description": "A serverless Laravel application running on AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/base"
+  },
+  {
+    "name": "bref-laravel-queues",
+    "description": "Laravel Queues with SQS and AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/queues"
   },
   {
     "name": "Serverless Load Balancer",

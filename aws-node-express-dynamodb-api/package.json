@@ -1,9 +1,10 @@
 {
   "name": "aws-node-express-dynamodb-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "This template demonstrates how to develop and deploy a simple Node Express API service backed by DynamoDB running on AWS Lambda using the traditional Serverless Framework.",
   "dependencies": {
     "express": "^4.17.1",
     "serverless-http": "^2.7.0"
-  }
+  },
+  "title": "Serverless Framework Node Express API service backed by DynamoDB on AWS"
 }

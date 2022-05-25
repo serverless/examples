@@ -9,5 +9,6 @@
   },
   "devDependencies": {
     "serverless-export-env": "2.0.0"
-  }
+  },
+  "title": "Serverless Ruby Dynamodb Cron"
 }

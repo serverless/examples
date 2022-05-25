@@ -1,7 +1,7 @@
 {
-  "name": "serverless-http-api-typescript-dynamodb",
+  "name": "aws-node-http-api-typescript-dynamodb",
   "version": "0.0.0",
-  "description": "",
+  "description": "A simple HTTP API with TypeScript running on AWS Lambda and API Gateway, using DynamoDB as a datastore.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,5 +20,6 @@
   },
   "dependencies": {
     "uuid": "^3.1.0"
-  }
+  },
+  "title": "AWS HTTP API with Typescript and DynamoDB"
 }

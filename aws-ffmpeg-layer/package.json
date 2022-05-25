@@ -1,7 +1,8 @@
 {
-  "name": "aws-lambda-layer",
-  "description": "",
+  "name": "aws-ffmpeg-layer",
+  "description": "AWS FFmepg Layer & a service using it to create GIFs",
   "version": "0.1.0",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {},
+  "title": "AWS FFmepg Layer"
 }

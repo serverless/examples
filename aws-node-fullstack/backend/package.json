@@ -1,7 +1,7 @@
 {
-  "name": "sfe-demo-leadcapture",
+  "name": "aws-node-fullstack",
   "version": "1.0.0",
-  "description": "",
+  "description": "This example demonstrates how to deploy a Fullstack serverless application",
   "main": "index.js",
   "scripts": {},
   "author": "Serverless.com",
@@ -12,5 +12,6 @@
   },
   "devDependencies": {
     "@serverless/enterprise-plugin": "latest"
-  }
+  },
+  "title": "Serverless Email Sign Up Form"
 }

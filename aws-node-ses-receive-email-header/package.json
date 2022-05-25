@@ -3,5 +3,6 @@
   "description": "Receive an email, trigger a lambda function to process header.",
   "version": "1.0.0",
   "author": "Andreas Heissenberger <andreas@heissenberger.at>",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS SES receive an email, trigger a lambda function to process header."
 }

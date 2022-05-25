@@ -4,5 +4,6 @@
   "description": "Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk.",
   "dependencies": {
     "serverless-openwhisk": ">=0.13.0"
-  }
+  },
+  "title": "OpenWhisk Simple HTTP Endpoint example in Swift"
 }

@@ -7,5 +7,6 @@
   "license": "MIT",
   "devDependencies": {
     "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin"
-  }
+  },
+  "title": "AWS Single Page App Via Cloudfront"
 }

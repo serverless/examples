@@ -14,5 +14,6 @@
     "pg": "^7.7.1",
     "pg-connection-string": "^2.0.0",
     "serverless-http": "^1.8.0"
-  }
+  },
+  "title": "AWS Lambda, Heroku and Postgres"
 }

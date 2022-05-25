@@ -22,5 +22,6 @@
     "webpack": "4.5.0"
   },
   "author": "Kalin Chernev <kalin.chernev@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Node Signed Uploads"
 }

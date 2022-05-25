@@ -12,5 +12,6 @@
   ],
   "dependencies": {
     "request": "^2.88.0"
-  }
+  },
+  "title": "AWS Node Line Echo Bot"
 }

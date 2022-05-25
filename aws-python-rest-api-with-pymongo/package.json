@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-python-requirements": "^5.0.0"
-  }
+  },
+  "title": "AWS Python Rest API with Pymongo"
 }

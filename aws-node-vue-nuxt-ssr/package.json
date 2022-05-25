@@ -30,5 +30,6 @@
   "devDependencies": {
     "serverless-domain-manager": "^3.2.1",
     "serverless-offline": "^4.10.0"
-  }
+  },
+  "title": "Serverless side rendering with Vue.js and Nuxt.js"
 }

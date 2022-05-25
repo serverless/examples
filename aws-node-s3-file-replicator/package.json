@@ -8,5 +8,6 @@
   "devDependencies": {
     "aws-sdk": "^2.467.0",
     "serverless-lift": "^1.1.0"
-  }
+  },
+  "title": "AWS fetch a file and store it in S3"
 }

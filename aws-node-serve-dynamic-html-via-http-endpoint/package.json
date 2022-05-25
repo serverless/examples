@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Hookup an AWS API Gateway endpoint to a Lambda function to render HTML on a `GET` request",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Serve Dynamic Html Via HTTP Endpoint"
 }

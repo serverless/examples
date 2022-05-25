@@ -4,5 +4,6 @@
   "description": "Example demonstrates how to setup a simple Swift function with OpenWhisk.",
   "dependencies": {
     "serverless-openwhisk": ">=0.13.0"
-  }
+  },
+  "title": "OpenWhisk Serverless Simple example in Swift"
 }

@@ -12,5 +12,6 @@
   },
   "dependencies": {
     "@line/bot-sdk": "^6.3.0"
-  }
+  },
+  "title": "Azure Nodejs"
 }

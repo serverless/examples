@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "mailparser": "^2.3.4"
-  }
+  },
+  "title": "AWS SES receive emails and process body"
 }

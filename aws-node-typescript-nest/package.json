@@ -57,5 +57,6 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "title": "Nest Serverless"
 }

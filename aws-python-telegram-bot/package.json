@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/jonatasbaldin/serverless-telegram-bot/issues"
   },
-  "homepage": "https://github.com/jonatasbaldin/serverless-telegram-bot#readme"
+  "homepage": "https://github.com/jonatasbaldin/serverless-telegram-bot#readme",
+  "title": "Serverless Telegram Bot"
 }

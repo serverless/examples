@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Serverless HTTP API",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS HTTP With Dynamodb"
 }

@@ -8,5 +8,6 @@
   },
   "main": "handler.py",
   "autor": "NiJia",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "Simple LINE bot"
 }

@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "This example demonstrates how to use an AWS Lambdas for your custom Alexa skill.",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Alexa Skill"
 }

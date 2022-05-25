@@ -3,5 +3,6 @@
   "version": "1.0.1",
   "description": "Example demonstrates how to setup a simple HTTP GET endpoint",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Simple HTTP Endpoint example in Ruby"
 }

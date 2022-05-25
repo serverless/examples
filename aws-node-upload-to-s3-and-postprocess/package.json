@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "crypto-js": "^4.0.0"
-  }
+  },
+  "title": "Upload To S3 And Postprocess"
 }
