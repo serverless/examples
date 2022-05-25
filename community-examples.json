@@ -484,6 +484,16 @@
     "githubUrl": "https://github.com/pharindoko/serverlessDotNetSample"
   },
   {
+    "name": "bref-laravel",
+    "description": "A serverless Laravel application running on AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/base"
+  },
+  {
+    "name": "bref-laravel-queues",
+    "description": "Laravel Queues with SQS and AWS Lambda using Bref.",
+    "githubUrl": "https://github.com/brefphp/examples/tree/master/Laravel/queues"
+  },
+  {
     "name": "Serverless Load Balancer",
     "description": "A sample that shows how to combine a load balancer with (vpc/subnet configuration) with a lambda.",
     "githubUrl": "https://github.com/pharindoko/serverless-load-balancer"
