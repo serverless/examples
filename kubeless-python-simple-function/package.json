@@ -9,5 +9,6 @@
   },
   "main": "handler.py",
   "autor": "Bitnami",
-  "license": "ASL"
-}	   
+  "license": "ASL",
+  "title": "Kubeless Serverless Simple function example in Python"
+}

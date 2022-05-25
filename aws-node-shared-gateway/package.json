@@ -9,6 +9,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  }
+  "dependencies": {},
+  "title": "Shared Aws Api Gateway Nodejs"
 }

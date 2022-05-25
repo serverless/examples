@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Example of creating a function that runs as a cron job using the serverless `schedule` event",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Scheduled Cron"
 }

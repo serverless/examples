@@ -4,5 +4,6 @@
   "description": "Example of chaining function calls using sequences and the sdk.",
   "dependencies": {
     "serverless-openwhisk": ">=0.13.0"
-  }
+  },
+  "title": "OpenWhisk Serverless Chaining Functions example in NodeJS"
 }

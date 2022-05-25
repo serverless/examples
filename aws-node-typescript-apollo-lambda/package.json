@@ -27,5 +27,6 @@
     "typescript": "^3.2.4"
   },
   "author": "Miguel Frazao (https://github.com/jmpfrazao/aws-node-typescript-apollo-lambda)",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Apollo Lambda (NodeJS & Typescript)"
 }

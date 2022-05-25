@@ -1,7 +1,8 @@
 {
-    "name": "aws-golang-rest-api-with-dynamodb",
-    "version": "1.0.0",
-    "description": "Serverless CRUD service exposing a REST HTTP interface",
-    "author": "",
-    "license": "MIT"
-  }
+  "name": "aws-golang-rest-api-with-dynamodb",
+  "version": "1.0.0",
+  "description": "Serverless CRUD service exposing a REST HTTP interface",
+  "author": "",
+  "license": "MIT",
+  "title": "AWS golang rest api with dynamodb"
+}

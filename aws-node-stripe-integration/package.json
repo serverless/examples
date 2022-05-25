@@ -13,5 +13,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "title": "AWS Stripe Integration example in NodeJS"
 }

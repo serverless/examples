@@ -8,5 +8,6 @@
     "jwk-to-pem": "^1.2.6",
     "request": "^2.82.0"
   },
-  "author": "Shahzeb Khan"
+  "author": "Shahzeb Khan",
+  "title": "API Gateway Authorizer Function for Auth0 or AWS Cognito using RS256 JSON Web Key Sets tokens."
 }

@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-python-requirements": "^2.4.1"
-  }
+  },
+  "title": "AWS Rest With Pynamodb"
 }

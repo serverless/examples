@@ -41,5 +41,7 @@
   },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"
-  }
+  },
+  "description": "This example shows you how to setup a dynamic image resizer API",
+  "title": "Dynamic Image Resizing API"
 }

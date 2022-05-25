@@ -56,5 +56,6 @@
   "bugs": {
     "url": "https://github.com/Q-Angelo/aws-node-typescript-rest-api/issues"
   },
-  "homepage": "https://github.com/Q-Angelo/aws-node-typescript-rest-api#readme"
+  "homepage": "https://github.com/Q-Angelo/aws-node-typescript-rest-api#readme",
+  "title": "AWS Typescript REST API"
 }

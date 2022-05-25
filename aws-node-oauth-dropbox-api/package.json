@@ -1,7 +1,7 @@
 {
   "name": "dropbox",
   "version": "1.0.0",
-  "description": "dropbox integration",
+  "description": "Dropbox integration",
   "main": "index.js",
   "scripts": {
     "test": "stage=dev IS_OFFLINE=true node_modules/.bin/mocha  --compilers js:babel-core/register  test/ --recursive  --timeout=60000",
@@ -40,5 +40,6 @@
     "serverless-offline": "^3.16.0",
     "serverless-plugin-optimize": "^3.0.3-rc.1",
     "tv4": "^1.3.0"
-  }
+  },
+  "title": "Dropbox OAuth2 integration"
 }

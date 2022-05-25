@@ -5,7 +5,8 @@
   "main": "index.js",
   "author": "serverless.com",
   "license": "MIT",
-   "dependencies": {
+  "dependencies": {
     "serverless-azure-functions": "^0.2.0"
-  }
+  },
+  "title": "Azure Simple HTTP Endpoint example in NodeJS"
 }

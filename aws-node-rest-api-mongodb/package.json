@@ -9,5 +9,6 @@
     "validator": "^7.0.0"
   },
   "author": "Quentin Homareau <quentin.homareau@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS REST API with MongoDB, Mongoose and Bluebird"
 }

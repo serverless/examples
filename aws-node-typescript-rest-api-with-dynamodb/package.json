@@ -1,7 +1,7 @@
 {
-  "name": "typescript-example",
+  "name": "aws-node-typescript-rest-api-with-dynamodb",
   "version": "0.0.0",
-  "description": "",
+  "description": "This example shows your how to create a TypeScript powered REST API with DynamoDB.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,5 +20,6 @@
   },
   "dependencies": {
     "uuid": "^3.1.0"
-  }
+  },
+  "title": "AWS TypeScript REST API with DynamoDB"
 }

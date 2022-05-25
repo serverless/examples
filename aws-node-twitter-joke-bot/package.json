@@ -1,7 +1,7 @@
 {
-  "name": "baddadjokesbot",
+  "name": "aws-node-twitter-joke-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Twitter bot that will periodically tweet out a joke obtained from a joke API.",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,5 +20,6 @@
   "dependencies": {
     "node-fetch": "^2.2.1",
     "twitter": "^1.7.1"
-  }
+  },
+  "title": "Joke Twitter Bot"
 }

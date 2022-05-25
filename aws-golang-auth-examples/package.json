@@ -17,5 +17,6 @@
   "license": "MIT",
   "devDependencies": {
     "serverless": "^1.30.3"
-  }
+  },
+  "title": "AWS Golang Auth"
 }

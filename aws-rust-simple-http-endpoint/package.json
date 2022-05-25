@@ -5,5 +5,6 @@
   "author": "Jonee Ryan Ty",
   "devDependencies": {
     "serverless-rust": "^0.3.8"
-  }
+  },
+  "title": "AWS Serverless Boilerplate example in Rust"
 }

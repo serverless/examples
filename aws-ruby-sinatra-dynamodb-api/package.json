@@ -6,5 +6,6 @@
   "devDependencies": {
     "serverless-rack": "^1.0.6",
     "serverless-ruby-layer": "^1.4.0"
-  }
+  },
+  "title": "Serverless Framework Ruby Sinatra API backed by DynamoDB on AWS"
 }

@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "sentiment": "^2.1.0"
-  }
+  },
+  "title": "AWS Text Analysis Via Sns Post Processing"
 }

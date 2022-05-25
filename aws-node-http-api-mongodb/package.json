@@ -1,5 +1,5 @@
 {
-  "name": "serverless-http-api-mongodb",
+  "name": "aws-node-http-api-mongodb",
   "version": "1.0.0",
   "description": "Serverless HTTP API with MongoDB using Mongoose and Bluebird",
   "main": "handler.js",
@@ -9,5 +9,6 @@
     "validator": "^7.0.0"
   },
   "author": "Quentin Homareau <quentin.homareau@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS HTTP API with MongoDB"
 }

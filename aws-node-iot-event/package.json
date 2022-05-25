@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Example on how to setup a AWS IoT Rule to send events to a Lambda function",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS IoT events to Lambda"
 }

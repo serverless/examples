@@ -1,5 +1,5 @@
 {
-  "name": "serverless-http-api-dynamodb-local",
+  "name": "aws-node-http-api-dynamodb-local",
   "version": "1.0.0",
   "description": "Serverless HTTP API with DynamoDB and offline support",
   "repository": "",
@@ -12,5 +12,6 @@
     "aws-sdk": "^2.12.0",
     "serverless-dynamodb-local": "^0.2.18",
     "serverless-offline": "^6.8.0"
-  }
+  },
+  "title": "AWS Node.js HTTP API with DynamoDB local"
 }

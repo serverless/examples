@@ -4,5 +4,6 @@
   "description": "Example of chaining function calls using sequences and docker images.",
   "dependencies": {
     "serverless-openwhisk": ">=0.13.0"
-  }
+  },
+  "title": "OpenWhisk Serverless Boilerplate using Docker example in NodeJS"
 }

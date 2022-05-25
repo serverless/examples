@@ -4,5 +4,6 @@
   "description": "Example of creating a Python function that runs as a cron job using the serverless schedule event.",
   "dependencies": {
     "serverless-openwhisk": ">=0.13.0"
-  }
+  },
+  "title": "OpenWhisk Serverless Scheduled Cron job example in Python"
 }

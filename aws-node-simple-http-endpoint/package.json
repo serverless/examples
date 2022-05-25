@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Example demonstrates how to setup a simple HTTP GET endpoint",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "AWS Serve Simple HTTP Endpoint"
 }

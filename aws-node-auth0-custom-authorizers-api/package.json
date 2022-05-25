@@ -8,5 +8,6 @@
   },
   "devDependencies": {
     "serverless-offline": "^3.18.0"
-  }
+  },
+  "title": "AWS protecting API Gateway with Auth0"
 }

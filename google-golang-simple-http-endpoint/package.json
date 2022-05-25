@@ -10,5 +10,6 @@
   },
   "dependencies": {
     "serverless-google-cloudfunctions": "^2.1.0"
-  }
+  },
+  "title": "GCF Simple HTTP Endpoint example in golang"
 }

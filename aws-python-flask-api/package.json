@@ -6,5 +6,6 @@
   "devDependencies": {
     "serverless-python-requirements": "^5.1.0",
     "serverless-wsgi": "^1.7.6"
-  }
+  },
+  "title": "Serverless Framework Python Flask API on AWS"
 }

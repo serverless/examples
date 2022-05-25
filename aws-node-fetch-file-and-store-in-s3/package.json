@@ -7,5 +7,6 @@
   "dependencies": {
     "aws-sdk": "^2.7.9",
     "node-fetch": "^1.6.3"
-  }
+  },
+  "title": "AWS fetch a file and store it in S3"
 }

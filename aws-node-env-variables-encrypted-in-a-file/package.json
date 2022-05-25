@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-secrets-plugin": "^0.0.1"
-  }
+  },
+  "title": "AWS environment variables encrypted in a file"
 }

@@ -16,5 +16,6 @@
     "serverless-offline": "^5.12.1",
     "serverless-plugin-chrome": "^1.0.0-55.3",
     "superagent": "^5.2.1"
-  }
+  },
+  "title": "Running Puppeteer on AWS Lambda"
 }

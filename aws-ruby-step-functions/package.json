@@ -9,5 +9,6 @@
   },
   "devDependencies": {
     "serverless-step-functions": "^3.0.0"
-  }
+  },
+  "title": "AWS Ruby Step Functions"
 }

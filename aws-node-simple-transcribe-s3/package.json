@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Example demonstrates how to setup a lambda function to transcribe audio file",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "title": "Simple AWS Transcribe example in NodeJS"
 }

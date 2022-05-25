@@ -10,5 +10,6 @@
   },
   "devDependencies": {
     "serverless": "^1.33.2"
-  }
+  },
+  "title": ".NET REST API with DynamoDB"
 }

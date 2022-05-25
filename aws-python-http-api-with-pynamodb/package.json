@@ -6,5 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-python-requirements": "^5"
-  }
+  },
+  "title": "AWS HTTP With Pynamodb"
 }

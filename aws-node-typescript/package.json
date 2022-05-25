@@ -1,6 +1,9 @@
 {
+  "name": "aws-node-typescript",
+  "description": "This template demonstrates how to deploy a TypeScript function running on AWS Lambda using the traditional Serverless Framework.",
   "devDependencies": {
     "esbuild": "^0.14.25",
     "serverless-esbuild": "^1.25.0"
-  }
+  },
+  "title": "AWS TypeScript example"
 }

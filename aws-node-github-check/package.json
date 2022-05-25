@@ -1,5 +1,5 @@
 {
-  "name": "serverless-github-check",
+  "name": "aws-node-github-check",
   "version": "0.0.1",
   "main": "handler.js",
   "scripts": {
@@ -23,5 +23,7 @@
   "dependencies": {
     "octonode": "^0.9.5",
     "babel-runtime": "^6.26.0"
-  }
+  },
+  "description": "The idea is to validate that all Pull Requests are related to a specific trello card.",
+  "title": "Serverless Github Check"
 }

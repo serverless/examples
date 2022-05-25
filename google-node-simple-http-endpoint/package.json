@@ -10,5 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "serverless-google-cloudfunctions": "^2.3.3"
-  }
+  },
+  "title": "GCF Simple HTTP Endpoint example in NodeJS"
 }
