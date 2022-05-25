@@ -1,0 +1,18 @@
+{
+  "name": "aws-node-ses-send-email-and-offline",
+  "title": "AWS SES for sending emails with offline support",
+  "description": "Sending emails on a schedule with AWS EventBridge, AWS Lambda, AWS SES with offline support",
+  "author": "Adam Jones (domdomegg)",
+  "license": "MIT",
+  "scripts": {
+    "start": "serverless offline start"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.98.0"
+  },
+  "devDependencies": {
+    "aws-ses-v2-local": "^2.0.1",
+    "serverless-offline": "^8.8.0",
+    "serverless-offline-ses-v2": "^1.0.1"
+  }
+}
