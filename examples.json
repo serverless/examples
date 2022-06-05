@@ -1928,6 +1928,19 @@
     "community": true
   },
   {
+    "title": "AWS SES emails with Node.js and serverless-offline",
+    "name": "serverless-example-send-email-with-ses-offline",
+    "description": "Sending emails with AWS SES, Node.js, serverless-offline and serverless-offline-ses-v2",
+    "githubUrl": "https://github.com/domdomegg/serverless-example-send-email-with-ses-offline",
+    "framework": "3",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/domdomegg",
+    "authorName": "domdomegg",
+    "authorAvatar": "https://avatars.githubusercontent.com/u/4953590?v=4",
+    "community": true
+  },
+  {
     "title": "Aws node signed uploads",
     "name": "aws-node-signed-uploads",
     "description": "Upload files larger than 10MB with AWS Lambda and API Gateway. Can be developed and tested locally.",

@@ -254,6 +254,11 @@
     "githubUrl": "https://github.com/lakshmantgld/aws-ses-serverless-example"
   },
   {
+    "name": "serverless-example-send-email-with-ses-offline",
+    "description": "Sending emails with AWS SES, Node.js, serverless-offline and serverless-offline-ses-v2",
+    "githubUrl": "https://github.com/domdomegg/serverless-example-send-email-with-ses-offline"
+  },
+  {
     "name": "aws-node-signed-uploads",
     "description": "Upload files larger than 10MB with AWS Lambda and API Gateway. Can be developed and tested locally.",
     "githubUrl": "https://github.com/kalinchernev/aws-node-signed-uploads"
