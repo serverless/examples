@@ -89,7 +89,7 @@ The expected result should be similar to:
     <h1>Landing Page</h1>
     <p>Hey Nik Graf!</p>
   </body>
-</html>%
+</html>
 ```
 
 Of course you can visit the URL in your browser and this is how it should look like:
