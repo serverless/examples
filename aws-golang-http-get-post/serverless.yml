@@ -85,7 +85,7 @@ functions:
     handler: bin/postBin
     package:
       include:
-        - ./bin/getQueryBin
+        - ./bin/postBin
     events:
       - http:
           path: post
