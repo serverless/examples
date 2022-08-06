@@ -1,12 +1,13 @@
 {
   "name": "serverless-http-api-typescript",
-  "description": "",
-  "version": "0.1.0",
+  "description": "This template demonstrates how to make a simple HTTP API with Node.js and Typescript running on AWS Lambda and API Gateway using the Serverless Framework v3",
+  "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.92",
-    "serverless": "^3.1.1",
-    "serverless-plugin-typescript": "^2.1.1",
-    "typescript": "^4.5.5"
+    "@types/aws-lambda": "^8.10.101",
+    "serverless": "^3.21.0",
+    "serverless-offline": "^9.1.6",
+    "serverless-plugin-typescript": "^2.1.2",
+    "typescript": "^4.7.4"
   }
 }
