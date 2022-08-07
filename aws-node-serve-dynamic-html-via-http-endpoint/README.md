@@ -2,7 +2,7 @@
 title: 'AWS Serving Dynamic HTML via API Gateway example in NodeJS'
 description: 'This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.'
 layout: Doc
-framework: v1
+framework: v3
 platform: AWS
 language: nodeJS
 priority: 10
@@ -10,6 +10,7 @@ authorLink: 'https://github.com/slate71'
 authorName: 'Lukas Andersen'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/2078561?v=4&s=140'
 -->
+
 # Serving Dynamic HTML via API Gateway Example
 
 This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a `GET` request.
@@ -27,7 +28,7 @@ Instead of returning the default `json` from a request, you can display custom d
 const response = {
   statusCode: 200,
   headers: {
-    'Content-Type': 'text/html',
+    "Content-Type": "text/html",
   },
   body: html,
 };
@@ -46,28 +47,13 @@ serverless deploy
 The expected result should be similar to:
 
 ```bash
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-.....
-Serverless: Stack create finished...
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (1.01 KB)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-...........................
-Serverless: Stack update finished...
+Deploying serve-dynamic-html-via-http to stage dev (us-east-1)
 
-Service Information
-service: serve-dynamic-html-via-http-endpoint
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  GET - https://nzkl1kas89.execute-api.us-east-1.amazonaws.com/dev/landing-page
+✔ Service deployed to stack serve-dynamic-html-via-http-dev (113s)
+
+endpoint: GET - https://XXXXXXXXXXX.execute-api.us-east-1.amazonaws.com/landing-page
 functions:
-  serve-dynamic-html-via-http-endpoint-dev-landingPage: arn:aws:lambda:us-east-1:377024778620:function:serve-dynamic-html-via-http-endpoint-dev-landingPage
+  landingPage: serve-dynamic-html-via-http-dev-landingPage (466 B)
 ```
 
 ## Usage
@@ -75,7 +61,7 @@ functions:
 You can now send an HTTP request directly to the endpoint using a tool like curl
 
 ```bash
-curl https://nzkl1kas89.execute-api.us-east-1.amazonaws.com/dev/landing-page?name=Nik%20Graf
+curl https://XXXXXXXXXXX.execute-api.us-east-1.amazonaws.com/dev/landing-page?name=Nik%20Graf
 ```
 
 The expected result should be similar to:
