@@ -576,5 +576,10 @@
     "name": "AWS Node Typescript Warmup Lambda Example",
     "description": "The following simple example shows how to solve the cold start problem of AWS lambda functions, through keeping function warm using Serverless WarmUp Plugin.",
     "githubUrl": "https://github.com/Pigius/AWS-Node-Typescript-Warmup-Lambda-Example"
+  },
+  {
+    "name": "AWS Deploy Node aplication in an EC2 instance",
+    "description": "This example shows how create an EC2 isntance running in a private VPC and deploy and NodeJS app while EC2 instance is creating.",
+    "githubUrl": "https://github.com/victorgmp/aws-ec2-node-role-policy"
   }
 ]
