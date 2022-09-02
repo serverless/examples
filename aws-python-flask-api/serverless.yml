@@ -5,6 +5,7 @@ frameworkVersion: '3'
 custom:
   wsgi:
     app: app.app
+    packRequirements: false
 
 provider:
   name: aws
