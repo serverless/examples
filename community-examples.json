@@ -576,5 +576,10 @@
     "name": "AWS Node Typescript Warmup Lambda Example",
     "description": "The following simple example shows how to solve the cold start problem of AWS lambda functions, through keeping function warm using Serverless WarmUp Plugin.",
     "githubUrl": "https://github.com/Pigius/AWS-Node-Typescript-Warmup-Lambda-Example"
+  },
+  {
+    "name": "Serverless Ruby Websocket Chat",
+    "description": "Simple WebSocket Chat composed of ServerlessFramework, AWS and Ruby",
+    "githubUrl": "https://github.com/IidaTakuma/ws-simple-chat"
   }
 ]

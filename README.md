@@ -286,6 +286,7 @@ serverless install -u https://github.com/author/project -n my-project
 | **[Serverless Python Rds Cron](https://github.com/caulagi/serverless-python-rds-cron)** <br/> A serverless python example that periodically removes entries from AWS RDS | [caulagi](http://github.com/caulagi) |
 | **[Serverless Python Sample](https://github.com/bennybauer/serverless-python-sample)** <br/> A simple serverless python sample with REST API endpoints and dependencies | [bennybauer](http://github.com/bennybauer) |
 | **[Serverless React Boilerplate](https://github.com/99xt/serverless-react-boilerplate)** <br/> A serverless react boilerplate for offline development | [99xt](http://github.com/99xt) |
+| **[Serverless Ruby WebSocket Chat](https://github.com/IidaTakuma/ws-simple-chat)** <br/> Simple WebSocket Chat composed of ServerlessFramework, AWS and Ruby | [IidaTakuma](http://github.com/IidaTakuma) |
 | **[Serverless Screenshot](https://github.com/svdgraaf/serverless-screenshot)** <br/> Serverless Screenshot Service using PhantomJS | [svdgraaf](http://github.com/svdgraaf) |
 | **[Serverless Slack Cron](https://github.com/ivanderbu2/serverless-slack-cron)** <br/> Lambda function which sends messages to Slack channel in regular intervals via cron trigger. | [ivanderbu2](http://github.com/ivanderbu2) |
 | **[Serverless Slack Emojibot](https://github.com/markhobson/emojibot)** <br/> Serverless slack bot for emoji | [markhobson](http://github.com/markhobson) |
