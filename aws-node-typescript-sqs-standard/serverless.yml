@@ -9,10 +9,9 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
-  logRetentionInDays: 30
 
 constructs:
-  mySimpleQueue:
+  queue:
     type: queue
     worker:
       handler: handlers/receiver.handler
@@ -21,7 +20,7 @@ functions:
   sender:
     handler: handlers/sender.handler
     environment:
-      QUEUE_URL: ${construct:mySimpleQueue.queueUrl}
+      QUEUE_URL: ${construct:queue.queueUrl}
     events:
       - httpApi:
           method: post

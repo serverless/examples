@@ -15,7 +15,7 @@ authorAvatar: 'https://avatars3.githubusercontent.com/u/28927258?s=460&v=4'
 
 This example demonstrates how to setup a SQS Standard and send messages through the message body and attributes.
 
-The queue was created by using [queue construct from the Lift plugin](https://github.com/getlift/lift/blob/master/docs/queue.md), which works perfectly!
+The queue was created by using the [queue construct from the Lift plugin](https://github.com/getlift/lift/blob/master/docs/queue.md).
 
 ## Use Cases
 
