@@ -14,16 +14,18 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
-    # Comment if you don't have a DynamoDB running locally
-      noStart: true
+      # Comment if you don't have a DynamoDB running locally
+      #noStart: true
     migration:
       dir: offline/migrations
 
 provider:
   name: aws
   runtime: nodejs12.x
+  region: eu-west-1
+  stage: dev
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-${sls:stage} 
   iam:
     role:
       statements:
@@ -35,8 +37,8 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
-
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+  
 functions:
   create:
     handler: todos/create.create
@@ -61,7 +63,7 @@ functions:
           path: todos/{id}
           method: get
           cors: true
-
+  
   update:
     handler: todos/update.update
     events:
