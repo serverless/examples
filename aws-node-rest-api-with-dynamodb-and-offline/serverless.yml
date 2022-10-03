@@ -63,7 +63,7 @@ functions:
           path: todos/{id}
           method: get
           cors: true
-  
+
   update:
     handler: todos/update.update
     events:
