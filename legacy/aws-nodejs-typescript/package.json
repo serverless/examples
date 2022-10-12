@@ -10,8 +10,8 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "@middy/core": "^2.5.3",
-    "@middy/http-json-body-parser": "^2.5.3"
+    "@middy/core": "^3.4.0",
+    "@middy/http-json-body-parser": "^3.4.0"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
