@@ -1,0 +1,57 @@
+service: serverless-offline-sqs-example-typescript
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: eu-west-1
+  environment:
+    FIFO_QUEUE_ARN: ${self:custom.myFifoQueueARN}
+    SQS_OFFLINE_ENDPOINT: ${self:custom.serverless-offline-sqs.endpoint}
+
+functions:
+  publisher:
+    handler: ./src/lambda/publisher.handlePublish
+    events:
+      - httpApi:
+          path: /
+          method: get
+  consumer:
+    handler: ./src/sqs/consumer.handleConsume
+    events:
+      - sqs: ${self:custom.myFifoQueueARN}
+
+resources:
+  Resources:
+    myFifoQueue:
+      Type: 'AWS::SQS::Queue'
+      Properties:
+        QueueName: ${self:service}-${sls:stage}-myFifoQueue.fifo
+        ContentBasedDeduplication: false
+        FifoQueue: true
+
+custom:
+  serverless-offline:
+    httpPort: 8080
+  esbuild:
+    minify: false
+    sourcemap: linked
+    watch:
+      pattern: ['src/**/*.ts']
+      ignore: ['node_modules/**/*']
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://0.0.0.0:9324
+    region: ${self:provider.region}
+    accessKeyId: root
+    secretAccessKey: root
+    skipCacheInvalidation: false
+
+  myFifoQueueARN: arn:aws:sqs:${aws:region}:${aws:accountId}:${self:service}-${sls:stage}-myFifoQueue.fifo
+
+plugins:
+  - serverless-esbuild
+  # Run elasticMQ server `npm run start-elastic-mq` before enabling serverless-offline-sqs.
+  - serverless-offline-sqs
+  - serverless-offline

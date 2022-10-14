@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es2021",
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "useUnknownInCatchVariables": false,
+    "lib": ["esnext", "dom"],
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "types": ["node"]
+  }
+}
