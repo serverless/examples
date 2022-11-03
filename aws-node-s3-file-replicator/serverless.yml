@@ -24,4 +24,4 @@ functions:
     events:
       - s3:
           bucket: ${construct:inputBucket.bucketName}
-          existing: false
+          existing: true
