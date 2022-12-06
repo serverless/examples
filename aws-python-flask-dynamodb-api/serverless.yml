@@ -3,14 +3,13 @@ service: aws-python-flask-dynamodb-api
 frameworkVersion: '3'
 
 custom:
-  tableName: 'users-table-${self:provider.stage}'
+  tableName: 'users-table-${sls:stage}'
   wsgi:
     app: app.app
 
 provider:
   name: aws
   runtime: python3.8
-  stage: dev
   iam:
     role:
       statements:
