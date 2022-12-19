@@ -566,5 +566,10 @@
     "name": "Serverless Python Twitch EventSub to Discord Webhook on AWS",
     "description": "This template takes go-live events from Twitch EventSub, and publishes the events through a Discord webhook",
     "githubUrl": "https://github.com/dylmye/aws-python-twitch-eventsub-to-discord-webhook"
+  },
+  {
+    "name": "Quipt",
+    "description": "A full-stack TypeScript video board web app built on Angular and AWS",
+    "githubUrl": "https://github.com/quipt/monorepo"
   }
 ]
