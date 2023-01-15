@@ -1,8 +1,0 @@
-{
-  "name": "openwhisk-swift-simple-http-endpoint",
-  "version": "0.1.0",
-  "description": "Example demonstrates how to setup a simple HTTP endpoint using Swift function with OpenWhisk.",
-  "dependencies": {
-    "serverless-openwhisk": ">=0.13.0"
-  }
-}

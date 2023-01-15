@@ -1,8 +1,0 @@
-{
-  "name": "openwhisk-node-chaining-functions",
-  "version": "0.1.0",
-  "description": "Example of chaining function calls using sequences and the sdk.",
-  "dependencies": {
-    "serverless-openwhisk": ">=0.13.0"
-  }
-}

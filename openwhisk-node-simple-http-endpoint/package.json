@@ -1,9 +1,0 @@
-{
-  "name": "openwhisk-node-simple-http",
-  "version": "0.1.0",
-  "description": "Example demonstrates how to setup a simple HTTP GET endpoint with OpenWhisk.",
-  "dependencies": {
-    "moment-timezone": "^0.5.11",
-    "serverless-openwhisk": ">=0.13.0"
-  }
-}

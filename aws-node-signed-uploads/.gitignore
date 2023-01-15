@@ -1,6 +1,0 @@
-coverage
-.serverless
-.webpack
-node_modules
-*.log
-config.json

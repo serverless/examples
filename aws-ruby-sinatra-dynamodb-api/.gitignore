@@ -1,6 +1,0 @@
-.bundle
-.dynamodb
-.serverless
-node_modules
-package-lock.json
-Gemfile.lock

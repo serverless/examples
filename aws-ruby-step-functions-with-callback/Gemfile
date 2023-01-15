@@ -1,5 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'aws-sdk-comprehend'
-gem 'aws-sdk-dynamodb'
-gem 'aws-sdk-states'

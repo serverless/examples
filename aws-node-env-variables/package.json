@@ -1,7 +1,0 @@
-{
-  "name": "aws-env-variables",
-  "version": "1.0.0",
-  "description": "This example demonstrates how to use environment variables for AWS Lambdas.",
-  "author": "",
-  "license": "MIT"
-}

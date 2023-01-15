@@ -1,7 +1,0 @@
-{
-  "name": "aws-node-simple-transcribe-s3",
-  "version": "1.0.0",
-  "description": "Example demonstrates how to setup a lambda function to transcribe audio file",
-  "author": "",
-  "license": "MIT"
-}
