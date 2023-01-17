@@ -3,7 +3,7 @@ service: aws-python-flask-dynamodb-api
 frameworkVersion: '3'
 
 custom:
-  tableName: 'users-table-${sls:stage}'
+  tableName: 'isi-bible-verse-clients-db-${sls:stage}'
   wsgi:
     app: app.app
 
@@ -42,11 +42,15 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          - AttributeName: userId
+          - AttributeName: status
+            AttributeType: S
+          - AttributeName: phone_number
             AttributeType: S
         KeySchema:
-          - AttributeName: userId
+          - AttributeName: status
             KeyType: HASH
+          - AttributeName: phone_number
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
