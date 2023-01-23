@@ -71,10 +71,10 @@
         }
       }
     },
-    "ApiLogGroup": {
+    "WebhookLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/aws-python-flask-dynamodb-api-dev-api"
+        "LogGroupName": "/aws/lambda/aws-python-flask-dynamodb-api-dev-webhook"
       }
     },
     "IamRoleLambdaExecution": {
@@ -173,23 +173,24 @@
         }
       }
     },
-    "ApiLambdaFunction": {
+    "WebhookLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-python-flask-dynamodb-api/dev/1673923406720-2023-01-17T02:43:26.720Z/aws-python-flask-dynamodb-api.zip"
+          "S3Key": "serverless/aws-python-flask-dynamodb-api/dev/1674452894839-2023-01-23T05:48:14.839Z/aws-python-flask-dynamodb-api.zip"
         },
         "Handler": "wsgi_handler.handler",
         "Runtime": "python3.9",
-        "FunctionName": "aws-python-flask-dynamodb-api-dev-api",
+        "FunctionName": "aws-python-flask-dynamodb-api-dev-webhook",
         "MemorySize": 1024,
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "isi-bible-verse-clients-db-dev"
+            "USERS_TABLE": "isi-bible-verse-clients-db2-dev",
+            "TWILIO_AUTH_TOKEN": "4515214055c4603765fcbfe82ac3e2eb"
           }
         },
         "Role": {
@@ -200,134 +201,65 @@
         }
       },
       "DependsOn": [
-        "ApiLogGroup"
+        "WebhookLogGroup"
       ]
     },
-    "ApiLambdaVersionm2aNcuZ8wZP6GYjk6zuxEqPZDvkTYm7MysB5fRc00Yo": {
+    "WebhookLambdaVersion3h97V9PeCug4oYV7N8aAe1Bu0PuSlcZQr5P3NY04o8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "ApiLambdaFunction"
+          "Ref": "WebhookLambdaFunction"
         },
-        "CodeSha256": "+ol8G+9fQw5dgZ82O4UsQTT6voYLfmlKf3ymLSeySjg="
+        "CodeSha256": "3yJYPTyk+G3wmZmopbNiZl4Hcy9MW5gCYnwc1GTGS04="
       }
     },
-    "HttpApi": {
-      "Type": "AWS::ApiGatewayV2::Api",
+    "WebhookLambdaFunctionUrl": {
+      "Type": "AWS::Lambda::Url",
       "Properties": {
-        "Name": "dev-aws-python-flask-dynamodb-api",
-        "ProtocolType": "HTTP"
-      }
-    },
-    "HttpApiStage": {
-      "Type": "AWS::ApiGatewayV2::Stage",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "StageName": "$default",
-        "AutoDeploy": true,
-        "DefaultRouteSettings": {
-          "DetailedMetricsEnabled": false
+        "AuthType": "NONE",
+        "TargetFunctionArn": {
+          "Fn::GetAtt": [
+            "WebhookLambdaFunction",
+            "Arn"
+          ]
         }
       }
     },
-    "ApiLambdaPermissionHttpApi": {
+    "WebhookLambdaPermissionFnUrl": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "ApiLambdaFunction",
+            "WebhookLambdaFunction",
             "Arn"
           ]
         },
-        "Action": "lambda:InvokeFunction",
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition"
-              },
-              ":execute-api:",
-              {
-                "Ref": "AWS::Region"
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId"
-              },
-              ":",
-              {
-                "Ref": "HttpApi"
-              },
-              "/*"
-            ]
-          ]
-        }
+        "Action": "lambda:InvokeFunctionUrl",
+        "Principal": "*",
+        "FunctionUrlAuthType": "NONE"
       }
-    },
-    "HttpApiIntegrationApi": {
-      "Type": "AWS::ApiGatewayV2::Integration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "IntegrationType": "AWS_PROXY",
-        "IntegrationUri": {
-          "Fn::GetAtt": [
-            "ApiLambdaFunction",
-            "Arn"
-          ]
-        },
-        "PayloadFormatVersion": "2.0",
-        "TimeoutInMillis": 30000
-      }
-    },
-    "HttpApiRouteDefault": {
-      "Type": "AWS::ApiGatewayV2::Route",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "RouteKey": "$default",
-        "Target": {
-          "Fn::Join": [
-            "/",
-            [
-              "integrations",
-              {
-                "Ref": "HttpApiIntegrationApi"
-              }
-            ]
-          ]
-        }
-      },
-      "DependsOn": "HttpApiIntegrationApi"
     },
     "UsersTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
         "AttributeDefinitions": [
           {
-            "AttributeName": "status",
+            "AttributeName": "phone_number",
             "AttributeType": "S"
           },
           {
-            "AttributeName": "phone_number",
+            "AttributeName": "status",
             "AttributeType": "S"
           }
         ],
         "KeySchema": [
           {
-            "AttributeName": "status",
+            "AttributeName": "phone_number",
             "KeyType": "HASH"
           },
           {
-            "AttributeName": "phone_number",
+            "AttributeName": "status",
             "KeyType": "RANGE"
           }
         ],
@@ -335,7 +267,7 @@
           "ReadCapacityUnits": 1,
           "WriteCapacityUnits": 1
         },
-        "TableName": "isi-bible-verse-clients-db-dev"
+        "TableName": "isi-bible-verse-clients-db2-dev"
       }
     }
   },
@@ -348,47 +280,25 @@
         "Name": "sls-aws-python-flask-dynamodb-api-dev-ServerlessDeploymentBucketName"
       }
     },
-    "ApiLambdaFunctionQualifiedArn": {
+    "WebhookLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionm2aNcuZ8wZP6GYjk6zuxEqPZDvkTYm7MysB5fRc00Yo"
+        "Ref": "WebhookLambdaVersion3h97V9PeCug4oYV7N8aAe1Bu0PuSlcZQr5P3NY04o8"
       },
       "Export": {
-        "Name": "sls-aws-python-flask-dynamodb-api-dev-ApiLambdaFunctionQualifiedArn"
+        "Name": "sls-aws-python-flask-dynamodb-api-dev-WebhookLambdaFunctionQualifiedArn"
       }
     },
-    "HttpApiId": {
-      "Description": "Id of the HTTP API",
+    "WebhookLambdaFunctionUrl": {
+      "Description": "Lambda Function URL",
       "Value": {
-        "Ref": "HttpApi"
-      },
-      "Export": {
-        "Name": "sls-aws-python-flask-dynamodb-api-dev-HttpApiId"
-      }
-    },
-    "HttpApiUrl": {
-      "Description": "URL of the HTTP API",
-      "Value": {
-        "Fn::Join": [
-          "",
-          [
-            "https://",
-            {
-              "Ref": "HttpApi"
-            },
-            ".execute-api.",
-            {
-              "Ref": "AWS::Region"
-            },
-            ".",
-            {
-              "Ref": "AWS::URLSuffix"
-            }
-          ]
+        "Fn::GetAtt": [
+          "WebhookLambdaFunctionUrl",
+          "FunctionUrl"
         ]
       },
       "Export": {
-        "Name": "sls-aws-python-flask-dynamodb-api-dev-HttpApiUrl"
+        "Name": "sls-aws-python-flask-dynamodb-api-dev-WebhookLambdaFunctionUrl"
       }
     }
   }

@@ -3,7 +3,7 @@ service: aws-python-flask-dynamodb-api
 frameworkVersion: '3'
 
 custom:
-  tableName: 'isi-bible-verse-clients-db-${sls:stage}'
+  tableName: 'isi-bible-verse-clients-db2-${sls:stage}'
   wsgi:
     app: app.app
 
@@ -25,12 +25,12 @@ provider:
             - Fn::GetAtt: [ UsersTable, Arn ]
   environment:
     USERS_TABLE: ${self:custom.tableName}
+    TWILIO_AUTH_TOKEN: ${ssm:/twilio/trial-account/twilio_auth_token}
 
 functions:
-  api:
+  webhook:
     handler: wsgi_handler.handler
-    events:
-      - httpApi: '*'
+    url: true
 
 plugins:
   - serverless-wsgi
@@ -42,14 +42,14 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          - AttributeName: status
-            AttributeType: S
           - AttributeName: phone_number
+            AttributeType: S
+          - AttributeName: status
             AttributeType: S
         KeySchema:
-          - AttributeName: status
-            KeyType: HASH
           - AttributeName: phone_number
+            KeyType: HASH
+          - AttributeName: status
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1

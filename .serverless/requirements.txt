@@ -1,3 +1,4 @@
 Flask==1.1.4
 Werkzeug==1.0.1
 markupsafe==2.0.1
+twilio>=6.63.2
