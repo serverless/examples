@@ -68,7 +68,7 @@ const config = {
           const runtime = getRuntime(dirname);
           const description = (data.description) ? `<br/> ${data.description}` : '';
           // add table rows
-          md += `| [${formatPluginName(data.name)}](${exampleUrl}) ${description} | ${runtime} |\n`;
+          md += `| [${formatPluginName(dirname)}](${exampleUrl}) ${description} | ${runtime} |\n`;
         } catch (error) {
           error.message = `Error processign file: "${example}": ${error.message}`;
           throw error;
