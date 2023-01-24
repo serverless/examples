@@ -61,13 +61,18 @@ const config = {
       let md = '| Example | Runtime  |\n';
       md += '|:--------------------------- |:-----|\n';
       examples.forEach((example) => {
-        const data = JSON.parse(fs.readFileSync(example, 'utf8'));
-        const dirname = path.dirname(example);
-        const exampleUrl = `https://github.com/serverless/examples/tree/v3/${dirname}`;
-        const runtime = getRuntime(dirname);
-        const description = (data.description) ? `<br/> ${data.description}` : '';
-        // add table rows
-        md += `| [${formatPluginName(data.name)}](${exampleUrl}) ${description} | ${runtime} |\n`;
+        try {
+          const data = JSON.parse(fs.readFileSync(example, 'utf8'));
+          const dirname = path.dirname(example);
+          const exampleUrl = `https://github.com/serverless/examples/tree/v3/${dirname}`;
+          const runtime = getRuntime(dirname);
+          const description = (data.description) ? `<br/> ${data.description}` : '';
+          // add table rows
+          md += `| [${formatPluginName(data.name)}](${exampleUrl}) ${description} | ${runtime} |\n`;
+        } catch (error) {
+          error.message = `Error processign file: "${example}": ${error.message}`;
+          throw error;
+        }
       });
 
       return md;
