@@ -523,7 +523,8 @@
     "description": "Boilerplate to live stream using AWS MediaLive and MediaStore",
     "githubUrl": "https://github.com/adimoraret/golive/"
   },
-  { "name": "HTTP Headers Checks",
+  {
+    "name": "HTTP Headers Checks",
     "description": "Serverless Application to check integrity of the headers of a given HTTP server",
     "githubUrl": "https://github.com/authdog/http-headers-check"
   },
@@ -626,5 +627,5 @@
     "name": "Serverless Typescript using Middy with Custom Middlewares",
     "description": "Serverless Framework example to deploy a lambda function using https://middy.js.org/, the stylish Node.js middleware engine for AWS Lambda with custom middlewares.",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-middy-custom-middleware"
-  },
+  }
 ]
