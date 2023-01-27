@@ -3,7 +3,7 @@ service: aws-python-flask-dynamodb-api
 frameworkVersion: '3'
 
 custom:
-  tableName: 'isi-bible-verse-clients-db2-${sls:stage}'
+  tableName: 'isi-bible-verse-clients-db3-${sls:stage}'
   wsgi:
     app: app.app
 
@@ -44,13 +44,9 @@ resources:
         AttributeDefinitions:
           - AttributeName: phone_number
             AttributeType: S
-          - AttributeName: status
-            AttributeType: S
         KeySchema:
           - AttributeName: phone_number
             KeyType: HASH
-          - AttributeName: status
-            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1

@@ -33,7 +33,7 @@
         }
       },
       "environment": {
-        "USERS_TABLE": "isi-bible-verse-clients-db2-dev",
+        "USERS_TABLE": "isi-bible-verse-clients-db3-dev",
         "TWILIO_AUTH_TOKEN": "4515214055c4603765fcbfe82ac3e2eb"
       },
       "stage": "dev",
@@ -205,7 +205,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-python-flask-dynamodb-api/dev/1674452894839-2023-01-23T05:48:14.839Z/aws-python-flask-dynamodb-api.zip"
+                "S3Key": "serverless/aws-python-flask-dynamodb-api/dev/1674782391291-2023-01-27T01:19:51.291Z/aws-python-flask-dynamodb-api.zip"
               },
               "Handler": "wsgi_handler.handler",
               "Runtime": "python3.9",
@@ -214,7 +214,7 @@
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "USERS_TABLE": "isi-bible-verse-clients-db2-dev",
+                  "USERS_TABLE": "isi-bible-verse-clients-db3-dev",
                   "TWILIO_AUTH_TOKEN": "4515214055c4603765fcbfe82ac3e2eb"
                 }
               },
@@ -229,14 +229,14 @@
               "WebhookLogGroup"
             ]
           },
-          "WebhookLambdaVersion3h97V9PeCug4oYV7N8aAe1Bu0PuSlcZQr5P3NY04o8": {
+          "WebhookLambdaVersionqIy64abaqRjfPWsJ5kIPGO2SwoIvAVgbXaBvLqk9dyI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "WebhookLambdaFunction"
               },
-              "CodeSha256": "3yJYPTyk+G3wmZmopbNiZl4Hcy9MW5gCYnwc1GTGS04="
+              "CodeSha256": "duhNVqCV+gwWAEZTTSpIeNur/w/eVjq/1fShyhRsRAY="
             }
           },
           "WebhookLambdaFunctionUrl": {
@@ -269,27 +269,19 @@
                 {
                   "AttributeName": "phone_number",
                   "AttributeType": "S"
-                },
-                {
-                  "AttributeName": "status",
-                  "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
                   "AttributeName": "phone_number",
                   "KeyType": "HASH"
-                },
-                {
-                  "AttributeName": "status",
-                  "KeyType": "RANGE"
                 }
               ],
               "ProvisionedThroughput": {
                 "ReadCapacityUnits": 1,
                 "WriteCapacityUnits": 1
               },
-              "TableName": "isi-bible-verse-clients-db2-dev"
+              "TableName": "isi-bible-verse-clients-db3-dev"
             }
           }
         },
@@ -305,7 +297,7 @@
           "WebhookLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "WebhookLambdaVersion3h97V9PeCug4oYV7N8aAe1Bu0PuSlcZQr5P3NY04o8"
+              "Ref": "WebhookLambdaVersionqIy64abaqRjfPWsJ5kIPGO2SwoIvAVgbXaBvLqk9dyI"
             },
             "Export": {
               "Name": "sls-aws-python-flask-dynamodb-api-dev-WebhookLambdaFunctionQualifiedArn"
@@ -410,7 +402,7 @@
       "vpc": {}
     },
     "custom": {
-      "tableName": "isi-bible-verse-clients-db2-dev",
+      "tableName": "isi-bible-verse-clients-db3-dev",
       "wsgi": {
         "app": "app.app"
       }
@@ -431,7 +423,7 @@
         "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "WebhookLambdaVersion3h97V9PeCug4oYV7N8aAe1Bu0PuSlcZQr5P3NY04o8"
+        "versionLogicalId": "WebhookLambdaVersionqIy64abaqRjfPWsJ5kIPGO2SwoIvAVgbXaBvLqk9dyI"
       }
     },
     "resources": {
@@ -443,27 +435,19 @@
               {
                 "AttributeName": "phone_number",
                 "AttributeType": "S"
-              },
-              {
-                "AttributeName": "status",
-                "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
                 "AttributeName": "phone_number",
                 "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "status",
-                "KeyType": "RANGE"
               }
             ],
             "ProvisionedThroughput": {
               "ReadCapacityUnits": 1,
               "WriteCapacityUnits": 1
             },
-            "TableName": "isi-bible-verse-clients-db2-dev"
+            "TableName": "isi-bible-verse-clients-db3-dev"
           }
         }
       },
@@ -495,7 +479,7 @@
     "artifact": "/Users/calebmcook/Documents/dev/Github Repos/isi-bible-verse-sender-api/.serverless/aws-python-flask-dynamodb-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-python-flask-dynamodb-api/dev/1674452894839-2023-01-23T05:48:14.839Z",
+    "artifactDirectoryName": "serverless/aws-python-flask-dynamodb-api/dev/1674782391291-2023-01-27T01:19:51.291Z",
     "artifact": "aws-python-flask-dynamodb-api.zip"
   }
 }
