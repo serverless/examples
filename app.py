@@ -28,18 +28,18 @@ def create_user():
         abort(400)
 
     #pull data from request
-    status = str.upper(request.form['Body'])
+    current_status = str.upper(request.form['Body'])
     phone_number = request.form['From']
 
     #response logic
-    if status == 'DAILY-SMS':
+    if current_status == 'DAILY-SMS':
         msg = 'Thank you for your interest in the ISI daily bible verse service! You are now subscribed to the SMS sent at 7am AZ time. Text "STOP-SERVICES" any time to cancel your subscription.'
-    elif status == 'STOP-SERVICES':
+    elif current_status == 'STOP-SERVICES':
         msg = 'Thank you for your interest in the ISI daily bible verse service! You are now unsubscribed to all services. Text "DAILY-SMS" anytime to resume services.'
     else:
         msg = 'Thank you for your interest in the ISI daily bible verse service. The keyword you sent is not among the available options. Please choose from the following: "DAILY-SMS" : daily SMS subscription at 7am., "STOP-SERVICES" : unsubscribe from all services.'
 
-    if status in ('DAILY-SMS', 'STOP-SERVICES'):
+    if current_status in ('DAILY-SMS', 'STOP-SERVICES'):
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(USERS_TABLE)
 
