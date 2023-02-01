@@ -3,17 +3,17 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
 
 constructs:
   jobs:
     type: queue
     worker:
-      handler: handler.consumer
+      handler: src/index.consumer
 
 functions:
   producer:
-    handler: handler.producer
+    handler: src/index.producer
     events:
       - httpApi:
           method: post

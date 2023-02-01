@@ -1,11 +1,10 @@
 service: aws-node # NOTE: update this with your service name
-
 frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
 
 functions:
-  hello:
-    handler: handler.hello
+  function1:
+    handler: src/index.handler

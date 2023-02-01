@@ -6,7 +6,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
   iam:
     role:
       statements:
@@ -25,7 +25,7 @@ provider:
 
 functions:
   api:
-    handler: handler.handler
+    handler: src/index.handler
     events:
       - httpApi: '*'
 
