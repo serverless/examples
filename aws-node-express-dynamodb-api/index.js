@@ -1,11 +1,18 @@
-const AWS = require("aws-sdk");
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const {
+  DynamoDBDocumentClient,
+  GetCommand,
+  PutCommand,
+} = require("@aws-sdk/lib-dynamodb");
 const express = require("express");
 const serverless = require("serverless-http");
+
 
 const app = express();
 
 const USERS_TABLE = process.env.USERS_TABLE;
-const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+const client = new DynamoDBClient();
+const dynamoDbClient = DynamoDBDocumentClient.from(client);
 
 app.use(express.json());
 
@@ -18,7 +25,7 @@ app.get("/users/:userId", async function (req, res) {
   };
 
   try {
-    const { Item } = await dynamoDbClient.get(params).promise();
+    const { Item } = await dynamoDbClient.send(new GetCommand(params));
     if (Item) {
       const { userId, name } = Item;
       res.json({ userId, name });
@@ -50,7 +57,7 @@ app.post("/users", async function (req, res) {
   };
 
   try {
-    await dynamoDbClient.put(params).promise();
+    await dynamoDbClient.send(new PutCommand(params));
     res.json({ userId, name });
   } catch (error) {
     console.log(error);

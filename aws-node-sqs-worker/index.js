@@ -1,6 +1,5 @@
-const { SQS } = require("aws-sdk");
-
-const sqs = new SQS();
+const { SQSClient, SendMessageCommand } = require("@aws-sdk/client-sqs");
+const sqs = new SQSClient();
 
 const producer = async (event) => {
   let statusCode = 200;
@@ -16,18 +15,16 @@ const producer = async (event) => {
   }
 
   try {
-    await sqs
-      .sendMessage({
-        QueueUrl: process.env.QUEUE_URL,
-        MessageBody: event.body,
-        MessageAttributes: {
-          AttributeName: {
-            StringValue: "Attribute Value",
-            DataType: "String",
-          },
+    await sqs.send(new SendMessageCommand({
+      QueueUrl: process.env.QUEUE_URL,
+      MessageBody: event.body,
+      MessageAttributes: {
+        AttributeName: {
+          StringValue: "Attribute Value",
+          DataType: "String",
         },
-      })
-      .promise();
+      },
+    }));
 
     message = "Message accepted!";
   } catch (error) {

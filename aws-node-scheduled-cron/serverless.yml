@@ -1,20 +1,18 @@
 service: aws-node-scheduled-cron
-
 frameworkVersion: '3'
-
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
 
 functions:
   rateHandler:
-    handler: handler.run
+    handler: index.run
     events:
       # Invoke Lambda function every minute
       - schedule: rate(1 minute)
   cronHandler:
-    handler: handler.run
+    handler: index.run
     events:
       # Invoke Lambda function every 2nd minute from Mon-Fri
       - schedule: cron(0/2 * ? * MON-FRI *)
