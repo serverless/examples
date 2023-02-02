@@ -9,11 +9,11 @@ constructs:
   jobs:
     type: queue
     worker:
-      handler: src/index.consumer
+      handler: index.consumer
 
 functions:
   producer:
-    handler: src/index.producer
+    handler: index.producer
     events:
       - httpApi:
           method: post

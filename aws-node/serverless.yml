@@ -7,4 +7,4 @@ provider:
 
 functions:
   function1:
-    handler: src/index.handler
+    handler: index.handler

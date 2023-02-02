@@ -7,12 +7,12 @@ provider:
 
 functions:
   rateHandler:
-    handler: src/index.run
+    handler: index.run
     events:
       # Invoke Lambda function every minute
       - schedule: rate(1 minute)
   cronHandler:
-    handler: src/index.run
+    handler: index.run
     events:
       # Invoke Lambda function every 2nd minute from Mon-Fri
       - schedule: cron(0/2 * ? * MON-FRI *)
