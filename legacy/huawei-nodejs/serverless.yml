@@ -27,7 +27,7 @@ provider: # provider information
   # stage: dev # 阶段，默认为 dev
   # package: default
   # memorySize: 256 # 默认256M，优先级：函数设置>默认设置
-  # timeout: 10 # 默认10s，优先级：函数设置>默认设置
+  # timeout: 30 # 默认30s，优先级：函数设置>默认设置
   # region: cn-north-4 # 默认cn-north-4，优先级：函数设置>默认设置
   # environment: # 环境变量，可选
   #   variables:
@@ -44,7 +44,7 @@ functions:
     # description: Huawei Serverless Cloud Function
     # package: default
     # memorySize: 256
-    # timeout: 10
+    # timeout: 30
     # region: cn-north-4
     # environment:
     #   variables:
