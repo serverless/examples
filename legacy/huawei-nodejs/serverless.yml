@@ -45,7 +45,6 @@ functions:
     # package: default
     # memorySize: 256
     # timeout: 30
-    # region: cn-north-4
     # environment:
     #   variables:
     #     ENV_FIRST: env1
