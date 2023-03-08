@@ -1,0 +1,51 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check out the Huawei Cloud Function Compute
+# plugin docs:
+#    https://github.com/zy-linn/serverless-huawei-functions
+#
+# For documentation on Huawei Cloud Function Compute itself:
+#    https://www.huaweicloud.com/product/functiongraph.html
+
+# Update the service name below with your own service name
+
+service: fg-service # service name
+
+frameworkVersion: "3"
+
+provider: # provider information
+  name: huawei
+  credentials: ~/.fg/credentials # 绝对地址，默认为 ~/credentials
+  runtime: Node.js14.18 # 可以指定华为云支持的Runtime， 默认Node.js14.18
+  # you can overwrite defaults here  
+  # stage: dev # 阶段，默认为 dev
+  # package: default
+  # memorySize: 256 # 默认256M，优先级：函数设置>默认设置
+  # timeout: 30 # 默认30s，优先级：函数设置>默认设置
+  # region: cn-north-4 # 默认cn-north-4，优先级：函数设置>默认设置
+  # environment: # 环境变量，可选
+  #   variables:
+  #     ENV_FIRST: env1
+  #     ENV_SECOND: env2
+
+plugins:
+  - serverless-huawei-functions
+
+functions:
+  hello_world:
+    handler: index.handler
+    # you can overwrite config here  
+    # description: Huawei Serverless Cloud Function
+    # package: default
+    # memorySize: 256
+    # timeout: 30
+    # environment:
+    #   variables:
+    #     ENV_FIRST: env1
+    #     ENV_SECOND: env2

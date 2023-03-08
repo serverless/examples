@@ -1,0 +1,14 @@
+{
+  "name": "fg-nodejs",
+  "version": "1.0.0",
+  "description": "Huawei Serverless Cloud Function example using Nodejs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cloud.tencent.com",
+  "license": "MIT",
+  "dependencies": {
+    "serverless-huawei-functions": "*"
+  }
+}
