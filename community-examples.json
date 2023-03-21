@@ -627,5 +627,10 @@
     "name": "Serverless Typescript using Middy with Custom Middlewares",
     "description": "Serverless Framework example to deploy a lambda function using https://middy.js.org/, the stylish Node.js middleware engine for AWS Lambda with custom middlewares.",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-middy-custom-middleware"
+  },
+  {
+    "name": "Serverless Typescript cognito local lambda triggers",
+    "description": "Serverless Framework example to run a cognito triggered lambda locally using Serverless offline",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-cognito-local"
   }
 ]
