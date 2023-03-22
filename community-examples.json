@@ -581,51 +581,56 @@
   {
     "name": "Serverless AppSync offline with TypeScript",
     "description": "Serverless Framework example to deploy an AWS AppSync API using TypeScript. It also has a local development environment using Serverless Offline.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-appsync-nodejs"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-appsync-node-typescript"
   },
   {
     "name": "Serverless AppSync offline with Python",
     "description": "Serverless Framework example to deploy an AWS AppSync API using Python. It also has a local development environment using Serverless Offline.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-appsync-python"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-appsync-python"
   },
   {
     "name": "Serverless Glue with Python Shell and PySpark Jobs",
     "description": "Serverless Framework example to deploy an AWS Glue job using Python Shell and PySpark.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-glue"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-glue-deployment"
   },
   {
     "name": "Serverless Glue with Python Shell and PySpark - Complete Boilerplate",
     "description": "A complete example of an AWS Glue application that uses the Serverless Framework to deploy the infrastructure and DevContainers and/or Docker Compose to run the application locally with AWS Glue Libs, Spark, Jupyter Notebook, AWS CLI, among other tools. It provides jobs using Python Shell and PySpark.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/_apps/serverless-glue"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-glue-full-boilerplate"
   },
   {
     "name": "Neo4j Deployment in AWS EC2",
     "description": "Serverless Framework example to deploy a Neo4j instance in EC2.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-neo4j-ec2"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-neo4j-ec2"
   },
   {
     "name": "Serverless S3 Local example",
     "description": "Serverless Framework example to run a lambda function locally using",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-s3-local"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-s3-local"
   },
   {
     "name": "Serverless DocumentDB Cluster",
     "description": "Serverless Framework example to deploy a DocumentDB cluster with all the necessary resources. It accepts params to customize the deployment without even having to modify the source code.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-documentdb"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-documentdb"
   },
   {
     "name": "Serverless RDS Postgres Instance",
     "description": "Serverless Framework example to deploy a RDS Postgres Instance with all the necessary resources. It accepts params to customize the deployment without even having to modify the source code.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-rds-postgres"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-rds-postgres"
   },
   {
     "name": "Serverless Typescript using Middy",
     "description": "Serverless Framework example to deploy a lambda function using https://middy.js.org/, the stylish Node.js middleware engine for AWS Lambda.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-middy"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-node-typescript-middy"
   },
   {
     "name": "Serverless Typescript using Middy with Custom Middlewares",
     "description": "Serverless Framework example to deploy a lambda function using https://middy.js.org/, the stylish Node.js middleware engine for AWS Lambda with custom middlewares.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless/serverless-middy-custom-middleware"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-node-typescript-middy-custom-middleware"
+  },
+  {
+    "name": "Serverless Typescript cognito local lambda triggers",
+    "description": "Serverless Framework example to run a cognito triggered lambda locally using Serverless offline",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-cognito-local"
   }
 ]
