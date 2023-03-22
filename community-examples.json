@@ -637,5 +637,10 @@
     "name": "Serverless SQS offline + TypeScript + ElasticMQ Example",
     "description": "Serverless Framework example to run AWS SQS service locally using https://github.com/softwaremill/elasticmq",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-sqs-node-typescript-offline-with-elasticmq"
+  },
+  {
+    "name": "Serverless SQS offline + Python + Localstack",
+    "description": "Serverless Framework example to run AWS SQS service locally using https://github.com/localstack",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-sqs-python"
   }
 ]
