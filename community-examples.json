@@ -632,5 +632,10 @@
     "name": "Serverless Typescript cognito local lambda triggers",
     "description": "Serverless Framework example to run a cognito triggered lambda locally using Serverless offline",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-cognito-local"
+  },
+  {
+    "name": "Serverless SQS offline + TypeScript + ElasticMQ Example",
+    "description": "Serverless Framework example to run AWS SQS service locally using https://github.com/softwaremill/elasticmq",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-sqs-node-typescript-offline-with-elasticmq"
   }
 ]
