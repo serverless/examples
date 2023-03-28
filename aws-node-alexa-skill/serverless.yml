@@ -1,6 +1,6 @@
 service: aws-node-alexa-skill
 
-frameworkVersion: ">=1.4.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
