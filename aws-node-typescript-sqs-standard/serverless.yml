@@ -1,40 +1,27 @@
-service:
-  name: aws-node-typescript-sqs-standard
+service: aws-node-typescript-sqs-standard
+
+frameworkVersion: "3"
 
 plugins:
-  - serverless-webpack
+  - serverless-lift
+  - serverless-plugin-typescript
 
 provider:
   name: aws
-  runtime: nodejs10.x
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - sqs:SendMessage
-          Resource:
-            - Fn::GetAtt: [ receiverQueue, Arn ]
-      
+  runtime: nodejs14.x
+
+constructs:
+  queue:
+    type: queue
+    worker:
+      handler: handlers/receiver.handler
+
 functions:
   sender:
-    handler: handler.sender
+    handler: handlers/sender.handler
+    environment:
+      QUEUE_URL: ${construct:queue.queueUrl}
     events:
-      - http:
+      - httpApi:
           method: post
-          path: sender
-
-  receiver:
-    handler: handler.receiver
-    events:
-      - sqs:
-          arn:
-            Fn::GetAtt:
-              - receiverQueue
-              - Arn
-resources:
-  Resources:
-    receiverQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: receiverQueue
+          path: /sender
