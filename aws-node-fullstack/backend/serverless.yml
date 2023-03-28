@@ -6,7 +6,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
   # credentials: ${secrets:aws-enterprise} # Enter an AWS Secret like this, after you create it in the Dashboard.
 
 functions:
