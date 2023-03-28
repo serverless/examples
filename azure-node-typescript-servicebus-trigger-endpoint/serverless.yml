@@ -1,6 +1,8 @@
 service:
     name: service-bus-trigger-example
 
+frameworkVersion: "3"
+
 plugins:
     - serverless-azure-functions
     - serverless-webpack
@@ -9,7 +11,7 @@ plugins:
 provider:
     name: azure
     stage: ${opt:env}
-    runtime: nodejs10
+    runtime: nodejs18.x
     region: '<Region>'
     type: premium
     subscriptionId: '<AzureSubscriptionId'

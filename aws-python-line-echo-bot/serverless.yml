@@ -1,4 +1,6 @@
 service: aws-python-line-echo-bot
+frameworkVersion: "3"
+
 provider:
   name: aws
   runtime: python3.7

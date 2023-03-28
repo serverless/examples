@@ -1,6 +1,8 @@
 
 service: aws-custom-authorizer-auth0
 
+frameworkVersion: "3"
+
 package:
   exclude:
     - ./**

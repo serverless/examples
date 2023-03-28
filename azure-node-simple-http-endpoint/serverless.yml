@@ -1,5 +1,7 @@
 service: azfx-node-http
 
+frameworkVersion: "3"
+
 provider:
   name: azure
   location: West US

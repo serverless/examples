@@ -1,5 +1,7 @@
 service: swift_service
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
   runtime: swift

@@ -1,6 +1,8 @@
 service:
   name: aws-node-typescript-apollo-lambda
 
+frameworkVersion: "3"
+
 plugins:
   - serverless-dotenv-plugin
   - serverless-offline
@@ -8,7 +10,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   timeout: 15
   apiKeys:
     - name: lambdaApolloKey

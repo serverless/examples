@@ -1,5 +1,7 @@
 service: serverless-telegram-bot
 
+frameworkVersion: "3"
+
 provider:
   name: aws
   runtime: python3.6

@@ -1,10 +1,10 @@
 service: serverless-rest-api-with-dynamodb
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs18.x
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iam:

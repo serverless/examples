@@ -1,6 +1,6 @@
 service: serverless-rest-api-with-dynamodb
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: "3"
 
 plugins:
   - serverless-dynamodb-local
@@ -21,7 +21,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iam:

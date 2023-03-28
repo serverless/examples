@@ -1,8 +1,10 @@
 service: node-simple-http-endpoint # NOTE: Don't put the word "google" in here
 
+frameworkVersion: "3"
+
 provider:
   name: google
-  runtime: 'nodejs8'
+  runtime: 'nodejs18.x'
   project: my-project-1234 #google account project name
   credentials: ~/.gcloud/keyfile.json # path must be absolute
 

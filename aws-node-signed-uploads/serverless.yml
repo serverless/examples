@@ -1,5 +1,7 @@
 service: aws-node-signed-uploads
 
+frameworkVersion: "3"
+
 plugins:
   - serverless-webpack
   - serverless-offline #serverless-offline needs to be last in the list
@@ -15,7 +17,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: ${opt:stage, env:AWS_STAGE, 'dev'}
   region: ${opt:region, env:AWS_REGION, 'eu-central-1'}
   environment:

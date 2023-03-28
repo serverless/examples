@@ -1,6 +1,6 @@
 service: aws-ruby-cron-with-dynamodb
 
-frameworkVersion: '2'
+frameworkVersion: "3"
 
 provider:
   name: aws

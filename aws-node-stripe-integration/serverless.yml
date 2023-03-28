@@ -17,9 +17,11 @@ service: aws-node-stripe-integration
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
 
+frameworkVersion: "3"
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: test
   region: us-east-1
 

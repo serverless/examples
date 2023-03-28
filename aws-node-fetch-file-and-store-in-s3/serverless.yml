@@ -1,13 +1,13 @@
 service: fetch-file-and-store-in-s3
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: "3"
 
 custom:
   bucket: <your-bucket-name>
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: dev
   region: us-west-1
   iam:

@@ -1,6 +1,6 @@
 service: single-page-app-via-cloudfront7
 
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: "3"
 
 plugins:
   - serverless-single-page-app-plugin

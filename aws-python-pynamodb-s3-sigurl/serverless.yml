@@ -1,6 +1,6 @@
 service: aws-python-pynamodb-s3-sigurl
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: "3"
 
 plugins:
   - serverless-python-requirements

@@ -1,5 +1,7 @@
 service: php-service
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
   runtime: php

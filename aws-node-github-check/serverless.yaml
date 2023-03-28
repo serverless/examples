@@ -1,5 +1,7 @@
 service: serverless-github-check
 
+frameworkVersion: "3"
+
 plugins:
   - serverless-webpack
   - serverless-offline
@@ -11,7 +13,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   profile: personal
   region: eu-west-1
   environment:

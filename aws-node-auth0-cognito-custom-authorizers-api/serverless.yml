@@ -1,9 +1,11 @@
 
 service: aws-node-auth0-cognito-custom-authorizers-api
 
+frameworkVersion: "3"
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
 functions:
   publicEndpoint:

@@ -1,8 +1,9 @@
 service: scrapper-lambda
+frameworkVersion: "3"
 provider:
   name: aws
   profile: <your aws profile>
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
 plugins:
   - serverless-offline

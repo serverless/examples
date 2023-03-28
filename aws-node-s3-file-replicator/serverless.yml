@@ -1,5 +1,7 @@
 service: replicator
 
+frameworkVersion: "3"
+
 plugins:
   - serverless-lift
 
@@ -11,7 +13,7 @@ constructs:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: dev
   region: us-east-1
   lambdaHashingVersion: 20201221

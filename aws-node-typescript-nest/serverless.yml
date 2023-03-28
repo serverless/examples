@@ -1,6 +1,8 @@
 service:
   name: serverless-nest-example
 
+frameworkVersion: "3"
+
 plugins:
   - '@hewmen/serverless-plugin-typescript'  
   - serverless-plugin-optimize
@@ -15,7 +17,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
 package:
   individually: true

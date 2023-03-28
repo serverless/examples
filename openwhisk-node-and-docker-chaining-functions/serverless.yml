@@ -13,6 +13,8 @@
 
 service: testing
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
 

@@ -1,11 +1,13 @@
 service: ${file(./secrets.json):ApiName}
 
+frameworkVersion: "3"
+
 provider:
   name: aws
   region: us-east-1
   stage: dev
   memorySize: 256
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   iam:
     role: LambdaRole
   environment:

@@ -1,8 +1,10 @@
 service: serverless-side-rendering-vue-nuxt
 
+frameworkVersion: "3"
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: ${self:custom.secrets.NODE_ENV}
   region: us-east-1
   environment: 
