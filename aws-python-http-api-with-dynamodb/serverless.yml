@@ -1,9 +1,9 @@
 service: serverless-http-api-dynamodb
-frameworkVersion: '2'
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.9
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
   httpApi:

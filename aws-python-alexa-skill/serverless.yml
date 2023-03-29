@@ -1,10 +1,10 @@
 service: aws-python-alexa-skill
 
-frameworkVersion: ">=1.4.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.9
 
 functions:
   luckyNumber:

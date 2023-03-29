@@ -1,5 +1,7 @@
 service: your-service # update this with your service name
 
+frameworkVersion: "3"
+
 provider:
   name: twilio
 

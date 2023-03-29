@@ -1,5 +1,5 @@
 service: aws-golang-s3-file-replicator
-frameworkVersion: ">=2.24.0"
+frameworkVersion: "3"
 
 custom:
   inputBucket: replicator-input-101

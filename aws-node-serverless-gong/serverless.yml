@@ -1,8 +1,8 @@
 service: serverless-gong
-frameworkVersion: '>=1.4.0 <2.0.0'
+frameworkVersion: "3"
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 functions:
   handleGong:
     handler: handler.gongHandler

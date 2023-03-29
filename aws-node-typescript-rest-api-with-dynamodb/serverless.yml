@@ -1,10 +1,10 @@
 service: sls-typescript-rest-api-with-dynamodb
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   region: eu-west-2
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}

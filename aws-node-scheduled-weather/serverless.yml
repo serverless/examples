@@ -1,9 +1,9 @@
 service: scheduled-weather-example
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   environment:
     RECIPIENT: tom@carrotcreative.com
     DARK_SKY_API_KEY: abc123

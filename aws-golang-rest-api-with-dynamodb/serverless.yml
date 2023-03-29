@@ -1,7 +1,7 @@
 app: aws-golang-rest-api-with-dynamodb
 service: aws-golang-rest-api-with-dynamodb
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: "3"
 
 provider:
   name: aws

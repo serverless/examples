@@ -4,7 +4,7 @@ provider:
 
 functions:
   hello:
-    runtime: python3.6
+    runtime: python3.9
     events:
       - httpApi:
           method: get

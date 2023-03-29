@@ -1,12 +1,14 @@
 
 service: recursive-invocation-example
 
+frameworkVersion: "3"
+
 custom:
   functionARN: yourFunctionARN
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 #  iam:
 #    role:
 #      statements:

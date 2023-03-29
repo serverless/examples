@@ -1,8 +1,10 @@
 service: python_service
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
-  runtime: python:3
+  runtime: python3.9
 
 functions:
   cron:

@@ -1,6 +1,6 @@
 service: ruby-simple-http-endpoint
 
-frameworkVersion: ">=2.70.0"
+frameworkVersion: "3"
 
 package:
   exclude:
@@ -13,7 +13,7 @@ plugins:
 
 provider:
   name: google
-  runtime: ruby27
+  runtime: ruby2.7
   project: l<projectname>
   credentials: ~/.config/gcloud/creds.json # path must be absolute
 

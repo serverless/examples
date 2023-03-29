@@ -1,5 +1,7 @@
 service: python-clock
 
+frameworkVersion: "3"
+
 provider:
   name: kubeless
   runtime: python2.7

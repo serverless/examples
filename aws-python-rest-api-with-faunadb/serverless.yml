@@ -1,6 +1,6 @@
 service: serverless-rest-api-with-faunadb
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: "3"
 
 package:
   exclude:
@@ -12,7 +12,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.9
   region: us-east-1
   stage: dev
   environment:

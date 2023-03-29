@@ -1,8 +1,10 @@
 service: github-webhook-listener
 
+frameworkVersion: "3"
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   environment:
     GITHUB_WEBHOOK_SECRET: REPLACE-WITH-YOUR-SECRET-HERE
 

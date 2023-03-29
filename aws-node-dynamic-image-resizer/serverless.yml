@@ -1,13 +1,15 @@
 service:
   name: ${self:custom.serviceName}
 
+frameworkVersion: "3"
+
 plugins:
   - serverless-offline
   - serverless-webpack
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   profile: dev-fii
 
   usagePlan:

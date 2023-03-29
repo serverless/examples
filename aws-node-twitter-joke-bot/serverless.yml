@@ -1,8 +1,10 @@
 service: baddadjokesbot
 
+frameworkVersion: "3"
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-west-1'}
 

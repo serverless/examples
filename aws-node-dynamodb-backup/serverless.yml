@@ -1,5 +1,7 @@
 service: serverless-dynamodb-backup
 
+frameworkVersion: "3"
+
 custom:
   bucket: EXAMPLE
   dynamoDBTableName: "${opt:stage, self:provider.stage}_EXAMPLE"
@@ -7,7 +9,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: staging
   iam:
     role:

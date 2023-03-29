@@ -1,6 +1,6 @@
 service: golang-simple-http-endpoint
 
-frameworkVersion: ">=1.33.0 <2.0.0"
+frameworkVersion: "3"
 
 package:
   exclude:

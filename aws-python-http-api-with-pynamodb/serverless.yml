@@ -1,5 +1,5 @@
 service: serverless-http-api-pynamodb
-frameworkVersion: '2'
+frameworkVersion: "3"
 
 plugins:
   - serverless-python-requirements
@@ -17,7 +17,7 @@ package:
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.9
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
   httpApi:

@@ -18,7 +18,7 @@ service: my-service # service name
 
 provider: # provider information
   name: tencent
-  runtime: Python3.6 # Python3.6 or Python2.7
+  runtime: python3.9 # Python3.9
   credentials: ~/credentials
 
 # you can overwrite defaults here
@@ -51,7 +51,7 @@ functions:
   hello_world:
     handler: index.main_handler
 #    description: Tencent Serverless Cloud Function
-#    runtime: Python3.6 # Python3.6 or Python2.7
+#    runtime: Python3.9 # Python3.6 or Python2.7
 #    memorySize: 256
 #    timeout: 10
 #    environment:

@@ -1,9 +1,10 @@
 service: serverless-simple-http-endpoint
-frameworkVersion: '2'
+
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
 functions:
   currentTime:

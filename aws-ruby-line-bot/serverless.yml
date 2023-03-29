@@ -1,6 +1,6 @@
 service: aws-ruby-line-bot
 
-frameworkVersion: ">=2.1.0 <3.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws

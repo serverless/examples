@@ -1,8 +1,10 @@
 service: gcp-node-typescript-simple # NOTE: Don't put the word "google" in here
 
+frameworkVersion: "3"
+
 provider:
   name: google
-  runtime: nodejs
+  runtime: nodejs18.x
   project: gcp-node-typescript-simple
   # the path to the credentials file needs to be absolute
   credentials: ~/.gcloud/keyfile.json

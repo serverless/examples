@@ -1,9 +1,10 @@
 service: serverless-http-api-dynamodb
-frameworkVersion: '2'
+
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   lambdaHashingVersion: '20201221'
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}

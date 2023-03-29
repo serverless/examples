@@ -2,11 +2,11 @@ tenant: ac360 # Enter your tenant name here
 app: enterprise # Enter your application name here
 service: demo-email-form
 
-frameworkVersion: '>=1.38.0 <2.0.0'
+frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs18.x
   # credentials: ${secrets:aws-enterprise} # Enter an AWS Secret like this, after you create it in the Dashboard.
 
 functions:
@@ -18,7 +18,7 @@ functions:
           method: post
           cors: true
 
-plugins:
+# plugins:
   # - serverless-finch # If you want to deploy the front-end uncomment this and the "custom" object below
 
 # custom:

@@ -1,6 +1,6 @@
 service: aws-ruby-sinatra-dynamodb-api
 
-frameworkVersion: "2"
+frameworkVersion: "3"
 
 custom:
   tableName: "users-table-${self:provider.stage}"

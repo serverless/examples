@@ -1,5 +1,7 @@
 service: go-service
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
   runtime: binary 

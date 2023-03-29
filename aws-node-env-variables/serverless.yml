@@ -1,10 +1,10 @@
 service: function-with-environment-variables
 
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   environment:
     EMAIL_SERVICE_API_KEY: KEYEXAMPLE1234
 

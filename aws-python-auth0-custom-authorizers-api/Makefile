@@ -60,7 +60,7 @@ vendor: check-docker $(VENDORED_FOLDER)
 $(VENDORED_FOLDER): requirements.txt    ## install requirements into $(VENDORED_FOLDER) when requirements.txt is newer than the folder
 	rm -rf $(VENDORED_FOLDER)
 	@-docker rm lambdapy36 &>/dev/null
-	docker run --name lambdapy36 -it -v $(shell pwd):/python-auth0 lambci/lambda:build-python3.6 /bin/sh -c "pip install -r /python-auth0/requirements.txt -t /python-auth0/vendored/"
+	docker run --name lambdapy36 -it -v $(shell pwd):/python-auth0 lambci/lambda:build-python3.9 /bin/sh -c "pip install -r /python-auth0/requirements.txt -t /python-auth0/vendored/"
 
 
 #################

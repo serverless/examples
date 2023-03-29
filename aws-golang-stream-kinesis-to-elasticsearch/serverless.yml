@@ -1,6 +1,6 @@
 service: aws-golang-kinesis-to-elasticsearch
 
-frameworkVersion: ">=1.28.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws

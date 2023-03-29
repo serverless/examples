@@ -1,6 +1,8 @@
 
 service: aws-custom-authorizer-auth0
 
+frameworkVersion: "3"
+
 package:
   exclude:
     - ./**
@@ -10,7 +12,7 @@ package:
 
 provider:
   name: aws
-  runtime: python3.6
+  runtime: python3.9
   region: us-east-1
   environment:
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}

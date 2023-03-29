@@ -1,6 +1,6 @@
 service: aws-ruby-step-functions-with-callback
 
-frameworkVersion: '2'
+frameworkVersion: "3"
 
 provider:
   name: aws

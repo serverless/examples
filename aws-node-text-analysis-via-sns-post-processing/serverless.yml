@@ -1,10 +1,10 @@
 service: text-analysis-via-sns-post-processing
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   region: us-east-1
   stage: dev
   iam:

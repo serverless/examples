@@ -1,6 +1,6 @@
 service: serverless-rest-api-with-pynamodb
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: "3"
 
 plugins:
   - serverless-python-requirements
@@ -18,7 +18,7 @@ package:
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.9
   region: eu-central-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}

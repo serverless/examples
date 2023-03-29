@@ -1,8 +1,10 @@
 service: graphql-api
 
+frameworkVersion: "3"
+
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs18.x
   environment:
     DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
   iam:

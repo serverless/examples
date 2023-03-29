@@ -1,13 +1,13 @@
 service: upload-to-s3-and-postprocess
 
-frameworkVersion: ">=1.1.0"
+frameworkVersion: "3"
 
 custom:
   bucket: <your-bucket-name>
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   iamRoleStatements:
     - Effect: Allow
       Action:

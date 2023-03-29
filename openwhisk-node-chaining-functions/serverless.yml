@@ -13,6 +13,8 @@
 
 service: my_service # NOTE: update this with your service name
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
 

@@ -1,8 +1,10 @@
 service: ruby-service
 
+frameworkVersion: "3"
+
 provider:
   name: openwhisk
-  runtime: ruby
+  runtime: ruby2.7
 
 functions:
   greeting:

@@ -1,13 +1,13 @@
 service: env-variables-encrypted-in-a-file
 
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: "3"
 
 plugins:
   - serverless-secrets-plugin
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: dev
 
 custom:
