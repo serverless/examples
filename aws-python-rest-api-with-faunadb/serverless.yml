@@ -12,7 +12,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.9
   region: us-east-1
   stage: dev
   environment:

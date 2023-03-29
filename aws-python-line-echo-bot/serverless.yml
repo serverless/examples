@@ -3,7 +3,7 @@ frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.9
 
 functions:
   line_bot:

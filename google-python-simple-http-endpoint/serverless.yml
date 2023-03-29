@@ -13,7 +13,7 @@ plugins:
 
 provider:
   name: google
-  runtime: python3.7
+  runtime: python3.9
   project: <projectnamehere-1234>
   credentials: ~/.gcloud/keyfile.json # path must be absolute
 

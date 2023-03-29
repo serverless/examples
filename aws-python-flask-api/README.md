@@ -24,10 +24,10 @@ This template configures a single function, `api`, which is responsible for hand
 
 ### Prerequisites
 
-In order to package your dependencies locally with `serverless-python-requirements`, you need to have `Python3.8` installed locally. You can create and activate a dedicated virtual environment with the following command:
+In order to package your dependencies locally with `serverless-python-requirements`, you need to have `Python3.9` installed locally. You can create and activate a dedicated virtual environment with the following command:
 
 ```bash
-python3.8 -m venv ./venv
+python3.9 -m venv ./venv
 source ./venv/bin/activate
 ```
 

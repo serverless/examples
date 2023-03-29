@@ -18,7 +18,7 @@ package:
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.9
   region: eu-central-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
