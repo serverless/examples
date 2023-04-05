@@ -1,5 +1,5 @@
 service: aws-python-sqs-worker
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -23,7 +23,8 @@ functions:
 
 plugins:
   - serverless-lift
+  - serverless-python-requirements
 
 package:
   patterns:
-    - '!node_modules/**'
+    - "!node_modules/**"

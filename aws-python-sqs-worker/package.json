@@ -5,6 +5,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "serverless-lift": "^1.21.0"
+    "serverless-lift": "^1.21.0",
+    "serverless-python-requirements": "^6.0.0"
   }
 }
