@@ -642,5 +642,15 @@
     "name": "Serverless SQS offline + Python + Localstack",
     "description": "Serverless Framework example to run AWS SQS service locally using https://github.com/localstack",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-sqs-python"
+  },
+  {
+    "name": "Serverless FastAPI",
+    "description": "Serverless Framework example to deploy a FastAPI application using Python. It also has local development environment using Serverless Offline.",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-python-fastapi"
+  },
+  {
+    "name": "Start and Stop EC2 Instances with AWS Lambda",
+    "description": "Serverless Framework example to start and stop EC2 instances using AWS Lambda.",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance"
   }
 ]
