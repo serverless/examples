@@ -76,7 +76,7 @@ _Note_: In current form, after deployment, your API is public and can be invoked
 After successful deployment, you can create a new user by calling the corresponding endpoint:
 
 ```bash
-curl --request POST 'https://xxxxxx.execute-api.us-east-1.amazonaws.com/dev/users' --header 'Content-Type: application/json' --data-raw '{"name": "John", "userId": "someUserId"}'
+curl --request POST 'https://xxxxxx.execute-api.us-east-1.amazonaws.com/users' --header 'Content-Type: application/json' --data-raw '{"name": "John", "userId": "someUserId"}'
 ```
 
 Which should result in the following response:
@@ -88,7 +88,7 @@ Which should result in the following response:
 You can later retrieve the user by `userId` by calling the following endpoint:
 
 ```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/dev/users/someUserId
+curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/users/someUserId
 ```
 
 Which should result in the following response:
