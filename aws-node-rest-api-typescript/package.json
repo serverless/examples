@@ -36,7 +36,7 @@
     "serverless-plugin-typescript": "^1.1.9",
     "sinon": "^9.0.2",
     "ts-node": "^8.9.1",
-    "tslint": "^6.1.2",
+    "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.2",
     "typescript": "^3.8.3"
   },
