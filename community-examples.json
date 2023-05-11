@@ -621,7 +621,7 @@
   {
     "name": "Serverless RDS Postgres Instance with Serverless VPC Plugin",
     "description": "Serverless Framework example to deploy a RDS Postgres Instance with all the necessary resources. It accepts params to customize the deployment without even having to modify the source code. Uses the Serverless VPC Plugin to simplify the creation of networking related resources.",
-    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-rds-postgres"
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-rds-postgres-vpc-plugin"
   },
   {
     "name": "Serverless Typescript using Middy",
