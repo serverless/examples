@@ -619,6 +619,11 @@
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-rds-postgres"
   },
   {
+    "name": "Serverless RDS Postgres Instance with Serverless VPC Plugin",
+    "description": "Serverless Framework example to deploy a RDS Postgres Instance with all the necessary resources. It accepts params to customize the deployment without even having to modify the source code. Uses the Serverless VPC Plugin to simplify the creation of networking related resources.",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-rds-postgres"
+  },
+  {
     "name": "Serverless Typescript using Middy",
     "description": "Serverless Framework example to deploy a lambda function using https://middy.js.org/, the stylish Node.js middleware engine for AWS Lambda.",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-node-typescript-middy"
@@ -652,5 +657,10 @@
     "name": "Start and Stop EC2 Instances with AWS Lambda",
     "description": "Serverless Framework example to start and stop EC2 instances using AWS Lambda.",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance"
+  },
+  {
+    "name": "Serverless Twilio + Typescript Lambda example",
+    "description": "Serverless Framework example to deploy a lambda function using Twilio and TypeScript",
+    "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-twilio-aws-lambdas-typescript"
   }
 ]
