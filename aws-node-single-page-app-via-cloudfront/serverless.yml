@@ -6,7 +6,7 @@ plugins:
   - serverless-single-page-app-plugin
 
 custom:
-  s3Bucket: yourBucketName123
+  s3Bucket: your-bucket-name123
 
 provider:
   name: aws
@@ -19,7 +19,11 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.s3Bucket}
-        AccessControl: PublicRead
+        OwnershipControls:
+          Rules:
+            - ObjectOwnership: ObjectWriter
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: index.html
