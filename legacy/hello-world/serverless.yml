@@ -7,12 +7,12 @@
 # The `service` block is the name of the service
 service: serverless-hello-world
 
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 # The `provider` block defines where your service will be deployed
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
 # The `functions` block defines what code to deploy
 functions:

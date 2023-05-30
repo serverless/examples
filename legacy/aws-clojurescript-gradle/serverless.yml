@@ -18,11 +18,11 @@ service: aws-clojurescript-gradle
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
 # you can overwrite defaults here
 #  stage: dev
@@ -52,8 +52,8 @@ provider:
 
 package:
   patterns:
-    - '!./**'
-    - '!build/**'
+    - "!./**"
+    - "!build/**"
     - node_modules/**
     - build/clojurescript/main/functions.js
 
