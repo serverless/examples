@@ -662,5 +662,10 @@
     "name": "Serverless Twilio + Typescript Lambda example",
     "description": "Serverless Framework example to deploy a lambda function using Twilio and TypeScript",
     "githubUrl": "https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-twilio-aws-lambdas-typescript"
+  },
+  {
+    "name": "TypeScript + Sequelize + PostgreSQL",
+    "description": "Example project to develop, test and deploy PostgreSQL AWS Lambda",
+    "githubUrl": "https://github.com/Inqnuam/serverless-aws-typescript-sequelize-postgresql"
   }
 ]
