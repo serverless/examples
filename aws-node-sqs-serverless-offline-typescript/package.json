@@ -1,0 +1,28 @@
+{
+  "name": "serverless-offline-sqs-example-typescript",
+  "description": "This is a sample example project written in Typescript to run AWS SQS with Serverless Offline",
+  "author": "A. Sayef Reyadh",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "sls offline start",
+    "start-elastic-mq": "docker run --name Offline-SQS --rm -it -p 9324:9324 -p 9325:9325 softwaremill/elasticmq-native"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1055.0",
+    "axios": "^0.21.4"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92",
+    "@types/node": "^18.8.4",
+    "@types/uuid": "^8.3.4",
+    "esbuild": "^0.14.48",
+    "serverless": "^3.1.1",
+    "serverless-esbuild": "^1.31.0",
+    "serverless-offline": "^8.8.0",
+    "serverless-offline-sqs": "^6.0.0",
+    "ts-node": "^10.8.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.2"
+  }
+}
