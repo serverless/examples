@@ -1,5 +1,4 @@
-service:
-  name: serverless-nest-example
+service: serverless-nest-example
 
 plugins:
   - '@hewmen/serverless-plugin-typescript'  
