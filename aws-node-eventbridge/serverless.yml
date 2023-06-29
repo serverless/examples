@@ -1,0 +1,53 @@
+service: aws-node-eventbridge
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "events:PutEvents"
+      Resource: "*"
+
+functions:
+  alice:
+    handler: handler.alice
+    events:
+      - httpApi:
+          method: POST
+          path: /alice
+  bob:
+    handler: handler.bob
+    events:
+      - eventBridge:
+          eventBus: custom-decouple-events
+          pattern:
+            source:
+              - alice.trigger
+            detail-type:
+              - Triggering_Bob               
+            detail:
+              name:
+                - "Message"
+  eve:
+    handler: handler.eve
+    events:
+      - eventBridge:
+          pattern:
+            source:
+              - aws.apigateway
+              - aws.cloudtrail
+              - aws.cloudwatch
+              - aws.dynamodb
+              - aws.ec2
+              - aws.events
+              - aws.iam
+              - aws.kms
+              - aws.logs
+              - aws.secretsmanager
+  dave:
+    handler: handler.dave
+    events:
+      - eventBridge:
+          schedule: rate(10 minutes)

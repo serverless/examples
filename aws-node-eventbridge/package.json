@@ -1,0 +1,10 @@
+{
+    "name": "aws-node-eventbridge",
+    "version": "1.0.0",
+    "description": "Example demonstrates how to add events and listener rules to AWS Eventbridge",
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "node-fetch": "^2.6.1"
+    }
+}

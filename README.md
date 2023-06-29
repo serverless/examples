@@ -59,6 +59,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Aws Node Dynamodb Backup](https://github.com/serverless/examples/tree/master/aws-node-dynamodb-backup) <br/> Serverless DynamoDB changes backed up to S3 | nodeJS |
 | [Aws Env Variables Encrypted In A File](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file) <br/> Serverless example managing secrets in an encrypted file | nodeJS |
 | [Aws Env Variables](https://github.com/serverless/examples/tree/master/aws-node-env-variables) <br/> This example demonstrates how to use environment variables for AWS Lambdas. | nodeJS |
+| [Aws Node Eventbridge](https://github.com/serverless/examples/tree/master/aws-node-eventbridge) <br/> Example demonstrates how to add events and listener rules to AWS Eventbridge | nodeJS |
 | [Aws Node Express Api](https://github.com/serverless/examples/tree/master/aws-node-express-api)  | nodeJS |
 | [Aws Node Express Dynamodb Api](https://github.com/serverless/examples/tree/master/aws-node-express-dynamodb-api)  | nodeJS |
 | [Aws Fetch File And Store In S3](https://github.com/serverless/examples/tree/master/aws-node-fetch-file-and-store-in-s3) <br/> Fetch an image from remote source (URL) and then upload the image to a S3 bucket. | nodeJS |
