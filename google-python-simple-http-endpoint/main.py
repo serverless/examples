@@ -19,7 +19,7 @@ def endpoint(request):
     """
     current_time = datetime.datetime.now().time()
     body = {
-        "message": "Received a {} request at {}".format(request.method, str(current_time))
+        "message": f"Received a {request.method} request at {current_time}"
     }
 
     response = {
