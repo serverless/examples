@@ -67,6 +67,11 @@ class ServerlessPlugin {
       `s3://${s3Bucket}/`,
       '--delete',
     ];
+    if (this.serverless.variables.options['aws-profile']) {
+      args.push(
+        `--profile=${this.serverless.variables.options['aws-profile']}`
+      );
+    }
     const { sterr } = this.runAwsCommand(args);
     if (!sterr) {
       this.serverless.cli.log('Successfully synced to the S3 bucket');
@@ -132,6 +137,11 @@ class ServerlessPlugin {
         '--paths',
         '/*',
       ];
+      if (this.serverless.variables.options['aws-profile']) {
+        args.push(
+          `--profile=${this.serverless.variables.options['aws-profile']}`
+        );
+      }
       const { sterr } = this.runAwsCommand(args);
       if (!sterr) {
         this.serverless.cli.log('Successfully invalidated CloudFront cache');
