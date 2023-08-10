@@ -5,11 +5,6 @@
     "githubUrl": "https://github.com/johncmunson/serverless-lambda-s3"
   },
   {
-    "name": "DropBucket - Serverless file sharing",
-    "description": "A serverless file sharing app powered by Cognito/S3/Lambda/API Gateway. Includes a React single-page app UI and virus scanning.",
-    "githubUrl": "https://github.com/marksteele/drop-bucket"
-  },
-  {
     "name": "Spiderless, Web Spider on Serverless",
     "description": "A web spider / scraper / website change detector built with Lambda, API Gateway, DynamoDB and SNS",
     "githubUrl": "https://github.com/slashbit/spider-less"
