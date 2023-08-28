@@ -21,7 +21,6 @@ This example demonstrates how to setup a lambda graphql API with apollo
 
 ## Setup
 - Setup your env file for AWS deployment with:
-  - - APOLLO_LAMBDA_KEY
   - - NODE_ENV
 
 - sls deploy

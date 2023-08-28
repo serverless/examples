@@ -9,23 +9,29 @@
     "lint": "tslint -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
-    "apollo-server-lambda": "^2.16.1",
-    "graphql": "^15.3.0",
+    "apollo-server-lambda": "^3.12.0",
+    "graphql": "^16.8.0",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
-    "@types/node": "^10.14.22",
-    "eslint": "^6.6.0",
-    "serverless": "^1.79.0",
-    "serverless-dotenv-plugin": "^3.0.0",
-    "serverless-offline": "^6.5.0",
-    "serverless-plugin-typescript": "^1.1.9",
-    "ts-loader": "^5.3.3",
-    "tslint": "^5.20.0",
+    "@types/node": "^20.5.7",
+    "eslint": "^8.48.0",
+    "serverless": "^3.34.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-typescript": "^2.1.5",
+    "ts-loader": "^9.4.4",
+    "tslint": "^5",
     "tslint-config-airbnb": "^5.11.2",
-    "typescript": "^3.2.4"
+    "typescript": "^5.2.2"
   },
   "author": "Miguel Frazao (https://github.com/jmpfrazao/aws-node-typescript-apollo-lambda)",
+  "contributors": [
+    {
+      "name": "Maike Negreiros",
+      "url": "https://github.com/maikenegreiros"
+    }
+  ],
   "license": "MIT"
 }

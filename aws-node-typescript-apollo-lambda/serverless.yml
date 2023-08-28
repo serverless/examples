@@ -1,5 +1,4 @@
-service:
-  name: aws-node-typescript-apollo-lambda
+service: aws-node-typescript-apollo-lambda
 
 frameworkVersion: "3"
 
@@ -8,13 +7,15 @@ plugins:
   - serverless-offline
   - serverless-plugin-typescript
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs18.x
   timeout: 15
-  apiKeys:
-    - name: lambdaApolloKey
-      value: ${env:APOLLO_LAMBDA_KEY}
+  apiGateway: 
+    apiKeys:
+      - lambdaApolloKey
 
 functions:
   graphql:
