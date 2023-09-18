@@ -1,0 +1,15 @@
+Type: AWS::S3::Bucket
+Properties:
+  BucketName: ${self:custom.S3Bucket}
+  AccessControl: PublicRead
+  CorsConfiguration:
+    CorsRules:
+    - AllowedMethods:
+      - GET
+      - PUT
+      - POST
+      - HEAD
+      AllowedOrigins:
+      - "*"
+      AllowedHeaders:
+      - "*"

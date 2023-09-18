@@ -70,6 +70,7 @@ serverless install -u https://github.com/serverless/examples/tree/master/folder-
 | [Graphql Api And Serverless](https://github.com/serverless/examples/tree/master/aws-node-graphql-and-rds)  | nodeJS |
 | [Aws Node Graphql Api With Dynamodb](https://github.com/serverless/examples/tree/master/aws-node-graphql-api-with-dynamodb) <br/> A single-module GraphQL endpoint with query and mutation functionality. | nodeJS |
 | [Aws Lambda And Heroku Postgres](https://github.com/serverless/examples/tree/master/aws-node-heroku-postgres) <br/> Shows how to connect AWS Lambda to Heroku Postgres. Uses an api:release Heroku webhook and the Heroku API to handle automatic Heroku Postgres credential rotation. | nodeJS |
+| [Initial Setup](https://github.com/serverless/examples/tree/master/aws-node-initial-setup-with-usersCRUDapi+cognito-setup+dummy_dynamoDB+S3)  | nodeJS |
 | [Aws Iot Event](https://github.com/serverless/examples/tree/master/aws-node-iot-event) <br/> Example on how to setup a AWS IoT Rule to send events to a Lambda function | nodeJS |
 | [Aws Lambda And Mongodb Atlas](https://github.com/serverless/examples/tree/master/aws-node-mongodb-atlas) <br/> Shows how to connect AWS Lambda to MongoDB Atlas. | nodeJS |
 | [Dropbox](https://github.com/serverless/examples/tree/master/aws-node-oauth-dropbox-api) <br/> dropbox integration | nodeJS |

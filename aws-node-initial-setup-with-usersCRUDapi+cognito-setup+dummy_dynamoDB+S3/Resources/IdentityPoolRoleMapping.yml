@@ -1,0 +1,6 @@
+Type: "AWS::Cognito::IdentityPoolRoleAttachment"
+Properties:
+  IdentityPoolId: !Ref CognitoIdentityPool
+  Roles:
+    authenticated: !GetAtt CognitoAuthorizedRole.Arn
+    unauthenticated: !GetAtt CognitoUnAuthorizedRole.Arn

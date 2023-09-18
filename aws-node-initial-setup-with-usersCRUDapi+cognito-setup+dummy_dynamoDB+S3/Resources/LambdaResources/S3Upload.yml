@@ -1,0 +1,11 @@
+handler: S3Upload/index.main
+package:
+  individually: true
+  artifact: "./dist/S3Upload.zip"
+name: S3Upload-${self:provider.stage}
+events: 
+    - http:
+        path: /s3-upload
+        method: POST
+        cors: true
+        response: ${file(./Resources/LambdaResponses.yml)}

@@ -1,0 +1,10 @@
+Type: AWS::DynamoDB::Table
+Properties:
+  TableName: UsersTable
+  AttributeDefinitions:
+    - AttributeName: userId
+      AttributeType: S
+  KeySchema:
+    - AttributeName: userId 
+      KeyType: HASH
+  BillingMode: PAY_PER_REQUEST    

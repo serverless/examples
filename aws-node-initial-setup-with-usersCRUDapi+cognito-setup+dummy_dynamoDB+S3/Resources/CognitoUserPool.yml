@@ -1,0 +1,44 @@
+Type: "AWS::Cognito::UserPool"
+Properties:
+  MfaConfiguration: OFF
+  UserPoolName: ${self:custom.userPoolName}
+  AccountRecoverySetting:
+    RecoveryMechanisms:
+      - Name: verified_email
+        Priority: 1
+  AutoVerifiedAttributes:
+    - email
+  VerificationMessageTemplate:
+    DefaultEmailOption: CONFIRM_WITH_LINK
+  EmailVerificationSubject: 'Your verification link'
+  EmailVerificationMessage: 'Please click the link below to verify your email address. {####}'
+  UsernameAttributes:
+    - email
+  Policies:
+    PasswordPolicy:
+      MinimumLength: 6
+      RequireLowercase: True
+      RequireNumbers: True
+      RequireSymbols: False
+      RequireUppercase: True
+  Schema:
+    - Name: name
+      AttributeDataType: String
+      Mutable: true
+      Required: true
+    - Name: email
+      AttributeDataType: String
+      Mutable: true
+      Required: true
+    - Name: picture
+      AttributeDataType: String
+      Mutable: true
+      Required: false
+    - Name: profile
+      AttributeDataType: String
+      Mutable: true
+      Required: false
+    - Name: zoneinfo
+      AttributeDataType: String
+      Mutable: true
+      Required: false

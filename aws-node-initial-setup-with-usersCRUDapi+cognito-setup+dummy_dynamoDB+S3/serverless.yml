@@ -1,0 +1,60 @@
+service: your-project-name-here
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${env:REGION, 'us-west-1'}
+  stage: ${opt:stage, 'dev'}
+  environment:
+    REGION: ${self:provider.region}
+    SERVICE_NAME: "${self:service}-${self:provider.stage}"
+    STAGE: "${self:provider.stage, dev}"
+    REDIRECT_URL_AFTER_AUTHENTICATION: ${self:custom.REDIRECT_URL_AFTER_AUTHENTICATION.${opt:stage, dev}}
+    S3Bucket: ${self:custom.S3Bucket}
+  iamRoleStatements: ${file(./Resources/LambdaRole.yml)}
+
+plugins:
+  - serverless-pseudo-parameters
+  - serverless-webpack
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+custom:
+  userPoolName: "${self:service}-${self:provider.stage}"
+  userPoolClientName: "${self:service}-user-pool-client-${self:provider.stage}"
+  REDIRECT_URL_AFTER_AUTHENTICATION:
+    prod: "https://your-domain-name-here.com/"
+    dev: "https://your-domain-name-here.com/"
+
+  S3Bucket: "${self:service}-s3bucket"
+
+functions:
+  S3Upload: ${file(./Resources/LambdaResources/S3Upload.yml)}
+  Users: ${file(./Resources/LambdaResources/Users.yml)}
+
+resources:
+  Resources:
+    CognitoUserPool: ${file(./Resources/CognitoUserPool.yml)}
+    CognitoUserPoolClient: ${file(./Resources/CognitoUserPoolClient.yml)}
+    CognitoUserPooldomain: ${file(./Resources/CognitoUserPooldomain.yml)}
+    CognitoIdentityPool: ${file(./Resources/CognitoIdentityPool.yml)}
+    CognitoUnAuthorizedRole: ${file(./Resources/CognitoUnAuthorizedRole.yml)}
+    CognitoAuthorizedRole: ${file(./Resources/CognitoAuthorizedRole.yml)}
+    IdentityPoolRoleMapping: ${file(./Resources/IdentityPoolRoleMapping.yml)}
+
+    # >>->>->>->>->>->>->>->>->>->>--S3 BUCKETS--<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<< #
+    S3Bucket: ${file(./Resources/S3Bucket.yml)}
+
+    # >>->>->>->>->>->>->>->>->>--DYNAMO DB TABLES--<<-<<-<<-<<-<<-<<-<<-<<-<<-<< #
+    UsersTable: ${file(./Resources/DynamoResources/UsersTable.yml)}
+
+  Outputs:
+    CognitoUserPoolId:
+      Value:
+        Ref: CognitoUserPool
+    CognitoUserPoolClientId:
+      Value:
+        Ref: CognitoUserPoolClient
+    IdentityPoolId:
+      Value: 
+        Ref: CognitoIdentityPool   
