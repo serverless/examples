@@ -1,7 +1,6 @@
-/* eslint-disable */
-/* aws-sdk automatically included in lambda context */
-const aws = require('aws-sdk');
+const aws = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 
+// eslint-disable-next-line no-unused-vars
 module.exports.recursiveLambda = (event, context, callback) => {
   const lambda = new aws.Lambda();
   console.log('received', event);
@@ -9,12 +8,12 @@ module.exports.recursiveLambda = (event, context, callback) => {
   if (event.numberOfCalls > 0) {
     console.log('recursive call');
     /* decrement numberOfCalls so we don't infinitely loop */
-    event.numberOfCalls = event.numberOfCalls - 1;
+    event.numberOfCalls -= 1; // eslint-disable-line no-param-reassign
     const params = {
       FunctionName: context.functionName,
       InvocationType: 'Event',
       Payload: JSON.stringify(event),
-      Qualifier: context.functionVersion
+      Qualifier: context.functionVersion,
     };
     lambda.invoke(params, context.done);
   } else {
