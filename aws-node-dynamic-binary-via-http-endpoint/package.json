@@ -1,0 +1,10 @@
+{
+  "name": "serverless-dynamic-binary-via-http-endpoint",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "pngjs": "^3.0.0"
+  }
+}

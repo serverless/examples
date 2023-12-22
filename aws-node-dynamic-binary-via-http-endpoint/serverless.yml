@@ -1,0 +1,19 @@
+service: dynamic-binary-via-http-endpoint
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+functions:
+  image:
+    handler: handler.image
+    events:
+      - http:
+          method: get
+          path: image
+          integration: lambda
+          request:
+            passThrough: WHEN_NO_TEMPLATES
+            template:
+              image/png: '{}'
