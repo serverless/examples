@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build folders/files
+.serverless
+.webpack
+.docker
+jsconfig.json
+

@@ -1,0 +1,42 @@
+service: sample-api-gateway
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  stage: ${opt:stage, 'local'}
+  basePath: ''
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    packager: yarn
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  tags:
+    projeto: sample-api-gateway
+  stage: ${opt:stage, 'dev'}
+  apiName: ${self:service}
+  stackName: ${self:service}-${self:custom.stage}
+  deploymentBucket:
+    name: dev-projectname-deploys
+  memorySize: 256
+  timeout: 30
+  versionFunctions: true
+  logRetentionInDays: 14
+
+  environment: ${file(./environments.yml):${self:custom.stage}, file(./environments.yml):default}
+
+functions: ${file(./functions.yml)}
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  exclude:
+    - README.md
+    - .serverless/**
+    - .webpack/**
+    - test/**
+    - /*.yml
