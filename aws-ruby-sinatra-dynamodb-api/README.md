@@ -123,10 +123,10 @@ bundle install --path vendor/bundle
 serverless rack serve
 ```
 
-Additionally, you will need to emulate DynamoDB locally, which can be done by using `serverless-dynamodb-local` plugin. In order to do that, execute the following commands:
+Additionally, you will need to emulate DynamoDB locally, which can be done by using `serverless-dynamodb` plugin. In order to do that, execute the following commands:
 
 ```bash
-serverless plugin install -n serverless-dynamodb-local
+serverless plugin install -n serverless-dynamodb
 serverless dynamodb install
 ```
 
@@ -152,8 +152,8 @@ client_options = if ENV['IS_OFFLINE']
                      region: 'localhost',
                      endpoint: 'http://localhost:8000',
                      credentials: Aws::Credentials.new(
-                       'DEFAULT_ACCESS_KEY',
-                       'DEFAULT_SECRET'
+                       'MockAccessKeyId',
+                       'MockSecretAccessKey'
                      )
                    }
                  else
@@ -174,7 +174,7 @@ At this point, you can run your application locally with the following command:
 serverless rack serve
 ```
 
-For additional local development capabilities of `serverless-rack` and `serverless-dynamodb-local` plugins, please refer to corresponding GitHub repositories:
+For additional local development capabilities of `serverless-rack` and `serverless-dynamodb` plugins, please refer to corresponding GitHub repositories:
 
 - https://github.com/logandk/serverless-rack
-- https://github.com/99x/serverless-dynamodb-local
+- https://github.com/99x/serverless-dynamodb

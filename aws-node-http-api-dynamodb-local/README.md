@@ -2,7 +2,7 @@
 title: 'AWS Serverless HTTP API with DynamoDB and offline support example in NodeJS'
 description: 'This example demonstrates how to run a service locally, using the ''serverless-offline'' plugin. It provides an HTTP API to manage Todos stored in DynamoDB.'
 layout: Doc
-framework: v1
+framework: v3
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/adambrgmn'
@@ -16,7 +16,7 @@ This example demonstrates how to run a service locally, using the
 provides an HTTP API to manage Todos stored in a DynamoDB, similar to the
 [aws-node-http-api-dynamodb](https://github.com/serverless/examples/tree/master/aws-node-http-api-dynamodb)
 example. A local DynamoDB instance is provided by the
-[serverless-dynamodb-local](https://github.com/99xt/serverless-dynamodb-local)
+[serverless-dynamodb](https://github.com/raisenational/serverless-dynamodb)
 plugin.
 
 ## Use-case
@@ -27,9 +27,7 @@ Test your service locally, without having to deploy it first.
 
 ```bash
 npm install
-serverless dynamodb install (or to use a persistent docker dynamodb instead, open a new terminal: cd ./dynamodb && docker-compose up -d)
-serverless offline start
-serverless dynamodb migrate (this imports schema)
+serverless dynamodb install # or to use a persistent docker dynamodb instead, open a new terminal: cd ./dynamodb && docker-compose up -d
 ```
 
 ## Run service offline

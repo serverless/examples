@@ -1,0 +1,16 @@
+[
+  {
+    "text": "Deploy my first service",
+    "id": "849fbd50-c926-4e08-9029-d47438b5f487",
+    "checked": true,
+    "createdAt": 1707175709304,
+    "updatedAt": 1707175709304
+  },
+  {
+    "text": "Learn Serverless",
+    "id": "cc6fbe30-c47f-11ee-9a7b-7d80f9b962e5",
+    "checked": false,
+    "createdAt": 1707175709241,
+    "updatedAt": 1707175770849
+  }
+]
