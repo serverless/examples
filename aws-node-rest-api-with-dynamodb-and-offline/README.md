@@ -2,7 +2,7 @@
 title: 'AWS Serverless REST API with DynamoDB and offline support example in NodeJS'
 description: 'This example demonstrates how to run a service locally, using the ''serverless-offline'' plugin. It provides a REST API to manage Todos stored in DynamoDB.'
 layout: Doc
-framework: v1
+framework: v3
 platform: AWS
 language: nodeJS
 priority: 10
@@ -17,7 +17,7 @@ This example demonstrates how to run a service locally, using the
 provides a REST API to manage Todos stored in a DynamoDB, similar to the
 [aws-node-rest-api-with-dynamodb](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb)
 example. A local DynamoDB instance is provided by the
-[serverless-dynamodb-local](https://github.com/99xt/serverless-dynamodb-local)
+[serverless-dynamodb](https://github.com/raisenational/serverless-dynamodb)
 plugin.
 
 ## Use-case
@@ -28,9 +28,7 @@ Test your service locally, without having to deploy it first.
 
 ```bash
 npm install
-serverless dynamodb install (or to use a persistent docker dynamodb instead, open a new terminal: cd ./dynamodb && docker-compose up -d)
-serverless offline start
-serverless dynamodb migrate (this imports schema)
+serverless dynamodb install # or to use a persistent docker dynamodb instead, open a new terminal: cd ./dynamodb && docker-compose up -d
 ```
 
 ## Run service offline
@@ -46,7 +44,7 @@ You can create, retrieve, update, or delete todos with the following commands:
 ### Create a Todo
 
 ```bash
-curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --data '{ "text": "Learn Serverless" }'
+curl -X POST -H "Content-Type:application/json" http://localhost:3000/dev/todos --data '{ "text": "Learn Serverless" }'
 ```
 
 Example Result:
@@ -57,7 +55,7 @@ Example Result:
 ### List all Todos
 
 ```bash
-curl -H "Content-Type:application/json" http://localhost:3000/todos
+curl -H "Content-Type:application/json" http://localhost:3000/dev/todos
 ```
 
 Example output:
@@ -69,7 +67,7 @@ Example output:
 
 ```bash
 # Replace the <id> part with a real id from your todos table
-curl -H "Content-Type:application/json" http://localhost:3000/todos/<id>
+curl -H "Content-Type:application/json" http://localhost:3000/dev/todos/<id>
 ```
 
 Example Result:
@@ -81,7 +79,7 @@ Example Result:
 
 ```bash
 # Replace the <id> part with a real id from your todos table
-curl -X PUT -H "Content-Type:application/json" http://localhost:3000/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
+curl -X PUT -H "Content-Type:application/json" http://localhost:3000/dev/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
 ```
 
 Example Result:
@@ -93,7 +91,7 @@ Example Result:
 
 ```bash
 # Replace the <id> part with a real id from your todos table
-curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/todos/<id>
+curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/dev/todos/<id>
 ```
 
 No output

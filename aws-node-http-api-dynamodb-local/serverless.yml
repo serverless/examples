@@ -3,7 +3,7 @@ service: serverless-http-api-dynamodb-local
 frameworkVersion: "3"
 
 plugins:
-  - serverless-dynamodb-local
+  - serverless-dynamodb
   - serverless-offline
 
 custom:
@@ -13,11 +13,17 @@ custom:
     start:
       port: 8000
       inMemory: true
+      # Uncomment if you have a DynamoDB instance already running locally you want to use instead
+      # noStart: true
+      # Create the tables according to the resources.Resources block
       migrate: true
-    # Comment if you don't have a DynamoDB running locally
-      noStart: true
-    migration:
-      dir: offline/migrations
+      # Insert seed items on creation, configured by the custom.dynamodb.seed block
+      seed: true
+    seed:
+      default:
+        sources:
+          - table: ${self:provider.environment.DYNAMODB_TABLE}
+            sources: [./db-seeds/todos.json]
 
 provider:
   name: aws
