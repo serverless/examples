@@ -1,26 +1,21 @@
 service: aws-node-sqs-worker
-frameworkVersion: '2 || 3'
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs20.x
   lambdaHashingVersion: '20201221'
-
-constructs:
-  jobs:
-    type: queue
-    worker:
-      handler: handler.consumer
 
 functions:
   producer:
-    handler: handler.producer
+    handler: handler.consumer
     events:
-      - httpApi:
-          method: post
-          path: /produce
-    environment:
-      QUEUE_URL: ${construct:jobs.queueUrl}
+      - sqs: arn:aws:sqs:${aws:region}:${aws:accountId}:MyFirstQueue
 
-plugins:
-  - serverless-lift
+resources:
+  Resources:
+    JobQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: MyFirstQueue
+

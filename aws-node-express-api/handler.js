@@ -20,4 +20,4 @@ app.use((req, res, next) => {
   });
 });
 
-module.exports.handler = serverless(app);
+exports.handler = serverless(app);

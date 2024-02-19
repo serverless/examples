@@ -1,9 +1,9 @@
 service: aws-python-http-api
-frameworkVersion: '2 || 3'
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.12
   lambdaHashingVersion: '20201221'
 
 functions:
