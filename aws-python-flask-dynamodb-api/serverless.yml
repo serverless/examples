@@ -10,7 +10,6 @@ custom:
 provider:
   name: aws
   runtime: python3.12
-  lambdaHashingVersion: '20201221'
   iam:
     role:
       statements:
