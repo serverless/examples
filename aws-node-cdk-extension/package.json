@@ -1,0 +1,15 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "bin": {
+    "example": "bin/example.js"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.131.0",
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.131.0",
+    "constructs": "^10.0.0"
+  }
+}

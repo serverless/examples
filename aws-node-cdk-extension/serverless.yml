@@ -1,0 +1,6 @@
+service: aws-node-cdk-extension
+
+cdk-instance:
+  extension: serverless/cdk@latest
+  config:
+    region: us-east-2
