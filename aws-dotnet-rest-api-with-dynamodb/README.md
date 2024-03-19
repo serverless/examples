@@ -19,7 +19,7 @@ The following AWS lambda is built in .NET Core 2.1
 
 It is possible configure the lambda by editing the `env.config.yml` file:
 
-```
+```yml
 feature: <feature_name>
 version: 1.0.0.0
 region: <aws_region>
@@ -32,14 +32,14 @@ dynamoTable: <dynamo_table_name>
 
 The project contains a `package.json` file with the following commands:
 
-```
-npm run tests
-```
-
-```
-npm run build
+```bash
+$ npm run tests
 ```
 
+```bash
+$ npm run build
 ```
-npm run deploy
+
+```bash
+$ npm run deploy
 ```
