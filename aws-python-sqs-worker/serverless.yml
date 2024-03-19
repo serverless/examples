@@ -4,7 +4,6 @@ frameworkVersion: '4'
 provider:
   name: aws
   runtime: python3.12
-  lambdaHashingVersion: '20201221'
 
 constructs:
   jobs:
