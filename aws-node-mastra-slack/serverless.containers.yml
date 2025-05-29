@@ -1,0 +1,28 @@
+name: mastra-slack-agent
+
+deployment:
+  type: "aws@1.0"
+
+containers:
+  agent:
+    src: ./
+    compute:
+      type: awsFargateEcs
+      awsFargateEcs:
+        cpu: 1024
+        memory: 2048
+    routing:
+      pathPattern: "/*"
+      pathHealthCheck: "/"
+    environment:
+      OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+      PORT: 8080
+      SLACK_APP_NAME: ${env:SLACK_APP_NAME}
+      SLACK_SIGNING_SECRET: ${env:SLACK_SIGNING_SECRET}
+      SLACK_BOT_TOKEN: ${env:SLACK_BOT_TOKEN}
+      SLACK_APP_TOKEN: ${env:SLACK_APP_TOKEN}
+      DB_URL: ${env:DB_URL}
+    integrations:
+      slack:
+        type: slack
+        name: ${env:SLACK_APP_NAME}
