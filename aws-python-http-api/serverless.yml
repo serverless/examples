@@ -1,9 +1,12 @@
 service: aws-python-http-api
-frameworkVersion: '4'
+frameworkVersion: "4"
 
 provider:
   name: aws
   runtime: python3.12
+  # Uncomment to easily set up a custom domain. Read the docs for more details:
+  # https://www.serverless.com/framework/docs/providers/aws/guide/alerts
+  # domain: api.example.com
 
 functions:
   hello:
