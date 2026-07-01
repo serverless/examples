@@ -1,0 +1,113 @@
+service: sandboxes-self-hosted-webhook
+frameworkVersion: '4'
+
+# Claude Self-Hosted Sandboxes on AWS Lambda MicroVMs — webhook control plane.
+#
+# Anthropic sends a `session.status_run_started` webhook -> the launcher Lambda
+# verifies the signature and calls RunMicrovm -> one isolated MicroVM per session
+# runs the worker (built from ./worker by the `sandboxes` feature below).
+#
+# This example exercises the webhook -> launcher -> RunMicrovm path. Wiring a real
+# Claude Managed Agent (so the worker claims real session work) is described in
+# the README; it is not required to deploy or to run the webhook test.
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs22.x
+  environment:
+    # The launcher passes only a *reference* to the env-key secret to the MicroVM.
+    MICROVM_IMAGE_IDENTIFIER: !Ref WorkerImage
+    MICROVM_EXECUTION_ROLE_ARN: !GetAtt WorkerExecutionRole.Arn
+    SIGNING_SECRET_ARN: !Ref SigningSecret
+    ENVIRONMENT_KEY_SECRET_ID: !Ref EnvironmentKeySecret
+    # The Claude self_hosted environment id. Leave empty ('') for the webhook-only
+    # test; when wiring a real managed agent (README Step 3), paste your env_... here.
+    ANTHROPIC_ENVIRONMENT_ID: '' # e.g. env_0123456789abcdef
+  iam:
+    role:
+      statements:
+        # Launch MicroVMs. The IAM action is `lambda:RunMicroVm` (capital VM)
+        # even though the API operation is named RunMicrovm.
+        - Effect: Allow
+          Action: lambda:RunMicroVm
+          Resource: '*'
+        # Pass the MicroVM execution role to the service. No iam:PassedToService
+        # condition — the MicroVM service passes the role to a principal that
+        # isn't lambda.amazonaws.com, which that condition would deny.
+        - Effect: Allow
+          Action: iam:PassRole
+          Resource: !GetAtt WorkerExecutionRole.Arn
+        # RunMicrovm attaches network connectors to each VM; the caller must be
+        # allowed to pass them. HTTP_INGRESS lets the platform deliver lifecycle
+        # hooks + proxy data-plane traffic to the VM (HTTP-only, tighter than
+        # ALL_INGRESS); INTERNET_EGRESS lets the worker call api.anthropic.com.
+        - Effect: Allow
+          Action: lambda:PassNetworkConnector
+          Resource:
+            - !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:aws:network-connector:aws-network-connector:HTTP_INGRESS
+            - !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:aws:network-connector:aws-network-connector:INTERNET_EGRESS
+        # Read only the webhook signing secret (for in-process signature verify).
+        - Effect: Allow
+          Action: secretsmanager:GetSecretValue
+          Resource: !Ref SigningSecret
+
+package:
+  patterns:
+    - '!worker/**'
+    - '!test-webhook.mjs'
+    - '!README.md'
+
+functions:
+  launcher:
+    handler: launcher/launcher.handler
+    # API Gateway caps integration timeout at 29s; stay at or under it.
+    timeout: 29
+    # The launcher is tiny; 512 MB keeps cold init snappy.
+    memorySize: 512
+    events:
+      - http:
+          path: webhook
+          method: post
+
+# The MicroVM worker image, built and managed by the Serverless Framework
+# `sandboxes` feature. The launcher runs this image via RunMicrovm.
+sandboxes:
+  worker:
+    artifact: ./worker # local Dockerfile + worker.mjs
+    minimumMemory: 2048
+    hooks:
+      ready: true # build-time snapshot gate (worker answers on :9000)
+      run: true # runtime hook delivering the per-session dispatch payload
+    iam:
+      executionRole:
+        # The MicroVM reads the Anthropic environment key at runtime with its own
+        # execution role — the key never transits the launcher or the launch call.
+        statements:
+          - Effect: Allow
+            Action: secretsmanager:GetSecretValue
+            Resource: !Ref EnvironmentKeySecret
+
+resources:
+  Resources:
+    # Populate out-of-band after deploy (or via the Claude Console env key).
+    EnvironmentKeySecret:
+      Type: AWS::SecretsManager::Secret
+      Properties:
+        Description: Anthropic environment key (ANTHROPIC_ENVIRONMENT_KEY) for the worker.
+    # Populate with the Anthropic webhook signing secret (whsec_...). The test
+    # script generates and stores one for you.
+    SigningSecret:
+      Type: AWS::SecretsManager::Secret
+      Properties:
+        Description: Anthropic webhook signing secret (whsec_...).
+  Outputs:
+    WebhookUrl:
+      Description: Register this URL as the Anthropic webhook endpoint.
+      Value: !Sub https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${sls:stage}/webhook
+    SigningSecretArn:
+      Description: Put the webhook signing secret here.
+      Value: !Ref SigningSecret
+    EnvironmentKeySecretArn:
+      Description: Put the Anthropic environment key here.
+      Value: !Ref EnvironmentKeySecret

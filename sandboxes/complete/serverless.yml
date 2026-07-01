@@ -1,0 +1,87 @@
+service: sandboxes-example
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  region: us-east-1
+
+# A complete, deploy-as-is showcase of the `sandboxes` feature (AWS Lambda
+# MicroVMs). `serverless deploy` works with NO edits — every setting below is a
+# live, working example. Account-specific capabilities (VPC egress, pre-built S3
+# artifact) are shown as commented blocks you enable with your own IDs.
+sandboxes:
+  api:
+    # ── Source ──────────────────────────────────────────────────────────────────
+    artifact: ./app # local directory containing a Dockerfile (built in-cloud)
+    description: Complete sandbox example # → MicrovmImage Description
+
+    # ── Runtime ─────────────────────────────────────────────────────────────────
+    minimumMemory: 2048 # 512 | 1024 | 2048 | 4096 | 8192 MiB (default 2048; arch is ARM64)
+    environment:
+      GREETING: hello-from-sandboxes # env vars baked into the image
+    # osCapabilities: [all]  # grant extra Linux capabilities (advanced; default none)
+
+    # ── Lifecycle hooks — the app must answer these on :9000 ─────────────────────
+    hooks:
+      ready: true # build-time readiness probe (gates a successful image build)
+      run: { timeout: 5 } # per-instance hook; value is `true` or { timeout: <seconds> }
+
+    # ── Observability — on by default; shown explicitly here ─────────────────────
+    # Creates: a CloudWatch log group, a metric filter per `filters` entry, an
+    # alarm per filter, and ONE dashboard per service (`<service>-<stage>-sandboxes`).
+    observability:
+      logs:
+        retentionDays: 14 # retention for the owned log group (default 14)
+      metrics:
+        filters: # log pattern → CloudWatch metric (one metric + alarm per key)
+          errors: '%[Ee][Rr][Rr][Oo][Rr]|[Ee][Xx][Cc][Ee][Pp][Tt][Ii][Oo][Nn]%'
+          warnings: '%[Ww][Aa][Rr][Nn]%'
+      alarms:
+        notify: { Ref: AlertTopic } # SNS target (topic defined in `resources:` below)
+        thresholds:
+          errors: { threshold: 5, period: 300 } # override per filter; others use defaults
+      dashboard:
+        enabled: true # renders the metrics, logs, alarms + MicroVM-count widgets
+
+    # ── Custom IAM — merged into the auto-generated least-privilege roles ────────
+    iam:
+      executionRole:
+        statements: # extra permissions the running MicroVM needs
+          - Effect: Allow
+            Action: ['s3:GetObject']
+            Resource: arn:aws:s3:::my-app-data-bucket/*
+        # managedPolicies:
+        #   - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+
+    tags:
+      example: sandboxes # applied to every resource this sandbox creates
+
+  # Add more sandboxes by adding more keys. The two below are commented out
+  # because they need account-specific resources — uncomment and fill in to use.
+
+  # # VPC egress — route the MicroVM's outbound traffic through your VPC.
+  # worker:
+  #   artifact: ./app
+  #   vpc:
+  #     subnetIds: # MicroVM-supported AZs only (in us-east-1, avoid use1-az3)
+  #       - subnet-xxxxxxxxxxxxxxxxx
+  #       - subnet-yyyyyyyyyyyyyyyyy
+  #     securityGroupIds:
+  #       - sg-xxxxxxxxxxxxxxxxx
+  #     protocol: ipv4 # ipv4 | dualstack
+
+  # # Pre-packaged artifact already in S3 (skips local zipping — the framework
+  # # still builds the image in-cloud from this source). Create it with:
+  # #   cd app && zip -r /tmp/worker-src.zip . && aws s3 cp /tmp/worker-src.zip s3://<bucket>/worker-src.zip
+  # prebuilt:
+  #   artifact: s3://<your-bucket>/worker-src.zip
+  #   minimumMemory: 1024
+
+# The SNS topic the alarms publish to — defined here so the example is
+# self-contained. After deploy, subscribe your email/Slack to it to get alerts.
+resources:
+  Resources:
+    AlertTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        DisplayName: Sandbox alerts

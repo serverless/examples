@@ -1,0 +1,18 @@
+service: sandboxes-minimal
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  region: us-east-1
+
+# Minimal sandbox: `artifact` is the only required field. Everything else is
+# defaulted by the framework:
+#   minimumMemory: 2048 MiB
+#   architecture:  ARM64
+#   base image:    latest al2023 managed base
+#   egress:        INTERNET_EGRESS (outbound internet)
+#   hooks:         off (no lifecycle hooks)
+#   IAM:           auto-generated build + execution roles
+sandboxes:
+  app:
+    artifact: ./app # local directory containing a Dockerfile
