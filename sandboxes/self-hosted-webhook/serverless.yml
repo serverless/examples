@@ -27,10 +27,9 @@ provider:
   iam:
     role:
       statements:
-        # Launch MicroVMs. The IAM action is `lambda:RunMicroVm` (capital VM)
-        # even though the API operation is named RunMicrovm.
+        # Launch MicroVMs.
         - Effect: Allow
-          Action: lambda:RunMicroVm
+          Action: lambda:RunMicrovm
           Resource: '*'
         # Pass the MicroVM execution role to the service. No iam:PassedToService
         # condition — the MicroVM service passes the role to a principal that

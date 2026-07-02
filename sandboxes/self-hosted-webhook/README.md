@@ -507,7 +507,7 @@ sandboxes:
     # To customize retention or add alarms, add an `observability:` block; to opt out: observability: false
 ```
 
-The launcher's IAM (in `provider.iam`) grants `lambda:RunMicroVm`, `iam:PassRole` (the execution role), `lambda:PassNetworkConnector` (for the auto-attached `HTTP_INGRESS`/`INTERNET_EGRESS` connectors), and `secretsmanager:GetSecretValue` on the signing secret.
+The launcher's IAM (in `provider.iam`) grants `lambda:RunMicrovm`, `iam:PassRole` (the execution role), `lambda:PassNetworkConnector` (for the auto-attached `HTTP_INGRESS`/`INTERNET_EGRESS` connectors), and `secretsmanager:GetSecretValue` on the signing secret.
 
 ---
 
