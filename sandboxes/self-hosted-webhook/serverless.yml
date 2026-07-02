@@ -77,7 +77,7 @@ sandboxes:
     minimumMemory: 2048
     hooks:
       ready: true # build-time snapshot gate (worker answers on :9000)
-      run: true # runtime hook delivering the per-session dispatch payload
+      run: { timeout: 5 } # per-session dispatch hook; AWS defaults to 1s, so widen it
     iam:
       executionRole:
         # The MicroVM reads the Anthropic environment key at runtime with its own

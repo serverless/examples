@@ -478,7 +478,7 @@ worker: session sesn_XXXX complete
 
 ## How it works (deep dive)
 
-- **Lifecycle hooks.** The worker runs an HTTP server on port 9000 and answers `POST /aws/lambda-microvms/runtime/v1/<hook>`. This example enables `ready` (image-build snapshot gate) and `run` (per-instance dispatch). Hooks are **opt-in**: state transitions happen regardless, but your code is only *notified* for hooks you declare. Respond `200` quickly — the `run` timeout defaults to ~2s — then do work asynchronously.
+- **Lifecycle hooks.** The worker runs an HTTP server on port 9000 and answers `POST /aws/lambda-microvms/runtime/v1/<hook>`. This example enables `ready` (image-build snapshot gate) and `run` (per-instance dispatch). Hooks are **opt-in**: state transitions happen regardless, but your code is only *notified* for hooks you declare. Respond `200` quickly — the `run` hook's timeout is short (AWS defaults to **1s** when you don't set one; this example widens it with `run: { timeout: 5 }`) — then do the session work asynchronously.
 - **"Idle" means no inbound endpoint traffic — not "no code running."** A MicroVM is suspended/terminated after `maxIdleDurationSeconds` with no requests to its endpoint, *even if it's busy*. This worker is a poller (all outbound), so it isn't kept alive by activity — it finishes by **exiting**, which terminates the VM immediately. The idle policy is just the backstop for a hung worker.
 - **No idempotency here.** Anthropic may deliver a webhook more than once; each delivery launches a MicroVM. One claims the session; the others find no work and exit. Fine for an example — see [Production hardening](#production-hardening).
 - **`MICROVM_DEV_ENDPOINT`, not `AWS_ENDPOINT_URL_LAMBDA_MICROVMS`.** The standard AWS override is honored by *every* MicroVMs client in the process — including the framework's own deploy-time calls (Dev Mode spawns a deploy). A launcher-specific var, read only by `launcher.mjs`, avoids redirecting those to the emulator; it's unset in production, so it's a no-op there.
@@ -496,7 +496,7 @@ sandboxes:
     minimumMemory: 2048         # MiB
     hooks:
       ready: true               # build-time snapshot gate (worker answers on :9000)
-      run: true                 # runtime hook delivering the per-session dispatch
+      run: { timeout: 5 }       # per-session dispatch hook (AWS default is 1s)
     iam:
       executionRole:            # the VM's own role — reads the env key at runtime
         statements:
