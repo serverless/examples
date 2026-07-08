@@ -1,0 +1,13 @@
+{
+  "name": "sandboxes-self-hosted-webhook",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Claude self-hosted sandboxes on AWS Lambda MicroVMs — webhook control plane, built with the Serverless Framework sandboxes feature.",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0",
+    "@aws-sdk/client-lambda-microvms": "^3.1074.0",
+    "@aws-sdk/client-secrets-manager": "^3.1057.0",
+    "standardwebhooks": "^1.0.0"
+  }
+}

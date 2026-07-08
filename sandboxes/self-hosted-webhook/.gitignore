@@ -1,0 +1,9 @@
+# Dependencies (committed lockfiles are kept; only the installed trees are ignored)
+node_modules/
+
+# Serverless Framework build artifacts
+.serverless/
+
+# Local env files
+.env
+.env.*

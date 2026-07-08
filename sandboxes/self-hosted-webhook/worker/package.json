@@ -1,0 +1,14 @@
+{
+  "name": "claude-microvm-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "In-MicroVM Anthropic EnvironmentWorker for the Claude self-hosted sandbox example.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0",
+    "@aws-sdk/client-secrets-manager": "^3.600.0"
+  }
+}
