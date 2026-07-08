@@ -10,8 +10,9 @@ const mongoClusterName = '';
 const mongoUser = '';
 const mongoDbName = '';
 const mongoPass = '';
+const clusterName = "";
 
-const mongoConnStr = `mongodb+srv://${mongoUser}:${mongoPass}@${mongoClusterName}-tdoka.mongodb.net/${mongoDbName}?retryWrites=true`;
+const mongoConnStr = `mongodb+srv://${mongoUser}:${mongoPass}@${mongoClusterName}/${mongoDbName}?retryWrites=true&w=majority&appName=${clusterName}`;
 
 const getPetType = () => {
     const msNow = Date.now();
@@ -52,17 +53,17 @@ const performQuery = async () => {
 const app = express();
 
 app.get('/hello', async function (req, res) {
-    if (!client.isConnected()) {
+    // if (!client.isConnected()) { // no longer existing for newer mongodb lib versions
         // Cold start or connection timed out. Create new connection.
         try {
-            await createConn();
+            await createConn();  // no-op if already connected
         } catch (e) {
             res.json({
                 error: e.message,
             });
             return;
         }
-    }
+    // }
 
     // Connection ready. Perform insert and return result.
     try {
