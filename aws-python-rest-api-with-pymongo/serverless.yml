@@ -1,19 +1,25 @@
 service: serverless-pymongo-item-api
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
-plugins:
-  - serverless-python-requirements
+package:
+  patterns:
+    - '!node_modules/**'
+
+custom:
+  # Built-in python requirements packaging activates on this key.
+  pythonRequirements: {}
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.14
+  architecture: arm64
   environment:
-    MONGO_DB_USER: ${env:MONGO_DB_USER}
-    MONGO_DB_PASS: ${env:MONGO_DB_PASS}
-    MONGO_DB_NAME: ${env:MONGO_DB_NAME}
-    MONGO_DB_URL: ${env:MONGO_DB_URL}
-    MONGO_COLLECTION_NAME: ${env:MONGO_COLLECTION_NAME}
+    MONGO_DB_USER: ${env:MONGO_DB_USER, ''}
+    MONGO_DB_PASS: ${env:MONGO_DB_PASS, ''}
+    MONGO_DB_NAME: ${env:MONGO_DB_NAME, ''}
+    MONGO_DB_URL: ${env:MONGO_DB_URL, ''}
+    MONGO_COLLECTION_NAME: ${env:MONGO_COLLECTION_NAME, ''}
   iam:
     role:
       managedPolicies:

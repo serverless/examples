@@ -1,14 +1,20 @@
 service: aws-ruby-sinatra-dynamodb-api
 
-frameworkVersion: "2"
+frameworkVersion: '4'
 
 custom:
   tableName: "users-table-${self:provider.stage}"
+  rack:
+    # bin/bundle-compat configures the gem install path via
+    # `bundle config set --local` and excludes local-development gems
+    # (puma, rackup) from the deployed package.
+    bundlerBin: ./bin/bundle-compat
+    bundlerArgs: '--without development'
 
 provider:
   name: aws
-  runtime: ruby2.7
-  lambdaHashingVersion: "20201221"
+  runtime: ruby4.0
+  architecture: arm64
   apiGateway:
     shouldStartNameWithService: true
   stage: dev

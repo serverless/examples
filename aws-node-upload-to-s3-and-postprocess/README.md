@@ -2,7 +2,7 @@
 title: 'AWS Upload a file to S3 to trigger a Lambda function example in NodeJS'
 description: 'This example shows how to upload a file to S3 using a HTML form, and have S3 trigger a lambda function.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -21,9 +21,11 @@ trigger a lambda function.
 
 ## Setup
 
-- Edit `serverless.yml` and choose a unique S3 bucket name.
+- The upload bucket defaults to `upload-postprocess-<stage>-<account-id>`, which
+  is unique to your AWS account and stage. To use a different name, set the
+  `BUCKET` environment variable before deploying.
 - Edit `generate-form.js` and fill in your `aws_access_key_id`,
-  `aws_secret_access_key` and `bucket_name`.
+  `aws_secret_access_key` and `bucket_name` (matching the bucket name above).
 - Run `yarn install` to install crypto-js dependency for `generate-form.js`.
 - Generate the HTML form:
 
@@ -43,29 +45,13 @@ serverless deploy
 
 The output should look similar to:
 
-```bash
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-.....
-Serverless: Stack create finished...
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (3.85 MB)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-........................
-Serverless: Stack update finished...
-Service Information
-service: upload-to-s3-and-postprocess
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  None
-functions:
-  upload-to-s3-and-postprocess-dev-postprocess
+```
+Deploying "upload-to-s3-and-postprocess" to stage "dev" (us-east-1)
 
+✔ Service deployed to stack upload-to-s3-and-postprocess-dev (38s)
+
+functions:
+  postprocess: upload-to-s3-and-postprocess-dev-postprocess (1.1 kB)
 ```
 
 ## Usage

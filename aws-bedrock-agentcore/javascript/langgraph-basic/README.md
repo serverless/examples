@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Basic Agent, Code Deploy (JavaScript)
+description: Minimal LangGraph JS agent built automatically from source with no Dockerfile, deployed to AWS Bedrock AgentCore.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph JS Example
 
 A minimal LangGraph JavaScript agent deployed to AWS Bedrock AgentCore without a Dockerfile. The Serverless Framework automatically builds the container image from source code.
@@ -6,7 +18,7 @@ A minimal LangGraph JavaScript agent deployed to AWS Bedrock AgentCore without a
 
 - **No Dockerfile needed**: Container image is built automatically from source code
 - **LangGraph JS**: ReAct agent pattern with tool calling
-- **Claude Sonnet 4.5**: Powered by Amazon Bedrock
+- **Claude Sonnet 5**: Powered by Amazon Bedrock
 - **Simple Tools**: Calculator operations
 - **Minimal Configuration**: Just `ai: { agents: { assistant: {} } }` in `serverless.yml`
 

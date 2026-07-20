@@ -1,15 +1,15 @@
-service: aws-ruby-step-functions-with-callback
+service: ruby-sfn-callback
 
-frameworkVersion: '2'
+frameworkVersion: '4'
 
 provider:
   name: aws
   region: us-east-1
-  runtime: ruby2.7
+  runtime: ruby4.0
+  architecture: arm64
   memorySize: 256
   timeout: 10
   logRetentionInDays: 30
-  lambdaHashingVersion: 20201221
   iam:
     role:
       statements:

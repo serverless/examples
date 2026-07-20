@@ -1,8 +1,8 @@
 <!--
-title: TODO
+title: 'AWS Python Telegram Bot example'
 description: This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework.
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10
@@ -13,11 +13,13 @@ authorAvatar: 'https://avatars3.githubusercontent.com/u/8570364?v=4&s=140'
 # Serverless Telegram Bot
 This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖
 
+Built with [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) v21+, which is fully `async`; the handler wraps each Bot API call with `asyncio.run(...)`.
+
 ## Usage
 
 ### What do I need?
-- A AWS key configured locally, see [here](https://serverless.com/framework/docs/providers/aws/guide/credentials/).
-- NodeJS. I tested with v8.9.0.
+- An AWS key configured locally, see [here](https://serverless.com/framework/docs/providers/aws/guide/credentials/).
+- Node.js.
 - A Telegram account.
 
 ### Installing

@@ -2,7 +2,7 @@
 title: 'AWS Fetch image from URL and upload to S3 example in NodeJS'
 description: 'This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -20,32 +20,29 @@ This example display how to fetch an image from remote source (URL) and then upl
 
 ## How it works
 
-We first fetch the data from given url and then call the S3 API `putObject` to upload it to the bucket.
+We first fetch the data from the given URL and then call the S3 `PutObjectCommand` to upload it to the bucket.
 
 ```js
-fetch('image URL')
-  .then(res => {
-    return s3.putObject({Bucket, Key, Body: res.body}).promise();
-  }).then(res => {
-    callback(null, res);
-  }).catch(err => {
-    callback(err, null);
-  });
+const response = await fetch(event.image_url);
+const buffer = Buffer.from(await response.arrayBuffer());
+await s3.send(new PutObjectCommand({ Bucket, Key, Body: buffer }));
 ```
 
 ## Setup
 
-Since this plugin uses the Serverless plugin `serverless-secrets-plugin` you need to setup the `node_modules` by running:
+Install the dependencies by running:
 
 ```bash
 npm install
 ```
 
-In addition you need to create an S3 bucket you want to store the files in. After you created the bucket change the bucket name in `serverless.yml` custom settings to your buckets.
+The S3 bucket used to store the files is created for you as part of this stack, with a CloudFormation-generated, globally-unique name — no manual setup is required.
 
 ```yml
-custom:
-  bucket: <your-bucket-name>
+resources:
+  Resources:
+    UploadBucket:
+      Type: AWS::S3::Bucket
 ```
 
 ## Deploy
@@ -59,28 +56,12 @@ serverless deploy
 The expected result should be similar to:
 
 ```bash
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-.....
-Serverless: Stack create finished...
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (1.8 KB)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-................
-Serverless: Stack update finished...
+Deploying "fetch-file-and-store-in-s3" to stage "dev" (us-west-1)
 
-Service Information
-service: aws-node-fetch-file-and-store-in-s3
-stage: dev
-region: us-west-1
-api keys:
-  None
-endpoints:
-  None
+✔ Service deployed to stack fetch-file-and-store-in-s3-dev (42s)
+
 functions:
-  aws-node-fetch-file-and-store-in-s3-dev-save: arn:aws:lambda:us-west-1:377024778620:function:aws-node-fetch-file-and-store-in-s3-dev-save
+  save: fetch-file-and-store-in-s3-dev-save (1.2 kB)
 ```
 
 ## Usage

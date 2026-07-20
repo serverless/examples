@@ -1,0 +1,11 @@
+{
+  "name": "aws-node-recursive-function",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is an example of a function that will recursively call itself.",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-lambda": "^3.700.0"
+  }
+}

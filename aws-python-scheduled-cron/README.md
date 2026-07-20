@@ -21,9 +21,7 @@ Detailed information about cron expressions in available in official [AWS docs](
 
 ### Deployment
 
-This example is made to work with the Serverless Framework dashboard, which includes advanced features such as CI/CD, monitoring, metrics, etc.
-
-In order to deploy with dashboard, you need to first login with:
+Serverless Framework requires an account. If you haven't signed in yet, log in with:
 
 ```
 serverless login

@@ -1,19 +1,13 @@
 {
   "name": "serverless-examples",
   "version": "0.0.0",
-  "description": "A compilation of several examples and boilerplates",
+  "description": "A collection of ready-to-deploy Serverless Framework services",
+  "private": true,
   "scripts": {
-    "lint": "eslint .",
     "docs": "node generate-readme.js",
-    "validate": "node validate.js"
+    "validate": "node validate.js",
+    "check-docs": "node generate-readme.js && git diff --exit-code README.md examples.json"
   },
   "license": "MIT",
-  "dependencies": {
-    "eslint": "^5.15.3",
-    "eslint-config-airbnb-base": "^10.0.1",
-    "eslint-plugin-import": "^2.16.0",
-    "gray-matter": "^4.0.2",
-    "markdown-magic": "^0.1.25"
-  },
-  "devDependencies": {}
+  "engines": { "node": ">=24" }
 }

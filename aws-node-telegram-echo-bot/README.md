@@ -1,7 +1,7 @@
 <!--
 title: 'Simple Telegram bot'
 description: 'This is a simple echo bot on Telegram.'
-framework: v1
+framework: v4
 platform: AWS
 language: NodeJS
 priority: 10
@@ -15,7 +15,7 @@ authorAvatar: 'https://avatars2.githubusercontent.com/u/3183314?s=460&v=4'
 This is a simple echo bot on Telegram. (NodeJS)
 
 ### Required 
-- Node.js `v6.5.0` or later
+- Node.js `24.x` or later
 - Telegram account 
 - AWS account
 
@@ -25,7 +25,6 @@ This is a simple echo bot on Telegram. (NodeJS)
 
 ```
 $ npm install -g serverless
-$ npm install
 ```
 
 2. Create a bot from Telegram, sending this message to [@BotFather](https://web.telegram.org/#/im?p=@BotFather)
@@ -34,9 +33,11 @@ $ /newbot
 ```
 
 
-3. Put the token received into a file called `handle.js`.
-```
-const token = "YOUR_API_TOKEN";
+3. Put the token received into the `TELEGRAM_BOT_TOKEN` environment variable in `serverless.yml`.
+```yml
+provider:
+  environment:
+    TELEGRAM_BOT_TOKEN: YOUR_API_TOKEN_HERE
 ```
 
 4. Deploy it!

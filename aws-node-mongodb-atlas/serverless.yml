@@ -1,11 +1,18 @@
 service: my-service # NOTE: update this with your service name
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
+  environment:
+    MONGODB_URI: mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<db>?retryWrites=true
 
 functions:
   hello:
     handler: handler.hello
     events:
-      - http: GET hello
+      - http:
+          path: hello
+          method: get

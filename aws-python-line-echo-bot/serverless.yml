@@ -1,7 +1,18 @@
 service: aws-python-line-echo-bot
+frameworkVersion: '4'
+
+package:
+  patterns:
+    - '!node_modules/**'
+
 provider:
   name: aws
-  runtime: python3.7
+  # python3.13 until pydantic-core ships manylinux cp314 wheels (checked 2026-07-17)
+  runtime: python3.13
+  architecture: arm64
+  environment:
+    CHANNEL_ACCESS_TOKEN: ${env:CHANNEL_ACCESS_TOKEN, 'YOUR_CHANNEL_ACCESS_TOKEN'}
+    CHANNEL_SECRET: ${env:CHANNEL_SECRET, 'YOUR_CHANNEL_SECRET'}
 
 functions:
   line_bot:
@@ -10,5 +21,14 @@ functions:
       - http:
           path: /webhook
           method: POST
-plugins:
-  - serverless-python-requirements
+
+custom:
+  # Built-in python requirements packaging activates on this key.
+  pythonRequirements:
+    # Force Linux wheels for the deploying (non-Linux) host so packaging fails loudly
+    # instead of silently bundling a host-platform native wheel (pydantic-core et al).
+    useUv: false
+    pipCmdExtraArgs:
+      - --platform
+      - manylinux2014_aarch64
+      - '--only-binary=:all:'

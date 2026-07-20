@@ -1,7 +1,7 @@
 <!--
 title: 'Simple Websocket Authorizers'
 description: 'The example shows you how to deploy simple websocket authorizers'
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10

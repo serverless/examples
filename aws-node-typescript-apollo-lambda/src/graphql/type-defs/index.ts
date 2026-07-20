@@ -1,14 +1,12 @@
-import { gql } from 'apollo-server-lambda';
-
 // Inputs
 import DummyInput from './inputs/DummyInput';
 // Objects
 import DummyObject from './objects/DummyObject';
 // Root types
-import Mutation from './root/Mutation'; // tslint:disable-line ordered-imports
-import Query from './root/Query'; // tslint:disable-line ordered-imports
+import Mutation from './root/Mutation';
+import Query from './root/Query';
 
-const typeDefStrings = [
+const typeDefs = [
   // Inputs
   DummyInput,
   // Objects
@@ -17,7 +15,5 @@ const typeDefStrings = [
   Mutation,
   Query,
 ];
-
-const typeDefs = typeDefStrings.map(typeDef => gql(typeDef));
 
 export default typeDefs;

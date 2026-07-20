@@ -2,7 +2,7 @@
 title: 'AWS SES receive emails and process body'
 description: 'This example shows how to process receiving emails, and have S3 trigger a lambda function.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -22,7 +22,8 @@ trigger a lambda function.
 ## Setup
 
 - [Create a SES verified Domain](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-getting-started-verify.html) but do not setup the "Rule Set"
-- Edit `serverless.yml` and choose a unique S3 bucket name but follow the [normalizing Rules](https://serverless.com/framework/docs/providers/aws/guide/resources#aws-cloudformation-resource-reference) to allow to use the name for the `bucketRef`. To keep it working use a name which  contains only the characters a-z. The `bucketRef` is the constant string `S3Bucket` plus the `bucket` name with the first letter uppercase.
+- The bucket name is stage- and account-qualified by default (`custom.defaultBucket: ses-email-body-${sls:stage}-${aws:accountId}`), so it's globally unique out of the box and safe to deploy without editing anything.
+- If you want a different bucket name, set the `BUCKET` environment variable (`custom.bucket: ${env:BUCKET, self:custom.defaultBucket}`) — but the framework derives the CloudFormation logical id for the bucket resource from the *resolved* bucket name (non-alphanumeric characters stripped, first letter uppercased, prefixed with `S3Bucket`), and that logical id is referenced by `custom.bucketRef` elsewhere in this template. If you override `BUCKET`, you must also update `custom.bucketRef` to match the new logical id — run `serverless package` and read the generated `AWS::S3::Bucket` logical id out of `.serverless/cloudformation-template-update-stack.json` to find the exact value.
 - if you change the region check if SES receiving exists in your region
 
 ## Deploy
@@ -36,28 +37,12 @@ serverless deploy
 The output should look similar to:
 
 ```
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service .zip file to S3 (2.69 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-........................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-ses-receive-email-body
-stage: dev
-region: eu-west-1
-stack: aws-node-ses-receive-email-body-dev
-api keys:
-  None
-endpoints:
-  None
-functions:
-  postprocess: aws-node-ses-receive-email-body-dev-postprocess
+Deploying aws-node-ses-receive-email-body to stage dev (eu-west-1)
 
+✔ Service deployed to stack aws-node-ses-receive-email-body-dev (42s)
+
+functions:
+  postprocess: aws-node-ses-receive-email-body-dev-postprocess (1.4 kB)
 ```
 
 ## Setup SNS Email Receiving Rule

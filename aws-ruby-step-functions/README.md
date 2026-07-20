@@ -2,7 +2,7 @@
 title: 'Ruby AWS Ruby Step Functions'
 description: 'Ruby example that make usage of AWS Step Functions with AWS Lambda, DynamoDB and Step Functions flows.'
 layout: Doc
-framework: v2
+framework: v4
 platform: AWS
 language: Ruby
 priority: 10

@@ -2,7 +2,7 @@
 title: 'AWS Serverless HTTP API with DynamoDB store example in Python'
 description: 'This example demonstrates how to setup an HTTP API allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 authorLink: 'https://github.com/godfreyhobbs'

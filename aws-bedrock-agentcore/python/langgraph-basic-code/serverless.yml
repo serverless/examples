@@ -1,12 +1,10 @@
 service: langgraph-basic-code
 
+frameworkVersion: '4'
+
 provider:
   name: aws
   region: us-east-1
-
-custom:
-  pythonRequirements:
-    dockerizePip: true
 
 ai:
   agents:

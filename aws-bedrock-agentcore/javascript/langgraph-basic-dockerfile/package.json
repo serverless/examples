@@ -21,13 +21,14 @@
     "ai-agent"
   ],
   "dependencies": {
+    "@aws-sdk/client-bedrock-agentcore": "^3.993.0",
     "@langchain/aws": "^1.2.5",
     "@langchain/core": "^1.1.28",
-    "bedrock-agentcore": "^0.2.0",
+    "bedrock-agentcore": "^0.4.0",
     "langchain": "^1.2.27",
-    "zod": "^3.23.0"
+    "zod": "^4.4.3"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": "24.x"
   }
 }

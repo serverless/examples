@@ -2,7 +2,7 @@
 title: 'AWS Analyse Image from S3 with Amazon Rekognition example in NodeJS'
 description: 'This example shows how to analyze an image in an S3 bucket with Amazon Rekognition and return a list of labels.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -36,24 +36,14 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (3.78 MB)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-..............
-Serverless: Stack update finished...
-Service Information
-service: rekognition-analysis-s3-image
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  POST - https://6bbhhv5q22.execute-api.us-east-1.amazonaws.com/dev/analysis
+```
+Deploying "rekognition-analysis-s3-image" to stage "dev" (us-east-1)
+
+✔ Service deployed to stack rekognition-analysis-s3-image-dev (48s)
+
+endpoint: POST - https://6bbhhv5q22.execute-api.us-east-1.amazonaws.com/dev/analysis
 functions:
-  imageAnalysis: rekognition-analysis-s3-image-dev-imageAnalysis
+  imageAnalysis: rekognition-analysis-s3-image-dev-imageAnalysis (1.5 kB)
 ```
 
 ## Usage

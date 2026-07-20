@@ -1,36 +1,32 @@
-'use strict';
+import type { APIGatewayProxyHandlerV2 } from 'aws-lambda';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 
-import { DynamoDB } from 'aws-sdk'
+const client = new DynamoDBClient({});
+const dynamoDb = DynamoDBDocumentClient.from(client);
 
-const dynamoDb = new DynamoDB.DocumentClient()
-
-
-module.exports.get = (event, context, callback) => {
+export const get: APIGatewayProxyHandlerV2 = async (event) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
-      id: event.pathParameters.id,
+      id: event.pathParameters?.id,
     },
   };
 
-  // fetch todo from the database
-  dynamoDb.get(params, (error, result) => {
-    // handle potential errors
-    if (error) {
-      console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the todo item.',
-      });
-      return;
-    }
+  try {
+    // fetch todo from the database
+    const result = await dynamoDb.send(new GetCommand(params));
 
-    // create a response
-    const response = {
+    return {
       statusCode: 200,
       body: JSON.stringify(result.Item),
     };
-    callback(null, response);
-  });
+  } catch (error) {
+    console.error(error);
+    return {
+      statusCode: 501,
+      headers: { 'Content-Type': 'text/plain' },
+      body: "Couldn't fetch the todo item.",
+    };
+  }
 };

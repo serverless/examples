@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
-    "lib": ["esnext"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "target": "esnext"
-  },
-  "exclude": ["node_modules"]
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true
+  }
 }

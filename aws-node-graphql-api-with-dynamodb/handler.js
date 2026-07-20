@@ -1,48 +1,35 @@
-const {
+import {
   graphql,
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLNonNull,
-} = require('graphql');
+} from 'graphql';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
-const AWS = require('aws-sdk');
+const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-const promisify = foo => new Promise((resolve, reject) => {
-  foo((error, result) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(result);
-    }
-  });
-});
-
-const getGreeting = firstName => promisify(callback =>
-  dynamoDb.get({
+const getGreeting = async (firstName) => {
+  const result = await client.send(new GetCommand({
     TableName: process.env.DYNAMODB_TABLE,
     Key: { firstName },
-  }, callback))
-  .then((result) => {
-    if (!result.Item) {
-      return firstName;
-    }
-    return result.Item.nickname;
-  })
-  .then(name => `Hello, ${name}.`);
+  }));
+  const name = result.Item ? result.Item.nickname : firstName;
+  return `Hello, ${name}.`;
+};
 
-const changeNickname = (firstName, nickname) => promisify(callback =>
-  dynamoDb.update({
+const changeNickname = async (firstName, nickname) => {
+  await client.send(new UpdateCommand({
     TableName: process.env.DYNAMODB_TABLE,
     Key: { firstName },
     UpdateExpression: 'SET nickname = :nickname',
     ExpressionAttributeValues: {
       ':nickname': nickname,
     },
-  }, callback))
-  .then(() => nickname);
+  }));
+  return nickname;
+};
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -76,9 +63,7 @@ const schema = new GraphQLSchema({
 
 // We want to make a GET request with ?query=<graphql query>
 // The event properties are specific to AWS. Other providers will differ.
-module.exports.query = (event, context, callback) =>
-  graphql(schema, event.queryStringParameters.query)
-  .then(
-    result => callback(null, { statusCode: 200, body: JSON.stringify(result) }),
-    err => callback(err)
-  );
+export const query = async (event) => {
+  const result = await graphql({ schema, source: event.queryStringParameters.query });
+  return { statusCode: 200, body: JSON.stringify(result) };
+};

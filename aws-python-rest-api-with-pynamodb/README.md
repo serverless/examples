@@ -2,7 +2,7 @@
 title: 'AWS Serverless REST API with DynamoDB store example in Python'
 description: 'This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10
@@ -50,7 +50,7 @@ Serverless: Checking Stack update progress…
 Serverless: Stack update finished…
 
 Service Information
-service: serverless-rest-api-with-pynamodb
+service: rest-api-pynamodb
 stage: dev
 region: us-east-1
 api keys:
@@ -62,11 +62,11 @@ endpoints:
   PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
   DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
 functions:
-  serverless-rest-api-with-pynamodb-dev-update: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-pynamodb-dev-update
-  serverless-rest-api-with-pynamodb-dev-get: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-pynamodb-dev-get
-  serverless-rest-api-with-pynamodb-dev-list: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-pynamodb-dev-list
-  serverless-rest-api-with-pynamodb-dev-create: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-pynamodb-dev-create
-  serverless-rest-api-with-pynamodb-dev-delete: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-pynamodb-dev-delete
+  rest-api-pynamodb-dev-update: arn:aws:lambda:us-east-1:123456789012:function:rest-api-pynamodb-dev-update
+  rest-api-pynamodb-dev-get: arn:aws:lambda:us-east-1:123456789012:function:rest-api-pynamodb-dev-get
+  rest-api-pynamodb-dev-list: arn:aws:lambda:us-east-1:123456789012:function:rest-api-pynamodb-dev-list
+  rest-api-pynamodb-dev-create: arn:aws:lambda:us-east-1:123456789012:function:rest-api-pynamodb-dev-create
+  rest-api-pynamodb-dev-delete: arn:aws:lambda:us-east-1:123456789012:function:rest-api-pynamodb-dev-delete
 ```
 
 ## Usage

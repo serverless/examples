@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const crypto = require('crypto-js');
-const Hex = require('crypto-js/enc-hex');
-const fs = require('fs');
+import crypto from 'crypto-js';
+import Hex from 'crypto-js/enc-hex.js';
+import fs from 'fs';
 
 // from: https://docs.aws.amazon.com/general/latest/gr/signature-v4-examples.html#signature-v4-examples-javascript
 function getSignatureKey(key, dateStamp, regionName, serviceName) {

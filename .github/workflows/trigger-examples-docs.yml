@@ -23,20 +23,20 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Trigger Sync Docs Workflow
-        uses: actions/github-script@v6
+        uses: actions/github-script@v9
         with:
           github-token: ${{ secrets.CI_BOT_GITHUB_TOKEN }}
           script: |
-            console.log(`Triggering sync-examples workflow for stage: ${{ github.event.inputs.stage || 'dev' }}`);
+            console.log(`Triggering sync-examples workflow for stage: ${{ github.event.inputs.stage || 'prod' }}`);
             await github.rest.actions.createWorkflowDispatch({
               owner: 'serverlessinc',
               repo: 'growth',
               workflow_id: 'sync-examples.yml', // Replace with the actual workflow file name in the target repo
               ref: 'main',
               inputs: {
-                stage: '${{ github.event.inputs.stage || 'dev' }}'
+                stage: '${{ github.event.inputs.stage || 'prod' }}'
               }
             });

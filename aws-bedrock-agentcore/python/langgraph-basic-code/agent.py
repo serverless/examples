@@ -3,10 +3,12 @@ Minimal LangGraph agent with simple built-in tools.
 
 This agent demonstrates:
 - BedrockAgentCoreApp entrypoint pattern
-- LangGraph with Claude Sonnet 4.5
+- LangGraph with Claude Sonnet 5
 - Simple tool integration (calculator, time)
 - Code deployment (no Docker required)
 """
+
+import os
 
 from typing import Annotated
 from typing_extensions import TypedDict
@@ -23,9 +25,12 @@ from bedrock_agentcore.runtime import BedrockAgentCoreApp
 # Initialize the AgentCore application
 app = BedrockAgentCoreApp()
 
-# Initialize Claude Sonnet 4.5 via US inference profile
+# Bedrock model ID; override with the MODEL_ID env var
+MODEL_ID = os.environ.get("MODEL_ID", "global.anthropic.claude-sonnet-5")
+
+# Initialize Claude Sonnet 5 via Bedrock Converse
 llm = init_chat_model(
-    "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    MODEL_ID,
     model_provider="bedrock_converse",
 )
 

@@ -1,2 +1,3 @@
-cryptography==2.3
-PyJWT==1.6.4
+cryptography>=42
+PyJWT>=2
+

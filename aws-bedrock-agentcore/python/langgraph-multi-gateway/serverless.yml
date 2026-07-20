@@ -1,5 +1,7 @@
 service: langgraph-multi-gateway
 
+frameworkVersion: '4'
+
 provider:
   name: aws
   region: us-east-1
@@ -7,11 +9,11 @@ provider:
 functions:
   calculatorFunction:
     handler: handlers/calculator.handler
-    runtime: python3.13
+    runtime: python3.14
 
   internalLookupFunction:
     handler: handlers/internal_lookup.handler
-    runtime: python3.13
+    runtime: python3.14
 
 ai:
   # Define tools that will be assigned to different gateways

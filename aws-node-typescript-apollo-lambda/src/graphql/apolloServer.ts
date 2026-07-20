@@ -1,4 +1,5 @@
-import { ApolloServer, IResolvers } from 'apollo-server-lambda';
+import { ApolloServer } from '@apollo/server';
+import { startServerAndCreateLambdaHandler, handlers } from '@as-integrations/aws-lambda';
 import * as queries from './resolvers/queries';
 import * as mutations from './resolvers/mutations';
 import typeDefs from './type-defs';
@@ -10,14 +11,15 @@ const IS_DEV = !NODE_ENV || !['production'].includes(NODE_ENV);
 const resolvers = {
   Mutation: mutations,
   Query: queries,
-} as IResolvers;
+};
 
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  // subscriptions: {},
   introspection: IS_DEV,
-  // context: {},
 });
 
-export default apolloServer.createHandler();
+export default startServerAndCreateLambdaHandler(
+  apolloServer,
+  handlers.createAPIGatewayProxyEventRequestHandler(),
+);

@@ -15,7 +15,7 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 This template demonstrates how to develop and deploy a simple Python Flask API service, backed by DynamoDB, running on AWS Lambda using the Serverless Framework.
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to configured `http` events. To learn more about `http` event configuration options, please refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/). As the events are configured in a way to accept all incoming requests, `Flask` framework is responsible for routing and handling requests internally. The implementation takes advantage of `serverless-wsgi`, which allows you to wrap WSGI applications such as Flask apps. To learn more about `serverless-wsgi`, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi). The template also relies on `serverless-python-requirements` plugin for packaging dependencies from `requirements.txt` file. For more details about `serverless-python-requirements` configuration, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
+This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to configured `http` events. To learn more about `http` event configuration options, please refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/). As the events are configured in a way to accept all incoming requests, `Flask` framework is responsible for routing and handling requests internally. The implementation takes advantage of `serverless-wsgi`, which allows you to wrap WSGI applications such as Flask apps. To learn more about `serverless-wsgi`, please refer to corresponding [GitHub repository](https://github.com/logandk/serverless-wsgi). The template also relies on the Framework's built-in Python requirements packaging, configured under `custom.pythonRequirements` in `serverless.yml`, to bundle dependencies from `requirements.txt`.
 
 Additionally, the template also handles provisioning of a DynamoDB database that is used for storing data about users. The Flask application exposes two endpoints, `POST /users` and `GET /user/{userId}`, which allow to create and retrieve users.
 
@@ -23,14 +23,14 @@ Additionally, the template also handles provisioning of a DynamoDB database that
 
 ### Prerequisites
 
-In order to package your dependencies locally with `serverless-python-requirements`, you need to have `Python3.8` installed locally. You can create and activate a dedicated virtual environment with the following command:
+In order to package your dependencies locally with the Framework's built-in Python requirements packaging, you need to have `Python 3.14` installed locally. You can create and activate a dedicated virtual environment with the following command:
 
 ```
-python3.8 -m venv ./venv
+python3.14 -m venv ./venv
 source ./venv/bin/activate
 ```
 
-Alternatively, you can also use `dockerizePip` configuration from `serverless-python-requirements`. For details on that, please refer to corresponding [GitHub repository](https://github.com/UnitedIncome/serverless-python-requirements).
+Alternatively, you can also set the `dockerizePip` option under `custom.pythonRequirements` in `serverless.yml` to package dependencies inside a Docker container instead.
 
 ### Deployment
 
@@ -51,7 +51,7 @@ After running deploy, you should see output similar to:
 ```
 Deploying "aws-python-flask-dynamodb-api" to stage "dev" (us-east-1)
 
-Using Python specified in "runtime": python3.12
+Using Python specified in "runtime": python3.14
 
 Packaging Python WSGI handler...
 
@@ -101,10 +101,10 @@ pip install werkzeug boto3
 pip install -r requirements.txt
 ```
 
-Additionally, you will need to emulate DynamoDB locally, which can be done by using `serverless-dynamodb-local` plugin. In order to do that, execute the following commands:
+Additionally, you will need to emulate DynamoDB locally, which can be done by using the [`serverless-dynamodb`](https://github.com/raisenational/serverless-dynamodb) plugin (the maintained fork of the now-archived `serverless-dynamodb-local`). In order to do that, execute the following commands:
 
 ```
-serverless plugin install -n serverless-dynamodb-local
+serverless plugin install -n serverless-dynamodb
 serverless dynamodb install
 ```
 
@@ -149,7 +149,7 @@ At this point, you can run your application locally with the following command:
 serverless wsgi serve
 ```
 
-For additional local development capabilities of `serverless-wsgi` and `serverless-dynamodb-local` plugins, please refer to corresponding GitHub repositories:
+For additional local development capabilities of `serverless-wsgi` and `serverless-dynamodb` plugins, please refer to corresponding GitHub repositories:
 
 - https://github.com/logandk/serverless-wsgi
-- https://github.com/99x/serverless-dynamodb-local
+- https://github.com/raisenational/serverless-dynamodb

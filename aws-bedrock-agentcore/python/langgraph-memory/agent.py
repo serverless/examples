@@ -3,7 +3,7 @@ LangGraph agent with AgentCore Memory for conversation persistence.
 
 This agent demonstrates:
 - BedrockAgentCoreApp entrypoint pattern with STREAMING response
-- LangGraph with Claude Sonnet 4.5
+- LangGraph with Claude Sonnet 5
 - Memory as a tool (LLM decides when to recall past context)
 - Automatic conversation saving via create_event
 
@@ -33,6 +33,9 @@ app = BedrockAgentCoreApp()
 MEMORY_ID = os.environ.get("BEDROCK_AGENTCORE_MEMORY_ID")
 AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
 
+# Bedrock model ID; override with the MODEL_ID env var
+MODEL_ID = os.environ.get("MODEL_ID", "global.anthropic.claude-sonnet-5")
+
 # Initialize memory client if memory is configured
 memory_client = None
 if MEMORY_ID:
@@ -60,7 +63,7 @@ def create_agent(actor_id: str, session_id: str):
 
     # Initialize LLM
     llm = ChatBedrock(
-        model_id="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model_id=MODEL_ID,
         model_kwargs={"temperature": 0.1}
     )
 

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.processheader = (event, context, callback) => {
+export const processheader = async (event) => {
   // console.log('Received event:', JSON.stringify(event, null, 2));
   const mail = event.Records[0].ses.mail;
 
@@ -16,7 +14,7 @@ module.exports.processheader = (event, context, callback) => {
     date,
   });
 
-  callback(null, {
+  return {
     from: from[0],
     to: to[0],
     subject,
@@ -24,10 +22,10 @@ module.exports.processheader = (event, context, callback) => {
     timestamp,
     source,
     messageId,
-  });
+  };
 };
 
-module.exports.processacceptreject = (event, context, callback) => {
+export const processacceptreject = async (event) => {
   // console.log('Received event:', JSON.stringify(event, null, 2));
   const sesNotification = event.Records[0].ses;
 
@@ -40,8 +38,7 @@ module.exports.processacceptreject = (event, context, callback) => {
   ) {
     console.log('Dropping spam');
     // Stop processing rule set, dropping message
-    callback(null, { disposition: 'STOP_RULE_SET' });
-  } else {
-    callback(null, null);
+    return { disposition: 'STOP_RULE_SET' };
   }
+  return null;
 };

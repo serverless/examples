@@ -1,8 +1,6 @@
 // index.js
-'use strict';
-
-const { app } = require('./handler');
+import { app } from './handler.js';
 
 app.listen(3000, () => {
-    console.info(`Listening on port 3000.`);
+  console.info('Listening on port 3000.');
 });

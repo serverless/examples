@@ -1,13 +1,15 @@
 service: aws-python-alexa-skill
 
-frameworkVersion: ">=1.4.0 <2.0.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: python2.7
+  runtime: python3.14
+  architecture: arm64
 
 functions:
   luckyNumber:
     handler: handler.lucky_number
     events:
-      - alexaSkill
+      # Replace with your own skill ID from the Amazon Developer Console.
+      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx-xx

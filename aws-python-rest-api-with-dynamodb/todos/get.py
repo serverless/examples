@@ -16,6 +16,12 @@ def get(event, context):
         }
     )
 
+    if 'Item' not in result:
+        return {
+            "statusCode": 404,
+            "body": json.dumps({"error": "Couldn't find the todo item."})
+        }
+
     # create a response
     response = {
         "statusCode": 200,

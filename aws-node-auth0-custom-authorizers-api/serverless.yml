@@ -1,16 +1,19 @@
 
 service: aws-custom-authorizer-auth0
 
+frameworkVersion: '4'
+
 plugins:
   - serverless-offline
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   region: us-west-2
   environment:
-    AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
-    AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key)}
+    AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID, 'REPLACE-ME'}
+    AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key), 'REPLACE-ME'}
 
 functions:
   auth:

@@ -1,10 +1,14 @@
 service: aws-ruby-line-bot
 
-frameworkVersion: ">=2.1.0 <3.0.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: ruby2.7
+  runtime: ruby4.0
+  architecture: arm64
+  environment:
+    LINE_CHANNEL_ACCESS_TOKEN: ${env:LINE_CHANNEL_ACCESS_TOKEN, 'YOUR_LINE_CHANNEL_ACCESS_TOKEN'}
+    LINE_CHANNEL_SECRET: ${env:LINE_CHANNEL_SECRET, 'YOUR_LINE_CHANNEL_SECRET'}
 
 functions:
   webhook:
@@ -20,4 +24,5 @@ plugins:
 custom:
   hooks:
     package:initialize:
-      - bundle install --deployment
+      - bundle config set --local deployment true
+      - bundle install

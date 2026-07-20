@@ -1,8 +1,13 @@
 service: shared-gateway
+
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   region: ap-southeast-1
+
 resources:
   Resources:
     SharedGW:

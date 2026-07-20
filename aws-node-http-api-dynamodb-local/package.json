@@ -1,16 +1,17 @@
 {
   "name": "serverless-http-api-dynamodb-local",
   "version": "1.0.0",
+  "type": "module",
   "description": "Serverless HTTP API with DynamoDB and offline support",
   "repository": "",
   "author": "Christoph Gysin <christoph.gysin@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "uuid": "^2.0.3"
+    "@aws-sdk/client-dynamodb": "^3.700.0",
+    "@aws-sdk/lib-dynamodb": "^3.700.0"
   },
   "devDependencies": {
-    "aws-sdk": "^2.12.0",
-    "serverless-dynamodb-local": "^0.2.18",
-    "serverless-offline": "^6.8.0"
+    "serverless-dynamodb": "^0.2.58",
+    "serverless-offline": "^14.7.4"
   }
 }

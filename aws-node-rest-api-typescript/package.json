@@ -4,41 +4,30 @@
   "description": "This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and MongoDB Atlas.",
   "main": "index.js",
   "scripts": {
-    "lint": "tslint -p tsconfig.json -c tslint.json",
     "local": "serverless offline",
     "deploy": "serverless deploy",
-    "test": "cross-env NODE_ENV=dev mocha -r ts-node/register tests/*.test.ts --exit",
+    "test": "cross-env NODE_ENV=dev mocha --import=tsx tests/*.test.ts --exit",
     "coverage": "nyc --reporter lcov npm run test"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "mongoose": "^5.9.10"
+    "mongoose": "^9.7.4"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.51",
-    "@types/chai": "^4.2.11",
-    "@types/dotenv-safe": "^8.1.0",
-    "@types/lambda-tester": "^3.6.0",
-    "@types/mocha": "^7.0.2",
-    "@types/mongoose": "^5.7.14",
-    "@types/sinon": "^9.0.0",
-    "@types/supertest": "^2.0.8",
-    "chai": "^4.2.0",
-    "cross-env": "^7.0.2",
-    "istanbul": "^0.4.5",
+    "@types/aws-lambda": "^8.10.162",
+    "@types/chai": "^5.2.3",
+    "@types/lambda-tester": "^4.0.3",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.13.0",
+    "@types/sinon": "^22.0.0",
+    "chai": "^6.2.2",
+    "cross-env": "^10.1.0",
     "lambda-tester": "^4.0.1",
-    "mocha": "^7.1.2",
-    "nyc": "^15.0.1",
-    "serverless-offline": "^5.12.1",
-    "serverless-plugin-typescript": "^1.1.9",
-    "sinon": "^9.0.2",
-    "ts-node": "^8.9.1",
-    "tslint": "^6.1.2",
-    "tslint-config-airbnb": "^5.11.2",
-    "typescript": "^3.8.3"
+    "mocha": "^11.7.6",
+    "nyc": "^18.0.0",
+    "serverless-offline": "^14.7.4",
+    "sinon": "^22.0.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   },
   "repository": {
     "type": "git",

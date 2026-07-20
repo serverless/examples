@@ -24,17 +24,21 @@ class State(Enum):
 class AssetModel(Model):
     class Meta:
         table_name = os.environ['DYNAMODB_TABLE']
+        region = os.environ['REGION']
         if 'ENV' in os.environ:
             host = 'http://localhost:8000'
         else:
-            region = os.environ['REGION']
             host = os.environ['DYNAMODB_HOST']
             # 'https://dynamodb.us-east-1.amazonaws.com'
 
     asset_id = UnicodeAttribute(hash_key=True)
     state = UnicodeAttribute(null=False, default=State.CREATED.name)
-    createdAt = UTCDateTimeAttribute(null=False, default=datetime.now().astimezone())
-    updatedAt = UTCDateTimeAttribute(null=False, default=datetime.now().astimezone())
+    # `default` must be a callable so each instance gets its own timestamp
+    # (pynamodb>=6 requires immutable-or-callable defaults; calling
+    # `datetime.now()` here directly would be evaluated once at
+    # class-definition time and shared by every instance).
+    createdAt = UTCDateTimeAttribute(null=False, default=lambda: datetime.now().astimezone())
+    updatedAt = UTCDateTimeAttribute(null=False, default=lambda: datetime.now().astimezone())
 
     def __str__(self):
         return 'asset_id:{}, state:{}'.format(self.asset_id, self.state)
@@ -52,7 +56,7 @@ class AssetModel(Model):
             raise e
 
     def __iter__(self):
-        for name, attr in self._get_attributes().items():
+        for name, attr in self.get_attributes().items():
             yield name, attr.serialize(getattr(self, name))
 
     def get_upload_url(self, ttl=60):

@@ -13,6 +13,8 @@
 
 service: langgraph-comprehensive
 
+frameworkVersion: '4'
+
 provider:
   name: aws
   region: us-east-1

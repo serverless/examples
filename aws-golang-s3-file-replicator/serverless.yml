@@ -1,13 +1,16 @@
 service: aws-golang-s3-file-replicator
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
 custom:
-  inputBucket: replicator-input-101
-  outputBucket: replicator-output-101
+  defaultInputBucket: replicator-input-${aws:accountId}
+  defaultOutputBucket: replicator-output-${aws:accountId}
+  inputBucket: ${env:INPUT_BUCKET, self:custom.defaultInputBucket}
+  outputBucket: ${env:OUTPUT_BUCKET, self:custom.defaultOutputBucket}
 
 provider:
   name: aws
-  runtime: go1.x
+  runtime: provided.al2023
+  architecture: arm64
   stage: dev
   region: ap-northeast-1
   memorySize: 128
@@ -25,14 +28,13 @@ provider:
           Resource: "arn:aws:s3:::${self:custom.inputBucket}/*"
 
 package:
-  exclude:
-    - ./**
-  include:
-    - ./bin/**
+  individually: true
 
 functions:
   replicate:
-    handler: bin/replicator
+    handler: bootstrap
+    package:
+      artifact: bin/replicate.zip
     environment:
       OUTPUT_BUCKET: ${self:custom.outputBucket}
     events:

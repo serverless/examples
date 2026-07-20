@@ -2,7 +2,7 @@
 title: 'AWS Serverless Alexa Skill example in Python'
 description: 'This example demonstrates how to setup your own Alexa skill using AWS Lambdas.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10
@@ -52,7 +52,7 @@ api keys:
 endpoints:
   None
 functions:
-  aws-python-alexa-skill-dev-luckyNumber: arn:aws:lambda:us-east-1:377024778620:function:aws-python-alexa-skill-dev-luckyNumber
+  aws-python-alexa-skill-dev-luckyNumber: arn:aws:lambda:us-east-1:123456789012:function:aws-python-alexa-skill-dev-luckyNumber
 ```
 
 Next we need to setup a Alexa skill. Once you've signed up for the Amazon Developer Platform visit `https://developer.amazon.com/edw/home.html`. There you should see the following screen:

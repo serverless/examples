@@ -1,3 +1,15 @@
+<!--
+title: Serverless Framework Sandboxes: Complete AWS Lambda MicroVM Example
+description: Deploy-as-is showcase of every sandboxes property: Dockerfile build, memory, hooks, observability, IAM, and tags.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # Serverless Framework — AWS Lambda MicroVMs (`sandboxes`) — complete example
 
 A complete, **deploy-as-is** showcase of the `sandboxes` top-level property, which

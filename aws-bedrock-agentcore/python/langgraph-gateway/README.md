@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Gateway Tools (Python)
+description: LangGraph agent exposing custom Lambda function tools via an auto-created AgentCore Gateway.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Gateway Agent
 
 A LangGraph agent demonstrating how to add custom Lambda function tools via AgentCore Gateway.
@@ -17,7 +29,7 @@ User Request → AgentCore Runtime → agent_invocation()
                                       ↓
                                    LangGraph
                                       ↓
-                               Claude Sonnet 4.5
+                               Claude Sonnet 5
                                       ↓
                          [needs calculation?]
                                       ↓
@@ -28,8 +40,8 @@ User Request → AgentCore Runtime → agent_invocation()
 
 ## Prerequisites
 
-- AWS account with Bedrock model access (Claude Sonnet 4.5)
-- Enable access to US inference profile `us.anthropic.claude-sonnet-4-5-20250929-v1:0` in Bedrock console
+- AWS account with Bedrock model access (Claude Sonnet 5)
+- Enable access to the `global.anthropic.claude-sonnet-5` inference profile in Bedrock console (override the default via the `MODEL_ID` env var)
 - Docker installed
 - Serverless Framework v4+
 - AWS credentials configured
@@ -92,7 +104,7 @@ The `serverless.yml` defines:
 functions:
   calculatorFunction:
     handler: handlers/calculator.handler
-    runtime: python3.13
+    runtime: python3.14
 
 ai:
   tools:
@@ -152,11 +164,11 @@ Define additional tools in `serverless.yml`:
 functions:
   calculatorFunction:
     handler: handlers/calculator.handler
-    runtime: python3.13
+    runtime: python3.14
 
   weatherFunction:
     handler: handlers/weather.handler
-    runtime: python3.13
+    runtime: python3.14
 
 ai:
   tools:

@@ -1,10 +1,8 @@
-'use strict';
+import { TranscribeClient, StartTranscriptionJobCommand } from '@aws-sdk/client-transcribe';
 
-const awsSdk = require('aws-sdk');
+const transcribeService = new TranscribeClient({});
 
-const transcribeService = new awsSdk.TranscribeService();
-
-module.exports.transcribe = (event, context, callback) => {
+export const transcribe = async (event) => {
   const records = event.Records;
 
   const transcribingPromises = records.map((record) => {
@@ -16,19 +14,18 @@ module.exports.transcribe = (event, context, callback) => {
 
     const TranscriptionJobName = record.s3.object.key;
 
-    return transcribeService.startTranscriptionJob({
-      LanguageCode: process.env.LANGUAGE_CODE,
-      Media: { MediaFileUri: recordUrl },
-      MediaFormat: 'wav',
-      TranscriptionJobName,
-      MediaSampleRateHertz: 8000, // normally 8000 if you are using wav file
-      OutputBucketName: process.env.S3_TRANSCRIPTION_BUCKET,
-    }).promise();
+    return transcribeService.send(
+      new StartTranscriptionJobCommand({
+        LanguageCode: process.env.LANGUAGE_CODE,
+        Media: { MediaFileUri: recordUrl },
+        MediaFormat: 'wav',
+        TranscriptionJobName,
+        MediaSampleRateHertz: 8000, // normally 8000 if you are using wav file
+        OutputBucketName: process.env.S3_TRANSCRIPTION_BUCKET,
+      })
+    );
   });
 
-  Promise.all(transcribingPromises)
-    .then(() => {
-      callback(null, { message: 'Start transcription job successfully' });
-    })
-    .catch(err => callback(err, { message: 'Error start transcription job' }));
+  await Promise.all(transcribingPromises);
+  return { message: 'Start transcription job successfully' };
 };

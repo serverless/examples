@@ -1,10 +1,13 @@
 service: graphql-api
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
-    DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
   iam:
     role:
       statements:
@@ -12,7 +15,7 @@ provider:
           Action:
             - dynamodb:GetItem
             - dynamodb:UpdateItem
-          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+          Resource: !GetAtt NicknamesTable.Arn
 
 functions:
   query:
@@ -33,7 +36,5 @@ resources:
         KeySchema:
           - AttributeName: firstName
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+        BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.DYNAMODB_TABLE}

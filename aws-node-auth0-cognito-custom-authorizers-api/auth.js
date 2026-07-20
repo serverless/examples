@@ -1,14 +1,26 @@
-'use strict';
-
-const jwk = require('jsonwebtoken');
-const jwkToPem = require('jwk-to-pem');
-const request = require('request');
+import jwt from 'jsonwebtoken';
+import jwksClient from 'jwks-rsa';
 
 // For Auth0:       https://<project>.auth0.com/
 // refer to:        http://bit.ly/2hoeRXk
 // For AWS Cognito: https://cognito-idp.<region>.amazonaws.com/<user pool id>
 // refer to:        http://amzn.to/2fo77UI
 const iss = 'https://<url>.com/';
+
+const client = jwksClient({
+  jwksUri: `${iss}.well-known/jwks.json`,
+});
+
+// Look up the signing key for the token's `kid` via the issuer's JWKS endpoint:
+const getSigningKey = (kid) => new Promise((resolve, reject) => {
+  client.getSigningKey(kid, (error, key) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(key.getPublicKey());
+    }
+  });
+});
 
 // Generate policy to allow this user on this API:
 const generatePolicy = (principalId, effect, resource) => {
@@ -29,41 +41,27 @@ const generatePolicy = (principalId, effect, resource) => {
 };
 
 // Reusable Authorizer function, set on `authorizer` field in serverless.yml
-module.exports.authorize = (event, context, cb) => {
+export const authorize = async (event) => {
   console.log('Auth function invoked');
-  if (event.authorizationToken) {
-    // Remove 'bearer ' from token:
-    const token = event.authorizationToken.substring(7);
-    // Make a request to the iss + .well-known/jwks.json URL:
-    request(
-      { url: `${iss}/.well-known/jwks.json`, json: true },
-      (error, response, body) => {
-        if (error || response.statusCode !== 200) {
-          console.log('Request error:', error);
-          cb('Unauthorized');
-        }
-        const keys = body;
-        // Based on the JSON of `jwks` create a Pem:
-        const k = keys.keys[0];
-        const jwkArray = {
-          kty: k.kty,
-          n: k.n,
-          e: k.e,
-        };
-        const pem = jwkToPem(jwkArray);
-
-        // Verify the token:
-        jwk.verify(token, pem, { issuer: iss }, (err, decoded) => {
-          if (err) {
-            console.log('Unauthorized user:', err.message);
-            cb('Unauthorized');
-          } else {
-            cb(null, generatePolicy(decoded.sub, 'Allow', event.methodArn));
-          }
-        });
-      });
-  } else {
+  if (!event.authorizationToken) {
     console.log('No authorizationToken found in the header.');
-    cb('Unauthorized');
+    throw new Error('Unauthorized');
+  }
+
+  // Remove 'bearer ' from token:
+  const token = event.authorizationToken.substring(7);
+
+  try {
+    // Decode the token (without verifying) to find which key (`kid`) signed it:
+    const decodedHeader = jwt.decode(token, { complete: true });
+    const kid = decodedHeader?.header?.kid;
+    const signingKey = await getSigningKey(kid);
+
+    // Verify the token:
+    const decoded = jwt.verify(token, signingKey, { issuer: iss });
+    return generatePolicy(decoded.sub, 'Allow', event.methodArn);
+  } catch (err) {
+    console.log('Unauthorized user:', err.message);
+    throw new Error('Unauthorized');
   }
 };

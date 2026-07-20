@@ -2,23 +2,22 @@
   "name": "typescript-example",
   "version": "0.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "tsc -w",
-    "lint": "tslint '*.ts'"
+    "watch": "tsc -w"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/aws-sdk": "0.0.42",
-    "@types/node": "^7.0.5",
-    "tslint": "^5.5.0",
-    "tslint-config-standard": "^6.0.1",
-    "typescript": "^2.4.2"
+    "@types/aws-lambda": "^8.10.162",
+    "@types/node": "^24.13.0",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "uuid": "^3.1.0"
+    "@aws-sdk/client-dynamodb": "^3.700.0",
+    "@aws-sdk/lib-dynamodb": "^3.700.0"
   }
 }

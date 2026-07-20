@@ -1,6 +1,7 @@
 {
-  "name": "aws-node-line-echo-bot",
+  "name": "aws-node-telegram-echo-bot",
   "version": "1.0.0",
+  "type": "module",
   "description": "This is a simple echo bot on Telegram",
   "main": "handler.js",
   "keywords": [
@@ -10,7 +11,5 @@
     "chatbot",
     "serverless"
   ],
-  "dependencies": {
-    "request": "^2.88.0"
-  }
+  "license": "MIT"
 }

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.createUser = (event, context, callback) => {
+export const createUser = async () => {
   // logs `4096`
   console.log('PASSWORD_ITERATIONS: ', process.env.PASSWORD_ITERATIONS);
   // logs `256`
@@ -18,28 +16,24 @@ module.exports.createUser = (event, context, callback) => {
 
   // The email service api key would be used to send a verfication email to the user.
 
-  const response = {
+  return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'User created',
     }),
   };
-
-  callback(null, response);
 };
 
-module.exports.resetPassword = (event, context, callback) => {
+export const resetPassword = async () => {
   // logs `KEYEXAMPLE1234`
   console.log('EMAIL_SERVICE_API_KEY: ', process.env.EMAIL_SERVICE_API_KEY);
 
   // The email service api key would be used to send a reset password email.
 
-  const response = {
+  return {
     statusCode: 200,
     body: JSON.stringify({
       message: 'Password sent.',
     }),
   };
-
-  callback(null, response);
 };

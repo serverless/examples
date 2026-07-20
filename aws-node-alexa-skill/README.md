@@ -2,7 +2,7 @@
 title: 'AWS Serverless Alexa Skill example in NodeJS'
 description: 'This example demonstrates how to setup your own Alexa skill using AWS Lambdas.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -33,25 +33,12 @@ serverless deploy
 The expected result should be similar to:
 
 ```bash
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (378 B)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.........
-Serverless: Stack update finished...
-Serverless: Removing old service versions...
-Service Information
-service: aws-node-alexa-skill-2
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  None
-functions:
-  aws-node-alexa-skill-2-dev-luckyNumber: arn:aws:lambda:us-east-1:377024778620:function:aws-node-alexa-skill-2-dev-luckyNumber
+Deploying "aws-node-alexa-skill" to stage "dev" (us-east-1)
 
+✔ Service deployed to stack aws-node-alexa-skill-dev (35s)
+
+functions:
+  luckyNumber: aws-node-alexa-skill-dev-luckyNumber (1.1 kB)
 ```
 
 Next we need to setup an Alexa skill. Once you've signed up for the Amazon Developer Platform visit `https://developer.amazon.com/edw/home.html`. There you should see the following screen:

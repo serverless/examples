@@ -2,7 +2,7 @@
 title: 'Ruby AWS Step Functions with Callback pattern'
 description: 'Ruby example that make usage of AWS Step Functions with callback pattern, AWS Lambda, DynamoDB, Amazon Comprehend, API Gateway, and Step Functions flows.'
 layout: Doc
-framework: v2
+framework: v4
 platform: AWS
 language: Ruby
 authorLink: 'https://github.com/pigius'
@@ -74,7 +74,7 @@ Serverless: Configuring Layer and GEM_PATH to the functions
 ✓ State machine "WorkflowWithCallback" definition is valid
 Serverless: Uploading CloudFormation file to S3...
 Serverless: Uploading artifacts...
-Serverless: Uploading service aws-ruby-step-functions-with-callback.zip file to S3 (137.4 KB)...
+Serverless: Uploading service ruby-sfn-callback.zip file to S3 (137.4 KB)...
 Serverless: Uploading service gemLayer.zip file to S3 (749.01 KB)...
 Serverless: Validating template...
 Serverless: Updating Stack...
@@ -82,19 +82,19 @@ Serverless: Checking Stack update progress...
 .........................
 Serverless: Stack update finished...
 Service Information
-service: aws-ruby-step-functions-with-callback
+service: ruby-sfn-callback
 stage: dev
 region: us-east-1
-stack: aws-ruby-step-functions-with-callback-dev
+stack: ruby-sfn-callback-dev
 resources: 19
 api keys:
   None
 endpoints:
 functions:
-  check-comment: aws-ruby-step-functions-with-callback-dev-check-comment
-  redact-comment: aws-ruby-step-functions-with-callback-dev-redact-comment
+  check-comment: ruby-sfn-callback-dev-check-comment
+  redact-comment: ruby-sfn-callback-dev-redact-comment
 layers:
-  gem: arn:aws:lambda:your-region:XXXXXXXXXXX:layer:aws-ruby-step-functions-with-callback-dev-ruby-bundle:49
+  gem: arn:aws:lambda:your-region:XXXXXXXXXXX:layer:ruby-sfn-callback-dev-ruby-bundle:49
 Serverless StepFunctions OutPuts
 endpoints:
   POST - https://XXXXXXXXXXXX.execute-api.your-region.amazonaws.com/dev/comments/add

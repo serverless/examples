@@ -24,7 +24,7 @@ namespace DotNetServerless.Lambda.Functions
       _serviceProvider = serviceProvider;
     }
 
-    [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+    [LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
     public async Task<APIGatewayProxyResponse> Run(APIGatewayProxyRequest request)
     {
       var requestModel = new GetItemRequest {Id = new Guid(request.PathParameters["id"])}; 

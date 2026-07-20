@@ -1,10 +1,9 @@
 [package]
-name = "test"
+name = "hello"
 version = "0.1.0"
-edition = "2018"
-authors = ["jonee"]
+edition = "2024"
 
 [dependencies]
-tokio = { version = "0.2", features = ["macros"] }
-lambda_http = { git = "https://github.com/awslabs/aws-lambda-rust-runtime/", branch = "master"}
+tokio = { version = "1.52.3", features = ["macros"] }
+lambda_http = "1.3.0"
 serde_json = "1.0"

@@ -12,7 +12,7 @@
     "@langchain/aws": "^1.2.5",
     "@langchain/core": "^1.1.28",
     "@langchain/langgraph": "^1.1.5",
-    "bedrock-agentcore": "^0.2.0",
+    "bedrock-agentcore": "^0.4.0",
     "zod": "^4.3.6"
   },
   "engines": {

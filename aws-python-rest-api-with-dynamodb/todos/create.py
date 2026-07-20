@@ -12,7 +12,10 @@ def create(event, context):
     data = json.loads(event['body'])
     if 'text' not in data:
         logging.error("Validation Failed")
-        raise Exception("Couldn't create the todo item.")
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"error": "Couldn't create the todo item."})
+        }
     
     timestamp = str(time.time())
 

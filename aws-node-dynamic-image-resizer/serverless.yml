@@ -1,38 +1,43 @@
-service:
-  name: ${self:custom.serviceName}
+service: ${self:custom.serviceName}
+
+frameworkVersion: '4'
 
 plugins:
   - serverless-offline
-  - serverless-webpack
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  profile: dev-fii
+  runtime: nodejs24.x
+  architecture: arm64
 
-  usagePlan:
-    quota:
-      limit: 100
-      offset: 2
-      period: MONTH
-    throttle:
-      burstLimit: 100
-      rateLimit: 50
+  apiGateway:
+    usagePlan:
+      quota:
+        limit: 100
+        offset: 2
+        period: MONTH
+      throttle:
+        burstLimit: 100
+        rateLimit: 50
+
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 's3:GetObject'
+          Resource: 'arn:aws:s3:::${self:custom.bucket}/*'
+        - Effect: 'Allow'
+          Action:
+            - 's3:PutObject'
+          Resource: 'arn:aws:s3:::${self:custom.bucket}/*'
 
 custom:
   serviceName: image-resizing
   stage: ${opt:stage, self:custom.defaultStage}
-  bucket: dynamic-image-resizing
-  webpack:
-    includeModules:
-      forceExclude:
-        - aws-sdk
+  defaultBucket: image-resizing-${sls:stage}-${aws:accountId}
+  bucket: ${env:BUCKET, self:custom.defaultBucket}
   defaultStage: dev
-  stages:
-    - ${opt:stage}
-    - dev
-    - integration
-    - production
 
 functions:
   resize:
@@ -43,29 +48,5 @@ functions:
           method: get
     environment:
       # Provide your bucket name here
-      BUCKET: dynamic-image-resizing
+      BUCKET: ${self:custom.bucket}
       REGION: us-east-1
-    # layers:
-    #   - {Ref: ImageLibsLambdaLayer}
-    iamRoleStatements:
-      - Effect: "Allow"
-        Action:
-          - "s3:GetObject"
-        Resource: "arn:aws:s3:::dynamic-image-resizing/*"
-      - Effect: "Allow"
-        Action:
-          - "s3:PutObject"
-        Resource: "arn:aws:s3:::dynamic-image-resizing/*"
-
-package:
-  exclude:
-    - layer/**
-    - node_modules/**
-    - '!node_modules/babel-runtime/**'
-    - '!node_modules/sharp/**'
-
-# layers:
-#   imageLibs:
-#     path: layer
-#     compatibleRuntimes:
-#       - nodejs12.x

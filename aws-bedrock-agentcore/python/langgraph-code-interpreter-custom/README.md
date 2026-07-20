@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Custom Code Interpreter (Python)
+description: LangGraph agent using a custom AgentCore Code Interpreter with PUBLIC network mode.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Custom Code Interpreter Example
 
 This example demonstrates using a custom code interpreter with PUBLIC network mode, allowing code to access external APIs and internet resources.
@@ -34,7 +46,7 @@ langgraph-code-interpreter-custom/
 - AWS account with Bedrock model access
 - Docker installed
 - Serverless Framework v4+
-- Python 3.12+
+- Python 3.14+
 
 ## Deployment
 

@@ -5,7 +5,7 @@
 # is snapshotted running (the `ready` lifecycle hook gates the snapshot). At RUN
 # TIME the `run` lifecycle hook delivers the per-session dispatch payload; the
 # worker acknowledges, handles the session, then exits.
-FROM public.ecr.aws/docker/library/node:22-slim
+FROM public.ecr.aws/docker/library/node:24-slim
 
 # Tools the agent's bash/edit/glob/grep tool calls use inside /workspace.
 RUN apt-get update \

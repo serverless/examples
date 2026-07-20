@@ -3,7 +3,7 @@
  *
  * This agent demonstrates:
  * - BedrockAgentCoreApp entrypoint pattern for JavaScript
- * - LangChain createAgent (backed by LangGraph) with Claude Sonnet 4.5 via Bedrock
+ * - LangChain createAgent (backed by LangGraph) with Claude Sonnet 5 via Bedrock
  * - Simple tool integration (calculator, time)
  * - Docker-based deployment
  */
@@ -14,9 +14,11 @@ import { ChatBedrockConverse } from '@langchain/aws'
 import { tool } from '@langchain/core/tools'
 import { z } from 'zod'
 
-// Initialize Claude Sonnet 4.5 via US inference profile
+const MODEL_ID = process.env.MODEL_ID ?? 'global.anthropic.claude-sonnet-5'
+
+// Initialize Claude Sonnet 5 via Bedrock
 const model = new ChatBedrockConverse({
-  model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+  model: MODEL_ID,
   region: process.env.AWS_REGION || 'us-east-1',
 })
 

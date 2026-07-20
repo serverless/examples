@@ -1,10 +1,10 @@
-org: serverlessinc
-app: aws-node-rest-api-typescript
 service: aws-node-rest-api-typescript
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
 
 functions:
   hello:
@@ -13,6 +13,3 @@ functions:
       - http:
           path: /
           method: get
-
-plugins:
-  - serverless-plugin-typescript

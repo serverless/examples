@@ -14,7 +14,8 @@ frameworkVersion: '4'
 provider:
   name: aws
   region: us-east-1
-  runtime: nodejs22.x
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
     # The launcher passes only a *reference* to the env-key secret to the MicroVM.
     MICROVM_IMAGE_IDENTIFIER: !Ref WorkerImage

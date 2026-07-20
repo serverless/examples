@@ -1,43 +1,37 @@
-const { spawnSync } = require("child_process");
-const { readFileSync, writeFileSync, unlinkSync } = require("fs");
-const AWS = require("aws-sdk");
+import { spawnSync } from 'node:child_process';
+import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 
-const s3 = new AWS.S3();
+const s3 = new S3Client({});
 
-module.exports.mkgif = async (event, context) => {
+export const mkgif = async (event) => {
   if (!event.Records) {
-    console.log("not an s3 invocation!");
+    console.log('not an s3 invocation!');
     return;
   }
   for (const record of event.Records) {
     if (!record.s3) {
-      console.log("not an s3 invocation!");
+      console.log('not an s3 invocation!');
       continue;
     }
-    if (record.s3.object.key.endsWith(".gif")) {
-      console.log("already a gif");
+    if (record.s3.object.key.endsWith('.gif')) {
+      console.log('already a gif');
       continue;
     }
     // get the file
-    const s3Object = await s3
-      .getObject({
+    const { Body } = await s3.send(
+      new GetObjectCommand({
         Bucket: record.s3.bucket.name,
-        Key: record.s3.object.key
+        Key: record.s3.object.key,
       })
-      .promise();
+    );
     // write file to disk
-    writeFileSync(`/tmp/${record.s3.object.key}`, s3Object.Body);
+    writeFileSync(`/tmp/${record.s3.object.key}`, await Body.transformToByteArray());
     // convert to gif!
     spawnSync(
-      "/opt/ffmpeg/ffmpeg",
-      [
-        "-i",
-        `/tmp/${record.s3.object.key}`,
-        "-f",
-        "gif",
-        `/tmp/${record.s3.object.key}.gif`
-      ],
-      { stdio: "inherit" }
+      '/opt/ffmpeg/ffmpeg',
+      ['-i', `/tmp/${record.s3.object.key}`, '-f', 'gif', `/tmp/${record.s3.object.key}.gif`],
+      { stdio: 'inherit' }
     );
     // read gif from disk
     const gifFile = readFileSync(`/tmp/${record.s3.object.key}.gif`);
@@ -45,12 +39,12 @@ module.exports.mkgif = async (event, context) => {
     unlinkSync(`/tmp/${record.s3.object.key}.gif`);
     unlinkSync(`/tmp/${record.s3.object.key}`);
     // upload gif to s3
-    await s3
-      .putObject({
+    await s3.send(
+      new PutObjectCommand({
         Bucket: record.s3.bucket.name,
         Key: `${record.s3.object.key}.gif`,
-        Body: gifFile
+        Body: gifFile,
       })
-      .promise();
+    );
   }
 };

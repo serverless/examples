@@ -1,7 +1,7 @@
 <!--
 title: 'The Serverless Gong'
 description: 'A serverless gong with GitHub and Slack webhooks'
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -18,33 +18,25 @@ When a selected repository in GitHub has a release event, a chosen Slack channel
 
 ![screenshot](https://www.stackery.io/blog/assets/images/posts/serverless-gong/gong6.png)
 
-## Instructions
-
-* Read the [Serverless Webhooks Tutorial](https://docs.stackery.io/docs/tutorials/serverless-webhooks/) to get started
-* Read the [blog post on the Serverless Gong](https://www.stackery.io/blog/serverless-gong/) for more on this project and detailed instructions with screenshots
-
 ## Setup
 
-#### Deploy this to your AWS account using Serverless Framework
+1. Create a [Slack incoming webhook](https://api.slack.com/messaging/webhooks) for the channel you want to gong.
 
-If you have the Serverless CLI set up, you can simply enter `serverless deploy` to deploy!
+2. Set your GitHub webhook secret and Slack webhook URL in `serverless.yml` by replacing `REPLACE-WITH-YOUR-SECRET-HERE` and `REPLACE-WITH-YOUR-SLACK-WEBHOOK-URL-HERE`.
 
-#### Deploy this to your AWS account using Stackery
+    ```yml
+    provider:
+      environment:
+        GITHUB_WEBHOOK_SECRET: REPLACE-WITH-YOUR-SECRET-HERE
+        SLACK_WEBHOOK_URL: REPLACE-WITH-YOUR-SLACK-WEBHOOK-URL-HERE
+    ```
 
-You can create and deploy this application to your own AWS account using the following two Stackery CLI commands:
+3. Deploy the service
 
-`stackery create` will initialize a new repo in your GitHub account, initializing it with the contents of the referenced template repository.
+    ```bash
+    serverless deploy
+    ```
 
-```
-stackery create --stack-name 'serverless-gong' \
---git-provider 'github' \
---template-git-url 'https://github.com/stackery/serverless-gong' 
-```
+4. Configure a webhook on the GitHub repository you want to gong. [Setting up a Webhook](https://developer.github.com/webhooks/creating/#setting-up-a-webhook). Point it at the deployed `/webhook` endpoint and select at least the `Releases` event.
 
-`stackery deploy` will deploy the newly created stack into your AWS account.
-
-```
-stackery deploy --stack-name 'serverless-gong' \
---env-name 'development' \
---git-ref 'master'
-```
+5. Cut a release on the repository and watch the gong land in Slack! 🔔

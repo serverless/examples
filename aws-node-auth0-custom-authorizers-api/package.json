@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Demonstration of protecting API gateway endpoints with auth0",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
-    "jsonwebtoken": "^8.1.0"
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "serverless-offline": "^3.18.0"
+    "serverless-offline": "^14.7.4"
   }
 }

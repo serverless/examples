@@ -13,7 +13,7 @@ export class BooksController extends BooksService {
    * Create book
    * @param {*} event
    */
-  async create (event: any, context?: Context) {
+  async create (event: any, context: Context) {
     console.log('functionName', context.functionName);
     const params: CreateBookDTO = JSON.parse(event.body);
 
@@ -24,7 +24,7 @@ export class BooksController extends BooksService {
       });
 
       return MessageUtil.success(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
 
       return MessageUtil.error(err.code, err.message);
@@ -42,7 +42,7 @@ export class BooksController extends BooksService {
     try {
       const result = await this.updateBooks(id, body);
       return MessageUtil.success(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
 
       return MessageUtil.error(err.code, err.message);
@@ -57,7 +57,7 @@ export class BooksController extends BooksService {
       const result = await this.findBooks();
 
       return MessageUtil.success(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
 
       return MessageUtil.error(err.code, err.message);
@@ -78,7 +78,7 @@ export class BooksController extends BooksService {
       const result = await this.findOneBookById(id);
 
       return MessageUtil.success(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
 
       return MessageUtil.error(err.code, err.message);
@@ -100,7 +100,7 @@ export class BooksController extends BooksService {
       }
 
       return MessageUtil.success(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
 
       return MessageUtil.error(err.code, err.message);

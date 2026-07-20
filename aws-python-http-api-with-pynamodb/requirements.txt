@@ -1,3 +1,6 @@
-pynamodb==4.3.1
-boto3 #no-deploy
-botocore #no-deploy
+pynamodb>=6
+# boto3/botocore are provided by the Lambda runtime; kept here for local
+# tooling only. See custom.pythonRequirements.noDeploy in serverless.yml,
+# which excludes them from the deployed package.
+boto3
+botocore

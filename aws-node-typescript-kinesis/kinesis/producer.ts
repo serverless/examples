@@ -1,10 +1,8 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import { Kinesis } from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
+import { KinesisClient, PutRecordCommand } from '@aws-sdk/client-kinesis';
+import { randomUUID } from 'crypto';
 
-const kinesis = new Kinesis({
-  apiVersion: '2013-12-02',
-});
+const kinesis = new KinesisClient({});
 
 const producer: APIGatewayProxyHandler = async (event) => {
   let statusCode: number = 200;
@@ -22,17 +20,19 @@ const producer: APIGatewayProxyHandler = async (event) => {
   const streamName: string = 'eventStream';
 
   try {
-    await kinesis.putRecord({
-      StreamName: streamName,
-      PartitionKey: uuidv4(),
-      Data: event.body,
-    }).promise();
+    await kinesis.send(
+      new PutRecordCommand({
+        StreamName: streamName,
+        PartitionKey: randomUUID(),
+        Data: Buffer.from(event.body),
+      }),
+    );
 
     message = 'Message placed in the Event Stream!';
 
   } catch (error) {
     console.log(error);
-    message = error;
+    message = error instanceof Error ? error.message : String(error);
     statusCode = 500;
   }
 

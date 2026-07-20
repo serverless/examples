@@ -1,9 +1,9 @@
 service: serverless-rest-api-with-dynamodb
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
 plugins:
-  - serverless-dynamodb-local
+  - serverless-dynamodb
   - serverless-offline
 
 custom:
@@ -21,9 +21,10 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
   iam:
     role:
       statements:
@@ -35,7 +36,7 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+          Resource: !GetAtt TodosDynamoDbTable.Arn
 
 functions:
   create:
@@ -81,16 +82,14 @@ functions:
 resources:
   Resources:
     TodosDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
+      Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.DYNAMODB_TABLE}

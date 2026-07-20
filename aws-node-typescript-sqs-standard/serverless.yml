@@ -1,12 +1,11 @@
-service:
-  name: aws-node-typescript-sqs-standard
+service: aws-node-typescript-sqs-standard
 
-plugins:
-  - serverless-webpack
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs24.x
+  architecture: arm64
   iam:
     role:
       statements:

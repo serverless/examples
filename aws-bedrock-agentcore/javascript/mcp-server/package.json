@@ -8,9 +8,10 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-agentcore": "^3.993.0",
     "@modelcontextprotocol/sdk": "^1.24.0",
     "express": "^5.1.0",
-    "zod": "^3.25.0"
+    "zod": "^4.4.3"
   },
   "engines": {
     "node": "24.x"

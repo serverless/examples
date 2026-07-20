@@ -1,13 +1,16 @@
 app: aws-golang-rest-api-with-dynamodb
 service: aws-golang-rest-api-with-dynamodb
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: go1.x
+  runtime: provided.al2023
+  architecture: arm64
+  stage: dev
+  region: us-east-1
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
   iam:
     role:
       statements:
@@ -19,14 +22,16 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+package:
+  individually: true
 
 functions:
   create:
-    handler: bin/create
+    handler: bootstrap
     package:
-      include:
-        - ./bin/create
+      artifact: bin/create.zip
     events:
       - http:
           path: todos
@@ -34,10 +39,9 @@ functions:
           cors: true
 
   list:
-    handler: bin/list
+    handler: bootstrap
     package:
-      include:
-        - ./bin/list
+      artifact: bin/list.zip
     events:
       - http:
           path: todos
@@ -45,10 +49,9 @@ functions:
           cors: true
 
   get:
-    handler: bin/get
+    handler: bootstrap
     package:
-      include:
-        - ./bin/get
+      artifact: bin/get.zip
     events:
       - http:
           path: todos/{id}
@@ -56,10 +59,9 @@ functions:
           cors: true
 
   update:
-    handler: bin/update
+    handler: bootstrap
     package:
-      include:
-        - ./bin/update
+      artifact: bin/update.zip
     events:
       - http:
           path: todos/{id}
@@ -67,10 +69,9 @@ functions:
           cors: true
 
   delete:
-    handler: bin/delete
+    handler: bootstrap
     package:
-      include:
-        - ./bin/deleteBin
+      artifact: bin/delete.zip
     events:
       - http:
           path: todos/{id}

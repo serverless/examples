@@ -5,10 +5,18 @@ frameworkVersion: "4"
 custom:
   wsgi:
     app: app.app
+    # serverless-wsgi decides whether to pip-install requirements itself by
+    # checking for "serverless-python-requirements" in the plugins list; with
+    # that plugin removed this must be pinned false so wsgi defers to the
+    # built-in python requirements packaging (activated by custom.pythonRequirements below).
+    packRequirements: false
+  # Built-in python requirements packaging activates on this key.
+  pythonRequirements: {}
 
 provider:
   name: aws
-  runtime: python3.12
+  runtime: python3.14
+  architecture: arm64
   # Uncomment to easily set up a custom domain. Read the docs for more details:
   # https://www.serverless.com/framework/docs/providers/aws/guide/domains
   # domain: api.example.com
@@ -26,4 +34,3 @@ functions:
 
 plugins:
   - serverless-wsgi
-  - serverless-python-requirements

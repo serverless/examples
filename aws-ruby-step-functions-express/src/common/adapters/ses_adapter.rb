@@ -12,7 +12,7 @@ class SesAdapter
   def send_email
     ses_client.send_email(mail_data)
     logger.info('Email was sent')
-  rescue Aws::SES::Errors => error
+  rescue Aws::SES::Errors::ServiceError => error
     logger.error(error)
   end
 

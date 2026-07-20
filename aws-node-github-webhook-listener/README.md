@@ -2,7 +2,7 @@
 title: 'AWS Serverless Github Webhook Listener example in NodeJS'
 description: 'This service will listen to github webhooks fired by a given repository.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -67,7 +67,7 @@ This service will listen to github webhooks fired by a given repository.
   ```yml
   provider:
     name: aws
-    runtime: nodejs12.x
+    runtime: nodejs24.x
     environment:
       GITHUB_WEBHOOK_SECRET: REPLACE-WITH-YOUR-SECRET-HERE
   ```
@@ -79,17 +79,14 @@ This service will listen to github webhooks fired by a given repository.
   ```
 
   After the deploy has finished you should see something like:
-  ```bash
-  Service Information
-  service: github-webhook-listener
-  stage: dev
-  region: us-east-1
-  api keys:
-    None
-  endpoints:
-    POST - https://abcdefg.execute-api.us-east-1.amazonaws.com/dev/webhook
+  ```
+  Deploying "github-webhook-listener" to stage "dev" (us-east-1)
+
+  ✔ Service deployed to stack github-webhook-listener-dev (36s)
+
+  endpoint: POST - https://abcdefg.execute-api.us-east-1.amazonaws.com/dev/webhook
   functions:
-    github-webhook-.....github-webhook-listener-dev-githubWebhookListener
+    githubWebhookListener: github-webhook-listener-dev-githubWebhookListener (1.2 kB)
   ```
 
 3. Configure your webhook in your github repository settings. [Setting up a Webhook](https://developer.github.com/webhooks/creating/#setting-up-a-webhook)

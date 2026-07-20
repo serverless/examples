@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
+    "target": "ES2023",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
     "experimentalDecorators": true,
-    "target": "es6",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./"
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

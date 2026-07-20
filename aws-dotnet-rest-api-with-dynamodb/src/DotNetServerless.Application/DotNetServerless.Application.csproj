@@ -1,16 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.14.12" />
-    <PackageReference Include="MediatR" Version="5.1.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
-    <PackageReference Include="AWSSDK.Core" Version="3.3.29.3" />
-    <PackageReference Include="AWSSDK.Core" Version="3.3.29.3" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="4.0.101.2" />
+    <!-- MediatR pinned <13 (Apache-2.0); v13+ requires a commercial license -->
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 </Project>

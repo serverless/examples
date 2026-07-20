@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Managed Code Interpreter (Python)
+description: LangGraph agent using the AWS-managed AgentCore Code Interpreter (SANDBOX mode) for Python execution.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Code Interpreter Example
 
 This example demonstrates using AWS-managed default code interpreter with a LangGraph agent for Python code execution.
@@ -26,7 +38,7 @@ langgraph-code-interpreter/
 - AWS account with Bedrock model access
 - Docker installed
 - Serverless Framework v4+
-- Python 3.12+
+- Python 3.14+
 
 ## Deployment
 

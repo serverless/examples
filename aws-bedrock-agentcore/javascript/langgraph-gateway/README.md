@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Gateway Tools (JavaScript)
+description: LangGraph JS agent exposing Lambda-backed tools through an AgentCore Gateway over MCP.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Gateway Example
 
 A LangGraph JavaScript agent with Lambda-backed tools exposed via an AgentCore Gateway using MCP protocol.

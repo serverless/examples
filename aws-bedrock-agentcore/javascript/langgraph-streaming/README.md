@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Token Streaming (JavaScript)
+description: LangGraph JS agent streaming LLM tokens in real time over SSE via BedrockAgentCoreApp.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph JS Streaming Example
 
 A LangGraph JavaScript agent with real-time LLM token streaming deployed to AWS Bedrock AgentCore. Tokens are streamed to the client via Server-Sent Events (SSE) as they are generated, instead of waiting for the full response.
@@ -8,7 +20,7 @@ A LangGraph JavaScript agent with real-time LLM token streaming deployed to AWS 
 - **Async Generator Pattern**: Uses `async function*` with `yield` for streaming through BedrockAgentCoreApp
 - **No Dockerfile needed**: Container image is built automatically from source code
 - **LangGraph JS**: ReAct agent pattern with tool calling
-- **Claude Sonnet 4.5**: Powered by Amazon Bedrock
+- **Claude Sonnet 5**: Powered by Amazon Bedrock
 - **Simple Tools**: Calculator operations and time queries
 
 ## How It Works

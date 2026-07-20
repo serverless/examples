@@ -1,2 +1,2 @@
-pymongo
+pymongo>=4
 dnspython

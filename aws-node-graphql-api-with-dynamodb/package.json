@@ -2,11 +2,11 @@
   "name": "aws-node-graphql-api-with-dynamodb",
   "version": "1.0.0",
   "description": "A single-module GraphQL endpoint with query and mutation functionality.",
-  "main": "handler.js",
+  "type": "module",
   "dependencies": {
-    "aws-sdk": "^2.136.0",
-    "eslint-plugin-react": "^7.4.0",
-    "graphql": "^0.11.7"
+    "@aws-sdk/client-dynamodb": "^3.700.0",
+    "@aws-sdk/lib-dynamodb": "^3.700.0",
+    "graphql": "^17.0.2"
   },
   "devDependencies": {},
   "scripts": {

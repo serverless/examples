@@ -1,3 +1,15 @@
+<!--
+title: Serverless Framework Sandboxes: Self-Hosted Webhook for Claude Managed Agents
+description: Self-hosted AWS Lambda MicroVM sandbox per Claude Managed Agent session, launched on demand by a webhook.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # Claude self-hosted sandboxes on AWS Lambda MicroVMs
 
 Run each **Claude Managed Agent** session inside its own throwaway, isolated **AWS Lambda MicroVM** — a real Linux VM built from *your* `Dockerfile` — launched on demand by a webhook, and defined in a single `serverless.yml`.

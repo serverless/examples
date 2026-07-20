@@ -18,5 +18,5 @@ def check_content_comment(comment, task_token)
   response = DetectionService.new(comment).call
   send_task_token(task_token, 'success', response)
 rescue => error
-  send_task_token(task_token, 'failure', error)
+  send_task_token(task_token, 'failure', "#{error.class.name}: #{error.message}")
 end

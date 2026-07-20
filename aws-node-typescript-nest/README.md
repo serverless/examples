@@ -2,7 +2,7 @@
 title: 'AWS Nest application example (NodeJS & Typescript)'
 description: 'This example demonstrates how to setup a simple [Nest](https://github.com/nestjs/nest) application.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -11,6 +11,9 @@ authorName: 'Emilien Escalle'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/314088?s=140&v=4'
 -->
 # Nest application example
+
+> Note: TypeScript is intentionally held at `5.x` — the TypeScript 7 native compiler isn't yet
+> supported by the surrounding toolchain (`ts-jest`, `@nestjs` tooling; checked 2026-07-20).
 
 This example demonstrates how to setup a [Nest](https://github.com/nestjs/nest) application.
 
@@ -28,10 +31,6 @@ Which should result in:
 
 ```bash
 $ sls offline start
-Serverless: Compiling with Typescript...
-Serverless: Using local tsconfig.json
-Serverless: Typescript compiled.
-Serverless: Watching typescript files...
 Serverless: Starting Offline: dev/us-east-1.
 
 Serverless: Routes for main:
@@ -74,9 +73,6 @@ The expected result should be similar to:
 
 ```bash
 $ sls deploy
-Serverless: Compiling with Typescript...
-Serverless: Using local tsconfig.json
-Serverless: Typescript compiled.
 Serverless: Packaging service...
 Serverless: Excluding development dependencies...
 Serverless: Creating Stack...
@@ -141,8 +137,6 @@ npm install serverless-plugin-warmup --save-dev
 
 ```yaml
 plugins:
-  - '@hewmen/serverless-plugin-typescript'
-  - serverless-plugin-optimize
   - serverless-offline
   - serverless-plugin-warmup
 

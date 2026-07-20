@@ -1,9 +1,15 @@
 service: serverless-telegram-bot
 
+frameworkVersion: '4'
+
+package:
+  patterns:
+    - '!node_modules/**'
+
 provider:
   name: aws
-  runtime: python3.6
-  profile: ckl
+  runtime: python3.14
+  architecture: arm64
   environment:
     TELEGRAM_TOKEN: ${file(./serverless.env.yml):TELEGRAM_TOKEN, ''}
 
@@ -18,5 +24,6 @@ functions:
     events:
       - http: POST /set_webhook
 
-plugins:
-  - serverless-python-requirements
+custom:
+  # Built-in python requirements packaging activates on this key.
+  pythonRequirements: {}

@@ -1,4 +1,4 @@
-import { resizeHandler } from './resizeHandler'
+import { resizeHandler } from './resizeHandler.js'
 
 export const handler = async (event) => {
   try {
@@ -12,6 +12,10 @@ export const handler = async (event) => {
     }
   } catch (error) {
     console.log(error)
-    return new Error(error)
+    const statusCode = error.statusCode || 500
+    return {
+      statusCode,
+      body: JSON.stringify({ error: error.message })
+    }
   }
 }

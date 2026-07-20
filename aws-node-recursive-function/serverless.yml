@@ -1,19 +1,21 @@
-
 service: recursive-invocation-example
+
+frameworkVersion: '4'
 
 custom:
   functionARN: yourFunctionARN
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
 #  iam:
 #    role:
 #      statements:
-#        -  Effect: "Allow"
-#           Action:
-#             - "lambda:InvokeFunction"
-#           Resource: ${self:custom.functionARN}
+#        - Effect: "Allow"
+#          Action:
+#            - "lambda:InvokeFunction"
+#          Resource: ${self:custom.functionARN}
 
 functions:
   recursiveExample:

@@ -1,10 +1,10 @@
-'use strict';
+import Sentiment from 'sentiment';
 
-const sentiment = require('sentiment');
+const sentiment = new Sentiment();
 
-module.exports.analyzeNote = (event) => {
+export const analyzeNote = (event) => {
   const note = event.Records[0].Sns.Message;
-  const result = sentiment(note);
+  const result = sentiment.analyze(note);
   if (result.score > 2) {
     console.log(`Positive note - will be published: ${note}`);
   } else {

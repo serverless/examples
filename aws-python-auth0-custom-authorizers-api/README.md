@@ -2,7 +2,7 @@
 title: 'AWS API Gateway Custom Authorizer Function with Auth0 example in Python'
 description: 'This is an example of how to protect API endpoints with Auth0, JSON Web Tokens (jwt) and a custom authorizer lambda function in Python 3.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10
@@ -23,10 +23,10 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 
 ## Setup
 
-1. You must have Python 3! Once you do, run `pip install -r requirements.txt` to install Python web token dependencies
-
-2. Install Docker. Why Docker? Because it's the only way to ensure that the Python package that is
-   created on your local machine and uploaded to AWS will actually run in AWS's lambda containers. 
+1. You must have Python 3.14! Third-party dependencies (`PyJWT`, `cryptography`) are bundled automatically at
+   deploy time by the Framework's built-in Python requirements packaging (configured under
+   `custom.pythonRequirements` in `serverless.yml`) — no plugin needed. Run `npm install` once to pull in
+   `serverless-offline` for local testing.
 
 2. Setup an [auth0 client](https://auth0.com/docs/clients) and get your `client id` and `client secrets` from auth0.
 

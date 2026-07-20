@@ -11,6 +11,7 @@ target
 *.jar
 *.war
 *.ear
+!gradle/wrapper/gradle-wrapper.jar
 
 # Serverless directories
 .serverless

@@ -1,8 +1,11 @@
 service: aws-node-twilio
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
     # replace these env variables with your twilio account values
     TWILIO_ACCOUNT_SID: YOUR-TWILIO-ACCOUNT-SID-HERE
@@ -10,9 +13,9 @@ provider:
     TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
 
 package:
-  exclude:
-    - "*.test.js"
-    - 'frontend/**'
+  patterns:
+    - '!*.test.js'
+    - '!frontend/**'
 
 functions:
   sendText:

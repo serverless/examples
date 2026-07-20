@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Comprehensive Agent (JavaScript)
+description: LangGraph JS agent combining Gateway tools, a direct MCP connection, browser, code interpreter, and memory in one deployment.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Comprehensive Agent
 
 A LangGraph agent demonstrating multiple AgentCore capabilities in a single deployment: custom Lambda tools, a direct MCP server connection, web browsing, code execution, and conversation memory.
@@ -32,7 +44,7 @@ User Request --> AgentCore Runtime --> agents/index.js
 ## Prerequisites
 
 - AWS account with Bedrock model access (Claude Sonnet)
-- Enable `us.anthropic.claude-sonnet-4-5-20250929-v1:0` in the [Bedrock console](https://console.aws.amazon.com/bedrock/home#/modelaccess)
+- Enable `global.anthropic.claude-sonnet-5` (the default; override via the `MODEL_ID` env var) in the [Bedrock console](https://console.aws.amazon.com/bedrock/home#/modelaccess)
 - Docker installed
 - Serverless Framework v4+
 - AWS credentials configured

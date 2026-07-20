@@ -1,8 +1,8 @@
 <!--
-title: TODO
+title: 'AWS Node.js HTTP API with DynamoDB and TypeScript example'
 description: This example shows your how to create a TypeScript powered HTTP API with DynamoDB.
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/QuantumInformation'
@@ -16,18 +16,16 @@ TypeScript (ts) offers type safety which is helpful when working with the AWS SD
 
 # compiling
 
-You can compile the ts files in this directory by 1st installing typescript via
+> Note: TypeScript is intentionally held at `5.x` — the TypeScript 7 native compiler isn't yet
+> supported by the surrounding ecosystem tooling (checked 2026-07-20).
 
-`npm install -g typescript`
-
-then
+Serverless Framework v4 has a built-in esbuild bundler, so there is no manual compilation step. Just run
 
 `npm i`
 
-You can then run the compiler by running `tsc` in this directory. It will pull the settings from .tsconfig and extra @types
-from package.json. The output create.js file is what will be uploaded by serverless.
+and the `.ts` handlers under `todos/` are packaged natively by `serverless package` / `serverless deploy` using the `tsconfig.json` in this directory.
 
-For brevity, I have just demonstrated this to match with the todos/create.js, todos/list.js, todos/get.js and todos/update.js lambda function
+For brevity, I have just demonstrated this to match with the todos/create.ts, todos/list.ts, todos/get.ts and todos/update.ts lambda function
 
 ## Usage
 

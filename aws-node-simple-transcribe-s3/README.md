@@ -2,7 +2,7 @@
 title: Simple AWS Transcribe example in NodeJS
 description: This example demonstrates how to setup a lambda function to transcribe your audio file (.wav format) into a text transcription. The lambda will be triggered whenever a new audio file is uploaded to S3 and the transcription (JSON format) will be saved to a S3 bucket.
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -36,28 +36,13 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service .zip file to S3 (1.71 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-........................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-simple-transcribe-s3
-stage: dev
-region: us-east-1
-stack: aws-node-simple-transcribe-s3-dev
-api keys:
-  None
-endpoints:
-  None
+```
+Deploying "aws-node-simple-transcribe-s3" to stage "dev" (us-east-1)
+
+✔ Service deployed to stack aws-node-simple-transcribe-s3-dev (44s)
+
 functions:
-  transcribe: aws-node-simple-transcribe-s3-dev-transcribe
+  transcribe: aws-node-simple-transcribe-s3-dev-transcribe (1.3 kB)
 ```
 
 ## Usage

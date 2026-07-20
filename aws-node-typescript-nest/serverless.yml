@@ -1,23 +1,29 @@
 service: serverless-nest-example
 
-plugins:
-  - '@hewmen/serverless-plugin-typescript'  
-  - serverless-plugin-optimize
-  - serverless-offline
-  # - serverless-plugin-warmup
+frameworkVersion: '4'
 
-# custom:
-#   # Enable warmup on all functions (only for production and staging)
-#   warmup:      
-#       - production
-#       - staging
+plugins:
+  - serverless-offline
+
+# @nestjs/core and @nestjs/common lazily `require()` a handful of optional
+# peer packages (microservices/websockets transports, class-validator,
+# class-transformer) that this example doesn't use and doesn't install.
+# esbuild fails to resolve them at bundle time unless they're marked
+# external, so they're left as runtime requires instead (never hit, since
+# these code paths aren't exercised by a plain HTTP controller).
+build:
+  esbuild:
+    configFile: ./esbuild.config.js
+    external:
+      - '@nestjs/microservices'
+      - '@nestjs/websockets'
+      - class-validator
+      - class-transformer
 
 provider:
   name: aws
-  runtime: nodejs12.x
-
-package:
-  individually: true
+  runtime: nodejs24.x
+  architecture: arm64
 
 functions:
   main:

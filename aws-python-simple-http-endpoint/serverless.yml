@@ -1,9 +1,10 @@
 service: aws-python-simple-http-endpoint
-frameworkVersion: '2'
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.14
+  architecture: arm64
 
 functions:
   currentTime:

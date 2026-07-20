@@ -1,23 +1,29 @@
 service: serverless-http-api-pynamodb
-frameworkVersion: '2'
+frameworkVersion: '4'
 
-plugins:
-  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    # boto3/botocore ship with the Lambda runtime already; keep them in
+    # requirements.txt for local tooling but don't bundle them.
+    noDeploy:
+      - boto3
+      - botocore
 
 package:
-  exclude:
-    - node_modules/**
-    - .idea/**
-    - .requirements/**
-    - env/**
-    - README.md
-    - package.json
-    - package-lock.json
-    - requirements.txt
+  patterns:
+    - '!node_modules/**'
+    - '!.idea/**'
+    - '!.requirements/**'
+    - '!env/**'
+    - '!README.md'
+    - '!package.json'
+    - '!package-lock.json'
+    - '!requirements.txt'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.14
+  architecture: arm64
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
   httpApi:

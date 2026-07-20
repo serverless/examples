@@ -1,17 +1,21 @@
 service: hellotime-app
+
+frameworkVersion: '4'
+
 provider:
   name: aws
+  architecture: arm64
 
 functions:
   hello:
-    runtime: python3.6
+    runtime: python3.14
     events:
       - httpApi:
           method: get
           path: /greet
     handler: web/handler.hello
   time:
-    runtime: nodejs12.x
+    runtime: nodejs24.x
     events:
       - httpApi:
           method: get

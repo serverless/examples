@@ -10,7 +10,7 @@ class ReserveParkingService
   ReserveParkingSchema = Struct.new(:id, :driver_plate, :check_in_date, :check_out_date, :current_status, :created_at)
 
   def initialize(attributes)
-    @attributes = attributes
+    @attributes = attributes.transform_keys(&:to_sym)
   end
 
   def reserve_parking

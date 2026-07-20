@@ -2,13 +2,13 @@
 title: 'AWS Serverless Boilerplate example in Rust'
 description: 'This example shows a Serverless boilerplate in Rust.'
 layout: Doc
-framework: v1+
+framework: v4
 platform: AWS
 language: Rust
 priority: 10
 authorLink: 'https://github.com/jonee'
 authorName: 'Jonee Ryan Ty'
-authorAvatar:
+authorAvatar: 'https://avatars.githubusercontent.com/u/1385276?v=4&s=140'
 -->
 
 # Serverless Boilerplate - AWS - Rust
@@ -17,32 +17,41 @@ Make sure `serverless` is installed. [See installation guide](https://serverless
 
 You will also need to set up your AWS account credentials using environment variables or a configuration file. Please see the [this guide for more information](https://serverless.com/framework/docs/providers/AWS/guide/credentials/).
 
-## 1. Install Project Dependencies
-`npm install` in this directory to download the modules from `package.json`.
+The function runs on the `provided.al2023` (arm64) custom runtime, built with
+[cargo-lambda](https://www.cargo-lambda.info/).
 
-## 2. Compile Rust Binary
+## 1. Install cargo-lambda
 
+```bash
+cargo install cargo-lambda --locked
 ```
-$ cargo build --release
+
+## 2. Build
+
+```bash
+cargo lambda build --release --arm64
 ```
+
+or simply:
+
+```bash
+make build
+```
+
+This compiles the `hello` binary to `target/lambda/hello/bootstrap` and zips it to `bin/hello.zip`,
+the artifact referenced by `serverless.yml`.
 
 ## 3. Deploy
 
-Hackish way to deploy
+```bash
+serverless deploy
+```
 
-1. Run `sls deploy` which would give an error about missing file path in the package path. 
-2. If you look at .serverless it should have 3 files- 
+or:
 
-cloudformation-template-create-stack.json
-cloudformation-template-update-stack.json
-serverless-state.json
-
-3. rename .serverless folder to p
-4. cargo build --release then add aws-rust-simple-http-endpoint.zip which consists of target/release/test only to the p folder
-5. sls deploy --package p
-
-
-
+```bash
+make deploy
+```
 
 ## 4. Invoke deployed function
 
@@ -50,5 +59,3 @@ serverless-state.json
 $ curl https://***.execute-api.us-east-1.amazonaws.com/test/test
 {"message":"Serverless Rust Hello"}
 ```
-
-**For more information on the Serverless AWS plugin, please see the project repository: [https://serverless.com/framework/docs/providers/AWS/guide/credentials/](https://serverless.com/framework/docs/providers/AWS/guide/credentials/).**

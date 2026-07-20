@@ -1,18 +1,23 @@
-service:
-  name: aws-node-typescript-apollo-lambda
+service: aws-node-typescript-apollo-lambda
+
+frameworkVersion: '4'
 
 plugins:
-  - serverless-dotenv-plugin
   - serverless-offline
-  - serverless-plugin-typescript
+
+build:
+  esbuild:
+    configFile: ./esbuild.config.js
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   timeout: 15
-  apiKeys:
-    - name: lambdaApolloKey
-      value: ${env:APOLLO_LAMBDA_KEY}
+  apiGateway:
+    apiKeys:
+      - name: lambdaApolloKey
+        value: ${env:APOLLO_LAMBDA_KEY, 'your-api-key-that-is-at-least-characters-long'}
 
 functions:
   graphql:

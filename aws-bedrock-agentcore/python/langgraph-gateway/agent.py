@@ -3,7 +3,7 @@ LangGraph agent with Gateway tools.
 
 This agent demonstrates:
 - BedrockAgentCoreApp entrypoint pattern
-- LangGraph with Claude Sonnet 4.5
+- LangGraph with Claude Sonnet 5
 - Gateway tool discovery via BEDROCK_AGENTCORE_GATEWAY_URL
 - MCP client with AWS SigV4 authentication using mcp-proxy-for-aws
 """
@@ -26,9 +26,12 @@ from langchain_mcp_adapters.tools import load_mcp_tools
 # Initialize the AgentCore application
 app = BedrockAgentCoreApp()
 
-# Initialize Claude Sonnet 4.5 via US inference profile
+# Bedrock model ID; override with the MODEL_ID env var
+MODEL_ID = os.environ.get("MODEL_ID", "global.anthropic.claude-sonnet-5")
+
+# Initialize Claude Sonnet 5 via Bedrock Converse
 llm = init_chat_model(
-    "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    MODEL_ID,
     model_provider="bedrock_converse",
 )
 

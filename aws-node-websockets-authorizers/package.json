@@ -1,7 +1,11 @@
 {
   "name": "aws-nodejs-websockets-authorizers",
   "version": "1.0.0",
+  "type": "module",
   "description": "Simple example that demonstrates how to use authorizer functions with websocket events",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.700.0"
+  }
 }

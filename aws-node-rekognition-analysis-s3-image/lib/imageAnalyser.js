@@ -1,12 +1,9 @@
-'use strict';
+import { RekognitionClient, DetectLabelsCommand } from '@aws-sdk/client-rekognition';
 
-const AWS = require('aws-sdk');
-
-const rek = new AWS.Rekognition();
+const rek = new RekognitionClient({});
 
 class ImageAnalyser {
-
-  static getImageLabels(s3Config) {
+  static async getImageLabels(s3Config) {
     const params = {
       Image: {
         S3Object: {
@@ -20,16 +17,10 @@ class ImageAnalyser {
 
     console.log(`Analyzing file: https://s3.amazonaws.com/${s3Config.bucket}/${s3Config.imageName}`);
 
-    return new Promise((resolve, reject) => {
-      rek.detectLabels(params, (err, data) => {
-        if (err) {
-          return reject(new Error(err));
-        }
-        console.log('Analysis labels:', data.Labels);
-        return resolve(data.Labels);
-      });
-    });
+    const data = await rek.send(new DetectLabelsCommand(params));
+    console.log('Analysis labels:', data.Labels);
+    return data.Labels;
   }
 }
 
-module.exports = ImageAnalyser;
+export default ImageAnalyser;

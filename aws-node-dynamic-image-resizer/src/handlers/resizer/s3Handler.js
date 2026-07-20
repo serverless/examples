@@ -1,28 +1,31 @@
-import * as AWS from 'aws-sdk'
-import stream from 'stream'
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
+import { PassThrough } from 'node:stream';
 
-AWS.config.region = 'us-east-1'
-const S3 = new AWS.S3()
+const S3 = new S3Client({ region: process.env.REGION || 'us-east-1' });
 
 class S3Handler {
-  constructor() { }
+  constructor() {}
 
-  readStream({ Bucket, Key }) {
-    return S3.getObject({ Bucket, Key }).createReadStream()
+  async readStream({ Bucket, Key }) {
+    const { Body } = await S3.send(new GetObjectCommand({ Bucket, Key }));
+    // In the Lambda Node.js runtime, Body is already a Node.js Readable stream.
+    return Body;
   }
 
   writeStream({ Bucket, Key }) {
-    const passThrough = new stream.PassThrough()
-    return {
-      writeStream: passThrough,
-      uploaded: S3.upload({
-        ContentType: 'image/png',
-        Body: passThrough,
+    const passThrough = new PassThrough();
+    const uploaded = new Upload({
+      client: S3,
+      params: {
         Bucket,
-        Key
-      }).promise()
-    }
+        Key,
+        Body: passThrough,
+        ContentType: 'image/png',
+      },
+    }).done();
+    return { writeStream: passThrough, uploaded };
   }
 }
 
-export const s3Handler = new S3Handler()
+export const s3Handler = new S3Handler();

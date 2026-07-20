@@ -1,9 +1,29 @@
-help:
-	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+.PHONY: build clean deploy
 
-functions := $(shell find functions -name \*main.go | awk -F'/' '{print $$2}')
+build: bin/authorize.zip bin/authorize2.zip bin/hello-world.zip bin/hello-world2.zip ## Build golang binaries
 
-build: ## Build golang binaries
-	@for function in $(functions) ; do \
-		env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/$$function functions/$$function/main.go ; \
-	done
+bin/authorize.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./functions/auth
+	zip -j bin/authorize.zip bootstrap && rm bootstrap
+
+bin/authorize2.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./functions/auth2
+	zip -j bin/authorize2.zip bootstrap && rm bootstrap
+
+bin/hello-world.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./functions/hello-world
+	zip -j bin/hello-world.zip bootstrap && rm bootstrap
+
+bin/hello-world2.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./functions/hello-world2
+	zip -j bin/hello-world2.zip bootstrap && rm bootstrap
+
+clean:
+	rm -rf bin bootstrap
+
+deploy: build
+	serverless deploy

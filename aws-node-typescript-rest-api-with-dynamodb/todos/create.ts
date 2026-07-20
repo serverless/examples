@@ -1,45 +1,48 @@
-'use strict'
+import { randomUUID } from 'crypto';
+import { APIGatewayProxyHandler } from 'aws-lambda';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 
-import * as uuid from 'uuid'
+const client = new DynamoDBClient({});
+const dynamoDb = DynamoDBDocumentClient.from(client);
 
-import { DynamoDB } from 'aws-sdk'
+export const create: APIGatewayProxyHandler = async (event) => {
+  const timestamp = new Date().getTime();
+  const data = JSON.parse(event.body ?? '{}');
 
-const dynamoDb = new DynamoDB.DocumentClient()
-
-module.exports.create = (event, context, callback) => {
-  const timestamp = new Date().getTime()
-  const data = JSON.parse(event.body)
   if (typeof data.text !== 'string') {
-    console.error('Validation Failed')
-    callback(new Error('Couldn\'t create the todo item.'))
-    return
+    console.error('Validation Failed');
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Couldn't create the todo item." }),
+    };
   }
 
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Item: {
-      id: uuid.v1(),
+      id: randomUUID(),
       text: data.text,
       checked: false,
       createdAt: timestamp,
-      updatedAt: timestamp
-    }
-  }
+      updatedAt: timestamp,
+    },
+  };
 
-  // write the todo to the database
-  dynamoDb.put(params, (error, result) => {
-    // handle potential errors
-    if (error) {
-      console.error(error)
-      callback(new Error('Couldn\'t create the todo item.'))
-      return
-    }
+  try {
+    // write the todo to the database
+    await dynamoDb.send(new PutCommand(params));
 
     // create a response
-    const response = {
+    return {
       statusCode: 200,
-      body: JSON.stringify(params.Item)
-    }
-    callback(null, response)
-  })
-}
+      body: JSON.stringify(params.Item),
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      statusCode: 501,
+      body: JSON.stringify({ message: "Couldn't create the todo item." }),
+    };
+  }
+};

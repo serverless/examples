@@ -1,10 +1,11 @@
 service: aws-node-iot-event
 
-frameworkVersion: ">=1.5.0 <2.0.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
 
 functions:
   log:

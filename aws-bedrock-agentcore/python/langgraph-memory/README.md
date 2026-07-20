@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Memory (Python)
+description: LangGraph agent using AgentCore Memory as a tool for recalling and saving conversation history.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Agent with Memory
 
 A LangGraph agent demonstrating AgentCore Memory for conversation persistence using the tool-based approach.
@@ -8,7 +20,7 @@ A LangGraph agent demonstrating AgentCore Memory for conversation persistence us
 - **Automatic Saving**: Conversations are saved via `create_event` after each response
 - **BedrockAgentCoreApp**: Integration pattern for AgentCore Runtime
 - **LangGraph**: Agent orchestration with tool calling
-- **Claude Sonnet 4.5**: High-performance reasoning model
+- **Claude Sonnet 5**: High-performance reasoning model
 
 ## Architecture
 
@@ -37,8 +49,8 @@ Response
 
 ## Prerequisites
 
-- AWS account with Bedrock model access (Claude Sonnet 4.5)
-- Enable access to US inference profile `us.anthropic.claude-sonnet-4-5-20250929-v1:0`
+- AWS account with Bedrock model access (Claude Sonnet 5)
+- Enable access to the `global.anthropic.claude-sonnet-5` inference profile (override the default via the `MODEL_ID` env var)
 - Docker installed
 - Serverless Framework v4+
 - AWS credentials configured

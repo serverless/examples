@@ -89,10 +89,11 @@ To learn more about the capabilities of `serverless-offline`, please refer to it
 
 ### Bundling dependencies
 
-In case you would like to include 3rd party dependencies, you will need to use a plugin called `serverless-python-requirements`. You can set it up by running the following command:
+In case you would like to include 3rd party dependencies, no plugin install is needed — the Serverless Framework bundles Python dependencies natively. Simply add your dependencies to a `requirements.txt` file (`Pipfile` and `pyproject.toml` are also supported but require additional configuration) and, if you don't already have one, add a `custom.pythonRequirements` block to your `serverless.yml` to activate and configure the built-in packaging, for example:
 
-```
-serverless plugin install -n serverless-python-requirements
+```yml
+custom:
+  pythonRequirements: {}
 ```
 
-Running the above will automatically add `serverless-python-requirements` to `plugins` section in your `serverless.yml` file and add it as a `devDependency` to `package.json` file. The `package.json` file will be automatically created if it doesn't exist beforehand. Now you will be able to add your dependencies to `requirements.txt` file (`Pipfile` and `pyproject.toml` is also supported but requires additional configuration) and they will be automatically injected to Lambda package during build process. For more details about the plugin's configuration, please refer to [official documentation](https://github.com/UnitedIncome/serverless-python-requirements).
+They will then be automatically injected into the Lambda package during the build process.

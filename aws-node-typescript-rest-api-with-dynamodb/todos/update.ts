@@ -1,28 +1,28 @@
-'use strict';
+import { APIGatewayProxyHandler } from 'aws-lambda';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const client = new DynamoDBClient({});
+const dynamoDb = DynamoDBDocumentClient.from(client);
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-module.exports.update = (event, context, callback) => {
+export const update: APIGatewayProxyHandler = async (event) => {
   const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body ?? '{}');
 
   // validation
   if (typeof data.text !== 'string' || typeof data.checked !== 'boolean') {
     console.error('Validation Failed');
-    callback(null, {
+    return {
       statusCode: 400,
       headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t update the todo item.',
-    });
-    return;
+      body: "Couldn't update the todo item.",
+    };
   }
 
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
-      id: event.pathParameters.id,
+      id: event.pathParameters?.id,
     },
     ExpressionAttributeNames: {
       '#todo_text': 'text',
@@ -33,27 +33,24 @@ module.exports.update = (event, context, callback) => {
       ':updatedAt': timestamp,
     },
     UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
-    ReturnValues: 'ALL_NEW',
+    ReturnValues: 'ALL_NEW' as const,
   };
 
-  // update the todo in the database
-  dynamoDb.update(params, (error, result) => {
-    // handle potential errors
-    if (error) {
-      console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the todo item.',
-      });
-      return;
-    }
+  try {
+    // update the todo in the database
+    const result = await dynamoDb.send(new UpdateCommand(params));
 
     // create a response
-    const response = {
+    return {
       statusCode: 200,
       body: JSON.stringify(result.Attributes),
     };
-    callback(null, response);
-  });
+  } catch (error) {
+    console.error(error);
+    return {
+      statusCode: 501,
+      headers: { 'Content-Type': 'text/plain' },
+      body: "Couldn't fetch the todo item.",
+    };
+  }
 };

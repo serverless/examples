@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Basic Agent, Code Deploy (Python)
+description: Minimal LangGraph agent deployed to AWS Bedrock AgentCore using code (zip) deployment.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Basic Agent (Code Deployment)
 
 A minimal LangGraph agent demonstrating core AgentCore concepts using code deployment.
@@ -8,7 +20,7 @@ A minimal LangGraph agent demonstrating core AgentCore concepts using code deplo
 
 - **BedrockAgentCoreApp**: Integration pattern for AgentCore Runtime
 - **LangGraph**: Agent orchestration with state management
-- **Claude Sonnet 4.5**: High-performance reasoning model
+- **Claude Sonnet 5**: High-performance reasoning model
 - **Simple Tools**: Calculator and time tools
 - **Code Deployment**: Python-based deployment (no Dockerfile needed)
 
@@ -19,7 +31,7 @@ User Request → AgentCore Runtime → agent_invocation()
                                       ↓
                                    LangGraph
                                       ↓
-                               Claude Sonnet 4.5
+                               Claude Sonnet 5
                                       ↓
                           (uses built-in tools)
                                       ↓
@@ -28,13 +40,13 @@ User Request → AgentCore Runtime → agent_invocation()
 
 ## Prerequisites
 
-- AWS account with Bedrock model access (Claude Sonnet 4.5)
-- Enable access to US inference profile `us.anthropic.claude-sonnet-4-5-20250929-v1:0` in Bedrock console
+- AWS account with Bedrock model access (Claude Sonnet 5)
+- Enable access to the `global.anthropic.claude-sonnet-5` inference profile in Bedrock console
 - Serverless Framework v4+
 - AWS credentials configured
 - **No Docker required** (unlike container deployment)
 
-> **Important**: This example uses the US cross-region inference profile for better availability and throughput. Direct model IDs may not support on-demand invocation.
+> **Important**: This example uses the global cross-region inference profile for better availability and throughput. Direct model IDs may not support on-demand invocation.
 
 ## Quick Start
 
@@ -97,7 +109,7 @@ serverless dev
 
 `agent.py` implements a simple LangGraph agent:
 
-1. **Initialize LLM**: Uses Claude Sonnet 4.5 via Bedrock Converse API
+1. **Initialize LLM**: Uses Claude Sonnet 5 via Bedrock Converse API
 2. **Define Tools**: Adds calculator and time tools using `@tool` decorator
 3. **Build Graph**: Creates a state machine with chatbot and tool nodes
 4. **Entrypoint**: `@app.entrypoint` decorator marks the invocation function
@@ -122,7 +134,7 @@ The configuration specifies:
 - `handler: agent.py` - Entry point file (triggers code deployment mode)
 - `package.patterns` - Files to include
 
-Dependencies in `requirements.txt` are bundled automatically via `custom.pythonRequirements.dockerizePip: true`, which ensures dependencies are compiled for the target Linux runtime.
+Dependencies in `requirements.txt` are bundled automatically by AgentCore's code deployment packaging.
 
 AgentCore automatically:
 
@@ -145,16 +157,7 @@ AgentCore automatically:
 
 ### Model Selection
 
-The model is hardcoded in `agent.py`. To change:
-
-```python
-llm = init_chat_model(
-    "us.anthropic.claude-3-5-sonnet-20241022-v2:0",  # Different model
-    model_provider="bedrock_converse",
-)
-```
-
-Or use an environment variable:
+The default model is `global.anthropic.claude-sonnet-5`, read from the `MODEL_ID` environment variable in `agent.py`. Override it via the `MODEL_ID` env var:
 
 ```yml
 ai:
@@ -162,7 +165,7 @@ ai:
     chatbot:
       handler: agent.py
       environment:
-        MODEL_ID: us.anthropic.claude-sonnet-4-5-20250929-v1:0
+        MODEL_ID: us.anthropic.claude-opus-4-1-20250805-v1:0 # Different model
 ```
 
 ### Add More Tools

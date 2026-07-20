@@ -57,9 +57,39 @@ class ServerlessPlugin {
     return { stdout, sterr };
   }
 
-  // syncs the `app` directory to the provided bucket
-  syncDirectory() {
-    const s3Bucket = this.serverless.variables.service.custom.s3Bucket;
+  // fetches the outputs of the deployed stack
+  async getStackOutputs() {
+    const provider = this.serverless.getProvider('aws');
+    const stackName = provider.naming.getStackName(this.options.stage);
+    const result = await provider.request(
+      'CloudFormation',
+      'describeStacks',
+      { StackName: stackName },
+      this.options.stage,
+      this.options.region,
+    );
+
+    return result.Stacks[0].Outputs;
+  }
+
+  // fetches the S3 bucket name CloudFormation generated for us
+  async bucketInfo() {
+    const outputs = await this.getStackOutputs();
+    const output = outputs.find(
+      entry => entry.OutputKey === 'WebAppS3BucketOutput',
+    );
+
+    if (output && output.OutputValue) {
+      return output.OutputValue;
+    }
+
+    const error = new Error('Could not extract Web App S3 bucket name');
+    throw error;
+  }
+
+  // syncs the `app` directory to the deployed bucket
+  async syncDirectory() {
+    const s3Bucket = await this.bucketInfo();
     const args = [
       's3',
       'sync',
@@ -77,17 +107,7 @@ class ServerlessPlugin {
 
   // fetches the domain name from the CloudFront outputs and prints it out
   async domainInfo() {
-    const provider = this.serverless.getProvider('aws');
-    const stackName = provider.naming.getStackName(this.options.stage);
-    const result = await provider.request(
-      'CloudFormation',
-      'describeStacks',
-      { StackName: stackName },
-      this.options.stage,
-      this.options.region,
-    );
-
-    const outputs = result.Stacks[0].Outputs;
+    const outputs = await this.getStackOutputs();
     const output = outputs.find(
       entry => entry.OutputKey === 'WebAppCloudFrontDistributionOutput',
     );

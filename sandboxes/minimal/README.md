@@ -1,3 +1,15 @@
+<!--
+title: Serverless Framework Sandboxes: Minimal AWS Lambda MicroVM Example
+description: Smallest possible sandboxes configuration, using only the required artifact field and framework defaults.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # Minimal sandbox example
 
 The smallest possible `sandboxes` configuration: a single sandbox with only the
