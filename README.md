@@ -60,7 +60,7 @@ serverless deploy
 <!-- AUTO-GENERATED-CONTENT:START (SERVERLESS_EXAMPLE_TABLE) t generated w/ `npm run docs` -->
 | Example | Runtime |
 |:--- |:--- |
-| [Dot Net REST API with DynamoDB](https://github.com/serverless/examples/tree/v4/aws-dotnet-rest-api-with-dynamodb) <br/> Setup a REST API w/ DynamoDB using Dot Net Core 2.1 | dotnet |
+| [Dot Net REST API with DynamoDB](https://github.com/serverless/examples/tree/v4/aws-dotnet-rest-api-with-dynamodb) <br/> Setup a REST API w/ DynamoDB using .NET 10 | dotnet |
 | [AWS FFmepg Layer](https://github.com/serverless/examples/tree/v4/aws-ffmpeg-layer) <br/> AWS FFmepg Layer & a service using it to create GIFs | nodeJS |
 | [AWS Golang Auth](https://github.com/serverless/examples/tree/v4/aws-golang-auth-examples) <br/> This example shows you how to setup auth in front of a AWS Lambda function | golang |
 | [Google map api](https://github.com/serverless/examples/tree/v4/aws-golang-googlemap) <br/> Serverless example using golang to hit google map api | golang |
@@ -221,7 +221,6 @@ Examples maintained by the community in their own repositories.
 | [Serverless ReactJS Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless) <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | nodeJS |
 | [Open Bot](https://github.com/open-bot/open-bot) <br/> An unoptionated Github bot driven by a configuration file in the repository | nodeJS |
 | [Aws ses serverless example](https://github.com/lakshmantgld/aws-ses-serverless-example) <br/> AWS SES example in NodeJS using lambda | nodeJS |
-| [Aws node signed uploads](https://github.com/kalinchernev/aws-node-signed-uploads) <br/> Upload files larger than 10MB with AWS Lambda and API Gateway. Can be developed and tested locally. | nodeJS |
 | [SQS Worker with AWS Lambda and CloudWatch Alarms](https://github.com/sbstjn/sqs-worker-serverless) <br/> Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function. | nodeJS |
 | [Serverless image manager](https://github.com/TylorShin/lambda-image-manager) <br/> image upload / download with resizing. Used API gateway's binary support & serverless | nodeJS |
 | [Amazon Kinesis Streams fan out via Kinesis Analytics](https://github.com/alexcasalboni/kinesis-streams-fan-out-kinesis-analytics) <br/> Use Amazon Kinesis Analytics to fan-out your Kinesis Streams and avoid read throttling. | nodeJS |
@@ -274,7 +273,6 @@ Examples maintained by the community in their own repositories.
 | [Serverless ES6/7 CRUD API](https://github.com/AnomalyInnovations/serverless-stack-demo-api) <br/> Serverless Stack examples of backend CRUD APIs (DynamoDB + Lambda + API Gateway + Cognito User Pool authorizer) for React.js single-page app | unknown |
 | [AWS Lambda Power Tuning (powered by Step Functions)](https://github.com/alexcasalboni/aws-lambda-power-tuning) <br/> Build a Step Functions state machine to optimize your AWS Lambda Function memory/power configuration. | unknown |
 | [React & Stripe Serverless Ecommerce](https://github.com/patrick-michelberger/serverless-shop) <br/> Serverless E-Commerce App with AWS Lambda, Stripe and React | unknown |
-| [Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 2](https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo/tree/part2) <br/> From this article you'll learn how to configure AWS Lambda functions to allow them manage your EKS Kubernetes cluster and run triggered jobs | unknown |
 | [JSON-Serverless](https://github.com/pharindoko/json-serverless) <br/> A simple & cheap serverless REST API using [json-server](https://github.com/typicode/json-server) in combination with AWS Lambda / S3 and the serverless framework | unknown |
 | [GoLive](https://github.com/adimoraret/golive/) <br/> Boilerplate to live stream using AWS MediaLive and MediaStore | unknown |
 | [Idempotent Serverless Functions](https://github.com/Nsupyq/idempotent-serverless-functions) <br/> This repository demonstrates how to ensure the idempotence of serverless functions running on AWS Lambda. | unknown |
