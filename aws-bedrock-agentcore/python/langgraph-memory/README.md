@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Memory (Python)
+title: 'Bedrock AgentCore: LangGraph Agent with Memory (Python)'
 description: LangGraph agent using AgentCore Memory as a tool for recalling and saving conversation history.
 layout: Doc
 framework: v4

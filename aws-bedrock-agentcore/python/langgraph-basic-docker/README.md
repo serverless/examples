@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Basic Agent, Docker Deploy (Python)
+title: 'Bedrock AgentCore: LangGraph Basic Agent, Docker Deploy (Python)'
 description: Minimal LangGraph agent deployed to AWS Bedrock AgentCore using Docker/container deployment.
 layout: Doc
 framework: v4

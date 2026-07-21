@@ -1,5 +1,5 @@
 <!--
-title: Serverless Framework Sandboxes: Minimal AWS Lambda MicroVM Example
+title: 'Serverless Framework Sandboxes: Minimal AWS Lambda MicroVM Example'
 description: Smallest possible sandboxes configuration, using only the required artifact field and framework defaults.
 layout: Doc
 framework: v4

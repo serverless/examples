@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Managed Browser (Python)
+title: 'Bedrock AgentCore: LangGraph Agent with Managed Browser (Python)'
 description: LangGraph agent using AgentCore Browser via LangChain's browser toolkit for web automation.
 layout: Doc
 framework: v4

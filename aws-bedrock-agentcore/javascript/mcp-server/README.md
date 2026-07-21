@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: Standalone MCP Server (JavaScript)
+title: 'Bedrock AgentCore: Standalone MCP Server (JavaScript)'
 description: Standalone JavaScript MCP server deployed to AWS Bedrock AgentCore Runtime, consumable by any MCP client.
 layout: Doc
 framework: v4

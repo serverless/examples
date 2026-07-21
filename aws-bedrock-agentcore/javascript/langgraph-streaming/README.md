@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Token Streaming (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Token Streaming (JavaScript)'
 description: LangGraph JS agent streaming LLM tokens in real time over SSE via BedrockAgentCoreApp.
 layout: Doc
 framework: v4

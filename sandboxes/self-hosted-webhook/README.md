@@ -1,5 +1,5 @@
 <!--
-title: Serverless Framework Sandboxes: Self-Hosted Webhook for Claude Managed Agents
+title: 'Serverless Framework Sandboxes: Self-Hosted Webhook for Claude Managed Agents'
 description: Self-hosted AWS Lambda MicroVM sandbox per Claude Managed Agent session, launched on demand by a webhook.
 layout: Doc
 framework: v4

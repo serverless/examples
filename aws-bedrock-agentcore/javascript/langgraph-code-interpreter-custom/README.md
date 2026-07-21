@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Custom Code Interpreter (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Custom Code Interpreter (JavaScript)'
 description: LangGraph JS agent using a custom AgentCore Code Interpreter with PUBLIC network access.
 layout: Doc
 framework: v4

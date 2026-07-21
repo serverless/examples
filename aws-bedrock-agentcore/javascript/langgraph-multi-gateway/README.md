@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Multi-Gateway Agents (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Multi-Gateway Agents (JavaScript)'
 description: LangGraph JS agents using separate public and private AgentCore Gateways with different authorization levels.
 layout: Doc
 framework: v4

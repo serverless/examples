@@ -1,6 +1,6 @@
 <!--
-title: Serverless Framework Sandboxes: Complete AWS Lambda MicroVM Example
-description: Deploy-as-is showcase of every sandboxes property: Dockerfile build, memory, hooks, observability, IAM, and tags.
+title: 'Serverless Framework Sandboxes: Complete AWS Lambda MicroVM Example'
+description: 'Deploy-as-is showcase of every sandboxes property: Dockerfile build, memory, hooks, observability, IAM, and tags.'
 layout: Doc
 framework: v4
 platform: AWS

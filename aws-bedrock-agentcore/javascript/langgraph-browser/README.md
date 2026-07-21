@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Managed Browser (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Managed Browser (JavaScript)'
 description: LangGraph JS agent using the AWS-managed AgentCore Browser tool for web navigation and screenshots.
 layout: Doc
 framework: v4
