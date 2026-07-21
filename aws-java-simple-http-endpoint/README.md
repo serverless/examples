@@ -2,7 +2,7 @@
 title: 'AWS Simple HTTP Endpoint example in Java'
 description: 'This example demonstrates how to setup a simple HTTP GET endpoint using Java. Once you fetch it, it will reply with the current time.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Java
 priority: 10
@@ -22,38 +22,39 @@ This example demonstrates how to setup a simple HTTP GET endpoint using Java. On
 
 ## Build
 
-It is required to build prior to deploying. You can build the deployment artifact using Gradle or Maven.
+It is required to build prior to deploying. The function runs on the `java25` (arm64) managed
+runtime. You can build the deployment artifact using Gradle or Maven.
 
 ### Gradle
 
 In order to build using Gradle simply run
 
 ```bash
-gradle wrapper # to build the gradle wrapper jar
-./gradlew build # to build the application jar
+./gradlew build # to build the shaded application jar
 ```
 
 The expected result should be similar to:
 
 ```bash
-Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
-:compileJava
-:processResources
-:classes
-:jar
-:assemble
-:buildZip
-:compileTestJava UP-TO-DATE
-:processTestResources UP-TO-DATE
-:testClasses UP-TO-DATE
-:test UP-TO-DATE
-:check UP-TO-DATE
-:build
+> Task :compileJava
+> Task :processResources NO-SOURCE
+> Task :classes
+> Task :jar
+> Task :shadowJar
+> Task :assemble
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :build
 
-BUILD SUCCESSFUL
-
-Total time: 8.195 secs
+BUILD SUCCESSFUL in 1s
+3 actionable tasks: 3 executed
 ```
+
+This produces `build/libs/aws-java-simple-http-endpoint.jar`, which is what `serverless.yml`
+packages as the function artifact.
 
 ### Maven
 
@@ -73,7 +74,7 @@ If you use Maven to build, then in `serverless.yml` you have to replace
 
 ```yaml
 package:
-  artifact: build/distributions/aws-java-simple-http-endpoint.zip
+  artifact: build/libs/aws-java-simple-http-endpoint.jar
 ```
 with
 ```yaml

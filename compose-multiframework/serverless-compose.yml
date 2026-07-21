@@ -19,7 +19,7 @@ stages:
 services:
   # Framework: AWS CloudFormation
   # The service name here will be used as the underlying cloudformation stack name.
-  # Make sure it’s unique so it doesn’t collide, and accidently update another stack.
+  # Make sure it’s unique so it doesn’t collide, and accidentally update another stack.
   # If you change it, make sure you update the references in other services.
   shared-resources-example:
     path: cloudformation

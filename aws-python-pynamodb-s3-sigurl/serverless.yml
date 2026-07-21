@@ -1,41 +1,47 @@
 service: aws-python-pynamodb-s3-sigurl
 
-frameworkVersion: ">=2.24.0"
-
-plugins:
-  - serverless-python-requirements
+frameworkVersion: '4'
 
 package:
-  exclude:
-    - node_modules/**
-    - .idea/**
-    - .requirements/**
-    - env/**
-    - README.md
-    - package.json
-    - package-lock.json
-    - requirements.txt
+  patterns:
+    - '!node_modules/**'
+    - '!.idea/**'
+    - '!.requirements/**'
+    - '!env/**'
+    - '!README.md'
+    - '!package.json'
+    - '!package-lock.json'
+    - '!requirements.txt'
 
 # DRY constants: define all compound/generated names in one place
 # Override args are: .. defaults:
 # --app_acroym          signed-uploader
-# --s3_bucket           self:custom.app_acronym
+# --s3_bucket           self:custom.default_bucket
 # --s3_key_base         self:custom.stage
 # --region              us-east-1
 # --stage               test
 # --deletion_policy     delete
 custom:
+  pythonRequirements:
+    # boto3/botocore ship with the Lambda runtime already; keep them in
+    # requirements.txt for local tooling but don't bundle them.
+    noDeploy:
+      - boto3
+      - botocore
   app_acronym: sig-s3-uploader
   default_stage: test
   stage: ${opt:stage, self:custom.default_stage}
   stack_name: ${self:custom.app_acronym}-${self:custom.stage}
-  region: ${opt:region, self:provider.region}
+  region: ${aws:region}
   deletion_policy: Delete
   dynamodb_table: ${self:custom.stack_name}
   dynamodb_arn: arn:aws:dynamodb:${self:custom.region}:*:table/${self:custom.dynamodb_table}
   dynamodb_host: https://dynamodb.${self:custom.region}.amazonaws.com
-  # Default to using app_acronym as bucket name
-  s3_bucket: ${opt:s3_bucket, self:custom.app_acronym}
+  # S3 bucket names are globally unique across all AWS accounts, so the bucket
+  # name is qualified with stage + account id to avoid colliding with buckets
+  # in other accounts.
+  default_bucket: ${self:custom.app_acronym}-${sls:stage}-${aws:accountId}
+  s3_bucket: ${opt:s3_bucket, self:custom.default_bucket}
   # default to using ${stage} as key base path, keeps stages from namespace collisions
   s3_key_base: ${opt:s3_key_base, self:custom.stage}
   s3_bucket_arn: arn:aws:s3:::${self:custom.s3_bucket}
@@ -45,7 +51,8 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.6
+  runtime: python3.14
+  architecture: arm64
   region: us-east-1
   environment:
     DYNAMODB_TABLE: ${self:custom.dynamodb_table}
@@ -122,11 +129,11 @@ functions:
           cors: true
           integration: lambda
           request:
-            paths:
-              asset_id: true
-              parameters:
-                 paths:
-                   timeout: true
+            parameters:
+              paths:
+                asset_id: true
+              querystrings:
+                timeout: false
   update:
     handler: asset/update.update
     name: ${self:custom.stack_name}-update
@@ -138,8 +145,9 @@ functions:
           cors: true
           integration: lambda
           request:
-            paths:
-              asset_id: true
+            parameters:
+              paths:
+                asset_id: true
   delete:
     handler: asset/delete.delete
     name: ${self:custom.stack_name}-delete
@@ -151,8 +159,9 @@ functions:
           cors: true
           integration: lambda
           request:
-            paths:
-              asset_id: true
+            parameters:
+              paths:
+                asset_id: true
 
 resources:
   Resources:

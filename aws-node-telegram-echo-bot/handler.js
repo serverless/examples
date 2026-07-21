@@ -1,25 +1,20 @@
-'use strict';
+const BASE_URL = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-const request = require('request');
+export const webhook = async (event) => {
+  const body = JSON.parse(event.body);
+  const { message } = body;
+  const chatId = message.chat.id;
 
-module.exports.webhook = (event, context, callback) => {
-  const token = '[YOU TOKEN PLZ]';
-  const BASE_URL = `https://api.telegram.org/bot${token}/sendMessage`;
+  await fetch(BASE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: message.text, chat_id: chatId }),
+  });
 
-  const body = JSON.parse(event.body)
-  const message = body.message
-  const chatId = message.chat.id
-  
-  request.post(BASE_URL).form({ text: message.text, chat_id: chatId });
-
-  const response = {
+  return {
     statusCode: 200,
     body: JSON.stringify({
       input: event,
     }),
   };
-
-  return callback(null, response);
-
 };
-

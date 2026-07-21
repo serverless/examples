@@ -2,7 +2,7 @@
 title: 'Serverless Nodejs Rest API with TypeScript And MongoDB Atlas'
 description: 'This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and MongoDB Atlas.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -11,6 +11,9 @@ authorName: 'May Jun'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/17956058?s=460&u=f3acebabd097e6e93d5be5a8366b980fea5b15aa&v=4'
 -->
 # Serverless Nodejs Rest API with TypeScript And MongoDB Atlas
+
+> Note: TypeScript is intentionally held at `5.x` — the TypeScript 7 native compiler isn't yet
+> supported by the surrounding ecosystem tooling (checked 2026-07-20).
 
 This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and MongoDB Atlas.
 
@@ -31,10 +34,6 @@ serverless invoke local --function find
 Which should result in:
 
 ```bash
-Serverless: Compiling with Typescript...
-Serverless: Using local tsconfig.json
-Serverless: Typescript compiled.
-
 {
     "statusCode": 200,
     "body": "{\"code\":0,\"message\":\"success\",\"data\":[{\"_id\":\"5dff21f71c9d440000a30dad\",\"createdAt\":\"2020-05-16T09:27:51.219Z\"},{\"_id\":\"5dff22ba1c9d440000a30dae\",\"createdAt\":\"2020-05-16T09:27:51.220Z\"}]}"
@@ -61,9 +60,6 @@ $ serverless deploy
 The expected result should be similar to:
 
 ```
-Serverless: Compiling with Typescript...
-Serverless: Using local tsconfig.json
-Serverless: Typescript compiled.
 Serverless: Packaging service...
 Serverless: Excluding development dependencies...
 Serverless: Uploading CloudFormation file to S3...

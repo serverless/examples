@@ -1,8 +1,8 @@
 <!--
-title: TODO
+title: 'TypeScript REST API with DynamoDB'
 description: This example shows your how to create a TypeScript powered REST API with DynamoDB.
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -15,20 +15,14 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/216566?v=4&s=140'
 
 TypeScript (ts) offers type safety which is helpful when working with the AWS SDK, which comes with ts definitions (d.ts)
 
-# compiling
+# TypeScript
 
-You can compile the ts files in this directory by 1st installing typescript via
+> Note: TypeScript is intentionally held at `5.x` — the TypeScript 7 native compiler isn't yet
+> supported by the surrounding ecosystem tooling (checked 2026-07-20).
 
-`npm install -g typescript`
+Serverless Framework v4 bundles TypeScript handlers natively (via its built-in esbuild integration), so there is no separate compile step and no build plugin to install. Just run `npm i` and deploy; `todos/create.ts`, `todos/list.ts`, `todos/get.ts` and `todos/update.ts` are packaged directly.
 
-then
-
-`npm i`
-
-You can then run the compiler by running `tsc` in this directory. It will pull the settings from .tsconfig and extra @types
-from package.json. The output create.js file is what will be uploaded by serverless.
-
-For brevity, I have just demonstrated this to match with the todos/create.js, todos/list.js, todos/get.js and todos/update.js lambda function
+You can still type-check the project without emitting output by running `npx tsc --noEmit`.
 
 ## Usage
 

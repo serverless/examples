@@ -1,5 +1,0 @@
-.serverless
-.requirements
-venv
-*.pyc
-*.pyo

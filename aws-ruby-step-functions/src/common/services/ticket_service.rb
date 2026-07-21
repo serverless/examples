@@ -10,12 +10,12 @@ class TicketService
   TicketSchema = Struct.new(:id, :first_name, :last_name, :check_in_date, :check_out_date, :current_status, :created_at)
 
   def initialize(attributes)
-    @attributes = attributes
+    @attributes = attributes.transform_keys(&:to_sym)
   end
 
   def create_ticket
     ticket_attribute = build_ticket
-    DynamoDBAdapter.new.save_item(build_ticket)
+    DynamoDBAdapter.new.save_item(ticket_attribute)
     ticket_attribute[:id]
   end
 

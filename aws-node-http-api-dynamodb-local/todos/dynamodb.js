@@ -1,17 +1,20 @@
-'use strict';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
-
-let options = {};
+let clientOptions = {};
 
 // connect to local DB if running offline
 if (process.env.IS_OFFLINE) {
-  options = {
+  clientOptions = {
     region: 'localhost',
     endpoint: 'http://localhost:8000',
+    credentials: {
+      accessKeyId: 'DEFAULT_ACCESS_KEY',
+      secretAccessKey: 'DEFAULT_SECRET',
+    },
   };
 }
 
-const client = new AWS.DynamoDB.DocumentClient(options);
+const client = DynamoDBDocumentClient.from(new DynamoDBClient(clientOptions));
 
-module.exports = client;
+export default client;

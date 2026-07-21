@@ -1,11 +1,12 @@
 service: aws-ruby-cron-with-dynamodb
 
-frameworkVersion: '2'
+frameworkVersion: '4'
 
 provider:
   name: aws
   region: us-east-1
-  runtime: ruby2.7
+  runtime: ruby4.0
+  architecture: arm64
   memorySize: 256
   timeout: 10
   environment:
@@ -17,7 +18,6 @@ provider:
   tags:
     Application: ${self:service}
     Stage: ${sls:stage}
-  lambdaHashingVersion: 20201221
   iam:
     role:
       statements:

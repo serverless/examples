@@ -1,8 +1,8 @@
 <!--
-title: TODO
-description: This example demonstrate how to use MongoDB with AWS and Serverless.
+title: 'AWS Serverless REST API with MongoDB example in NodeJS'
+description: 'This example demonstrate how to use MongoDB with AWS and Serverless.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -11,11 +11,11 @@ authorName: 'Luciano Pellacani Franca'
 authorAvatar: 'https://avatars2.githubusercontent.com/u/8251208?v=4&s=140'
 -->
 
-# Serverless MongoDB Rest API with Mongoose and Bluebird Promises
+# Serverless MongoDB Rest API with Mongoose
 
 This example demonstrate how to use a MongoDB database with aws and serverless.
 
-Using Mongoose ODM and Bluebird for Promises.
+Using Mongoose ODM.
 
 ## Use Cases
 
@@ -30,7 +30,7 @@ serverless deploy
 
 ## Usage
 
-In `handler.js` update the `mongoString` with your mongoDB url.
+Set the `MONGODB_URI` environment variable (either in `serverless.yml` or your shell) to your MongoDB connection string before invoking the functions.
 
 *Create*
 

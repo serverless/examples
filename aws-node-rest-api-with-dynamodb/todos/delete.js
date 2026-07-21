@@ -1,35 +1,18 @@
-'use strict';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, DeleteCommand } from '@aws-sdk/lib-dynamodb';
 
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-module.exports.delete = (event, context, callback) => {
-  const params = {
-    TableName: process.env.DYNAMODB_TABLE,
-    Key: {
-      id: event.pathParameters.id,
-    },
-  };
-
-  // delete the todo from the database
-  dynamoDb.delete(params, (error) => {
-    // handle potential errors
-    if (error) {
-      console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t remove the todo item.',
-      });
-      return;
-    }
-
-    // create a response
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify({}),
-    };
-    callback(null, response);
-  });
+// `delete` is a reserved word, so the handler function is declared as `del`
+// and re-exported under the `delete` name for the serverless.yml handler reference.
+const del = async (event) => {
+  await client.send(
+    new DeleteCommand({
+      TableName: process.env.DYNAMODB_TABLE,
+      Key: { id: event.pathParameters.id },
+    })
+  );
+  return { statusCode: 200, body: JSON.stringify({}) };
 };
+
+export { del as delete };

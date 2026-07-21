@@ -1,12 +1,10 @@
-'use strict';
-
 // Returns a random integer between min (inclusive) and max (inclusive)
 const getRandomInt = (min, max) => Math.floor(Math.random() * ((max - min) + 1)) + min;
 
-module.exports.luckyNumber = (event, context, callback) => {
+export const luckyNumber = async (event) => {
   const upperLimit = event.request.intent.slots.UpperLimit.value || 100;
   const number = getRandomInt(0, upperLimit);
-  const response = {
+  return {
     version: '1.0',
     response: {
       outputSpeech: {
@@ -16,6 +14,4 @@ module.exports.luckyNumber = (event, context, callback) => {
       shouldEndSession: false,
     },
   };
-
-  callback(null, response);
 };

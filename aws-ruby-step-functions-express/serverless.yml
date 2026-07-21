@@ -1,13 +1,13 @@
-service: aws-ruby-step-functions
+service: aws-ruby-step-functions-express
 
-frameworkVersion: '2'
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: ruby2.7
+  runtime: ruby4.0
+  architecture: arm64
   region: eu-west-1
   memorySize: 256
-  lambdaHashingVersion: 20201221
   logRetentionInDays: 30
   iam:
     role:

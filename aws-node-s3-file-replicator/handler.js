@@ -1,55 +1,42 @@
-const aws = require('aws-sdk')
-const s3 = new aws.S3()
-const path = require('path')
+import { S3Client, CopyObjectCommand } from '@aws-sdk/client-s3';
 
-const outputBucket = process.env.OUTPUT_BUCKET
+const s3 = new S3Client({});
+const outputBucket = process.env.OUTPUT_BUCKET;
 
-exports.replicate = function main(event, context) {
-  // Fail on mising data
+export const replicate = async (event) => {
+  // Fail on missing data
   if (!outputBucket) {
-    context.fail('Error: Environment variable OUTPUT_BUCKET missing')
-    return
+    throw new Error('Error: Environment variable OUTPUT_BUCKET missing');
   }
   if (event.Records === null) {
-    context.fail('Error: Event has no records.')
-    return
+    throw new Error('Error: Event has no records.');
   }
 
-  let tasks = []
-  for (let i = 0; i < event.Records.length; i++) {
-    tasks.push(replicatePromise(event.Records[i], outputBucket))
+  await Promise.all(event.Records.map((record) => replicateObject(record, outputBucket)));
+};
+
+async function replicateObject(record, destBucket) {
+  // The source bucket and source key are part of the event data
+  const srcBucket = record.s3.bucket.name;
+  const srcKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
+
+  // Modify destKey if an alternate copy location is preferred
+  const destKey = srcKey;
+  const msg = `copying ${srcBucket}:${srcKey} to ${destBucket}:${destKey}`;
+
+  console.log(`Attempting: ${msg}`);
+  try {
+    await s3.send(
+      new CopyObjectCommand({
+        Bucket: destBucket,
+        Key: destKey,
+        CopySource: encodeURIComponent(`${srcBucket}/${srcKey}`),
+        MetadataDirective: 'COPY',
+      })
+    );
+    console.log(`Success: ${msg}`);
+  } catch (err) {
+    console.log(`Error: ${msg}`, err);
+    throw err;
   }
-
-  Promise.all(tasks)
-    .then(() => { context.succeed() })
-    .catch(() => { context.fail() })
-}
-
-function replicatePromise(record, destBucket) {
-  return new Promise((resolve, reject) => {
-    // The source bucket and source key are part of the event data
-    var srcBucket = record.s3.bucket.name
-    var srcKey = decodeURIComponent(record.s3.object.key.replace(/\+/g, " "))
-
-    // Modify destKey if an alternate copy location is preferred
-    var destKey = srcKey
-    var msg = 'copying ' + srcBucket + ':' + srcKey + ' to ' + destBucket + ':' + destKey
-
-    console.log('Attempting: ' + msg)
-    s3.copyObject({
-      Bucket: destBucket,
-      Key: destKey,
-      CopySource: encodeURIComponent(srcBucket + '/' + srcKey),
-      MetadataDirective: 'COPY'
-    }, (err, data) => {
-      if (err) {
-        console.log('Error:' + msg)
-        console.log(err, err.stack) // an error occurred
-        return reject('Error:' + msg)
-      } else {
-        console.log('Success: ' + msg)
-        return resolve('Success: ' + msg)
-      }
-    })
-  })
 }

@@ -1,59 +1,27 @@
-'use strict';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-module.exports.update = (event, context, callback) => {
-  const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body);
-
-  // validation
+export const update = async (event) => {
+  const data = JSON.parse(event.body ?? '{}');
   if (typeof data.text !== 'string' || typeof data.checked !== 'boolean') {
-    console.error('Validation Failed');
-    callback(null, {
-      statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t update the todo item.',
-    });
-    return;
+    return { statusCode: 400, body: JSON.stringify({ error: '"text" and "checked" must be provided' }) };
   }
 
-  const params = {
-    TableName: process.env.DYNAMODB_TABLE,
-    Key: {
-      id: event.pathParameters.id,
-    },
-    ExpressionAttributeNames: {
-      '#todo_text': 'text',
-    },
-    ExpressionAttributeValues: {
-      ':text': data.text,
-      ':checked': data.checked,
-      ':updatedAt': timestamp,
-    },
-    UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
-    ReturnValues: 'ALL_NEW',
-  };
-
-  // update the todo in the database
-  dynamoDb.update(params, (error, result) => {
-    // handle potential errors
-    if (error) {
-      console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t fetch the todo item.',
-      });
-      return;
-    }
-
-    // create a response
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify(result.Attributes),
-    };
-    callback(null, response);
-  });
+  const result = await client.send(
+    new UpdateCommand({
+      TableName: process.env.DYNAMODB_TABLE,
+      Key: { id: event.pathParameters.id },
+      ExpressionAttributeNames: { '#todo_text': 'text' },
+      ExpressionAttributeValues: {
+        ':text': data.text,
+        ':checked': data.checked,
+        ':updatedAt': Date.now(),
+      },
+      UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
+      ReturnValues: 'ALL_NEW',
+    })
+  );
+  return { statusCode: 200, body: JSON.stringify(result.Attributes) };
 };

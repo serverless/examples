@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs"
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "types": [
-    "node",
-    "aws-sdk"
-  ]
+    "target": "ES2023",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true
+  }
 }

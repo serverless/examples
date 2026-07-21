@@ -1,7 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    line-bot-api (1.11.0)
+    base64 (0.3.0)
+    line-bot-api (2.10.0)
+      base64 (~> 0.2)
+      multipart-post (~> 2.4)
+    multipart-post (2.4.1)
 
 PLATFORMS
   ruby
@@ -9,5 +13,10 @@ PLATFORMS
 DEPENDENCIES
   line-bot-api
 
+CHECKSUMS
+  base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
+  line-bot-api (2.10.0) sha256=065e04a08d00cbf30f90db07749a119d808e344ce31f051e851a5a66ee17fa7f
+  multipart-post (2.4.1) sha256=9872d03a8e552020ca096adadbf5e3cb1cd1cdd6acd3c161136b8a5737cdb4a8
+
 BUNDLED WITH
-   2.0.2
+  4.0.16

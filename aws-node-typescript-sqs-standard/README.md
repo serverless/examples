@@ -2,7 +2,7 @@
 title: 'AWS SQS Standard Example (NodeJS & Typescript)'
 description: 'This example demonstrates how to setup a SQS with Typescript.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -11,6 +11,9 @@ authorName: 'Miguel Frazao'
 authorAvatar: 'https://avatars3.githubusercontent.com/u/28927258?s=460&v=4'
 -->
 # Simple SQS Standard Example
+
+> Note: TypeScript is intentionally held at `5.x` — the TypeScript 7 native compiler isn't yet
+> supported by the surrounding ecosystem tooling (checked 2026-07-20).
 
 This example demonstrates how to setup a SQS Standard and send messages through the message body and attributes.
 

@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Custom Browser (JavaScript)
+description: LangGraph JS agent using a custom AgentCore Browser resource with session recording to S3.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Custom Browser Example
 
 A LangGraph JavaScript agent using a custom AgentCore browser with session recording to S3.
@@ -41,5 +53,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-browser](../langgraph-browser/) - Default AWS-managed browser
-- [strands-browser](../strands-browser/) - Browser with Strands Agents framework
+- [langgraph-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser) - Default AWS-managed browser
+- [strands-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/strands-browser) - Browser with Strands Agents framework

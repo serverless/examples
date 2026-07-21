@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Multi-Gateway Agents (JavaScript)
+description: LangGraph JS agents using separate public and private AgentCore Gateways with different authorization levels.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Multi-Gateway Example
 
 A multi-agent setup with public and private gateways, each with different authorization levels.
@@ -72,5 +84,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-gateway](../langgraph-gateway/) - Single gateway example
-- [../python/langgraph-multi-gateway](../../python/langgraph-multi-gateway/) - Python version
+- [langgraph-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-gateway) - Single gateway example
+- [../python/langgraph-multi-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-multi-gateway) - Python version

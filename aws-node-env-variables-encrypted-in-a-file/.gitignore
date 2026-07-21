@@ -1,2 +1,6 @@
 node_modules
 .serverless
+
+# decrypted plaintext secrets - never commit these, only the .encrypted files
+secrets.*.yml
+!secrets.example.yml

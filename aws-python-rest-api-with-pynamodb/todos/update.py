@@ -6,9 +6,7 @@ from todos.todo_model import TodoModel
 
 
 def update(event, context):
-    # TODO: Figure out why this is behaving differently to the other endpoints
-    # data = json.loads(event['body'])
-    data = event['body']
+    data = json.loads(event['body'])
 
     if 'text' not in data and 'checked' not in data:
         logging.error('Validation Failed %s', data)
@@ -16,7 +14,7 @@ def update(event, context):
                 'body': json.dumps({'error_message': 'Couldn\'t update the todo item.'})}
 
     try:
-        found_todo = TodoModel.get(hash_key=event['path']['todo_id'])
+        found_todo = TodoModel.get(hash_key=event['pathParameters']['todo_id'])
     except DoesNotExist:
         return {'statusCode': 404,
                 'body': json.dumps({'error_message': 'TODO was not found'})}

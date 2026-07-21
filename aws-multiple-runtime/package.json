@@ -1,0 +1,8 @@
+{
+  "name": "aws-multiple-runtime",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This example demonstrates how you can run multiple runtimes in AWS Lambda.",
+  "author": "",
+  "license": "MIT"
+}

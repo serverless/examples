@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'sinatra-contrib'
+gem 'sinatra', '~> 4.0'
 gem 'aws-sdk-dynamodb'
+
+group :development do
+  gem 'puma'
+  gem 'rackup'
+end

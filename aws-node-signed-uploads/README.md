@@ -1,7 +1,7 @@
 <!--
 title: 'AWS Node Signed Uploads'
 description: 'The approach implemented in this service is useful when you want to use Amazon API Gateway and you want to solve the 10MB payload limit'
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -14,7 +14,7 @@ authorAvatar: 'https://avatars3.githubusercontent.com/u/1923476?v=4&s=140'
 
 ## Requirements
 
-* Node.js (version 8 is best at the moment)
+* Node.js 24
 * npm which comes with Node.js
 * yarn
 
@@ -22,9 +22,9 @@ authorAvatar: 'https://avatars3.githubusercontent.com/u/1923476?v=4&s=140'
 
 The approach implemented in this service is useful when you want to use [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and you want to solve the 10MB payload limit.
 
-The service is based on the [serverless](https://serverless.com/) framework. The service is uploading objects to a specific S3 bucket using a [pre-signed URL](http://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html). Implemented in node.js runtime using [getSignedUrl](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property) method.
+The service is based on the [serverless](https://serverless.com/) framework. The service is uploading objects to a specific S3 bucket using a [pre-signed URL](http://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html), generated with `@aws-sdk/s3-request-presigner`'s `getSignedUrl`.
 
-The package is targeting the latest runtime of AWS Lambda. ([8.10](https://aws.amazon.com/blogs/compute/node-js-8-10-runtime-now-available-in-aws-lambda/))
+The package targets the `nodejs24.x` AWS Lambda runtime.
 
 ## Settings
 
@@ -37,10 +37,13 @@ $ export AWS_REGION=
 
 Defaults are `dev` and `eu-central-1`.
 
-Change name of upload bucket:
+The upload bucket name defaults to `${self:service}-${sls:stage}-${aws:accountId}`
+(service, stage, and account qualified, so it's globally unique and safe to deploy without
+collisions). Override it in `custom.bucketName` if you want a different name:
 
 ```yaml
-bucketName: testBucket
+custom:
+  bucketName: my-own-bucket-name
 ```
 
 ### File name to sign
@@ -82,14 +85,6 @@ Starting a local dev server and its endpoint for receiving uploads:
 $ yarn start
 ```
 
-### Linter
-
-Starting the linter tasks:
-
-```bash
-$ yarn lint
-```
-
 ### Deployment
 
 [Setup your AWS credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/).
@@ -98,4 +93,16 @@ Run the following the fire the deployment:
 
 ```bash
 $ yarn deploy
+```
+
+After running deploy, you should see output similar to:
+
+```
+Deploying "aws-node-signed-uploads" to stage "dev" (eu-central-1)
+
+✔ Service deployed to stack aws-node-signed-uploads-dev (48s)
+
+endpoint: GET - https://xxxxxxxxxx.execute-api.eu-central-1.amazonaws.com/dev/upload
+functions:
+  upsert-objects: dev-aws-node-signed-uploads-upload (1.4 kB)
 ```

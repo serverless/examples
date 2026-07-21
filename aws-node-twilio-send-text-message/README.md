@@ -2,7 +2,7 @@
 title: 'AWS Send SMS Message with Twilio example in NodeJS'
 description: 'This example demonstrates how to send SMS messages with the Twilio SDK and AWS lambda.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 1
@@ -39,11 +39,11 @@ This example demonstrates how to send SMS messages with the Twilio SDK and AWS l
         TWILIO_PHONE_NUMBER: YOUR-TWILIO-PHONE-NUMBER-HERE
       ```
     
-      If you want to use encrypted API keys, see our [encrypted environment variables example](https://github.com/serverless/examples/tree/master/aws-node-env-variables-encrypted-in-a-file)
+      If you want to use encrypted API keys, see our [encrypted environment variables example](https://github.com/serverless/examples/tree/v4/aws-node-env-variables-encrypted-in-a-file)
       
 5. Install the dependencies required by the service 
       ```bash
-      npm i --only=prod
+      npm install --omit=dev
       ```
       
 6. Deploy the service 

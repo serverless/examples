@@ -2,7 +2,7 @@
 title: 'Serverless Framework Python SQS Producer-Consumer on AWS'
 description: 'This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the traditional Serverless Framework.'
 layout: Doc
-framework: v2
+framework: v4
 platform: AWS
 language: Python
 priority: 2

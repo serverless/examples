@@ -20,9 +20,10 @@ import { z } from 'zod'
 
 const GATEWAY_URL = process.env.BEDROCK_AGENTCORE_GATEWAY_URL
 const AWS_REGION = process.env.AWS_REGION || 'us-east-1'
+const MODEL_ID = process.env.MODEL_ID ?? 'global.anthropic.claude-sonnet-5'
 
 const llm = new ChatBedrockConverse({
-  model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+  model: MODEL_ID,
   region: AWS_REGION,
 })
 

@@ -1,12 +1,19 @@
-build:
-	dep ensure -v
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/hello hello/main.go
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/world world/main.go
+.PHONY: build clean deploy
 
-.PHONY: clean
+build: bin/hello.zip bin/world.zip
+
+bin/hello.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./hello
+	zip -j bin/hello.zip bootstrap && rm bootstrap
+
+bin/world.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./world
+	zip -j bin/world.zip bootstrap && rm bootstrap
+
 clean:
-	rm -rf ./bin ./vendor Gopkg.lock
+	rm -rf bin bootstrap
 
-.PHONY: deploy
-deploy: clean build
-	sls deploy --verbose
+deploy: build
+	serverless deploy --verbose

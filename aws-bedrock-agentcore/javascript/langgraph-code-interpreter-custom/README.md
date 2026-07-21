@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Custom Code Interpreter (JavaScript)
+description: LangGraph JS agent using a custom AgentCore Code Interpreter with PUBLIC network access.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Custom Code Interpreter Example
 
 A LangGraph JavaScript agent with a custom code interpreter that has PUBLIC network access.
@@ -40,4 +52,4 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-code-interpreter](../langgraph-code-interpreter/) - Default interpreter (SANDBOX)
+- [langgraph-code-interpreter](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-code-interpreter) - Default interpreter (SANDBOX)

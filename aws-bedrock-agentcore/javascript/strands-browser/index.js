@@ -22,7 +22,7 @@ import { z } from 'zod'
 
 const AWS_REGION = process.env.AWS_REGION || 'us-east-1'
 const MODEL_ID =
-  process.env.MODEL_ID || 'us.anthropic.claude-sonnet-4-5-20250929-v1:0'
+  process.env.MODEL_ID ?? 'global.anthropic.claude-sonnet-5'
 
 // Bypass tool consent for automated deployments
 process.env.BYPASS_TOOL_CONSENT = 'true'
@@ -58,9 +58,11 @@ For financial analysis, focus on:
  * Create a Strands agent with browser capabilities.
  */
 function createAgent() {
+  // `perTurn` was removed from SlidingWindowConversationManagerConfig in
+  // @strands-agents/sdk v1.x (config is now: windowSize, shouldTruncateResults,
+  // proactiveCompression, pinFirst) - see strands-agents/harness-sdk.
   const conversationManager = new SlidingWindowConversationManager({
     windowSize: 25,
-    perTurn: true,
   })
 
   return new Agent({

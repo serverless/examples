@@ -2,7 +2,7 @@
 title: 'AWS Ruby scheduled cron example backed by DynamoDB'
 description: 'This is an example of creating a function that runs as a cron job using the serverless schedule event. With the usage of the AWS Lambda function, it creates a record to the DynamoDB each and every 30 minutes.'
 layout: Doc
-framework: v2
+framework: v4
 platform: AWS
 language: Ruby
 priority: 10
@@ -79,7 +79,7 @@ endpoints:
 functions:
   create-meal-order: aws-ruby-cron-with-dynamodb-dev-create-meal-order
 layers:
-  gem: arn:aws:lambda:us-east-1:862403288926:layer:aws-ruby-cron-with-dynamodb-dev-ruby-bundle:1
+  gem: arn:aws:lambda:us-east-1:123456789012:layer:aws-ruby-cron-with-dynamodb-dev-ruby-bundle:1
 ```
 
 ## Configuration

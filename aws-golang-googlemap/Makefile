@@ -1,14 +1,24 @@
 .PHONY: build clean deploy
 
-build:
-	dep ensure -v
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getgeolocation getgeolocation/main.go
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getsearchlocation getsearchlocation/main.go
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getnearbylocation getnearbylocation/main.go
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/getgeodetail getgeodetail/main.go
+build: bin/getgeolocation.zip bin/getnearbylocation.zip bin/getgeodetail.zip
+
+bin/getgeolocation.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./getgeolocation
+	zip -j bin/getgeolocation.zip bootstrap && rm bootstrap
+
+bin/getnearbylocation.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./getnearbylocation
+	zip -j bin/getnearbylocation.zip bootstrap && rm bootstrap
+
+bin/getgeodetail.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./getgeodetail
+	zip -j bin/getgeodetail.zip bootstrap && rm bootstrap
 
 clean:
-	rm -rf ./bin ./vendor Gopkg.lock
+	rm -rf bin bootstrap
 
-deploy: clean build
-	sls deploy --verbose
+deploy: build
+	serverless deploy --verbose

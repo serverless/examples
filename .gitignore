@@ -23,5 +23,8 @@ tmp
 *.swp
 *.swo
 vendor
-./bin/Debug/netcoreapp2.1/
-./bin/release/netcoreapp2.1/
+venv/
+.venv/
+
+# Internal working dir (validation/CI tooling kept out of the pushable tree)
+git-excluded/

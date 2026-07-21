@@ -1,24 +1,25 @@
-/* eslint-disable */
-/* aws-sdk automatically included in lambda context */
-const aws = require('aws-sdk');
+import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
 
-module.exports.recursiveLambda = (event, context, callback) => {
-  const lambda = new aws.Lambda();
+const lambda = new LambdaClient({});
+
+export const recursiveLambda = async (event, context) => {
   console.log('received', event);
   /* if numberOfCalls still has value, continue recursive operation */
   if (event.numberOfCalls > 0) {
     console.log('recursive call');
     /* decrement numberOfCalls so we don't infinitely loop */
-    event.numberOfCalls = event.numberOfCalls - 1;
-    const params = {
-      FunctionName: context.functionName,
-      InvocationType: 'Event',
-      Payload: JSON.stringify(event),
-      Qualifier: context.functionVersion
-    };
-    lambda.invoke(params, context.done);
-  } else {
-    console.log('recursive call finished');
-    context.succeed('finished');
+    event.numberOfCalls -= 1;
+    await lambda.send(
+      new InvokeCommand({
+        FunctionName: context.functionName,
+        InvocationType: 'Event',
+        Payload: JSON.stringify(event),
+        Qualifier: context.functionVersion,
+      })
+    );
+    return 'invoked next call';
   }
+
+  console.log('recursive call finished');
+  return 'finished';
 };

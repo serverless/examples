@@ -1,24 +1,30 @@
 service: hello-world
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: go1.x
+  runtime: provided.al2023
+  architecture: arm64
   region: eu-west-1
   memorySize: 128
 
 package:
-  exclude:
-  - ./**
-  include:
-  - ./bin/**
+  individually: true
 
 functions:
   authorize:
-    handler: bin/auth
+    handler: bootstrap
+    package:
+      artifact: bin/authorize.zip
   authorize2:
-    handler: bin/auth2
+    handler: bootstrap
+    package:
+      artifact: bin/authorize2.zip
   hello-world:
-    handler: bin/hello-world
+    handler: bootstrap
+    package:
+      artifact: bin/hello-world.zip
     events:
     - http:
         path: /hello
@@ -30,7 +36,9 @@ functions:
           name: authorize
           resultTtlInSeconds: 0
   hello-world2:
-    handler: bin/hello-world2
+    handler: bootstrap
+    package:
+      artifact: bin/hello-world2.zip
     events:
     - http:
         path: me

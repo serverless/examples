@@ -1,8 +1,11 @@
 service: traditional
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs20.x
+  runtime: nodejs24.x
+  architecture: arm64
 
 functions:
   hello:

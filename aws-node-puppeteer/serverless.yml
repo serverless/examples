@@ -1,22 +1,22 @@
 service: scrapper-lambda
+
+frameworkVersion: '4'
+
 provider:
   name: aws
-  profile: <your aws profile>
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  # @sparticuz/chromium only ships x86_64 Chromium binaries (no arm64 build), so this
+  # example is a documented exception to the repo-wide arm64 default.
+  architecture: x86_64
 
 plugins:
   - serverless-offline
-  - serverless-plugin-chrome
-  
-package:
-  exclude:
-    - node_modules/puppeteer/.local-chromium/**
 
 functions:
   hello:
     handler: handler.hello
-    memorySize: 1536MB
-    timeout: 30
+    memorySize: 1536
+    timeout: 29
     events:
       - http:
           path: /

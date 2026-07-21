@@ -1,12 +1,13 @@
 service: aws-java-simple-http-endpoint
-frameworkVersion: '2'
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: java8
+  runtime: java25
+  architecture: arm64
 
 package:
-  artifact: build/distributions/aws-java-simple-http-endpoint.zip
+  artifact: build/libs/aws-java-simple-http-endpoint.jar
 
 functions:
   currentTime:

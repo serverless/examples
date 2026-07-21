@@ -1,21 +1,42 @@
 service: env-variables-encrypted-in-a-file
 
-frameworkVersion: ">=1.2.0 <2.0.0"
-
-plugins:
-  - serverless-secrets-plugin
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   stage: dev
-
-custom:
-  secrets: ${file(secrets.${opt:stage, self:provider.stage}.yml)}
+  environment:
+    STAGE: ${sls:stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - kms:Decrypt
+          Resource: !GetAtt SecretsKey.Arn
 
 functions:
   resetPassword:
     handler: handler.resetPassword
-    environment:
-      SESSION_KEY: ${self:custom.secrets.SESSION_KEY}
-      EMAIL_SERVICE_API_KEY: ${self:custom.secrets.EMAIL_SERVICE_API_KEY}
+
+resources:
+  Resources:
+    # Customer-managed KMS key used to encrypt/decrypt the secrets.<stage>.yml
+    # file. `npm run encrypt`/`npm run decrypt` (see package.json) use this
+    # key via the AWS SDK; the Lambda function decrypts at runtime.
+    SecretsKey:
+      Type: AWS::KMS::Key
+      Properties:
+        Description: CMK for ${self:service} secrets.${sls:stage}.yml
+        EnableKeyRotation: true
+    SecretsKeyAlias:
+      Type: AWS::KMS::Alias
+      Properties:
+        AliasName: alias/${self:service}-${sls:stage}-secrets
+        TargetKeyId: !Ref SecretsKey
+  Outputs:
+    SecretsKeyId:
+      Description: Pass this as KMS_KEY_ID to `npm run encrypt`
+      Value: !Ref SecretsKey

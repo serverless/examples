@@ -2,7 +2,7 @@
 title: 'AWS Serverless REST API with DynamoDB store example in Python'
 description: 'This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10
@@ -62,11 +62,11 @@ endpoints:
   PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
   DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/dev/todos/{id}
 functions:
-  serverless-rest-api-with-dynamodb-dev-update: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-update
-  serverless-rest-api-with-dynamodb-dev-get: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-get
-  serverless-rest-api-with-dynamodb-dev-list: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-list
-  serverless-rest-api-with-dynamodb-dev-create: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-create
-  serverless-rest-api-with-dynamodb-dev-delete: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-delete
+  serverless-rest-api-with-dynamodb-dev-update: arn:aws:lambda:us-east-1:123456789012:function:serverless-rest-api-with-dynamodb-dev-update
+  serverless-rest-api-with-dynamodb-dev-get: arn:aws:lambda:us-east-1:123456789012:function:serverless-rest-api-with-dynamodb-dev-get
+  serverless-rest-api-with-dynamodb-dev-list: arn:aws:lambda:us-east-1:123456789012:function:serverless-rest-api-with-dynamodb-dev-list
+  serverless-rest-api-with-dynamodb-dev-create: arn:aws:lambda:us-east-1:123456789012:function:serverless-rest-api-with-dynamodb-dev-create
+  serverless-rest-api-with-dynamodb-dev-delete: arn:aws:lambda:us-east-1:123456789012:function:serverless-rest-api-with-dynamodb-dev-delete
 ```
 
 ## Usage

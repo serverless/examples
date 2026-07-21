@@ -1,43 +1,19 @@
 service: serverless-gong
-frameworkVersion: '>=1.4.0 <2.0.0'
+
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
+  environment:
+    GITHUB_WEBHOOK_SECRET: REPLACE-WITH-YOUR-SECRET-HERE
+    SLACK_WEBHOOK_URL: REPLACE-WITH-YOUR-SLACK-WEBHOOK-URL-HERE
+
 functions:
   handleGong:
     handler: handler.gongHandler
-    description:
-      Fn::Sub:
-        - 'Stackery Stack #{StackeryStackTagName} Environment #{StackeryEnvironmentTagName} Function #{ResourceName}'
-        - ResourceName: handleGong
     events:
       - http:
-          path: /webhook
-          method: POST
-    environment:
-      GITHUB_WEBHOOK_SECRET:
-        Ref: StackeryEnvConfiggithubSecretAsString
-      SLACK_WEBHOOK_URL:
-        Ref: StackeryEnvConfigslackWebhookURLAsString
-resources:
-  Parameters:
-    StackeryStackTagName:
-      Type: String
-      Description: Stack Name (injected by Stackery at deployment time)
-      Default: serverless-gong
-    StackeryEnvironmentTagName:
-      Type: String
-      Description: Environment Name (injected by Stackery at deployment time)
-      Default: dev
-    StackeryEnvConfiggithubSecretAsString:
-      Type: AWS::SSM::Parameter::Value<String>
-      Default: /Stackery/Environments/<StackeryEnvId>/Config/githubSecret
-    StackeryEnvConfigslackWebhookURLAsString:
-      Type: AWS::SSM::Parameter::Value<String>
-      Default: /Stackery/Environments/<StackeryEnvId>/Config/slackWebhookURL
-  Metadata:
-    StackeryEnvConfigParameters:
-      StackeryEnvConfiggithubSecretAsString: githubSecret
-      StackeryEnvConfigslackWebhookURLAsString: slackWebhookURL
-plugins:
-  - serverless-cf-vars
+          path: webhook
+          method: post

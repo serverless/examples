@@ -13,7 +13,7 @@ NO_COLOR = \033[0m
 #################
 
 .PHONY: deploy
-deploy: vendor                 ## wrap sls deploy
+deploy:                        ## wrap sls deploy
 	@make action=deploy sls
 
 sls: guard-action
@@ -37,42 +37,11 @@ fi
 
 #################
 #
-# Docker Targets
-#
-#################
-check-docker:
-	@if which docker &>/dev/null ; then \
-		printf "$(INFO_COLOR)OK:$(NO_COLOR) Docker is valid\n" ; \
-	else \
-		printf "$(ERROR_COLOR)ERROR:$(NO_COLOR) docker not found. Please install and configure docker!\n" ; \
-		exit 1 ; \
-	fi
-
-# Docker stuff
-clean-it-containers:                     ## stops and removes _ALL_ containers
-	@-docker rm -f $$(docker ps -qa)
-
-
-# neat trick so that vendor target only runs when requirements.txt is newer than vendored folder
-VENDORED_FOLDER := vendored
-.PHONY: vendor
-vendor: check-docker $(VENDORED_FOLDER)
-$(VENDORED_FOLDER): requirements.txt    ## install requirements into $(VENDORED_FOLDER) when requirements.txt is newer than the folder
-	rm -rf $(VENDORED_FOLDER)
-	@-docker rm lambdapy36 &>/dev/null
-	docker run --name lambdapy36 -it -v $(shell pwd):/python-auth0 lambci/lambda:build-python3.6 /bin/sh -c "pip install -r /python-auth0/requirements.txt -t /python-auth0/vendored/"
-
-
-#################
-#
 # Cleanup
 #
 #################
 
-clean: clean-backend-deploy clean-tox clean-pyc
-
-clean-backend-deploy:
-	rm -rf $(VENDORED_FOLDER)
+clean: clean-tox clean-pyc
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +

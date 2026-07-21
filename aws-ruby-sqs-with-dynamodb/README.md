@@ -2,7 +2,7 @@
 title: 'Serverless AWS Ruby SQS with DynamoDB example'
 description: 'Serverless ruby example that creates DynamoDB records with the usage of SQS, API Gateway, and AWS Lambda functions.'
 layout: Doc
-framework: v2
+framework: v4
 platform: AWS
 language: Ruby
 priority: 5

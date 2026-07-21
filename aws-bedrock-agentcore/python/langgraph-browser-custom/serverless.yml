@@ -8,6 +8,8 @@
 
 service: langgraph-browser-custom
 
+frameworkVersion: '4'
+
 provider:
   name: aws
   region: us-east-1
@@ -18,7 +20,7 @@ resources:
     RecordingsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:service}-recordings-${sls:stage}
+        BucketName: ${self:service}-recordings-${aws:accountId}-${sls:stage}
         PublicAccessBlockConfiguration:
           BlockPublicAcls: true
           BlockPublicPolicy: true
@@ -43,7 +45,7 @@ ai:
       recording:
         enabled: true
         s3Location:
-          bucket: ${self:service}-recordings-${sls:stage}
+          bucket: ${self:service}-recordings-${aws:accountId}-${sls:stage}
           prefix: browser-sessions/
       # Custom role with S3 permissions for recordings
       role:
@@ -66,7 +68,7 @@ ai:
         # Pass the custom browser ID to the agent
         # Logical ID: getLogicalId('customBrowser', 'Browser') = 'CustomBrowserBrowser'
         CUSTOM_BROWSER_ID: !GetAtt CustomBrowserBrowser.BrowserId
-        RECORDINGS_BUCKET: ${self:service}-recordings-${sls:stage}
+        RECORDINGS_BUCKET: ${self:service}-recordings-${aws:accountId}-${sls:stage}
       # Grant permission to use the custom browser
       role:
         statements:

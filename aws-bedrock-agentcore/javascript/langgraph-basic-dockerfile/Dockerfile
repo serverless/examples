@@ -1,12 +1,12 @@
 # LangGraph JS Minimal Agent - Dockerfile
 #
 # Multi-stage build for smaller production image.
-# Uses Node.js 20 LTS with ES Modules support.
+# Uses Node.js 24 LTS with ES Modules support.
 
 # =============================================================================
 # Stage 1: Dependencies
 # =============================================================================
-FROM node:20-slim AS deps
+FROM public.ecr.aws/docker/library/node:24-slim AS deps
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ RUN npm ci --omit=dev
 # =============================================================================
 # Stage 2: Production
 # =============================================================================
-FROM node:20-slim AS production
+FROM public.ecr.aws/docker/library/node:24-slim AS production
 
 WORKDIR /app
 

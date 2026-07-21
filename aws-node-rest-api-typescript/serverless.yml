@@ -1,21 +1,24 @@
 service: aws-node-rest-api-typescript
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
     NODE_ENV: dev
+    DB_URL: "${env:DB_URL, 'mongodb+srv://<user>:<password>@<your-cluster>.mongodb.net/test?retryWrites=true&w=majority'}"
+    DB_NAME: ${env:DB_NAME, 'study'}
+    DB_BOOKS_COLLECTION: ${env:DB_BOOKS_COLLECTION, 'books'}
 
 plugins:
-  - serverless-plugin-typescript 
   - serverless-offline
 
 package:
-  exclude:
-    - config/.env.stg
-    - config/.env.pro
-  include:
-    - config/.env.dev
+  patterns:
+    - '!config/.env.stg'
+    - '!config/.env.pro'
 
 functions:
   create:

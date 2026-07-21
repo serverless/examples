@@ -2,7 +2,7 @@
 title: 'AWS Storing Encrypted Secrets example in NodeJS'
 description: 'This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -10,107 +10,122 @@ authorLink: 'https://github.com/rupakg'
 authorName: 'Rupak Ganguly'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/8188?v=4&s=140'
 -->
-# Serverless
+# Serverless - Encrypted Secrets in a File
 
-IMPORTANT NOTE: As pointed out in the [AWS documentation](http://docs.aws.amazon.com/lambda/latest/dg/env_variables.html) for storing sensible the `Ciphertext` should be stored in the environment variables. This tutorial doesn't go into that yet, but we will update it soon accordingly.
-
-This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.
+This example demonstrates how to store secrets like API keys encrypted in your repository, decrypting them with [AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) at runtime inside the Lambda function.
 
 ## Use-cases
 
-- Provide secrets like API keys to your Lambda functions
+- Provide secrets like API keys to your Lambda functions without ever committing plaintext to source control
 
 ## Why?
 
 While repository hosting services like Github or Bitbucket have very high security standards it's recommended to not store your unencrypted secrets there. In addition in larger teams not everybody needs to have access to those secrets of your production environment.
 
-Encrypting your secrets per stage and only adding the encrypted files into your repository is a sensible strategy to fulfill the previously described goals. The passwords to decrypt and encrypt the secrets files should only be shared between the necessary developers over a secure channel. In case you are using a Continuous Integration to deploy your infrastructure obviously this system must be aware of the passwords as well.
+Encrypting your secrets per stage with a KMS key and only adding the encrypted files to your repository is a sensible strategy to fulfill the previously described goals. Only principals granted `kms:Decrypt` on the key (in this example, the Lambda function's execution role) can read the secrets back.
+
+## How it works
+
+* `serverless.yml` provisions a customer-managed KMS key (`SecretsKey`) and grants the `resetPassword` function's execution role `kms:Decrypt` on it.
+* `secrets.<stage>.yml` holds your plaintext secrets locally. It's gitignored - never commit it.
+* `npm run encrypt -- <stage>` encrypts `secrets.<stage>.yml` with the KMS key into `secrets.<stage>.yml.encrypted`, which is safe to commit.
+* `npm run decrypt -- <stage>` reverses that, for local editing.
+* At runtime, `handler.js` reads the packaged `secrets.<stage>.yml.encrypted` file, calls `KMSClient`'s `DecryptCommand`, and caches the decrypted values for the lifetime of the execution environment (warm invocations skip the KMS round trip).
 
 ## Setup
-
-Since this plugin uses the Serverless plugin `serverless-secrets-plugin` you need to setup the `node_modules` by running:
 
 ```bash
 npm install
 ```
 
+Copy `secrets.example.yml` to `secrets.dev.yml` and fill in real values:
+
+```bash
+cp secrets.example.yml secrets.dev.yml
+```
+
+```yaml
+SESSION_KEY: 'your-session-signing-key-here'
+EMAIL_SERVICE_API_KEY: 'your-email-service-api-key-here'
+```
+
 ## Usage
 
-### Decrypt and Deploy
-
-In order to deploy the you endpoint simply run
+### 1. Deploy the KMS key
 
 ```bash
-serverless deploy --stage dev
+serverless deploy
 ```
 
-The expected result should be similar to:
+Grab the key id/alias from the `SecretsKeyId` stack output (or run `serverless info`).
+
+### 2. Encrypt your secrets file
 
 ```bash
- Error --------------------------------------------------
-
-    Couldn't find the secrets file for this stage: secrets.dev.yml
-
-    For debugging logs, run again after setting SLS_DEBUG env var.
-
- Get Support --------------------------------------------
-    Docs:          docs.serverless.com
-    Bugs:          github.com/serverless/serverless/issues
-
-    Please report this error. We think it might be a bug.
-
- Your Environment Information -----------------------------
-    OS:                 darwin
-    Node Version:       6.2.2
-    Serverless Version: 1.2.0
-```
-
-This is happening since the `serverless-secrets-plugin` makes sure a secrets file for the specific stage exists.
-
-Let's decrypt the secrets file so you can deploy the service. To do so run
-
-```bash
-serverless decrypt --stage dev --password 'va$27dC}9382G7ac6?V'
-```
-
-The expected result should be similar to:
-
-```bash
-Serverless: Sucessfully encrypted 'secrets.dev.yml.encrypted' to 'secrets.dev.yml'
-```
-
-Now that you have the unencrypted version of your secrets file this directory you can deploy with
-
-```bash
-serverless deploy --stage dev
-```
-
-### Encrypt
-
-In case you want to add, update or remove entries in your secrets file simply modify your secrets file. Once you are done encrypt it with
-
-```bash
-serverless encrypt --stage dev --password 'va$27dC}9382G7ac6?V'
-```
-
-The expected result should be:
-
-```bash
-Serverless: Sucessfully encrypted 'secrets.dev.yml' to 'secrets.dev.yml.encrypted'
-```
-
-The encrypted file can be checked into your version control system e.g. Git.
-
-### Decrypt and Encrypt the Production Secrets
-
-```bash
-serverless decrypt --stage prod --password 'v2]83WDneGt9AGXv]X6QfP9NW3^J&K3V'
+KMS_KEY_ID=<key-id-from-stack-output> npm run encrypt -- dev
 ```
 
 ```bash
-serverless encrypt --stage prod --password 'v2]83WDneGt9AGXv]X6QfP9NW3^J&K3V'
+Successfully encrypted 'secrets.dev.yml' to 'secrets.dev.yml.encrypted'
+```
+
+Commit `secrets.dev.yml.encrypted` - it can safely be checked into version control.
+
+### 3. Deploy again so the encrypted file is packaged with the function
+
+```bash
+serverless deploy
+```
+
+### 4. Invoke it
+
+```bash
+serverless invoke -f resetPassword --log
+```
+
+```bash
+{
+    "statusCode": 200,
+    "body": "{\"message\":\"Password sent.\"}"
+}
+--------------------------------------------------------------------
+SESSION_KEY:  your-session-signing-key-here
+EMAIL_SERVICE_API_KEY:  your-email-service-api-key-here
+```
+
+### Updating a secret
+
+Edit `secrets.dev.yml`, then re-run:
+
+```bash
+KMS_KEY_ID=<key-id-from-stack-output> npm run encrypt -- dev
+```
+
+```bash
+Successfully encrypted 'secrets.dev.yml' to 'secrets.dev.yml.encrypted'
+```
+
+### Recovering the plaintext file
+
+If you've lost your local `secrets.dev.yml`, decrypt it back from the committed `.encrypted` file:
+
+```bash
+STAGE=dev npm run decrypt -- dev
+```
+
+```bash
+Successfully decrypted 'secrets.dev.yml.encrypted' to 'secrets.dev.yml'
+```
+
+### Production secrets
+
+The same commands work for any stage - just swap `dev` for `prod`:
+
+```bash
+serverless deploy --stage prod
+KMS_KEY_ID=<prod-key-id-from-stack-output> npm run encrypt -- prod
 ```
 
 # Important Note
 
-Make sure the the unencrypted secrets files are listed in .gitignore or similar to make sure they are never checked into your repository.
+Make sure the unencrypted `secrets.*.yml` files are listed in `.gitignore` (they already are here) so they're never checked into your repository - only the `.encrypted` files should be committed.

@@ -1,8 +1,0 @@
-{
-  "name": "openwhisk-go-simple",
-  "version": "0.1.0",
-  "description": "Example demonstrates how to setup a simple Go function with OpenWhisk.",
-  "dependencies": {
-    "serverless-openwhisk": ">=0.13.0"
-  }
-}

@@ -1,22 +1,24 @@
 service: aws-node-ses-receive-email-body
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
 custom:
-  bucket: sesreceiveemailbody
-  bucketRef: S3BucketSesreceiveemailbody
+  defaultBucket: ses-email-body-${sls:stage}-${aws:accountId}
+  bucket: ${env:BUCKET, self:custom.defaultBucket}
+  bucketRef: S3BucketSesemailbody${sls:stage}${aws:accountId}
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   region: eu-west-1
   iam:
     role:
       statements:
         - Effect: Allow
           Action:
-            - s3:*
-          Resource: "*"
+            - s3:GetObject
+          Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
   postprocess:
@@ -31,17 +33,17 @@ resources:
     S3EMailBucketPermissions:
       Type: AWS::S3::BucketPolicy
       Properties:
-        Bucket: 
+        Bucket:
           Ref: ${self:custom.bucketRef}
         PolicyDocument:
           Statement:
-            - Principal: 
+            - Principal:
                 Service: "ses.amazonaws.com"
               Action:
                 - s3:PutObject
               Effect: Allow
               Sid: "AllowSESPuts"
-              Resource: 
+              Resource:
                 Fn::Join: ['', ['arn:aws:s3:::', Ref: "${self:custom.bucketRef}", '/*'] ]
               Condition:
                 StringEquals:

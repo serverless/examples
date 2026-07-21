@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Multi-Gateway Agents (Python)
+description: LangGraph agent using multiple AgentCore Gateways with different authorization types and tool subsets.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Multi-Gateway Agent
 
 Demonstrates multiple AgentCore Gateways with different authorization types and tool subsets.
@@ -48,8 +60,8 @@ Use multiple gateways when you need:
 
 ## Prerequisites
 
-- AWS account with Bedrock model access (Claude Sonnet 4.5)
-- Enable access to US inference profile `us.anthropic.claude-sonnet-4-5-20250929-v1:0`
+- AWS account with Bedrock model access (Claude Sonnet 5)
+- Enable access to the `global.anthropic.claude-sonnet-5` inference profile (override the default via the `MODEL_ID` env var)
 - Docker installed
 - Serverless Framework v4+
 - AWS credentials configured
@@ -189,5 +201,5 @@ serverless remove
 
 ## Next Steps
 
-- [LangGraph Gateway](../langgraph-gateway/) - Basic single gateway example
-- [LangGraph Memory](../langgraph-memory/) - Add conversation persistence
+- [LangGraph Gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Basic single gateway example
+- [LangGraph Memory](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence

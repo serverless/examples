@@ -6,7 +6,7 @@ from todos.todo_model import TodoModel
 
 def get(event, context):
     try:
-        found_todo = TodoModel.get(hash_key=event['path']['todo_id'])
+        found_todo = TodoModel.get(hash_key=event['pathParameters']['id'])
     except DoesNotExist:
         return {'statusCode': 404,
                 'body': json.dumps({'error_message': 'TODO was not found'})}

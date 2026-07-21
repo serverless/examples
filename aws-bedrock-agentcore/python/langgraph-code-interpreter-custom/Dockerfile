@@ -3,7 +3,7 @@
 # This Dockerfile builds a container for a LangGraph agent
 # that uses a custom code interpreter with PUBLIC network mode.
 
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 # Set working directory
 WORKDIR /app

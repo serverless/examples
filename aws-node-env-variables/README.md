@@ -2,7 +2,7 @@
 title: 'AWS Serverless Environment Variables Usage example in NodeJS'
 description: 'This example demonstrates how to use environment variables for AWS Lambdas.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -38,30 +38,14 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Creating Stack…
-Serverless: Checking Stack create progress…
-.....
-Serverless: Stack create finished…
-Serverless: Packaging service…
-Serverless: Uploading CloudFormation file to S3…
-Serverless: Uploading service .zip file to S3…
-Serverless: Updating Stack…
-Serverless: Checking Stack update progress…
-................
-Serverless: Stack update finished…
+```
+Deploying "function-with-environment-variables" to stage "dev" (us-east-1)
 
-Service Information
-service: function-with-environment-variables
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  None
+✔ Service deployed to stack function-with-environment-variables-dev (35s)
+
 functions:
-  function-with-environment-variables-dev-resetPassword: arn:aws:lambda:us-east-1:377024778620:function:function-with-environment-variables-dev-resetPassword
-  function-with-environment-variables-dev-createUser: arn:aws:lambda:us-east-1:377024778620:function:function-with-environment-variables-dev-createUser
+  createUser: function-with-environment-variables-dev-createUser (1.1 kB)
+  resetPassword: function-with-environment-variables-dev-resetPassword (1.1 kB)
 ```
 
 ## Usage

@@ -1,7 +1,7 @@
 <!--
 title: 'Ruby LINE bot'
 description: 'This example shows you how to create a LINE bot using Ruby.'
-framework: v1
+framework: v4
 platform: AWS
 language: Ruby
 priority: 10
@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/1446195?v=4&s=140'
 
 # AWS-ruby-line-echo-bot
 
-Follow this [project](https://github.com/serverless/examples/tree/master/aws-python-line-echo-bot),
+Follow this [project](https://github.com/serverless/examples/tree/v4/aws-python-line-echo-bot),
 
 I use my first language(ruby) to build this on serverless,
 
@@ -38,11 +38,11 @@ export AWS_ACCESS_KEY_ID=<your-key-here>
 export AWS_SECRET_ACCESS_KEY=<your-secret-key-here>
 ```
 
-3. Insert you line bot secret & key
+3. Set your LINE bot channel secret & access token as environment variables before deploying
 
-```python=
-config.channel_secret = "YOUR_LINE_CHANNEL_SECRET"
-config.channel_token = "YOUR_LINE_CHANNEL_TOKEN"
+```bash=
+export LINE_CHANNEL_SECRET=<your-channel-secret-here>
+export LINE_CHANNEL_ACCESS_TOKEN=<your-channel-access-token-here>
 ```
 
 4. Deploy the webhook function
@@ -52,8 +52,17 @@ npm install
 serverless deploy
 ```
 
+5. Register the deployed `webhook` endpoint URL as your LINE bot's webhook URL in the [LINE Developers console](https://developers.line.biz/console/), then send it a message.
+
 Now you can test your chatbot, have fun!
 ![Echo bot](https://i.imgur.com/ekiLRHS.png)
+
+## Implementation notes
+
+The handler uses `line-bot-api` v2's `Line::Bot::V2::WebhookParser` to validate the `X-Line-Signature`
+header on every incoming request before processing it, and replies through
+`Line::Bot::V2::MessagingApi::ApiClient`. See the [gem's README](https://github.com/line/line-bot-sdk-ruby)
+for the full Messaging API surface.
 
 # References
 

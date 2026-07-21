@@ -1,6 +1,4 @@
-'use strict';
-
-class Messenger {
+export default class Messenger {
   constructor(client) {
     this.client = client;
   }
@@ -21,5 +19,3 @@ class Messenger {
     return this.client.messages.create(sms);
   }
 }
-
-module.exports = Messenger;

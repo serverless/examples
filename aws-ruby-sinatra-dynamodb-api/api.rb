@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'sinatra'
-require 'sinatra/json'
 require 'aws-sdk-dynamodb'
+
+# Minimal stand-in for the `json` helper that used to come from
+# sinatra-contrib's sinatra/json extension (dropped in this example since
+# sinatra-contrib does not yet support Sinatra 4 / Rack 3).
+helpers do
+  def json(payload)
+    content_type :json
+    payload.to_json
+  end
+end
 
 client_options = if ENV['IS_OFFLINE']
                    {

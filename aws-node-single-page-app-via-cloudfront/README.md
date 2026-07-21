@@ -2,7 +2,7 @@
 title: 'AWS Single Page Application example in NodeJS'
 description: 'This example demonstrates how to setup a Single Page Application.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -18,13 +18,11 @@ To achieve these goals we use S3 in combination with CloudFront. S3 is used to s
 
 ## Prerequisite
 
-[Nodejs](https://nodejs.org/en/) (at least version 8)
+[Node.js](https://nodejs.org/en/) 24
 
-The `serverless-single-page-app-plugin` in this example requires the Serverless Framework version 1.2.0 or higher and the AWS Command Line Interface. Learn more [here](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) on how to install the AWS Command Line Interface.
+The `serverless-single-page-app-plugin` in this example requires Serverless Framework v4 and the AWS Command Line Interface. Learn more [here](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) on how to install the AWS Command Line Interface.
 
 ## Setup
-
-Replace the bucket name in `serverless.yaml` which you can find inside the `custom` section. There is a placeholder text `yourBucketName123`. This is due the fact that bucket names must be globally unique across all AWS S3 buckets.
 
 Since this plugin uses a custom Serverless plugin you need to setup the `node_modules` by running:
 
@@ -46,28 +44,13 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Packaging service…
-Serverless: Uploading CloudFormation file to S3…
-Serverless: Uploading service .zip file to S3…
-Serverless: Updating Stack…
-Serverless: Checking Stack update progress…
-...........................
-Serverless: Stack update finished…
+```
+Deploying "single-page-app-via-cloudfront7" to stage "dev" (us-east-1)
 
-Service Information
-service: serverless-simple-http-endpoint
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  None
-functions:
-  None
+✔ Service deployed to stack single-page-app-via-cloudfront7-dev (612s)
 ```
 
-After this step your S3 bucket and CloudFront distribution is setup. Now you need to upload your static file e.g. `index.html` and `app.js` to S3. You can do this by running
+After this step your S3 bucket and CloudFront distribution is setup. CloudFormation generates a unique name for the bucket, which the plugin reads from the stack outputs. Now you need to upload your static file e.g. `index.html` and `app.js` to S3. You can do this by running
 
 ```bash
 serverless syncToS3
@@ -76,12 +59,12 @@ serverless syncToS3
 The expected result should be similar to
 
 ```bash
-Serverless: upload: app/index.html to s3://yourBucketName123/index.html
-Serverless: upload: app/app.js to s3://yourBucketName123/app.js
+Serverless: upload: app/index.html to s3://<generated-bucket-name>/index.html
+Serverless: upload: app/app.js to s3://<generated-bucket-name>/app.js
 Serverless: Successfully synced to the S3 bucket
 ```
 
-Hint: The plugin is simply running the AWS CLI command: `aws S3 sync app/ s3://yourBucketName123/`
+Hint: The plugin looks up the bucket name from the stack outputs and simply runs the AWS CLI command: `aws s3 sync app/ s3://<generated-bucket-name>/`
 
 Now you just need to figure out the deployed URL. You can use the AWS Console UI or run
 

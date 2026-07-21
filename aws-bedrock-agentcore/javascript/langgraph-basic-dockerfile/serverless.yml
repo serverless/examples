@@ -5,8 +5,11 @@
 
 service: langgraph-basic-dockerfile
 
+frameworkVersion: '4'
+
 provider:
   name: aws
+  region: us-east-1
 
 ai:
   agents:

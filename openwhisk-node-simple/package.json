@@ -1,9 +1,0 @@
-{
-  "name": "openwhisk-node-simple",
-  "version": "0.1.0",
-  "description": "Simple example demonstrating OpenWhisk provider support.",
-  "dependencies": {
-    "left-pad": "^1.1.3",
-    "serverless-openwhisk": ">=0.13.0"
-  }
-}

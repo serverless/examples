@@ -1,3 +1,7 @@
+target
+bin
+bootstrap
+Cargo.lock
 .serverless
 *.pyc
 *.pyo

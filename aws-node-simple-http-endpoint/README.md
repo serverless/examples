@@ -2,7 +2,7 @@
 title: 'AWS Simple HTTP Endpoint example in NodeJS'
 description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -27,8 +27,6 @@ serverless invoke local --function currentTime
 Which should result in:
 
 ```bash
-Serverless: Your function ran successfully.
-
 {
     "statusCode": 200,
     "body": "{\"message\":\"Hello, the current time is 12:49:06 GMT+0100 (CET).\"}"
@@ -45,25 +43,14 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Packaging service…
-Serverless: Uploading CloudFormation file to S3…
-Serverless: Uploading service .zip file to S3…
-Serverless: Updating Stack…
-Serverless: Checking Stack update progress…
-...........................
-Serverless: Stack update finished…
+```
+Deploying "serverless-simple-http-endpoint" to stage "dev" (us-east-1)
 
-Service Information
-service: serverless-simple-http-endpoint
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  GET - https://2e16njizla.execute-api.us-east-1.amazonaws.com/time
+✔ Service deployed to stack serverless-simple-http-endpoint-dev (91s)
+
+endpoint: GET - https://2e16njizla.execute-api.us-east-1.amazonaws.com/time
 functions:
-  serverless-simple-http-endpoint-dev-currentTime: arn:aws:lambda:us-east-1:488110005556:function:serverless-simple-http-endpoint-dev-currentTime
+  currentTime: serverless-simple-http-endpoint-dev-currentTime (1.5 kB)
 ```
 
 ## Usage

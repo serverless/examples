@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import { SQS } from 'aws-sdk';
+import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 
-const sqs = new SQS();
+const sqs = new SQSClient({});
 
 const sender: APIGatewayProxyHandler = async (event, context) => {
   let statusCode: number = 200;
@@ -23,22 +23,24 @@ const sender: APIGatewayProxyHandler = async (event, context) => {
   const queueUrl: string = `https://sqs.${region}.amazonaws.com/${accountId}/${queueName}`
 
   try {
-    await sqs.sendMessage({
-      QueueUrl: queueUrl,
-      MessageBody: event.body,
-      MessageAttributes: {
-        AttributeNameHere: {
-          StringValue: 'Attribute Value Here',
-          DataType: 'String',
+    await sqs.send(
+      new SendMessageCommand({
+        QueueUrl: queueUrl,
+        MessageBody: event.body,
+        MessageAttributes: {
+          AttributeNameHere: {
+            StringValue: 'Attribute Value Here',
+            DataType: 'String',
+          },
         },
-      },
-    }).promise();
+      }),
+    );
 
     message = 'Message placed in the Queue!';
 
   } catch (error) {
     console.log(error);
-    message = error;
+    message = error instanceof Error ? error.message : String(error);
     statusCode = 500;
   }
 

@@ -43,7 +43,7 @@ app = BedrockAgentCoreApp()
 
 # Configuration
 AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
-MODEL_ID = os.environ.get("MODEL_ID", "us.anthropic.claude-sonnet-4-20250514-v1:0")
+MODEL_ID = os.environ.get("MODEL_ID", "global.anthropic.claude-sonnet-5")
 CUSTOM_BROWSER_ID = os.environ.get("CUSTOM_BROWSER_ID")
 RECORDINGS_BUCKET = os.environ.get("RECORDINGS_BUCKET")
 

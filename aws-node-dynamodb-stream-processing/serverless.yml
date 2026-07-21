@@ -1,0 +1,38 @@
+service: dynamodb-stream-processing
+
+frameworkVersion: '4'
+
+custom:
+  bucket: EXAMPLE
+  dynamoDBTableName: "${sls:stage}_EXAMPLE"
+  prefix: FOO
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+  stage: staging
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+          Resource: "arn:aws:s3:::${self:custom.bucket}/${self:custom.prefix}/${self:custom.dynamoDBTableName}/*"
+        - Effect: Allow
+          Action:
+            - "dynamodb:GetRecords"
+            - "dynamodb:GetShardIterator"
+            - "dynamodb:DescribeStream"
+            - "dynamodb:ListStreams"
+          Resource: "arn:aws:dynamodb:ap-southeast-1:*:table/${self:custom.dynamoDBTableName}/stream/*"
+
+functions:
+  processStream:
+    handler: handler.processStream
+    environment:
+      STAGE: "${sls:stage}"
+      BUCKET: "${self:custom.bucket}"
+      TABLE: "${self:custom.dynamoDBTableName}"
+      PREFIX: "${self:custom.prefix}"
+    timeout: 300

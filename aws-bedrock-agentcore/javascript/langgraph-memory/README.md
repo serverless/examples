@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Memory (JavaScript)
+description: LangGraph JS agent using AgentCore Memory to persist and recall conversation history.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Memory Example
 
 A LangGraph JavaScript agent with AgentCore Memory for conversation persistence.
@@ -39,4 +51,4 @@ sls remove
 
 ## Related Examples
 
-- [../python/langgraph-memory](../../python/langgraph-memory/) - Python version
+- [../python/langgraph-memory](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Python version

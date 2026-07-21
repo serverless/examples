@@ -5,7 +5,7 @@
  * - BedrockAgentCoreApp streaming via async generator (async function*)
  * - LangGraph JS stream() API with streamMode: "messages" for token-level streaming
  * - Server-Sent Events (SSE) delivery to clients
- * - Claude Sonnet 4.5 via Bedrock with simple tool integration
+ * - Claude Sonnet 5 via Bedrock with simple tool integration
  * - No Dockerfile needed - container image built automatically from source
  *
  * The process handler yields each LLM token as it is generated,
@@ -18,11 +18,13 @@ import { ChatBedrockConverse } from '@langchain/aws'
 import { tool } from '@langchain/core/tools'
 import { z } from 'zod'
 
+const MODEL_ID = process.env.MODEL_ID ?? 'global.anthropic.claude-sonnet-5'
+
 /**
- * Initialize Claude Sonnet 4.5 via US inference profile
+ * Initialize Claude Sonnet 5 via Bedrock
  */
 const model = new ChatBedrockConverse({
-  model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+  model: MODEL_ID,
   region: process.env.AWS_REGION || 'us-east-1',
 })
 

@@ -2,7 +2,7 @@
 title: 'AWS Python Rest API with Pymongo'
 description: 'AWS Python Rest API with Pymongo Example'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: python
 priority: 10

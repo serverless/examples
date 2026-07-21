@@ -1,12 +1,11 @@
-service:
-  name: aws-node-typescript-kinesis
+service: aws-node-typescript-kinesis
 
-plugins:
-  - serverless-webpack
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   iam:
     role:
       statements:

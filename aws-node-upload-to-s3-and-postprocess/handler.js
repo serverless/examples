@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.postprocess = (event) => {
+export const postprocess = async (event) => {
   event.Records.forEach((record) => {
     const filename = record.s3.object.key;
     const filesize = record.s3.object.size;

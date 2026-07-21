@@ -1,15 +1,18 @@
 service: gifmaker
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+  runtime: nodejs24.x
+  architecture: arm64
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+          Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
   mkgif:
@@ -22,6 +25,11 @@ functions:
 layers:
   ffmpeg:
     path: layer
+    compatibleRuntimes:
+      - nodejs24.x
+    compatibleArchitectures:
+      - arm64
 
 custom:
-  bucket: ${env:BUCKET, 'ffmpeg-layer-gif-maker'}
+  defaultBucket: gifmaker-${sls:stage}-${aws:accountId}
+  bucket: ${env:BUCKET, self:custom.defaultBucket}

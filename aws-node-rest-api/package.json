@@ -1,0 +1,7 @@
+{
+  "name": "aws-node-rest-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Serverless Framework Node REST API on AWS",
+  "license": "MIT"
+}

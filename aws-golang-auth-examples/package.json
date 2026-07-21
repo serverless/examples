@@ -16,6 +16,6 @@
   "author": "Sam Bryant <srbry@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "serverless": "^1.30.3"
+    "serverless": "^4.39.0"
   }
 }

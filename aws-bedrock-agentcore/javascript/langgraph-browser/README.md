@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Managed Browser (JavaScript)
+description: LangGraph JS agent using the AWS-managed AgentCore Browser tool for web navigation and screenshots.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Browser Example
 
 A LangGraph JavaScript agent with AWS-managed browser capabilities deployed to Bedrock AgentCore.
@@ -6,7 +18,7 @@ A LangGraph JavaScript agent with AWS-managed browser capabilities deployed to B
 
 - **Browser Automation**: Navigate, click, type, extract text, take screenshots
 - **LangGraph JS**: ReAct agent pattern with browser tools
-- **Claude Sonnet 4.5**: Powered by Amazon Bedrock
+- **Claude Sonnet 5**: Powered by Amazon Bedrock
 - **Minimal Configuration**: Just `ai: { agents: { browserAgent: {} } }` in `serverless.yml`
 
 ## Tools Available
@@ -51,5 +63,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-browser-custom](../langgraph-browser-custom/) - Custom browser with session recording
-- [strands-browser](../strands-browser/) - Browser with Strands Agents framework
+- [langgraph-browser-custom](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser-custom) - Custom browser with session recording
+- [strands-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/strands-browser) - Browser with Strands Agents framework

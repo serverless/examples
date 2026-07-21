@@ -2,7 +2,7 @@
 title: 'GraphQL query endpoint in NodeJS on AWS with DynamoDB'
 description: 'A single-module GraphQL endpoint with query and mutation functionality.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 1
@@ -26,16 +26,16 @@ $ npm install --save graphql
 Now we can use it in `handler.js`, where we declare a schema and then use it to serve query requests.
 ```js
 /* handler.js */
-const {
+import {
   graphql,
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLNonNull
-} = require('graphql')
+  GraphQLNonNull,
+} from 'graphql';
 
 // This method just inserts the user's first name into the greeting message.
-const getGreeting = firstName => `Hello, ${firstName}.`
+const getGreeting = firstName => `Hello, ${firstName}.`;
 
 // Here we declare the schema and resolvers for the query
 const schema = new GraphQLSchema({
@@ -49,19 +49,18 @@ const schema = new GraphQLSchema({
         // the greeting message is a string
         type: GraphQLString,
         // resolve to a greeting message
-        resolve: (parent, args) => getGreeting(args.firstName)
-      }
-    }
+        resolve: (parent, args) => getGreeting(args.firstName),
+      },
+    },
   }),
-})
+});
 
 // We want to make a GET request with ?query=<graphql query>
 // The event properties are specific to AWS. Other providers will differ.
-module.exports.query = (event, context, callback) => graphql(schema, event.queryStringParameters.query)
-  .then(
-    result => callback(null, {statusCode: 200, body: JSON.stringify(result)}),
-    err => callback(err)
-  )
+export const query = async (event) => {
+  const result = await graphql({ schema, source: event.queryStringParameters.query });
+  return { statusCode: 200, body: JSON.stringify(result) };
+};
 ```
 
 Pretty simple! To deploy it, define a service in `serverless.yml`, and set the handler to service HTTP requests.
@@ -80,29 +79,16 @@ functions:
 Now we can bring it to life:
 ```sh
 $ serverless deploy
-# Serverless: Packaging service...
-# Serverless: Excluding development dependencies...
-# Serverless: Uploading CloudFormation file to S3...
-# Serverless: Uploading artifacts...
-# Serverless: Uploading service .zip file to S3 (357.34 KB)...
-# Serverless: Validating template...
-# Serverless: Updating Stack...
-# Serverless: Checking Stack update progress...
-# ..............
-# Serverless: Stack update finished...
-# Service Information
-# service: graphql-api
-# stage: dev
-# region: us-east-1
-# stack: graphql-api-dev
-# api keys:
-#   None
+# Deploying "graphql-api" to stage "dev" (us-east-1)
+#
+# ✔ Service deployed to stack graphql-api-dev (45s)
+#
 # endpoints:
-#   GET - https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query
+#   GET - https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/query
 # functions:
-#   query: graphql-api-dev-query
+#   query: graphql-api-dev-query (1.1 kB)
 
-$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
+$ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/query' --data-urlencode 'query={greeting(firstName: "Jeremy")}'
 # {"data":{"greeting":"Hello, Jeremy."}}
 ```
 
@@ -114,15 +100,18 @@ Let's start by adding a database to the resource definitions in `serverless.yml`
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
-    DYNAMODB_TABLE: ${self:service}-${self:provider.stage}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:GetItem
-        - dynamodb:UpdateItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+            - dynamodb:UpdateItem
+          Resource: !GetAtt NicknamesTable.Arn
 
 resources:
   Resources:
@@ -135,9 +124,7 @@ resources:
         KeySchema:
           - AttributeName: firstName
             KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+        BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
 ```
 
@@ -147,57 +134,47 @@ We need to run `serverless deploy` again to update the changes made in `serverle
 $ serverless deploy
 ```
 
-To use it we need the [aws-sdk](https://www.npmjs.com/package/aws-sdk), In this example, I use the SDK's vanilla DocumentClient to access DynamoDB records.
+To use it we need the [`@aws-sdk/client-dynamodb`](https://www.npmjs.com/package/@aws-sdk/client-dynamodb) and [`@aws-sdk/lib-dynamodb`](https://www.npmjs.com/package/@aws-sdk/lib-dynamodb) packages (AWS SDK for JavaScript v3).
 ```sh
-$ npm install --save aws-sdk
+$ npm install --save @aws-sdk/client-dynamodb @aws-sdk/lib-dynamodb
 ```
 
 Include these in our handler, and then we can get to work.
 ```js
 // add to handler.js
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+
+const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 ```
 
-Before, we defined a method that just returned a string value for the greeting message. However, the GraphQL library can also use Promises as resolvers. Since the DocumentClient uses a callback pattern, we'll wrap these in promises and use the DynamoDB `get` method to check the database for a nickname for the user.
+Before, we defined a method that just returned a string value for the greeting message. However, the GraphQL library can also use Promises as resolvers, so we `await` the DynamoDB `GetCommand` to check the database for a nickname for the user.
 
 ```js
 // add to handler.js
-const promisify = foo => new Promise((resolve, reject) => {
-  foo((error, result) => {
-    if(error) {
-      reject(error)
-    } else {
-      resolve(result)
-    }
-  })
-})
 
 // replace previous implementation of getGreeting
-const getGreeting = firstName => promisify(callback =>
-  dynamoDb.get({
+const getGreeting = async (firstName) => {
+  const result = await client.send(new GetCommand({
     TableName: process.env.DYNAMODB_TABLE,
     Key: { firstName },
-  }, callback))
-  .then(result => {
-    if(!result.Item) {
-      return firstName
-    }
-    return result.Item.nickname
-  })
-  .then(name => `Hello, ${name}.`)
+  }));
+  const name = result.Item ? result.Item.nickname : firstName;
+  return `Hello, ${name}.`;
+};
 
-  // add method for updates
-const changeNickname = (firstName, nickname) => promisify(callback =>
-  dynamoDb.update({
+// add method for updates
+const changeNickname = async (firstName, nickname) => {
+  await client.send(new UpdateCommand({
     TableName: process.env.DYNAMODB_TABLE,
     Key: { firstName },
     UpdateExpression: 'SET nickname = :nickname',
     ExpressionAttributeValues: {
-      ':nickname': nickname
-    }
-  }, callback))
-  .then(() => nickname)
+      ':nickname': nickname,
+    },
+  }));
+  return nickname;
+};
 ```
 
 You can see here that we added a method `changeNickname`, but the GraphQL API is not yet using it. We need to declare a mutation that the front-end can use to perform updates. We previously only added a `query` declaration to the schema. Now we need a `mutation` as well.
@@ -241,4 +218,4 @@ $ curl -G 'https://9qdmq5nvql.execute-api.us-east-1.amazonaws.com/dev/query' --d
 
 The API will now call anyone named "Jeremy" by the nickname "Jer". This kind of separation of concerns lets you build front-ends and services that offload logic into back-ends that use abstract data access and processing behind one, strongly typed, validated, uniform contract that comes with rich versioning and deprecation strategies.
 
-To deploy this service yourself, download the [source code](#todo) and deploy it with the Serverless Framework. Happy building!
+To deploy this service yourself, clone this repository and deploy it with the Serverless Framework. Happy building!

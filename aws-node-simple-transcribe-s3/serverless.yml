@@ -1,11 +1,14 @@
 service: aws-node-simple-transcribe-s3
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   environment:
-    S3_AUDIO_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-records
-    S3_TRANSCRIPTION_BUCKET: ${self:service}-${opt:stage, self:provider.stage}-transcriptions
+    S3_AUDIO_BUCKET: ${self:service}-${sls:stage}-records
+    S3_TRANSCRIPTION_BUCKET: ${self:service}-${sls:stage}-transcriptions
     LANGUAGE_CODE: en-US
   iam:
     role:

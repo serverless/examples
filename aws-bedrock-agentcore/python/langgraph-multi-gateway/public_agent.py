@@ -23,8 +23,11 @@ from langchain_mcp_adapters.tools import load_mcp_tools
 
 app = BedrockAgentCoreApp()
 
+# Bedrock model ID; override with the MODEL_ID env var
+MODEL_ID = os.environ.get("MODEL_ID", "global.anthropic.claude-sonnet-5")
+
 llm = init_chat_model(
-    "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    MODEL_ID,
     model_provider="bedrock_converse",
 )
 

@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: Strands Agent with Browser (JavaScript)
+description: Strands Agents JavaScript agent using AgentCore Browser tools for web automation.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # Strands Browser Example
 
 A Strands Agents JavaScript agent with AgentCore Browser for web automation.
@@ -41,5 +53,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-browser](../langgraph-browser/) - LangGraph version with manual tool wrappers
-- [langgraph-browser-custom](../langgraph-browser-custom/) - Custom browser with session recording
+- [langgraph-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser) - LangGraph version with manual tool wrappers
+- [langgraph-browser-custom](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser-custom) - Custom browser with session recording

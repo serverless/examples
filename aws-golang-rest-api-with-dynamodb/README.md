@@ -1,7 +1,7 @@
 <!--
 title: 'aws-golang-rest-api-with-dynamodb'
 description: 'Boilerplate code for Golang CRUD Operations'
-framework: v1
+framework: v4
 platform: AWS
 language: Go
 priority: 10
@@ -11,9 +11,13 @@ authorAvatar: 'https://avatars.githubusercontent.com/u/14845943?s=400&u=6d79e8f0
 -->
 # aws-golang-rest-api-with-dynamodb
 
+Requires Go 1.25+. Functions are compiled to `provided.al2023` (arm64) custom-runtime bootstraps
+and use the AWS SDK for Go v2.
+
 Build & Deploy
 ```
-make deploy
+make build
+serverless deploy
 ```
 
 # CRUD Operations

@@ -2,7 +2,7 @@
 title: 'AWS Serving Dynamic HTML via API Gateway example in NodeJS'
 description: 'This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -24,15 +24,13 @@ This example illustrates how to hookup an API Gateway endpoint to a Lambda funct
 Instead of returning the default `json` from a request, you can display custom dynamic HTML by setting the `Content-Type` header to `text/html`.
 
 ```js
-const response = {
+return {
   statusCode: 200,
   headers: {
     'Content-Type': 'text/html',
   },
   body: html,
 };
-// callback will send HTML back
-callback(null, response);
 ```
 
 ## Deploy
@@ -45,29 +43,14 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-.....
-Serverless: Stack create finished...
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (1.01 KB)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-...........................
-Serverless: Stack update finished...
+```
+Deploying "dynamic-html-endpoint" to stage "dev" (us-east-1)
 
-Service Information
-service: serve-dynamic-html-via-http-endpoint
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  GET - https://nzkl1kas89.execute-api.us-east-1.amazonaws.com/dev/landing-page
+✔ Service deployed to stack dynamic-html-endpoint-dev (91s)
+
+endpoint: GET - https://nzkl1kas89.execute-api.us-east-1.amazonaws.com/dev/landing-page
 functions:
-  serve-dynamic-html-via-http-endpoint-dev-landingPage: arn:aws:lambda:us-east-1:377024778620:function:serve-dynamic-html-via-http-endpoint-dev-landingPage
+  landingPage: dynamic-html-endpoint-dev-landingPage (1.1 kB)
 ```
 
 ## Usage
@@ -102,4 +85,4 @@ To greet a specific person, provide the query parameter with the name of that pe
 
 ## Scaling
 
-By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
+By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 1000. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).

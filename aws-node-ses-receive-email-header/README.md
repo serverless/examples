@@ -2,7 +2,7 @@
 title: 'AWS SES receive an email, trigger a lambda function to process header.'
 description: 'This example shows how to process receiving email header, and trigger a lambda function.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -36,28 +36,13 @@ serverless deploy
 The output should look similar to:
 
 ```
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service .zip file to S3 (2.69 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-........................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-ses-receive-email-header
-stage: dev
-region: eu-west-1
-stack: aws-node-ses-receive-email-header-dev
-api keys:
-  None
-endpoints:
-  None
-functions:
-  processheader: aws-node-ses-receive-email-header-dev-processheader
+Deploying aws-node-ses-receive-email-header to stage dev (eu-west-1)
 
+✔ Service deployed to stack aws-node-ses-receive-email-header-dev (35s)
+
+functions:
+  processheader: aws-node-ses-receive-email-header-dev-processheader (1.0 kB)
+  processacceptreject: aws-node-ses-receive-email-header-dev-processacceptreject (1.0 kB)
 ```
 
 ## Setup SNS Email Receiving Rule for process header

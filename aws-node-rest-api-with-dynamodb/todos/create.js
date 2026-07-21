@@ -1,52 +1,22 @@
-'use strict';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { randomUUID } from 'node:crypto';
 
-const uuid = require('uuid');
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
-module.exports.create = (event, context, callback) => {
-  const timestamp = new Date().getTime();
-  const data = JSON.parse(event.body);
+export const create = async (event) => {
+  const data = JSON.parse(event.body ?? '{}');
   if (typeof data.text !== 'string') {
-    console.error('Validation Failed');
-    callback(null, {
-      statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t create the todo item.',
-    });
-    return;
+    return { statusCode: 400, body: JSON.stringify({ error: '"text" must be a string' }) };
   }
-
-  const params = {
-    TableName: process.env.DYNAMODB_TABLE,
-    Item: {
-      id: uuid.v1(),
-      text: data.text,
-      checked: false,
-      createdAt: timestamp,
-      updatedAt: timestamp,
-    },
+  const timestamp = Date.now();
+  const item = {
+    id: randomUUID(),
+    text: data.text,
+    checked: false,
+    createdAt: timestamp,
+    updatedAt: timestamp,
   };
-
-  // write the todo to the database
-  dynamoDb.put(params, (error) => {
-    // handle potential errors
-    if (error) {
-      console.error(error);
-      callback(null, {
-        statusCode: error.statusCode || 501,
-        headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t create the todo item.',
-      });
-      return;
-    }
-
-    // create a response
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify(params.Item),
-    };
-    callback(null, response);
-  });
+  await client.send(new PutCommand({ TableName: process.env.DYNAMODB_TABLE, Item: item }));
+  return { statusCode: 201, body: JSON.stringify(item) };
 };

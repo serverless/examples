@@ -3,8 +3,5 @@
   "version": "1.0.0",
   "description": "Serverless CRUD service exposing an HTTP API",
   "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "serverless-python-requirements": "^5"
-  }
+  "license": "MIT"
 }

@@ -25,7 +25,7 @@ def create(event, context):
     #                                    'X-Forwarded-Proto': 'https'}, 'queryStringParameters': None,
     #                        'pathParameters': None, 'stageVariables': None,
     #                        'requestContext': {'requestTime': '26/Nov/2017:20:48:38 +0000', 'path': '/dev/asset',
-    #                                           'accountId': '818300131735', 'protocol': 'HTTP/1.1',
+    #                                           'accountId': '123456789012', 'protocol': 'HTTP/1.1',
     #                                           'resourceId': 'wpjmgf', 'stage': 'dev', 'requestTimeEpoch': 1511729318077,
     #                                           'requestId': '2d827060-d2eb-11e7-96f5-9b58ecc94e3f',
     #                                           'identity': {'cognitoIdentityPoolId': None, 'accountId': None,

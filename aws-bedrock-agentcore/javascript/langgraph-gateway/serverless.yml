@@ -1,5 +1,7 @@
 service: langgraph-gateway
 
+frameworkVersion: '4'
+
 provider:
   name: aws
   region: us-east-1
@@ -7,7 +9,7 @@ provider:
 functions:
   calculatorFunction:
     handler: handlers/calculator.handler
-    runtime: nodejs20.x
+    runtime: nodejs24.x
 
 ai:
   # Define tools that will be available to the agent via Gateway

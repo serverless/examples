@@ -1,15 +1,18 @@
-const puppeteer = require('puppeteer');
-const { getChrome } = require('./chrome-script');
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
 
-module.exports.hello = async (event) => {
+export const hello = async (event) => {
   const { url } = event.queryStringParameters;
-  const chrome = await getChrome();
-  const browser = await puppeteer.connect({
-    browserWSEndpoint: chrome.endpoint,
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
   });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle0' });
   const content = await page.evaluate(() => document.body.innerHTML);
+  await browser.close();
   return {
     statusCode: 200,
     body: JSON.stringify({

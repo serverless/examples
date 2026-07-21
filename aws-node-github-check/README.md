@@ -2,7 +2,7 @@
 title: Serverless Github Check
 description: The idea is to validate that all Pull Requests are related to a specific trello card.
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -34,17 +34,13 @@ serverless deploy
 After the deploy has finished, you should see something like:
 
 ```
-Service Information
-service: serverless-github-check
-stage: dev
-region: eu-west-1
-stack: serverless-github-check-dev
-api keys:
-  None
-endpoints:
-  POST - https://abcdefghij.execute-api.eu-west-1.amazonaws.com/dev/webhook
+Deploying "serverless-github-check" to stage "dev" (eu-west-1)
+
+✔ Service deployed to stack serverless-github-check-dev (38s)
+
+endpoint: POST - https://abcdefghij.execute-api.eu-west-1.amazonaws.com/dev/webhook
 functions:
-  githubCheck: serverless-github-check-dev-githubCheck
+  githubCheck: serverless-github-check-dev-githubCheck (1.3 kB)
 ```
 
 * Configure the webhook in the github repository settings. This [link](https://developer.github.com/webhooks/creating/#setting-up-a-webhook) can help you.

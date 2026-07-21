@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: Strands Agent with Browser (Python)
+description: Strands Agents agent using AgentCore Browser for web automation and research tasks.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # Strands Browser Example
 
 This example demonstrates using AgentCore Browser with the Strands Agents framework for web automation and research tasks.
@@ -68,10 +80,10 @@ from strands_tools.browser import AgentCoreBrowser
 # Initialize browser (uses AWS-managed infrastructure)
 browser_tool = AgentCoreBrowser(region="us-east-1")
 
-# Create agent with browser capability
+# Create agent with browser capability (default: global.anthropic.claude-sonnet-5, override via MODEL_ID)
 agent = Agent(
     tools=[browser_tool.browser],
-    model="us.anthropic.claude-sonnet-4-20250514-v1:0"
+    model=MODEL_ID
 )
 ```
 
@@ -116,7 +128,7 @@ ai:
     browserAgent: {}
 ```
 
-See the [Browser documentation](../../../../../../../../../docs/sf/providers/aws/guide/agents/browser.md) for full configuration options.
+See the [Browser documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/browser) for full configuration options.
 
 ## Cleanup
 
@@ -126,6 +138,6 @@ serverless remove
 
 ## Next Steps
 
-- [Browser Documentation](../../../../../../../../../docs/sf/providers/aws/guide/agents/browser.md) - Full configuration reference
-- [Memory Example](../langgraph-memory/) - Add conversation persistence
-- [Gateway Example](../langgraph-gateway/) - Add custom Lambda tools
+- [Browser Documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/browser) - Full configuration reference
+- [Memory Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence
+- [Gateway Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Add custom Lambda tools

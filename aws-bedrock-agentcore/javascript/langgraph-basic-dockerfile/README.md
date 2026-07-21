@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Basic Agent, Dockerfile Deploy (JavaScript)
+description: Minimal LangGraph JS agent deployed to AWS Bedrock AgentCore via a custom Dockerfile build.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph JS Minimal Example
 
 A minimal LangGraph JavaScript agent deployed to AWS Bedrock AgentCore using Serverless Framework.
@@ -5,7 +17,7 @@ A minimal LangGraph JavaScript agent deployed to AWS Bedrock AgentCore using Ser
 ## Features
 
 - **LangGraph JS**: ReAct agent pattern with tool calling
-- **Claude Sonnet 4.5**: Powered by Amazon Bedrock
+- **Claude Sonnet 5**: Powered by Amazon Bedrock
 - **Simple Tools**: Calculator operations and time queries
 - **Docker Deployment**: Auto-detected Dockerfile for easy deployment
 
@@ -168,12 +180,13 @@ const tools = [getCurrentTime, add, multiply, divide, myNewTool]
 
 ### Changing the Model
 
-Edit the model configuration in `agent.js`:
+The default model is `global.anthropic.claude-sonnet-5`, read from the `MODEL_ID` environment variable in `agent.js`. Override it via the `MODEL_ID` env var, or edit the fallback in `agent.js`:
 
 ```javascript
+const MODEL_ID = process.env.MODEL_ID ?? 'global.anthropic.claude-sonnet-5'
+
 const model = new ChatBedrockConverse({
-  // Claude Sonnet 4.5
-  model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+  model: MODEL_ID,
   // Or use other models:
   // model: 'us.amazon.nova-2-lite-v1:0',
   // model: 'us.meta.llama3-70b-instruct-v1:0',
@@ -183,5 +196,5 @@ const model = new ChatBedrockConverse({
 
 ## Related Examples
 
-- [langgraph-basic-docker](../../python/langgraph-basic-docker/) - Python version
-- [langgraph-gateway](../../python/langgraph-gateway/) - Lambda functions as tools
+- [langgraph-basic-docker](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-basic-docker) - Python version
+- [langgraph-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Lambda functions as tools

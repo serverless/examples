@@ -1,26 +1,37 @@
-
 service: aws-custom-authorizer-auth0
 
+frameworkVersion: '4'
+
 package:
-  exclude:
-    - ./**
-  include:
-    - vendored/**
-    - lambda_handlers.py
+  patterns:
+    - '!node_modules/**'
+    - '!frontend/**'
+    - '!Makefile'
+    - '!secrets.example.json'
+    - '!public_key-example'
+
+custom:
+  # Built-in python requirements packaging activates on this key.
+  # pipCmdExtraArgs forces pip to fetch Lambda-compatible (manylinux) wheels
+  # for arm64, regardless of the host OS/architecture running the deploy.
+  pythonRequirements:
+    pipCmdExtraArgs:
+      - --platform
+      - manylinux2014_aarch64
+      - '--only-binary=:all:'
 
 provider:
   name: aws
-  runtime: python3.6
+  runtime: python3.14
+  architecture: arm64
   region: us-east-1
   environment:
-    AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
-    AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key)}
-    PYTHONPATH: "/var/runtime:/var/task/vendored"
+    AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID, 'REPLACE-ME'}
+    AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key), 'REPLACE-ME'}
 
 functions:
   auth:
     handler: lambda_handlers.auth
-    cors: true
   publicEndpoint:
     handler: lambda_handlers.public_endpoint
     events:

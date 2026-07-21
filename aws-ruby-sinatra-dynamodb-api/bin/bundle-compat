@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Compatibility shim for the serverless-rack plugin's bundler invocation.
+#
+# serverless-rack still shells out to
+# `bundle install --path vendor/bundle --without development`, but both the
+# `--path` and `--without` flags were removed in modern Bundler (the version
+# bundled with the ruby4.0 Lambda runtime no longer supports them) in favor
+# of `bundle config set --local path/without <value>`. This wrapper
+# translates the old invocation into the new one and otherwise passes
+# everything straight through to the real `bundle` executable (used, for
+# example, when the plugin runs `bundle exec rackup` for local development).
+#
+# Configured via `custom.rack.bundlerBin` / `custom.rack.bundlerArgs` in
+# serverless.yml.
+set -euo pipefail
+
+if [ "${1:-}" = "install" ]; then
+  shift
+  path=""
+  without=""
+  rest=()
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --path)
+        path="$2"
+        shift 2
+        ;;
+      --path=*)
+        path="${1#--path=}"
+        shift
+        ;;
+      --without)
+        without="$2"
+        shift 2
+        ;;
+      --without=*)
+        without="${1#--without=}"
+        shift
+        ;;
+      *)
+        rest+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [ -n "$path" ]; then
+    bundle config set --local path "$path"
+  fi
+
+  if [ -n "$without" ]; then
+    bundle config set --local without "$without"
+  fi
+
+  if [ "${#rest[@]}" -gt 0 ]; then
+    exec bundle install "${rest[@]}"
+  else
+    exec bundle install
+  fi
+else
+  exec bundle "$@"
+fi

@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: Standalone MCP Server (JavaScript)
+description: Standalone JavaScript MCP server deployed to AWS Bedrock AgentCore Runtime, consumable by any MCP client.
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # MCP Server Example
 
 A JavaScript MCP server deployed to AWS Bedrock AgentCore Runtime. Exposes simple tools via the [Model Context Protocol](https://modelcontextprotocol.io/) that can be consumed by any MCP client (Cursor, Claude Desktop, Amazon Q CLI, etc.).

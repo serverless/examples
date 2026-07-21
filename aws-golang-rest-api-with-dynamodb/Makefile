@@ -1,21 +1,41 @@
-.PHONY: build clean deploy
+.PHONY: build clean deploy format
 
-build:
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/create todos/create.go
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/delete todos/delete.go
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/get todos/get.go
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/list todos/list.go
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/update todos/update.go
+build: bin/create.zip bin/delete.zip bin/get.zip bin/list.zip bin/update.zip
+
+bin/create.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./todos/create
+	zip -j bin/create.zip bootstrap && rm bootstrap
+
+bin/delete.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./todos/delete
+	zip -j bin/delete.zip bootstrap && rm bootstrap
+
+bin/get.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./todos/get
+	zip -j bin/get.zip bootstrap && rm bootstrap
+
+bin/list.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./todos/list
+	zip -j bin/list.zip bootstrap && rm bootstrap
+
+bin/update.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./todos/update
+	zip -j bin/update.zip bootstrap && rm bootstrap
 
 clean:
-	rm -rf ./bin ./vendor Gopkg.lock
+	rm -rf bin bootstrap
 
-deploy: clean build
-	sls deploy --verbose
+deploy: build
+	serverless deploy --verbose
 
-format: 
-	gofmt -w todos/create.go
-	gofmt -w todos/delete.go
-	gofmt -w todos/get.go
-	gofmt -w todos/list.go
-	gofmt -w todos/update.go
+format:
+	gofmt -w todos/create/main.go
+	gofmt -w todos/delete/main.go
+	gofmt -w todos/get/main.go
+	gofmt -w todos/list/main.go
+	gofmt -w todos/update/main.go

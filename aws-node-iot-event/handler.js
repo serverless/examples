@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.log = (event, context, callback) => {
+export const log = async (event) => {
   console.log(event);
-  callback(null, {});
+  return {};
 };

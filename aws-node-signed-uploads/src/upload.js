@@ -1,13 +1,14 @@
-import AWS from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-export const handler = async event => {
+export const handler = async (event) => {
   const { REGION: region, BUCKET: bucket } = process.env;
 
   if (!region || !bucket) {
     throw new Error('REGION and BUCKET environment variables are required!');
   }
 
-  const S3 = new AWS.S3({ signatureVersion: 'v4', region });
+  const s3 = new S3Client({ region });
 
   const file =
     event.headers && event.headers['x-amz-meta-filekey']
@@ -23,14 +24,10 @@ export const handler = async event => {
     };
   }
 
-  const params = {
-    Bucket: bucket,
-    Key: file,
-    Expires: 30,
-  };
+  const command = new PutObjectCommand({ Bucket: bucket, Key: file });
 
   try {
-    const url = await S3.getSignedUrl('putObject', params);
+    const url = await getSignedUrl(s3, command, { expiresIn: 30 });
 
     return {
       statusCode: 200,
@@ -43,7 +40,7 @@ export const handler = async event => {
   } catch (error) {
     return {
       statusCode: 400,
-      body: JSON.stringify(error),
+      body: JSON.stringify({ message: error.message }),
     };
   }
 };

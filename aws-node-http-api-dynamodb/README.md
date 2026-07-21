@@ -2,7 +2,7 @@
 title: 'AWS Serverless HTTP API example in NodeJS'
 description: 'This example demonstrates how to setup an HTTP API allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/ozbillwang'
@@ -15,7 +15,7 @@ This example demonstrates how to setup a [RESTful Web Services](https://en.wikip
 
 ## Structure
 
-This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.js`. In each of these files there is exactly one function which is directly attached to `module.exports`.
+This service has a separate directory for all the todo operations. For each operation exactly one file exists e.g. `todos/delete.js`. In each of these files there is exactly one function which is directly exported.
 
 The idea behind the `todos` directory is that in case you want to create a service containing multiple resources e.g. users, notes, comments you could do so in the same service. While this is certainly possible you might consider creating a separate service for each resource. It depends on the use-case and your preference.
 
@@ -40,20 +40,11 @@ serverless deploy
 
 The expected result should be similar to:
 
-```bash
-Serverless: Packaging service…
-Serverless: Uploading CloudFormation file to S3…
-Serverless: Uploading service .zip file to S3…
-Serverless: Updating Stack…
-Serverless: Checking Stack update progress…
-Serverless: Stack update finished…
+```
+Deploying "serverless-http-api-dynamodb" to stage "dev" (us-east-1)
 
-Service Information
-service: serverless-http-api-dynamodb
-stage: dev
-region: us-east-1
-api keys:
-  None
+✔ Service deployed to stack serverless-http-api-dynamodb-dev (91s)
+
 endpoints:
   POST - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/todos
   GET - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/todos
@@ -61,11 +52,11 @@ endpoints:
   PUT - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/todos/{id}
   DELETE - https://45wf34z5yf.execute-api.us-east-1.amazonaws.com/todos/{id}
 functions:
-  serverless-http-api-dynamodb-dev-update: arn:aws:lambda:us-east-1:488110005556:function:serverless-http-api-dynamodb-dev-update
-  serverless-http-api-dynamodb-dev-get: arn:aws:lambda:us-east-1:488110005556:function:serverless-http-api-dynamodb-dev-get
-  serverless-http-api-dynamodb-dev-list: arn:aws:lambda:us-east-1:488110005556:function:serverless-http-api-dynamodb-dev-list
-  serverless-http-api-dynamodb-dev-create: arn:aws:lambda:us-east-1:488110005556:function:serverless-http-api-dynamodb-dev-create
-  serverless-http-api-dynamodb-dev-delete: arn:aws:lambda:us-east-1:488110005556:function:serverless-http-api-dynamodb-dev-delete
+  create: serverless-http-api-dynamodb-dev-create (1.2 kB)
+  list: serverless-http-api-dynamodb-dev-list (1.2 kB)
+  get: serverless-http-api-dynamodb-dev-get (1.2 kB)
+  update: serverless-http-api-dynamodb-dev-update (1.2 kB)
+  delete: serverless-http-api-dynamodb-dev-delete (1.2 kB)
 ```
 
 ## Usage
@@ -80,7 +71,7 @@ curl -X POST https://XXXXXXX.execute-api.us-east-1.amazonaws.com/todos --data '{
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+{"id":"3ac1f668-8b45-4b1a-9c1e-1e2f6f9d8c2a","text":"Learn Serverless","checked":false,"createdAt":1479138570824,"updatedAt":1479138570824}
 ```
 
 ### List all Todos
@@ -91,7 +82,7 @@ curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/todos
 
 Example output:
 ```bash
-[{"text":"Deploy my first service","id":"ac90feaa11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"206793aa11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]%
+[{"text":"Deploy my first service","id":"ac90feaa11e6-9ede-afdfa051af86","checked":true,"updatedAt":1479139961304},{"text":"Learn Serverless","id":"206793aa11e6-9ede-afdfa051af86","createdAt":1479139943241,"checked":false,"updatedAt":1479139943241}]
 ```
 
 ### Get one Todo
@@ -103,7 +94,7 @@ curl https://XXXXXXX.execute-api.us-east-1.amazonaws.com/todos/<id>
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}%
+{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":false,"updatedAt":1479138570824}
 ```
 
 ### Update a Todo
@@ -115,7 +106,7 @@ curl -X PUT https://XXXXXXX.execute-api.us-east-1.amazonaws.com/todos/<id> --dat
 
 Example Result:
 ```bash
-{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}%
+{"text":"Learn Serverless","id":"ee6490d0-aa11e6-9ede-afdfa051af86","createdAt":1479138570824,"checked":true,"updatedAt":1479138570824}
 ```
 
 ### Delete a Todo
@@ -131,18 +122,8 @@ No output
 
 ### AWS Lambda
 
-By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
+By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 1000. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
 
 ### DynamoDB
 
-When you create a table, you specify how much provisioned throughput capacity you want to reserve for reads and writes. DynamoDB will reserve the necessary resources to meet your throughput needs while ensuring consistent, low-latency performance. You can change the provisioned throughput and increasing or decreasing capacity as needed.
-
-This is can be done via settings in the `serverless.yml`.
-
-```yaml
-  ProvisionedThroughput:
-    ReadCapacityUnits: 1
-    WriteCapacityUnits: 1
-```
-
-In case you expect a lot of traffic fluctuation we recommend to checkout this guide on how to auto scale DynamoDB [https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/](https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/)
+This table is created with `BillingMode: PAY_PER_REQUEST`, so you don't need to manage read/write capacity units — DynamoDB scales automatically with your traffic and you only pay for what you use.

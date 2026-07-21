@@ -1,15 +1,14 @@
-.PHONY: build clean deploy gomodgen
+.PHONY: build clean deploy
 
-build: gomodgen
-	export GO111MODULE=on
-	env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/replicator src/main.go
+build: bin/replicate.zip
+
+bin/replicate.zip:
+	mkdir -p bin
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -tags lambda.norpc -o bootstrap ./src
+	zip -j bin/replicate.zip bootstrap && rm bootstrap
 
 clean:
-	rm -rf ./bin ./vendor Gopkg.lock
+	rm -rf bin bootstrap
 
-deploy: clean build
-	sls deploy --verbose
-
-gomodgen:
-	chmod u+x gomod.sh
-	./gomod.sh
+deploy: build
+	serverless deploy --verbose

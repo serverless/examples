@@ -11,7 +11,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler.handler
-      Runtime: nodejs20.x
+      Runtime: nodejs24.x
       Environment:
         Variables:
           # We are using the output of the shared resources CloudFormation template
@@ -19,7 +19,7 @@ Resources:
           TABLE_NAME: ${param:tableName}
           DOMAIN: ${param:domain}
       Architectures:
-        - x86_64
+        - arm64
       Events:
         Api:
           Type: HttpApi

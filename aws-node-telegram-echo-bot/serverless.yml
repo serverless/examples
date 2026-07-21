@@ -1,8 +1,13 @@
 service: aws-node-telegram-echo-bot
 
+frameworkVersion: '4'
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
+  environment:
+    TELEGRAM_BOT_TOKEN: YOUR_API_TOKEN_HERE
 
 functions:
   webhook:

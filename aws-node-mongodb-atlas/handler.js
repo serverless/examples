@@ -1,82 +1,58 @@
 // handler.js
-'use strict';
+import express from 'express';
+import serverless from 'serverless-http';
+import { MongoClient } from 'mongodb';
+import { faker } from '@faker-js/faker';
 
-const express = require('express');
-const serverless = require('serverless-http');
-const MongoClient = require('mongodb').MongoClient;
-const faker = require('faker');
+const mongoConnStr = process.env.MONGODB_URI ?? '';
 
-const mongoClusterName = '';
-const mongoUser = '';
-const mongoDbName = '';
-const mongoPass = '';
+const client = new MongoClient(mongoConnStr);
+let connectPromise;
 
-const mongoConnStr = `mongodb+srv://${mongoUser}:${mongoPass}@${mongoClusterName}-tdoka.mongodb.net/${mongoDbName}?retryWrites=true`;
-
-const getPetType = () => {
-    const msNow = Date.now();
-    if (msNow % 2 === 0) {
-        return 'cat';
-    }
-    return 'dog';
-}
-
-const getPet = () => {
-    return {
-        type: getPetType(),
-        name: faker.name.findName(),
-    };
-}
-
-const client = new MongoClient(mongoConnStr, {
-    useNewUrlParser: true,
-});
-let db;
-
-const createConn = async () => {
-    await client.connect();
-    db = client.db('test');
+// Cache the connection promise so warm Lambda invocations reuse the same
+// MongoDB connection instead of reconnecting on every request. On failure,
+// clear the cache so the next request retries instead of being stuck with a
+// rejected promise for the lifetime of the warm container.
+const getDb = async () => {
+  if (!connectPromise) {
+    connectPromise = client.connect().catch((err) => {
+      connectPromise = undefined;
+      throw err;
+    });
+  }
+  await connectPromise;
+  return client.db('test');
 };
 
-const performQuery = async () => {
-    const pets = db.collection('pets');
+const getPetType = () => (Date.now() % 2 === 0 ? 'cat' : 'dog');
 
-    const newPet = getPet();
+const getPet = () => ({
+  type: getPetType(),
+  name: faker.person.fullName(),
+});
 
-    return {
-        insertedPet: newPet,
-        mongoResult: await pets.insertOne(newPet),
-    };
+const performQuery = async (db) => {
+  const pets = db.collection('pets');
+  const newPet = getPet();
+
+  return {
+    insertedPet: newPet,
+    mongoResult: await pets.insertOne(newPet),
+  };
 };
 
 const app = express();
 
-app.get('/hello', async function (req, res) {
-    if (!client.isConnected()) {
-        // Cold start or connection timed out. Create new connection.
-        try {
-            await createConn();
-        } catch (e) {
-            res.json({
-                error: e.message,
-            });
-            return;
-        }
-    }
-
-    // Connection ready. Perform insert and return result.
-    try {
-        res.json(await performQuery());
-        return;
-    } catch (e) {
-        res.send({
-            error: e.message,
-        });
-        return;
-    }
+app.get('/hello', async (req, res) => {
+  try {
+    const db = await getDb();
+    res.json(await performQuery(db));
+  } catch (e) {
+    res.status(500).json({
+      error: e.message,
+    });
+  }
 });
 
-module.exports = {
-    app,
-    hello: serverless(app),
-};
+export { app };
+export const hello = serverless(app);

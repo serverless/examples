@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.landingPage = (event, context, callback) => {
+export const landingPage = async (event) => {
   let dynamicHtml = '<p>Hey Unknown!</p>';
   // check for GET params and use if available
   if (event.queryStringParameters && event.queryStringParameters.name) {
@@ -18,14 +16,11 @@ module.exports.landingPage = (event, context, callback) => {
     </body>
   </html>`;
 
-  const response = {
+  return {
     statusCode: 200,
     headers: {
       'Content-Type': 'text/html',
     },
     body: html,
   };
-
-  // callback is sending HTML back
-  callback(null, response);
 };

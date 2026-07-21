@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2",
-    "serverless-http": "^3.2.0"
+    "express": "^5.2.1",
+    "serverless-http": "^4.0.0"
   }
 }

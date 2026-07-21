@@ -88,14 +88,6 @@ document.getElementById('btn-public').addEventListener('click', () => {
 document.getElementById('btn-private').addEventListener('click', () => {
   // Call private API with JWT in header
   const token = localStorage.getItem('id_token');
-  /*
-   // block request from happening if no JWT token present
-   if (!token) {
-    document.getElementById('message').textContent = ''
-    document.getElementById('message').textContent =
-     'You must login to call this protected endpoint!'
-    return false
-  }*/
   // Do request to private endpoint
   fetch(PRIVATE_ENDPOINT, {
     method: 'POST',

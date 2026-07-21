@@ -2,9 +2,10 @@
   "name": "upload-to-s3-and-postprocess",
   "description": "Upload a files to S3 to trigger a lambda function.",
   "version": "1.0.0",
+  "type": "module",
   "author": "Christoph Gysin <christoph.gysin@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "crypto-js": "^4.0.0"
+    "crypto-js": "^4.2.0"
   }
 }

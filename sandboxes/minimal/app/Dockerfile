@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/node:22-slim
+FROM public.ecr.aws/docker/library/node:24-slim
 WORKDIR /app
 COPY app.js .
 EXPOSE 8080

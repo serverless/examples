@@ -1,16 +1,14 @@
 service: single-page-app-via-cloudfront7
 
-frameworkVersion: ">=1.2.0 <2.0.0"
+frameworkVersion: '4'
 
 plugins:
   - serverless-single-page-app-plugin
 
-custom:
-  s3Bucket: your-bucket-name-123
-
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
 
 resources:
   Resources:
@@ -18,7 +16,6 @@ resources:
     WebAppS3Bucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:custom.s3Bucket}
         AccessControl: Private
         PublicAccessBlockConfiguration:
           BlockPublicPolicy: false
@@ -38,14 +35,20 @@ resources:
               Principal: "*"
               Action:
               - s3:GetObject
-              Resource: arn:aws:s3:::${self:custom.s3Bucket}/*
+              Resource:
+                'Fn::Join':
+                  - ''
+                  - - 'arn:aws:s3:::'
+                    - Ref: WebAppS3Bucket
+                    - /*
     ## Specifying the CloudFront Distribution to server your Web Application
     WebAppCloudFrontDistribution:
       Type: AWS::CloudFront::Distribution
       Properties:
         DistributionConfig:
           Origins:
-            - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
+            - DomainName:
+                'Fn::GetAtt': [ WebAppS3Bucket, DomainName ]
               ## An identifier for the origin which must be unique within the distribution
               Id: WebApp
               CustomOriginConfig:
@@ -63,6 +66,12 @@ resources:
           ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
           ## The only exception are files that actually exist e.h. app.js, reset.css
           CustomErrorResponses:
+            ## This origin serves objects from the S3 REST endpoint, which returns 403
+            ## (not 404) for a key that does not exist — so a deep link like /about must
+            ## map 403 as well, otherwise SPA client-side routing 403s on refresh.
+            - ErrorCode: 403
+              ResponseCode: 200
+              ResponsePagePath: /index.html
             - ErrorCode: 404
               ResponseCode: 200
               ResponsePagePath: /index.html
@@ -98,3 +107,8 @@ resources:
     WebAppCloudFrontDistributionOutput:
       Value:
         'Fn::GetAtt': [ WebAppCloudFrontDistribution, DomainName ]
+    ## CloudFormation generates a unique bucket name for us, so we expose it as an output for the
+    ## syncToS3 / invalidateCloudFrontCache plugin commands (and for anyone using the AWS CLI directly)
+    WebAppS3BucketOutput:
+      Value:
+        Ref: WebAppS3Bucket

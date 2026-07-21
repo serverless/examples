@@ -1,12 +1,13 @@
 service: serverless-rest-api-with-dynamodb
 
-frameworkVersion: ">=2.24.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.14
+  architecture: arm64
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
   iam:
     role:
       statements:
@@ -18,7 +19,7 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
   create:

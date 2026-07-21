@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 // Set in `environment` of serverless.yml
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
@@ -23,10 +23,10 @@ const generatePolicy = (principalId, effect, resource) => {
 };
 
 // Reusable Authorizer function, set on `authorizer` field in serverless.yml
-module.exports.auth = (event, context, callback) => {
+export const auth = async (event) => {
   console.log('event', event);
   if (!event.authorizationToken) {
-    return callback('Unauthorized');
+    throw new Error('Unauthorized');
   }
 
   const tokenParts = event.authorizationToken.split(' ');
@@ -34,37 +34,38 @@ module.exports.auth = (event, context, callback) => {
 
   if (!(tokenParts[0].toLowerCase() === 'bearer' && tokenValue)) {
     // no auth token!
-    return callback('Unauthorized');
+    throw new Error('Unauthorized');
   }
   const options = {
     audience: AUTH0_CLIENT_ID,
   };
 
   try {
-    jwt.verify(tokenValue, AUTH0_CLIENT_PUBLIC_KEY, options, (verifyError, decoded) => {
-      if (verifyError) {
-        console.log('verifyError', verifyError);
-        // 401 Unauthorized
-        console.log(`Token invalid. ${verifyError}`);
-        return callback('Unauthorized');
-      }
-      // is custom authorizer function
-      console.log('valid from customAuthorizer', decoded);
-      return callback(null, generatePolicy(decoded.sub, 'Allow', event.methodArn));
+    const decoded = await new Promise((resolve, reject) => {
+      jwt.verify(tokenValue, AUTH0_CLIENT_PUBLIC_KEY, options, (verifyError, result) => {
+        if (verifyError) {
+          reject(verifyError);
+        } else {
+          resolve(result);
+        }
+      });
     });
+    // is custom authorizer function
+    console.log('valid from customAuthorizer', decoded);
+    return generatePolicy(decoded.sub, 'Allow', event.methodArn);
   } catch (err) {
-    console.log('catch error. Invalid token', err);
-    return callback('Unauthorized');
+    console.log('Token invalid.', err);
+    throw new Error('Unauthorized');
   }
 };
 
 // Public API
-module.exports.publicEndpoint = (event, context, callback) => callback(null, {
+export const publicEndpoint = async () => ({
   statusCode: 200,
   headers: {
-      /* Required for CORS support to work */
+    /* Required for CORS support to work */
     'Access-Control-Allow-Origin': '*',
-      /* Required for cookies, authorization headers with HTTPS */
+    /* Required for cookies, authorization headers with HTTPS */
     'Access-Control-Allow-Credentials': true,
   },
   body: JSON.stringify({
@@ -73,12 +74,12 @@ module.exports.publicEndpoint = (event, context, callback) => callback(null, {
 });
 
 // Private API
-module.exports.privateEndpoint = (event, context, callback) => callback(null, {
+export const privateEndpoint = async () => ({
   statusCode: 200,
   headers: {
-      /* Required for CORS support to work */
+    /* Required for CORS support to work */
     'Access-Control-Allow-Origin': '*',
-      /* Required for cookies, authorization headers with HTTPS */
+    /* Required for cookies, authorization headers with HTTPS */
     'Access-Control-Allow-Credentials': true,
   },
   body: JSON.stringify({

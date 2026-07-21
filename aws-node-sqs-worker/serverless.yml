@@ -1,20 +1,36 @@
-service: aws-node-sqs-worker
+service: sqs-worker
 frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs20.x
+  runtime: nodejs24.x
+  architecture: arm64
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: sqs:SendMessage
+          Resource: !GetAtt JobsQueue.Arn
 
 functions:
   producer:
+    handler: handler.producer
+    environment:
+      QUEUE_URL: !Ref JobsQueue
+    events:
+      - httpApi:
+          path: /produce
+          method: post
+  consumer:
     handler: handler.consumer
     events:
-      - sqs: arn:aws:sqs:${aws:region}:${aws:accountId}:MyFirstQueue
+      - sqs:
+          arn: !GetAtt JobsQueue.Arn
+          batchSize: 10
 
 resources:
   Resources:
-    JobQueue:
+    JobsQueue:
       Type: AWS::SQS::Queue
       Properties:
-        QueueName: MyFirstQueue
-
+        QueueName: ${self:service}-jobs-${sls:stage}

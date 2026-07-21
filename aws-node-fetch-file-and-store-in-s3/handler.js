@@ -1,26 +1,18 @@
-'use strict';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-const fetch = require('node-fetch');
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const s3 = new S3Client({});
 
-const s3 = new AWS.S3();
-
-module.exports.save = (event, context, callback) => {
-  fetch(event.image_url)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      return Promise.reject(new Error(
-            `Failed to fetch ${response.url}: ${response.status} ${response.statusText}`));
+export const save = async (event) => {
+  const response = await fetch(event.image_url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${response.url}: ${response.status} ${response.statusText}`);
+  }
+  const buffer = Buffer.from(await response.arrayBuffer());
+  return s3.send(
+    new PutObjectCommand({
+      Bucket: process.env.BUCKET,
+      Key: event.key,
+      Body: buffer,
     })
-    .then(response => response.buffer())
-    .then(buffer => (
-      s3.putObject({
-        Bucket: process.env.BUCKET,
-        Key: event.key,
-        Body: buffer,
-      }).promise()
-    ))
-    .then(v => callback(null, v), callback);
+  );
 };

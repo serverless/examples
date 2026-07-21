@@ -2,7 +2,7 @@
 title: 'AWS Simple HTTP Endpoint example in Python'
 description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10

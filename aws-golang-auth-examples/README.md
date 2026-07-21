@@ -1,7 +1,7 @@
 <!--
-title: .'AWS Golang Auth'
+title: 'AWS Golang Auth'
 description: 'This example shows you how to setup auth in front of a AWS Lambda function'
-framework: v1
+framework: v4
 platform: AWS
 language: Go
 priority: 10
@@ -23,3 +23,12 @@ Functions:
 I hope to add to these examples over time, if you have ideas please feel free to raise issues or pull requests.
 
 For more info on these example check out the [blog post](https://cloudnative.ly/lambdas-with-golang-a-technical-guide-6f381284897b)
+
+## Build & Deploy
+
+This example requires Go 1.25+. Functions are compiled to `provided.al2023` (arm64) custom-runtime bootstraps.
+
+```bash
+make build
+serverless deploy
+```

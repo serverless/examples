@@ -2,7 +2,7 @@
 title: 'AWS Recursive Lambda function Invocation example in NodeJS'
 description: 'This is an example of a function that will recursively call itself.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -35,19 +35,15 @@ The `sls deploy` command will give you back the function ARN (Amazon Resource Na
 The message should look something like:
 
 ```bash
-Service Information
-service: recursive-invocation-example
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  None
+Deploying recursive-invocation-example to stage dev (us-east-1)
+
+✔ Service deployed to stack recursive-invocation-example-dev (28s)
+
 functions:
-  recursive-invocation-example-dev-recursiveExample: arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample
+  recursiveExample: recursive-invocation-example-dev-recursiveExample (1.1 kB)
 ```
 
-The ARN in this example is `arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample`. If you need to retrieve this data again run the `serverless info` command.
+Run `serverless info` to retrieve the function's ARN, e.g. `arn:aws:lambda:us-east-1:123456789012:function:recursive-invocation-example-dev-recursiveExample`.
 
 #### 2. Take your newly created function's ARN and replace the custom: functionARN value `yourFunctionARN` value in `serverless.yml` with your ARN.
 
@@ -62,7 +58,7 @@ After:
 ```yml
 # in serverless.yml
 custom:
-  functionARN: arn:aws:lambda:us-east-1:488110005556:function:recursive-invocation-example-dev-recursiveExample
+  functionARN: arn:aws:lambda:us-east-1:123456789012:function:recursive-invocation-example-dev-recursiveExample
 ```
 
 #### 3. Uncomment the IAM statement in `serverless.yml`
@@ -71,12 +67,15 @@ custom:
 # in serverless.yml
 provider:
   name: aws
-  runtime: nodejs12.x
-  iamRoleStatements:
-    -  Effect: "Allow"
-       Action:
-         - "lambda:InvokeFunction"
-       Resource: ${self:custom.functionARN}
+  runtime: nodejs24.x
+  architecture: arm64
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "lambda:InvokeFunction"
+          Resource: ${self:custom.functionARN}
 ```
 
 The `custom: functionARN` value is referenced as a [serverless variable](https://serverless.com/framework/docs/providers/aws/guide/variables/) in the IAM statement the variable syntax `${self:custom.functionARN}`

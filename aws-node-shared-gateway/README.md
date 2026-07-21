@@ -2,7 +2,7 @@
 title: 'Shared AWS API Gateway with multiple Node Lambdas'
 description: 'A sample of implementing shared API gateway with multiple Node Lambdas'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10

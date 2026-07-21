@@ -1,13 +1,11 @@
 service: fetch-file-and-store-in-s3
 
-frameworkVersion: ">=2.24.0"
-
-custom:
-  bucket: <your-bucket-name>
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   stage: dev
   region: us-west-1
   iam:
@@ -17,10 +15,15 @@ provider:
           Action:
             - s3:PutObject
             - s3:PutObjectAcl
-          Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+          Resource: !Sub "${UploadBucket.Arn}/*"
 
 functions:
   save:
     handler: handler.save
     environment:
-      BUCKET: ${self:custom.bucket}
+      BUCKET: !Ref UploadBucket
+
+resources:
+  Resources:
+    UploadBucket:
+      Type: AWS::S3::Bucket

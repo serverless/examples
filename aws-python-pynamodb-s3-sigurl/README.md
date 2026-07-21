@@ -1,8 +1,8 @@
 <!--
-title: 'AWS Serverless REST API with DynamoDB store and presigned URLs example in Python 3.6.'
+title: 'AWS Serverless REST API with DynamoDB store and presigned URLs example in Python 3.14.'
 description: 'This example demonstrates how to setup a RESTful Web Service allowing you to create, list, get, update and delete Assets. DynamoDB is used to store the data.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: Python
 priority: 10
@@ -56,6 +56,12 @@ Default format uses:
 ### Notes
 Initial scaffold copied from the aws-python-rest-api-with-pynamodb example.
 
+S3 bucket names are globally unique across all AWS accounts, so the default bucket name
+(`custom.default_bucket`) is qualified with the stage and account id
+(`${self:custom.app_acronym}-${sls:stage}-${aws:accountId}`) to avoid colliding with a
+bucket already claimed in another account. Override it with `--s3_bucket <name>` if you
+need a specific bucket name.
+
 The PUT method to mark the asset as UPLOADED is somewhat redundant as the S3 event that marks uploads as RECEIVED should be sufficient for most cases.
 However the goal was to use a PUT method to mark it received, so the PUT marks a RECEIVED asset as UPLOADED.
 That said, there is no distinction between UPLOADED vs RECEIVED anywhere in the example.
@@ -82,7 +88,7 @@ The expected result should be similar to:
 ```bash
 %> sls deploy                                                                               
 Serverless: Parsing Python requirements.txt
-Serverless: Installing required Python packages for runtime python3.6...
+Serverless: Installing required Python packages for runtime python3.14...
 Serverless: Linking required Python packages...
 Serverless: Packaging service...
 Serverless: Excluding development dependencies...

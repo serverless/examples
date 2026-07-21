@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Authorize your API Gateway with either Auth0 or Cognito RS256 tokens.",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
-    "jsonwebtoken": "^7.1.9",
-    "jwk-to-pem": "^1.2.6",
-    "request": "^2.82.0"
+    "jose": "^4",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^4.1.0"
+  },
+  "overrides": {
+    "jose": "^4"
   },
   "author": "Shahzeb Khan"
 }

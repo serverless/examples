@@ -1,9 +1,12 @@
 service: websocket-authorizer-example
 
+frameworkVersion: '4'
+
 provider:
   name: aws
   stage: dev
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
 
 functions:
   connect:

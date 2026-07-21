@@ -1,13 +1,16 @@
 service: aws-node-alexa-skill
 
-frameworkVersion: ">=1.4.0 <2.0.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
 
 functions:
   luckyNumber:
     handler: handler.luckyNumber
     events:
-      - alexaSkill
+      # Empty object: any Alexa skill may invoke this function.
+      # Set `appId` to restrict invocation to a specific skill.
+      - alexaSkill: {}

@@ -2,7 +2,7 @@
 title: 'AWS Kinesis Data Streams Example (NodeJS & Typescript)'
 description: 'Produce and Consume data on a Kinesis Data Stream with Typescript.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -11,6 +11,9 @@ authorName: 'Bill Kidwell'
 authorAvatar: 'https://avatars0.githubusercontent.com/u/46457910?s=460&u=7c6d271ea7527f05e6c053cab571d32ffb3dbd38&v=4'
 -->
 # Simple Kinesis Example
+
+> Note: TypeScript is intentionally held at `5.x` — the TypeScript 7 native compiler isn't yet
+> supported by the surrounding ecosystem tooling (checked 2026-07-20).
 
 This example demonstrates how to setup a Kinesis producer and consumer to send and receive messages through a Kinesis Data Stream.
 
@@ -66,4 +69,4 @@ INFO    Kinesis Message:
 ```
 
 ## Acknowledgements
-Adapted from Miguel Frazao's [SQS Standard example](https://github.com/serverless/examples/tree/master/aws-node-typescript-sqs-standard).
+Adapted from Miguel Frazao's [SQS Standard example](https://github.com/serverless/examples/tree/v4/aws-node-typescript-sqs-standard).

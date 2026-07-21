@@ -1,21 +1,14 @@
 service: serverless-github-check
 
-plugins:
-  - serverless-webpack
-  - serverless-offline
-
-custom:
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  profile: personal
+  runtime: nodejs24.x
+  architecture: arm64
   region: eu-west-1
   environment:
-    GITHUB_TOKEN: ${ssm:githubToken}
+    GITHUB_TOKEN: ${ssm:githubToken, 'REPLACE-WITH-YOUR-GITHUB-TOKEN'}
 
 functions:
   githubCheck:

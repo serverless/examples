@@ -2,7 +2,7 @@
 title: 'AWS Simple HTTP Endpoint example in Python'
 description: 'This template demonstrates how to make a simple REST API with Python running on AWS Lambda and API Gateway using the traditional Serverless Framework.'
 layout: Doc
-framework: v2
+framework: v4
 platform: AWS
 language: python
 priority: 2
@@ -23,14 +23,12 @@ This template does not include any kind of persistence (database). For a more ad
 
 ### Deployment
 
-This example is made to work with the Serverless Framework dashboard which includes advanced features like CI/CD, monitoring, metrics, etc.
+Serverless Framework requires an account. If you haven't signed in yet, log in first, then deploy:
 
 ```
 $ serverless login
 $ serverless deploy
 ```
-
-To deploy without the dashboard you will need to remove `org` and `app` fields from the `serverless.yml`, and you won’t have to run `sls login` before deploying.
 
 After running deploy, you should see output similar to:
 

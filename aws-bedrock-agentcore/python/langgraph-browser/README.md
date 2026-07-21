@@ -1,3 +1,15 @@
+<!--
+title: Bedrock AgentCore: LangGraph Agent with Managed Browser (Python)
+description: LangGraph agent using AgentCore Browser via LangChain's browser toolkit for web automation.
+layout: Doc
+framework: v4
+platform: AWS
+language: python
+authorLink: 'https://github.com/serverless'
+authorName: 'Serverless, Inc.'
+authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
+-->
+
 # LangGraph Browser Example
 
 This example demonstrates using AgentCore Browser with LangChain/LangGraph for web automation and research tasks.
@@ -75,9 +87,9 @@ from langgraph.prebuilt import create_react_agent
 # Create toolkit
 toolkit, browser_tools = create_browser_toolkit(region="us-east-1")
 
-# Initialize chat model
+# Initialize chat model (default: global.anthropic.claude-sonnet-5, override via MODEL_ID)
 llm = init_chat_model(
-    "us.anthropic.claude-sonnet-4-20250514-v1:0",
+    MODEL_ID,
     model_provider="bedrock_converse",
 )
 
@@ -151,6 +163,6 @@ serverless remove
 
 ## Next Steps
 
-- [Gateway Example](../langgraph-gateway/) - Add custom Lambda tools
-- [Memory Example](../langgraph-memory/) - Add conversation persistence
-- [Browser Documentation](../../../../../../../../../docs/sf/providers/aws/guide/agents/browser.md) - Full configuration reference
+- [Gateway Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Add custom Lambda tools
+- [Memory Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence
+- [Browser Documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/browser) - Full configuration reference

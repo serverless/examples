@@ -1,8 +1,9 @@
+import asyncio
 import json
-import telegram
-import os
 import logging
+import os
 
+import telegram
 
 # Logging is cool!
 logger = logging.getLogger()
@@ -22,19 +23,39 @@ ERROR_RESPONSE = {
 }
 
 
-def configure_telegram():
+def get_telegram_token():
     """
-    Configures the bot with a Telegram Token.
-
-    Returns a bot instance.
+    Reads the Telegram Token from the environment.
     """
 
-    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
-    if not TELEGRAM_TOKEN:
+    telegram_token = os.environ.get('TELEGRAM_TOKEN')
+    if not telegram_token:
         logger.error('The TELEGRAM_TOKEN must be set')
         raise NotImplementedError
 
-    return telegram.Bot(TELEGRAM_TOKEN)
+    return telegram_token
+
+
+async def send_message(chat_id, text):
+    """
+    Sends a message using a short-lived Bot instance.
+
+    python-telegram-bot >= 20 is fully async, so the Bot must be used as an
+    async context manager (this takes care of opening/closing its HTTP
+    session) and every API call awaited.
+    """
+
+    async with telegram.Bot(get_telegram_token()) as bot:
+        await bot.send_message(chat_id=chat_id, text=text)
+
+
+async def configure_webhook(url):
+    """
+    Sets the bot's webhook URL using a short-lived Bot instance.
+    """
+
+    async with telegram.Bot(get_telegram_token()) as bot:
+        return await bot.set_webhook(url)
 
 
 def webhook(event, context):
@@ -42,12 +63,11 @@ def webhook(event, context):
     Runs the Telegram webhook.
     """
 
-    bot = configure_telegram()
     logger.info('Event: {}'.format(event))
 
-    if event.get('httpMethod') == 'POST' and event.get('body'): 
+    if event.get('httpMethod') == 'POST' and event.get('body'):
         logger.info('Message received')
-        update = telegram.Update.de_json(json.loads(event.get('body')), bot)
+        update = telegram.Update.de_json(json.loads(event.get('body')), None)
         chat_id = update.message.chat.id
         text = update.message.text
 
@@ -56,7 +76,7 @@ def webhook(event, context):
             You can take a look at my source code here: https://github.com/jonatasbaldin/serverless-telegram-bot.
             If you have any issues, please drop a tweet to my creator: https://twitter.com/jonatsbaldin. Happy botting!"""
 
-        bot.sendMessage(chat_id=chat_id, text=text)
+        asyncio.run(send_message(chat_id, text))
         logger.info('Message sent')
 
         return OK_RESPONSE
@@ -70,14 +90,13 @@ def set_webhook(event, context):
     """
 
     logger.info('Event: {}'.format(event))
-    bot = configure_telegram()
     url = 'https://{}/{}/'.format(
         event.get('headers').get('Host'),
         event.get('requestContext').get('stage'),
     )
-    webhook = bot.set_webhook(url)
+    webhook_set = asyncio.run(configure_webhook(url))
 
-    if webhook:
+    if webhook_set:
         return OK_RESPONSE
 
     return ERROR_RESPONSE

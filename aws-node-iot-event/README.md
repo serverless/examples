@@ -2,7 +2,7 @@
 title: 'AWS Serverless IoT Event example in NodeJS'
 description: 'This example demonstrates how to setup a AWS IoT Rule to send events to a Lambda function.'
 layout: Doc
-framework: v1
+framework: v4
 platform: AWS
 language: nodeJS
 priority: 10
@@ -30,23 +30,12 @@ serverless deploy
 The expected result should be similar to:
 
 ```bash
-Serverless: Packaging service...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading service .zip file to S3 (363 B)...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-iot-event
-stage: dev
-region: us-east-1
-api keys:
-  None
-endpoints:
-  None
+Deploying aws-node-iot-event to stage dev (us-east-1)
+
+✔ Service deployed to stack aws-node-iot-event-dev (30s)
+
 functions:
-  aws-node-iot-event-dev-log: arn:aws:lambda:us-east-1:377024778620:function:aws-node-iot-event-dev-log
+  log: aws-node-iot-event-dev-log (1.1 kB)
 ```
 
 ## Usage

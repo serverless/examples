@@ -1,7 +1,7 @@
 <!--
-title: .'AWS Simple HTTP Endpoint example in Ruby'
+title: 'AWS Simple HTTP Endpoint example in Ruby'
 description: 'This example demonstrates how to setup a simple HTTP GET endpoint. Once you fetch it, it will reply with the current time.'
-framework: v1
+framework: v4
 platform: AWS
 language: Ruby
 priority: 10
@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/1994863?v=4&s=140'
 
 # Simple HTTP Endpoint Example
 
-Inspired by the [aws-node-simple-http-endpoint](https://github.com/serverless/examples/tree/master/aws-node-simple-http-endpoint), in Ruby!
+Inspired by the [aws-node-simple-http-endpoint](https://github.com/serverless/examples/tree/v4/aws-node-simple-http-endpoint), in Ruby!
 
 ## Use Cases
 
@@ -40,16 +40,16 @@ Serverless: Checking Stack update progress...
 ...............................
 Serverless: Stack update finished...
 Service Information
-service: serverless-ruby-simple-http-endpoint
+service: ruby-http-endpoint
 stage: dev
 region: us-east-1
-stack: serverless-ruby-simple-http-endpoint-dev
+stack: ruby-http-endpoint-dev
 api keys:
   None
 endpoints:
   GET - https://spmfbzc6ja.execute-api.us-east-1.amazonaws.com/time
 functions:
-  current_time: serverless-ruby-simple-http-endpoint-dev-current_time
+  current_time: ruby-http-endpoint-dev-current_time
 layers:
   None
 Serverless: Removing old service artifacts from S3...

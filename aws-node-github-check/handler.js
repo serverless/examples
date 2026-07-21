@@ -1,18 +1,14 @@
-import { client } from 'octonode'; // eslint-disable-line import/extensions
-import { success, failure, githubSuccessPayload, githubFailurePayload } from './libs/response-lib';
-import { isAValidPullRequest, eventIsAPullRequest, updatePullRequestStatus } from './libs/github-service';
+import { success, failure, githubSuccessPayload, githubFailurePayload } from './libs/response-lib.js';
+import { isAValidPullRequest, eventIsAPullRequest, updatePullRequestStatus } from './libs/github-service.js';
 
-/* eslint-disable import/prefer-default-export */
-export async function githubCheck(event, context, callback) {
-  const githubClient = client(process.env.GITHUB_TOKEN);
-
+export async function githubCheck(event) {
   const body = JSON.parse(event.body);
-  if (!eventIsAPullRequest(body)) return callback(null, success('Event is not a Pull Request'));
+  if (!eventIsAPullRequest(body)) return success('Event is not a Pull Request');
   const payload = isAValidPullRequest(body) ? githubSuccessPayload() : githubFailurePayload();
   try {
-    await updatePullRequestStatus(githubClient, payload, body.repository, body.pull_request);
-    return callback(null, success(`Process finished with state: ${payload.state}`));
+    await updatePullRequestStatus(payload, body.repository, body.pull_request);
+    return success(`Process finished with state: ${payload.state}`);
   } catch (e) {
-    return callback(null, failure('Process finished with error'));
+    return failure('Process finished with error');
   }
 }

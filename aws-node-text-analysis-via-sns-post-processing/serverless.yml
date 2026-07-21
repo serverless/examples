@@ -1,19 +1,22 @@
-service: text-analysis-via-sns-post-processing
+service: text-analysis-sns
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs24.x
+  architecture: arm64
   region: us-east-1
   stage: dev
+  environment:
+    SNS_TOPIC_ARN: arn:aws:sns:${aws:region}:${aws:accountId}:analyzeNote
   iam:
     role:
       statements:
-        - Effect: "Allow"
-          Resource: "*"
+        - Effect: Allow
+          Resource: ${self:provider.environment.SNS_TOPIC_ARN}
           Action:
-            - "sns:*"
+            - sns:Publish
 
 functions:
   addNote:
