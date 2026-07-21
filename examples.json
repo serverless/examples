@@ -2,7 +2,7 @@
   {
     "title": "Dot Net REST API with DynamoDB",
     "name": "aws-dotnet-rest-api-with-dynamodb",
-    "description": "Setup a REST API w/ DynamoDB using Dot Net Core 2.1",
+    "description": "Setup a REST API w/ DynamoDB using .NET 10",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-dotnet-rest-api-with-dynamodb",
     "framework": "v4",
     "language": "csharp",
