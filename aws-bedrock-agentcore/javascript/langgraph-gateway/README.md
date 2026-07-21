@@ -51,5 +51,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-multi-gateway](../langgraph-multi-gateway/) - Multiple gateways with different auth
-- [../python/langgraph-gateway](../../python/langgraph-gateway/) - Python version
+- [langgraph-multi-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-multi-gateway) - Multiple gateways with different auth
+- [../python/langgraph-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Python version

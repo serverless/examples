@@ -200,7 +200,7 @@ serverless remove
 
 ## Next Steps
 
-- [Add gateway tools](../langgraph-gateway/) - Expose Lambda functions as agent tools
-- [Multiple gateways](../langgraph-multi-gateway/) - Different authorization for different tools
+- [Add gateway tools](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Expose Lambda functions as agent tools
+- [Multiple gateways](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-multi-gateway) - Different authorization for different tools
 - [Memory Documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/memory) - Full configuration reference
-- [Basic Agent](../langgraph-basic-docker/) - LangGraph without memory
+- [Basic Agent](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-basic-docker) - LangGraph without memory

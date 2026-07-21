@@ -53,5 +53,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-browser](../langgraph-browser/) - Default AWS-managed browser
-- [strands-browser](../strands-browser/) - Browser with Strands Agents framework
+- [langgraph-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser) - Default AWS-managed browser
+- [strands-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/strands-browser) - Browser with Strands Agents framework

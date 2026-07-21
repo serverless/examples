@@ -146,4 +146,4 @@ serverless remove
 
 ## Related Examples
 
-- [langgraph-code-interpreter](../langgraph-code-interpreter/) - Basic example with default interpreter (SANDBOX)
+- [langgraph-code-interpreter](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-code-interpreter) - Basic example with default interpreter (SANDBOX)

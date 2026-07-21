@@ -201,5 +201,5 @@ serverless remove
 
 ## Next Steps
 
-- [LangGraph Gateway](../langgraph-gateway/) - Basic single gateway example
-- [LangGraph Memory](../langgraph-memory/) - Add conversation persistence
+- [LangGraph Gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Basic single gateway example
+- [LangGraph Memory](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence

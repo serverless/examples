@@ -85,5 +85,5 @@ langgraph-basic/
 
 ## Related Examples
 
-- [langgraph-basic-dockerfile](../langgraph-basic-dockerfile/) - Same agent with a Dockerfile
-- [mcp-server](../mcp-server/) - JavaScript MCP server
+- [langgraph-basic-dockerfile](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-basic-dockerfile) - Same agent with a Dockerfile
+- [mcp-server](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/mcp-server) - JavaScript MCP server

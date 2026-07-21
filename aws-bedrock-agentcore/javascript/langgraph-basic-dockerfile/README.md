@@ -196,5 +196,5 @@ const model = new ChatBedrockConverse({
 
 ## Related Examples
 
-- [langgraph-basic-docker](../../python/langgraph-basic-docker/) - Python version
-- [langgraph-gateway](../../python/langgraph-gateway/) - Lambda functions as tools
+- [langgraph-basic-docker](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-basic-docker) - Python version
+- [langgraph-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Lambda functions as tools

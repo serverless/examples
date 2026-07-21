@@ -14,7 +14,7 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 A minimal LangGraph agent demonstrating core AgentCore concepts using code deployment.
 
-> **Alternative**: See [langgraph-basic-docker](../langgraph-basic-docker/) for the same agent using Docker/container deployment.
+> **Alternative**: See [langgraph-basic-docker](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-basic-docker) for the same agent using Docker/container deployment.
 
 ## What This Example Shows
 
@@ -211,5 +211,5 @@ serverless remove
 
 ## Next Steps
 
-- [Add gateway tools](../langgraph-gateway/) - Expose Lambda functions as agent tools
-- [Add memory](../langgraph-memory/) - Enable conversation persistence
+- [Add gateway tools](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Expose Lambda functions as agent tools
+- [Add memory](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Enable conversation persistence

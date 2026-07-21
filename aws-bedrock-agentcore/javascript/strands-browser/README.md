@@ -53,5 +53,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-browser](../langgraph-browser/) - LangGraph version with manual tool wrappers
-- [langgraph-browser-custom](../langgraph-browser-custom/) - Custom browser with session recording
+- [langgraph-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser) - LangGraph version with manual tool wrappers
+- [langgraph-browser-custom](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser-custom) - Custom browser with session recording

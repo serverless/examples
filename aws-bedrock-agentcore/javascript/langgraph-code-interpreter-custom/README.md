@@ -52,4 +52,4 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-code-interpreter](../langgraph-code-interpreter/) - Default interpreter (SANDBOX)
+- [langgraph-code-interpreter](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-code-interpreter) - Default interpreter (SANDBOX)

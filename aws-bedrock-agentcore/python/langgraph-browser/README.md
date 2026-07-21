@@ -163,6 +163,6 @@ serverless remove
 
 ## Next Steps
 
-- [Gateway Example](../langgraph-gateway/) - Add custom Lambda tools
-- [Memory Example](../langgraph-memory/) - Add conversation persistence
-- [Browser Documentation](../../../../../../../../../docs/sf/providers/aws/guide/agents/browser.md) - Full configuration reference
+- [Gateway Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Add custom Lambda tools
+- [Memory Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence
+- [Browser Documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/browser) - Full configuration reference

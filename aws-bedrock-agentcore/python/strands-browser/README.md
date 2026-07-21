@@ -128,7 +128,7 @@ ai:
     browserAgent: {}
 ```
 
-See the [Browser documentation](../../../../../../../../../docs/sf/providers/aws/guide/agents/browser.md) for full configuration options.
+See the [Browser documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/browser) for full configuration options.
 
 ## Cleanup
 
@@ -138,6 +138,6 @@ serverless remove
 
 ## Next Steps
 
-- [Browser Documentation](../../../../../../../../../docs/sf/providers/aws/guide/agents/browser.md) - Full configuration reference
-- [Memory Example](../langgraph-memory/) - Add conversation persistence
-- [Gateway Example](../langgraph-gateway/) - Add custom Lambda tools
+- [Browser Documentation](https://www.serverless.com/framework/docs/providers/aws/guide/agents/browser) - Full configuration reference
+- [Memory Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence
+- [Gateway Example](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-gateway) - Add custom Lambda tools

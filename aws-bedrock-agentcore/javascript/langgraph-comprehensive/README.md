@@ -141,8 +141,8 @@ serverless remove
 
 ## Related Examples
 
-- [LangGraph Gateway](../langgraph-gateway/) -- Gateway tools only
-- [LangGraph Browser](../langgraph-browser/) -- Browser only
-- [LangGraph Code Interpreter](../langgraph-code-interpreter/) -- Code interpreter only
-- [LangGraph Memory](../langgraph-memory/) -- Memory only
-- [LangGraph Multi-Gateway](../langgraph-multi-gateway/) -- Multiple gateways with different authorization
+- [LangGraph Gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-gateway) -- Gateway tools only
+- [LangGraph Browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser) -- Browser only
+- [LangGraph Code Interpreter](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-code-interpreter) -- Code interpreter only
+- [LangGraph Memory](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-memory) -- Memory only
+- [LangGraph Multi-Gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-multi-gateway) -- Multiple gateways with different authorization

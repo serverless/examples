@@ -201,5 +201,5 @@ serverless remove
 
 ## Next Steps
 
-- [LangGraph Multi-Gateway](../langgraph-multi-gateway/) - Multiple gateways with different authorization
-- [LangGraph Memory](../langgraph-memory/) - Add conversation persistence
+- [LangGraph Multi-Gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-multi-gateway) - Multiple gateways with different authorization
+- [LangGraph Memory](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) - Add conversation persistence

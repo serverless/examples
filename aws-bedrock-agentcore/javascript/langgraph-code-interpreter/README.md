@@ -54,4 +54,4 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-code-interpreter-custom](../langgraph-code-interpreter-custom/) - Custom interpreter with PUBLIC network
+- [langgraph-code-interpreter-custom](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-code-interpreter-custom) - Custom interpreter with PUBLIC network

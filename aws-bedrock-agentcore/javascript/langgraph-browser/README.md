@@ -63,5 +63,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-browser-custom](../langgraph-browser-custom/) - Custom browser with session recording
-- [strands-browser](../strands-browser/) - Browser with Strands Agents framework
+- [langgraph-browser-custom](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-browser-custom) - Custom browser with session recording
+- [strands-browser](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/strands-browser) - Browser with Strands Agents framework

@@ -84,5 +84,5 @@ sls remove
 
 ## Related Examples
 
-- [langgraph-gateway](../langgraph-gateway/) - Single gateway example
-- [../python/langgraph-multi-gateway](../../python/langgraph-multi-gateway/) - Python version
+- [langgraph-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-gateway) - Single gateway example
+- [../python/langgraph-multi-gateway](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-multi-gateway) - Python version

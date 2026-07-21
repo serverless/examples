@@ -25,7 +25,7 @@ A LangGraph JavaScript agent with real-time LLM token streaming deployed to AWS 
 
 ## How It Works
 
-The key difference from the non-streaming [langgraph-basic](../langgraph-basic/) example is how the `process` handler works:
+The key difference from the non-streaming [langgraph-basic](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-basic) example is how the `process` handler works:
 
 **Non-streaming** (langgraph-basic): `process` is an `async` function that `return`s the complete response after the agent finishes.
 
@@ -120,5 +120,5 @@ langgraph-streaming/
 
 ## Related Examples
 
-- [langgraph-basic](../langgraph-basic/) - Same agent without streaming (returns complete response)
-- [langgraph-basic-dockerfile](../langgraph-basic-dockerfile/) - Non-streaming agent with a Dockerfile
+- [langgraph-basic](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-basic) - Same agent without streaming (returns complete response)
+- [langgraph-basic-dockerfile](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/langgraph-basic-dockerfile) - Non-streaming agent with a Dockerfile
