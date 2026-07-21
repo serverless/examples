@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Basic Agent, Code Deploy (Python)
+title: 'Bedrock AgentCore: LangGraph Basic Agent, Code Deploy (Python)'
 description: Minimal LangGraph agent deployed to AWS Bedrock AgentCore using code (zip) deployment.
 layout: Doc
 framework: v4

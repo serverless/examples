@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Basic Agent, Code Deploy (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Basic Agent, Code Deploy (JavaScript)'
 description: Minimal LangGraph JS agent built automatically from source with no Dockerfile, deployed to AWS Bedrock AgentCore.
 layout: Doc
 framework: v4

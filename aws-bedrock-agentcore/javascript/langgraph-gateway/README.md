@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Gateway Tools (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Gateway Tools (JavaScript)'
 description: LangGraph JS agent exposing Lambda-backed tools through an AgentCore Gateway over MCP.
 layout: Doc
 framework: v4

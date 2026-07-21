@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Managed Code Interpreter (Python)
+title: 'Bedrock AgentCore: LangGraph Agent with Managed Code Interpreter (Python)'
 description: LangGraph agent using the AWS-managed AgentCore Code Interpreter (SANDBOX mode) for Python execution.
 layout: Doc
 framework: v4

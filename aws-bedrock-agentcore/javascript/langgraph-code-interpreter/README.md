@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Managed Code Interpreter (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Managed Code Interpreter (JavaScript)'
 description: LangGraph JS agent using the AWS-managed AgentCore Code Interpreter for sandboxed code execution.
 layout: Doc
 framework: v4

@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Custom Code Interpreter (Python)
+title: 'Bedrock AgentCore: LangGraph Agent with Custom Code Interpreter (Python)'
 description: LangGraph agent using a custom AgentCore Code Interpreter with PUBLIC network mode.
 layout: Doc
 framework: v4

@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Custom Browser (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Custom Browser (JavaScript)'
 description: LangGraph JS agent using a custom AgentCore Browser resource with session recording to S3.
 layout: Doc
 framework: v4

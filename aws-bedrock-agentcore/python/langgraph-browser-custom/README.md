@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Custom Browser (Python)
+title: 'Bedrock AgentCore: LangGraph Agent with Custom Browser (Python)'
 description: LangGraph agent using a custom AgentCore Browser resource with session recording to S3.
 layout: Doc
 framework: v4

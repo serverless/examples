@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Memory (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Agent with Memory (JavaScript)'
 description: LangGraph JS agent using AgentCore Memory to persist and recall conversation history.
 layout: Doc
 framework: v4

@@ -43,6 +43,13 @@ for (const dir of findExampleDirs(ROOT)) {
   for (const key of REQUIRED) if (!fm[key]) errors.push(`${rel}: frontmatter missing "${key}"`);
   if (fm.title === 'TODO') errors.push(`${rel}: frontmatter title is TODO`);
   if (fm.framework && fm.framework !== 'v4') errors.push(`${rel}: frontmatter framework is "${fm.framework}", expected "v4"`);
+  // serverless.com converts the frontmatter comment to YAML; an unquoted value
+  // containing ": " is invalid YAML there and blanks the example's page.
+  for (const [key, value] of Object.entries(fm)) {
+    if (value.includes(': ') && !/^['"]/.test(value)) {
+      errors.push(`${rel}: frontmatter "${key}" contains ": " — quote the value (breaks YAML parsing on serverless.com)`);
+    }
+  }
 }
 
 if (errors.length) {

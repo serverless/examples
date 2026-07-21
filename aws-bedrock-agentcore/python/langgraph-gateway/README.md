@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Agent with Gateway Tools (Python)
+title: 'Bedrock AgentCore: LangGraph Agent with Gateway Tools (Python)'
 description: LangGraph agent exposing custom Lambda function tools via an auto-created AgentCore Gateway.
 layout: Doc
 framework: v4

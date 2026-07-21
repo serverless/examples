@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: Strands Agent with Browser (Python)
+title: 'Bedrock AgentCore: Strands Agent with Browser (Python)'
 description: Strands Agents agent using AgentCore Browser for web automation and research tasks.
 layout: Doc
 framework: v4

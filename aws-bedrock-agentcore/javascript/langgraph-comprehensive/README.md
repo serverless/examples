@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Comprehensive Agent (JavaScript)
+title: 'Bedrock AgentCore: LangGraph Comprehensive Agent (JavaScript)'
 description: LangGraph JS agent combining Gateway tools, a direct MCP connection, browser, code interpreter, and memory in one deployment.
 layout: Doc
 framework: v4

@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: LangGraph Multi-Gateway Agents (Python)
+title: 'Bedrock AgentCore: LangGraph Multi-Gateway Agents (Python)'
 description: LangGraph agent using multiple AgentCore Gateways with different authorization types and tool subsets.
 layout: Doc
 framework: v4

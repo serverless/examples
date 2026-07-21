@@ -1,5 +1,5 @@
 <!--
-title: Bedrock AgentCore: Strands Agent with Browser (JavaScript)
+title: 'Bedrock AgentCore: Strands Agent with Browser (JavaScript)'
 description: Strands Agents JavaScript agent using AgentCore Browser tools for web automation.
 layout: Doc
 framework: v4
