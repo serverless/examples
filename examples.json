@@ -756,7 +756,7 @@
     "language": "node",
     "platform": "aws",
     "authorLink": "https://github.com/eahefnawy",
-    "authorName": "Eslam \u03bb Hefnawy",
+    "authorName": "Eslam λ Hefnawy",
     "authorAvatar": "https://avatars3.githubusercontent.com/u/2312463?v=4&s=140"
   },
   {
@@ -1882,19 +1882,6 @@
     "community": true
   },
   {
-    "title": "Aws node signed uploads",
-    "name": "aws-node-signed-uploads",
-    "description": "Upload files larger than 10MB with AWS Lambda and API Gateway. Can be developed and tested locally.",
-    "githubUrl": "https://github.com/kalinchernev/aws-node-signed-uploads",
-    "framework": "latest",
-    "language": "node",
-    "platform": "aws",
-    "authorLink": "https://github.com/kalinchernev",
-    "authorName": "kalinchernev",
-    "authorAvatar": "https://avatars.githubusercontent.com/u/1923476?v=4",
-    "community": true
-  },
-  {
     "title": "SQS Worker with AWS Lambda and CloudWatch Alarms",
     "name": "sqs-worker-serverless",
     "description": "Process messages stored in SQS with an [auto-scaled AWS Lambda worker](https://sbstjn.com/serverless-sqs-worker-with-aws-lambda.html) function.",
@@ -2066,7 +2053,7 @@
   {
     "title": "Serverless Telegram Bot",
     "name": "serverless-telegram-bot",
-    "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework \u26a1\ud83e\udd16",
+    "description": "This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖",
     "githubUrl": "https://github.com/jonatasbaldin/serverless-telegram-bot",
     "framework": "latest",
     "language": "python",
@@ -2566,7 +2553,7 @@
     "language": "",
     "platform": "",
     "authorLink": "https://github.com/bbilger",
-    "authorName": "Bj\u00f6rn Bilger",
+    "authorName": "Björn Bilger",
     "authorAvatar": "https://avatars.githubusercontent.com/u/6827090?v=4",
     "community": true
   },
@@ -2636,19 +2623,6 @@
     "community": true
   },
   {
-    "title": "Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 2",
-    "name": "aws-eks-spot-instances-serverless-framework-demo",
-    "description": "From this article you'll learn how to configure AWS Lambda functions to allow them manage your EKS Kubernetes cluster and run triggered jobs",
-    "githubUrl": "https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo/tree/part2",
-    "framework": "",
-    "language": "",
-    "platform": "",
-    "authorLink": "https://github.com/andreivmaksimov",
-    "authorName": "Andrei Maksimov",
-    "authorAvatar": "https://avatars.githubusercontent.com/u/1902417?v=4",
-    "community": true
-  },
-  {
     "title": "Serverless Dashboard For Atom Editor",
     "name": "serverless-dashboard-for-atom",
     "description": "Atom editor package which allows you to deploy and visualize your serverless services with Serverless Framework on your editor.",
@@ -2683,7 +2657,7 @@
     "language": "",
     "platform": "",
     "authorLink": "https://github.com/pharindoko",
-    "authorName": "Florian Fu\u00df",
+    "authorName": "Florian Fuß",
     "authorAvatar": "https://avatars.githubusercontent.com/u/5619511?v=4",
     "community": true
   },
@@ -2748,7 +2722,7 @@
     "language": "",
     "platform": "",
     "authorLink": "https://github.com/marchetti2",
-    "authorName": "M\u00e1rio Luiz",
+    "authorName": "Mário Luiz",
     "authorAvatar": "https://avatars.githubusercontent.com/u/35637518?v=4",
     "community": true
   },
@@ -2761,7 +2735,7 @@
     "language": "",
     "platform": "",
     "authorLink": "https://github.com/fargito",
-    "authorName": "Fran\u00e7ois Farge",
+    "authorName": "François Farge",
     "authorAvatar": "https://avatars.githubusercontent.com/u/29537204?v=4",
     "community": true
   },
@@ -2787,7 +2761,7 @@
     "language": "node",
     "platform": "aws",
     "authorLink": "https://github.com/eahefnawy",
-    "authorName": "Eslam \u03bb Hefnawy",
+    "authorName": "Eslam λ Hefnawy",
     "authorAvatar": "https://avatars.githubusercontent.com/u/2312463?v=4"
   }
 ]
