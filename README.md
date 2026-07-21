@@ -212,14 +212,12 @@ Examples maintained by the community in their own repositories.
 | [Serverless cloudwatch rds custom metrics](https://github.com/AndrewFarley/serverless-cloudwatch-rds-custom-metrics) <br/> A NodeJS-based MySQL RDS Data Collection script to push Custom Metrics to Cloudwatch with Serverless | nodeJS |
 | [Sc5 serverless boilerplate](https://github.com/SC5/sc5-serverless-boilerplate) <br/> A boilerplate that contains setup for test-driven development | nodeJS |
 | [Serverless blog to podcast](https://github.com/SC5/serverless-blog-to-podcast) <br/> Service that reads RSS feed and converts the entries to a podcast feed and audio files using Amazon Polly | nodeJS |
-| [Offset trump](https://github.com/FLGMwt/offset-trump) <br/> Single page app using Serverless (C# runtime) and S3 site hosting. Pledge to do a good thing for the next four years to offset the potential negative effects of the US Presidency | dotnet |
 | [Serverless url shortener](https://github.com/aletheia/serverless-url-shortener) <br/> A simple url-shortener, using Serverless framework | nodeJS |
 | [Serverless html pdf](https://github.com/calvintychan/serverless-html-pdf) <br/> Service that convert HTML to PDF using PhantomJS's rasterize example. | nodeJS |
 | [Serverless examples cached rds ws](https://github.com/mugglmenzel/serverless-examples-cached-rds-ws) <br/> A serverless framework example project that uses API Gateway, ElastiCache, and RDS PostgreSQL. | java |
 | [Bittman](https://github.com/rhlsthrm/bittman) <br/> A serverless project that follows a stock trading algorithm and uses scheduled functions to save data to DynamoDB and send emails through Mailgun. | nodeJS |
 | [Adoptable pet bot](https://github.com/lynnaloo/adoptable-pet-bot) <br/> Tweets adoptable pets using Serverless (Node.js) and AWS Lambda | nodeJS |
 | [Owntracks serverless](https://github.com/dschep/owntracks-serverless) <br/> A serverless implementation of the OwnTracks HTTP backend | nodeJS |
-| [Serverless modern koa](https://github.com/barczaG/serverless-modern-koa) <br/> Serverless modern koa starter kit | nodeJS |
 | [Serverless ReactJS Universal Rendering Boilerplate](https://github.com/TylorShin/react-universal-in-serverless) <br/> ReactJS web app Starter kit does universal (isomorphic) rendering with Serverless | nodeJS |
 | [Open Bot](https://github.com/open-bot/open-bot) <br/> An unoptionated Github bot driven by a configuration file in the repository | nodeJS |
 | [Aws ses serverless example](https://github.com/lakshmantgld/aws-ses-serverless-example) <br/> AWS SES example in NodeJS using lambda | nodeJS |
@@ -237,10 +235,8 @@ Examples maintained by the community in their own repositories.
 | [AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito Example](https://github.com/andreivmaksimov/serverless-framework-aws-lambda-amazon-api-gateway-s3-dynamodb-and-cognito) <br/> Step by step guide how to deploy simple web application on top of AWS Lambda, Amazon API Gateway, S3, DynamoDB and Cognito. | nodeJS |
 | [Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda   Part 1](https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo) <br/> From this tutorial you'll learn how to add AWS EKS Cluster with Spot Instances to your cloud environment managed by Serverless framework | python |
 | [Serverless + lambda protobuf responses](https://github.com/theburningmonk/lambda-protobuf-demo) <br/> Demo using API Gateway and Lambda with Protocol Buffer | nodeJS |
-| [Serverless Telegram Bot](https://github.com/jonatasbaldin/serverless-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework ⚡🤖 | python |
 | [Serverless + lambda + vpc + nat + redis](https://github.com/ittus/aws-lambda-vpc-nat-examples) <br/> Demo using API Gateway and Lambda with VPC and NAT to access Internet and AWS Resource | nodeJS |
 | [Serverless Gitlab CI](https://github.com/bvincent1/serverless-gitlab-ci) <br/> Simple Gitlab CI template for automatic testing and deployments | nodeJS |
-| [Serverless ffmpeg](https://github.com/kvaggelakos/serverless-ffmpeg) <br/> Bucket event driven FFMPEG using serverless. Input bucket => Serverless ffmpeg => Output bucket. | nodeJS |
 | [Realtime WW2 Alexa Skill](https://github.com/ceilfors/realtime-ww2-alexa) <br/> An alexa skill project that's using Alexa SDK. Can also be used for a working example of serverless-webpack (with use of async/await via babel). | nodeJS |
 | [Serverless Kakao Bot](https://github.com/JisuPark/serverless-kakao-bot) <br/> Easy development for Kakaotalk Bot with Serverless | nodeJS |
 | [Personal Access Tokens Cron Check](https://github.com/madtrick/cfpat-audit) <br/> Audit for leaked PAT in your Contentful organization. How to use serverless as cronjobs to keep your Personal Access Tokens secure | nodeJS |
@@ -263,14 +259,11 @@ Examples maintained by the community in their own repositories.
 | [Serverless api typescript template](https://github.com/JoshuaToth/serverless-api-typescript-template) <br/> A starter template for a Serverless API using Typescript and Jest | nodeJS |
 | [Serverless SNS SQS offline Example ](https://github.com/kenyipp/serverless-sns-sqs-offline-example) <br/> Minimal example of running serverless-offline with SQS and SNS in local environment. | nodeJS |
 | [Serverless RDS Log Sync S3](https://github.com/drocco007/serverless-aws-rds-logs-s3) <br/> Annotated exmaple of a periodic scheduled task to sync changed RDS log files to an S3 bucket. | python |
-| [HTTP Headers Checks](https://github.com/authdog/http-headers-check) <br/> Serverless Application to check integrity of the headers of a given HTTP server | nodeJS |
 | [Serverless Image Labeller](https://github.com/nileshprasad137/serverless-image-labeller) <br/> Serverless image labelling using Rekognition, s3, DynamoDB. | python |
 | [Serverless AppSync offline TypeScript with CircleCI](https://github.com/daisuke-awaji/serverless-appsync-offline-typescript-template) <br/> A Serverless Framework template that allows you to launch an AppSync emulator locally and proceed with development. Lambda Function build by TypeScript/Webpack. | nodeJS |
 | [Serverless Screenshot to S3](https://github.com/slaytr/aws-node-screenshot-to-s3) <br/> An example serverless stack which takes a screenshot using aws-chrome-lambda and puts it in s3. NodeJS. | nodeJS |
 | [Express Application With Lambda](https://github.com/HoseungJang/serverless-lambda-express-example) <br/> This example demonstrates how to build an express application for AWS Lambda based on serverless framework. | nodeJS |
 | [DropBucket - Serverless file sharing](https://github.com/marksteele/drop-bucket) <br/> A serverless file sharing app powered by Cognito/S3/Lambda/API Gateway. Includes a React single-page app UI and virus scanning. | unknown |
-| [serverless-pokego](https://github.com/jch254/pokego-serverless) <br/> Serverless-powered API to fetch nearby Pokemon Go data | unknown |
-| [serverless-garden-aid](https://github.com/garden-aid/web-bff) <br/> IoT Garden Aid Backend | unknown |
 | [serverless-react-boilerplate](https://github.com/99xt/serverless-react-boilerplate) <br/> A serverless react boilerplate for offline development | unknown |
 | [serverless-delivery-framework](https://github.com/99xt/serverless-delivery-framework) <br/> This is a boilerplate for version release pipeline with serverless framework | unknown |
 | [serverless-mailgun-slack](https://github.com/Marcus-L/serverless-mailgun-slack) <br/> A Serverless function for posting to a Slack Webhook in response to a Mailgun route | unknown |
@@ -282,11 +275,7 @@ Examples maintained by the community in their own repositories.
 | [AWS Lambda Power Tuning (powered by Step Functions)](https://github.com/alexcasalboni/aws-lambda-power-tuning) <br/> Build a Step Functions state machine to optimize your AWS Lambda Function memory/power configuration. | unknown |
 | [React & Stripe Serverless Ecommerce](https://github.com/patrick-michelberger/serverless-shop) <br/> Serverless E-Commerce App with AWS Lambda, Stripe and React | unknown |
 | [Run your Kubernetes Workloads on Amazon EC2 Spot Instances with Amazon EKS and Lambda - Part 2](https://github.com/andreivmaksimov/aws-eks-spot-instances-serverless-framework-demo/tree/part2) <br/> From this article you'll learn how to configure AWS Lambda functions to allow them manage your EKS Kubernetes cluster and run triggered jobs | unknown |
-| [Serverless Dashboard For Atom Editor](https://github.com/horike37/serverless-dashboard-for-atom) <br/> Atom editor package which allows you to deploy and visualize your serverless services with Serverless Framework on your editor. | unknown |
-| [Serverless SSH Command](https://github.com/upgle/serverless-openwhisk-ssh) <br/> Example of executing ssh command with OpenWhisk | unknown |
 | [JSON-Serverless](https://github.com/pharindoko/json-serverless) <br/> A simple & cheap serverless REST API using [json-server](https://github.com/typicode/json-server) in combination with AWS Lambda / S3 and the serverless framework | unknown |
-| [[Unly] Boilerplates Generator](https://github.com/UnlyEd/boilerplates-generator) <br/> A boilerplates generator, meant to help to quick-start Serverless (AWS Lambda/API GW) and OSS projects, using good defaults _(sentry for automated error handling, staging/prod environments, built-in support for env vars, jest support, babel/webpack)_, yet flexible to fit your needs. | unknown |
-| [Demo project for serverless-migrate-plugin](https://github.com/EliuX/serverless-migrate-plugin/tree/master/example) <br/> An example about how to use migrations in your serverless project with serverless-migrate-plugin | unknown |
 | [GoLive](https://github.com/adimoraret/golive/) <br/> Boilerplate to live stream using AWS MediaLive and MediaStore | unknown |
 | [Idempotent Serverless Functions](https://github.com/Nsupyq/idempotent-serverless-functions) <br/> This repository demonstrates how to ensure the idempotence of serverless functions running on AWS Lambda. | unknown |
 | [File uploads using S3 presigned URLs](https://github.com/marchetti2/aws-node-serverless-upload-presigned-url) <br/> A Serverless photo upload service with API Gateway, S3 presigned URLs and Lambda. | unknown |
