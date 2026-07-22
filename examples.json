@@ -508,6 +508,18 @@
     "priority": 4
   },
   {
+    "title": "AWS Lambda Self-Managed Code Storage",
+    "name": "aws-node-self-managed-code-storage",
+    "description": "Run Lambda function and layer code directly from the deployment bucket with self-managed code storage",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-self-managed-code-storage",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "AWS Serving Dynamic HTML via API Gateway example in NodeJS",
     "name": "aws-node-serve-dynamic-html-via-http-endpoint",
     "description": "This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request.",
