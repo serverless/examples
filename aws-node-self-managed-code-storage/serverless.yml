@@ -1,0 +1,27 @@
+service: aws-node-self-managed-code-storage
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+  deploymentBucket:
+    # Lambda runs this service's function and layer code directly from the
+    # deployment bucket (self-managed code storage) instead of copying it
+    # into Lambda-managed storage. See the README for details.
+    codeStorageMode: reference
+
+layers:
+  utils:
+    path: layer
+    description: Shared helpers used by the service functions
+
+functions:
+  hello:
+    handler: handler.hello
+    layers:
+      - !Ref UtilsLambdaLayer
+    events:
+      - httpApi:
+          path: /
+          method: get
