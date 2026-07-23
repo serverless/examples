@@ -180,6 +180,18 @@
     "authorAvatar": "https://avatars3.githubusercontent.com/u/765871?v=4&s=140"
   },
   {
+    "title": "AWS Node.js ES Module Bundles with esbuild",
+    "name": "aws-node-esm-esbuild",
+    "description": "This example demonstrates how to bundle TypeScript handlers as ES modules (.mjs) with the built-in esbuild support, without adding a package.json to the deployment artifact.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-esm-esbuild",
+    "framework": "v4",
+    "language": "nodeJS",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "AWS Storing Encrypted Secrets example in NodeJS",
     "name": "aws-node-env-variables-encrypted-in-a-file",
     "description": "This example demonstrates how to store secrets like API keys encrypted in your repository while providing them as environment variables to your AWS Lambda functions.",

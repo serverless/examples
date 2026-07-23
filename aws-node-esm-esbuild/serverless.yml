@@ -1,0 +1,24 @@
+service: aws-node-esm-esbuild
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+build:
+  esbuild:
+    # Emit the bundled handlers as ES modules. The .mjs extension makes the
+    # Lambda Node.js runtime load them with the ESM loader, without shipping a
+    # package.json with "type": "module" inside the deployment artifact.
+    format: esm
+    outExtension:
+      '.js': '.mjs'
+
+functions:
+  time:
+    handler: src/handler.currentTime
+    events:
+      - httpApi:
+          path: /time
+          method: get
