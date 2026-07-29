@@ -290,6 +290,18 @@
     "authorAvatar": "https://avatars0.githubusercontent.com/u/8188?v=4&s=140"
   },
   {
+    "title": "AWS MCP Server on Lambda (NodeJS)",
+    "name": "aws-node-mcp-server",
+    "description": "Run an MCP server built with the official MCP TypeScript SDK on AWS Lambda, with streaming responses through API Gateway.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-mcp-server",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "Node.js AWS Lambda connecting to MongoDB Atlas",
     "name": "aws-node-mongodb-atlas",
     "description": "Shows how to connect AWS Lambda to MongoDB Atlas.",
@@ -1291,6 +1303,18 @@
     "platform": "aws",
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "Bedrock AgentCore: MCP Server from Plain Lambda Functions (JavaScript)",
+    "name": "aws-bedrock-agentcore-javascript-mcp-server-lambda-tools",
+    "description": "MCP server whose tools are plain Lambda functions - no MCP SDK in your code - using Bedrock AgentCore Gateway.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/mcp-server-lambda-tools",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {

@@ -1,0 +1,45 @@
+# MCP server on AWS Lambda, built with the official MCP TypeScript SDK v2
+# and served through API Gateway REST response streaming.
+#
+# Plain JSON responses and streaming SSE responses both work through the same
+# endpoint - the server picks per request.
+service: aws-node-mcp-server
+
+provider:
+  name: aws
+  runtime: nodejs22.x # the MCP SDK v2 requires Node.js 20+
+
+functions:
+  mcp:
+    handler: src/lambda.handler
+    timeout: 120
+    events:
+      - http:
+          method: POST
+          path: /mcp
+          # Response streaming lifts API Gateway's classic response limits and
+          # enables SSE, but the integration timeout must be raised explicitly
+          # alongside it (up to 15 minutes):
+          timeoutInMillis: 120000
+          response:
+            transferMode: STREAM
+          # To reject unauthenticated requests before they invoke the function,
+          # attach an authorizer (see the jwtAuthorizer function below), or use
+          # the SDK's in-process bearer auth (see src/server.mjs):
+          # authorizer:
+          #   name: jwtAuthorizer
+      - http:
+          method: GET
+          path: /mcp # the server answers the spec-mandated 405 for GET
+
+      # OAuth discovery for MCP clients ("paste URL and log in"): serve the
+      # protected-resource metadata on an unauthenticated route. The SDK's
+      # oauthMetadata middleware can generate the document (see src/server.mjs):
+      # - http:
+      #     method: GET
+      #     path: /.well-known/oauth-protected-resource
+
+  # A request authorizer validating Bearer JWTs against your OpenID Connect
+  # provider - pairs with the `authorizer` block above:
+  # jwtAuthorizer:
+  #   handler: src/authorizer.handler
