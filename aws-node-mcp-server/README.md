@@ -22,6 +22,8 @@ The MCP `2026-07-28` protocol revision made servers stateless — every request 
 
 Plain JSON and streaming SSE coexist on the one endpoint: simple tool calls return ordinary `application/json` responses, while calls that request progress stream `text/event-stream` with notifications arriving ahead of the final result.
 
+**Related example:** [`aws-node-mcp-server-function-url`](../aws-node-mcp-server-function-url) serves the same MCP server through a Lambda Function URL instead — no API Gateway, no per-request fee. Pick this example when you want a custom domain, WAF, throttling, or an authorizer that rejects requests before they invoke the function.
+
 ## Usage
 
 ### Deploy

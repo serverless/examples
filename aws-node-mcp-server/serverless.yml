@@ -22,7 +22,7 @@ functions:
           # alongside it (up to 15 minutes):
           timeoutInMillis: 120000
           response:
-            transferMode: STREAM
+            transferMode: stream
           # To reject unauthenticated requests before they invoke the function,
           # attach an authorizer (see the jwtAuthorizer function below), or use
           # the SDK's in-process bearer auth (see src/server.mjs):

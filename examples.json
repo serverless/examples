@@ -302,6 +302,18 @@
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {
+    "title": "AWS MCP Server on Lambda Function URL (NodeJS)",
+    "name": "aws-node-mcp-server-function-url",
+    "description": "Run an MCP server built with the official MCP TypeScript SDK on a Lambda Function URL with response streaming - no API Gateway.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-mcp-server-function-url",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "Node.js AWS Lambda connecting to MongoDB Atlas",
     "name": "aws-node-mongodb-atlas",
     "description": "Shows how to connect AWS Lambda to MongoDB Atlas.",
