@@ -45,6 +45,38 @@ npm install
 sls deploy
 ```
 
+## Test
+
+The deploy output prints the runtime's MCP endpoint URL. The test script calls it directly - the same way real MCP clients connect - signing requests with your local AWS credentials (SigV4, the runtime's default inbound auth):
+
+```bash
+ENDPOINT=<agent URL from deploy output> node test-invoke.js
+```
+
+```
+=== tools/call: add({"a":5,"b":3}) ===
+  Result: 8
+  Structured: {"sum":8}
+```
+
+Note the `requestHeaders.allowlist` block in `serverless.yml`: protocol revision `2026-07-28` requires the `Mcp-Method` and `Mcp-Name` headers on every request, and the allowlist forwards them to the container.
+
+## Test
+
+The deploy output prints the runtime's MCP endpoint URL. The test script calls it directly - the same way real MCP clients connect - signing requests with your local AWS credentials (SigV4, the runtime's default inbound auth):
+
+```bash
+ENDPOINT=<agent URL from deploy output> node test-invoke.js
+```
+
+```
+=== tools/call: add({"a":5,"b":3}) ===
+  Result: 8
+  Structured: {"sum":8}
+```
+
+Note the `requestHeaders.allowlist` block in `serverless.yml`: protocol revision `2026-07-28` requires the `Mcp-Method` and `Mcp-Name` headers on every request, and the allowlist forwards them to the container.
+
 ## Local development
 
 ```bash

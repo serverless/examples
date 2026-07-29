@@ -1,30 +1,45 @@
 #!/usr/bin/env node
 /**
- * Test script to invoke the MCP Server deployed to AgentCore Runtime.
+ * Test script for the MCP Server deployed to AgentCore Runtime.
  *
- * Uses the stateless MCP 2026-07-28 protocol: every request is
- * self-contained - no initialize handshake and no session bookkeeping.
+ * Calls the runtime's HTTPS MCP endpoint directly - the same way real MCP
+ * clients connect - using the stateless MCP 2026-07-28 protocol: every
+ * request is self-contained, with the required Mcp-* headers attached and
+ * no session bookkeeping. Requests are signed with SigV4 (IAM inbound auth,
+ * the runtime default).
  *
  * Usage:
- *   RUNTIME_ARN=arn:aws:bedrock-agentcore:... node test-invoke.js
+ *   ENDPOINT=<agent URL from deploy output> node test-invoke.js
  */
 
-import {
-  BedrockAgentCoreClient,
-  InvokeAgentRuntimeCommand,
-} from '@aws-sdk/client-bedrock-agentcore'
+import { SignatureV4 } from '@smithy/signature-v4'
+import { HttpRequest } from '@smithy/protocol-http'
+import { Sha256 } from '@aws-crypto/sha256-js'
+import { defaultProvider } from '@aws-sdk/credential-provider-node'
 
-const RUNTIME_ARN = process.env.RUNTIME_ARN
+const ENDPOINT = process.env.ENDPOINT
 const REGION = process.env.AWS_REGION || 'us-east-1'
 
-if (!RUNTIME_ARN) {
-  console.error('Error: RUNTIME_ARN environment variable is required.')
-  console.error('Usage: RUNTIME_ARN=<your-runtime-arn> node test-invoke.js')
-  console.error('\nGet your runtime ARN from: serverless info')
+if (!ENDPOINT) {
+  console.error('Error: ENDPOINT environment variable is required.')
+  console.error('Usage: ENDPOINT=<agent URL from deploy output> node test-invoke.js')
   process.exit(1)
 }
 
-const client = new BedrockAgentCoreClient({ region: REGION })
+// The runtime URL embeds the agent ARN - the WHOLE ARN must be URL-encoded in
+// the path (including its inner "/"), and MCP-protocol runtimes serve under
+// /invocations?qualifier=DEFAULT.
+const raw = new URL(ENDPOINT)
+const arn = decodeURIComponent(raw.pathname.match(/\/runtimes\/(.+)\/invocations/)[1])
+const url = new URL(`${raw.origin}/runtimes/${encodeURIComponent(arn)}/invocations`)
+if (!url.searchParams.has('qualifier')) url.searchParams.set('qualifier', 'DEFAULT')
+
+const signer = new SignatureV4({
+  service: 'bedrock-agentcore',
+  region: REGION,
+  credentials: defaultProvider(),
+  sha256: Sha256,
+})
 
 // The per-request envelope required by protocol revision 2026-07-28:
 const META = {
@@ -34,45 +49,50 @@ const META = {
 }
 
 let id = 0
-async function invoke(method, params = {}) {
-  const payload = {
+async function invoke(method, params = {}, toolName) {
+  const body = JSON.stringify({
     jsonrpc: '2.0',
     id: ++id,
     method,
     params: { ...params, _meta: { ...META, ...(params._meta ?? {}) } },
-  }
-  const command = new InvokeAgentRuntimeCommand({
-    agentRuntimeArn: RUNTIME_ARN,
-    qualifier: 'DEFAULT',
-    payload: Buffer.from(JSON.stringify(payload)),
-    contentType: 'application/json',
-    accept: 'application/json, text/event-stream',
   })
-  const response = await client.send(command)
-  return JSON.parse(await streamToString(response.response))
-}
-
-async function streamToString(stream) {
-  if (typeof stream === 'string') return stream
-  if (stream instanceof Uint8Array || Buffer.isBuffer(stream)) {
-    return new TextDecoder().decode(stream)
-  }
-  const chunks = []
-  for await (const chunk of stream) {
-    chunks.push(typeof chunk === 'string' ? chunk : new TextDecoder().decode(chunk))
-  }
-  return chunks.join('')
+  const request = new HttpRequest({
+    method: 'POST',
+    protocol: url.protocol,
+    hostname: url.hostname,
+    path: url.pathname,
+    query: Object.fromEntries(url.searchParams),
+    headers: {
+      host: url.hostname,
+      'content-type': 'application/json',
+      accept: 'application/json, text/event-stream',
+      'mcp-protocol-version': '2026-07-28',
+      'mcp-method': method,
+      ...(toolName && { 'mcp-name': toolName }),
+    },
+    body,
+  })
+  const signed = await signer.sign(request)
+  const res = await fetch(`${url.origin}${url.pathname}?${url.searchParams}`, {
+    method: 'POST',
+    headers: signed.headers,
+    body,
+  })
+  const text = await res.text()
+  // Responses may arrive as plain JSON or as a single SSE event
+  const data = text.startsWith('event:') || text.startsWith('data:')
+    ? text.split('\n').find((l) => l.startsWith('data:'))?.slice(5)
+    : text
+  return { status: res.status, ...JSON.parse(data) }
 }
 
 async function main() {
   console.log('MCP Server Test Suite (stateless, protocol 2026-07-28)')
-  console.log(`Runtime ARN: ${RUNTIME_ARN}`)
-  console.log(`Region: ${REGION}`)
+  console.log(`Endpoint: ${url.origin}${url.pathname}`)
   console.log('='.repeat(50) + '\n')
 
   console.log('=== server/discover ===')
   const discover = await invoke('server/discover')
-  console.log('Server:', discover.result?.serverInfo?.name, discover.result?.serverInfo?.version)
   console.log('Supported versions:', discover.result?.supportedVersions)
   console.log()
 
@@ -90,7 +110,7 @@ async function main() {
   ]
   for (const [name, args] of calls) {
     console.log(`=== tools/call: ${name}(${JSON.stringify(args)}) ===`)
-    const result = await invoke('tools/call', { name, arguments: args })
+    const result = await invoke('tools/call', { name, arguments: args }, name)
     const text = result.result?.content?.[0]?.text ?? JSON.stringify(result.result ?? result.error)
     console.log(`  Result: ${text}`)
     if (result.result?.structuredContent) {

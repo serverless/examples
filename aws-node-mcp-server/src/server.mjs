@@ -56,9 +56,12 @@ export default createMcpHandler(() => {
   // More SDK capabilities to explore (uncomment and adapt):
   // -------------------------------------------------------------------------
 
-  // Elicitation - pause a tool call to ask the user for input (the client
-  // retries the request with the answers attached; protect the round-trip
-  // state with the SDK's requestState codec - see its docs):
+  // Elicitation - pause a tool call to ask the user for input. The handler
+  // returns an input_required result; the client asks the user and retries
+  // the call with the answers attached, re-entering the handler. Add
+  // acceptedContent and inputRequired to the imports above. To protect
+  // round-trip state that influences your logic, use the SDK's
+  // createRequestStateCodec with a key from KMS/Secrets Manager.
   //
   // server.registerTool(
   //   'approve_refund',
@@ -67,16 +70,18 @@ export default createMcpHandler(() => {
   //     inputSchema: z.object({ orderId: z.string() }),
   //   },
   //   async ({ orderId }, ctx) => {
-  //     const result = await ctx.mcpReq.elicitInput({
-  //       mode: 'form',
-  //       message: `Refund order ${orderId}?`,
-  //       requestedSchema: {
-  //         type: 'object',
-  //         properties: { confirmed: { type: 'boolean' } },
-  //         required: ['confirmed'],
-  //       },
-  //     })
-  //     if (result.action !== 'accept' || !result.content?.confirmed) {
+  //     const answer = acceptedContent(ctx.mcpReq.inputResponses, 'confirm', z.object({ confirmed: z.boolean() }))
+  //     if (answer === undefined) {
+  //       return inputRequired({
+  //         inputRequests: {
+  //           confirm: inputRequired.elicit({
+  //             message: `Refund order ${orderId}?`,
+  //             requestedSchema: z.object({ confirmed: z.boolean() }),
+  //           }),
+  //         },
+  //       })
+  //     }
+  //     if (!answer.confirmed) {
   //       return { content: [{ type: 'text', text: 'refund cancelled' }] }
   //     }
   //     return { content: [{ type: 'text', text: `refunded ${orderId}` }] }

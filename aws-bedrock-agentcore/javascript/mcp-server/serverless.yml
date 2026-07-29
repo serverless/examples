@@ -15,3 +15,11 @@ ai:
   agents:
     assistant:
       protocol: MCP
+      # Forward the MCP standard headers to the container - protocol revision
+      # 2026-07-28 requires Mcp-Method / Mcp-Name on every request, and the
+      # SDK validates them against the body:
+      requestHeaders:
+        allowlist:
+          - Mcp-Method
+          - Mcp-Name
+          - Mcp-Protocol-Version

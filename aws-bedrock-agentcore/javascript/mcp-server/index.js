@@ -115,6 +115,8 @@ const mcpHandler = createMcpHandler(() => {
   // Elicitation - pause a tool call to ask the user for input; the client
   // retries the request with the answers attached (multi round-trip requests):
   //
+  // (also add acceptedContent and inputRequired to the imports above)
+  //
   // server.registerTool(
   //   'approve_action',
   //   {
@@ -122,16 +124,21 @@ const mcpHandler = createMcpHandler(() => {
   //     inputSchema: z.object({ action: z.string() }),
   //   },
   //   async ({ action }, ctx) => {
-  //     const result = await ctx.mcpReq.elicitInput({
-  //       mode: 'form',
-  //       message: `Proceed with ${action}?`,
-  //       requestedSchema: {
-  //         type: 'object',
-  //         properties: { confirmed: { type: 'boolean' } },
-  //         required: ['confirmed'],
-  //       },
-  //     })
-  //     if (result.action !== 'accept' || !result.content?.confirmed) {
+  //     // First pass: no answers yet - return input_required so the client
+  //     // asks the user and retries this call with the responses attached.
+  //     const answer = acceptedContent(ctx.mcpReq.inputResponses, 'confirm', z.object({ confirmed: z.boolean() }))
+  //     if (answer === undefined) {
+  //       return inputRequired({
+  //         inputRequests: {
+  //           confirm: inputRequired.elicit({
+  //             message: `Proceed with ${action}?`,
+  //             requestedSchema: z.object({ confirmed: z.boolean() }),
+  //           }),
+  //         },
+  //       })
+  //     }
+  //     // Re-entry: the retried request carries the user's answer.
+  //     if (!answer.confirmed) {
   //       return { content: [{ type: 'text', text: 'cancelled' }] }
   //     }
   //     return { content: [{ type: 'text', text: `${action} done` }] }

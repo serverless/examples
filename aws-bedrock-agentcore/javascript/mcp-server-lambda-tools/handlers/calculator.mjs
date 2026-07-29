@@ -8,10 +8,14 @@
  * context.clientContext.custom['bedrockAgentCoreToolName'] in the form
  * `<target>___<tool>` (for example `calculator___add`).
  */
-export const handler = async (event) => {
+export const handler = async (event, context) => {
   const { a, b } = event
   if (typeof a !== 'number' || typeof b !== 'number') {
     throw new Error('a and b must be numbers')
   }
+  // `<target>___<tool>` - branch on the tool name when one function backs
+  // several tools:
+  const tool = context.clientContext?.custom?.bedrockAgentCoreToolName ?? ''
+  if (tool.endsWith('___multiply')) return a * b
   return a + b
 }

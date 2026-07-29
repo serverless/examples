@@ -8,12 +8,17 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock-agentcore": "^3.993.0",
     "@modelcontextprotocol/node": "^2.0.0",
     "@modelcontextprotocol/server": "^2.0.0",
     "zod": "^4.4.3"
   },
   "engines": {
     "node": "24.x"
+  },
+  "devDependencies": {
+    "@aws-crypto/sha256-js": "^5.2.0",
+    "@aws-sdk/credential-provider-node": "^3.750.0",
+    "@smithy/protocol-http": "^5.0.0",
+    "@smithy/signature-v4": "^5.0.0"
   }
 }
