@@ -1,8 +1,9 @@
 /**
  * MCP Server for AWS Bedrock AgentCore Runtime
  *
- * A stateless MCP server exposing simple tools via the Model Context Protocol.
- * Uses Express + @modelcontextprotocol/sdk with Streamable HTTP transport.
+ * Built with the official MCP TypeScript SDK v2, serving the stateless
+ * MCP `2026-07-28` protocol revision - and answering older MCP clients
+ * through the SDK's built-in fallback on the same endpoint.
  *
  * Tools:
  *   - add: Add two numbers
@@ -10,136 +11,162 @@
  *   - get_current_time: Get the current date and time
  */
 
-import express from 'express'
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
+import { createServer } from 'node:http'
+import { createMcpHandler, McpServer } from '@modelcontextprotocol/server'
+import { toNodeHandler } from '@modelcontextprotocol/node'
 import { z } from 'zod'
 
 // ---------------------------------------------------------------------------
-// MCP Server factory — creates a fresh stateless server per request
+// MCP server factory - the handler creates a fresh instance per request
 // ---------------------------------------------------------------------------
 
-const createMcpServer = () => {
-  const server = new McpServer({
-    name: 'mcp-server',
-    version: '1.0.0',
-  })
+const mcpHandler = createMcpHandler(() => {
+  const server = new McpServer({ name: 'mcp-server', version: '1.0.0' })
 
-  // Tool: add two numbers
   server.registerTool(
     'add',
     {
       title: 'Addition',
       description: 'Add two numbers together',
-      inputSchema: {
+      inputSchema: z.object({
         a: z.number().describe('First number'),
         b: z.number().describe('Second number'),
-      },
+      }),
+      outputSchema: z.object({ sum: z.number() }),
     },
-    async ({ a, b }) => ({
-      content: [{ type: 'text', text: String(a + b) }],
-    }),
+    async ({ a, b }) => {
+      const output = { sum: a + b }
+      return {
+        content: [{ type: 'text', text: String(output.sum) }],
+        structuredContent: output, // typed results for structured-output clients
+      }
+    },
   )
 
-  // Tool: multiply two numbers
   server.registerTool(
     'multiply',
     {
       title: 'Multiplication',
       description: 'Multiply two numbers together',
-      inputSchema: {
+      inputSchema: z.object({
         a: z.number().describe('First number'),
         b: z.number().describe('Second number'),
-      },
+      }),
+      outputSchema: z.object({ product: z.number() }),
     },
-    async ({ a, b }) => ({
-      content: [{ type: 'text', text: String(a * b) }],
-    }),
+    async ({ a, b }) => {
+      const output = { product: a * b }
+      return {
+        content: [{ type: 'text', text: String(output.product) }],
+        structuredContent: output,
+      }
+    },
   )
 
-  // Tool: get current time
   server.registerTool(
     'get_current_time',
     {
       title: 'Current Time',
-      description:
-        'Get the current date and time. Optionally specify a timezone.',
-      inputSchema: {
+      description: 'Get the current date and time. Optionally specify a timezone.',
+      inputSchema: z.object({
         timezone: z
           .string()
           .optional()
-          .describe(
-            'Timezone (e.g. "America/New_York", "Europe/London", "UTC")',
-          ),
-      },
+          .describe('Timezone (e.g. "America/New_York", "Europe/London", "UTC")'),
+      }),
     },
     async ({ timezone }) => {
-      const now = new Date()
-      const options = {
+      const now = new Date().toLocaleString('en-US', {
         timeZone: timezone || 'UTC',
         dateStyle: 'full',
         timeStyle: 'long',
-      }
-      return {
-        content: [{ type: 'text', text: now.toLocaleString('en-US', options) }],
-      }
+      })
+      return { content: [{ type: 'text', text: now }] }
     },
   )
 
+  // -------------------------------------------------------------------------
+  // More SDK capabilities to explore (uncomment and adapt):
+  // -------------------------------------------------------------------------
+
+  // Progress notifications - long-running tools can stream progress over SSE
+  // to clients that request it (a progressToken in the request's _meta):
+  //
+  // server.registerTool(
+  //   'slow_report',
+  //   {
+  //     description: 'Generate a report, reporting progress along the way',
+  //     inputSchema: z.object({ steps: z.number().default(3), progressToken: z.string().optional() }),
+  //   },
+  //   async ({ steps, progressToken }, ctx) => {
+  //     for (let i = 1; i <= steps; i++) {
+  //       await new Promise((resolve) => setTimeout(resolve, 800))
+  //       if (progressToken) {
+  //         await ctx.mcpReq.notify({
+  //           method: 'notifications/progress',
+  //           params: { progressToken, progress: i, total: steps, message: `step ${i}` },
+  //         })
+  //       }
+  //     }
+  //     return { content: [{ type: 'text', text: `completed ${steps} steps` }] }
+  //   },
+  // )
+
+  // Elicitation - pause a tool call to ask the user for input; the client
+  // retries the request with the answers attached (multi round-trip requests):
+  //
+  // server.registerTool(
+  //   'approve_action',
+  //   {
+  //     description: 'Perform an action after user confirmation',
+  //     inputSchema: z.object({ action: z.string() }),
+  //   },
+  //   async ({ action }, ctx) => {
+  //     const result = await ctx.mcpReq.elicitInput({
+  //       mode: 'form',
+  //       message: `Proceed with ${action}?`,
+  //       requestedSchema: {
+  //         type: 'object',
+  //         properties: { confirmed: { type: 'boolean' } },
+  //         required: ['confirmed'],
+  //       },
+  //     })
+  //     if (result.action !== 'accept' || !result.content?.confirmed) {
+  //       return { content: [{ type: 'text', text: 'cancelled' }] }
+  //     }
+  //     return { content: [{ type: 'text', text: `${action} done` }] }
+  //   },
+  // )
+
+  // Resources - expose readable documents next to tools:
+  //
+  // server.registerResource(
+  //   'status',
+  //   'status://server',
+  //   { description: 'Server status document' },
+  //   async () => ({ contents: [{ uri: 'status://server', text: 'all good' }] }),
+  // )
+
   return server
-}
+})
 
 // ---------------------------------------------------------------------------
-// Express HTTP layer — stateless Streamable HTTP on port 8000
+// HTTP layer - AgentCore Runtime expects the MCP endpoint on port 8000
+// at /mcp. toNodeHandler adapts Node's req/res to the SDK's web-standard
+// handler. The platform adds an Mcp-Session-Id header for its own session
+// isolation; stateless servers accept and ignore it.
 // ---------------------------------------------------------------------------
 
 const PORT = 8000
-const app = express()
-app.use(express.json())
+const node = toNodeHandler(mcpHandler)
 
-// POST /mcp — handle MCP JSON-RPC requests (stateless)
-app.post('/mcp', async (req, res) => {
-  const server = createMcpServer()
-  try {
-    const transport = new StreamableHTTPServerTransport({
-      sessionIdGenerator: undefined, // stateless — no persistent sessions
-      enableJsonResponse: true,
-    })
-    await server.connect(transport)
-    res.on('close', () => {
-      transport.close()
-      server.close()
-    })
-    await transport.handleRequest(req, res, req.body)
-  } catch (error) {
-    console.error('Error handling MCP request:', error)
-    if (!res.headersSent) {
-      res.status(500).json({
-        jsonrpc: '2.0',
-        error: {
-          code: -32603,
-          message: 'Internal server error',
-        },
-        id: null,
-      })
-    }
+createServer((req, res) => {
+  if (!req.url?.startsWith('/mcp')) {
+    res.writeHead(404, { 'content-type': 'application/json' })
+    res.end(JSON.stringify({ error: 'not found' }))
+    return
   }
-})
-
-// GET /mcp — method not allowed per MCP spec
-app.get('/mcp', (_req, res) => {
-  res.writeHead(405).end(
-    JSON.stringify({
-      jsonrpc: '2.0',
-      error: {
-        code: -32000,
-        message: 'Method not allowed.',
-      },
-      id: null,
-    }),
-  )
-})
-
-app.listen(PORT, '0.0.0.0', () => {
+  node(req, res)
+}).listen(PORT, '0.0.0.0', () => {
   console.log(`MCP server running on http://0.0.0.0:${PORT}/mcp`)
 })

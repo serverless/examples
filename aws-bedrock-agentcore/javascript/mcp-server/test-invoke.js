@@ -2,13 +2,11 @@
 /**
  * Test script to invoke the MCP Server deployed to AgentCore Runtime.
  *
+ * Uses the stateless MCP 2026-07-28 protocol: every request is
+ * self-contained - no initialize handshake and no session bookkeeping.
+ *
  * Usage:
  *   RUNTIME_ARN=arn:aws:bedrock-agentcore:... node test-invoke.js
- *
- * Or set RUNTIME_ARN environment variable before running.
- *
- * Requires: @aws-sdk/client-bedrock-agentcore
- *   npm install @aws-sdk/client-bedrock-agentcore
  */
 
 import {
@@ -27,35 +25,31 @@ if (!RUNTIME_ARN) {
 }
 
 const client = new BedrockAgentCoreClient({ region: REGION })
-let sessionId = null
 
-async function invoke(method, params, id) {
-  const payload = { jsonrpc: '2.0', method, id }
-  if (params) payload.params = params
+// The per-request envelope required by protocol revision 2026-07-28:
+const META = {
+  'io.modelcontextprotocol/protocolVersion': '2026-07-28',
+  'io.modelcontextprotocol/clientInfo': { name: 'test-client', version: '1.0.0' },
+  'io.modelcontextprotocol/clientCapabilities': {},
+}
 
+let id = 0
+async function invoke(method, params = {}) {
+  const payload = {
+    jsonrpc: '2.0',
+    id: ++id,
+    method,
+    params: { ...params, _meta: { ...META, ...(params._meta ?? {}) } },
+  }
   const command = new InvokeAgentRuntimeCommand({
     agentRuntimeArn: RUNTIME_ARN,
     qualifier: 'DEFAULT',
-    ...(sessionId ? { runtimeSessionId: sessionId } : {}),
     payload: Buffer.from(JSON.stringify(payload)),
     contentType: 'application/json',
     accept: 'application/json, text/event-stream',
   })
-
   const response = await client.send(command)
-
-  // Capture session ID from first response
-  if (!sessionId && response.runtimeSessionId) {
-    sessionId = response.runtimeSessionId
-  }
-
-  // Parse response body
-  const body =
-    typeof response.response === 'string'
-      ? response.response
-      : await streamToString(response.response)
-
-  return JSON.parse(body)
+  return JSON.parse(await streamToString(response.response))
 }
 
 async function streamToString(stream) {
@@ -63,91 +57,52 @@ async function streamToString(stream) {
   if (stream instanceof Uint8Array || Buffer.isBuffer(stream)) {
     return new TextDecoder().decode(stream)
   }
-  // Handle ReadableStream or async iterator
   const chunks = []
   for await (const chunk of stream) {
-    chunks.push(
-      typeof chunk === 'string' ? chunk : new TextDecoder().decode(chunk),
-    )
+    chunks.push(typeof chunk === 'string' ? chunk : new TextDecoder().decode(chunk))
   }
   return chunks.join('')
 }
 
-async function testInitialize() {
-  console.log('=== Initialize ===')
-  const result = await invoke(
-    'initialize',
-    {
-      protocolVersion: '2025-11-25',
-      clientInfo: { name: 'test-client', version: '1.0.0' },
-      capabilities: {},
-    },
-    1,
-  )
-  console.log(
-    'Server:',
-    result.result?.serverInfo?.name,
-    result.result?.serverInfo?.version,
-  )
-  console.log('Protocol:', result.result?.protocolVersion)
-  console.log()
-}
-
-async function testListTools() {
-  console.log('=== tools/list ===')
-  const result = await invoke('tools/list', undefined, 2)
-  const tools = result.result?.tools || []
-  for (const tool of tools) {
-    console.log(`  - ${tool.name}: ${tool.description}`)
-  }
-  console.log()
-}
-
-async function testCallTool(name, args, id) {
-  console.log(`=== tools/call: ${name}(${JSON.stringify(args)}) ===`)
-  const result = await invoke('tools/call', { name, arguments: args }, id)
-  const content =
-    result.result?.content?.[0]?.text ?? JSON.stringify(result.result)
-  console.log(`  Result: ${content}`)
-  console.log()
-  return content
-}
-
 async function main() {
-  console.log('MCP Server Test Suite')
+  console.log('MCP Server Test Suite (stateless, protocol 2026-07-28)')
   console.log(`Runtime ARN: ${RUNTIME_ARN}`)
   console.log(`Region: ${REGION}`)
   console.log('='.repeat(50) + '\n')
 
-  // Step 1: Initialize
-  await testInitialize()
+  console.log('=== server/discover ===')
+  const discover = await invoke('server/discover')
+  console.log('Server:', discover.result?.serverInfo?.name, discover.result?.serverInfo?.version)
+  console.log('Supported versions:', discover.result?.supportedVersions)
+  console.log()
 
-  // Step 2: Send initialized notification
-  const notifPayload = { jsonrpc: '2.0', method: 'notifications/initialized' }
-  const notifCommand = new InvokeAgentRuntimeCommand({
-    agentRuntimeArn: RUNTIME_ARN,
-    qualifier: 'DEFAULT',
-    runtimeSessionId: sessionId,
-    payload: Buffer.from(JSON.stringify(notifPayload)),
-    contentType: 'application/json',
-    accept: 'application/json, text/event-stream',
-  })
-  await client.send(notifCommand)
+  console.log('=== tools/list ===')
+  const list = await invoke('tools/list')
+  for (const tool of list.result?.tools ?? []) {
+    console.log(`  - ${tool.name}: ${tool.description}`)
+  }
+  console.log()
 
-  // Step 3: List tools
-  await testListTools()
+  const calls = [
+    ['add', { a: 5, b: 3 }],
+    ['multiply', { a: 4, b: 7 }],
+    ['get_current_time', { timezone: 'Europe/Warsaw' }],
+  ]
+  for (const [name, args] of calls) {
+    console.log(`=== tools/call: ${name}(${JSON.stringify(args)}) ===`)
+    const result = await invoke('tools/call', { name, arguments: args })
+    const text = result.result?.content?.[0]?.text ?? JSON.stringify(result.result ?? result.error)
+    console.log(`  Result: ${text}`)
+    if (result.result?.structuredContent) {
+      console.log(`  Structured: ${JSON.stringify(result.result.structuredContent)}`)
+    }
+    console.log()
+  }
 
-  // Step 4: Call each tool
-  await testCallTool('add', { a: 5, b: 3 }, 10)
-  await testCallTool('multiply', { a: 7, b: 6 }, 11)
-  await testCallTool('get_current_time', { timezone: 'UTC' }, 12)
-  await testCallTool('get_current_time', { timezone: 'America/New_York' }, 13)
-
-  console.log('='.repeat(50))
-  console.log('All tests completed!')
+  console.log('All tests completed.')
 }
 
 main().catch((err) => {
-  console.error('Test failed:', err)
+  console.error('Test failed:', err.message)
   process.exit(1)
 })

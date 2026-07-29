@@ -32,7 +32,7 @@ A JavaScript MCP server deployed to AWS Bedrock AgentCore Runtime. Exposes simpl
 
 ```text
 mcp-server/
-├── index.js          # MCP server (Express + @modelcontextprotocol/sdk)
+├── index.js          # MCP server (official MCP SDK v2 + node:http)
 ├── package.json      # Dependencies and start script
 ├── serverless.yml    # Serverless Framework configuration
 └── README.md
@@ -54,9 +54,13 @@ sls dev
 
 ## How it works
 
-The server uses Express to expose a stateless Streamable HTTP endpoint at `POST /mcp` on port 8000, which is the standard expected by AgentCore Runtime for MCP-protocol runtimes. Each request creates a fresh MCP server instance, processes the JSON-RPC message, and cleans up on close.
+The server is built with the official [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) v2: `createMcpHandler` produces a web-standard handler serving the stateless MCP `2026-07-28` protocol revision (self-contained requests, `server/discover`, structured results) while answering older MCP clients through the SDK's built-in fallback on the same endpoint. `toNodeHandler` mounts it on a plain `node:http` server at `/mcp` on port 8000, the standard expected by AgentCore Runtime for MCP-protocol runtimes. The Runtime adds an `Mcp-Session-Id` header for its own session isolation; the stateless server accepts and ignores it.
 
 The `serverless.yml` sets `protocol: MCP` on the agent, which tells AgentCore to route MCP traffic to the runtime.
+
+Commented blocks in `index.js` show optional capabilities to enable: progress notifications streamed over SSE from long-running tools, elicitation (a tool pausing to ask the user for input), and resources.
+
+**Related example:** [`mcp-server-lambda-tools`](../mcp-server-lambda-tools) inverts this trade — AWS runs the MCP server (AgentCore Gateway) and your code shrinks to plain Lambda functions with the tool schema declared in `serverless.yml`. Pick this example when you need full SDK-level control; pick that one for simple request/response tools with no MCP code at all.
 
 ## Connecting MCP clients
 
