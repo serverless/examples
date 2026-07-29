@@ -57,7 +57,7 @@ Older MCP clients that still send the `initialize` handshake are answered too â€
 The example is deliberately minimal; commented blocks show how to extend it:
 
 - **Authentication** (`serverless.yml` + `src/server.mjs`): either attach an API Gateway authorizer that validates Bearer JWTs before the function is invoked, or use the SDK's in-process `requireBearerAuth` with a `jose`-based verifier for any OpenID Connect provider. Pair it with an unauthenticated `/.well-known/oauth-protected-resource` route (the SDK's `oauthMetadataResponse` helper builds the document) so MCP clients can discover how to log in.
-- **Elicitation** (`src/server.mjs`): a tool can pause mid-call and ask the user for input via `ctx.mcpReq.elicitInput(...)`; the client retries the request with the answers attached.
+- **Elicitation** (`src/server.mjs`): a tool can pause mid-call and ask the user for input by returning `inputRequired(...)`; the client asks the user and retries the call with the answers attached, and the handler reads them with `acceptedContent(...)` on re-entry.
 - **Resources**: expose readable documents next to tools with `registerResource`.
 - **Long-running tools**: `timeoutInMillis` on the route and the function `timeout` can be raised up to 15 minutes.
 
