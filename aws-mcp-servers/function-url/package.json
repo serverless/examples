@@ -1,9 +1,9 @@
 {
-  "name": "aws-node-mcp-server",
+  "name": "aws-mcp-function-url",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "MCP server on AWS Lambda with the official MCP SDK and API Gateway response streaming",
+  "description": "MCP server on a Lambda Function URL with response streaming - no API Gateway",
   "dependencies": {
     "@modelcontextprotocol/node": "^2.0.0",
     "@modelcontextprotocol/server": "^2.0.0",

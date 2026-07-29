@@ -1,7 +1,9 @@
 # MCP Server Example
 #
-# A JavaScript MCP server deployed to AWS Bedrock AgentCore Runtime.
-# Exposes tools (add, multiply, get_current_time) via the Model Context Protocol.
+# A JavaScript MCP server deployed to AWS Bedrock AgentCore Runtime, serving
+# the canonical aws-mcp-servers example server: tools (add, slow_report with
+# streamed progress, approve_refund with an elicitation round-trip),
+# resources, a prompt, server/discover instructions, and cache hints.
 
 service: mcp-server
 
@@ -23,3 +25,12 @@ ai:
           - Mcp-Method
           - Mcp-Name
           - Mcp-Protocol-Version
+
+      # Platform OAuth (config-only): have the runtime validate Bearer JWTs
+      # from any OpenID Connect provider before requests reach the container.
+      # The default (no authorizer) is IAM/SigV4 auth.
+      # authorizer:
+      #   jwt:
+      #     discoveryUrl: https://<your-idp>/.well-known/openid-configuration
+      #     allowedAudience:
+      #       - https://<your-mcp-endpoint>

@@ -3,7 +3,7 @@
 #
 # Plain JSON responses and streaming SSE responses both work through the same
 # endpoint - the server picks per request.
-service: aws-node-mcp-server
+service: aws-mcp-rest-api
 
 provider:
   name: aws
@@ -24,13 +24,16 @@ functions:
           response:
             transferMode: stream
           # To reject unauthenticated requests before they invoke the function,
-          # attach an authorizer (see the jwtAuthorizer function below), or use
-          # the SDK's in-process bearer auth (see src/server.mjs):
+          # attach the JWT authorizer below (src/authorizer.mjs validates
+          # Bearer tokens against any OpenID Connect provider), or use the
+          # SDK's in-process bearer auth (see src/server.mjs):
           # authorizer:
           #   name: jwtAuthorizer
       - http:
           method: GET
           path: /mcp # the server answers the spec-mandated 405 for GET
+          response:
+            transferMode: stream # every route on a streaming handler streams
 
       # OAuth discovery for MCP clients ("paste URL and log in"): serve the
       # protected-resource metadata on an unauthenticated route. The SDK's
@@ -39,7 +42,10 @@ functions:
       #     method: GET
       #     path: /.well-known/oauth-protected-resource
 
-  # A request authorizer validating Bearer JWTs against your OpenID Connect
-  # provider - pairs with the `authorizer` block above:
+  # The request authorizer pairing with the `authorizer` block above:
   # jwtAuthorizer:
   #   handler: src/authorizer.handler
+  #   environment:
+  #     JWKS_URL: https://<your-idp>/.well-known/jwks.json
+  #     TOKEN_ISSUER: https://<your-idp>/
+  #     TOKEN_AUDIENCE: https://<your-mcp-endpoint>

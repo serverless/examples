@@ -1,0 +1,26 @@
+# MCP server as a containerized Fastify app on Lambda, via AWS Lambda Web
+# Adapter baked into the image (see Dockerfile). Deploying builds the image
+# and pushes it to ECR (Docker must be running). Served on a Function URL
+# with response streaming.
+service: aws-mcp-fastify-container
+
+provider:
+  name: aws
+  ecr:
+    images:
+      mcp:
+        path: ./
+
+functions:
+  mcp:
+    image:
+      name: mcp
+    timeout: 120 # streamed responses can run up to the full function timeout
+    url:
+      invokeMode: RESPONSE_STREAM
+      # The default (no authorizer) is a public endpoint - fine for trying the
+      # example, but add auth for real deployments:
+      # - IAM (SigV4) for AWS-credentialed callers:
+      # authorizer: aws_iam
+      # - or OAuth validated in-process with the SDK's requireBearerAuth - see
+      #   the commented block in src/server.mjs.
