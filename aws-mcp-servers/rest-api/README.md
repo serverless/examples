@@ -69,7 +69,7 @@ The demo endpoint is public. For real deployments, two options (both included):
 
 - **Signed round-trip state**: seal server state across elicitation retries with `createRequestStateCodec` (see the comment in `src/server.mjs`).
 - **OAuth discovery**: serve `/.well-known/oauth-protected-resource` so MCP clients can discover your authorization server (commented route in `serverless.yml`).
-- **Long-running tools**: raise the function `timeout` and `timeoutInMillis` - streamed responses run up to 15 minutes.
+- **Long-running tools**: raise the function `timeout` and `timeoutInMillis` - streamed responses run up to 15 minutes. Keep the endpoint regional (as configured): edge-optimized REST endpoints cut streams that stay idle for 30 seconds, so a tool that computes quietly for longer than that would fail there even with a raised timeout.
 
 ### Cleanup
 

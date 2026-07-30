@@ -75,6 +75,10 @@ The demo endpoint is public. For real deployments (both included):
 - **Validate in-process** - the SDK's `requireBearerAuth` with a `jose` JWKS verifier (commented block at the bottom of `src/server.mjs`).
 - Behind an IAM-auth Function URL, the adapter's `AWS_LWA_AUTHORIZATION_SOURCE` can restore a client-supplied token from another header into `Authorization` (SigV4 reserves the original).
 
+### Going further
+
+- **Long-running tools**: raise the function `timeout` and `timeoutInMillis` together. Keep the endpoint regional (as configured): edge-optimized REST endpoints cut streams that stay idle for 30 seconds, so a tool that computes quietly for longer than that would fail there even with a raised timeout.
+
 ### Cleanup
 
 ```bash

@@ -40,7 +40,7 @@ The Lambda-based examples vary along three axes that are **fully independent** -
 | --- | --- | --- |
 | Custom domain, WAF, throttling, usage plans | yes | domain via CloudFront in front |
 | Reject unauthenticated requests before invoking | yes (authorizer) | IAM/SigV4 only |
-| Streaming (SSE) | yes - raise `timeoutInMillis` alongside (up to 15 min) | yes - function `timeout` is the only bound |
+| Streaming (SSE) | yes - raise `timeoutInMillis` alongside (up to 15 min), and keep the endpoint regional: edge-optimized endpoints cut streams idle for 30 s | yes - function `timeout` is the only bound |
 | Per-request cost | per-request fee (see [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/)), no streaming surcharge | none (Lambda streaming meters egress beyond the first 6 MB per response - see [Lambda pricing](https://aws.amazon.com/lambda/pricing/)) |
 
 AgentCore Runtime replaces the front-door question entirely (the platform hosts the endpoint, IAM or JWT auth, consumption-based pricing - see [AgentCore pricing](https://aws.amazon.com/bedrock/agentcore/pricing/)); AgentCore Gateway additionally replaces the MCP server itself.

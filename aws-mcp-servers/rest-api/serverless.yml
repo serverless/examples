@@ -8,6 +8,12 @@ service: aws-mcp-rest-api
 provider:
   name: aws
   runtime: nodejs22.x # the MCP SDK v2 requires Node.js 20+
+  # Regional endpoint, not the default edge-optimized one: edge REST endpoints
+  # cut idle streams after 30 seconds, which kills a tool that computes quietly
+  # for longer than that before responding. Regional raises that bound to
+  # 5 minutes (verified: an identical 36s silent call returns 200 on regional
+  # and 504 on edge).
+  endpointType: REGIONAL
 
 functions:
   mcp:
