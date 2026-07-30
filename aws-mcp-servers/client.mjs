@@ -309,6 +309,25 @@ if (process.env.LONG) {
   })
 }
 
+if (process.env.LONG) {
+  await check('14. LONG: a silent 36s call is not cut short', async () => {
+    // slow_report emits progress only when given a progressToken, so this call
+    // writes nothing at all for ~36s and then returns plain JSON. That is the
+    // case an edge-optimized API Gateway endpoint kills at 30s (its idle
+    // timeout starts at invoke, not at the first byte, and a raised
+    // timeoutInMillis does not help) - which is why the REST-fronted examples
+    // deploy on a regional endpoint.
+    const r = await request({
+      method: 'tools/call',
+      params: { name: 'slow_report', arguments: { steps: 45 } },
+      name: 'slow_report',
+    })
+    assert(r.status === 200, `HTTP ${r.status} after ${(r.ms / 1000).toFixed(1)}s`)
+    assert(r.json.result?.content?.[0]?.text === 'completed 45 steps', JSON.stringify(r.json).slice(0, 200))
+    return `plain JSON after ${(r.ms / 1000).toFixed(1)}s of silence`
+  })
+}
+
 // --- summary -------------------------------------------------------------------
 
 const failed = results.filter((r) => !r.ok)

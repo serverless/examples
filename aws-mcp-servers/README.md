@@ -76,6 +76,6 @@ AUTH=sigv4 SERVICE=bedrock-agentcore ENDPOINT=<url> node client.mjs   # AgentCor
 AUTH=sigv4 SERVICE=lambda ENDPOINT=<url> node client.mjs              # IAM-auth Function URL
 ```
 
-The checks cover the whole surface, including two negative cases proving the `2026-07-28` protocol validation is active end to end: a mismatching `Mcp-Method` header (`-32020`) and an elicitation call from a client that did not declare the capability (`-32021`).
+The checks cover the whole surface, including two negative cases proving the `2026-07-28` protocol validation is active end to end: a mismatching `Mcp-Method` header (`-32020`) and an elicitation call from a client that did not declare the capability (`-32021`). `LONG=1` adds two long-call cases - one streaming ~36 s of progress events, one staying completely silent for ~36 s before returning - because those two fail for different reasons on a misconfigured front door.
 
 The canonical copies of the shared files live in this directory ([client.mjs](client.mjs), [server.mjs](server.mjs)); every example carries an identical copy so each directory stays self-contained. Edit the canonical, re-copy into the examples - `node validate.js` at the repo root fails on any drift.
