@@ -1,0 +1,47 @@
+# An MCP server whose route is fronted by your own Lambda authorizer, so
+# unauthorized traffic is rejected by API Gateway before the server function is
+# invoked. The identity provider here is Auth0; the authorizer's JWKS check
+# fits any OIDC issuer.
+#
+# The Framework never verifies tokens — enforcement is this authorizer, and
+# every request it rejects is a server invocation you do not pay for.
+service: mcp-oauth-authorizer
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x # the MCP SDK requires Node.js 20 or newer
+  # Lets a response stream stay quiet for roughly 5 minutes; the edge-optimized
+  # default ends one quiet for roughly 30 seconds.
+  endpointType: REGIONAL
+
+functions:
+  # An ordinary function of yours. `authorizer:` below names it by key, and the
+  # Framework wires it to the MCP route only — never to the discovery route,
+  # which a client must be able to read before it has a token to present.
+  mcpAuthorizer:
+    handler: src/authorizer.handler
+    environment:
+      MCP_ISSUER: ${env:MCP_ISSUER}
+      MCP_AUDIENCE: ${env:MCP_AUDIENCE}
+
+mcp:
+  servers:
+    demo:
+      server: src/server.mjs
+
+      # The string form: a bare function name compiles as a TOKEN authorizer,
+      # with API Gateway's defaults — an Allow verdict cached per token for 300
+      # seconds (rejections throw, return no policy, and are never cached), and
+      # a request with no Authorization header at all rejected without invoking
+      # even the authorizer. A TOKEN authorizer receives ONLY
+      # the header's value, as event.authorizationToken; src/authorizer.mjs is
+      # written against exactly that shape, and the README covers the
+      # `type: request` object form for decisions that need the full request.
+      authorizer: mcpAuthorizer
+
+      # Advertisement, not enforcement: publishes the protected-resource
+      # discovery document (RFC 9728) naming the issuer, so clients can find
+      # where to log in. What rejects is the authorizer above.
+      oauthDiscovery:
+        issuer: ${env:MCP_ISSUER}

@@ -1,0 +1,13 @@
+{
+  "name": "aws-mcp-rest-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server on AWS Lambda with the official MCP SDK and API Gateway response streaming",
+  "dependencies": {
+    "@modelcontextprotocol/node": "^2.0.0",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "jose": "^6.0.0",
+    "zod": "^4.2.0"
+  }
+}

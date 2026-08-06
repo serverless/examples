@@ -1,0 +1,13 @@
+{
+  "name": "aws-mcp-hono",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server on AWS Lambda via the official MCP Hono integration and Hono's aws-lambda adapter - zero custom glue",
+  "dependencies": {
+    "@modelcontextprotocol/hono": "^2.0.0",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "hono": "^4.11.0",
+    "zod": "^4.2.0"
+  }
+}

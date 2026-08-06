@@ -1,0 +1,44 @@
+# An MCP server that verifies bearer tokens INSIDE the module, with the MCP
+# SDK's own `requireBearerAuth` gate wrapped around the handler — the path to
+# the specification's full auth semantics: the 401 carries a WWW-Authenticate
+# challenge, a token missing a required scope is a 403 insufficient_scope, and
+# the verified identity reaches your tools as ctx.http.authInfo.
+#
+# The Framework's part is advertisement and delivery only: `oauthDiscovery`
+# publishes the protected-resource document, and the endpoint itself is open —
+# every request reaches the function, where src/server.mjs judges it.
+service: mcp-oauth-in-module
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x # the MCP SDK requires Node.js 20 or newer
+  # Lets a response stream stay quiet for roughly 5 minutes; the edge-optimized
+  # default ends one quiet for roughly 30 seconds.
+  endpointType: REGIONAL
+
+mcp:
+  servers:
+    demo:
+      server: src/server.mjs
+
+      # No `authorizer:` — deliberately. Rejection happens in the module, which
+      # is what buys the spec-shaped responses, paid for with one invocation
+      # per rejected request. A gateway authorizer in front of this module is
+      # the hardened combination: cheap rejection of floods at API Gateway,
+      # the spec's judgement in here. Either sibling example's authorizer
+      # drops in unchanged.
+
+      # Advertisement: the RFC 9728 protected-resource document at
+      # /.well-known/oauth-protected-resource/demo/mcp, so clients can find
+      # the authorization server. It enforces nothing — the module does.
+      oauthDiscovery:
+        issuer: ${env:MCP_ISSUER}
+
+      environment:
+        # The OIDC issuer whose tokens the gate accepts; its JWKS is fetched
+        # from <issuer>/.well-known/jwks.json.
+        MCP_ISSUER: ${env:MCP_ISSUER}
+        # Space-separated scopes every token must carry. Leave unset to accept
+        # any token the issuer signed.
+        MCP_REQUIRED_SCOPES: ${env:MCP_REQUIRED_SCOPES, ''}

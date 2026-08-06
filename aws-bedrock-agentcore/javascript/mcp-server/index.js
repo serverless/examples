@@ -1,145 +1,30 @@
 /**
- * MCP Server for AWS Bedrock AgentCore Runtime
+ * MCP Server for AWS Bedrock AgentCore Runtime.
  *
- * A stateless MCP server exposing simple tools via the Model Context Protocol.
- * Uses Express + @modelcontextprotocol/sdk with Streamable HTTP transport.
+ * Serves the canonical aws-mcp-servers example server (src/server.mjs) -
+ * built with the official MCP TypeScript SDK v2, speaking the stateless MCP
+ * 2026-07-28 protocol revision, with the SDK's built-in fallback for older
+ * clients on the same endpoint.
  *
- * Tools:
- *   - add: Add two numbers
- *   - multiply: Multiply two numbers
- *   - get_current_time: Get the current date and time
+ * AgentCore Runtime expects the MCP endpoint on port 8000 at /mcp.
+ * toNodeHandler adapts Node's req/res to the SDK's web-standard handler.
+ * The platform adds an Mcp-Session-Id header for its own session isolation;
+ * stateless servers accept and ignore it.
  */
-
-import express from 'express'
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js'
-import { z } from 'zod'
-
-// ---------------------------------------------------------------------------
-// MCP Server factory — creates a fresh stateless server per request
-// ---------------------------------------------------------------------------
-
-const createMcpServer = () => {
-  const server = new McpServer({
-    name: 'mcp-server',
-    version: '1.0.0',
-  })
-
-  // Tool: add two numbers
-  server.registerTool(
-    'add',
-    {
-      title: 'Addition',
-      description: 'Add two numbers together',
-      inputSchema: {
-        a: z.number().describe('First number'),
-        b: z.number().describe('Second number'),
-      },
-    },
-    async ({ a, b }) => ({
-      content: [{ type: 'text', text: String(a + b) }],
-    }),
-  )
-
-  // Tool: multiply two numbers
-  server.registerTool(
-    'multiply',
-    {
-      title: 'Multiplication',
-      description: 'Multiply two numbers together',
-      inputSchema: {
-        a: z.number().describe('First number'),
-        b: z.number().describe('Second number'),
-      },
-    },
-    async ({ a, b }) => ({
-      content: [{ type: 'text', text: String(a * b) }],
-    }),
-  )
-
-  // Tool: get current time
-  server.registerTool(
-    'get_current_time',
-    {
-      title: 'Current Time',
-      description:
-        'Get the current date and time. Optionally specify a timezone.',
-      inputSchema: {
-        timezone: z
-          .string()
-          .optional()
-          .describe(
-            'Timezone (e.g. "America/New_York", "Europe/London", "UTC")',
-          ),
-      },
-    },
-    async ({ timezone }) => {
-      const now = new Date()
-      const options = {
-        timeZone: timezone || 'UTC',
-        dateStyle: 'full',
-        timeStyle: 'long',
-      }
-      return {
-        content: [{ type: 'text', text: now.toLocaleString('en-US', options) }],
-      }
-    },
-  )
-
-  return server
-}
-
-// ---------------------------------------------------------------------------
-// Express HTTP layer — stateless Streamable HTTP on port 8000
-// ---------------------------------------------------------------------------
+import { createServer } from 'node:http'
+import { toNodeHandler } from '@modelcontextprotocol/node'
+import mcp from './src/server.mjs'
 
 const PORT = 8000
-const app = express()
-app.use(express.json())
+const node = toNodeHandler(mcp)
 
-// POST /mcp — handle MCP JSON-RPC requests (stateless)
-app.post('/mcp', async (req, res) => {
-  const server = createMcpServer()
-  try {
-    const transport = new StreamableHTTPServerTransport({
-      sessionIdGenerator: undefined, // stateless — no persistent sessions
-      enableJsonResponse: true,
-    })
-    await server.connect(transport)
-    res.on('close', () => {
-      transport.close()
-      server.close()
-    })
-    await transport.handleRequest(req, res, req.body)
-  } catch (error) {
-    console.error('Error handling MCP request:', error)
-    if (!res.headersSent) {
-      res.status(500).json({
-        jsonrpc: '2.0',
-        error: {
-          code: -32603,
-          message: 'Internal server error',
-        },
-        id: null,
-      })
-    }
+createServer((req, res) => {
+  if (!req.url?.startsWith('/mcp')) {
+    res.writeHead(404, { 'content-type': 'application/json' })
+    res.end(JSON.stringify({ error: 'not found' }))
+    return
   }
-})
-
-// GET /mcp — method not allowed per MCP spec
-app.get('/mcp', (_req, res) => {
-  res.writeHead(405).end(
-    JSON.stringify({
-      jsonrpc: '2.0',
-      error: {
-        code: -32000,
-        message: 'Method not allowed.',
-      },
-      id: null,
-    }),
-  )
-})
-
-app.listen(PORT, '0.0.0.0', () => {
+  node(req, res)
+}).listen(PORT, '0.0.0.0', () => {
   console.log(`MCP server running on http://0.0.0.0:${PORT}/mcp`)
 })

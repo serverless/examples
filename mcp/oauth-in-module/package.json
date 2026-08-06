@@ -1,0 +1,12 @@
+{
+  "name": "mcp-oauth-in-module",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server deployed with the Serverless Framework",
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "jose": "^6.1.0",
+    "zod": "^4.2.0"
+  }
+}

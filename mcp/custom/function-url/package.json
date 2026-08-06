@@ -1,0 +1,12 @@
+{
+  "name": "aws-mcp-function-url",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server on a Lambda Function URL with response streaming - no API Gateway",
+  "dependencies": {
+    "@modelcontextprotocol/node": "^2.0.0",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.2.0"
+  }
+}

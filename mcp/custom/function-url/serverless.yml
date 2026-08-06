@@ -1,0 +1,26 @@
+# MCP server on a Lambda Function URL with response streaming.
+#
+# The leanest possible MCP hosting on AWS: no API Gateway, no per-request
+# fee - the Function URL invokes the Lambda directly, and response streaming
+# carries both plain JSON and SSE on the same endpoint.
+service: aws-mcp-function-url
+
+provider:
+  name: aws
+  runtime: nodejs22.x # the MCP SDK v2 requires Node.js 20+
+
+functions:
+  mcp:
+    handler: src/lambda.handler
+    timeout: 120 # streamed responses can run up to the full function timeout
+    url:
+      invokeMode: RESPONSE_STREAM
+      # Function URLs support two auth modes. The default (no authorizer) is a
+      # public endpoint - fine for trying the example, but add auth for real
+      # deployments:
+      # - IAM (SigV4) for AWS-credentialed callers (the shared client tests
+      #   this with AUTH=sigv4 SERVICE=lambda):
+      # authorizer: aws_iam
+      # - or OAuth for MCP clients (Claude, AI IDEs) validated in-process with
+      #   the SDK's requireBearerAuth - see the commented block in
+      #   src/server.mjs.

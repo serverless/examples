@@ -1,0 +1,11 @@
+{
+  "name": "mcp-oauth-cognito",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server deployed with the Serverless Framework",
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.2.0"
+  }
+}
