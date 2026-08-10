@@ -6,7 +6,7 @@ framework: v4
 platform: AWS
 language: nodeJS
 authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
+authorName: 'Serverless, Inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 -->
 
