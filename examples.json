@@ -290,6 +290,66 @@
     "authorAvatar": "https://avatars0.githubusercontent.com/u/8188?v=4&s=140"
   },
   {
+    "title": "AWS MCP Server behind API Gateway REST (NodeJS)",
+    "name": "mcp-custom-rest-api",
+    "description": "Run an MCP server built with the official MCP TypeScript SDK on AWS Lambda, with streaming responses through API Gateway REST response streaming.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/custom/rest-api",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS MCP Server on Lambda Function URL (NodeJS)",
+    "name": "mcp-custom-function-url",
+    "description": "Run an MCP server built with the official MCP TypeScript SDK on a Lambda Function URL with response streaming - no API Gateway.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/custom/function-url",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS MCP Server with Hono (NodeJS)",
+    "name": "mcp-custom-hono",
+    "description": "Run an MCP server on AWS Lambda with the official MCP Hono integration and Hono's aws-lambda adapter - no hand-written Lambda glue at all.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/custom/hono",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS MCP Server with Express and Lambda Web Adapter (NodeJS)",
+    "name": "mcp-custom-express-web-adapter",
+    "description": "Run an MCP server as a plain Express app on AWS Lambda with Lambda Web Adapter - zip deployment, streaming through API Gateway REST.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/custom/express-web-adapter",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS MCP Server, minimal (NodeJS)",
+    "name": "mcp-minimal",
+    "description": "Deploy an MCP server built with the official MCP TypeScript SDK to AWS Lambda with the Serverless Framework - one module, one line of configuration.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/minimal",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "Node.js AWS Lambda connecting to MongoDB Atlas",
     "name": "aws-node-mongodb-atlas",
     "description": "Shows how to connect AWS Lambda to MongoDB Atlas.",
@@ -1291,6 +1351,18 @@
     "platform": "aws",
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "Bedrock AgentCore: MCP Server from Plain Lambda Functions (JavaScript)",
+    "name": "aws-bedrock-agentcore-javascript-mcp-server-lambda-tools",
+    "description": "MCP server whose tools are plain Lambda functions - no MCP SDK in your code - using Bedrock AgentCore Gateway.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/javascript/mcp-server-lambda-tools",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {
@@ -2632,5 +2704,41 @@
     "authorLink": "https://github.com/eahefnawy",
     "authorName": "Eslam λ Hefnawy",
     "authorAvatar": "https://avatars.githubusercontent.com/u/2312463?v=4"
+  },
+  {
+    "title": "AWS MCP Server with Amazon Cognito OAuth (NodeJS)",
+    "name": "mcp-oauth-cognito",
+    "description": "Protect an MCP server with an Amazon Cognito user pool validated by API Gateway - zero token-verification code, a self-contained pool and app client, machine-to-machine tokens, with the Serverless Framework.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/oauth-cognito",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS MCP Server with a Custom Lambda Authorizer and Auth0 (NodeJS)",
+    "name": "mcp-oauth-authorizer",
+    "description": "Reject unauthorized MCP traffic at API Gateway before the Lambda runs, using your own Lambda authorizer with Auth0 as the identity provider, with the Serverless Framework.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/oauth-authorizer",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS MCP Server Verifying OAuth In-Module (NodeJS)",
+    "name": "mcp-oauth-in-module",
+    "description": "Verify OAuth 2.1 bearer tokens inside your MCP server module with the MCP SDK's requireBearerAuth gate - spec-shaped 401 challenges, scope-aware 403s, and the caller's identity in your tools, with the Serverless Framework.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/mcp/oauth-in-module",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   }
 ]

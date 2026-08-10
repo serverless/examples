@@ -1,0 +1,60 @@
+# MCP server as a plain Express app on Lambda, via AWS Lambda Web Adapter.
+#
+# The Lambda Web Adapter layer proxies Lambda events to the Express server
+# over localhost HTTP - the application code contains nothing Lambda-specific.
+# Served through API Gateway REST response streaming.
+service: aws-mcp-express
+
+provider:
+  name: aws
+  runtime: nodejs22.x # the MCP SDK v2 requires Node.js 20+
+  # Regional endpoint, not the default edge-optimized one: edge REST endpoints
+  # cut idle streams after 30 seconds, which kills a tool that computes quietly
+  # for longer than that before responding. Regional raises that bound to
+  # 5 minutes (verified: an identical 36s silent call returns 200 on regional
+  # and 504 on edge).
+  endpointType: REGIONAL
+
+functions:
+  mcp:
+    # The handler is the startup script (the layer's exec wrapper runs it and
+    # proxies invocations to the HTTP server it starts):
+    handler: run.sh
+    timeout: 120
+    layers:
+      # AWS Lambda Web Adapter, published by AWS (region-agnostic account,
+      # arch-specific): https://github.com/aws/aws-lambda-web-adapter
+      - arn:aws:lambda:${aws:region}:753240598075:layer:LambdaAdapterLayerX86:25
+    environment:
+      AWS_LAMBDA_EXEC_WRAPPER: /opt/bootstrap
+      AWS_LWA_INVOKE_MODE: response_stream # stream responses (SSE) end-to-end
+      PORT: '8000'
+    events:
+      - http:
+          method: POST
+          path: /mcp
+          # Response streaming lifts API Gateway's classic response limits and
+          # enables SSE, but the integration timeout must be raised explicitly
+          # alongside it (up to 15 minutes):
+          timeoutInMillis: 120000
+          response:
+            transferMode: stream
+          # To reject unauthenticated requests before they invoke the function,
+          # attach the JWT authorizer below (src/authorizer.mjs validates
+          # Bearer tokens against any OpenID Connect provider), or use the
+          # SDK's in-process bearer auth (see src/server.mjs):
+          # authorizer:
+          #   name: jwtAuthorizer
+      - http:
+          method: GET
+          path: /mcp # the server answers the spec-mandated 405 for GET
+          response:
+            transferMode: stream # every route on a streaming handler streams
+
+  # The request authorizer pairing with the `authorizer` block above:
+  # jwtAuthorizer:
+  #   handler: src/authorizer.handler
+  #   environment:
+  #     JWKS_URL: https://<your-idp>/.well-known/jwks.json
+  #     TOKEN_ISSUER: https://<your-idp>/
+  #     TOKEN_AUDIENCE: https://<your-mcp-endpoint>

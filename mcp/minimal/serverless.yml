@@ -1,0 +1,57 @@
+# An MCP server declared under `mcp:` below. The module in
+# src/server.mjs is a plain MCP SDK server; everything around it — the HTTPS
+# endpoint, response streaming, the Lambda entry that bridges the two, and the
+# packaging — belongs to the Framework.
+service: mcp-minimal
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x # the MCP SDK requires Node.js 20 or newer
+  # Edge-optimized REST endpoints (the default) end a response stream that has
+  # gone quiet for roughly 30 seconds, counted from the invoke; regional raises
+  # that bound to roughly 5 minutes. What matters is the gap between writes, so
+  # a tool that computes for a while before it answers needs the regional bound.
+  endpointType: REGIONAL
+
+  # A custom domain belongs to the API, not to one server: it fronts every MCP
+  # server and `http` function in the service. Mapped at the root (no
+  # `basePath`), the OAuth discovery document sits where MCP clients probe for
+  # it, which is what lets an interactive client discover your authorization
+  # server and log in itself.
+  # domain: mcp.example.com
+
+mcp:
+  servers:
+    # The server name is the function key, the Lambda name suffix, and the URL
+    # path segment: this one is served at /demo/mcp.
+    demo:
+      server: src/server.mjs
+
+      # Longer tools: `timeout` (seconds, default 60) sets the function timeout
+      # and the streaming integration timeout together, so the two cannot drift
+      # apart. A tool running past ~300 seconds must emit progress regardless.
+      # timeout: 300
+
+      # Access control is yours to enforce — the Framework never verifies
+      # tokens. `authorizer` puts your enforcement at API Gateway, in front of
+      # the function: one of your own authorizer functions by name, an
+      # http-event-style object (a Cognito user pool included), or aws_iam.
+      # `oauthDiscovery` is advertisement, not enforcement: it publishes the
+      # protected-resource discovery document at
+      # /.well-known/oauth-protected-resource/demo/mcp so clients can find
+      # where to log in. With neither, the endpoint is public. The
+      # oauth-cognito, oauth-authorizer, and oauth-in-module examples next
+      # door each carry one enforcement shape, deployable end to end.
+      # authorizer: verifyToken
+      # oauthDiscovery:
+      #   issuer: https://example.us.auth0.com
+
+      # Elicitation round trips — a tool pausing to ask the caller for input —
+      # need a key to seal what the retry has to bring back. `state: true`
+      # provisions one in this stack (a Secrets Manager secret, about $0.40 per
+      # month) and places it in SERVERLESS_MCP_STATE_KEY before your module is
+      # imported, so `createRequestStateCodec` can read it at module level. A
+      # literal SSM parameter or Secrets Manager ARN brings your own key
+      # instead.
+      # state: true

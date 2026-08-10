@@ -1,0 +1,13 @@
+{
+  "name": "mcp-server-lambda-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server from plain Lambda functions via Bedrock AgentCore Gateway",
+  "devDependencies": {
+    "@aws-crypto/sha256-js": "^5.2.0",
+    "@aws-sdk/credential-provider-node": "^3.750.0",
+    "@smithy/protocol-http": "^5.0.0",
+    "@smithy/signature-v4": "^5.0.0"
+  }
+}

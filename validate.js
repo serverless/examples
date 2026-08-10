@@ -5,7 +5,7 @@ const path = require('path');
 
 const ROOT = __dirname;
 const REQUIRED = ['title', 'description', 'framework', 'platform', 'language', 'authorLink', 'authorName', 'authorAvatar'];
-const SKIP_DIRS = new Set(['node_modules', '.git', '.github', 'docs', 'images', '.serverless']);
+const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.claude', 'docs', 'images', '.serverless']);
 
 // An example root is the shallowest directory containing serverless.yml/yaml.
 // Do not recurse below an example root (multi-service examples validate once, at the root).
@@ -48,6 +48,41 @@ for (const dir of findExampleDirs(ROOT)) {
   for (const [key, value] of Object.entries(fm)) {
     if (value.includes(': ') && !/^['"]/.test(value)) {
       errors.push(`${rel}: frontmatter "${key}" contains ": " — quote the value (breaks YAML parsing on serverless.com)`);
+    }
+  }
+}
+
+// The mcp/custom examples all serve one canonical MCP server and ship
+// one shared test client. The canonical copies live at mcp/custom/
+// (client.mjs, server.mjs); every example carries an identical copy so each
+// directory stays self-contained. Edit the canonical, then re-copy.
+const SHARED_FILES = [
+  ['mcp/custom/client.mjs', [
+    'mcp/custom/rest-api/client.mjs',
+    'mcp/custom/function-url/client.mjs',
+    'mcp/custom/hono/client.mjs',
+    'mcp/custom/express-web-adapter/client.mjs',
+    'mcp/custom/fastify-container/client.mjs',
+    'aws-bedrock-agentcore/javascript/mcp-server/client.mjs',
+  ]],
+  ['mcp/custom/server.mjs', [
+    'mcp/custom/rest-api/src/server.mjs',
+    'mcp/custom/function-url/src/server.mjs',
+    'mcp/custom/hono/src/server.mjs',
+    'mcp/custom/express-web-adapter/src/server.mjs',
+    'mcp/custom/fastify-container/src/server.mjs',
+    'aws-bedrock-agentcore/javascript/mcp-server/src/server.mjs',
+  ]],
+];
+for (const [canonical, copies] of SHARED_FILES) {
+  const canonicalPath = path.join(ROOT, canonical);
+  if (!fs.existsSync(canonicalPath)) { errors.push(`${canonical}: canonical shared file missing`); continue; }
+  const want = fs.readFileSync(canonicalPath, 'utf8');
+  for (const copy of copies) {
+    const copyPath = path.join(ROOT, copy);
+    if (!fs.existsSync(copyPath)) { errors.push(`${copy}: missing copy of ${canonical}`); continue; }
+    if (fs.readFileSync(copyPath, 'utf8') !== want) {
+      errors.push(`${copy}: differs from canonical ${canonical} — edit the canonical and re-copy`);
     }
   }
 }

@@ -1,0 +1,67 @@
+# MCP server from plain Lambda functions via Bedrock AgentCore Gateway.
+#
+# The Gateway is the MCP server: an AWS-managed /mcp endpoint that serves
+# tools/list and server/discover itself and invokes a Lambda function per
+# tool call. Tool handlers are plain functions - no MCP SDK, no HTTP server.
+service: mcp-server-lambda-tools
+
+provider:
+  name: aws
+
+functions:
+  calculator:
+    handler: handlers/calculator.handler
+    runtime: nodejs24.x
+
+ai:
+  tools:
+    calculator:
+      function: calculator
+      toolSchema: # the Gateway serves tools/list from this schema
+        - name: add
+          description: Add two numbers together
+          inputSchema:
+            type: object
+            properties:
+              a: { type: number, description: First number }
+              b: { type: number, description: Second number }
+            required: [a, b]
+        # One function can back multiple tools - the invoked tool name arrives
+        # in context.clientContext.custom['bedrockAgentCoreToolName'] and the
+        # handler branches on it (see handlers/calculator.mjs):
+        # - name: multiply
+        #   description: Multiply two numbers
+        #   inputSchema:
+        #     type: object
+        #     properties:
+        #       a: { type: number }
+        #       b: { type: number }
+        #     required: [a, b]
+
+    # Tools don't have to be Lambda functions. The same gateway can expose
+    # an HTTP API described by an OpenAPI document:
+    # weather:
+    #   openapi: ./weather-openapi.yml
+    # ...or proxy an external MCP server (streaming and elicitation pass
+    # through for this target type):
+    # external:
+    #   mcp: https://mcp.example.com/mcp
+
+  gateways:
+    mcpServer:
+      protocol:
+        # Advertise the MCP protocol revisions this endpoint serves.
+        supportedVersions: ['2026-07-28', '2025-03-26']
+        # With many tools, semantic search helps agents find the right one
+        # (adds a built-in x_amz_bedrock_agentcore_search tool):
+        # searchType: SEMANTIC
+        # instructions: 'Use the calculator tools for any arithmetic'
+      tools: [calculator]
+      # Default authorization is AWS_IAM (SigV4) - see test-client.mjs.
+      # For OAuth clients (Claude, AI IDEs), configure a JWT authorizer with
+      # your OpenID Connect provider instead:
+      # authorizer:
+      #   type: CUSTOM_JWT
+      #   jwt:
+      #     discoveryUrl: https://cognito-idp.us-east-1.amazonaws.com/<pool>/.well-known/openid-configuration
+      #     allowedAudience: [<your-client-id>]
