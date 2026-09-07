@@ -4,8 +4,9 @@ service: aws-node-container-snapstart
 
 provider:
   name: aws
-  # SnapStart bills a cached snapshot per published version (outside the Java
-  # managed runtimes). Deleting superseded versions on deploy keeps that to one.
+  # SnapStart always publishes a version and bills a cached snapshot per retained
+  # version (outside the Java managed runtimes). Deleting superseded versions
+  # keeps only the one the snapstart alias serves.
   versionFunctions: false
   ecr:
     images:

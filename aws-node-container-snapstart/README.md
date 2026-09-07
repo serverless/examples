@@ -54,7 +54,7 @@ The response reports how the environment started:
 { "initializationType": "snap-start", "functionVersion": "1", "initializedAt": "…" }
 ```
 
-`initializationType` is `snap-start` because the HTTP API invokes the `snapstart` alias the Framework publishes on every deploy. In CloudWatch Logs the first invocation of a fresh environment shows a `RESTORE_REPORT` line with the restore duration instead of an `INIT_REPORT`.
+`initializationType` is `snap-start` because the HTTP API invokes the `snapstart` alias, which the Framework points at the version published by the latest deploy that changed the function. In CloudWatch Logs the first invocation of a fresh environment shows a `RESTORE_REPORT` line with the restore duration instead of an `INIT_REPORT`.
 
 Invoking the function by its unqualified name skips the snapshot:
 
@@ -67,7 +67,7 @@ returns `"initializationType": "on-demand"` and `"functionVersion": "$LATEST"`.
 ## What to keep in mind
 
 - **Uniqueness.** Everything at module scope is captured once and shared by every restored environment. Do not create random seeds, unique IDs or cached credentials during initialization; create them inside the handler. See [Handling uniqueness with Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-uniqueness.html).
-- **Cost.** AWS bills a cached snapshot per published version for runtimes other than Java. This example sets `versionFunctions: false` so each deploy deletes the superseded version; with the default, every deploy would retain another billed snapshot. See [Cost of retained versions](https://www.serverless.com/framework/docs/providers/aws/guide/functions#cost-of-retained-versions).
+- **Cost.** AWS bills a cached snapshot per published version for runtimes other than Java. SnapStart always publishes a version; `versionFunctions` only decides whether superseded versions are kept. This example sets it to `false` so a deploy that publishes a new version deletes the previous one; with the default, each such deploy would retain another billed snapshot. See [Cost of retained versions](https://www.serverless.com/framework/docs/providers/aws/guide/functions#cost-of-retained-versions).
 - **Limits.** SnapStart cannot be combined with provisioned concurrency, EFS, S3 Files, or ephemeral storage above 512 MB.
 
 ## Remove
