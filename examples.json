@@ -156,6 +156,18 @@
     "authorAvatar": "https://avatars0.githubusercontent.com/u/26760571?v=4&s=140"
   },
   {
+    "title": "AWS Lambda container image with SnapStart (NodeJS)",
+    "name": "aws-node-container-snapstart",
+    "description": "Deploy a Node.js Lambda function as a container image with SnapStart enabled, including the Dockerfile label that makes a non-Java/Python/.NET image snapshot-ready.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-container-snapstart",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "Dynamic Image Resizing API",
     "name": "aws-node-dynamic-image-resizer",
     "description": "This example shows you how to setup a dynamic image resizer API",
