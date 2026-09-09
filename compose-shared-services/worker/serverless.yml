@@ -1,0 +1,26 @@
+service: compose-shared-worker
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+functions:
+  processJob:
+    handler: worker.handler
+    events:
+      - sqs:
+          arn: !GetAtt JobsQueue.Arn
+          batchSize: 1
+
+resources:
+  Resources:
+    JobsQueue:
+      Type: AWS::SQS::Queue
+  Outputs:
+    JobsQueueUrl:
+      Value: !Ref JobsQueue
+    JobsQueueArn:
+      Value: !GetAtt JobsQueue.Arn

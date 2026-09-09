@@ -1,0 +1,10 @@
+{
+  "name": "compose-shared-api",
+  "version": "1.0.0",
+  "description": "HTTP API that writes to a shared DynamoDB table and enqueues worker jobs",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.700.0",
+    "@aws-sdk/client-sqs": "^3.700.0"
+  }
+}

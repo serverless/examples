@@ -190,6 +190,7 @@ serverless deploy
 | [AWS MCP Server with Amazon Cognito OAuth (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-cognito) <br/> Protect an MCP server with an Amazon Cognito user pool validated by API Gateway - zero token-verification code, a self-contained pool and app client, machine-to-machine tokens, with the Serverless Framework. | nodeJS |
 | [AWS MCP Server with a Custom Lambda Authorizer and Auth0 (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-authorizer) <br/> Reject unauthorized MCP traffic at API Gateway before the Lambda runs, using your own Lambda authorizer with Auth0 as the identity provider, with the Serverless Framework. | nodeJS |
 | [AWS MCP Server Verifying OAuth In-Module (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-in-module) <br/> Verify OAuth 2.1 bearer tokens inside your MCP server module with the MCP SDK's requireBearerAuth gate - spec-shaped 401 challenges, scope-aware 403s, and the caller's identity in your tools, with the Serverless Framework. | nodeJS |
+| [Serverless Compose Shared Data Service with Personal Stages](https://github.com/serverless/examples/tree/v4/compose-shared-services) <br/> Share one stateful data service across many personal stages using the Compose service resolver, wiring outputs both same-stage and cross-stage | nodeJS |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Community Examples

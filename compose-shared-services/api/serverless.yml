@@ -1,0 +1,30 @@
+service: compose-shared-api
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+  environment:
+    # Resolved by Compose and injected as params. The api handler never learns
+    # which stage these came from — it just reads plain environment variables.
+    TABLE_NAME: ${param:ordersTableName}
+    JOBS_QUEUE_URL: ${param:jobsQueueUrl}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: dynamodb:PutItem
+          Resource: ${param:ordersTableArn}
+        - Effect: Allow
+          Action: sqs:SendMessage
+          Resource: ${param:jobsQueueArn}
+
+functions:
+  createOrder:
+    handler: api.handler
+    events:
+      - httpApi:
+          path: /orders
+          method: post
