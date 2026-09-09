@@ -69,3 +69,5 @@ await client.close()
 npm init -y && npm install @modelcontextprotocol/client
 ENDPOINT="https://…/demo/mcp" node client.mjs
 ```
+
+Every Framework-hosted example here also runs under [Dev Mode](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode): `serverless dev` keeps the deployed endpoint (and its auth) live while each tool call runs your local working copy — the [minimal example shows the loop](minimal/README.md#develop-it-live).
