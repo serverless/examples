@@ -189,6 +189,10 @@ claude -p "call the whoami tool from the demo MCP server and show the raw result
 
 A pasted header never refreshes, so calls start answering the gate's `401` when the token expires — re-add with a fresh one. `claude mcp remove demo` deregisters it. The browser-login alternative is the [oauth-cognito walkthrough](../oauth-cognito/README.md#interactive-clients-need-a-custom-domain), and it applies here the same way once a root-mapped domain fronts the service.
 
+## Develop it live
+
+`serverless dev` serves this example too — and since enforcement lives in the module here, the verification code is precisely what runs on your machine: edit it, and the next request is judged by the new logic, no redeploy. The [minimal example's walkthrough](../minimal/README.md#develop-it-live) and the [Dev Mode docs](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode) apply unchanged.
+
 ## Clean up
 
 ```bash

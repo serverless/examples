@@ -232,6 +232,10 @@ The redirect completes the flow back to Claude:
 
 The logged-in calls then pass the gate. What makes them pass is scope: the pool authorizer accepts only access tokens carrying `mcp/invoke`, which is why the pre-registered client above enables `openid mcp/invoke` — and when a client's request names no scopes, Cognito issues the token with every scope enabled on the app client. If a post-login call answers `401` anyway, what the client sent to `/oauth2/authorize` is the first thing to check.
 
+## Develop it live
+
+`serverless dev` works with the gate up: during a session the user pool authorizer stays in force at API Gateway exactly as it does deployed — unauthorized requests are rejected there, and accepted requests run your local module on the next save — no redeploy. The [minimal example's walkthrough](../minimal/README.md#develop-it-live) and the [Dev Mode docs](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode) apply unchanged.
+
 ## Clean up
 
 ```bash

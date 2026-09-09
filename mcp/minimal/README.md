@@ -159,6 +159,18 @@ claude -p "call the add tool from the demo MCP server with a=2 b=40" --allowedTo
 
 The custom domain enters the picture only when a server enforces OAuth and a human logs in through the client — that walkthrough is the [oauth-cognito README](../oauth-cognito/README.md#interactive-clients-need-a-custom-domain). `claude mcp remove demo` deregisters it.
 
+## Develop it live
+
+Dev Mode serves this example while every tool call runs the module in your editor. Start a session:
+
+```bash
+serverless dev
+```
+
+The banner lists the same `/demo/mcp` endpoint — still a real API Gateway URL — and each request to it is relayed to your machine and answered by your current local code. Call a tool through any client, edit `src/server.mjs`, call it again: the second answer is the new code, with nothing deployed in between. TypeScript modules get the same treatment, compiled on the fly.
+
+Two limits come with a session. Requests or results larger than ~125 KB are rejected: the session prints the limit and what to do, while the client sees a plain `502`. And because a session delivers each result in one piece, a tool call that stays silent for roughly 30 seconds is dropped downstream with a `504` on an edge-optimized endpoint — this example's `endpointType: REGIONAL` has no such budget, so a call runs up to the server's `timeout`. Deploying normally lifts both — and when you are done developing, `serverless deploy` restores the packaged server on the same URL. The [Dev Mode section of the MCP guide](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode) covers the mechanics, including how `state` keys and elicitation behave during a session.
+
 ## Going further
 
 `serverless.yml` carries the next three steps as commented blocks, each with the reasoning next to it:

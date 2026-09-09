@@ -230,6 +230,10 @@ curl -s -X POST https://your-tenant.us.auth0.com/oidc/register \
 
 The issuer's metadata advertises a `registration_endpoint` whether or not registration is actually enabled, so the probe — not the metadata — is what tells you.
 
+## Develop it live
+
+`serverless dev` works with the gate up — and here that cuts both ways: the authorizer function itself runs on your machine through the same session, so you can edit token verification and see the next request judged by the new code, while rejected requests still never reach the server. The [minimal example's walkthrough](../minimal/README.md#develop-it-live) and the [Dev Mode docs](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode) apply unchanged.
+
 ## Clean up
 
 ```bash
