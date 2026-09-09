@@ -1,0 +1,55 @@
+# Serverless Framework Compose: shared data service + personal stages
+#
+# Three services, wired together with the `service` resolver:
+#
+#   orders-db  A shared, stateful DynamoDB table. Deployed once to a long-lived
+#              stage (here, `dev`) and left running.
+#   worker     An SQS queue plus the Lambda that drains it. Deployed per stage,
+#              alongside `api`.
+#   api        An HTTP endpoint that writes orders to the shared table and
+#              enqueues a job for the worker.
+#
+# `api` reads two outputs, in two different ways:
+#
+#   ${service:worker.JobsQueueUrl}   Same-stage reference. Reads worker's output
+#                                    at the stage of the current run and makes
+#                                    worker deploy before api.
+#
+#   ${shared:orders-db.TableName}    Cross-stage reference. `shared` is a named
+#                                    `service` resolver instance pinned to the
+#                                    stage held in ${param:dataStage}. It reads
+#                                    orders-db's outputs from that fixed stage,
+#                                    so personal stages share one data table.
+#
+# See the README for the bootstrap and personal-stage workflows.
+
+stages:
+  default:
+    params:
+      # The stage that owns the shared data services. Personal stages read
+      # orders-db from here instead of deploying their own copy.
+      dataStage: dev
+    resolvers:
+      shared:
+        type: service
+        # Pin the resolver to the data stage. A fixed string works too;
+        # driving it from a param keeps the whole graph on one lifecycle
+        # during a full `--stage dev` bootstrap (see the README).
+        stage: ${param:dataStage}
+
+services:
+  orders-db:
+    path: orders-db
+
+  worker:
+    path: worker
+
+  api:
+    path: api
+    params:
+      # Same-stage: worker deploys before api, in this run's stage.
+      jobsQueueUrl: ${service:worker.JobsQueueUrl}
+      jobsQueueArn: ${service:worker.JobsQueueArn}
+      # Cross-stage: read orders-db as deployed to ${param:dataStage}.
+      ordersTableName: ${shared:orders-db.TableName}
+      ordersTableArn: ${shared:orders-db.TableArn}
