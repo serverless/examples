@@ -118,9 +118,14 @@ def safe_calculate(expression: str) -> float:
 
     try:
         tree = ast.parse(expression, mode='eval')
-        return _evaluate_node(tree.body)
-    except SyntaxError as e:
+    except SyntaxError:
         raise ValueError(f"Invalid expression syntax: {expression}")
+
+    result = _evaluate_node(tree.body)
+    if not math.isfinite(result):
+        # inf/nan would serialize as invalid JSON (Infinity, NaN)
+        raise ValueError("Result is too large to represent")
+    return result
 
 
 def _evaluate_node(node):
@@ -143,7 +148,9 @@ def _evaluate_node(node):
         op_func = OPERATORS.get(type(node.op))
         if op_func is None:
             raise ValueError(f"Unsupported operator: {type(node.op).__name__}")
-        return op_func(left, right)
+        # Keep every value a float: int results (e.g. from floor/ceil/round)
+        # would make ** arbitrary-precision and able to run for minutes.
+        return float(op_func(left, right))
 
     # Unary operations: -x, +x
     if isinstance(node, ast.UnaryOp):
@@ -151,7 +158,7 @@ def _evaluate_node(node):
         op_func = OPERATORS.get(type(node.op))
         if op_func is None:
             raise ValueError(f"Unsupported unary operator: {type(node.op).__name__}")
-        return op_func(operand)
+        return float(op_func(operand))
 
     # Function calls: sqrt(16), sin(0)
     if isinstance(node, ast.Call):
@@ -159,7 +166,7 @@ def _evaluate_node(node):
             func_name = node.func.id
             if func_name in FUNCTIONS:
                 args = [_evaluate_node(arg) for arg in node.args]
-                return FUNCTIONS[func_name](*args)
+                return float(FUNCTIONS[func_name](*args))
             raise ValueError(f"Unknown function: {func_name}")
         raise ValueError("Function calls must be simple names")
 
