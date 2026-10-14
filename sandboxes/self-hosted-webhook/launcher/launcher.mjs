@@ -59,8 +59,8 @@ const microvms = new LambdaMicrovmsClient({
   // Local dev only: point RunMicrovm at the local emulator started by
   // `serverless dev --sandbox worker`. A launcher-specific var on purpose — NOT the standard
   // AWS_ENDPOINT_URL_LAMBDA_MICROVMS, which the AWS SDK honors for *every* MicroVMs client in the
-  // process (including the framework's own deploy-time calls that must reach real AWS). Unset in
-  // production, so this is a no-op there.
+  // process. Set only when the stage is deployed with --param="microvmDevEndpoint=..." (see
+  // serverless.yml); empty otherwise, so this is a no-op in production.
   ...(process.env.MICROVM_DEV_ENDPOINT && {
     endpoint: process.env.MICROVM_DEV_ENDPOINT,
   }),

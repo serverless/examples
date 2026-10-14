@@ -1,0 +1,12 @@
+{
+  "name": "aws-dev-mode",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A TypeScript HTTP API and a Python queue worker, developed with Serverless Framework Dev Mode",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-sqs": "^3.1000.0"
+  }
+}

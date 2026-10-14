@@ -1,0 +1,43 @@
+service: aws-dev-mode
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs26.x
+  architecture: arm64
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: sqs:SendMessage
+          Resource: !GetAtt JobsQueue.Arn
+
+# One artifact per function: the API is TypeScript, built by the Framework's
+# esbuild support, and the worker is Python. Each ships in its own artifact.
+package:
+  individually: true
+
+functions:
+  api:
+    handler: src/api.createJob
+    environment:
+      QUEUE_URL: !Ref JobsQueue
+    events:
+      - httpApi: 'POST /jobs'
+  worker:
+    handler: worker/handler.process
+    runtime: python3.15
+    package:
+      patterns:
+        - '!**'
+        - 'worker/**'
+    events:
+      - sqs:
+          arn: !GetAtt JobsQueue.Arn
+          batchSize: 10
+          functionResponseType: ReportBatchItemFailures
+
+resources:
+  Resources:
+    JobsQueue:
+      Type: AWS::SQS::Queue

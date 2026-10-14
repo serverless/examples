@@ -167,9 +167,9 @@ Dev Mode serves this example while every tool call runs the module in your edito
 serverless dev
 ```
 
-The banner lists the same `/demo/mcp` endpoint — still a real API Gateway URL — and each request to it is relayed to your machine and answered by your current local code. Call a tool through any client, edit `src/server.mjs`, call it again: the second answer is the new code, with nothing deployed in between. TypeScript modules get the same treatment, compiled on the fly.
+The endpoint stays the same `/demo/mcp` URL — still a real API Gateway URL — and each request to it is relayed to your machine and answered by your current local code. Call a tool through any client, edit `src/server.mjs`, call it again: the second answer is the new code, with nothing deployed in between. TypeScript modules get the same treatment, compiled on the fly.
 
-Two limits come with a session. Requests or results larger than ~125 KB are rejected: the session prints the limit and what to do, while the client sees a plain `502`. And because a session delivers each result in one piece, a tool call that stays silent for roughly 30 seconds is dropped downstream with a `504` on an edge-optimized endpoint — this example's `endpointType: REGIONAL` has no such budget, so a call runs up to the server's `timeout`. Deploying normally lifts both — and when you are done developing, `serverless deploy` restores the packaged server on the same URL. The [Dev Mode section of the MCP guide](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode) covers the mechanics, including how `state` keys and elicitation behave during a session.
+A session serves the server as deployed: progress and results stream, requests and results above about 126 KB travel through the stage's deployment bucket, and the endpoint's idle bound applies as it does deployed — this example's `endpointType: REGIONAL` lets a quiet call run up to the server's `timeout`. When you are done, stop the session with Ctrl+C: it restores the packaged server on the same URL, with nothing to deploy. The [Dev Mode section of the MCP guide](https://www.serverless.com/framework/docs/providers/aws/guide/mcp#dev-mode) covers the mechanics, including how `state` keys and elicitation behave during a session.
 
 ## Going further
 
