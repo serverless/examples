@@ -211,8 +211,13 @@ Two `serverless dev` sessions cooperate:
 
 ### Prerequisites for this step
 
-1. Docker running, and the stack deployed once (Step 1).
-2. Store a webhook signing secret, and keep the value for the test script:
+1. Docker running.
+2. Point the launcher at the local emulator by deploying the stage with the `microvmDevEndpoint` parameter:
+   ```bash
+   serverless deploy --param="microvmDevEndpoint=http://127.0.0.1:9100"
+   ```
+   Dev Mode runs your local `launcher.mjs` with the *deployed* function's environment variables, not your shell's, so the emulator's address goes on the function: this deploy sets the launcher's `MICROVM_DEV_ENDPOINT` to `http://127.0.0.1:9100`. While the stage is deployed with this parameter, the deployed launcher also sends `RunMicrovm` to `127.0.0.1`, so a webhook that reaches AWS while no Dev Mode session is running cannot start a MicroVM, and costs nothing. Running `serverless deploy` without `--param` sets it back to empty, and the launcher launches real MicroVMs again (Step 4).
+3. Store a webhook signing secret, and keep the value for the test script:
    ```bash
    SIGNING_ARN=$(serverless info --json | jq -r '.outputs[] | select(.OutputKey=="SigningSecretArn").OutputValue')
    export SIGNING_SECRET="whsec_$(openssl rand -base64 24)"
@@ -240,22 +245,27 @@ MicroVMs API ready — Ctrl-C to stop
 ```
 
 > Runs the container as the worker's real execution role (IAM emulation), so it reads Secrets Manager exactly like production. Add `--no-assume-role` to use your ambient credentials.
-> **Port 9100 already in use** (e.g. a leftover dev session)? Use `serverless dev --sandbox worker --port 9200` and set `MICROVM_DEV_ENDPOINT` to match below.
+> **Port 9100 already in use** (e.g. a leftover dev session)? Use `serverless dev --sandbox worker --port 9200`, and deploy with `--param="microvmDevEndpoint=http://127.0.0.1:9200"` to match.
 
 ### Terminal B — the launcher (functions Dev Mode)
 
 ```bash
-export MICROVM_DEV_ENDPOINT=http://127.0.0.1:9100   # point RunMicrovm at Terminal A
 serverless dev
 ```
 
 ```text
-Functions:
-  launcher: sandboxes-self-hosted-webhook-dev-launcher
-Endpoints:
-  POST - https://abc123xyz0.execute-api.us-east-1.amazonaws.com/dev/webhook
-✔ Connected (Ctrl+C to cancel)
+Dev ϟ Mode
+
+Developing "sandboxes-self-hosted-webhook" on stage "dev" (us-east-1)
+
+✔ Dev Mode on · 1 of 1 function (7.4s)
+
+endpoint: POST - https://abc123xyz0.execute-api.us-east-1.amazonaws.com/dev/webhook
+
+Press h for keys, Ctrl+C or q to restore your functions and exit.
 ```
+
+The local launcher sends `RunMicrovm` to Terminal A because the deployed launcher's `MICROVM_DEV_ENDPOINT` says so (prerequisite 2).
 
 ### Terminal C — fire a signed webhook
 
@@ -325,7 +335,7 @@ The emulator also streams these lines inline (prefixed `─ <id>`), but because 
 
 - Edit **`launcher/launcher.mjs`** → the next webhook runs your new code (no redeploy).
 - Edit **`worker/worker.mjs` or `worker/Dockerfile`** → the emulator rebuilds the image; the next `RunMicrovm` launches a fresh container.
-- When done: `Ctrl-C` both, then `serverless deploy` once to restore the deployed launcher (Dev Mode temporarily swaps it for a relay shim).
+- When done: `Ctrl-C` both. Stopping Dev Mode in Terminal B restores the deployed launcher. To keep developing locally, deploy with the same `--param`; Step 4 deploys without it to ship your launcher and worker edits to real MicroVMs.
 
 ---
 
@@ -346,7 +356,7 @@ Now make the worker do real work — a live Claude session running **in your loc
 
 2. **In the Claude Console**, open the environment and click **Generate environment key** (Console-only, even if you created the environment via the API). Then create a **webhook** for `session.status_run_started` events — this gives you the **signing secret** (`whsec_…`) — and set its endpoint to the stack's `WebhookUrl`. See [Self-hosted sandboxes](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes) and [Webhooks](https://platform.claude.com/docs/en/managed-agents/webhooks).
 
-3. **Configure and deploy.** If Dev Mode from Step 2 is still running, stop it first — press `Ctrl-C` in Terminals A and B (Dev Mode swapped the deployed launcher for a relay shim, so deploy with it stopped). Store both secret values (the framework doesn't manage secret values, so use the AWS CLI):
+3. **Configure and deploy.** If Dev Mode from Step 2 is still running, stop it first — press `Ctrl-C` in Terminals A and B. Store both secret values (the framework doesn't manage secret values, so use the AWS CLI):
    ```bash
    SIGNING_ARN=$(serverless info --json | jq -r '.outputs[] | select(.OutputKey=="SigningSecretArn").OutputValue')
    ENVKEY_ARN=$(serverless info --json | jq -r '.outputs[] | select(.OutputKey=="EnvironmentKeySecretArn").OutputValue')
@@ -354,13 +364,13 @@ Now make the worker do real work — a live Claude session running **in your loc
    aws secretsmanager put-secret-value --secret-id "$SIGNING_ARN" --secret-string '<whsec_... from the Console>'
    aws secretsmanager put-secret-value --secret-id "$ENVKEY_ARN" --secret-string '<environment key>'
    ```
-   Set your environment id in `serverless.yml` (so the launcher polls the right environment), then deploy:
+   Set your environment id in `serverless.yml` (so the launcher polls the right environment), then deploy, keeping the `microvmDevEndpoint` parameter from Step 2 so the worker still runs on your laptop:
    ```yaml
    # serverless.yml → provider.environment
    ANTHROPIC_ENVIRONMENT_ID: env_XXXXXXXXXXXXXXXX
    ```
    ```bash
-   serverless deploy
+   serverless deploy --param="microvmDevEndpoint=http://127.0.0.1:9100"
    ```
    > Leave `ANTHROPIC_ENVIRONMENT_ID` empty and the launcher rejects the launch with a clear error instead of starting a VM that can't find its environment.
 
@@ -370,8 +380,7 @@ Now make the worker do real work — a live Claude session running **in your loc
    serverless dev --sandbox worker
    ```
    ```bash
-   # Terminal B — launcher relay, pointed at Terminal A
-   export MICROVM_DEV_ENDPOINT=http://127.0.0.1:9100
+   # Terminal B — launcher relay; the deployed MICROVM_DEV_ENDPOINT points it at Terminal A
    serverless dev
    ```
    ```bash
@@ -418,10 +427,10 @@ Claude just ran tools inside a sandbox on your machine. Same code, no cloud Micr
 
 ## Step 4 — Ship to production (same code)
 
-There's nothing new to write — the code you ran locally is what runs in the cloud. Stop Dev Mode if it's running (`Ctrl-C` in Terminals A and B) and redeploy to restore the real launcher, then trigger a session (no Dev Mode this time) — the webhook drives the *deployed* launcher, which launches a **real MicroVM**:
+There's nothing new to write — the code you ran locally is what runs in the cloud. Stop Dev Mode if it's running (`Ctrl-C` in Terminals A and B; that restores the deployed launcher). Deploy without `--param`: that ships any launcher or worker edits and sets `MICROVM_DEV_ENDPOINT` back to empty, so the launcher calls real MicroVMs. Then trigger a session (no Dev Mode this time) — the webhook drives the *deployed* launcher, which launches a **real MicroVM**:
 
 ```bash
-serverless deploy   # restores the real launcher (Dev Mode leaves a relay shim in place)
+serverless deploy   # no --param: ships your edits and points the launcher at real MicroVMs
 
 # Same trigger as Step 3, using your agent + environment ids:
 SID=$(ant beta:sessions create \
@@ -493,7 +502,7 @@ worker: session sesn_XXXX complete
 - **Lifecycle hooks.** The worker runs an HTTP server on port 9000 and answers `POST /aws/lambda-microvms/runtime/v1/<hook>`. This example enables `ready` (image-build snapshot gate) and `run` (per-instance dispatch). Hooks are **opt-in**: state transitions happen regardless, but your code is only *notified* for hooks you declare. Respond `200` quickly — the `run` hook's timeout is short (AWS defaults to **1s** when you don't set one; this example widens it with `run: { timeout: 5 }`) — then do the session work asynchronously.
 - **"Idle" means no inbound endpoint traffic — not "no code running."** A MicroVM is suspended/terminated after `maxIdleDurationSeconds` with no requests to its endpoint, *even if it's busy*. This worker is a poller (all outbound), so it isn't kept alive by activity — it finishes by **exiting**, which terminates the VM immediately. The idle policy is just the backstop for a hung worker.
 - **No idempotency here.** Anthropic may deliver a webhook more than once; each delivery launches a MicroVM. One claims the session; the others find no work and exit. Fine for an example — see [Production hardening](#production-hardening).
-- **`MICROVM_DEV_ENDPOINT`, not `AWS_ENDPOINT_URL_LAMBDA_MICROVMS`.** The standard AWS override is honored by *every* MicroVMs client in the process — including the framework's own deploy-time calls (Dev Mode spawns a deploy). A launcher-specific var, read only by `launcher.mjs`, avoids redirecting those to the emulator; it's unset in production, so it's a no-op there.
+- **`MICROVM_DEV_ENDPOINT`, not `AWS_ENDPOINT_URL_LAMBDA_MICROVMS`.** The launcher's MicroVMs client uses this endpoint when it is set. It's set on the deployed function, through the `microvmDevEndpoint` parameter, because Dev Mode runs the local launcher with the deployed function's environment variables rather than your shell's; it's empty unless you deploy with that parameter, so it's a no-op in production. A launcher-specific variable, read only by `launcher.mjs`, keeps the override to that one client, where the AWS SDK applies the standard `AWS_ENDPOINT_URL_LAMBDA_MICROVMS` to *every* MicroVMs client in the process.
 
 ---
 
@@ -539,7 +548,7 @@ Intentionally omitted here to keep the example focused on the webhook → launch
 | Symptom | Cause & fix |
 | --- | --- |
 | Worker logs `404 NotFoundError` from the poller | Empty `ANTHROPIC_ENVIRONMENT_ID` → the worker polls an empty environment. Set it in `serverless.yml` (`provider.environment`) and redeploy. (The launcher fails fast on an empty value.) |
-| `Port 9100 is already in use` | A leftover `serverless dev --sandbox` session. Use `--port 9200` and set `MICROVM_DEV_ENDPOINT` to match. |
+| `Port 9100 is already in use` | A leftover `serverless dev --sandbox` session. Use `--port 9200` and deploy with `--param="microvmDevEndpoint=http://127.0.0.1:9200"` to match. |
 | Deploy fails: `... did not stabilize` | Occasionally transient on first image create. Re-run `serverless deploy`. |
 | Worker logs "no Anthropic environment key is stored yet" | Expected for the synthetic test — populate `EnvironmentKeySecret` for real sessions (Step 3). |
 | Webhook returns `401` | Signature mismatch — the stored `SigningSecret` must equal the value you sign with (and the one registered in the Console). |

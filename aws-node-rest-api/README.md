@@ -77,13 +77,15 @@ Which should result in response similar to the following:
 }
 ```
 
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using the `dev` command:
+To run your code for real requests to your deployed API, use the `dev` command:
 
-```
+```bash
 serverless dev
 ```
 
-This will start a local emulator of AWS Lambda and tunnel your requests to and from AWS Lambda, allowing you to interact with your function as if it were running in the cloud.
+Dev Mode attaches your deployed function to your machine: call its endpoint as before, and your local code runs, with your function's deployed configuration and permissions. Edit the code and the next request runs the new version, with nothing to redeploy.
+
+Press Ctrl+C to end the session; your function runs the deployed code again. Deploy with `serverless deploy` when you want your changes to stay. Learn more in the [Dev Mode guide](https://www.serverless.com/framework/docs/providers/aws/guide/dev-mode).
 
 ## Scaling
 

@@ -25,6 +25,10 @@ provider:
     # The Claude self_hosted environment id. Leave empty ('') for the webhook-only
     # test; when wiring a real managed agent (README Step 3), paste your env_... here.
     ANTHROPIC_ENVIRONMENT_ID: '' # e.g. env_0123456789abcdef
+    # Local development only (README Step 2): deploy with
+    # --param="microvmDevEndpoint=http://127.0.0.1:9100" and the launcher sends RunMicrovm
+    # to the local MicroVMs emulator. Empty by default, so the launcher launches real MicroVMs.
+    MICROVM_DEV_ENDPOINT: ${param:microvmDevEndpoint, ''}
   iam:
     role:
       statements:

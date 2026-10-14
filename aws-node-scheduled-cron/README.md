@@ -45,12 +45,10 @@ There is no additional step required. Your defined schedules becomes active righ
 
 The easiest way to develop and test your function is to use the `dev` command:
 
-```
+```bash
 serverless dev
 ```
 
-This will start a local emulator of AWS Lambda and tunnel your requests to and from AWS Lambda, allowing you to interact with your function as if it were running in the cloud.
+Dev Mode attaches your deployed function to your machine: each scheduled run, or a `serverless invoke --function rateHandler`, runs your local code, with your function's deployed configuration and permissions. Edit the code and the next invocation runs the new version, with nothing to redeploy.
 
-Now you can invoke the function as before, but this time the function will be executed locally. Now you can develop your function locally, invoke it, and see the results immediately without having to re-deploy.
-
-When you are done developing, don't forget to run `serverless deploy` to deploy the function to the cloud.
+Press Ctrl+C to end the session; your function runs the deployed code again. Deploy with `serverless deploy` when you want your changes to stay. Learn more in the [Dev Mode guide](https://www.serverless.com/framework/docs/providers/aws/guide/dev-mode).

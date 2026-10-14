@@ -120,6 +120,18 @@
     "authorAvatar": "https://avatars0.githubusercontent.com/u/527924?v=4&s=140"
   },
   {
+    "title": "Dev Mode: a TypeScript HTTP API and a Python queue worker",
+    "name": "aws-dev-mode",
+    "description": "This example shows Serverless Framework Dev Mode on a service with a TypeScript HTTP API and a Python SQS worker: real requests and queue messages run the code on your machine, from a terminal or an AI coding agent.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-dev-mode",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "AWS Serverless Alexa Skill example in NodeJS",
     "name": "aws-node-alexa-skill",
     "description": "This example demonstrates how to setup your own Alexa skill using AWS Lambdas.",
