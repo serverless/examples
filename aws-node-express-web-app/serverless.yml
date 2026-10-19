@@ -1,0 +1,9 @@
+service: aws-node-express-web-app
+
+provider:
+  name: aws
+  region: us-east-1
+
+webApps:
+  api:
+    entry: src/server.js

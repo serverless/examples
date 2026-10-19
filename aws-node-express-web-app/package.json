@@ -1,0 +1,13 @@
+{
+  "name": "aws-node-express-web-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An Express server deployed as an AWS Lambda Web Function with the Serverless Framework",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
