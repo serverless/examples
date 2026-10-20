@@ -1,0 +1,16 @@
+{
+  "name": "aws-node-nextjs-web-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Next.js app deployed as an AWS Lambda Web Function with the Serverless Framework",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "start": "node .next/standalone/server.js"
+  },
+  "dependencies": {
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}

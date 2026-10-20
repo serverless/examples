@@ -1,0 +1,17 @@
+service: aws-node-nextjs-web-app
+
+provider:
+  name: aws
+  region: us-east-1
+
+webApps:
+  site:
+    # The server that `next build` writes with `output: 'standalone'`.
+    # Run `npm run build` before `serverless deploy`.
+    entry: .next/standalone/server.js
+    # The standalone output is already built: ship it as it is.
+    build: false
+    package:
+      patterns:
+        - '!**'
+        - '.next/standalone/**'

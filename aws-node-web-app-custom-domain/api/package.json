@@ -1,0 +1,13 @@
+{
+  "name": "aws-node-web-app-custom-domain-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Express API of a web app custom domain example",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

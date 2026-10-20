@@ -266,6 +266,18 @@
     "priority": 3
   },
   {
+    "title": "Express web app on AWS Lambda Web Functions",
+    "name": "aws-node-express-web-app",
+    "description": "This example deploys a plain Express server to AWS Lambda Web Functions with the Serverless Framework. The server has no Lambda-specific code and answers on a public HTTPS endpoint.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-express-web-app",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "AWS Fetch image from URL and upload to S3 example in NodeJS",
     "name": "aws-node-fetch-file-and-store-in-s3",
     "description": "This example display how to fetch an image from remote source (URL) and then upload this image to a S3 bucket.",
@@ -396,6 +408,18 @@
     "authorLink": "https://github.com/welkie",
     "authorName": "Matt Welke",
     "authorAvatar": "https://avatars0.githubusercontent.com/u/7719209"
+  },
+  {
+    "title": "Next.js app on AWS Lambda Web Functions",
+    "name": "aws-node-nextjs-web-app",
+    "description": "This example deploys a Next.js app to AWS Lambda Web Functions with the Serverless Framework, using the standalone server that next build writes. Pages, route handlers and static assets are all served from one public HTTPS endpoint.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-nextjs-web-app",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {
     "title": "Running Puppeteer on AWS Lambda",
@@ -854,6 +878,18 @@
     "authorLink": "https://github.com/walgarch",
     "authorName": "walgarch",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/32451330?v=4&s=140"
+  },
+  {
+    "title": "Next.js and Express web apps on one custom domain",
+    "name": "aws-node-web-app-custom-domain",
+    "description": "This example deploys a Next.js frontend and an Express API to AWS Lambda Web Functions with the Serverless Framework and serves both from one custom domain, routed by path.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-web-app-custom-domain",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {
     "title": "Simple Websocket Authorizers",

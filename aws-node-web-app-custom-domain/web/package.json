@@ -1,0 +1,16 @@
+{
+  "name": "aws-node-web-app-custom-domain-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Next.js frontend of a web app custom domain example",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "start": "node .next/standalone/server.js"
+  },
+  "dependencies": {
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}

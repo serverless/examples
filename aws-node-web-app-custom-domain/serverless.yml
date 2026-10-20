@@ -1,0 +1,33 @@
+service: aws-node-web-app-custom-domain
+
+provider:
+  name: aws
+  region: us-east-1
+  # One hostname for both web apps. Set it at deploy time:
+  # serverless deploy --param="domain=app.example.com"
+  domains:
+    # Every path the entry below doesn't match goes to the Next.js app.
+    - name: ${param:domain}
+      webApp: web
+    # /api and every path under /api/ go to the Express API, with the path unchanged.
+    - name: ${param:domain}
+      basePath: api
+      webApp: api
+
+webApps:
+  web:
+    # The server that `next build` writes with `output: 'standalone'`.
+    # Run `npm run build` in web/ before `serverless deploy`.
+    entry: web/.next/standalone/server.js
+    # The standalone output is already built: ship it as it is.
+    build: false
+    package:
+      patterns:
+        - '!**'
+        - 'web/.next/standalone/**'
+  api:
+    entry: api/server.js
+    package:
+      patterns:
+        - '!**'
+        - 'api/**'
