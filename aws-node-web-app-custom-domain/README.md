@@ -53,7 +53,7 @@ webApps:
 - The entry with `basePath: api` receives `/api` and every path under `/api/`. The path reaches the web app unchanged: a request for `/api/hello` arrives as `/api/hello`, so [`api/server.js`](api/server.js) mounts its routes under `/api`.
 - `${param:domain}` is the hostname, a [stage parameter](https://www.serverless.com/framework/docs/guides/parameters) you set at deploy time.
 
-For the hostname, the Framework creates an Amazon CloudFront distribution in front of the two web apps and Route 53 A and AAAA alias records that point the hostname at it. On the first deploy it also requests an ACM certificate for the hostname in us-east-1, CloudFront's certificate Region, and validates it through DNS in the hosted zone; a later deploy finds and reuses it. Requests to the hostname aren't cached: every request reaches a web app.
+For the hostname, the Framework creates an Amazon CloudFront distribution in front of the two web apps and Route 53 A and AAAA alias records that point the hostname at it. On the first deploy it uses an ACM certificate in us-east-1, CloudFront's certificate Region, that covers the hostname, such as an existing wildcard certificate, or requests one and validates it through DNS in the hosted zone; later deploys reuse it. Requests to the hostname aren't cached: every request reaches a web app.
 
 Each web app is packaged on its own:
 
@@ -110,7 +110,7 @@ stages:
       domain: dev.example.com
 ```
 
-The first deploy with a new hostname takes several minutes: ACM issues the certificate, and CloudFront creates the distribution. Later deploys update the distribution in place.
+The first deploy with a new hostname takes several minutes, mostly while CloudFront creates the distribution and, if no certificate covers the hostname yet, while ACM issues one. Later deploys update the distribution in place.
 
 ```text
 Deploying "aws-node-web-app-custom-domain" to stage "dev" (us-east-1)
@@ -166,4 +166,4 @@ serverless remove --param="domain=app.example.com"
 
 This deletes the stack and the uploaded code. The stack holds both web functions with their endpoints and log groups, the CloudFront distribution, and the A and AAAA records. Removing the distribution takes a few minutes.
 
-The certificate and its DNS validation record stay, so a later deploy with the same hostname reuses the certificate. To delete them, delete the certificate in ACM in us-east-1, and its `_<hash>.app.example.com` CNAME validation record in the hosted zone.
+A certificate the deploy requested stays, with its DNS validation record, so a later deploy with the same hostname reuses it. To delete them, delete the certificate in ACM in us-east-1, and its `_<hash>.app.example.com` CNAME validation record in the hosted zone. A certificate that existed before, such as a wildcard certificate, is left as it was.
