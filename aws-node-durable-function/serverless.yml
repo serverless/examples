@@ -1,0 +1,14 @@
+# A Node.js durable function: a handler that checkpoints its steps and can
+# pause and resume across invocations, for up to executionTimeout seconds.
+service: aws-node-durable-function
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+
+functions:
+  worker:
+    handler: handler.worker
+    durableConfig:
+      # Maximum time a whole execution may take, waits included (up to 366 days).
+      executionTimeout: 3600

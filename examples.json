@@ -180,6 +180,18 @@
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {
+    "title": "AWS Lambda durable function (NodeJS)",
+    "name": "aws-node-durable-function",
+    "description": "Deploy a Node.js Lambda durable function that runs a checkpointed step, waits, and resumes, and start an execution with serverless invoke.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-durable-function",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "Dynamic Image Resizing API",
     "name": "aws-node-dynamic-image-resizer",
     "description": "This example shows you how to setup a dynamic image resizer API",
