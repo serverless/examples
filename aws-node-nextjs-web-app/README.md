@@ -66,6 +66,21 @@ npm run build
 npm start
 ```
 
+## Develop with `serverless dev`
+
+After the first deploy, `serverless dev` runs the app on your machine with its cloud context:
+
+```bash
+serverless dev
+```
+
+- Requests to the web app's real URL are answered by `next dev` on your machine, with the deployed environment variables and the web function's IAM role.
+- The local URL that `serverless dev` prints under `web apps:` (`http://localhost:<port>`) serves the same server directly, with Next.js hot reload. On the real URL, refresh to see changes.
+- When your machine doesn't answer (it sleeps, or you stop the session), the real URL serves the deployed build again.
+- `dev.command` in `serverless.yml` is what `serverless dev` runs: `next dev` on the `PORT` the Framework sets, listening on `127.0.0.1` only. Without it, Dev Mode would try to run `entry`, which here is build output.
+
+Stop the session with Ctrl+C: the real URL goes back to the deployed build. See [Dev Mode](https://www.serverless.com/framework/docs/providers/aws/guide/dev-mode#web-apps) for the details.
+
 ## Build and deploy
 
 Build first. The deploy ships what is in `.next/standalone/`, so run the build again before every deploy:
