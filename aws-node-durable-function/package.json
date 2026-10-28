@@ -1,0 +1,10 @@
+{
+  "name": "aws-node-durable-function",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Node.js durable function on AWS Lambda deployed with the Serverless Framework",
+  "type": "module",
+  "dependencies": {
+    "@aws/durable-execution-sdk-js": "3.0.0"
+  }
+}
