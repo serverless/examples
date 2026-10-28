@@ -2836,5 +2836,17 @@
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, Inc.",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "Serverless Compose EventBridge Custom Event Bus Subscribers",
+    "name": "compose-eventbridge-custom-bus",
+    "description": "Own an EventBridge Custom Event Bus in a stateful service and subscribe functions from other services to it, with ordered and batched delivery, wired together with Serverless Compose",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/compose-eventbridge-custom-bus",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   }
 ]

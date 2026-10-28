@@ -1,0 +1,9 @@
+{
+  "name": "compose-eventbus-producer",
+  "version": "1.0.0",
+  "description": "Publishes order events to an EventBridge Custom Event Bus",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-eventbridgev2": "^3.1156.0"
+  }
+}

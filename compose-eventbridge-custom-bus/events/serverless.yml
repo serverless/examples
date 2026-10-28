@@ -1,0 +1,25 @@
+service: compose-eventbus-events
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+
+# A stateful, resource-only service: no functions, just the Custom Event Bus.
+# Deploy it once per environment and let the consuming services subscribe to
+# it. The bus name includes the stage, so each environment gets its own bus.
+#
+# The bus has no DeletionPolicy, so `serverless remove` deletes it together
+# with the events it retains. For a long-lived environment, consider adding
+# `DeletionPolicy: Retain` and `UpdateReplacePolicy: Retain` to OrdersBus.
+resources:
+  Resources:
+    OrdersBus:
+      Type: AWS::EventsV2::EventBus
+      Properties:
+        Name: orders-${sls:stage}
+        StorageConfiguration:
+          RetentionPeriodInDays: 7
+  Outputs:
+    OrdersBusArn:
+      Value: !GetAtt OrdersBus.EventBusArn
