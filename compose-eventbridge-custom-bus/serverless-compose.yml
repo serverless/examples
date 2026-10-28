@@ -1,0 +1,28 @@
+# Serverless Framework Compose: EventBridge Custom Event Bus subscribers
+#
+# Three services:
+#
+#   events    A stateful, resource-only service that owns the Custom Event Bus
+#             (AWS::EventsV2::EventBus) and outputs its ARN.
+#   orders    Two consumers. Each `eventBridge` event subscribes a function to
+#             the bus with an AWS::EventsV2::Subscriber.
+#   producer  A function that publishes order events to the bus.
+#
+# `${service:events.OrdersBusArn}` reads the bus ARN from the `events` service
+# in this run's stage and makes `events` deploy before the services that read
+# it. `serverless remove` runs in the reverse order, so the subscribers are
+# deleted before the bus.
+
+services:
+  events:
+    path: events
+
+  orders:
+    path: orders
+    params:
+      ordersBusArn: ${service:events.OrdersBusArn}
+
+  producer:
+    path: producer
+    params:
+      ordersBusArn: ${service:events.OrdersBusArn}

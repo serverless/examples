@@ -1,0 +1,43 @@
+service: compose-eventbus-orders
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+functions:
+  # One event per invocation, in publish order within each event group.
+  fulfil:
+    handler: handler.fulfil
+    events:
+      - eventBridge:
+          eventBus: ${param:ordersBusArn}
+          ordering: fifo
+          batchSize: 1
+          pattern:
+            source:
+              - orders.producer
+            detail-type:
+              - OrderPlaced
+
+  # The Custom Event Bus defaults: an array of events per invocation,
+  # synchronous delivery, unordered, and a 300-second, 5-attempt retry
+  # policy. Events that still can't be delivered go to AuditDlq.
+  audit:
+    handler: handler.audit
+    events:
+      - eventBridge:
+          eventBus: ${param:ordersBusArn}
+          deadLetterQueueArn: !GetAtt AuditDlq.Arn
+          pattern:
+            source:
+              - orders.producer
+
+resources:
+  Resources:
+    AuditDlq:
+      Type: AWS::SQS::Queue
+      Properties:
+        MessageRetentionPeriod: 1209600

@@ -1,0 +1,33 @@
+service: compose-eventbus-producer
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+  environment:
+    ORDERS_BUS_ARN: ${param:ordersBusArn}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: events:PutEvents
+          Resource: ${param:ordersBusArn}
+
+# The build leaves every @aws-sdk/* package out of the bundle by default and
+# relies on the SDK in the Lambda runtime. The negation bundles
+# @aws-sdk/client-eventbridgev2 into the handler, so the function runs the
+# version pinned in package.json whatever the runtime includes. Setting
+# `exclude` replaces the default list, so the first entry keeps the other SDK
+# packages out.
+build:
+  esbuild:
+    exclude:
+      - '@aws-sdk/*'
+      - '!@aws-sdk/client-eventbridgev2'
+
+functions:
+  publish:
+    handler: handler.publish
+    timeout: 30
