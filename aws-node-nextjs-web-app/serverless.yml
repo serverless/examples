@@ -11,6 +11,11 @@ webApps:
     entry: .next/standalone/server.js
     # The standalone output is already built: ship it as it is.
     build: false
+    # What `serverless dev` runs on your machine instead of the built server.
+    # `next dev` reads the PORT the Framework sets; `--hostname 127.0.0.1` keeps
+    # it on this machine only (it ignores HOSTNAME and listens on every interface).
+    dev:
+      command: npm run dev -- --hostname 127.0.0.1
     package:
       patterns:
         - '!**'
