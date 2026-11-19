@@ -5,7 +5,8 @@
 //
 //   --all      check every example with a manifest
 //   <dir>…     check these example directories (relative to the repository root)
-//   --package  also run `serverless package` in a temporary copy of each example
+//   --package  also install dependencies and run `serverless package` in a
+//              temporary copy of each example
 //
 // Prints one `<dir>: <message>` line per error and a final count; exits 1 on any error.
 

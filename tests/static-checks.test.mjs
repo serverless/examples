@@ -1,6 +1,6 @@
 import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -231,6 +231,20 @@ const SECRETS = [
   ['Slack token', `xoxb-${'1'.repeat(12)}`],
 ];
 
+for (const kind of ['', 'EC ', 'DSA ', 'OPENSSH ', 'ENCRYPTED ']) {
+  test(`secrets: reports a "${kind}PRIVATE KEY" block`, () => {
+    const root = fixture(({ file }) => fs.writeFileSync(file('key.pem'), `-----BEGIN ${kind}${'PRIVATE'} KEY-----\n`));
+    assertOneError(root, 'secrets', /key\.pem.*private key block/);
+  });
+}
+
+test('secrets: does not report a public certificate or public key', () => {
+  const root = fixture(({ file }) =>
+    fs.writeFileSync(file('public.pem'), '-----BEGIN CERTIFICATE-----\nabc\n-----END CERTIFICATE-----\n-----BEGIN PUBLIC KEY-----\n'),
+  );
+  assert.deepEqual(checkExample(root, DIR), []);
+});
+
 for (const [name, value] of SECRETS) {
   test(`secrets: reports a ${name} by file and pattern name, not by value`, () => {
     const root = fixture(({ file }) => fs.writeFileSync(file('config.js'), `export const key = '${value}';\n`));
@@ -292,32 +306,99 @@ test('check-paths: reports a missing invoke event file', () => {
 
 // --package
 
-test('packageExample runs serverless package with the fixed stage in a copy of the example', () => {
-  const root = fixture();
+// Records each exec call; `statuses` maps a step ("npm ci", "serverless package") to its exit status.
+function fakeExec(statuses = {}) {
   const calls = [];
   const exec = (cmd, args, opts) => {
-    calls.push({ cmd, args, cwd: opts.cwd, hasHandler: fs.existsSync(path.join(opts.cwd, 'handler.js')) });
-    return { status: 0 };
+    const step = `${cmd} ${args[0]}`;
+    calls.push({
+      step,
+      args,
+      cwd: opts.cwd,
+      hasHandler: fs.existsSync(path.join(opts.cwd, 'handler.js')),
+      hasNodeModules: fs.existsSync(path.join(opts.cwd, 'node_modules')),
+    });
+    return { status: statuses[step] ?? 0 };
   };
+  return { exec, calls };
+}
+
+test('packageExample runs npm ci, then serverless package with the fixed stage, in a copy of the example', () => {
+  const root = fixture();
+  const { exec, calls } = fakeExec();
   assert.deepEqual(packageExample(root, DIR, { exec }), []);
-  assert.equal(calls.length, 1);
-  assert.equal(calls[0].cmd, 'serverless');
-  assert.deepEqual(calls[0].args, ['package', '--stage', 'ex000000']);
-  assert.notEqual(calls[0].cwd, path.join(root, DIR));
-  assert.ok(calls[0].hasHandler);
+  assert.deepEqual(calls.map((c) => c.step), ['npm ci', 'serverless package']);
+  assert.deepEqual(calls[1].args, ['package', '--stage', 'ex000000']);
+  for (const call of calls) {
+    assert.notEqual(call.cwd, path.join(root, DIR));
+    assert.ok(call.hasHandler);
+  }
+  assert.equal(calls[0].cwd, calls[1].cwd);
   assert.ok(!fs.existsSync(calls[0].cwd), 'the temporary copy is removed');
 });
 
-test('packageExample reports a non-zero exit', () => {
-  const errors = packageExample(fixture(), DIR, { exec: () => ({ status: 2 }) });
-  assert.deepEqual(errors, ['package: serverless package exited with code 2']);
+test('packageExample does not copy node_modules', () => {
+  const root = fixture(({ file }) => fs.mkdirSync(file('node_modules/left-pad'), { recursive: true }));
+  const { exec, calls } = fakeExec();
+  packageExample(root, DIR, { exec });
+  assert.ok(calls.every((c) => !c.hasNodeModules));
+});
+
+test('packageExample runs npm install when there is a package.json without a lockfile', () => {
+  const root = fixture(({ file }) => fs.rmSync(file('package-lock.json')));
+  const { exec, calls } = fakeExec();
+  assert.deepEqual(packageExample(root, DIR, { exec }), []);
+  assert.deepEqual(calls.map((c) => c.step), ['npm install', 'serverless package']);
+});
+
+test('packageExample installs nothing when there is no package.json', () => {
+  const root = fixture(({ file }) => {
+    fs.rmSync(file('package.json'));
+    fs.rmSync(file('package-lock.json'));
+  });
+  const { exec, calls } = fakeExec();
+  assert.deepEqual(packageExample(root, DIR, { exec }), []);
+  assert.deepEqual(calls.map((c) => c.step), ['serverless package']);
+});
+
+test('packageExample reports a failed install as one error naming the step and does not package', () => {
+  const { exec, calls } = fakeExec({ 'npm ci': 1 });
+  assert.deepEqual(packageExample(fixture(), DIR, { exec }), ['package: npm ci exited with code 1']);
+  assert.deepEqual(calls.map((c) => c.step), ['npm ci']);
+});
+
+test('packageExample reports a failed serverless package as one error naming the step', () => {
+  const { exec } = fakeExec({ 'serverless package': 2 });
+  assert.deepEqual(packageExample(fixture(), DIR, { exec }), ['package: serverless package exited with code 2']);
 });
 
 test('packageExample reports a missing serverless binary instead of throwing', () => {
-  const exec = () => ({ status: null, error: Object.assign(new Error('spawnSync serverless ENOENT'), { code: 'ENOENT' }) });
+  const exec = (cmd) =>
+    cmd === 'serverless'
+      ? { status: null, error: Object.assign(new Error('spawnSync serverless ENOENT'), { code: 'ENOENT' }) }
+      : { status: 0 };
   const errors = packageExample(fixture(), DIR, { exec });
   assert.equal(errors.length, 1);
   assert.match(errors[0], /^package: .*serverless.*not found/);
+});
+
+test('packageExample reports a missing npm binary instead of throwing', () => {
+  const exec = () => ({ status: null, error: Object.assign(new Error('spawnSync npm ENOENT'), { code: 'ENOENT' }) });
+  const errors = packageExample(fixture(), DIR, { exec });
+  assert.equal(errors.length, 1);
+  assert.match(errors[0], /^package: .*npm.*not found/);
+});
+
+// validate.js
+
+test('validate.js does not treat test fixtures as examples', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'examples-validate-'));
+  tempRoots.push(root);
+  fs.copyFileSync(path.join(repoRoot, 'validate.js'), path.join(root, 'validate.js'));
+  fs.mkdirSync(path.join(root, 'tests', 'fixtures', 'bare'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'tests', 'fixtures', 'bare', 'serverless.yml'), 'service: bare\n');
+  const result = spawnSync(process.execPath, ['validate.js'], { cwd: root, encoding: 'utf8' });
+  assert.doesNotMatch(result.stdout + result.stderr, /tests\/fixtures/);
 });
 
 // CLI
@@ -357,12 +438,13 @@ test('CLI --all with no manifests says so and exits 0', () => {
   assert.match(out.join('\n'), /no examples with an example\.json manifest/i);
 });
 
-test('CLI --package runs the injected exec once per example', () => {
+test('CLI --package packages each example through the injected exec', () => {
   const root = fixture();
-  let calls = 0;
-  const { code } = cli(['--all', '--package'], root, () => { calls += 1; return { status: 1 }; });
-  assert.equal(calls, 1);
+  const { exec, calls } = fakeExec({ 'serverless package': 1 });
+  const { code, out } = cli(['--all', '--package'], root, exec);
+  assert.deepEqual(calls.map((c) => c.step), ['npm ci', 'serverless package']);
   assert.equal(code, 1);
+  assert.equal(out[0], 'hello: package: serverless package exited with code 1');
 });
 
 test('CLI without arguments prints usage and exits 1', () => {

@@ -1,5 +1,5 @@
 // Static checks that every example with an example.json manifest must pass,
-// plus an optional `serverless package` run in a copy of the example.
+// plus an optional install and `serverless package` run in a copy of the example.
 //
 // Every message starts with the name of the rule it comes from:
 //   manifest             example.json loads and passes validateManifest
@@ -9,7 +9,8 @@
 //   lockfile             a package.json with dependencies has a lockfile beside it
 //   exact-version        dependencies and devDependencies use exact versions
 //   no-stage             serverless.yml sets no top-level or provider.stage
-//   secrets              no secret-shaped values in files tracked by git
+//   secrets              no secret-shaped values (keys, tokens, private key
+//                        blocks) in files tracked by git
 //   generated-readme     README.md frontmatter and badge match the manifest
 //   generated-catalogue  the examples.json entry matches the manifest
 //   check-paths          script check paths and invoke event files exist
@@ -58,11 +59,14 @@ const SECRET_PATTERNS = [
   ['Stripe live key', /sk_live_/],
   ['Stripe test key', /sk_test_/],
   ['AWS access key id', /AKIA[0-9A-Z]{16}/],
-  ['private key block', /-----BEGIN/],
+  ['private key block', /-----BEGIN (RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----/],
   ['Slack token', /xox[bp]-/],
 ];
 
 export const PACKAGE_STAGE = 'ex000000';
+const PACKAGE_COPY_SKIP = new Set(['node_modules', '.serverless']);
+// The lockfiles `npm ci` installs from.
+const NPM_CI_LOCKFILES = ['package-lock.json', 'npm-shrinkwrap.json'];
 const CATALOGUE_FILE = 'examples.json';
 
 /**
@@ -114,9 +118,12 @@ export function checkExample(root, dir) {
 }
 
 /**
- * Copies the example to a temporary directory and runs
- * `serverless package --stage ex000000` there through `exec`, which has the
- * signature of child_process.spawnSync. Returns error messages.
+ * Copies the example (without node_modules and .serverless) to a temporary
+ * directory and, there, installs dependencies (`npm ci` with an npm lockfile,
+ * `npm install` with only a package.json) and runs
+ * `serverless package --stage ex000000`. Every step goes through `exec`, which
+ * has the signature of child_process.spawnSync. Returns at most one error
+ * message, naming the step that did not complete.
  */
 export function packageExample(root, dir, { exec = spawnSync } = {}) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'example-package-'));
@@ -124,14 +131,25 @@ export function packageExample(root, dir, { exec = spawnSync } = {}) {
     const copy = path.join(tmp, path.posix.basename(dir));
     fs.cpSync(path.join(root, dir), copy, {
       recursive: true,
-      filter: (src) => path.basename(src) !== '.serverless',
+      filter: (src) => !PACKAGE_COPY_SKIP.has(path.basename(src)),
     });
-    const result = exec('serverless', ['package', '--stage', PACKAGE_STAGE], { cwd: copy, stdio: 'inherit' });
-    if (result.error?.code === 'ENOENT') {
-      return ['package: the serverless command was not found on PATH; install the Serverless Framework to use --package'];
+
+    const steps = [];
+    if (fs.existsSync(path.join(copy, 'package.json'))) {
+      const locked = NPM_CI_LOCKFILES.some((f) => fs.existsSync(path.join(copy, f)));
+      steps.push(['npm', [locked ? 'ci' : 'install']]);
     }
-    if (result.error) return [`package: serverless package could not run: ${result.error.message}`];
-    if (result.status !== 0) return [`package: serverless package exited with code ${result.status}`];
+    steps.push(['serverless', ['package', '--stage', PACKAGE_STAGE]]);
+
+    for (const [cmd, args] of steps) {
+      const step = `${cmd} ${args[0]}`;
+      const result = exec(cmd, args, { cwd: copy, stdio: 'inherit' });
+      if (result.error?.code === 'ENOENT') {
+        return [`package: ${step}: the ${cmd} command was not found on PATH; install it to use --package`];
+      }
+      if (result.error) return [`package: ${step} could not run: ${result.error.message}`];
+      if (result.status !== 0) return [`package: ${step} exited with code ${result.status}`];
+    }
     return [];
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });

@@ -5,7 +5,7 @@ const path = require('path');
 
 const ROOT = __dirname;
 const REQUIRED = ['title', 'description', 'framework', 'platform', 'language', 'authorLink', 'authorName', 'authorAvatar'];
-const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.claude', 'docs', 'images', '.serverless']);
+const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.claude', 'docs', 'images', '.serverless', 'tests']);
 
 // An example root is the shallowest directory containing serverless.yml/yaml.
 // Do not recurse below an example root (multi-service examples validate once, at the root).
