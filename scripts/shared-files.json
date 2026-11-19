@@ -1,0 +1,18 @@
+{
+  "mcp/custom/client.mjs": [
+    "mcp/custom/rest-api/client.mjs",
+    "mcp/custom/function-url/client.mjs",
+    "mcp/custom/hono/client.mjs",
+    "mcp/custom/express-web-adapter/client.mjs",
+    "mcp/custom/fastify-container/client.mjs",
+    "aws-bedrock-agentcore/javascript/mcp-server/client.mjs"
+  ],
+  "mcp/custom/server.mjs": [
+    "mcp/custom/rest-api/src/server.mjs",
+    "mcp/custom/function-url/src/server.mjs",
+    "mcp/custom/hono/src/server.mjs",
+    "mcp/custom/express-web-adapter/src/server.mjs",
+    "mcp/custom/fastify-container/src/server.mjs",
+    "aws-bedrock-agentcore/javascript/mcp-server/src/server.mjs"
+  ]
+}
