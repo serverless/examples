@@ -108,8 +108,8 @@ The command prints the function's response:
 
 ```json
 {
-  "statusCode": 200,
-  "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
+    "statusCode": 200,
+    "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
 }
 ```
 
