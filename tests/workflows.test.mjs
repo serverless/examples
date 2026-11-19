@@ -161,6 +161,19 @@ test('publish-verified reads only the triggering attempt', () => {
   assert.match(publish, /--latest-\$\{RUN_ATTEMPT\}\$/);
 });
 
+test('publish-verified publishes also when the run has no latest results; only the download needs some', () => {
+  const steps = job(read('publish-verified.yml'), 'publish').split(/\n(?= {6}- )/).slice(1);
+  const counted = steps.filter((s) => s.includes('steps.find.outputs.count'));
+  assert.equal(counted.length, 1, counted.join('\n---\n'));
+  assert.match(counted[0], /uses: actions\/download-artifact@/);
+  assert.match(counted[0], /if: steps\.find\.outputs\.count != '0'\n/);
+  for (const name of ['Check out the scripts', 'Merge the results and write the badges', 'Commit to the verified branch']) {
+    assert.ok(steps.some((s) => s.includes(`- name: ${name}`)), name);
+  }
+  const commit = steps.find((s) => s.includes('- name: Commit to the verified branch'));
+  assert.match(commit, /if git diff --cached --quiet; then\n\s+echo "Nothing changed"\n\s+exit 0\n/);
+});
+
 test('no step is named after an empty value', () => {
   assert.doesNotMatch(read('sweep.yml'), /^\s+- name: .*\$\{\{ needs\.select\.outputs\.second \}\}/m);
 });

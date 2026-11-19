@@ -87,7 +87,8 @@ test('a skipped (quarantined) result counts as quarantine and is not recorded as
   );
 });
 
-test('an example that never ran is absent, also when it is quarantined', () => {
+test('the results list only examples that ran; one that never ran is absent, also when it is quarantined', () => {
+  // publish-verified still writes an empty badge for it (tested below).
   const merged = mergeResults({}, [result()], RUN_1, { quarantined: ['aws-python'] });
   assert.deepEqual(Object.keys(merged), ['aws-node']);
 });
@@ -208,8 +209,12 @@ function repo() {
   manifest('aws-node', { tier: 'fast', checks: [{ script: { path: 'test/smoke.mjs' } }] });
   manifest('mcp/minimal', { tier: 'fast', checks: [{ script: { path: 'test/smoke.mjs' } }] });
   manifest('aws-python', { tier: 'fast', checks: [{ script: { path: 'test/smoke.mjs' } }], quarantine: { reason: 'Outage', since: '2026-11-01' } });
+  manifest('aws-untested', undefined);
   return { root, write };
 }
+
+const EMPTY_BADGE = renderBadge(null);
+const readBadge = (out, dir) => fs.readFileSync(path.join(out, badgePath(dir)), 'utf8');
 
 test('publish-verified writes results.json and a badge per example, nested ones included', () => {
   const { root, write } = repo();
@@ -250,6 +255,46 @@ test('publish-verified starts from nothing when there is no results directory or
   const out = path.join(root, 'site');
   assert.equal(run(['--results-dir', path.join(root, 'none'), '--out', out, '--run-url', RUN_1], { root, log: () => {} }), 0);
   assert.equal(fs.readFileSync(path.join(out, 'results.json'), 'utf8'), '{}\n');
+});
+
+test('publish-verified writes the empty badge for a tested example that never ran', () => {
+  const { root, write } = repo();
+  write('results/mcp__minimal--latest.json', JSON.stringify(result({ example: 'mcp/minimal' })));
+  const out = path.join(root, 'site');
+  assert.equal(run(['--results-dir', path.join(root, 'results'), '--out', out, '--run-url', RUN_1], { root, log: () => {} }), 0);
+  assert.deepEqual(Object.keys(JSON.parse(fs.readFileSync(path.join(out, 'results.json'), 'utf8'))), ['mcp/minimal'], 'results.json lists only examples that ran');
+  assert.equal(readBadge(out, 'aws-node'), EMPTY_BADGE);
+  assert.match(readBadge(out, 'mcp/minimal'), /Verified/);
+});
+
+test('publish-verified writes the empty badge for a quarantined example, with or without an entry', () => {
+  const { root, write } = repo();
+  const out = path.join(root, 'site');
+  assert.equal(run(['--results-dir', path.join(root, 'none'), '--out', out, '--run-url', RUN_1], { root, log: () => {} }), 0);
+  assert.equal(readBadge(out, 'aws-python'), EMPTY_BADGE, 'never ran');
+  write('site/results.json', JSON.stringify(mergeResults({}, [result({ example: 'aws-python' })], RUN_1)));
+  fs.rmSync(path.join(out, 'badges'), { recursive: true });
+  assert.equal(run(['--results-dir', path.join(root, 'none'), '--out', out, '--run-url', RUN_2], { root, log: () => {} }), 0);
+  assert.equal(readBadge(out, 'aws-python'), EMPTY_BADGE, 'ran and passed before');
+});
+
+test('publish-verified writes no badge for an example without a test block', () => {
+  const { root, write } = repo();
+  write('results/aws-node--latest.json', JSON.stringify(result()));
+  const out = path.join(root, 'site');
+  assert.equal(run(['--results-dir', path.join(root, 'results'), '--out', out, '--run-url', RUN_1], { root, log: () => {} }), 0);
+  assert.equal(fs.existsSync(path.join(out, 'badges/aws-untested.svg')), false);
+});
+
+test('publish-verified with an empty results directory writes the empty badge for every tested example', () => {
+  const { root } = repo();
+  fs.mkdirSync(path.join(root, 'results'));
+  const out = path.join(root, 'site');
+  assert.equal(run(['--results-dir', path.join(root, 'results'), '--out', out, '--run-url', RUN_1], { root, log: () => {} }), 0);
+  assert.equal(fs.readFileSync(path.join(out, 'results.json'), 'utf8'), '{}\n');
+  const badges = fs.readdirSync(path.join(out, 'badges'), { recursive: true, withFileTypes: true }).filter((e) => e.isFile());
+  assert.deepEqual(badges.map((e) => path.relative(path.join(out, 'badges'), path.join(e.parentPath, e.name))).sort(), ['aws-node.svg', 'aws-python.svg', path.join('mcp', 'minimal.svg')]);
+  for (const dir of ['aws-node', 'aws-python', 'mcp/minimal']) assert.equal(readBadge(out, dir), EMPTY_BADGE, dir);
 });
 
 test('publish-verified usage errors exit 2', () => {

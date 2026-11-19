@@ -8,9 +8,12 @@
 //                        recursively); only `latest` results count. A missing
 //                        directory counts as no results.
 //   --out <dir>          the published tree: reads results.json there when it
-//                        exists, then writes results.json and badges/<example>.svg
-//                        for every example in it (nested directories kept, such as
-//                        badges/mcp/minimal.svg)
+//                        exists, then writes results.json (the examples that ran)
+//                        and badges/<example>.svg for every tested example of this
+//                        checkout and every example in results.json (nested
+//                        directories kept, such as badges/mcp/minimal.svg); an
+//                        example that is not verified, never ran or is
+//                        quarantined gets the empty 1x1 badge
 //   --run-url <url>      the workflow run the results come from
 //
 // Results naming a directory that is not a tested example of this checkout are
@@ -77,10 +80,12 @@ export function run(args, { root, log = console.log } = {}) {
   const results = mergeResults(previous, runs, values['run-url'], { quarantined });
   fs.mkdirSync(out, { recursive: true });
   fs.writeFileSync(previousFile, `${JSON.stringify(results, null, 2)}\n`);
-  for (const [dir, entry] of Object.entries(results)) {
+  // Every tested example gets a badge, the empty one when it is not verified:
+  // also one that never ran or is quarantined, so no README shows a missing image.
+  for (const dir of new Set([...known, ...Object.keys(results)])) {
     const file = path.join(out, badgePath(dir));
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, renderBadge(entry));
+    fs.writeFileSync(file, renderBadge(results[dir] ?? null));
   }
   const verified = Object.values(results).filter((e) => e.verified).length;
   log(`${runs.length} result(s) read; ${Object.keys(results).length} example(s) in ${RESULTS_FILE}, ${verified} verified`);
