@@ -35,7 +35,8 @@ jobs:
 
   select:
     name: Select changed examples
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    # The AWS roles exist for this repository only.
+    if: github.repository == 'serverless/examples' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -78,7 +79,8 @@ jobs:
   live:
     name: Live test (${{ matrix.dir }})
     needs: select
-    if: (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && needs.select.outputs.count != '0'
+    # The AWS roles exist for this repository only.
+    if: github.repository == 'serverless/examples' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && needs.select.outputs.count != '0'
     runs-on: ubuntu-latest
     timeout-minutes: 50
     permissions:

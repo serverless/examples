@@ -25,6 +25,8 @@ permissions: {}
 jobs:
   select:
     name: Select examples
+    # The AWS roles exist for this repository only.
+    if: github.repository == 'serverless/examples'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -87,7 +89,8 @@ jobs:
   live:
     name: Live test (${{ matrix.dir }})
     needs: select
-    if: needs.select.outputs.count != '0'
+    # The AWS roles exist for this repository only.
+    if: github.repository == 'serverless/examples' && needs.select.outputs.count != '0'
     runs-on: ubuntu-latest
     timeout-minutes: 50
     permissions:

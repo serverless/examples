@@ -21,7 +21,8 @@ concurrency:
 jobs:
   publish:
     name: Publish results and badges
-    if: github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'schedule' || github.event.workflow_run.event == 'workflow_dispatch'
+    # Live tests run in this repository only, so only it has results to publish.
+    if: github.repository == 'serverless/examples' && (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'schedule' || github.event.workflow_run.event == 'workflow_dispatch')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

@@ -46,9 +46,38 @@ test('no workflow cancels a run in progress', () => {
   for (const file of FILES) assert.doesNotMatch(read(file), /cancel-in-progress:\s*true/, file);
 });
 
-test('the ci live job carries the fork guard', () => {
-  const live = job(read('ci.yml'), 'live');
-  assert.ok(live.includes(`if: (${FORK_GUARD})`), live.split('\n').find((l) => l.includes('if:')));
+// The `if:` of a job, from its job-level line.
+const jobIf = (file, name) => job(read(file), name).split('\n').find((l) => /^ {4}if: /.test(l)) ?? '';
+
+test('the ci select and live jobs carry the fork guard', () => {
+  for (const name of ['select', 'live']) {
+    const line = jobIf('ci.yml', name);
+    assert.ok(line.includes(`(${FORK_GUARD})`), `${name}: ${line}`);
+  }
+});
+
+const REPO_GUARD = "github.repository == 'serverless/examples'";
+
+for (const [file, name] of [
+  ['ci.yml', 'select'],
+  ['ci.yml', 'live'],
+  ['sweep.yml', 'select'],
+  ['sweep.yml', 'live'],
+  ['cleanup.yml', 'report'],
+  ['publish-verified.yml', 'publish'],
+]) {
+  test(`${file}: the ${name} job runs only in the repository the AWS roles exist for`, () => {
+    const line = jobIf(file, name);
+    // The guard comes first and the rest is one parenthesized or `&&`-joined term, so `||` cannot bypass it.
+    assert.ok(line.startsWith(`    if: ${REPO_GUARD}`), `${file} ${name}: ${line}`);
+    const rest = line.slice(`    if: ${REPO_GUARD}`.length);
+    const outside = rest.replace(/\((?:[^()]|\([^()]*\))*\)/g, '');
+    assert.doesNotMatch(outside, /\|\|/, `${file} ${name}: ${line}`);
+  });
+}
+
+test('the ci static job runs in every copy of the repository', () => {
+  assert.doesNotMatch(job(read('ci.yml'), 'static'), /github\.repository/);
 });
 
 test('the ci static job has no secrets and only reads contents', () => {
