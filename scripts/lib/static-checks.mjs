@@ -20,9 +20,9 @@
 
 import { spawnSync, execFileSync } from 'node:child_process';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 
+import { copyExample, installCommands } from './exec.mjs';
 import { loadManifest, validateManifest, MANIFEST_FILE } from './manifest.mjs';
 import { applyGenerated, mergeCatalogueEntry, toExamplesJsonEntry } from './readme.mjs';
 
@@ -64,9 +64,6 @@ const SECRET_PATTERNS = [
 ];
 
 export const PACKAGE_STAGE = 'ex000000';
-const PACKAGE_COPY_SKIP = new Set(['node_modules', '.serverless']);
-// The lockfiles `npm ci` installs from.
-const NPM_CI_LOCKFILES = ['package-lock.json', 'npm-shrinkwrap.json'];
 const CATALOGUE_FILE = 'examples.json';
 
 /**
@@ -119,31 +116,19 @@ export function checkExample(root, dir) {
 
 /**
  * Copies the example (without node_modules and .serverless) to a temporary
- * directory and, there, installs dependencies (`npm ci` with an npm lockfile,
- * `npm install` with only a package.json) and runs
+ * directory and, there, installs dependencies (see installCommands: the root
+ * and, for a Compose root, each service directory) and runs
  * `serverless package --stage ex000000`. Every step goes through `exec`, which
  * has the signature of child_process.spawnSync. Returns at most one error
  * message, naming the step that did not complete.
  */
 export function packageExample(root, dir, { exec = spawnSync } = {}) {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'example-package-'));
+  const { copy, cleanup } = copyExample(root, dir, 'example-package-');
   try {
-    const copy = path.join(tmp, path.posix.basename(dir));
-    fs.cpSync(path.join(root, dir), copy, {
-      recursive: true,
-      filter: (src) => !PACKAGE_COPY_SKIP.has(path.basename(src)),
-    });
-
-    const steps = [];
-    if (fs.existsSync(path.join(copy, 'package.json'))) {
-      const locked = NPM_CI_LOCKFILES.some((f) => fs.existsSync(path.join(copy, f)));
-      steps.push(['npm', [locked ? 'ci' : 'install']]);
-    }
-    steps.push(['serverless', ['package', '--stage', PACKAGE_STAGE]]);
-
-    for (const [cmd, args] of steps) {
+    const steps = [...installCommands(copy), { cwd: copy, cmd: 'serverless', args: ['package', '--stage', PACKAGE_STAGE] }];
+    for (const { cwd, cmd, args } of steps) {
       const step = `${cmd} ${args[0]}`;
-      const result = exec(cmd, args, { cwd: copy, stdio: 'inherit' });
+      const result = exec(cmd, args, { cwd, stdio: 'inherit' });
       if (result.error?.code === 'ENOENT') {
         return [`package: ${step}: the ${cmd} command was not found on PATH; install it to use --package`];
       }
@@ -152,7 +137,7 @@ export function packageExample(root, dir, { exec = spawnSync } = {}) {
     }
     return [];
   } finally {
-    fs.rmSync(tmp, { recursive: true, force: true });
+    cleanup();
   }
 }
 

@@ -193,6 +193,26 @@ test('an invoke check without contains is an error', () => {
   assert.match(errors[0], /contains/);
 });
 
+test('an invoke check accepts extra CLI arguments in args', () => {
+  const m = validManifest();
+  m.test.checks = [{ invoke: { function: 'hello', args: ['--type', 'Event'], contains: 'ok' } }];
+  assert.deepEqual(validateManifest(m), []);
+});
+
+for (const [label, args] of [
+  ['a string', '--log'],
+  ['an empty string', ['']],
+  ['a number', [1]],
+]) {
+  test(`invoke args as ${label} is an error`, () => {
+    const m = validManifest();
+    m.test.checks = [{ invoke: { function: 'hello', args, contains: 'ok' } }];
+    const errors = validateManifest(m);
+    assert.equal(errors.length, 1, errors.join('\n'));
+    assert.match(errors[0], /test\.checks\[0\]\.invoke\.args/);
+  });
+}
+
 test('a script check needs a path', () => {
   const m = validManifest();
   m.test.checks = [{ script: {} }];

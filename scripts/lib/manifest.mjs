@@ -14,7 +14,7 @@
 //
 // A Check has exactly one key:
 //   http:   { output, path?, status?, contains? }   status or contains is required
-//   invoke: { function, event?, contains }
+//   invoke: { function, event?, args?, contains }   args: extra CLI arguments
 //   script: { path }
 //
 // Keys not listed above are rejected at every level.
@@ -32,7 +32,7 @@ const KEYS = {
   test: ['tier', 'checks', 'timeoutMinutes', 'quarantine'],
   quarantine: ['reason', 'since'],
   http: ['output', 'path', 'status', 'contains'],
-  invoke: ['function', 'event', 'contains'],
+  invoke: ['function', 'event', 'args', 'contains'],
   script: ['path'],
 };
 const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.serverless', '.superpowers', 'tests', 'scripts']);
@@ -154,6 +154,9 @@ function validateCheck(errors, check, at) {
   } else if (kind === 'invoke') {
     requireString(errors, c, 'function', `${where}.function`);
     optionalString(errors, c, 'event', `${where}.event`);
+    if (c.args !== undefined && !(Array.isArray(c.args) && c.args.every(isNonEmptyString))) {
+      errors.push(`${where}.args: must be an array of non-empty strings`);
+    }
     requireString(errors, c, 'contains', `${where}.contains`);
   } else {
     requireString(errors, c, 'path', `${where}.path`);
