@@ -168,11 +168,20 @@ test('CLI --changed runs git diff against the base and prints the selection as J
   const root = layout([tested('aws-node'), tested('mcp/custom/hono'), quarantined('aws-go')]);
   const r = cli(['--changed', 'abc123'], { root, diff: 'aws-node/handler.js\nmcp/custom/client.mjs\naws-go/main.go\n' });
   assert.equal(r.code, 0);
-  assert.deepEqual(r.calls, [{ cmd: 'git', args: ['diff', '--name-only', 'abc123...HEAD'], cwd: root }]);
+  assert.deepEqual(r.calls, [{ cmd: 'git', args: ['diff', '--name-only', '--no-renames', 'abc123...HEAD'], cwd: root }]);
   const json = JSON.parse(r.out);
   assert.deepEqual(Object.keys(json), ['dirs', 'quarantined', 'reason']);
   assert.deepEqual(json.dirs, ['aws-node', 'mcp/custom/hono']);
   assert.deepEqual(json.quarantined, ['aws-go']);
+});
+
+test('CLI --changed selects both examples when a file moves from one to another', () => {
+  const root = layout([tested('ex-a'), tested('ex-b')]);
+  // With --no-renames, git lists a moved file as a deletion and an addition.
+  const r = cli(['--changed', 'abc123'], { root, diff: 'ex-a/lib.js\nex-b/lib.js\n' });
+  assert.equal(r.code, 0);
+  assert.ok(r.calls[0].args.includes('--no-renames'));
+  assert.deepEqual(JSON.parse(r.out).dirs, ['ex-a', 'ex-b']);
 });
 
 test('CLI --changed with no example manifests prints an empty selection', () => {

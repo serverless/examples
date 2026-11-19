@@ -5,7 +5,8 @@
 // Usage: node scripts/select-examples.mjs --changed <base-sha> [--tier fast|slow]
 //        node scripts/select-examples.mjs --all --tier fast|slow
 //
-//   --changed <base-sha>  examples touched by `git diff --name-only <base-sha>...HEAD`
+//   --changed <base-sha>  examples touched by `git diff --name-only --no-renames <base-sha>...HEAD`
+//                         (both sides of a moved file count as changed)
 //   --all                 every tested example in the tier
 //   --tier                keep only examples in this tier
 //
@@ -43,7 +44,7 @@ export function run(args, { root, exec = defaultExec, stdout = console.log, stde
     const sharedFiles = fs.existsSync(sharedFile) ? JSON.parse(fs.readFileSync(sharedFile, 'utf8')) : {};
     let changedFiles;
     if (opts.base) {
-      const diff = exec('git', ['diff', '--name-only', `${opts.base}...HEAD`], { cwd: root });
+      const diff = exec('git', ['diff', '--name-only', '--no-renames', `${opts.base}...HEAD`], { cwd: root });
       changedFiles = diff.split('\n').map((l) => l.trim()).filter(Boolean);
       stderr(`${changedFiles.length} file(s) changed since ${opts.base}`);
     }
