@@ -18,15 +18,8 @@
     "tier": "fast",
     "checks": [
       {
-        "invoke": {
-          "function": "worker",
-          "args": [
-            "--type",
-            "Event",
-            "--data",
-            "{\"orderId\":\"1\"}"
-          ],
-          "contains": "Durable execution started: arn:aws:lambda:"
+        "script": {
+          "path": "test/smoke.mjs"
         }
       }
     ]
