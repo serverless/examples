@@ -172,6 +172,18 @@ test('readme-links: accepts https://, #anchor and mailto: targets', () => {
   assert.deepEqual(checkExample(root, DIR), []);
 });
 
+test('readme-links: accepts a footnote definition and reports a relative reference definition', () => {
+  const footnote = fixture(({ file }) =>
+    edit(file('README.md'), (s) => s.replace('The handler returns', 'The handler[^1] returns').replace('## Next steps\n', '## Next steps\n\n[^1]: Billed per request.\n')),
+  );
+  assert.deepEqual(checkExample(footnote, DIR), []);
+
+  const reference = fixture(({ file }) =>
+    edit(file('README.md'), (s) => s.replace('The handler returns', 'The [handler][h] returns').replace('## Next steps\n', '## Next steps\n\n[h]: handler.js\n')),
+  );
+  assertOneError(reference, 'readme-links', /handler\.js/);
+});
+
 test('readme-links: ignores links inside code fences and inline code', () => {
   const root = fixture(({ file }) =>
     edit(file('README.md'), (s) =>

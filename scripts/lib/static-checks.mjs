@@ -41,9 +41,10 @@ const EXTRA_HEADINGS_AFTER = 'How it works';
 const CLEANUP_HEADING = 'Cost and cleanup';
 const CLEANUP_COMMAND = 'serverless remove';
 const ALLOWED_LINK_TARGET = /^(https:\/\/|#|mailto:)/i;
-// `](target` of an inline link or image, and `[label]: target` of a reference definition.
+// `](target` of an inline link or image, and `[label]: target` of a reference
+// definition; a footnote definition, `[^label]: text`, has no target.
 const INLINE_LINK_TARGET = /\]\(\s*<?([^\s)>]*)/g;
-const REFERENCE_DEFINITION = /^ {0,3}\[[^\]]+\]:\s*<?([^\s>]+)/;
+const REFERENCE_DEFINITION = /^ {0,3}\[(?!\^)[^\]]+\]:\s*<?([^\s>]+)/;
 const INLINE_CODE = /(`+).+?\1/g;
 
 const NPM_LOCKFILES = ['package-lock.json', 'npm-shrinkwrap.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lock', 'bun.lockb'];
