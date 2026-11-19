@@ -43,12 +43,13 @@ export function generate(root) {
   return manifests.length;
 }
 
-// Replaces the entry with the same githubUrl in place, keeping keys the
-// generated entry does not set (and their order); appends when there is none.
+// Replaces the entry with the same githubUrl in place, keeping its name (the
+// website's page URL is built from it) and any keys the generated entry does
+// not set, in their order; appends when there is none.
 function upsert(catalogue, entry) {
   const i = catalogue.findIndex((e) => e.githubUrl === entry.githubUrl);
   if (i === -1) catalogue.push(entry);
-  else catalogue[i] = { ...catalogue[i], ...entry };
+  else catalogue[i] = { ...catalogue[i], ...entry, name: catalogue[i].name };
 }
 
 function writeIfChanged(file, content) {

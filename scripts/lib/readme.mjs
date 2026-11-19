@@ -21,17 +21,19 @@ const FRONTMATTER_RE = /^<!--[\s\S]*?-->/;
 const BADGE_PREFIX = `[![Verified](https://raw.githubusercontent.com/serverless/examples/${BADGE_BRANCH}/badges/`;
 
 /**
- * Returns the `<!-- … -->` frontmatter block. String values are single-quoted
- * (a quote inside a value is doubled); `priority` stays a bare number.
+ * Returns the `<!-- … -->` frontmatter block. Free-text values (title,
+ * description, author fields) are single-quoted with a quote inside a value
+ * doubled; layout, framework, platform, language and priority are written
+ * bare, as in the existing READMEs.
  */
 export function renderFrontmatter(m) {
   const lines = [
     ['title', quote(m.title)],
     ['description', quote(m.description)],
-    ['layout', quote('Doc')],
-    ['framework', quote(m.framework)],
-    ['platform', quote(m.platform)],
-    ['language', quote(FRONTMATTER_LANGUAGE[m.language] ?? m.language)],
+    ['layout', 'Doc'],
+    ['framework', m.framework],
+    ['platform', m.platform],
+    ['language', FRONTMATTER_LANGUAGE[m.language] ?? m.language],
   ];
   if (m.priority !== undefined) lines.push(['priority', String(m.priority)]);
   lines.push(['authorLink', quote(m.author.link)], ['authorName', quote(m.author.name)]);

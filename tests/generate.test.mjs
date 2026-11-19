@@ -39,10 +39,10 @@ function sampleManifest() {
 const SAMPLE_FRONTMATTER = `<!--
 title: 'HTTP API on AWS Lambda (Node.js)'
 description: 'A single HTTP endpoint on API Gateway and Lambda, using the Framework''s defaults.'
-layout: 'Doc'
-framework: 'v4'
-platform: 'AWS'
-language: 'nodeJS'
+layout: Doc
+framework: v4
+platform: AWS
+language: nodeJS
 priority: 1
 authorLink: 'https://github.com/serverless'
 authorName: 'Serverless, Inc.'
@@ -83,7 +83,7 @@ test('renderFrontmatter spells each language the way existing READMEs do', () =>
   const spelling = { node: 'nodeJS', python: 'Python', go: 'Go', java: 'Java', ruby: 'Ruby', csharp: 'CSharp', rust: 'Rust' };
   for (const [language, expected] of Object.entries(spelling)) {
     const out = renderFrontmatter({ ...sampleManifest(), language });
-    assert.match(out, new RegExp(`^language: '${expected}'$`, 'm'), language);
+    assert.match(out, new RegExp(`^language: ${expected}$`, 'm'), language);
   }
 });
 
@@ -221,6 +221,33 @@ test('generate rewrites READMEs and upserts catalogue entries in place, appendin
   const snapshot = [read('examples.json'), read('aws-node-http-api/README.md'), read('mcp/minimal/README.md')];
   generate(root);
   assert.deepEqual([read('examples.json'), read('aws-node-http-api/README.md'), read('mcp/minimal/README.md')], snapshot);
+});
+
+test('generate keeps the name of an existing catalogue entry', () => {
+  const { root, write, read } = tempRepo();
+  const existing = {
+    title: 'Old',
+    name: 'ruby-step-functions',
+    description: 'Old',
+    githubUrl: 'https://github.com/serverless/examples/tree/v4/aws-ruby-step-functions',
+    framework: 'v4',
+    language: 'ruby',
+    platform: 'aws',
+    authorLink: 'https://github.com/serverless',
+    authorName: 'Serverless, Inc.',
+    authorAvatar: 'https://example.com/existing.png',
+  };
+  write('examples.json', `${JSON.stringify([existing], null, 2)}\n`);
+  const m = { ...sampleManifest(), language: 'ruby' };
+  delete m.dir;
+  write('aws-ruby-step-functions/example.json', JSON.stringify(m));
+  write('aws-ruby-step-functions/README.md', '# Ruby\n');
+
+  generate(root);
+
+  const [entry] = JSON.parse(read('examples.json'));
+  assert.equal(entry.name, 'ruby-step-functions');
+  assert.equal(entry.title, m.title);
 });
 
 test('generate leaves examples.json untouched when there are no manifests', () => {
