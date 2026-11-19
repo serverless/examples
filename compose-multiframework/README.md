@@ -32,6 +32,7 @@ Both functions receive the table name and the stage's `domain` parameter in envi
 - The Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
+- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), to delete the `sam` function's log group after the remove.
 
 ## Deploy
 
@@ -146,6 +147,13 @@ serverless remove
 ```
 
 Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table.
+
+The remove leaves the `sam` function's log group, `/aws/lambda/sam-compose-service-example-<…>-HelloWorldFunction-<id>`. Find its name and delete it with the AWS CLI; these commands use your default Region:
+
+```bash
+aws logs describe-log-groups --log-group-name-prefix /aws/lambda/sam-compose-service-example --query 'logGroups[].logGroupName' --output text
+aws logs delete-log-group --log-group-name <name>
+```
 
 ## Next steps
 

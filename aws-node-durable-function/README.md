@@ -63,21 +63,21 @@ serverless invoke -f worker --type Event -d '{"orderId":"1"}'
 The command prints the ARN of the execution it started:
 
 ```text
-Durable execution started: arn:aws:lambda:us-east-1:123456789012:function:aws-node-durable-function-dev-worker:1/durable-execution/3ebd7f79-db03-4601-87de-68c7c4dfd267/6113b540-687c-3f6c-bc97-7482b3c95936
+Durable execution started: arn:aws:lambda:us-east-1:123456789012:function:aws-node-durable-function-dev-worker:1/durable-execution/c201cefe-b264-4bea-aeec-b4fb8da81eff/c3066f4f-0858-30db-b1b1-2aea44ec7c97
 ```
 
-Wait about 15 seconds, since the handler waits 10, then read the execution's result with the AWS CLI:
+Wait about 15 seconds, since the handler waits 10, then read the execution's result with the AWS CLI, in the Region you deployed to:
 
 ```bash
-aws lambda get-durable-execution --durable-execution-arn <the ARN the invoke printed>
+aws lambda get-durable-execution --region us-east-1 --durable-execution-arn <the ARN the invoke printed>
 ```
 
 The output, trimmed to three fields, looks like this:
 
 ```json
 {
-    "DurableExecutionArn": "arn:aws:lambda:us-east-1:123456789012:function:aws-node-durable-function-dev-worker:1/durable-execution/e84fa685-1505-4cf2-ab5c-eac4330fcbb5/ed84f67f-1948-3aaf-bc11-f01c76b28bfd",
-    "Result": "{\"orderId\":\"2\",\"acceptedAt\":\"2026-11-19T16:23:59.253Z\",\"completedAt\":\"2026-11-19T16:24:09.410Z\"}",
+    "DurableExecutionArn": "arn:aws:lambda:us-east-1:123456789012:function:aws-node-durable-function-dev-worker:1/durable-execution/c201cefe-b264-4bea-aeec-b4fb8da81eff/c3066f4f-0858-30db-b1b1-2aea44ec7c97",
+    "Result": "{\"orderId\":\"1\",\"acceptedAt\":\"2026-11-19T16:48:16.309Z\",\"completedAt\":\"2026-11-19T16:48:26.871Z\"}",
     "Status": "SUCCEEDED"
 }
 ```
