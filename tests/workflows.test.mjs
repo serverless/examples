@@ -60,10 +60,9 @@ test('the ci static job has no secrets and only reads contents', () => {
 });
 
 for (const file of ['ci.yml', 'sweep.yml']) {
-  test(`${file}: the live job has the environment, limits, concurrency group and cleanup step`, () => {
+  test(`${file}: the live job has the limits, concurrency group and cleanup step`, () => {
     const live = job(read(file), 'live');
     for (const line of [
-      'environment: live-tests',
       'timeout-minutes: 50',
       'fail-fast: false',
       'max-parallel: 4',
@@ -79,6 +78,23 @@ for (const file of ['ci.yml', 'sweep.yml']) {
     for (const n of [1, 2, 3]) assert.ok(live.includes(`vars.EXAMPLES_ROLE_ARN_${n}`), `role ${n}`);
     assert.match(live, /if: always\(\) && steps\.stage\.outputs\.stage != ''\n(.*\n)*?\s+run: node scripts\/test-example\.mjs "\$EXAMPLE_DIR" --remove-only --stage "\$STAGE"/);
     assert.doesNotMatch(live, /--region/, 'the region comes from AWS_REGION so the manifest region wins');
+  });
+}
+
+test('no workflow names a GitHub environment', () => {
+  for (const file of FILES) assert.doesNotMatch(read(file), /^\s*environment:/m, file);
+});
+
+for (const [file, name] of [['sweep.yml', 'live'], ['cleanup.yml', 'report']]) {
+  test(`${file}: the ${name} job first stops unless the run is on v4`, () => {
+    const text = job(read(file), name);
+    const steps = text.slice(text.indexOf('\n    steps:\n')).split(/\n(?= {6}- )/);
+    const first = steps[1];
+    assert.ok(first, `${file}: no steps`);
+    assert.match(first, /\n {10}REF: \$\{\{ github\.ref \}\}\n/, first);
+    assert.match(first, /if \[\[ "\$REF" != refs\/heads\/v4 \]\]; then\n\s+echo "::error::.*"\n\s+exit 1\n/, first);
+    const script = first.slice(first.indexOf('run: |'));
+    assert.doesNotMatch(script, /\$\{\{/, 'values reach the script through env');
   });
 }
 

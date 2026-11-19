@@ -15,7 +15,6 @@ jobs:
   report:
     name: Report stacks left behind (role ${{ matrix.role }})
     runs-on: ubuntu-latest
-    environment: live-tests
     timeout-minutes: 15
     permissions:
       id-token: write
@@ -25,6 +24,15 @@ jobs:
       matrix:
         role: [1, 2, 3]
     steps:
+      - name: Stop unless the run is on v4
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          # The AWS roles trust workflow runs on the v4 branch only.
+          if [[ "$REF" != refs/heads/v4 ]]; then
+            echo "::error::This job assumes AWS roles that trust runs on the v4 branch only; start the workflow from v4. This run is on $REF."
+            exit 1
+          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false

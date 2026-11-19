@@ -80,7 +80,6 @@ jobs:
     needs: select
     if: (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) && needs.select.outputs.count != '0'
     runs-on: ubuntu-latest
-    environment: live-tests
     timeout-minutes: 50
     permissions:
       id-token: write
