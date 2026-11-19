@@ -6,7 +6,7 @@
 //   platform                    "AWS"
 //   framework                   "v4"
 //   author                      { name, link, avatar? }
-//   services                    string[]
+//   services                    non-empty string[]
 //   region?                     string
 //   priority?                   number
 //   onboarding?                 boolean
@@ -16,6 +16,8 @@
 //   http:   { output, path?, status?, contains? }   status or contains is required
 //   invoke: { function, event?, contains }
 //   script: { path }
+//
+// Keys not listed above are rejected at every level.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -24,6 +26,15 @@ export const MANIFEST_FILE = 'example.json';
 export const LANGUAGES = ['node', 'python', 'go', 'java', 'ruby', 'csharp', 'rust'];
 export const TIERS = ['fast', 'slow'];
 const CHECK_KINDS = ['http', 'invoke', 'script'];
+const KEYS = {
+  root: ['dir', 'title', 'description', 'language', 'platform', 'framework', 'author', 'services', 'region', 'priority', 'onboarding', 'test'],
+  author: ['name', 'link', 'avatar'],
+  test: ['tier', 'checks', 'timeoutMinutes', 'quarantine'],
+  quarantine: ['reason', 'since'],
+  http: ['output', 'path', 'status', 'contains'],
+  invoke: ['function', 'event', 'contains'],
+  script: ['path'],
+};
 const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.serverless', '.superpowers', 'tests', 'scripts']);
 
 /**
@@ -60,6 +71,7 @@ export function loadManifest(root, dir) {
 export function validateManifest(m) {
   const errors = [];
   if (!isObject(m)) return ['manifest must be a JSON object'];
+  rejectUnknownKeys(errors, m, KEYS.root, '');
 
   requireString(errors, m, 'title', 'title');
   requireString(errors, m, 'description', 'description');
@@ -70,12 +82,13 @@ export function validateManifest(m) {
   if (!isObject(m.author)) {
     errors.push('author: required object with name and link');
   } else {
+    rejectUnknownKeys(errors, m.author, KEYS.author, 'author.');
     requireString(errors, m.author, 'name', 'author.name');
     requireString(errors, m.author, 'link', 'author.link');
     optionalString(errors, m.author, 'avatar', 'author.avatar');
   }
 
-  if (!Array.isArray(m.services) || !m.services.every(isNonEmptyString)) {
+  if (!Array.isArray(m.services) || m.services.length === 0 || !m.services.every(isNonEmptyString)) {
     errors.push('services: required array of non-empty strings');
   }
 
@@ -92,6 +105,7 @@ function validateTest(errors, t) {
     errors.push('test: must be an object');
     return;
   }
+  rejectUnknownKeys(errors, t, KEYS.test, 'test.');
   requireOneOf(errors, t.tier, 'test.tier', TIERS);
 
   if (!Array.isArray(t.checks) || t.checks.length === 0) {
@@ -108,6 +122,7 @@ function validateTest(errors, t) {
     if (!isObject(t.quarantine)) {
       errors.push('test.quarantine: must be an object with reason and since');
     } else {
+      rejectUnknownKeys(errors, t.quarantine, KEYS.quarantine, 'test.quarantine.');
       requireString(errors, t.quarantine, 'reason', 'test.quarantine.reason');
       if (!isIsoDate(t.quarantine.since)) errors.push('test.quarantine.since: required date as YYYY-MM-DD');
     }
@@ -127,6 +142,7 @@ function validateCheck(errors, check, at) {
     errors.push(`${where}: must be an object`);
     return;
   }
+  rejectUnknownKeys(errors, c, KEYS[kind], `${where}.`);
   if (kind === 'http') {
     requireString(errors, c, 'output', `${where}.output`);
     optionalString(errors, c, 'path', `${where}.path`);
@@ -141,6 +157,12 @@ function validateCheck(errors, check, at) {
     requireString(errors, c, 'contains', `${where}.contains`);
   } else {
     requireString(errors, c, 'path', `${where}.path`);
+  }
+}
+
+function rejectUnknownKeys(errors, obj, allowed, prefix) {
+  for (const key of Object.keys(obj)) {
+    if (!allowed.includes(key)) errors.push(`${prefix}${key}: unknown key; allowed keys are ${allowed.join(', ')}`);
   }
 }
 

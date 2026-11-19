@@ -107,6 +107,32 @@ test('services must be an array of strings', () => {
   assert.equal(errorsContaining(validateManifest(m), 'services').length, 1);
 });
 
+test('services must not be empty', () => {
+  const m = validManifest();
+  m.services = [];
+  assert.equal(errorsContaining(validateManifest(m), 'services').length, 1);
+});
+
+test('unknown keys are errors naming the key and its path, at every level', () => {
+  const cases = [
+    [(m) => { m.titel = 'x'; }, 'titel'],
+    [(m) => { m.author.email = 'x'; }, 'author.email'],
+    [(m) => { m.test.timeoutMinute = 10; }, 'test.timeoutMinute'],
+    [(m) => { m.test.quarantine = { reason: 'r', since: '2026-11-01', until: '2026-12-01' }; }, 'test.quarantine.until'],
+    [(m) => { m.test.checks[0].http.statusCode = 200; }, 'test.checks[0].http.statusCode'],
+    [(m) => { m.test.checks = [{ invoke: { function: 'f', contains: 'ok', payload: '{}' } }]; }, 'test.checks[0].invoke.payload'],
+    [(m) => { m.test.checks = [{ script: { path: 'test/smoke.mjs', args: [] } }]; }, 'test.checks[0].script.args'],
+  ];
+  for (const [mutate, keyPath] of cases) {
+    const m = validManifest();
+    mutate(m);
+    const errors = validateManifest(m);
+    assert.equal(errors.length, 1, `${keyPath}: ${errors.join('\n')}`);
+    assert.ok(errors[0].includes(keyPath), `${keyPath} not named in: ${errors[0]}`);
+    assert.match(errors[0], /unknown key/);
+  }
+});
+
 test('optional fields with the wrong type are errors', () => {
   const m = validManifest();
   m.onboarding = 'yes';
