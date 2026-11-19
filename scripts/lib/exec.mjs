@@ -196,7 +196,8 @@ function killGroup(child, sig) {
  * Runs a command through `exec` (signature of runCommand) and throws unless it
  * exits 0: Interrupted when `signal` aborts (before, during or right after the
  * run), TimedOut when `timeoutMs` is spent (before or during the run), an
- * Error naming the command otherwise. Resolves to the command's result.
+ * Error naming the command otherwise; for a non-zero exit that Error carries
+ * the command's result as `result`. Resolves to the command's result.
  */
 export async function runOrThrow(exec, cmd, args, opts = {}) {
   if (opts.signal?.aborted) throw new Interrupted();
@@ -210,7 +211,7 @@ export async function runOrThrow(exec, cmd, args, opts = {}) {
   if (r.status !== 0) {
     // Output that was not streamed is the only trace of why the command stopped.
     const tail = opts.echo === false ? (r.stderr ?? '').trim().slice(-300) : '';
-    throw new Error(`${name} exited with code ${r.status}${tail ? `: ${tail}` : ''}`);
+    throw Object.assign(new Error(`${name} exited with code ${r.status}${tail ? `: ${tail}` : ''}`), { result: r });
   }
   return r;
 }

@@ -814,7 +814,8 @@ test('CLI prints one PASS line and exits 0', async () => {
 test('CLI prints FAIL, names the failed step on stderr, and exits 1', async () => {
   const { code, out, err } = await cli([DIR], fixture(), { exec: fakeExec({ 'serverless remove': { status: 1 } }).exec });
   assert.equal(code, 1);
-  assert.deepEqual(out, [`FAIL ${DIR} 4.4.7 0s`]);
+  // The fake cannot list stacks, so the runner waits the full 10 minutes (on the fake clock) before it fails remove.
+  assert.deepEqual(out, [`FAIL ${DIR} 4.4.7 600s`]);
   assert.ok(err.some((l) => /remove/.test(l)));
   assert.ok(err.some((l) => /left behind: hello-svc-ex/.test(l)));
 });
@@ -1055,4 +1056,121 @@ test('CLI: a second signal kills the running command group, grandchildren includ
   } finally {
     if (grandchild && alive(grandchild)) process.kill(grandchild, 'SIGKILL');
   }
+});
+
+// --- remove: the outcome comes from the stage's stacks
+
+const REMOVE_ERROR = '✖ ServerlessError2: An error occurred: IamRoleLambdaExecution - Resource creation cancelled.';
+
+// Answers `aws cloudformation`: describe-stacks with the outputs, list-stacks
+// with the next of `lists` (the last one repeats). Each list is [[name, status], …].
+function cfn(...lists) {
+  const seen = [];
+  const respond = ({ args }) => {
+    if (args[1] !== 'list-stacks') return { status: 0, stdout: STACK_JSON };
+    const rows = lists.length > 1 ? lists.shift() : lists[0];
+    seen.push(rows);
+    return stackList(...rows);
+  };
+  return { respond, seen };
+}
+
+// `serverless remove` answers in turn (the last one repeats).
+function removes(...answers) {
+  return () => (answers.length > 1 ? answers.shift() : answers[0]);
+}
+
+const removeFailed = { status: 1, stdout: 'Removing aws-node from stage\n', stderr: `\n${REMOVE_ERROR}\n\n` };
+const removeCount = (fx) => fx.steps().filter((s) => s === 'serverless remove').length;
+
+test('remove-only: a remove that exits 1 while the stack is being deleted passes once the stack is gone', async () => {
+  const root = fixture();
+  const resultFile = path.join(root, 'r.json');
+  const stack = `hello-svc-${STAGE}`;
+  const listing = cfn([[stack, 'CREATE_IN_PROGRESS']], [[stack, 'DELETE_IN_PROGRESS']], [[stack, 'DELETE_IN_PROGRESS']], []);
+  const fx = fakeExec({ 'aws cloudformation': listing.respond, 'serverless remove': removes(removeFailed) });
+  const clock = fakeClock();
+  const { code, out, err } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, {
+    exec: fx.exec,
+    now: clock.now,
+    sleep: clock.sleep,
+  });
+  assert.equal(code, 0, err.join('\n'));
+  assert.match(out[0], /^PASS hello /);
+  assert.equal(removeCount(fx), 1);
+  assert.deepEqual(clock.sleeps, [10_000, 10_000]);
+  const result = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
+  assert.equal(result.result, 'pass');
+  assert.equal(result.failedStep, undefined);
+  assert.equal(result.leftBehind, undefined);
+  assert.match(result.detail, /gone/);
+  assert.ok(result.detail.includes(`serverless remove had reported an error: ${REMOVE_ERROR}`), result.detail);
+  assert.ok(err.some((l) => /^\[remove\] waiting for .*DELETE_IN_PROGRESS/.test(l)), err.join('\n'));
+});
+
+test('a normal run is not failed by a remove that exits 1 when the stack is deleted after it', async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const listing = cfn([[stack, 'DELETE_IN_PROGRESS']], []);
+  const fx = fakeExec({ 'aws cloudformation': listing.respond, 'serverless remove': removes(removeFailed) });
+  const { result } = await run(fixture(), { fx, args: { stage: STAGE } });
+  assert.equal(result.result, 'pass');
+  assert.equal(result.failedStep, undefined);
+  assert.equal(result.leftBehind, undefined);
+});
+
+test('a stack that settles in a state that is not deleting gets one more serverless remove', async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const listing = cfn([[stack, 'CREATE_IN_PROGRESS']], [[stack, 'CREATE_COMPLETE']], [[stack, 'DELETE_IN_PROGRESS']], []);
+  const fx = fakeExec({ 'aws cloudformation': listing.respond, 'serverless remove': removes(removeFailed, { status: 0 }) });
+  const { result } = await run(fixture(), { fx, args: { stage: STAGE } });
+  assert.equal(removeCount(fx), 2);
+  assert.equal(result.result, 'pass');
+});
+
+test('when the retry leaves the stack too, remove fails and names only that stack', async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const listing = cfn([[stack, 'ROLLBACK_COMPLETE']]);
+  const fx = fakeExec({ 'aws cloudformation': listing.respond, 'serverless remove': removes(removeFailed) });
+  const clock = fakeClock();
+  const { result } = await run(fixture(), { fx, clock, args: { stage: STAGE } });
+  assert.equal(removeCount(fx), 2, 'one retry in total');
+  assert.equal(result.result, 'fail');
+  assert.equal(result.failedStep, 'remove');
+  assert.equal(result.leftBehind, stack);
+  assert.ok(clock.sleeps.reduce((a, b) => a + b, 0) <= 10 * MINUTE);
+});
+
+test('of two expected stacks, leftBehind names only the one that still exists', async () => {
+  const listing = cfn([[`hello-worker-${STAGE}`, 'DELETE_FAILED']]);
+  const fx = fakeExec({ 'aws cloudformation': listing.respond, 'serverless remove': removes(removeFailed) });
+  const { result } = await run(composeFixture(), { fx, args: { stage: STAGE } });
+  assert.equal(result.failedStep, 'remove');
+  assert.equal(result.leftBehind, `hello-worker-${STAGE}`);
+});
+
+test('the wait for a deleting stack stops after 10 minutes', async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const fx = fakeExec({ 'aws cloudformation': cfn([[stack, 'DELETE_IN_PROGRESS']]).respond, 'serverless remove': removes(removeFailed) });
+  const clock = fakeClock();
+  const { result } = await run(fixture(), { fx, clock, args: { stage: STAGE } });
+  assert.equal(clock.sleeps.reduce((a, b) => a + b, 0), 10 * MINUTE);
+  assert.ok(clock.sleeps.every((ms) => ms <= 10_000));
+  assert.equal(removeCount(fx), 1, 'a deleting stack is not removed again');
+  assert.equal(result.failedStep, 'remove');
+  assert.equal(result.leftBehind, stack);
+});
+
+test("the wait never runs past the remove step's own deadline", async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const clock = fakeClock();
+  const fx = fakeExec({
+    'aws cloudformation': cfn([[stack, 'DELETE_IN_PROGRESS']]).respond,
+    'serverless remove': () => {
+      clock.t += 12 * MINUTE;
+      return removeFailed;
+    },
+  });
+  const { result } = await run(fixture(), { fx, clock, args: { stage: STAGE } });
+  assert.equal(clock.sleeps.reduce((a, b) => a + b, 0), 3 * MINUTE);
+  assert.equal(result.failedStep, 'remove');
 });

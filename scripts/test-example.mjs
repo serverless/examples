@@ -21,6 +21,11 @@
 //                            where serverless.yml loads plugins and runs
 //                            `serverless remove --stage <stage>`.
 //
+// When `serverless remove` exits non-zero, the stage's stacks decide: the runner
+// waits (at most 10 minutes, within remove's own 15) while they are being
+// deleted, runs remove once more if one settles in a state that is not
+// deleting, and counts remove as done once every stack is gone.
+//
 // AWS credentials and the Framework key come from the caller's environment.
 // Command output streams to stderr, prefixed with the step name. Stdout gets one
 // line: `PASS|FAIL <dir> <resolvedVersion> <seconds>s`, or
@@ -60,6 +65,9 @@ const DEFAULT_TIMEOUT_MINUTES = 15;
 const DEFAULT_REGION = 'us-east-1';
 const REMOVE_TIMEOUT_MS = 15 * MINUTE;
 const VERSION_TIMEOUT_MS = 2 * MINUTE;
+// After a remove that exits non-zero: how often and how long to watch the stage's stacks.
+const REMOVE_POLL_MS = 10_000;
+const REMOVE_WAIT_MS = 10 * MINUTE;
 const SERVICE_FILES = ['serverless.yml', 'serverless.yaml'];
 const FRAMEWORK_VERSION = /^(latest|canary|\d+(\.\d+){0,2}(-[0-9A-Za-z.]+)?)$/;
 const STAGE_TIME_CHARS = 5;
@@ -149,7 +157,7 @@ export async function runExample({
   exec = runCommand,
   fetchImpl = fetch,
   now = Date.now,
-  sleep = (ms) => sleepFor(ms, undefined, { signal }).catch(() => {}),
+  sleep = (ms) => sleepFor(ms),
   log = (line) => process.stderr.write(`${line}\n`),
   resultFile,
   signal,
@@ -245,7 +253,7 @@ export async function runExample({
 
       await attempt('check', async () => {
         const outputs = compose ? {} : await readOutputs(exec, copy, stacks[0], region, left(), signal);
-        const ctx = { cwd: copy, stage, region, outputs, exec, fetchImpl, now, sleep, deadline, signal };
+        const ctx = { cwd: copy, stage, region, outputs, exec, fetchImpl, now, sleep: untilAborted(sleep, signal), deadline, signal };
         for (const [i, check] of manifest.test.checks.entries()) {
           const kind = Object.keys(check)[0];
           log(`[check] checks[${i}] ${kind}`);
@@ -259,20 +267,15 @@ export async function runExample({
       });
     } finally {
       if (deployStarted) {
-        try {
-          await runOrThrow(exec, 'serverless', ['remove', '--stage', stage, ...regionArgs], {
-            cwd: copy,
-            step: 'remove',
-            timeoutMs: REMOVE_TIMEOUT_MS,
-          });
+        const removal = await removeStage({ exec, cwd: copy, stage, region, deadline: now() + REMOVE_TIMEOUT_MS, sleep, now, log });
+        if (removal.done) {
           if (signal?.aborted && !failure.step) {
             failure.step = 'remove';
             failure.detail = new Interrupted().message;
           }
-        } catch (err) {
-          const detail = err.message;
-          log(`[remove] ${detail}`);
-          leftBehind = stacks.join(', ');
+        } else {
+          const detail = removal.error;
+          leftBehind = (removal.left ?? stacks).join(', ');
           if (failure.step) {
             failure.detail += `; remove: ${detail}`;
           } else {
@@ -315,6 +318,7 @@ export async function removeOnly({
   region,
   exec = runCommand,
   now = Date.now,
+  sleep = (ms) => sleepFor(ms),
   log = (line) => process.stderr.write(`${line}\n`),
   resultFile,
   env = process.env,
@@ -342,28 +346,33 @@ export async function removeOnly({
     const dirs = compose ? serviceDirs(copy) : [copy];
     if (frameworkVersion !== 'latest') for (const d of dirs) rewriteFrameworkVersion(d, frameworkVersion);
 
-    const stacks = await findStageStacks(exec, copy, stage, region, log);
+    const found = await listStageStacks(exec, copy, stage, region);
+    if (found === null) log(`[list-stacks] could not list the stacks in ${region}; running remove anyway`);
+    const stacks = found?.map((s) => s.name);
+    const fallback = stacks?.join(', ') || `stacks ending in -${stage}`;
     if (stacks?.length === 0) {
       log(`[remove-only] no stack in ${region} ends in -${stage}; nothing to remove`);
       result.detail = 'nothing deployed';
     } else {
+      let removal;
       try {
         const withPlugins = new Set(dirs.filter(loadsPlugins));
         for (const { cwd, cmd, args } of installCommands(copy).filter((c) => withPlugins.has(c.cwd))) {
           await runOrThrow(exec, cmd, args, { cwd, step: 'install', timeoutMs: REMOVE_TIMEOUT_MS });
         }
-        await runOrThrow(exec, 'serverless', ['remove', '--stage', stage, '--region', region], {
-          cwd: copy,
-          step: 'remove',
-          timeoutMs: REMOVE_TIMEOUT_MS,
-        });
+        removal = await removeStage({ exec, cwd: copy, stage, region, deadline: now() + REMOVE_TIMEOUT_MS, sleep, now, log });
       } catch (err) {
-        log(`[remove] ${err.message}`);
+        log(`[install] ${err.message}`);
+        removal = { done: false, error: err.message, left: null };
+      }
+      if (removal.done && removal.error) {
+        result.detail = `the stacks of stage ${stage} are gone; serverless remove had reported an error: ${removal.lastLine}`;
+      } else if (!removal.done) {
         Object.assign(result, {
           result: 'fail',
           failedStep: 'remove',
-          detail: err.message,
-          leftBehind: stacks?.join(', ') || `stacks ending in -${stage}`,
+          detail: removal.error,
+          leftBehind: removal.left?.join(', ') || fallback,
         });
       }
     }
@@ -384,19 +393,104 @@ function loadsPlugins(dir) {
   return Boolean(file) && PLUGINS_LINE.test(fs.readFileSync(file, 'utf8'));
 }
 
-// Resolves to the names of the region's stacks (not deleted) that end in
-// `-<stage>`, or to null when they cannot be listed.
-async function findStageStacks(exec, cwd, stage, region, log) {
+// Resolves to `{ name, status }` for each of the region's stacks (not
+// deleted) whose name ends in `-<stage>`, or to null when they cannot be listed.
+async function listStageStacks(exec, cwd, stage, region) {
   const args = ['cloudformation', 'list-stacks', '--region', region, '--output', 'json', '--stack-status-filter', ...EXISTING_STACK_STATUSES];
   try {
     const r = await runOrThrow(exec, 'aws', args, { cwd, step: 'list-stacks', echo: false, timeoutMs: VERSION_TIMEOUT_MS });
     return JSON.parse(r.stdout)
       .StackSummaries.filter((s) => s.StackStatus !== 'DELETE_COMPLETE' && s.StackName.endsWith(`-${stage}`))
-      .map((s) => s.StackName);
-  } catch (err) {
-    log(`[list-stacks] could not list the stacks in ${region} (${err.message}); running remove anyway`);
+      .map((s) => ({ name: s.StackName, status: s.StackStatus }));
+  } catch {
     return null;
   }
+}
+
+/**
+ * Runs `serverless remove` for `stage` in `cwd` and decides from the stage's
+ * stacks whether the removal is done. A remove that exits 0 is done. After a
+ * non-zero exit the stacks ending in `-<stage>` are listed: while one is in
+ * progress (DELETE_IN_PROGRESS among others) it waits, checking every 10 s;
+ * when every remaining stack has settled in a state that is not deleting, it
+ * runs remove once more (one retry in total). It stops when every stack is
+ * gone, or after 10 minutes, and never after `deadline`. Resolves to
+ * `{ done, error, lastLine, left }`: `error` is the first remove's error
+ * message, `lastLine` its last non-empty output line, `left` the names of the
+ * stacks still present when not done (null when they could not be listed).
+ */
+async function removeStage({ exec, cwd, stage, region, deadline, sleep, now, log }) {
+  const remove = () =>
+    runOrThrow(exec, 'serverless', ['remove', '--stage', stage, '--region', region], { cwd, step: 'remove', timeoutMs: deadline - now() });
+  let first;
+  try {
+    await remove();
+    return { done: true };
+  } catch (err) {
+    first = err;
+  }
+  log(`[remove] ${first.message}`);
+  const error = first.message;
+  const lastLine = lastOutputLine(first.result) ?? error;
+  const waitUntil = Math.min(now() + REMOVE_WAIT_MS, deadline);
+  const describe = (stacks) => stacks.map((s) => `${s.name} (${s.status})`).join(', ');
+  let retried = false;
+  let left = null;
+  for (;;) {
+    const stacks = await listStageStacks(exec, cwd, stage, region);
+    if (stacks) {
+      if (stacks.length === 0) {
+        log(`[remove] every stack of stage ${stage} is gone`);
+        return { done: true, error, lastLine };
+      }
+      left = stacks.map((s) => s.name);
+    }
+    if (now() >= waitUntil) break;
+    if (stacks && !retried && stacks.every((s) => !s.status.endsWith('_IN_PROGRESS'))) {
+      retried = true;
+      log(`[remove] ${describe(stacks)} settled without being deleted; running serverless remove once more`);
+      try {
+        await remove();
+      } catch (err) {
+        log(`[remove] ${err.message}`);
+      }
+      continue;
+    }
+    const what = stacks ? describe(stacks) : `the stacks ending in -${stage} (they could not be listed)`;
+    log(`[remove] waiting for ${what} to be deleted; checking again in ${REMOVE_POLL_MS / 1000}s`);
+    await sleep(Math.min(REMOVE_POLL_MS, waitUntil - now()));
+  }
+  log(`[remove] stopped waiting; still present: ${left ? left.join(', ') : `unknown (the stacks ending in -${stage} could not be listed)`}`);
+  return { done: false, error, lastLine, left };
+}
+
+// The last non-empty line of a command's stderr, else of its stdout, trimmed
+// and without terminal colour codes; undefined when there is none.
+function lastOutputLine(result) {
+  for (const text of [result?.stderr, result?.stdout]) {
+    const line = (text ?? '')
+      .replace(/\x1b\[[0-9;]*m/g, '')
+      .split('\n')
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .at(-1);
+    if (line) return line;
+  }
+  return undefined;
+}
+
+// A sleep that ends early when `signal` aborts, for steps that stop on an interruption.
+function untilAborted(sleep, signal) {
+  return (ms) => {
+    if (!signal) return sleep(ms);
+    if (signal.aborted) return Promise.resolve();
+    let onAbort;
+    const aborted = new Promise((resolve) => {
+      onAbort = resolve;
+      signal.addEventListener('abort', onAbort, { once: true });
+    });
+    return Promise.race([sleep(ms), aborted]).finally(() => signal.removeEventListener('abort', onAbort));
+  };
 }
 
 function checkVersionAndStage(frameworkVersion, stage) {
@@ -455,7 +549,9 @@ async function readFrameworkVersion(exec, cwd, timeoutMs, signal) {
   try {
     const r = await runOrThrow(exec, 'serverless', ['--version'], { cwd, step: 'version', timeoutMs, signal });
     const text = `${r.stdout ?? ''}\n${r.stderr ?? ''}`;
-    // The last match: `Serverless ϟ Framework <v>` comes after any install lines.
+    // The last matching line of stdout followed by stderr. When the CLI installs a
+    // version first, its `Installed Serverless Framework v<v>` line (stderr) and the
+    // `Serverless ϟ Framework <v>` line (stdout) name the same version, so either is right.
     const found = text
       .split('\n')
       .map((l) => l.match(FRAMEWORK_LINE)?.[1])
