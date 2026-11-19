@@ -256,6 +256,36 @@ test('a description containing ": " is accepted', () => {
   assert.deepEqual(validateManifest(m), []);
 });
 
+test('"-->" or a line break in a frontmatter value is an error naming the field', () => {
+  const fields = [
+    ['title', (m, v) => (m.title = v)],
+    ['description', (m, v) => (m.description = v)],
+    ['author.name', (m, v) => (m.author.name = v)],
+    ['author.link', (m, v) => (m.author.link = v)],
+    ['author.avatar', (m, v) => (m.author.avatar = v)],
+  ];
+  for (const [field, set] of fields) {
+    for (const [bad, what] of [
+      ['A --> B', '-->'],
+      ['A\nB', 'line break'],
+      ['A\r\nB', 'line break'],
+    ]) {
+      const m = validManifest();
+      set(m, bad);
+      const errors = validateManifest(m);
+      assert.equal(errors.length, 1, `${field} ${JSON.stringify(bad)}: ${errors.join('\n')}`);
+      assert.ok(errors[0].startsWith(`${field}: `) && errors[0].includes(what) && errors[0].includes('frontmatter'), errors[0]);
+    }
+  }
+});
+
+test('"->", "--" and "<!--" alone stay valid in frontmatter values', () => {
+  const m = validManifest();
+  m.title = 'A -> B -- C';
+  m.description = 'Uses <!-- in text.';
+  assert.deepEqual(validateManifest(m), []);
+});
+
 function makeTree(files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'manifest-test-'));
   for (const [rel, content] of Object.entries(files)) {

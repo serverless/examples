@@ -17,7 +17,9 @@
 //   invoke: { function, event?, args?, contains }   args: extra CLI arguments
 //   script: { path }
 //
-// Keys not listed above are rejected at every level.
+// Keys not listed above are rejected at every level. title, description and the
+// author fields go into README frontmatter, so they must not contain `-->` or a
+// line break.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -76,6 +78,8 @@ export function validateManifest(m) {
 
   requireString(errors, m, 'title', 'title');
   requireString(errors, m, 'description', 'description');
+  rejectFrontmatterBreaks(errors, m, 'title', 'title');
+  rejectFrontmatterBreaks(errors, m, 'description', 'description');
   requireOneOf(errors, m.language, 'language', LANGUAGES);
   requireOneOf(errors, m.platform, 'platform', ['AWS']);
   requireOneOf(errors, m.framework, 'framework', ['v4']);
@@ -87,6 +91,7 @@ export function validateManifest(m) {
     requireString(errors, m.author, 'name', 'author.name');
     requireString(errors, m.author, 'link', 'author.link');
     optionalString(errors, m.author, 'avatar', 'author.avatar');
+    for (const key of KEYS.author) rejectFrontmatterBreaks(errors, m.author, key, `author.${key}`);
   }
 
   if (!Array.isArray(m.services) || m.services.length === 0 || !m.services.every(isNonEmptyString)) {
@@ -184,6 +189,15 @@ function requireString(errors, obj, key, at) {
 
 function optionalString(errors, obj, key, at) {
   if (obj[key] !== undefined && !isNonEmptyString(obj[key])) errors.push(`${at}: must be a non-empty string`);
+}
+
+// Values written into the README's `<!-- … -->` frontmatter: `-->` would end
+// the comment and a line break would split the value.
+function rejectFrontmatterBreaks(errors, obj, key, at) {
+  const v = obj[key];
+  if (typeof v !== 'string') return;
+  if (v.includes('-->')) errors.push(`${at}: must not contain "-->", which would end the README frontmatter comment`);
+  if (/[\r\n]/.test(v)) errors.push(`${at}: must not contain a line break, which would split the README frontmatter value`);
 }
 
 function requireOneOf(errors, value, at, allowed) {
