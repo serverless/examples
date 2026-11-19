@@ -317,6 +317,18 @@ test('secrets: scans only tracked text files and skips lockfiles', () => {
   assert.deepEqual(checkExample(root, DIR), []);
 });
 
+test('secrets: skips tracked symlinks, also one to a directory, and still scans what they point to', () => {
+  const value = `AKIA${'C'.repeat(16)}`;
+  const root = fixture(({ file }) => {
+    fs.mkdirSync(file('shared'));
+    fs.writeFileSync(file('shared/config.js'), `export const key = '${value}';\n`);
+    fs.symlinkSync('shared', file('linked-dir'));
+    fs.symlinkSync('shared/config.js', file('linked-file.js'));
+  });
+  const errors = checkExample(root, DIR);
+  assert.deepEqual(errors, ['secrets: shared/config.js: contains a value shaped like a AWS access key id']);
+});
+
 // generated-readme
 
 test('generated-readme: reports frontmatter that differs from the manifest', () => {

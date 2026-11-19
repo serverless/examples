@@ -287,7 +287,9 @@ function checkSecrets(exampleDir) {
   for (const rel of tracked) {
     if (LOCKFILES.has(path.posix.basename(rel))) continue;
     const file = path.join(exampleDir, rel);
-    if (!fs.existsSync(file)) continue;
+    // Only regular files: a tracked symlink (to a file or a directory) is
+    // skipped; a tracked target is scanned on its own.
+    if (!fs.lstatSync(file, { throwIfNoEntry: false })?.isFile()) continue;
     const buf = fs.readFileSync(file);
     if (buf.subarray(0, 8000).includes(0)) continue;
     const text = buf.toString('utf8');
