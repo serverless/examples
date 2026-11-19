@@ -128,6 +128,7 @@ export class UsageError extends Error {
  * @property {'install'|'deploy'|'check'|'remove'} [failedStep]  the first step that did not complete
  * @property {string} [detail]          what went wrong, or why the example was skipped
  * @property {string} [leftBehind]      stacks a failed remove may have left, comma-separated
+ * In `detail` and `leftBehind` every 12-digit number reads 123456789012.
  */
 
 /** Returns a stage name: `ex` + 9 lowercase base36 characters (time, then random). */
@@ -173,6 +174,7 @@ export async function runExample({
   const startMs = now();
   const base = { example: dir, tier: manifest.test.tier, frameworkVersion, startedAt: new Date(startMs).toISOString() };
   const finish = (result) => {
+    maskAccountIds(result);
     if (resultFile) {
       fs.mkdirSync(path.dirname(path.resolve(resultFile)), { recursive: true });
       fs.writeFileSync(resultFile, `${JSON.stringify(result, null, 2)}\n`);
@@ -383,11 +385,21 @@ export async function removeOnly({
     cleanup();
   }
   result.durationSeconds = Math.round((now() - startMs) / 1000);
+  maskAccountIds(result);
   if (resultFile) {
     fs.mkdirSync(path.dirname(path.resolve(resultFile)), { recursive: true });
     fs.writeFileSync(resultFile, `${JSON.stringify(result, null, 2)}\n`);
   }
   return result;
+}
+
+// Result files are uploaded as artifacts of a public repository, and AWS error
+// messages quoted in `detail` can name the account: every 12-digit number in
+// `detail` and `leftBehind` becomes the placeholder account id. Changes `result`.
+function maskAccountIds(result) {
+  for (const key of ['detail', 'leftBehind']) {
+    if (typeof result[key] === 'string') result[key] = result[key].replace(/\b\d{12}\b/g, '123456789012');
+  }
 }
 
 // True when the service in `dir` has a top-level plugins: key.

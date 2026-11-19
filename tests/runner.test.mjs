@@ -601,6 +601,29 @@ test('the result file holds the result as JSON', async () => {
   assert.deepEqual(JSON.parse(fs.readFileSync(resultFile, 'utf8')), result);
 });
 
+// An AccessDenied as AWS prints it, with an account id and a 13-digit timestamp.
+const ACCOUNT = '210987654321';
+const DENIED = `User: arn:aws:sts::${ACCOUNT}:assumed-role/examples-test/x is not authorized (request at 1763520000000)`;
+
+test('account ids in the detail are masked in the result and the result file; a 13-digit number is left alone', async () => {
+  const root = fixture();
+  const resultFile = path.join(root, 'results', 'hello.json');
+  const { result } = await run(root, { fx: fakeExec({ 'aws cloudformation': { status: 254, stderr: DENIED } }), args: { resultFile } });
+  const written = fs.readFileSync(resultFile, 'utf8');
+  assert.equal(result.failedStep, 'check');
+  assert.ok(!written.includes(ACCOUNT), written);
+  assert.ok(!result.detail.includes(ACCOUNT), result.detail);
+  assert.ok(result.detail.includes('arn:aws:sts::123456789012:assumed-role/examples-test/x'), result.detail);
+  assert.ok(result.detail.includes('1763520000000'), result.detail);
+});
+
+test('CLI: the failed-step line on stderr shows the masked detail', async () => {
+  const { code, err } = await cli([DIR], fixture(), { exec: fakeExec({ 'aws cloudformation': { status: 254, stderr: DENIED } }).exec });
+  assert.equal(code, 1);
+  const line = err.find((l) => l.startsWith('failed step:'));
+  assert.ok(line && line.includes('arn:aws:sts::123456789012:') && !line.includes(ACCOUNT), err.join('\n'));
+});
+
 // --- compose
 
 test('a compose root installs in the root and each service with a package.json, deploys from the root and skips outputs', async () => {
@@ -1192,6 +1215,25 @@ test('a remove error without a ✖ line is quoted by its last non-empty line', a
   const { code } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec });
   assert.equal(code, 0);
   assert.ok(JSON.parse(fs.readFileSync(resultFile, 'utf8')).detail.endsWith('had reported an error: at the end'));
+});
+
+test('remove-only: account ids in the detail and the stacks left behind are masked in the result file', async () => {
+  for (const [name, removeAnswer, list] of [
+    // The stacks are gone; the detail quotes the remove error.
+    ['gone', { status: 1, stderr: `✖ ${DENIED}\n` }, cfn([[`hello-svc-${STAGE}`, 'CREATE_COMPLETE']], [])],
+    // Remove does not complete; the detail is the error and leftBehind names the stacks.
+    ['left', { status: 1, stderr: `✖ ${DENIED}\n` }, cfn([[`hello-svc-${STAGE}`, 'CREATE_COMPLETE']], [[`app-${ACCOUNT}-${STAGE}`, 'DELETE_FAILED']])],
+  ]) {
+    const root = fixture();
+    const resultFile = path.join(root, 'r.json');
+    const fx = fakeExec({ 'aws cloudformation': list.respond, 'serverless remove': removes(removeAnswer) });
+    await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec });
+    const written = fs.readFileSync(resultFile, 'utf8');
+    const result = JSON.parse(written);
+    assert.ok(!written.includes(ACCOUNT), `${name}: ${written}`);
+    if (name === 'gone') assert.ok(result.detail.includes('arn:aws:sts::123456789012:') && result.detail.includes('1763520000000'), result.detail);
+    if (name === 'left') assert.equal(result.leftBehind, `app-123456789012-${STAGE}`);
+  }
 });
 
 test("a listing in the wait never gets more time than is left to remove's deadline", async () => {
