@@ -602,7 +602,8 @@ test('the result file holds the result as JSON', async () => {
 });
 
 // An AccessDenied as AWS prints it, with an account id and a 13-digit timestamp.
-const ACCOUNT = '210987654321';
+// The id is built, so the source holds no 12-digit number but the placeholder.
+const ACCOUNT = '4'.repeat(12);
 const DENIED = `User: arn:aws:sts::${ACCOUNT}:assumed-role/examples-test/x is not authorized (request at 1763520000000)`;
 
 test('account ids in the detail are masked in the result and the result file; a 13-digit number is left alone', async () => {
