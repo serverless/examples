@@ -1,0 +1,33 @@
+{
+  "title": "Python Flask API on AWS",
+  "description": "This template demonstrates how to develop and deploy a simple Python Flask API running on AWS Lambda using the Serverless Framework.",
+  "language": "python",
+  "platform": "AWS",
+  "framework": "v4",
+  "priority": 7,
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "apigateway",
+    "iam",
+    "logs"
+  ],
+  "onboarding": true,
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "http": {
+          "output": "ServiceEndpoint",
+          "path": "/",
+          "status": 200,
+          "contains": "Hello from root!"
+        }
+      }
+    ]
+  }
+}

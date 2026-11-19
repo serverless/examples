@@ -12,65 +12,39 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 # MCP Server — minimal
 
+[![Verified](https://raw.githubusercontent.com/serverless/examples/verified/badges/mcp/minimal.svg)](https://github.com/serverless/examples/blob/verified/results.json)
+
 The smallest deployable member of the [MCP examples](../README.md): no auth, no domain — the [oauth-cognito](../oauth-cognito), [oauth-authorizer](../oauth-authorizer), and [oauth-in-module](../oauth-in-module) examples each add enforcement in one of its three shapes, and the hub README carries the client-capability matrix that applies to all of them.
 
 Deploy a [Model Context Protocol](https://modelcontextprotocol.io) server, written against the official [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk), with the Serverless Framework's [built-in MCP server support](https://www.serverless.com/framework/docs/providers/aws/guide/mcp).
 
-There are two files. `src/server.mjs` is a plain SDK server with no Lambda concepts and no Framework APIs in it. `serverless.yml` names it:
+## What it deploys
 
-```yaml
-mcp:
-  servers:
-    demo:
-      server: src/server.mjs
-```
+- An API Gateway REST API with a regional endpoint, serving the MCP server at `/demo/mcp` in streaming mode.
+- A Lambda function, `demo`, that runs `src/server.mjs` behind the Framework's prebuilt Lambda entry.
+- An IAM role for the function and a CloudWatch Logs log group for its logs.
 
-That is the whole integration. The Framework owns everything around the module: the HTTPS endpoint at `/demo/mcp` on an API Gateway REST API in streaming mode, the integration timeout kept in step with the function timeout, packaging, and the prebuilt Lambda entry that bridges Lambda's streaming runtime to the SDK handler's web-standard `fetch`. The server becomes an ordinary function in the service model, so `serverless logs -f demo`, metrics, versions, and rollback work with no special casing.
+## Prerequisites
 
-The server exposes two tools, which is enough to see both response modes:
+- [Node.js](https://nodejs.org/) 24.
+- The Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
+- An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
+- A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
 
-- **`add`** — returns immediately, as plain JSON with structured output.
-- **`slow_report`** — works for a while and emits progress notifications, which stream back as `text/event-stream` ahead of the final result.
+## Deploy
 
-## Deployment
+Install the dependencies and deploy from this directory:
 
 ```bash
-npm install
+npm ci
 serverless deploy
 ```
 
-The deploy summary prints the endpoint, and `serverless info` prints it again later:
+The deploy summary prints the endpoint under `mcp:`, as `demo → https://<api-id>.execute-api.<region>.amazonaws.com/<stage>/demo/mcp`, and `serverless info` prints it again later. The stage segment tracks `--stage`, so a deploy to another stage changes every URL below with it; the examples on this page use the default `dev` stage. Deploying again without any changes prints `No changes to deploy. Deployment skipped.` — `--force` deploys anyway.
 
-```
-mcp: demo → https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp
-```
+## Try it
 
-The `dev` segment tracks the stage, so a `--stage` deploy changes every URL below with it. Deploying again without any changes prints `No changes to deploy. Deployment skipped.` — `--force` deploys anyway.
-
-## Testing
-
-Any Streamable HTTP MCP client works. The MCP Inspector's CLI mode takes a config file (`mcp.json` below) naming the endpoint. `"protocolEra": "modern"` opts it into the current protocol revision (its default is an older one) — this server answers without it too; the opt-in starts to matter once a tool depends on the current revision, as elicitation does:
-
-```json
-{
-  "mcpServers": {
-    "demo": {
-      "type": "streamable-http",
-      "url": "https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp",
-      "protocolEra": "modern"
-    }
-  }
-}
-```
-
-```bash
-npx @modelcontextprotocol/inspector --cli \
-  --config mcp.json --server demo --method tools/list
-```
-
-Without `--cli` the same command opens the Inspector's browser UI, where the opt-in is the connection's **Protocol Era** setting.
-
-`curl` works too — the protocol is JSON-RPC over POST. List the tools:
+Any Streamable HTTP MCP client works; `curl` is enough, since the protocol is JSON-RPC over POST. List the tools:
 
 ```bash
 curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
@@ -81,7 +55,7 @@ curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"curl","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}'
 ```
 
-Call `add` — a tool call also carries the tool name in the `mcp-name` header:
+The result lists two tools, `add` and `slow_report`. Call `add` — a tool call also carries the tool name in the `mcp-name` header:
 
 ```bash
 curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
@@ -104,7 +78,25 @@ curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
 }
 ```
 
-The response samples on this page are trimmed to the load-bearing keys — the live responses also carry protocol bookkeeping inside `result`: a `resultType` and a `_meta` block naming the server.
+The response samples on this page are trimmed to the load-bearing keys — the live responses also carry protocol bookkeeping inside `result`: a `resultType` and a `_meta` block naming the server. The example's automated check, [`test/smoke.mjs`](test/smoke.mjs), sends the same two requests and checks both answers.
+
+## How it works
+
+There are two files. `src/server.mjs` is a plain SDK server with no Lambda concepts and no Framework APIs in it. `serverless.yml` names it:
+
+```yaml
+mcp:
+  servers:
+    demo:
+      server: src/server.mjs
+```
+
+That is the whole integration. The Framework owns everything around the module: the HTTPS endpoint at `/demo/mcp` on an API Gateway REST API in streaming mode, the integration timeout kept in step with the function timeout, packaging, and the prebuilt Lambda entry that bridges Lambda's streaming runtime to the SDK handler's web-standard `fetch`. The server becomes an ordinary function in the service model, so `serverless logs -f demo`, metrics, versions, and rollback work with no special casing.
+
+The server exposes two tools, which is enough to see both response modes:
+
+- **`add`** — returns immediately, as plain JSON with structured output.
+- **`slow_report`** — works for a while and emits progress notifications, which stream back as `text/event-stream` ahead of the final result.
 
 Ask `slow_report` for progress — pass a `progressToken` and the response arrives as an event stream, one event per step, with the result last (`-N` keeps `curl` from buffering it):
 
@@ -118,7 +110,7 @@ curl -sN https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
   -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"slow_report","arguments":{"steps":3},"_meta":{"progressToken":"p1","io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"curl","version":"1.0.0"},"io.modelcontextprotocol/clientCapabilities":{}}}}'
 ```
 
-```
+```text
 event: message
 data: {"jsonrpc":"2.0","method":"notifications/progress","params":{"progressToken":"p1","progress":1,"total":3,"message":"step 1"}}
 
@@ -134,7 +126,28 @@ data: {"result":{"content":[{"type":"text","text":"completed 3 steps"}]},"jsonrp
 
 The same call without a `progressToken` returns one plain JSON response: both modes live on the one endpoint, and the server picks per request.
 
-## Claude Code
+## Connect a client
+
+The MCP Inspector's CLI mode takes a config file (`mcp.json` below) naming the endpoint. `"protocolEra": "modern"` opts it into the current protocol revision (its default is an older one) — this server answers without it too; the opt-in starts to matter once a tool depends on the current revision, as elicitation does:
+
+```json
+{
+  "mcpServers": {
+    "demo": {
+      "type": "streamable-http",
+      "url": "https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp",
+      "protocolEra": "modern"
+    }
+  }
+}
+```
+
+```bash
+npx @modelcontextprotocol/inspector --cli \
+  --config mcp.json --server demo --method tools/list
+```
+
+Without `--cli` the same command opens the Inspector's browser UI, where the opt-in is the connection's **Protocol Era** setting.
 
 The deployed endpoint is a complete server for any Streamable HTTP client, and Claude Code needs nothing but `--transport http` and the URL — no custom domain, no OAuth flags:
 
@@ -143,7 +156,7 @@ claude mcp add --transport http demo https://abc123def.execute-api.us-east-1.ama
 claude mcp list
 ```
 
-```
+```text
 demo: https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp (HTTP) - ✔ Connected
 ```
 
@@ -153,7 +166,7 @@ A headless call proves the round trip without opening the REPL — the phrasing 
 claude -p "call the add tool from the demo MCP server with a=2 b=40" --allowedTools "mcp__demo__add"
 ```
 
-```
+```text
 `add(a=2, b=40)` → `{"sum": 42}`
 ```
 
@@ -185,8 +198,16 @@ The [MCP guide](https://www.serverless.com/framework/docs/providers/aws/guide/mc
 
 The [mcp/custom](https://github.com/serverless/examples/tree/v4/mcp/custom) family hosts the same kind of server by hand, one directory per hosting approach — a written Lambda adapter, Hono, Express or Fastify behind Lambda Web Adapter, API Gateway REST or a Function URL — so you can see and compare the glue. This example is the shortcut: the Framework assembles the Lambda-plus-API-Gateway-streaming hosting for you, so reach for those when you want a different front door or control over the bridge, and for this when you want the endpoint without writing any of it.
 
-## Clean up
+## Cost and cleanup
+
+Lambda and API Gateway charge per request and for compute time. The server costs nothing while no client calls it, and light use stays within the AWS free tier. The commented `state: true` option adds a Secrets Manager secret, which is billed per month while it exists. Remove the stack when you are done:
 
 ```bash
 serverless remove
 ```
+
+## Next steps
+
+- Read the [MCP guide](https://www.serverless.com/framework/docs/providers/aws/guide/mcp) for authentication, elicitation state and custom domains.
+- Add OAuth with no verification code of your own in the [oauth-cognito example](https://github.com/serverless/examples/tree/v4/mcp/oauth-cognito).
+- Compare hosting approaches in the [mcp/custom examples](https://github.com/serverless/examples/tree/v4/mcp/custom).

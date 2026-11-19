@@ -1,0 +1,30 @@
+{
+  "title": "Serverless Compose of Serverless, CloudFormation, and SAM",
+  "description": "Use Serverless Compose to deploy a Serverless Framework service, an AWS SAM template and a CloudFormation stack together as one project.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Eslam λ Hefnawy",
+    "link": "https://github.com/eahefnawy",
+    "avatar": "https://avatars.githubusercontent.com/u/2312463?v=4"
+  },
+  "services": [
+    "lambda",
+    "apigateway",
+    "dynamodb",
+    "iam",
+    "logs"
+  ],
+  "onboarding": true,
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}

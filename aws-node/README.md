@@ -5,7 +5,7 @@ layout: Doc
 framework: v4
 platform: AWS
 language: nodeJS
-priority: 1
+priority: 5
 authorLink: 'https://github.com/serverless'
 authorName: 'Serverless, Inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
@@ -13,38 +13,39 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 # Serverless Framework AWS NodeJS Example
 
-This template demonstrates how to deploy a simple NodeJS function running on AWS Lambda using the Serverless Framework. The deployed function does not include any event definitions or any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which include use cases like API endpoints, workers triggered by SQS, persistence with DynamoDB, and scheduled tasks. For details about configuration of specific events, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+[![Verified](https://raw.githubusercontent.com/serverless/examples/verified/badges/aws-node.svg)](https://github.com/serverless/examples/blob/verified/results.json)
 
-## Usage
+This template deploys one Node.js function to AWS Lambda. The function has no events and no database, so it is the smallest service you can deploy and invoke. Start here to learn the deploy and invoke loop, then add the [events](https://www.serverless.com/framework/docs/providers/aws/events/) your use case needs.
 
-### Deployment
+## What it deploys
 
-In order to deploy the example, you need to run the following command:
+- A Lambda function, `hello`.
+- An IAM role for the function and a CloudWatch Logs log group for its logs.
 
-```
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) 24.
+- The Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
+- An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
+- A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
+
+## Deploy
+
+Run the deploy from this directory:
+
+```bash
 serverless deploy
 ```
 
-After running deploy, you should see output similar to:
+## Try it
 
-```
-Deploying "aws-node" to stage "dev" (us-east-1)
+Invoke the deployed function:
 
-✔ Service deployed to stack aws-node-dev (90s)
-
-functions:
-  hello: aws-node-dev-hello (1.5 kB)
-```
-
-### Invocation
-
-After successful deployment, you can invoke the deployed function by using the following command:
-
-```
+```bash
 serverless invoke --function hello
 ```
 
-Which should result in response similar to the following:
+The command prints the function's response:
 
 ```json
 {
@@ -53,14 +54,56 @@ Which should result in response similar to the following:
 }
 ```
 
-### Local development
+## How it works
 
-The easiest way to develop and test your function is to use the Serverless Framework's `dev` command:
+`serverless.yml` declares the function and its runtime:
+
+```yaml
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+functions:
+  hello:
+    handler: handler.hello
+```
+
+`handler.hello` points at the `hello` export of `handler.js`, which returns a status code and a JSON body:
+
+```javascript
+exports.hello = async (event) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Go Serverless v4.0! Your function executed successfully!'
+    })
+  };
+};
+```
+
+### Develop with Dev Mode
+
+Start a Dev Mode session:
 
 ```bash
 serverless dev
 ```
 
-Dev Mode attaches your deployed function to your machine: invoke the function as before, and your local code runs, with your function's deployed configuration and permissions. Edit the code and the next invocation runs the new version, with nothing to redeploy.
+Dev Mode attaches your deployed function to your machine. Invoke the function as before, and your local code runs, with the function's deployed configuration and permissions. Edit the code, and the next invocation runs the new version, with nothing to redeploy.
 
-Press Ctrl+C to end the session; your function runs the deployed code again. Deploy with `serverless deploy` when you want your changes to stay. Learn more in the [Dev Mode guide](https://www.serverless.com/framework/docs/providers/aws/guide/dev-mode).
+Press Ctrl+C to end the session; the function runs the deployed code again. Run `serverless deploy` when you want your changes to stay. Learn more in the [Dev Mode guide](https://www.serverless.com/framework/docs/providers/aws/guide/dev-mode).
+
+## Cost and cleanup
+
+Lambda charges per request and for compute time. The function costs nothing while you do not invoke it, and light use stays within the AWS free tier. Remove the stack, with the function and its log group, when you are done:
+
+```bash
+serverless remove
+```
+
+## Next steps
+
+- Read the [functions guide](https://www.serverless.com/framework/docs/providers/aws/guide/functions) for memory, timeouts and environment variables.
+- Put the function behind an HTTP endpoint with the [HTTP API example](https://github.com/serverless/examples/tree/v4/aws-node-http-api).
+- Run it on a schedule with the [scheduled cron example](https://github.com/serverless/examples/tree/v4/aws-node-scheduled-cron).

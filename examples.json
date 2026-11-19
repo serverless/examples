@@ -629,7 +629,7 @@
   {
     "title": "AWS Node Scheduled Cron example in NodeJS",
     "name": "aws-node-scheduled-cron",
-    "description": "This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event.",
+    "description": "A Node.js function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-scheduled-cron",
     "framework": "v4",
     "language": "node",
@@ -1090,7 +1090,7 @@
   {
     "title": "AWS Python Scheduled Cron example in Python",
     "name": "aws-python-scheduled-cron",
-    "description": "This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event.",
+    "description": "A Python function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-python-scheduled-cron",
     "framework": "v4",
     "language": "python",
@@ -2778,9 +2778,9 @@
     "community": true
   },
   {
-    "title": "Serverless Compose of Serverless, Cloudformation, and SAM",
+    "title": "Serverless Compose of Serverless, CloudFormation, and SAM",
     "name": "compose-multiframework",
-    "description": "This template shows how to compose multiple services using different frameworks, in a single project",
+    "description": "Use Serverless Compose to deploy a Serverless Framework service, an AWS SAM template and a CloudFormation stack together as one project.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/compose-multiframework",
     "framework": "v4",
     "language": "node",

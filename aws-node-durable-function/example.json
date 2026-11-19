@@ -1,0 +1,34 @@
+{
+  "title": "AWS Lambda durable function (NodeJS)",
+  "description": "Deploy a Node.js Lambda durable function that runs a checkpointed step, waits, and resumes, and start an execution with serverless invoke.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "invoke": {
+          "function": "worker",
+          "args": [
+            "--type",
+            "Event",
+            "--data",
+            "{\"orderId\":\"1\"}"
+          ],
+          "contains": "Durable execution started: arn:aws:lambda:"
+        }
+      }
+    ]
+  }
+}

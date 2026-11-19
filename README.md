@@ -112,7 +112,7 @@ serverless deploy
 | [AWS Simple HTTP Endpoint example in NodeJS with Typescript](https://github.com/serverless/examples/tree/v4/aws-node-http-api-typescript) <br/> This template demonstrates how to make a simple HTTP API with Node.js and Typescript running on AWS Lambda and API Gateway using the Serverless Framework v1. | nodeJS |
 | [TypeScript Serverless HTTP API with DynamoDB](https://github.com/serverless/examples/tree/v4/aws-node-http-api-typescript-dynamodb) <br/> This example shows your how to create a TypeScript powered HTTP API with DynamoDB. | nodeJS |
 | [AWS S3 File Replicator](https://github.com/serverless/examples/tree/v4/aws-node-s3-file-replicator) <br/> This example creates 2 AWS S3 buckets and copies files in one bucket to the other | nodeJS |
-| [AWS Node Scheduled Cron example in NodeJS](https://github.com/serverless/examples/tree/v4/aws-node-scheduled-cron) <br/> This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event. | nodeJS |
+| [AWS Node Scheduled Cron example in NodeJS](https://github.com/serverless/examples/tree/v4/aws-node-scheduled-cron) <br/> A Node.js function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event. | nodeJS |
 | [AWS Lambda Self-Managed Code Storage](https://github.com/serverless/examples/tree/v4/aws-node-self-managed-code-storage) <br/> Run Lambda function and layer code directly from the deployment bucket with self-managed code storage | nodeJS |
 | [AWS Serving Dynamic HTML via API Gateway example in NodeJS](https://github.com/serverless/examples/tree/v4/aws-node-serve-dynamic-html-via-http-endpoint) <br/> This example illustrates how to hookup an API Gateway endpoint to a Lambda function to render HTML on a GET request. | nodeJS |
 | [The Serverless Gong](https://github.com/serverless/examples/tree/v4/aws-node-serverless-gong) <br/> A serverless gong with GitHub and Slack webhooks | nodeJS |
@@ -150,7 +150,7 @@ serverless deploy
 | [AWS Simple HTTP Endpoint example in Python](https://github.com/serverless/examples/tree/v4/aws-python-http-api) <br/> This template demonstrates how to make a simple HTTP API with Python running on AWS Lambda and API Gateway using the Serverless Framework. | python |
 | [AWS Serverless HTTP API with DynamoDB store example in Python](https://github.com/serverless/examples/tree/v4/aws-python-http-api-with-dynamodb) <br/> This example demonstrates how to setup an HTTP API allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data. | python |
 | [AWS Serverless HTTP API with DynamoDB store example in Python](https://github.com/serverless/examples/tree/v4/aws-python-http-api-with-pynamodb) <br/> This example demonstrates how to setup an HTTP API allowing you to create, list, get, update and delete Todos. DynamoDB is used to store the data. | python |
-| [AWS Python Scheduled Cron example in Python](https://github.com/serverless/examples/tree/v4/aws-python-scheduled-cron) <br/> This is an example of creating a function that runs as a cron job using the serverless ''schedule'' event. | python |
+| [AWS Python Scheduled Cron example in Python](https://github.com/serverless/examples/tree/v4/aws-python-scheduled-cron) <br/> A Python function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event. | python |
 | [AWS Simple HTTP Endpoint example in Python](https://github.com/serverless/examples/tree/v4/aws-python-simple-http-endpoint) <br/> This example demonstrates how to setup a simple HTTP GET endpoint. Once you ping it, it will reply with the current time. | python |
 | [Python SQS Producer Consumer on AWS](https://github.com/serverless/examples/tree/v4/aws-python-sqs-worker) <br/> This template demonstrates how to develop and deploy a simple SQS-based producer-consumer service running on AWS Lambda using the traditional Serverless Framework. | python |
 | [Python Telegram Bot](https://github.com/serverless/examples/tree/v4/aws-python-telegram-bot) <br/> This example demonstrates how to setup an echo Telegram Bot using the Serverless Framework. | python |
@@ -191,7 +191,7 @@ serverless deploy
 | [Bedrock AgentCore: LangGraph Agent with Memory (Python)](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-memory) <br/> LangGraph agent using AgentCore Memory as a tool for recalling and saving conversation history. | python |
 | [Bedrock AgentCore: LangGraph Multi-Gateway Agents (Python)](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/langgraph-multi-gateway) <br/> LangGraph agent using multiple AgentCore Gateways with different authorization types and tool subsets. | python |
 | [Bedrock AgentCore: Strands Agent with Browser (Python)](https://github.com/serverless/examples/tree/v4/aws-bedrock-agentcore/python/strands-browser) <br/> Strands Agents agent using AgentCore Browser for web automation and research tasks. | python |
-| [Serverless Compose of Serverless, Cloudformation, and SAM](https://github.com/serverless/examples/tree/v4/compose-multiframework) <br/> This template shows how to compose multiple services using different frameworks, in a single project | nodeJS |
+| [Serverless Compose of Serverless, CloudFormation, and SAM](https://github.com/serverless/examples/tree/v4/compose-multiframework) <br/> Use Serverless Compose to deploy a Serverless Framework service, an AWS SAM template and a CloudFormation stack together as one project. | nodeJS |
 | [AWS MCP Server with Amazon Cognito OAuth (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-cognito) <br/> Protect an MCP server with an Amazon Cognito user pool validated by API Gateway - zero token-verification code, a self-contained pool and app client, machine-to-machine tokens, with the Serverless Framework. | nodeJS |
 | [AWS MCP Server with a Custom Lambda Authorizer and Auth0 (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-authorizer) <br/> Reject unauthorized MCP traffic at API Gateway before the Lambda runs, using your own Lambda authorizer with Auth0 as the identity provider, with the Serverless Framework. | nodeJS |
 | [AWS MCP Server Verifying OAuth In-Module (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-in-module) <br/> Verify OAuth 2.1 bearer tokens inside your MCP server module with the MCP SDK's requireBearerAuth gate - spec-shaped 401 challenges, scope-aware 403s, and the caller's identity in your tools, with the Serverless Framework. | nodeJS |
@@ -306,28 +306,27 @@ We are happy to accept more examples from the community. 🎉
 
 ### Adding example code
 
-1. Add a `README.md` to your example with a frontmatter HTML comment listing these required keys:
-   - `title`
-   - `description`
-   - `framework` (use `v4`)
-   - `platform`
-   - `language`
-   - `authorLink`
-   - `authorName`
-   - `authorAvatar`
+Each example is one directory that teaches one thing and deploys on its own. New examples follow the example standard:
 
-2. Add an entry for your example to [examples.json](./examples.json).
+1. Add an `example.json` manifest. It holds the title, description, language, platform (`AWS`), framework (`v4`), author and the AWS services the example deploys, and a `test` section with the checks that prove a deployment works: an `http` request to a stack output URL, an `invoke` of a function, or a `script`. [aws-node-http-api/example.json](./aws-node-http-api/example.json) is a short one to copy.
 
-3. Validate your frontmatter and regenerate the README.md with:
+2. Write the `README.md`: an H1 title and one or two sentences on what the example does, then these H2 sections, in this order: What it deploys, Prerequisites, Deploy, Try it, How it works, Cost and cleanup (with `serverless remove`), Next steps. Give every code fence a language.
+
+3. Keep `serverless.yml` free of a fixed `stage`, pin exact dependency versions, and commit the lockfile.
+
+4. Generate the README frontmatter, the badge line, the [examples.json](./examples.json) entry and the tables in this README from the manifest, then run the checks:
 
 ```bash
-npm run validate
 npm run docs
+npm run validate
+npm test
 ```
 
-Both commands must pass, and the regenerated README.md must be included in your PR.
+All three must pass, and the regenerated files must be included in your PR. Do not edit the generated parts by hand. `node scripts/check-examples.mjs <dir>` runs the static checks for one example. `node scripts/test-example.mjs <dir>` deploys the example to the AWS account in your environment with a unique stage, runs its checks and removes it; it creates real resources, which cost money.
 
-4. Open a new pull request with your example. Please make sure `serverless package` succeeds in your example's directory before submitting. ⚡️
+5. Open a new pull request with your example. ⚡️
+
+Examples without an `example.json` keep a hand-written frontmatter HTML comment in their `README.md` (`title`, `description`, `framework` set to `v4`, `platform`, `language`, `authorLink`, `authorName`, `authorAvatar`) and a hand-written entry in [examples.json](./examples.json). When you change one of them, keep both in step, run `npm run validate` and `npm run docs`, and make sure `serverless package` succeeds in the example's directory.
 
 ### Adding a community example
 
