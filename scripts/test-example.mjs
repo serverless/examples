@@ -23,8 +23,10 @@
 //
 // When `serverless remove` exits non-zero, the stage's stacks decide: the runner
 // waits (at most 10 minutes, within remove's own 15) while they are being
-// deleted, runs remove once more if one settles in a state that is not
-// deleting, and counts remove as done once every stack is gone.
+// deleted, runs remove once more when they settle in a state that is not
+// deleting, and counts remove as done once every stack is gone. It stops early
+// when the stacks cannot be listed 3 times in a row, or when they have settled
+// again after that retry.
 //
 // AWS credentials and the Framework key come from the caller's environment.
 // Command output streams to stderr, prefixed with the step name. Stdout gets one
@@ -68,6 +70,7 @@ const VERSION_TIMEOUT_MS = 2 * MINUTE;
 // After a remove that exits non-zero: how often and how long to watch the stage's stacks.
 const REMOVE_POLL_MS = 10_000;
 const REMOVE_WAIT_MS = 10 * MINUTE;
+const MAX_FAILED_LISTINGS = 3;
 const SERVICE_FILES = ['serverless.yml', 'serverless.yaml'];
 const FRAMEWORK_VERSION = /^(latest|canary|\d+(\.\d+){0,2}(-[0-9A-Za-z.]+)?)$/;
 const STAGE_TIME_CHARS = 5;
@@ -346,9 +349,9 @@ export async function removeOnly({
     const dirs = compose ? serviceDirs(copy) : [copy];
     if (frameworkVersion !== 'latest') for (const d of dirs) rewriteFrameworkVersion(d, frameworkVersion);
 
-    const found = await listStageStacks(exec, copy, stage, region);
-    if (found === null) log(`[list-stacks] could not list the stacks in ${region}; running remove anyway`);
-    const stacks = found?.map((s) => s.name);
+    const listed = await listStageStacks(exec, copy, stage, region);
+    if (listed.error) log(`[list-stacks] could not list the stacks in ${region} (${listed.error}); running remove anyway`);
+    const stacks = listed.stacks?.map((s) => s.name);
     const fallback = stacks?.join(', ') || `stacks ending in -${stage}`;
     if (stacks?.length === 0) {
       log(`[remove-only] no stack in ${region} ends in -${stage}; nothing to remove`);
@@ -393,31 +396,37 @@ function loadsPlugins(dir) {
   return Boolean(file) && PLUGINS_LINE.test(fs.readFileSync(file, 'utf8'));
 }
 
-// Resolves to `{ name, status }` for each of the region's stacks (not
-// deleted) whose name ends in `-<stage>`, or to null when they cannot be listed.
-async function listStageStacks(exec, cwd, stage, region) {
+// Resolves to `{ stacks }`, the `{ name, status }` of each of the region's
+// stacks (not deleted) whose name ends in `-<stage>`, or to `{ error }`, one
+// line saying why they could not be listed (account ids masked).
+async function listStageStacks(exec, cwd, stage, region, timeoutMs = VERSION_TIMEOUT_MS) {
   const args = ['cloudformation', 'list-stacks', '--region', region, '--output', 'json', '--stack-status-filter', ...EXISTING_STACK_STATUSES];
   try {
-    const r = await runOrThrow(exec, 'aws', args, { cwd, step: 'list-stacks', echo: false, timeoutMs: VERSION_TIMEOUT_MS });
-    return JSON.parse(r.stdout)
+    const r = await runOrThrow(exec, 'aws', args, { cwd, step: 'list-stacks', echo: false, timeoutMs });
+    const stacks = JSON.parse(r.stdout)
       .StackSummaries.filter((s) => s.StackStatus !== 'DELETE_COMPLETE' && s.StackName.endsWith(`-${stage}`))
       .map((s) => ({ name: s.StackName, status: s.StackStatus }));
-  } catch {
-    return null;
+    return { stacks };
+  } catch (err) {
+    const line = lastOutputLine(err.result) ?? err.message;
+    return { error: line.replace(/\b\d{12}\b/g, '<account>') };
   }
 }
 
 /**
  * Runs `serverless remove` for `stage` in `cwd` and decides from the stage's
  * stacks whether the removal is done. A remove that exits 0 is done. After a
- * non-zero exit the stacks ending in `-<stage>` are listed: while one is in
- * progress (DELETE_IN_PROGRESS among others) it waits, checking every 10 s;
- * when every remaining stack has settled in a state that is not deleting, it
- * runs remove once more (one retry in total). It stops when every stack is
- * gone, or after 10 minutes, and never after `deadline`. Resolves to
- * `{ done, error, lastLine, left }`: `error` is the first remove's error
- * message, `lastLine` its last non-empty output line, `left` the names of the
- * stacks still present when not done (null when they could not be listed).
+ * non-zero exit the stacks ending in `-<stage>` are listed:
+ * - none left: done;
+ * - one still in progress (DELETE_IN_PROGRESS among others): wait 10 s, list again;
+ * - every remaining stack settled in a state that is not deleting: run remove
+ *   once more (one retry in total), then list again; once the retry is spent,
+ *   stop, since nothing can change those stacks any more;
+ * - 3 listings in a row that do not succeed: stop, with the stacks unknown.
+ * Waiting stops after 10 minutes and never runs past `deadline`; no listing gets
+ * more time than is left to it. Resolves to `{ done, error, lastLine, left }`:
+ * `error` is the first remove's error message, `lastLine` its error line,
+ * `left` the names of the stacks still present when not done (null when unknown).
  */
 async function removeStage({ exec, cwd, stage, region, deadline, sleep, now, log }) {
   const remove = () =>
@@ -431,22 +440,38 @@ async function removeStage({ exec, cwd, stage, region, deadline, sleep, now, log
   }
   log(`[remove] ${first.message}`);
   const error = first.message;
-  const lastLine = lastOutputLine(first.result) ?? error;
+  const lastLine = errorLine(first.result) ?? error;
   const waitUntil = Math.min(now() + REMOVE_WAIT_MS, deadline);
   const describe = (stacks) => stacks.map((s) => `${s.name} (${s.status})`).join(', ');
+  const stop = (left) => {
+    log(`[remove] stopped waiting; still present: ${left ? left.join(', ') : `unknown (the stacks ending in -${stage} could not be listed)`}`);
+    return { done: false, error, lastLine, left };
+  };
   let retried = false;
   let left = null;
+  let failedListings = 0;
   for (;;) {
-    const stacks = await listStageStacks(exec, cwd, stage, region);
+    const listed = await listStageStacks(exec, cwd, stage, region, Math.min(VERSION_TIMEOUT_MS, deadline - now()));
+    const { stacks } = listed;
     if (stacks) {
+      failedListings = 0;
       if (stacks.length === 0) {
         log(`[remove] every stack of stage ${stage} is gone`);
         return { done: true, error, lastLine };
       }
       left = stacks.map((s) => s.name);
+    } else {
+      failedListings += 1;
+      log(`[remove] could not list the stacks of stage ${stage} (${failedListings} of ${MAX_FAILED_LISTINGS} in a row): ${listed.error}`);
+      if (failedListings >= MAX_FAILED_LISTINGS) return stop(null);
     }
-    if (now() >= waitUntil) break;
-    if (stacks && !retried && stacks.every((s) => !s.status.endsWith('_IN_PROGRESS'))) {
+    if (now() >= waitUntil) return stop(left);
+    const settled = stacks?.every((s) => !s.status.endsWith('_IN_PROGRESS'));
+    if (settled && retried) {
+      log(`[remove] ${describe(stacks)} settled without being deleted after the retry`);
+      return stop(left);
+    }
+    if (settled) {
       retried = true;
       log(`[remove] ${describe(stacks)} settled without being deleted; running serverless remove once more`);
       try {
@@ -456,27 +481,39 @@ async function removeStage({ exec, cwd, stage, region, deadline, sleep, now, log
       }
       continue;
     }
-    const what = stacks ? describe(stacks) : `the stacks ending in -${stage} (they could not be listed)`;
-    log(`[remove] waiting for ${what} to be deleted; checking again in ${REMOVE_POLL_MS / 1000}s`);
+    const what = stacks ? `${describe(stacks)} to be deleted` : `a listing of the stacks ending in -${stage}`;
+    log(`[remove] waiting for ${what}; checking again in ${REMOVE_POLL_MS / 1000}s`);
     await sleep(Math.min(REMOVE_POLL_MS, waitUntil - now()));
   }
-  log(`[remove] stopped waiting; still present: ${left ? left.join(', ') : `unknown (the stacks ending in -${stage} could not be listed)`}`);
-  return { done: false, error, lastLine, left };
+}
+
+// The Serverless Framework marks its error line with ✖: the last such line of
+// stderr, else stdout, without the mark; else the last non-empty line.
+function errorLine(result) {
+  for (const text of [result?.stderr, result?.stdout]) {
+    const marked = lines(text).filter((l) => l.startsWith('✖')).at(-1);
+    if (marked) return marked.slice(1).trim();
+  }
+  return lastOutputLine(result);
 }
 
 // The last non-empty line of a command's stderr, else of its stdout, trimmed
 // and without terminal colour codes; undefined when there is none.
 function lastOutputLine(result) {
   for (const text of [result?.stderr, result?.stdout]) {
-    const line = (text ?? '')
-      .replace(/\x1b\[[0-9;]*m/g, '')
-      .split('\n')
-      .map((l) => l.trim())
-      .filter(Boolean)
-      .at(-1);
+    const line = lines(text).at(-1);
     if (line) return line;
   }
   return undefined;
+}
+
+// The non-empty lines of `text`, trimmed, without terminal colour codes.
+function lines(text) {
+  return (text ?? '')
+    .replace(/\x1b\[[0-9;]*m/g, '')
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
 }
 
 // A sleep that ends early when `signal` aborts, for steps that stop on an interruption.

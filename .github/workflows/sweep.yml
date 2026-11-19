@@ -170,6 +170,7 @@ jobs:
       # this step removes whatever the stage still has.
       - name: Remove what the stage left
         if: always() && steps.stage.outputs.stage != ''
+        timeout-minutes: 15
         env:
           STAGE: ${{ steps.stage.outputs.stage }}
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}

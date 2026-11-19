@@ -129,6 +129,15 @@ test('every multi-line script with a pipeline sets pipefail', () => {
   }
 });
 
+test('every step that runs --remove-only has a timeout', () => {
+  for (const file of FILES) {
+    // Steps are list items at the same indent; each one ends where the next begins.
+    const steps = read(file).split(/\n(?= {6}- )/);
+    for (const step of steps.filter((s) => s.includes('--remove-only'))) assert.match(step, /\n {8}timeout-minutes: \d+\n/, `${file}:\n${step}`);
+  }
+  assert.ok(['ci.yml', 'sweep.yml'].every((f) => read(f).includes('--remove-only')));
+});
+
 test('publish-verified reads only the triggering attempt', () => {
   const publish = read('publish-verified.yml');
   assert.match(publish, /pattern: result-\*--latest-\$\{\{ github\.event\.workflow_run\.run_attempt \}\}/);

@@ -814,8 +814,8 @@ test('CLI prints one PASS line and exits 0', async () => {
 test('CLI prints FAIL, names the failed step on stderr, and exits 1', async () => {
   const { code, out, err } = await cli([DIR], fixture(), { exec: fakeExec({ 'serverless remove': { status: 1 } }).exec });
   assert.equal(code, 1);
-  // The fake cannot list stacks, so the runner waits the full 10 minutes (on the fake clock) before it fails remove.
-  assert.deepEqual(out, [`FAIL ${DIR} 4.4.7 600s`]);
+  // The fake cannot list stacks: after 3 failed listings, 10 s apart, remove fails.
+  assert.deepEqual(out, [`FAIL ${DIR} 4.4.7 20s`]);
   assert.ok(err.some((l) => /remove/.test(l)));
   assert.ok(err.some((l) => /left behind: hello-svc-ex/.test(l)));
 });
@@ -1063,14 +1063,15 @@ test('CLI: a second signal kills the running command group, grandchildren includ
 const REMOVE_ERROR = '✖ ServerlessError2: An error occurred: IamRoleLambdaExecution - Resource creation cancelled.';
 
 // Answers `aws cloudformation`: describe-stacks with the outputs, list-stacks
-// with the next of `lists` (the last one repeats). Each list is [[name, status], …].
+// with the next of `lists` (the last one repeats). Each list is [[name, status], …],
+// or a command result (an object) for a listing that does not succeed.
 function cfn(...lists) {
   const seen = [];
   const respond = ({ args }) => {
     if (args[1] !== 'list-stacks') return { status: 0, stdout: STACK_JSON };
     const rows = lists.length > 1 ? lists.shift() : lists[0];
     seen.push(rows);
-    return stackList(...rows);
+    return Array.isArray(rows) ? stackList(...rows) : rows;
   };
   return { respond, seen };
 }
@@ -1080,7 +1081,9 @@ function removes(...answers) {
   return () => (answers.length > 1 ? answers.shift() : answers[0]);
 }
 
-const removeFailed = { status: 1, stdout: 'Removing aws-node from stage\n', stderr: `\n${REMOVE_ERROR}\n\n` };
+// The live run's output: the error line, then the CLI's help footer.
+const REMOVE_OUTPUT = `\n${REMOVE_ERROR}\n\nFor help, try the following:\n  • Run the command again with the "--debug" option\n  • Review the docs: https://www.serverless.com/framework/docs/\n`;
+const removeFailed = { status: 1, stdout: 'Removing aws-node from stage\n', stderr: REMOVE_OUTPUT };
 const removeCount = (fx) => fx.steps().filter((s) => s === 'serverless remove').length;
 
 test('remove-only: a remove that exits 1 while the stack is being deleted passes once the stack is gone', async () => {
@@ -1104,7 +1107,10 @@ test('remove-only: a remove that exits 1 while the stack is being deleted passes
   assert.equal(result.failedStep, undefined);
   assert.equal(result.leftBehind, undefined);
   assert.match(result.detail, /gone/);
-  assert.ok(result.detail.includes(`serverless remove had reported an error: ${REMOVE_ERROR}`), result.detail);
+  assert.ok(
+    result.detail.endsWith('serverless remove had reported an error: ServerlessError2: An error occurred: IamRoleLambdaExecution - Resource creation cancelled.'),
+    result.detail,
+  );
   assert.ok(err.some((l) => /^\[remove\] waiting for .*DELETE_IN_PROGRESS/.test(l)), err.join('\n'));
 });
 
@@ -1137,7 +1143,7 @@ test('when the retry leaves the stack too, remove fails and names only that stac
   assert.equal(result.result, 'fail');
   assert.equal(result.failedStep, 'remove');
   assert.equal(result.leftBehind, stack);
-  assert.ok(clock.sleeps.reduce((a, b) => a + b, 0) <= 10 * MINUTE);
+  assert.deepEqual(clock.sleeps, [], 'nothing can change a settled stack once the retry is spent');
 });
 
 test('of two expected stacks, leftBehind names only the one that still exists', async () => {
@@ -1173,4 +1179,62 @@ test("the wait never runs past the remove step's own deadline", async () => {
   const { result } = await run(fixture(), { fx, clock, args: { stage: STAGE } });
   assert.equal(clock.sleeps.reduce((a, b) => a + b, 0), 3 * MINUTE);
   assert.equal(result.failedStep, 'remove');
+});
+
+test('a remove error without a ✖ line is quoted by its last non-empty line', async () => {
+  const root = fixture();
+  const resultFile = path.join(root, 'r.json');
+  const stack = `hello-svc-${STAGE}`;
+  const fx = fakeExec({
+    'aws cloudformation': cfn([[stack, 'CREATE_COMPLETE']], []).respond,
+    'serverless remove': removes({ status: 1, stderr: 'Error: something odd\n  at the end  \n\n' }),
+  });
+  const { code } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec });
+  assert.equal(code, 0);
+  assert.ok(JSON.parse(fs.readFileSync(resultFile, 'utf8')).detail.endsWith('had reported an error: at the end'));
+});
+
+test("a listing in the wait never gets more time than is left to remove's deadline", async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const clock = fakeClock();
+  const fx = fakeExec({
+    'aws cloudformation': cfn([[stack, 'DELETE_IN_PROGRESS']], []).respond,
+    'serverless remove': () => {
+      clock.t += 14.5 * MINUTE;
+      return removeFailed;
+    },
+  });
+  await run(fixture(), { fx, clock, args: { stage: STAGE } });
+  const removeAt = fx.calls.findIndex((c) => c.step === 'serverless remove');
+  const listings = fx.calls.slice(removeAt).filter((c) => c.args[1] === 'list-stacks');
+  assert.ok(listings.length >= 1);
+  assert.equal(listings[0].timeoutMs, 30_000);
+  assert.ok(listings.every((c) => c.timeoutMs <= 30_000), listings.map((c) => c.timeoutMs).join(', '));
+});
+
+const LISTING_ERROR = {
+  status: 254,
+  stderr: '\nAn error occurred (ExpiredToken) when calling the ListStacks operation: The security token included in the request is expired for 123456789012\n',
+};
+
+test('three failed listings in a row stop the wait: remove fails with the expected names and the reason is logged', async () => {
+  const clock = fakeClock();
+  const fx = fakeExec({ 'aws cloudformation': cfn(LISTING_ERROR).respond, 'serverless remove': removes(removeFailed) });
+  const { result, logs } = await run(fixture(), { fx, clock, args: { stage: STAGE } });
+  assert.equal(fx.calls.filter((c) => c.args[1] === 'list-stacks').length, 3);
+  assert.deepEqual(clock.sleeps, [10_000, 10_000]);
+  assert.equal(result.failedStep, 'remove');
+  assert.equal(result.leftBehind, `hello-svc-${STAGE}`);
+  const reason = logs.find((l) => /^\[remove\] .*ExpiredToken/.test(l));
+  assert.ok(reason, logs.join('\n'));
+  assert.doesNotMatch(reason, /123456789012/);
+});
+
+test('a successful listing resets the count of failed ones', async () => {
+  const stack = `hello-svc-${STAGE}`;
+  const listing = cfn(LISTING_ERROR, LISTING_ERROR, [[stack, 'DELETE_IN_PROGRESS']], LISTING_ERROR, LISTING_ERROR, []);
+  const fx = fakeExec({ 'aws cloudformation': listing.respond, 'serverless remove': removes(removeFailed) });
+  const { result } = await run(fixture(), { fx, args: { stage: STAGE } });
+  assert.equal(fx.calls.filter((c) => c.args[1] === 'list-stacks').length, 6);
+  assert.equal(result.result, 'pass');
 });
