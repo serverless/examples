@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "docs": "node scripts/generate.mjs && node generate-readme.js",
-    "validate": "node validate.js",
+    "validate": "node validate.js && node scripts/check-examples.mjs --all",
     "test": "node --test \"tests/*.test.mjs\"",
     "check-docs": "npm run docs && git diff --exit-code README.md examples.json '**/README.md'"
   },

@@ -79,6 +79,15 @@ export function toExamplesJsonEntry(m) {
   return entry;
 }
 
+/**
+ * Returns `entry` merged over the catalogue entry it replaces: keys of
+ * `existing` keep their order, keys the generated entry does not set are kept,
+ * and so is the existing `name` (the website's page URL is built from it).
+ */
+export function mergeCatalogueEntry(existing, entry) {
+  return { ...existing, ...entry, name: existing.name };
+}
+
 function quote(value) {
   return `'${String(value).replaceAll("'", "''")}'`;
 }

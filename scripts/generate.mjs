@@ -9,7 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { findExampleDirs, loadManifest, validateManifest, MANIFEST_FILE } from './lib/manifest.mjs';
-import { applyGenerated, toExamplesJsonEntry } from './lib/readme.mjs';
+import { applyGenerated, mergeCatalogueEntry, toExamplesJsonEntry } from './lib/readme.mjs';
 
 const CATALOGUE_FILE = 'examples.json';
 
@@ -43,13 +43,12 @@ export function generate(root) {
   return manifests.length;
 }
 
-// Replaces the entry with the same githubUrl in place, keeping its name (the
-// website's page URL is built from it) and any keys the generated entry does
-// not set, in their order; appends when there is none.
+// Replaces the entry with the same githubUrl in place (see mergeCatalogueEntry);
+// appends when there is none.
 function upsert(catalogue, entry) {
   const i = catalogue.findIndex((e) => e.githubUrl === entry.githubUrl);
   if (i === -1) catalogue.push(entry);
-  else catalogue[i] = { ...catalogue[i], ...entry, name: catalogue[i].name };
+  else catalogue[i] = mergeCatalogueEntry(catalogue[i], entry);
 }
 
 function writeIfChanged(file, content) {
