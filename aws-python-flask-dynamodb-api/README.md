@@ -47,6 +47,8 @@ npm install
 serverless deploy
 ```
 
+Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
+
 You should see output like this:
 
 ```text
@@ -204,7 +206,7 @@ The [`serverless-wsgi`](https://github.com/logandk/serverless-wsgi) and [`server
 
 ## Cost and cleanup
 
-While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. The DynamoDB table uses provisioned capacity, one read and one write unit, which is billed by the hour while the table exists, whether or not you use it. The table also bills for the data it stores, and the users you create stay in it until you remove the stack; the function's logs stay in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). `serverless remove` deletes the table with its data, the function, the API and the log group:
+While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. The DynamoDB table uses provisioned capacity, one read and one write unit, which is billed by the hour while the table exists, whether or not you use it. The table also bills for the data it stores, and the users you create stay in it until you remove the stack, and so do the function's logs in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). `serverless remove` deletes the table with its data, the function, the API and the log group:
 
 ```bash
 serverless remove

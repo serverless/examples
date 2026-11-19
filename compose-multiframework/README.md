@@ -41,6 +41,8 @@ Run the deploy from this directory, where `serverless-compose.yml` lives:
 serverless deploy
 ```
 
+Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
+
 You should see output like this:
 
 ```text
@@ -137,13 +139,13 @@ The [Serverless Compose guide](https://www.serverless.com/framework/docs/guides/
 
 ## Cost and cleanup
 
-Each stage you deploy has its own three stacks. While a stage is deployed, Lambda bills each request and the functions' compute time, and API Gateway bills each request. The stage's DynamoDB table uses provisioned capacity, five read and five write units, which is billed by the hour while the table exists, whether or not you use it. The functions' logs stay in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove all three stacks of a stage, in reverse dependency order, from this directory:
+Each stage you deploy has its own three stacks. While a stage is deployed, Lambda bills each request and the functions' compute time, and API Gateway bills each request. The stage's DynamoDB table uses provisioned capacity, five read and five write units, which is billed by the hour while the table exists, whether or not you use it. The functions' logs go to CloudWatch Logs, which bills for stored log data. The `traditional` function's log group is part of its stack, and `serverless remove` deletes it with its logs; Lambda creates the `sam` function's log group outside the stack on the first invoke, so that log group stays after the remove until you delete it. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove all three stacks of a stage, in reverse dependency order, from this directory:
 
 ```bash
 serverless remove
 ```
 
-Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table. For a stage other than `dev`, add `--stage <name>`.
+Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table.
 
 ## Next steps
 

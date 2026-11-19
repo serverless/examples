@@ -37,6 +37,8 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
+
 You should see output like this:
 
 ```text
@@ -105,7 +107,7 @@ Press Ctrl+C to end the session; the function runs the deployed code again. Run 
 
 ## Cost and cleanup
 
-While the example is deployed, Lambda bills each invocation and the function's compute time; while you do not invoke the function, it bills nothing. The function's logs stay in CloudWatch Logs, which bills for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the function and its log group, when you are done:
+While the example is deployed, Lambda bills each invocation and the function's compute time; while you do not invoke the function, it bills nothing. Until you remove the stack, the function's logs stay in CloudWatch Logs, which bills for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the function and its log group, when you are done:
 
 ```bash
 serverless remove

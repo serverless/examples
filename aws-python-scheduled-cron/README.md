@@ -38,6 +38,8 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
+
 You should see output like this:
 
 ```text

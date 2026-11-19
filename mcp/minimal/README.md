@@ -40,6 +40,8 @@ npm ci
 serverless deploy
 ```
 
+Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
+
 You should see output like this:
 
 ```text
@@ -58,7 +60,7 @@ The deploy summary prints the endpoint under `mcp:`, as `demo → https://<api-i
 Any Streamable HTTP MCP client works; `curl` is enough, since the protocol is JSON-RPC over POST. List the tools:
 
 ```bash
-curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
+curl -s https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
   -H 'content-type: application/json' \
   -H 'accept: application/json, text/event-stream' \
   -H 'mcp-protocol-version: 2026-07-28' \
@@ -69,7 +71,7 @@ curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
 The result lists two tools, `add` and `slow_report`. Call `add` — a tool call also carries the tool name in the `mcp-name` header:
 
 ```bash
-curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
+curl -s https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
   -H 'content-type: application/json' \
   -H 'accept: application/json, text/event-stream' \
   -H 'mcp-protocol-version: 2026-07-28' \
@@ -112,7 +114,7 @@ The server exposes two tools, which is enough to see both response modes:
 Ask `slow_report` for progress — pass a `progressToken` and the response arrives as an event stream, one event per step, with the result last (`-N` keeps `curl` from buffering it):
 
 ```bash
-curl -sN https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
+curl -sN https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
   -H 'content-type: application/json' \
   -H 'accept: application/json, text/event-stream' \
   -H 'mcp-protocol-version: 2026-07-28' \
@@ -146,7 +148,7 @@ The MCP Inspector's CLI mode takes a config file (`mcp.json` below) naming the e
   "mcpServers": {
     "demo": {
       "type": "streamable-http",
-      "url": "https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp",
+      "url": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp",
       "protocolEra": "modern"
     }
   }
@@ -163,12 +165,12 @@ Without `--cli` the same command opens the Inspector's browser UI, where the opt
 The deployed endpoint is a complete server for any Streamable HTTP client, and Claude Code needs nothing but `--transport http` and the URL — no custom domain, no OAuth flags:
 
 ```bash
-claude mcp add --transport http demo https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp
+claude mcp add --transport http demo https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp
 claude mcp list
 ```
 
 ```text
-demo: https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp (HTTP) - ✔ Connected
+demo: https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp (HTTP) - ✔ Connected
 ```
 
 A headless call proves the round trip without opening the REPL — the phrasing of the reply is the model's and varies run to run; what it reliably carries is the tool's answer, 42:
@@ -211,7 +213,7 @@ The [mcp/custom](https://github.com/serverless/examples/tree/v4/mcp/custom) fami
 
 ## Cost and cleanup
 
-While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. While no client calls the server, neither bills anything. The function's logs stay in CloudWatch Logs, which bills for stored log data. The commented `state: true` option adds a Secrets Manager secret, which is billed per month while it exists. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/) and [Secrets Manager pricing](https://aws.amazon.com/secrets-manager/pricing/). Remove the stack when you are done:
+While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. While no client calls the server, neither bills anything. Until you remove the stack, the function's logs stay in CloudWatch Logs, which bills for stored log data; `serverless remove` deletes the log group with them. The commented `state: true` option adds a Secrets Manager secret, which is billed per month while it exists. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/) and [Secrets Manager pricing](https://aws.amazon.com/secrets-manager/pricing/). Remove the stack when you are done:
 
 ```bash
 serverless remove
