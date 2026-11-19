@@ -43,7 +43,7 @@ The handler returns a fixed message.
 
 ## Cost and cleanup
 
-The function costs nothing while idle. Remove it with:
+Lambda bills each invocation and the function's compute time; while you do not invoke the function, it bills nothing. CloudWatch Logs bills for the log data it stores until you remove the stack. Remove it with:
 
 ```bash
 serverless remove
