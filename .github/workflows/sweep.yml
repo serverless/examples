@@ -92,7 +92,8 @@ jobs:
     # The AWS roles exist for this repository only.
     if: github.repository == 'serverless/examples' && needs.select.outputs.count != '0'
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    # The nightly job tests two Framework versions, each with its run and remove.
+    timeout-minutes: 80
     permissions:
       id-token: write
       contents: read
@@ -181,7 +182,8 @@ jobs:
       # this step removes whatever the stage still has.
       - name: Remove what the stage left
         if: always() && steps.stage.outputs.stage != ''
-        timeout-minutes: 15
+        # Remove's own 15-minute budget plus the listing and install around it.
+        timeout-minutes: 20
         env:
           STAGE: ${{ steps.stage.outputs.stage }}
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}

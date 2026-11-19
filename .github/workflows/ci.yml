@@ -141,7 +141,8 @@ jobs:
       # this step removes whatever the stage still has.
       - name: Remove what the stage left
         if: always() && steps.stage.outputs.stage != ''
-        timeout-minutes: 15
+        # Remove's own 15-minute budget plus the listing and install around it.
+        timeout-minutes: 20
         env:
           STAGE: ${{ steps.stage.outputs.stage }}
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}

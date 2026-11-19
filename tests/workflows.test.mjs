@@ -88,11 +88,14 @@ test('the ci static job has no secrets and only reads contents', () => {
   for (const command of ['npm test', 'npm run validate', 'npm run check-docs']) assert.ok(stat.includes(`run: ${command}`), command);
 });
 
+// ci runs one Framework version per job; the sweep's nightly job runs two.
+const LIVE_TIMEOUT = { 'ci.yml': 50, 'sweep.yml': 80 };
+
 for (const file of ['ci.yml', 'sweep.yml']) {
   test(`${file}: the live job has the limits, concurrency group and cleanup step`, () => {
     const live = job(read(file), 'live');
+    assert.match(live, new RegExp(`\\n {4}timeout-minutes: ${LIVE_TIMEOUT[file]}\\n`), `${file}: job timeout`);
     for (const line of [
-      'timeout-minutes: 50',
       'fail-fast: false',
       'max-parallel: 4',
       'group: live-${{ matrix.dir }}',
@@ -174,11 +177,12 @@ test('every multi-line script with a pipeline sets pipefail', () => {
   }
 });
 
-test('every step that runs --remove-only has a timeout', () => {
+test('every step that runs --remove-only has a 20-minute timeout', () => {
   for (const file of FILES) {
     // Steps are list items at the same indent; each one ends where the next begins.
     const steps = read(file).split(/\n(?= {6}- )/);
-    for (const step of steps.filter((s) => s.includes('--remove-only'))) assert.match(step, /\n {8}timeout-minutes: \d+\n/, `${file}:\n${step}`);
+    // 20 minutes: remove's own 15-minute budget plus the listing and install around it.
+    for (const step of steps.filter((s) => s.includes('--remove-only'))) assert.match(step, /\n {8}timeout-minutes: 20\n/, `${file}:\n${step}`);
   }
   assert.ok(['ci.yml', 'sweep.yml'].every((f) => read(f).includes('--remove-only')));
 });
