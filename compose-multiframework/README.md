@@ -148,11 +148,11 @@ serverless remove
 
 Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table.
 
-The remove leaves the `sam` function's log group, `/aws/lambda/sam-compose-service-example-<…>-HelloWorldFunction-<id>`. Find its name and delete it with the AWS CLI; these commands use your default Region:
+The remove leaves the `sam` function's log group, `/aws/lambda/sam-compose-service-example-<…>-HelloWorldFunction-<id>`. Find its name and delete it with the AWS CLI, in the Region you deployed to:
 
 ```bash
-aws logs describe-log-groups --log-group-name-prefix /aws/lambda/sam-compose-service-example --query 'logGroups[].logGroupName' --output text
-aws logs delete-log-group --log-group-name <name>
+aws logs describe-log-groups --region us-east-1 --log-group-name-prefix /aws/lambda/sam-compose-service-example --query 'logGroups[].logGroupName' --output text
+aws logs delete-log-group --region us-east-1 --log-group-name <name>
 ```
 
 ## Next steps
