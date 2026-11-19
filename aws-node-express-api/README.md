@@ -39,6 +39,17 @@ npm install
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-node-express-api" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-node-express-api-dev (47s)
+endpoint: ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
+
+functions:
+  api: aws-node-express-api-dev-api (946 kB)
+```
+
 The deploy prints the endpoint URL, `https://<api-id>.execute-api.<region>.amazonaws.com`.
 
 ## Try it

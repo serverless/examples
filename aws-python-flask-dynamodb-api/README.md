@@ -47,6 +47,19 @@ npm install
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-python-flask-dynamodb-api" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-python-flask-dynamodb-api-dev (64s)
+endpoints:
+  ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
+  ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+
+functions:
+  api: aws-python-flask-dynamodb-api-dev-api (658 kB)
+```
+
 The deploy prints the endpoint URLs, which end in the stage name: `https://<api-id>.execute-api.<region>.amazonaws.com/dev/` for the default `dev` stage.
 
 ## Try it

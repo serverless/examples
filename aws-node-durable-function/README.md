@@ -38,6 +38,15 @@ npm ci
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-node-durable-function" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-node-durable-function-dev (47s)
+functions:
+  worker: aws-node-durable-function-dev-worker (3.5 MB)
+```
+
 The deploy publishes a version of the function and the `durable` alias. Lambda runs durable functions only through a version or alias, and `serverless invoke` uses this alias by default.
 
 ## Try it
@@ -51,7 +60,7 @@ serverless invoke -f worker --type Event -d '{"orderId":"1"}'
 The command prints the ARN of the execution it started:
 
 ```text
-Durable execution started: arn:aws:lambda:us-east-1:123456789012:function:aws-node-durable-function-dev-worker:1/durable-execution/<name>/<id>
+Durable execution started: arn:aws:lambda:us-east-1:123456789012:function:aws-node-durable-function-dev-worker:1/durable-execution/3ebd7f79-db03-4601-87de-68c7c4dfd267/6113b540-687c-3f6c-bc97-7482b3c95936
 ```
 
 Add `--durable-execution-name order-1` to name the execution; a second invoke with the same name returns the existing execution instead of starting another one.
@@ -70,7 +79,7 @@ A synchronous invoke (without `--type Event`) waits for the execution and prints
 
 ## How it works
 
-[`handler.mjs`](handler.mjs) wraps the handler in `withDurableExecution` from the [durable execution SDK](https://www.npmjs.com/package/@aws/durable-execution-sdk-js), runs one step, waits 10 seconds, and returns:
+[`handler.mjs`](https://github.com/serverless/examples/blob/v4/aws-node-durable-function/handler.mjs) wraps the handler in `withDurableExecution` from the [durable execution SDK](https://www.npmjs.com/package/@aws/durable-execution-sdk-js), runs one step, waits 10 seconds, and returns:
 
 ```javascript
 export const worker = withDurableExecution(async (event, context) => {

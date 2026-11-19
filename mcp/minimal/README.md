@@ -14,7 +14,7 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 [![Verified](https://raw.githubusercontent.com/serverless/examples/verified/badges/mcp/minimal.svg)](https://github.com/serverless/examples/blob/verified/results.json)
 
-The smallest deployable member of the [MCP examples](../README.md): no auth, no domain — the [oauth-cognito](../oauth-cognito), [oauth-authorizer](../oauth-authorizer), and [oauth-in-module](../oauth-in-module) examples each add enforcement in one of its three shapes, and the hub README carries the client-capability matrix that applies to all of them.
+The smallest deployable member of the [MCP examples](https://github.com/serverless/examples/blob/v4/mcp/README.md): no auth, no domain — the [oauth-cognito](https://github.com/serverless/examples/tree/v4/mcp/oauth-cognito), [oauth-authorizer](https://github.com/serverless/examples/tree/v4/mcp/oauth-authorizer), and [oauth-in-module](https://github.com/serverless/examples/tree/v4/mcp/oauth-in-module) examples each add enforcement in one of its three shapes, and the hub README carries the client-capability matrix that applies to all of them.
 
 Deploy a [Model Context Protocol](https://modelcontextprotocol.io) server, written against the official [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk), with the Serverless Framework's [built-in MCP server support](https://www.serverless.com/framework/docs/providers/aws/guide/mcp).
 
@@ -38,6 +38,17 @@ Install the dependencies and deploy from this directory:
 ```bash
 npm ci
 serverless deploy
+```
+
+You should see output like this:
+
+```text
+Deploying "mcp-minimal" to stage "dev" (us-east-1)
+✔ Service deployed to stack mcp-minimal-dev (47s)
+functions:
+  demo: mcp-minimal-dev-demo (4.6 MB)
+
+mcp: demo → https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/demo/mcp
 ```
 
 The deploy summary prints the endpoint under `mcp:`, as `demo → https://<api-id>.execute-api.<region>.amazonaws.com/<stage>/demo/mcp`, and `serverless info` prints it again later. The stage segment tracks `--stage`, so a deploy to another stage changes every URL below with it; the examples on this page use the default `dev` stage. Deploying again without any changes prints `No changes to deploy. Deployment skipped.` — `--force` deploys anyway.
@@ -78,7 +89,7 @@ curl -s https://abc123def.execute-api.us-east-1.amazonaws.com/dev/demo/mcp \
 }
 ```
 
-The response samples on this page are trimmed to the load-bearing keys — the live responses also carry protocol bookkeeping inside `result`: a `resultType` and a `_meta` block naming the server. The example's automated check, [`test/smoke.mjs`](test/smoke.mjs), sends the same two requests and checks both answers.
+The response samples on this page are trimmed to the load-bearing keys — the live responses also carry protocol bookkeeping inside `result`: a `resultType` and a `_meta` block naming the server. The example's automated check, [`test/smoke.mjs`](https://github.com/serverless/examples/blob/v4/mcp/minimal/test/smoke.mjs), sends the same two requests and checks both answers.
 
 ## How it works
 
@@ -170,7 +181,7 @@ claude -p "call the add tool from the demo MCP server with a=2 b=40" --allowedTo
 `add(a=2, b=40)` → `{"sum": 42}`
 ```
 
-The custom domain enters the picture only when a server enforces OAuth and a human logs in through the client — that walkthrough is the [oauth-cognito README](../oauth-cognito/README.md#interactive-clients-need-a-custom-domain). `claude mcp remove demo` deregisters it.
+The custom domain enters the picture only when a server enforces OAuth and a human logs in through the client — that walkthrough is the [oauth-cognito README](https://github.com/serverless/examples/blob/v4/mcp/oauth-cognito/README.md#interactive-clients-need-a-custom-domain). `claude mcp remove demo` deregisters it.
 
 ## Develop it live
 
@@ -188,7 +199,7 @@ A session serves the server as deployed: progress and results stream, requests a
 
 `serverless.yml` carries the next three steps as commented blocks, each with the reasoning next to it:
 
-- **Authentication** — enforcement is yours; the Framework never verifies tokens. `authorizer` puts your access control at API Gateway, in front of the function — one of your own authorizer functions, a Cognito user pool, or `aws_iam` — and `oauthDiscovery` publishes the protected-resource discovery document that tells clients where to log in. The [oauth-cognito](../oauth-cognito), [oauth-authorizer](../oauth-authorizer), and [oauth-in-module](../oauth-in-module) examples each deploy one enforcement shape end to end.
+- **Authentication** — enforcement is yours; the Framework never verifies tokens. `authorizer` puts your access control at API Gateway, in front of the function — one of your own authorizer functions, a Cognito user pool, or `aws_iam` — and `oauthDiscovery` publishes the protected-resource discovery document that tells clients where to log in. The [oauth-cognito](https://github.com/serverless/examples/tree/v4/mcp/oauth-cognito), [oauth-authorizer](https://github.com/serverless/examples/tree/v4/mcp/oauth-authorizer), and [oauth-in-module](https://github.com/serverless/examples/tree/v4/mcp/oauth-in-module) examples each deploy one enforcement shape end to end.
 - **Elicitation state** — `state: true` provisions a signing key in this stack and hands it to the server, so a tool can pause to ask the caller for input and trust what the retry brings back. The caller’s client has to speak the 2026-07-28 protocol revision for that flow — opt-in for clients built on the official SDK (`versionNegotiation: { mode: 'auto' }`); tools that never ask for input need nothing.
 - **A custom domain** — `provider.domain` fronts the whole API, MCP servers and `http` functions alike. Mapped at the root, it also puts the discovery document where MCP clients probe for it.
 

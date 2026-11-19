@@ -40,6 +40,17 @@ npm install
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-node-express-dynamodb-api" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-node-express-dynamodb-api-dev (64s)
+endpoint: ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
+
+functions:
+  api: aws-node-express-dynamodb-api-dev-api (4 MB)
+```
+
 The deploy prints the endpoint URL, `https://<api-id>.execute-api.<region>.amazonaws.com`.
 
 ## Try it

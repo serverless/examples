@@ -38,6 +38,17 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-python-http-api" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-python-http-api-dev (46s)
+endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
+
+functions:
+  hello: aws-python-http-api-dev-hello (3.1 kB)
+```
+
 The deploy prints the endpoint URL, `https://<api-id>.execute-api.<region>.amazonaws.com/`.
 
 ## Try it

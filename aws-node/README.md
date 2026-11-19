@@ -37,6 +37,15 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-node" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-node-dev (40s)
+functions:
+  hello: aws-node-dev-hello (2.6 kB)
+```
+
 ## Try it
 
 Invoke the deployed function:
@@ -49,8 +58,8 @@ The command prints the function's response:
 
 ```json
 {
-  "statusCode": 200,
-  "body": "{\"message\":\"Go Serverless v4.0! Your function executed successfully!\"}"
+    "statusCode": 200,
+    "body": "{\"message\":\"Go Serverless v4.0! Your function executed successfully!\"}"
 }
 ```
 

@@ -39,6 +39,19 @@ npm install
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-python-flask-api" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-python-flask-api-dev (53s)
+endpoints:
+  ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
+  ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
+
+functions:
+  api: aws-python-flask-api-dev-api (655 kB)
+```
+
 The deploy prints the endpoint URLs, which end in the stage name: `https://<api-id>.execute-api.<region>.amazonaws.com/dev/` for the default `dev` stage.
 
 ## Try it

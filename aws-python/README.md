@@ -37,6 +37,15 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-python" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-python-dev (41s)
+functions:
+  hello: aws-python-dev-hello (2.7 kB)
+```
+
 ## Try it
 
 Invoke the deployed function:
@@ -49,8 +58,8 @@ The command prints the function's response:
 
 ```json
 {
-  "statusCode": 200,
-  "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
+    "statusCode": 200,
+    "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
 }
 ```
 

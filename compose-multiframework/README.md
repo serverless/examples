@@ -41,6 +41,25 @@ Run the deploy from this directory, where `serverless-compose.yml` lives:
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Serverless ϟ Compose
+
+✔ shared-resources-example
+    TableName: shared-table-dev
+
+✔ sam
+    Endpoint: https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
+
+✔ traditional
+    HelloLambdaFunctionQualifiedArn: arn:aws:lambda:us-east-1:123456789012:function:traditional-dev-hello:1
+    HttpApiId: xxxxxxxxxx
+    HttpApiUrl: https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
+
+Results: 3 services succeeded, 0 failed, 0 skipped, 3 total    Time: 1m 16s
+```
+
 Compose deploys `shared-resources-example` first, then `traditional` and `sam` in parallel. To print each service's outputs again later, run `serverless info` in the same directory.
 
 ## Try it

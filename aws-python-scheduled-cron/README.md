@@ -38,6 +38,15 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-python-scheduled-cron" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-python-scheduled-cron-dev (102s)
+functions:
+  rateHandler: aws-python-scheduled-cron-dev-rateHandler (2.9 kB)
+```
+
 The schedule is active as soon as the deploy finishes; there is no further step.
 
 ## Try it

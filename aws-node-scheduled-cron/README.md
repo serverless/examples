@@ -38,6 +38,15 @@ Run the deploy from this directory:
 serverless deploy
 ```
 
+You should see output like this:
+
+```text
+Deploying "aws-node-scheduled-cron" to stage "dev" (us-east-1)
+✔ Service deployed to stack aws-node-scheduled-cron-dev (103s)
+functions:
+  rateHandler: aws-node-scheduled-cron-dev-rateHandler (2.7 kB)
+```
+
 The schedule is active as soon as the deploy finishes; there is no further step.
 
 ## Try it
@@ -48,7 +57,20 @@ Invoke the function now instead of waiting for the next run, and print its log:
 serverless invoke --function rateHandler --log
 ```
 
-The log printed after the response contains the line the handler writes, `Your cron function ran at`, followed by the current date and time.
+The command prints the function's response, `null`, then its log. The log contains the line the handler writes, `Your cron function ran at`, followed by the current date and time:
+
+```text
+null
+
+----------------------
+
+START - fe4200af-617b-483d-ad33-13c010a52dcf - Version: $LATEST
+2026-11-19 15:13:15.616 - fe4200af-617b-483d-ad33-13c010a52dcf -
+INFO	Your cron function ran at Thu Nov 19 2026 15:13:15 GMT+0000 (Coordinated Universal Time)
+
+REPORT - fe4200af-617b-483d-ad33-13c010a52dcf
+Duration: 1.95 ms	Billed Duration: 2 ms	Memory Size: 1024 MB	Max Memory Used: 78 MB
+```
 
 To see the scheduled runs, read the function's logs. Each minute adds one line:
 
