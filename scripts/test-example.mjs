@@ -3,6 +3,7 @@
 // example.json declares, and always removes what it deployed.
 //
 // Usage: node scripts/test-example.mjs <dir> [--framework-version <v>] [--region <r>] [--result-file <path>]
+//                                            [--stage <stage>] [--remove-only]
 //
 //   <dir>                    example directory, relative to the repository root
 //   --framework-version <v>  latest (default), canary, or a version number; anything
@@ -11,6 +12,14 @@
 //                            AWS_REGION, then AWS_DEFAULT_REGION, then us-east-1.
 //                            Every serverless and aws command gets --region.
 //   --result-file <path>     also write the result as JSON to this file
+//   --stage <stage>          use this stage instead of a new one: `ex` + 1 to 13
+//                            lowercase base36 characters
+//   --remove-only            with --stage: deploy nothing, only remove what that
+//                            stage deployed. Lists the region's stacks whose names
+//                            end in `-<stage>`; when there are none it removes
+//                            nothing and passes; otherwise it installs dependencies
+//                            where serverless.yml loads plugins and runs
+//                            `serverless remove --stage <stage>`.
 //
 // AWS credentials and the Framework key come from the caller's environment.
 // Command output streams to stderr, prefixed with the step name. Stdout gets one
@@ -20,7 +29,8 @@
 //
 // On SIGINT or SIGTERM the current step stops, remove runs, the result records
 // the stopped step as `interrupted`, and the exit code is 1. A second signal
-// exits at once and names the stacks left behind.
+// exits at once and names the stacks left behind. With --remove-only a signal
+// does not stop the remove.
 
 import { randomInt } from 'node:crypto';
 import fs from 'node:fs';
@@ -33,7 +43,8 @@ import { runCheck } from './lib/checks.mjs';
 import { copyExample, installCommands, Interrupted, isComposeRoot, runCommand, runOrThrow, serviceDirs, TimedOut } from './lib/exec.mjs';
 import { loadManifest, validateManifest, MANIFEST_FILE } from './lib/manifest.mjs';
 
-const USAGE = 'Usage: node scripts/test-example.mjs <dir> [--framework-version <v>] [--region <r>] [--result-file <path>]';
+const USAGE =
+  'Usage: node scripts/test-example.mjs <dir> [--framework-version <v>] [--region <r>] [--result-file <path>] [--stage <stage>] [--remove-only]';
 const MINUTE = 60_000;
 const DEFAULT_TIMEOUT_MINUTES = 15;
 const DEFAULT_REGION = 'us-east-1';
@@ -43,6 +54,8 @@ const SERVICE_FILES = ['serverless.yml', 'serverless.yaml'];
 const FRAMEWORK_VERSION = /^(latest|canary|\d+(\.\d+){0,2}(-[0-9A-Za-z.]+)?)$/;
 const STAGE_TIME_CHARS = 5;
 const STAGE_RANDOM_CHARS = 4;
+const STAGE = /^ex[a-z0-9]{1,13}$/;
+const PLUGINS_LINE = /^plugins[ \t]*:/m;
 
 /** A problem with the command line or the example's manifest (exit code 2). */
 export class UsageError extends Error {
@@ -85,14 +98,16 @@ export function newStage(now = Date.now()) {
  * AWS_DEFAULT_REGION from `env`, else us-east-1. When `signal` aborts, the
  * current step stops and is recorded as interrupted, and remove still runs
  * (without that signal). `onDeployStart(stacks)` is called just before deploy.
- * Throws UsageError for a manifest the runner cannot run; otherwise resolves
- * to a Result, also written to `resultFile` when given.
+ * `stage` replaces the generated stage. Throws UsageError for a manifest the
+ * runner cannot run; otherwise resolves to a Result, also written to
+ * `resultFile` when given.
  */
 export async function runExample({
   root,
   dir,
   frameworkVersion = 'latest',
   region,
+  stage: givenStage,
   exec = runCommand,
   fetchImpl = fetch,
   now = Date.now,
@@ -103,9 +118,7 @@ export async function runExample({
   env = process.env,
   onDeployStart = () => {},
 }) {
-  if (!FRAMEWORK_VERSION.test(frameworkVersion)) {
-    throw new UsageError(`--framework-version ${JSON.stringify(frameworkVersion)}: use latest, canary or a version number such as 4.4.7`);
-  }
+  checkVersionAndStage(frameworkVersion, givenStage);
   const manifest = readTestedManifest(root, dir);
   region ??= manifest.region ?? (env.AWS_REGION || undefined) ?? (env.AWS_DEFAULT_REGION || undefined) ?? DEFAULT_REGION;
   const startMs = now();
@@ -144,7 +157,7 @@ export async function runExample({
   const services = (compose ? serviceDirs(exampleDir) : [exampleDir]).filter((d) => findServiceFile(d));
   const serviceNames = services.map((d) => readServiceName(root, d));
 
-  const stage = newStage(startMs);
+  const stage = givenStage ?? newStage(startMs);
   const stacks = serviceNames.map((name) => `${name}-${stage}`);
   const regionArgs = ['--region', region];
   const deadline = startMs + (manifest.test.timeoutMinutes ?? DEFAULT_TIMEOUT_MINUTES) * MINUTE;
@@ -248,6 +261,115 @@ export async function runExample({
   return finish(result);
 }
 
+/**
+ * Removes what `stage` deployed from the example at `<root>/<dir>`, without
+ * deploying: copies the example, lists the region's stacks and, when one ends
+ * in `-<stage>`, installs dependencies where a serverless.yml loads plugins and
+ * runs `serverless remove`. Nothing deployed is a pass with the detail
+ * `nothing deployed`. When the stacks cannot be listed, remove runs anyway.
+ * The region is chosen as in runExample. Resolves to a Result.
+ */
+export async function removeOnly({
+  root,
+  dir,
+  stage,
+  frameworkVersion = 'latest',
+  region,
+  exec = runCommand,
+  now = Date.now,
+  log = (line) => process.stderr.write(`${line}\n`),
+  resultFile,
+  env = process.env,
+}) {
+  if (stage === undefined) throw new UsageError('--remove-only needs --stage <stage>');
+  checkVersionAndStage(frameworkVersion, stage);
+  const manifest = readTestedManifest(root, dir);
+  region ??= manifest.region ?? (env.AWS_REGION || undefined) ?? (env.AWS_DEFAULT_REGION || undefined) ?? DEFAULT_REGION;
+  const startMs = now();
+  log(`[remove-only] ${dir}: stage ${stage}, region ${region}`);
+
+  const { copy, cleanup } = copyExample(root, dir, 'example-remove-');
+  const result = {
+    example: dir,
+    tier: manifest.test.tier,
+    frameworkVersion,
+    startedAt: new Date(startMs).toISOString(),
+    result: 'pass',
+    resolvedVersion: 'unknown',
+    stage,
+    region,
+  };
+  try {
+    const compose = isComposeRoot(copy);
+    const dirs = compose ? serviceDirs(copy) : [copy];
+    if (frameworkVersion !== 'latest') for (const d of dirs) rewriteFrameworkVersion(d, frameworkVersion);
+
+    const stacks = await findStageStacks(exec, copy, stage, region, log);
+    if (stacks?.length === 0) {
+      log(`[remove-only] no stack in ${region} ends in -${stage}; nothing to remove`);
+      result.detail = 'nothing deployed';
+    } else {
+      try {
+        const withPlugins = new Set(dirs.filter(loadsPlugins));
+        for (const { cwd, cmd, args } of installCommands(copy).filter((c) => withPlugins.has(c.cwd))) {
+          await runOrThrow(exec, cmd, args, { cwd, step: 'install', timeoutMs: REMOVE_TIMEOUT_MS });
+        }
+        await runOrThrow(exec, 'serverless', ['remove', '--stage', stage, '--region', region], {
+          cwd: copy,
+          step: 'remove',
+          timeoutMs: REMOVE_TIMEOUT_MS,
+        });
+      } catch (err) {
+        log(`[remove] ${err.message}`);
+        Object.assign(result, {
+          result: 'fail',
+          failedStep: 'remove',
+          detail: err.message,
+          leftBehind: stacks?.join(', ') || `stacks ending in -${stage}`,
+        });
+      }
+    }
+  } finally {
+    cleanup();
+  }
+  result.durationSeconds = Math.round((now() - startMs) / 1000);
+  if (resultFile) {
+    fs.mkdirSync(path.dirname(path.resolve(resultFile)), { recursive: true });
+    fs.writeFileSync(resultFile, `${JSON.stringify(result, null, 2)}\n`);
+  }
+  return result;
+}
+
+// True when the service in `dir` has a top-level plugins: key.
+function loadsPlugins(dir) {
+  const file = findServiceFile(dir);
+  return Boolean(file) && PLUGINS_LINE.test(fs.readFileSync(file, 'utf8'));
+}
+
+// Resolves to the names of the region's stacks (not deleted) that end in
+// `-<stage>`, or to null when they cannot be listed.
+async function findStageStacks(exec, cwd, stage, region, log) {
+  const args = ['cloudformation', 'list-stacks', '--region', region, '--output', 'json'];
+  try {
+    const r = await runOrThrow(exec, 'aws', args, { cwd, step: 'list-stacks', echo: false, timeoutMs: VERSION_TIMEOUT_MS });
+    return JSON.parse(r.stdout)
+      .StackSummaries.filter((s) => s.StackStatus !== 'DELETE_COMPLETE' && s.StackName.endsWith(`-${stage}`))
+      .map((s) => s.StackName);
+  } catch (err) {
+    log(`[list-stacks] could not list the stacks in ${region} (${err.message}); running remove anyway`);
+    return null;
+  }
+}
+
+function checkVersionAndStage(frameworkVersion, stage) {
+  if (!FRAMEWORK_VERSION.test(frameworkVersion)) {
+    throw new UsageError(`--framework-version ${JSON.stringify(frameworkVersion)}: use latest, canary or a version number such as 4.4.7`);
+  }
+  if (stage !== undefined && !STAGE.test(stage)) {
+    throw new UsageError(`--stage ${JSON.stringify(stage)}: use ex followed by 1 to 13 lowercase letters or digits`);
+  }
+}
+
 function readTestedManifest(root, dir) {
   if (!fs.existsSync(path.join(root, dir, MANIFEST_FILE))) throw new UsageError(`${dir}: no ${MANIFEST_FILE} in this directory`);
   let manifest;
@@ -332,11 +454,16 @@ export async function main(
 ) {
   const controller = new AbortController();
   let deployed = [];
+  let removing = false;
   let received = 0;
   const onSignal = (name) => {
     received += 1;
     if (received === 1) {
-      err(`[run] ${name}: stopping the current step; removing what was deployed (send it again to exit at once)`);
+      err(
+        removing
+          ? `[run] ${name}: remove continues (send it again to exit at once)`
+          : `[run] ${name}: stopping the current step; removing what was deployed (send it again to exit at once)`,
+      );
       controller.abort();
       return;
     }
@@ -356,6 +483,8 @@ export async function main(
           'framework-version': { type: 'string' },
           region: { type: 'string' },
           'result-file': { type: 'string' },
+          stage: { type: 'string' },
+          'remove-only': { type: 'boolean' },
         },
       });
     } catch (e) {
@@ -365,11 +494,26 @@ export async function main(
     const dir = path.relative(root, path.resolve(root, parsed.positionals[0])).split(path.sep).join('/');
     const { values } = parsed;
 
-    const result = await runExample({
+    let result;
+    if (values['remove-only']) {
+      removing = true;
+      deployed = [`the stacks ending in -${values.stage}`];
+      result = await removeOnly({
+        root,
+        dir,
+        stage: values.stage,
+        frameworkVersion: values['framework-version'],
+        region: values.region,
+        resultFile: values['result-file'],
+        log: err,
+        ...deps,
+      });
+    } else result = await runExample({
       root,
       dir,
       frameworkVersion: values['framework-version'],
       region: values.region,
+      stage: values.stage,
       resultFile: values['result-file'],
       log: err,
       signal: controller.signal,

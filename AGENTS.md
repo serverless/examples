@@ -11,7 +11,17 @@
 - `npm run docs`: regenerates README frontmatter, the badge line, `examples.json` and the tables in the root `README.md` from the manifests.
 - `npm test`: runs the tests of the repository's scripts.
 - `node scripts/check-examples.mjs <dir>`: the static checks for one example.
-- `node scripts/test-example.mjs <dir>`: deploys the example to the AWS account of the credentials in your environment, runs the checks its `example.json` declares, and removes it. It creates real resources and costs money.
+- `node scripts/test-example.mjs <dir>`: deploys the example to the AWS account of the credentials in your environment, runs the checks its `example.json` declares, and removes it. It creates real resources and costs money. `--stage <stage>` uses that stage (`ex` plus 1 to 13 lowercase letters or digits) instead of a new one; `--remove-only --stage <stage>` deploys nothing and only removes what that stage left.
+- `node scripts/select-examples.mjs --changed <base-sha>` or `--all --tier fast|slow`: prints the examples a live test run covers, as JSON.
+- `node scripts/publish-verified.mjs --results-dir <dir> --out <dir> --run-url <url>`: adds `latest` result files to `results.json` in `--out` and writes `badges/<example dir>.svg`. The `publish-verified` workflow runs it for the `verified` branch.
+- `node scripts/cleanup-report.mjs --regions <list>`: lists CloudFormation stacks whose names end in a test stage and that are older than 24 hours. It deletes nothing.
+
+## Workflows
+
+- `ci`: static checks on every pull request and push; live tests of the changed examples on pushes to `v4` and on pull requests from branches of this repository, never from forks.
+- `sweep`: live tests of every tested example, the fast tier nightly with `latest` and `canary`, the slow tier weekly with `latest`; run it by hand with a tier and a Framework version.
+- `publish-verified`: after `sweep`, or `ci` on a push to `v4`, publishes the `latest` results and badges to the `verified` branch.
+- `cleanup`: daily report of stacks that test runs left behind.
 
 ## Rules
 

@@ -834,3 +834,142 @@ test('CLI usage and manifest errors exit 2', async () => {
   delete m.test;
   assert.equal((await cli([DIR], fixture({ example: m }))).code, 2);
 });
+
+// --- --stage
+
+test('CLI: --stage is used instead of a generated stage', async () => {
+  const root = fixture();
+  const fx = fakeExec();
+  const resultFile = path.join(root, 'r.json');
+  const { code } = await cli([DIR, '--stage', 'exabc123def', '--result-file', resultFile], root, { exec: fx.exec });
+  assert.equal(code, 0);
+  assert.deepEqual(fx.calls.find((c) => c.step === 'serverless deploy').args.slice(0, 3), ['deploy', '--stage', 'exabc123def']);
+  assert.deepEqual(fx.calls.find((c) => c.step === 'serverless remove').args.slice(0, 3), ['remove', '--stage', 'exabc123def']);
+  assert.equal(JSON.parse(fs.readFileSync(resultFile, 'utf8')).stage, 'exabc123def');
+});
+
+test('CLI: a --stage that is not ex plus 1 to 13 lowercase base36 characters exits 2 before anything runs', async () => {
+  const root = fixture();
+  for (const stage of ['dev', 'ex', 'Exabc', 'exABC', 'ex-abc', `ex${'a'.repeat(14)}`, '']) {
+    const fx = fakeExec();
+    const { code, out } = await cli([DIR, '--stage', stage], root, { exec: fx.exec });
+    assert.equal(code, 2, JSON.stringify(stage));
+    assert.deepEqual(out, []);
+    assert.deepEqual(fx.calls, []);
+  }
+  const fx = fakeExec();
+  assert.equal((await cli([DIR, '--stage', `ex${'a'.repeat(13)}`], root, { exec: fx.exec })).code, 0);
+});
+
+// --- --remove-only
+
+const STAGE = 'exabc123def';
+
+function stackList(...names) {
+  return { status: 0, stdout: JSON.stringify({ StackSummaries: names.map(([StackName, StackStatus = 'CREATE_COMPLETE']) => ({ StackName, StackStatus })) }) };
+}
+
+test('CLI: --remove-only needs --stage', async () => {
+  const fx = fakeExec();
+  const { code, err } = await cli([DIR, '--remove-only'], fixture(), { exec: fx.exec });
+  assert.equal(code, 2);
+  assert.ok(err.some((l) => /--stage/.test(l)), err.join('\n'));
+  assert.deepEqual(fx.calls, []);
+});
+
+test('CLI: --remove-only looks for the stage, removes it and exits 0', async () => {
+  const root = fixture();
+  const resultFile = path.join(root, 'r.json');
+  const fx = fakeExec({ 'aws cloudformation': stackList([`hello-svc-${STAGE}`], ['other-exzzz999zzz']) });
+  const { code, out } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec, env: { AWS_REGION: 'eu-west-1' } });
+  assert.equal(code, 0);
+  assert.deepEqual(fx.steps(), ['aws cloudformation', 'serverless remove']);
+  assert.deepEqual(fx.calls[0].args, ['cloudformation', 'list-stacks', '--region', 'eu-west-1', '--output', 'json']);
+  assert.deepEqual(fx.calls[1].args, ['remove', '--stage', STAGE, '--region', 'eu-west-1']);
+  assert.equal(fx.calls[1].timeoutMs, 15 * MINUTE);
+  assert.ok(!fx.calls[1].cwd.startsWith(root), 'remove runs in a copy');
+  assert.match(out[0], /^PASS hello /);
+  const result = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
+  assert.equal(result.stage, STAGE);
+  assert.equal(result.result, 'pass');
+});
+
+test('CLI: --remove-only with nothing deployed for the stage runs no remove and exits 0', async () => {
+  const root = fixture();
+  const resultFile = path.join(root, 'r.json');
+  const fx = fakeExec({ 'aws cloudformation': stackList([`hello-svc-${STAGE}`, 'DELETE_COMPLETE'], [`hello-svc-x${STAGE}`]) });
+  const { code, out } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec });
+  assert.equal(code, 0);
+  assert.deepEqual(fx.steps(), ['aws cloudformation']);
+  assert.match(out[0], /^PASS hello /);
+  assert.equal(JSON.parse(fs.readFileSync(resultFile, 'utf8')).detail, 'nothing deployed');
+});
+
+test('CLI: --remove-only installs only where serverless.yml loads plugins', async () => {
+  const root = fixture({ files: { 'serverless.yml': 'service: hello-svc\nplugins:\n  - serverless-wsgi\nprovider:\n  name: aws\n' } });
+  const fx = fakeExec({ 'aws cloudformation': stackList([`hello-svc-${STAGE}`]) });
+  const { code } = await cli([DIR, '--remove-only', '--stage', STAGE], root, { exec: fx.exec });
+  assert.equal(code, 0);
+  assert.deepEqual(fx.steps(), ['aws cloudformation', 'npm ci', 'serverless remove']);
+});
+
+test('CLI: --remove-only finds the stacks of a compose root by the stage suffix', async () => {
+  const fx = fakeExec({ 'aws cloudformation': stackList([`shared-resources-${STAGE}`]) });
+  const { code } = await cli([DIR, '--remove-only', '--stage', STAGE], composeFixture(), { exec: fx.exec });
+  assert.equal(code, 0);
+  assert.deepEqual(fx.steps(), ['aws cloudformation', 'serverless remove']);
+});
+
+test('CLI: --remove-only still removes when the stacks cannot be listed', async () => {
+  const fx = fakeExec({ 'aws cloudformation': { status: 255, stderr: 'AccessDenied' } });
+  const { code } = await cli([DIR, '--remove-only', '--stage', STAGE], fixture(), { exec: fx.exec });
+  assert.equal(code, 0);
+  assert.deepEqual(fx.steps(), ['aws cloudformation', 'serverless remove']);
+});
+
+test('CLI: --remove-only exits 1 and names the stacks when remove does not complete', async () => {
+  const root = fixture();
+  const resultFile = path.join(root, 'r.json');
+  const fx = fakeExec({ 'aws cloudformation': stackList([`hello-svc-${STAGE}`]), 'serverless remove': { status: 1 } });
+  const { code, out, err } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec });
+  assert.equal(code, 1);
+  assert.match(out[0], /^FAIL hello /);
+  assert.ok(err.some((l) => l === `left behind: hello-svc-${STAGE}`), err.join('\n'));
+  const result = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
+  assert.equal(result.failedStep, 'remove');
+  assert.equal(result.leftBehind, `hello-svc-${STAGE}`);
+});
+
+// --- runCommand stops the whole process group
+
+function alive(pid) {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+test('runCommand stops the grandchildren of a command, not only the command', async () => {
+  // The child starts a grandchild that ignores its output pipes, prints its pid and waits.
+  const child = `
+    const { spawn } = require('node:child_process');
+    const g = spawn(process.execPath, ['-e', 'setTimeout(() => {}, 60000)'], { stdio: 'ignore' });
+    console.log(g.pid);
+    setTimeout(() => {}, 60000);
+  `;
+  const r = await runCommand(process.execPath, ['-e', child], { timeoutMs: 500, echo: false });
+  const grandchild = Number(r.stdout.trim());
+  assert.ok(grandchild > 0, r.stdout);
+  try {
+    let waited = 0;
+    while (alive(grandchild) && waited < 3000) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      waited += 50;
+    }
+    assert.equal(alive(grandchild), false, 'the grandchild is still running');
+  } finally {
+    if (alive(grandchild)) process.kill(grandchild, 'SIGKILL');
+  }
+});

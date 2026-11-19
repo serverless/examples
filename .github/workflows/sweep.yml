@@ -1,0 +1,177 @@
+name: sweep
+
+# Live tests of every tested example in a tier: the fast tier nightly with the
+# released Framework (latest) and then the canary build, the slow tier weekly
+# with latest. A manual run picks the tier and one Framework version.
+
+on:
+  schedule:
+    - cron: '17 3 * * *' # nightly: fast tier, latest then canary
+    - cron: '41 4 * * 6' # weekly, Saturday: slow tier, latest
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: Tier to test
+        type: choice
+        options: [fast, slow]
+        default: fast
+      framework-version:
+        description: 'Framework version: latest, canary or a version number such as 4.4.7'
+        type: string
+        default: latest
+
+permissions: {}
+
+jobs:
+  select:
+    name: Select examples
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+      count: ${{ steps.select.outputs.count }}
+      first: ${{ steps.plan.outputs.first }}
+      second: ${{ steps.plan.outputs.second }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: Plan
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_TIER: ${{ inputs.tier }}
+          INPUT_VERSION: ${{ inputs.framework-version }}
+        run: |
+          if [[ "$EVENT" == workflow_dispatch ]]; then
+            tier=$INPUT_TIER first=$INPUT_VERSION second=
+          elif [[ "$SCHEDULE" == '41 4 * * 6' ]]; then
+            tier=slow first=latest second=
+          else
+            tier=fast first=latest second=canary
+          fi
+          # The runner validates the version again; this keeps odd input out of names.
+          if [[ ! "$first" =~ ^(latest|canary|[0-9]+(\.[0-9]+){0,2}(-[0-9A-Za-z.]+)?)$ ]]; then
+            echo "::error::framework-version must be latest, canary or a version number"
+            exit 1
+          fi
+          { echo "tier=$tier"; echo "first=$first"; echo "second=$second"; } >> "$GITHUB_OUTPUT"
+      - name: Select
+        id: select
+        env:
+          TIER: ${{ steps.plan.outputs.tier }}
+        run: |
+          node scripts/select-examples.mjs --all --tier "$TIER" > "$RUNNER_TEMP/selection.json"
+          # shellcheck disable=SC2016 # single quotes on purpose: the ${...} below are JavaScript
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const s = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+            // index picks the role (index % 3); slug names files and artifacts.
+            const include = s.dirs.map((dir, index) => ({ dir, index, role: (index % 3) + 1, slug: dir.replaceAll("/", "__") }));
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify({ include })}\ncount=${include.length}\n`);
+            const lines = ["## Selected examples", "", s.reason, ""];
+            for (const d of s.dirs) lines.push(`- ${d}`);
+            if (s.quarantined.length) {
+              lines.push("", "Quarantined, not run:", "");
+              for (const d of s.quarantined) lines.push(`- ${d}`);
+            }
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join("\n") + "\n");
+          ' "$RUNNER_TEMP/selection.json"
+
+  live:
+    name: Live test (${{ matrix.dir }})
+    needs: select
+    if: needs.select.outputs.count != '0'
+    runs-on: ubuntu-latest
+    environment: live-tests
+    timeout-minutes: 50
+    permissions:
+      id-token: write
+      contents: read
+    # One group per example, shared with ci: two runs of one example never overlap.
+    concurrency:
+      group: live-${{ matrix.dir }}
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.select.outputs.matrix) }}
+    env:
+      EXAMPLE_DIR: ${{ matrix.dir }}
+      EXAMPLE_SLUG: ${{ matrix.slug }}
+      FIRST: ${{ needs.select.outputs.first }}
+      SECOND: ${{ needs.select.outputs.second }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.14'
+      - name: Install the Serverless Framework CLI
+        run: npm install --global serverless
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ matrix.role == 1 && vars.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && vars.EXAMPLES_ROLE_ARN_2 || vars.EXAMPLES_ROLE_ARN_3 }}
+          aws-region: ${{ vars.EXAMPLES_REGION }}
+          role-duration-seconds: 3600
+          mask-aws-account-id: true
+      - name: Choose the stage
+        id: stage
+        run: |
+          stage=$(node --input-type=module -e 'import { newStage } from "./scripts/test-example.mjs"; console.log(newStage())')
+          echo "stage=$stage" >> "$GITHUB_OUTPUT"
+          echo "Stage: $stage"
+      # The versions run one after another with the same stage. The region is
+      # AWS_REGION from the credentials step, unless the manifest sets one.
+      - name: Test with ${{ needs.select.outputs.first }}
+        env:
+          STAGE: ${{ steps.stage.outputs.stage }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
+          SERVERLESS_PLATFORM_STAGE: dev
+        run: |
+          node scripts/test-example.mjs "$EXAMPLE_DIR" --stage "$STAGE" --framework-version "$FIRST" \
+            --result-file "results/$EXAMPLE_SLUG--$FIRST.json"
+      - name: Upload the ${{ needs.select.outputs.first }} result
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: result-${{ matrix.slug }}--${{ needs.select.outputs.first }}-${{ github.run_attempt }}
+          path: results/${{ matrix.slug }}--${{ needs.select.outputs.first }}.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Test with ${{ needs.select.outputs.second }}
+        id: second
+        if: ${{ !cancelled() && steps.stage.outcome == 'success' && needs.select.outputs.second != '' }}
+        env:
+          STAGE: ${{ steps.stage.outputs.stage }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
+          SERVERLESS_PLATFORM_STAGE: dev
+        run: |
+          node scripts/test-example.mjs "$EXAMPLE_DIR" --stage "$STAGE" --framework-version "$SECOND" \
+            --result-file "results/$EXAMPLE_SLUG--$SECOND.json"
+      - name: Upload the ${{ needs.select.outputs.second }} result
+        if: always() && steps.second.outcome != 'skipped' && needs.select.outputs.second != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: result-${{ matrix.slug }}--${{ needs.select.outputs.second }}-${{ github.run_attempt }}
+          path: results/${{ matrix.slug }}--${{ needs.select.outputs.second }}.json
+          if-no-files-found: warn
+          retention-days: 30
+      # A cancelled or timed-out job gives the runner only seconds to remove;
+      # this step removes whatever the stage still has.
+      - name: Remove what the stage left
+        if: always() && steps.stage.outputs.stage != ''
+        env:
+          STAGE: ${{ steps.stage.outputs.stage }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
+          SERVERLESS_PLATFORM_STAGE: dev
+        run: node scripts/test-example.mjs "$EXAMPLE_DIR" --remove-only --stage "$STAGE"

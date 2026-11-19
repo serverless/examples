@@ -84,9 +84,11 @@ export function installCommands(dir) {
  * `{ status, stdout, stderr, timedOut, interrupted, error }`. `status` is null
  * when the command could not start (`error` set) or was stopped. Output is
  * captured and, unless `echo` is false, written line by line to `write` with a
- * `[step]` prefix. After `timeoutMs`, or when `signal` aborts, the command is
- * sent SIGTERM, then SIGKILL, and `timedOut` or `interrupted` is true. `env`
- * defaults to the caller's environment and is never printed.
+ * `[step]` prefix. The command runs in its own process group. After
+ * `timeoutMs`, or when `signal` aborts, the whole group (the command and every
+ * process it started) is sent SIGTERM, then SIGKILL, and `timedOut` or
+ * `interrupted` is true. `env` defaults to the caller's environment and is
+ * never printed.
  */
 export function runCommand(
   cmd,
@@ -104,7 +106,8 @@ export function runCommand(
       return;
     }
     try {
-      child = spawn(cmd, args, { cwd, env: env ?? process.env, stdio: ['ignore', 'pipe', 'pipe'] });
+      // detached: a new process group, so a stop reaches the CLI's own child processes too.
+      child = spawn(cmd, args, { cwd, env: env ?? process.env, stdio: ['ignore', 'pipe', 'pipe'], detached: true });
     } catch (err) {
       resolve({ status: null, stdout: '', stderr: '', timedOut: false, error: err });
       return;
@@ -125,8 +128,8 @@ export function runCommand(
     let killTimer;
     const stop = () => {
       if (killTimer) return;
-      child.kill('SIGTERM');
-      killTimer = setTimeout(() => child.kill('SIGKILL'), KILL_GRACE_MS);
+      killGroup(child, 'SIGTERM');
+      killTimer = setTimeout(() => killGroup(child, 'SIGKILL'), KILL_GRACE_MS);
     };
     const timer =
       Number.isFinite(timeoutMs) &&
@@ -145,7 +148,9 @@ export function runCommand(
     });
     child.on('close', (status) => {
       clearTimeout(timer);
-      clearTimeout(killTimer);
+      // A stopped command's group gets its SIGKILL even after the command
+      // itself exited, without keeping this process alive for it.
+      killTimer?.unref();
       signal?.removeEventListener('abort', onAbort);
       if (echo) {
         for (const stream of ['stdout', 'stderr']) if (pending[stream]) write(`[${step}] ${pending[stream]}\n`);
@@ -153,6 +158,20 @@ export function runCommand(
       resolve({ status: timedOut || interrupted || error ? null : status, ...out, timedOut, interrupted, error });
     });
   });
+}
+
+// Sends `sig` to the process group led by `child`, or to `child` alone when
+// the group is already gone.
+function killGroup(child, sig) {
+  try {
+    process.kill(-child.pid, sig);
+  } catch {
+    try {
+      child.kill(sig);
+    } catch {
+      // already exited
+    }
+  }
 }
 
 /**

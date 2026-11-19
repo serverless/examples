@@ -1,0 +1,56 @@
+name: cleanup
+
+# Daily report of CloudFormation stacks that example test runs may have left
+# behind (names ending in a test stage, older than 24 hours), for each test
+# role. It only reports; it deletes nothing.
+
+on:
+  schedule:
+    - cron: '29 7 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  report:
+    name: Report stacks left behind (role ${{ matrix.role }})
+    runs-on: ubuntu-latest
+    environment: live-tests
+    timeout-minutes: 15
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        role: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ matrix.role == 1 && vars.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && vars.EXAMPLES_ROLE_ARN_2 || vars.EXAMPLES_ROLE_ARN_3 }}
+          aws-region: ${{ vars.EXAMPLES_REGION }}
+          role-duration-seconds: 900
+          mask-aws-account-id: true
+      - name: Report
+        env:
+          DEFAULT_REGION: ${{ vars.EXAMPLES_REGION }}
+          ROLE: ${{ matrix.role }}
+        run: |
+          # The default region plus every region an example manifest sets.
+          regions=$(node --input-type=module -e '
+            import { findExampleDirs, loadManifest } from "./scripts/lib/manifest.mjs";
+            const set = new Set([process.env.DEFAULT_REGION]);
+            for (const dir of findExampleDirs(".")) {
+              const m = loadManifest(".", dir);
+              if (m.test && m.region) set.add(m.region);
+            }
+            console.log([...set].join(","));
+          ')
+          echo "### Role $ROLE" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/cleanup-report.mjs --regions "$regions" | tee -a "$GITHUB_STEP_SUMMARY"

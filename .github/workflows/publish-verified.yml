@@ -1,0 +1,92 @@
+name: publish-verified
+
+# After a sweep, or a ci run for a push to v4, adds the run's `latest` live
+# test results to results.json on the `verified` branch and writes the badges
+# the READMEs show (badges/<example dir>.svg, nested directories kept).
+
+on:
+  workflow_run:
+    workflows: [ci, sweep]
+    types: [completed]
+    branches: [v4]
+
+permissions: {}
+
+# One publish at a time, so commits to the verified branch never race.
+concurrency:
+  group: publish-verified
+
+jobs:
+  publish:
+    name: Publish results and badges
+    if: github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'schedule' || github.event.workflow_run.event == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    env:
+      RUN_ID: ${{ github.event.workflow_run.id }}
+      RUN_URL: ${{ github.event.workflow_run.html_url }}
+    steps:
+      - name: Look for latest results and the verified branch
+        id: find
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          count=$(gh api --paginate "repos/$REPO/actions/runs/$RUN_ID/artifacts" \
+            --jq '.artifacts[].name | select(test("^result-.+--latest-[0-9]+$"))' | wc -l)
+          branch=$(gh api "repos/$REPO/git/matching-refs/heads/verified" \
+            --jq 'map(select(.ref == "refs/heads/verified")) | length')
+          { echo "count=$count"; echo "branch=$branch"; } >> "$GITHUB_OUTPUT"
+          echo "$count latest result artifact(s) in run $RUN_ID; verified branch exists: $branch"
+      - name: Check out the scripts
+        if: steps.find.outputs.count != '0'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          path: src
+          persist-credentials: false
+      - name: Check out the verified branch
+        if: steps.find.outputs.count != '0' && steps.find.outputs.branch == '1'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: verified
+          path: site
+      - name: Check out the repository to start the verified branch
+        if: steps.find.outputs.count != '0' && steps.find.outputs.branch == '0'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: site
+      - name: Start the verified branch as an orphan
+        if: steps.find.outputs.count != '0' && steps.find.outputs.branch == '0'
+        working-directory: site
+        run: git switch --orphan verified
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        if: steps.find.outputs.count != '0'
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        if: steps.find.outputs.count != '0'
+        with:
+          pattern: result-*--latest-*
+          path: results
+          merge-multiple: true
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: Merge the results and write the badges
+        if: steps.find.outputs.count != '0'
+        run: node src/scripts/publish-verified.mjs --results-dir results --out site --run-url "$RUN_URL"
+      - name: Commit to the verified branch
+        if: steps.find.outputs.count != '0'
+        working-directory: site
+        run: |
+          git add results.json badges
+          if git diff --cached --quiet; then
+            echo "Nothing changed"
+            exit 0
+          fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit --quiet -m "chore: publish live test results of run $RUN_ID"
+          git push origin HEAD:refs/heads/verified
