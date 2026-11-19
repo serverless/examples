@@ -5,10 +5,10 @@
 // Run by the example test runner with EXAMPLE_STAGE and EXAMPLE_REGION set and
 // AWS credentials in the environment; it reads the stacks with the aws CLI.
 //
-// Stack names:
-//   shared-resources-example     the compose service key (the cloudformation service)
-//   sam-compose-service-example  stack_name in sam/samconfig.toml
-//   traditional-<stage>          service name and stage (the serverless.yml service)
+// Stack names, each with the stage:
+//   shared-resources-example-<stage>     stack_name in cloudformation/samconfig.toml
+//   sam-compose-service-example-<stage>  stack_name in sam/samconfig.toml
+//   traditional-<stage>                  service name and stage in traditional/serverless.yml
 
 import { execFileSync } from 'node:child_process';
 
@@ -22,13 +22,13 @@ if (!stage) fail('EXAMPLE_STAGE is not set');
 if (!region) fail('EXAMPLE_REGION is not set');
 const tableName = `shared-table-${stage}`;
 
-const shared = stackOutputs('shared-resources-example');
-if (shared.TableName !== tableName) fail(`shared-resources-example: expected output TableName ${tableName}; got ${shared.TableName}`);
+const shared = stackOutputs(`shared-resources-example-${stage}`);
+if (shared.TableName !== tableName) fail(`shared-resources-example-${stage}: expected output TableName ${tableName}; got ${shared.TableName}`);
 const status = aws(['dynamodb', 'describe-table', '--table-name', tableName]).Table?.TableStatus;
 if (status !== 'ACTIVE') fail(`table ${tableName}: expected status ACTIVE; got ${status}`);
 
 await expectAnswer('traditional', stackOutputs(`traditional-${stage}`).HttpApiUrl);
-await expectAnswer('sam', stackOutputs('sam-compose-service-example').Endpoint);
+await expectAnswer('sam', stackOutputs(`sam-compose-service-example-${stage}`).Endpoint);
 
 console.log(`table ${tableName} is active; traditional and sam answer with it`);
 

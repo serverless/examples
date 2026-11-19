@@ -117,7 +117,7 @@ The plugin's [GitHub repository](https://github.com/logandk/serverless-wsgi) des
 
 ## Cost and cleanup
 
-Lambda and API Gateway charge per request and for compute time. The API costs nothing while nobody calls it, and light use stays within the AWS free tier. Remove the stack, with the function, the API and the log group, when you are done:
+While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. While nobody calls the API, neither bills anything. The function's logs stay in CloudWatch Logs, which bills for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the function, the API and the log group, when you are done:
 
 ```bash
 serverless remove

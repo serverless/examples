@@ -94,7 +94,7 @@ functions:
 
 ## Cost and cleanup
 
-Lambda charges per request and for compute time, plus for the durable operations an execution records, such as steps and waits, and for the checkpoint data it keeps. No compute is billed while an execution waits. A few test executions cost little. Remove the function, its versions and the alias when you are done:
+While the example is deployed, Lambda bills each invocation and the function's compute time, the durable operations an execution records, such as steps and waits, and the checkpoint data it keeps. No compute is billed while an execution waits. The function's logs stay in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the function, its versions and the alias when you are done:
 
 ```bash
 serverless remove

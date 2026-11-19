@@ -191,7 +191,7 @@ The [`serverless-wsgi`](https://github.com/logandk/serverless-wsgi) and [`server
 
 ## Cost and cleanup
 
-Lambda and API Gateway charge per request and for compute time, and light use stays within the AWS free tier. The DynamoDB table uses provisioned capacity, which is billed by the hour while the table exists, whether or not you use it; one read and one write unit stay within the AWS free tier. The table also stores the users you create until you remove the stack. `serverless remove` deletes the table with its data, the function, the API and the log group:
+While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. The DynamoDB table uses provisioned capacity, one read and one write unit, which is billed by the hour while the table exists, whether or not you use it. The table also bills for the data it stores, and the users you create stay in it until you remove the stack; the function's logs stay in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). `serverless remove` deletes the table with its data, the function, the API and the log group:
 
 ```bash
 serverless remove

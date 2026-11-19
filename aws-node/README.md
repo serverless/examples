@@ -96,7 +96,7 @@ Press Ctrl+C to end the session; the function runs the deployed code again. Run 
 
 ## Cost and cleanup
 
-Lambda charges per request and for compute time. The function costs nothing while you do not invoke it, and light use stays within the AWS free tier. Remove the stack, with the function and its log group, when you are done:
+While the example is deployed, Lambda bills each invocation and the function's compute time; while you do not invoke the function, it bills nothing. The function's logs stay in CloudWatch Logs, which bills for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the function and its log group, when you are done:
 
 ```bash
 serverless remove

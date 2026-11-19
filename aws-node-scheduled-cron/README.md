@@ -93,7 +93,7 @@ Press Ctrl+C to end the session; the function runs the deployed code again. Run 
 
 ## Cost and cleanup
 
-The function runs every minute for as long as it is deployed. Lambda charges per invocation and for compute time, and this load stays within the AWS free tier, but it keeps running until you remove it. Remove the stack, with the function, the rule and the log group, when you are done:
+The rule invokes the function every minute for as long as it is deployed, so Lambda bills an invocation and its compute time every minute, whether or not you look at the results. Each run also adds a line to the function's logs in CloudWatch Logs, which bills for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [EventBridge pricing](https://aws.amazon.com/eventbridge/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the function, the rule and the log group, when you are done:
 
 ```bash
 serverless remove

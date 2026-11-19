@@ -18,9 +18,8 @@ stages:
 
 services:
   # Framework: AWS CloudFormation
-  # The service name here will be used as the underlying cloudformation stack name.
-  # Make sure it’s unique so it doesn’t collide, and accidentally update another stack.
-  # If you change it, make sure you update the references in other services.
+  # The stack name, with the stage, is set by stack_name in cloudformation/samconfig.toml.
+  # If you change the service key, make sure you update the references in other services.
   shared-resources-example:
     path: cloudformation
     params:

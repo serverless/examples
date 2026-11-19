@@ -2,4 +2,5 @@ version = 0.1
 
 [default]
 [default.global.parameters]
-stack_name = "sam-compose-service-example"
+# The stage is part of the stack name, so each stage deploys its own stack.
+stack_name = "sam-compose-service-example-${sls:stage}"

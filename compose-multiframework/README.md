@@ -18,11 +18,11 @@ This example deploys three services written for three tools, a Serverless Framew
 
 ## What it deploys
 
-Three CloudFormation stacks:
+Three CloudFormation stacks per stage:
 
-- `shared-resources-example`, from `cloudformation/template.yml`: a DynamoDB table, `shared-table-<stage>`, with provisioned capacity, and a `TableName` output.
+- `shared-resources-example-<stage>`, from `cloudformation/template.yml`: a DynamoDB table, `shared-table-<stage>`, with provisioned capacity, and a `TableName` output.
 - `traditional-<stage>`, from `traditional/serverless.yml`: a Lambda function behind an API Gateway HTTP API, with an IAM role and a log group.
-- `sam-compose-service-example`, from `sam/template.yml`: a Lambda function behind an API Gateway HTTP API, with an IAM role, and an `Endpoint` output.
+- `sam-compose-service-example-<stage>`, from `sam/template.yml`: a Lambda function behind an API Gateway HTTP API, with an IAM role, and an `Endpoint` output.
 
 Both functions receive the table name and the stage's `domain` parameter in environment variables and return them.
 
@@ -105,19 +105,26 @@ environment:
 
 The `stages` block holds stage-specific values. Every stage uses the `default` parameters unless it has its own block, such as `prod`; deploy to another stage with `serverless deploy --stage prod`.
 
-The stack names come from each tool's own naming. The traditional service's stack is its `service` name and the stage. The CloudFormation stack takes the Compose service key, `shared-resources-example`, and the SAM stack takes `stack_name` from `sam/samconfig.toml`; neither name includes the stage, so each stage you deploy updates the same two stacks.
+Every stack name includes the stage, so each stage you deploy gets its own stacks and its own table. The traditional service's stack is its `service` name and the stage, as for any `serverless.yml` service. The CloudFormation and SAM stacks take `stack_name` from the `samconfig.toml` next to each template, which adds the stage with a variable:
+
+```toml
+[default.global.parameters]
+stack_name = "shared-resources-example-${sls:stage}"
+```
+
+Without a `stack_name`, a CloudFormation or SAM service in Compose deploys to a stack named after its Compose service key, the same stack in every stage.
 
 The [Serverless Compose guide](https://www.serverless.com/framework/docs/guides/compose) covers dependencies and shared outputs, the [AWS SAM and CloudFormation guide](https://www.serverless.com/framework/docs/guides/sam) covers deploying those templates, and the [variables guide](https://www.serverless.com/framework/docs/guides/variables) covers `${param:...}` and the other variable sources.
 
 ## Cost and cleanup
 
-Lambda and API Gateway charge per request and for compute time, and light use stays within the AWS free tier. The DynamoDB table uses provisioned capacity, which is billed by the hour while the table exists, whether or not you use it; five read and five write units stay within the AWS free tier. Remove all three stacks, in reverse dependency order, from this directory:
+Each stage you deploy has its own three stacks. While a stage is deployed, Lambda bills each request and the functions' compute time, and API Gateway bills each request. The stage's DynamoDB table uses provisioned capacity, five read and five write units, which is billed by the hour while the table exists, whether or not you use it. The functions' logs stay in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove all three stacks of a stage, in reverse dependency order, from this directory:
 
 ```bash
 serverless remove
 ```
 
-Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table.
+Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table. For a stage other than `dev`, add `--stage <name>`.
 
 ## Next steps
 

@@ -200,7 +200,7 @@ The [mcp/custom](https://github.com/serverless/examples/tree/v4/mcp/custom) fami
 
 ## Cost and cleanup
 
-Lambda and API Gateway charge per request and for compute time. The server costs nothing while no client calls it, and light use stays within the AWS free tier. The commented `state: true` option adds a Secrets Manager secret, which is billed per month while it exists. Remove the stack when you are done:
+While the example is deployed, Lambda bills each request and the function's compute time, and API Gateway bills each request. While no client calls the server, neither bills anything. The function's logs stay in CloudWatch Logs, which bills for stored log data. The commented `state: true` option adds a Secrets Manager secret, which is billed per month while it exists. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/) and [Secrets Manager pricing](https://aws.amazon.com/secrets-manager/pricing/). Remove the stack when you are done:
 
 ```bash
 serverless remove

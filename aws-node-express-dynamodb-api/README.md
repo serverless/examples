@@ -159,7 +159,7 @@ Press Ctrl+C to end the session; the function runs the deployed code again. Run 
 
 ## Cost and cleanup
 
-Lambda, API Gateway and the on-demand DynamoDB table charge per request, and light use stays within the AWS free tier. The table also charges for the data it stores, and the users you create stay in it until you remove the stack. `serverless remove` deletes the table with its data, the function, the API and the log group:
+While the example is deployed, Lambda bills each request and the function's compute time, API Gateway bills each request, and the on-demand DynamoDB table bills each read and write. While nobody calls the API, none of them bills for requests. The table also bills for the data it stores, and the users you create stay in it until you remove the stack; the function's logs stay in CloudWatch Logs, which bills for stored log data. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). `serverless remove` deletes the table with its data, the function, the API and the log group:
 
 ```bash
 serverless remove
