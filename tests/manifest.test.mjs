@@ -266,7 +266,7 @@ function makeTree(files) {
   return root;
 }
 
-test('findExampleDirs returns repo-relative dirs with example.json, sorted', () => {
+test('findExampleDirs returns repo-relative dirs with example.json, sorted, skipping dot-directories', () => {
   const root = makeTree({
     'b-example/example.json': '{}',
     'a-example/example.json': '{}',
@@ -277,7 +277,8 @@ test('findExampleDirs returns repo-relative dirs with example.json, sorted', () 
     '.git/example.json': '{}',
     '.github/x/example.json': '{}',
     '.serverless/example.json': '{}',
-    '.superpowers/x/example.json': '{}',
+    '.tool-state/x/example.json': '{}',
+    'group/.work/example.json': '{}',
     'tests/fixture/example.json': '{}',
     'scripts/fixture/example.json': '{}',
   });

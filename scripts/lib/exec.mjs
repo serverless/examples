@@ -14,6 +14,14 @@ export const COMPOSE_FILES = ['serverless-compose.yml', 'serverless-compose.yaml
 // How long a killed command gets between SIGTERM and SIGKILL.
 const KILL_GRACE_MS = 10_000;
 
+/** Raised when a step is stopped by an interruption; its message is the step's detail. */
+export class Interrupted extends Error {
+  constructor() {
+    super('interrupted');
+    this.name = 'Interrupted';
+  }
+}
+
 /** Raised when a step runs out of time; its message is the step's detail. */
 export class TimedOut extends Error {
   constructor() {
@@ -73,19 +81,28 @@ export function installCommands(dir) {
 
 /**
  * Runs `cmd args` without a shell and resolves when it exits:
- * `{ status, stdout, stderr, timedOut, error }`. `status` is null when the
- * command could not start (`error` set) or was killed. Output is captured and,
- * unless `echo` is false, written line by line to `write` with a `[step]`
- * prefix. After `timeoutMs` the command is sent SIGTERM, then SIGKILL, and
- * `timedOut` is true. `env` defaults to the caller's environment and is never
- * printed.
+ * `{ status, stdout, stderr, timedOut, interrupted, error }`. `status` is null
+ * when the command could not start (`error` set) or was stopped. Output is
+ * captured and, unless `echo` is false, written line by line to `write` with a
+ * `[step]` prefix. After `timeoutMs`, or when `signal` aborts, the command is
+ * sent SIGTERM, then SIGKILL, and `timedOut` or `interrupted` is true. `env`
+ * defaults to the caller's environment and is never printed.
  */
-export function runCommand(cmd, args, { cwd, env, timeoutMs, step = cmd, echo = true, write = (s) => process.stderr.write(s) } = {}) {
+export function runCommand(
+  cmd,
+  args,
+  { cwd, env, timeoutMs, signal, step = cmd, echo = true, write = (s) => process.stderr.write(s) } = {},
+) {
   return new Promise((resolve) => {
     const out = { stdout: '', stderr: '' };
     let timedOut = false;
+    let interrupted = false;
     let error;
     let child;
+    if (signal?.aborted) {
+      resolve({ status: null, stdout: '', stderr: '', timedOut, interrupted: true });
+      return;
+    }
     try {
       child = spawn(cmd, args, { cwd, env: env ?? process.env, stdio: ['ignore', 'pipe', 'pipe'] });
     } catch (err) {
@@ -106,13 +123,22 @@ export function runCommand(cmd, args, { cwd, env, timeoutMs, step = cmd, echo = 
     child.stderr.on('data', onData('stderr'));
 
     let killTimer;
+    const stop = () => {
+      if (killTimer) return;
+      child.kill('SIGTERM');
+      killTimer = setTimeout(() => child.kill('SIGKILL'), KILL_GRACE_MS);
+    };
     const timer =
       Number.isFinite(timeoutMs) &&
       setTimeout(() => {
         timedOut = true;
-        child.kill('SIGTERM');
-        killTimer = setTimeout(() => child.kill('SIGKILL'), KILL_GRACE_MS);
+        stop();
       }, Math.max(0, timeoutMs));
+    const onAbort = () => {
+      interrupted = true;
+      stop();
+    };
+    signal?.addEventListener('abort', onAbort, { once: true });
 
     child.on('error', (err) => {
       error = err;
@@ -120,22 +146,26 @@ export function runCommand(cmd, args, { cwd, env, timeoutMs, step = cmd, echo = 
     child.on('close', (status) => {
       clearTimeout(timer);
       clearTimeout(killTimer);
+      signal?.removeEventListener('abort', onAbort);
       if (echo) {
         for (const stream of ['stdout', 'stderr']) if (pending[stream]) write(`[${step}] ${pending[stream]}\n`);
       }
-      resolve({ status: timedOut || error ? null : status, ...out, timedOut, error });
+      resolve({ status: timedOut || interrupted || error ? null : status, ...out, timedOut, interrupted, error });
     });
   });
 }
 
 /**
  * Runs a command through `exec` (signature of runCommand) and throws unless it
- * exits 0: TimedOut when `timeoutMs` is spent (before or during the run), an
+ * exits 0: Interrupted when `signal` aborts (before, during or right after the
+ * run), TimedOut when `timeoutMs` is spent (before or during the run), an
  * Error naming the command otherwise. Resolves to the command's result.
  */
 export async function runOrThrow(exec, cmd, args, opts = {}) {
+  if (opts.signal?.aborted) throw new Interrupted();
   if (opts.timeoutMs !== undefined && opts.timeoutMs <= 0) throw new TimedOut();
   const r = await exec(cmd, args, opts);
+  if (r.interrupted || opts.signal?.aborted) throw new Interrupted();
   if (r.timedOut) throw new TimedOut();
   const name = `${cmd} ${args[0] ?? ''}`.trim();
   if (r.error?.code === 'ENOENT') throw new Error(`${name}: the ${cmd} command was not found on PATH`);

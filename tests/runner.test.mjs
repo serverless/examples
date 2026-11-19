@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { EventEmitter } from 'node:events';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -73,7 +74,7 @@ function fakeExec(responses = {}) {
   const calls = [];
   const exec = async (cmd, args, opts = {}) => {
     const step = `${cmd} ${args[0]}`;
-    const call = { step, cmd, args, cwd: opts.cwd, env: opts.env, timeoutMs: opts.timeoutMs };
+    const call = { step, cmd, args, cwd: opts.cwd, env: opts.env, timeoutMs: opts.timeoutMs, signal: opts.signal };
     calls.push(call);
     const defaults = {
       'serverless --version': { status: 0, stdout: 'Serverless ϟ Framework 4.4.7\n', stderr: '' },
@@ -125,6 +126,7 @@ async function run(root, opts = {}) {
     now: clock.now,
     sleep: clock.sleep,
     log: (line) => logs.push(line),
+    env: {},
     ...opts.args,
   });
   return { result, fx, ff, clock, logs };
@@ -161,9 +163,19 @@ test('happy path runs version, install, deploy, describe-stacks, remove in order
   assert.equal(result.leftBehind, undefined);
 
   const [, , deploy, describe, remove] = fx.calls;
-  assert.deepEqual(deploy.args, ['deploy', '--stage', result.stage]);
-  assert.deepEqual(describe.args, ['cloudformation', 'describe-stacks', '--stack-name', `hello-svc-${result.stage}`, '--output', 'json']);
-  assert.deepEqual(remove.args, ['remove', '--stage', result.stage]);
+  assert.equal(result.region, 'us-east-1');
+  assert.deepEqual(deploy.args, ['deploy', '--stage', result.stage, '--region', 'us-east-1']);
+  assert.deepEqual(describe.args, [
+    'cloudformation',
+    'describe-stacks',
+    '--stack-name',
+    `hello-svc-${result.stage}`,
+    '--region',
+    'us-east-1',
+    '--output',
+    'json',
+  ]);
+  assert.deepEqual(remove.args, ['remove', '--stage', result.stage, '--region', 'us-east-1']);
   assert.deepEqual(ff.urls, ['https://abc.example.com/']);
 });
 
@@ -215,9 +227,38 @@ test("the manifest's region applies when --region is not given", async () => {
   assert.deepEqual(deploy.args.slice(-2), ['--region', 'eu-west-1']);
 });
 
-test('without a region no --region argument is passed', async () => {
-  const { fx } = await run(fixture());
-  assert.ok(fx.calls.every((c) => !c.args.includes('--region')));
+// Returns the --region value of every serverless and aws call except serverless --version.
+function regionsUsed(fx) {
+  return fx.calls
+    .filter((c) => (c.cmd === 'serverless' || c.cmd === 'aws') && c.args[0] !== '--version')
+    .map((c) => (c.args.includes('--region') ? c.args[c.args.indexOf('--region') + 1] : null));
+}
+
+for (const [label, env, expected] of [
+  ['AWS_REGION', { AWS_REGION: 'ap-south-1', AWS_DEFAULT_REGION: 'sa-east-1' }, 'ap-south-1'],
+  ['AWS_DEFAULT_REGION', { AWS_DEFAULT_REGION: 'sa-east-1' }, 'sa-east-1'],
+  ['us-east-1 by default', {}, 'us-east-1'],
+]) {
+  test(`without --region or a manifest region the region comes from ${label} and goes to every command`, async () => {
+    const { fx, result } = await run(fixture(), { args: { env } });
+    assert.equal(result.region, expected);
+    const regions = regionsUsed(fx);
+    assert.equal(regions.length, 3);
+    assert.ok(regions.every((r) => r === expected), regions.join(', '));
+  });
+}
+
+test('--region wins over the manifest and the environment', async () => {
+  const root = fixture({ example: manifest({ region: 'eu-west-1' }) });
+  const { fx, result } = await run(root, { args: { region: 'us-west-2', env: { AWS_REGION: 'ap-south-1' } } });
+  assert.equal(result.region, 'us-west-2');
+  assert.ok(regionsUsed(fx).every((r) => r === 'us-west-2'));
+});
+
+test("the manifest's region wins over the environment", async () => {
+  const root = fixture({ example: manifest({ region: 'eu-west-1' }) });
+  const { result } = await run(root, { args: { env: { AWS_REGION: 'ap-south-1' } } });
+  assert.equal(result.region, 'eu-west-1');
 });
 
 // --- failures
@@ -336,6 +377,115 @@ test('a step that starts after the deadline does not run', async () => {
   assert.equal(result.durationSeconds, 960);
 });
 
+// --- interruption
+
+test('an interruption during deploy stops it, removes with its own deadline and records deploy as interrupted', async () => {
+  const controller = new AbortController();
+  const fx = fakeExec({
+    'serverless deploy': () => {
+      controller.abort();
+      return { status: null, interrupted: true };
+    },
+  });
+  const { result } = await run(fixture(), { fx, args: { signal: controller.signal } });
+  assert.equal(result.result, 'fail');
+  assert.equal(result.failedStep, 'deploy');
+  assert.equal(result.detail, 'interrupted');
+  assert.deepEqual(fx.steps(), ['serverless --version', 'npm ci', 'serverless deploy', 'serverless remove']);
+  assert.equal(fx.calls[2].signal, controller.signal);
+  const remove = fx.calls.at(-1);
+  assert.notEqual(remove.signal, controller.signal);
+  assert.equal(remove.timeoutMs, 15 * MINUTE);
+  assert.equal(result.leftBehind, undefined);
+});
+
+test('a command that exits 0 after the interruption still counts as interrupted', async () => {
+  const controller = new AbortController();
+  const fx = fakeExec({
+    'npm ci': () => {
+      controller.abort();
+      return { status: 0 };
+    },
+  });
+  const { result } = await run(fixture(), { fx, args: { signal: controller.signal } });
+  assert.equal(result.failedStep, 'install');
+  assert.equal(result.detail, 'interrupted');
+  assert.deepEqual(fx.steps(), ['serverless --version', 'npm ci']);
+});
+
+test('an interruption while an http check retries stops the check and removes', async () => {
+  const controller = new AbortController();
+  const ff = {
+    fetchImpl: async () => {
+      controller.abort();
+      return response(503, 'Service Unavailable');
+    },
+  };
+  const { result, fx, clock } = await run(fixture(), { ff, args: { signal: controller.signal } });
+  assert.equal(result.failedStep, 'check');
+  assert.equal(result.detail, 'interrupted');
+  assert.deepEqual(clock.sleeps, []);
+  assert.equal(fx.steps().at(-1), 'serverless remove');
+});
+
+test('an interruption during remove lets remove finish and records remove as interrupted', async () => {
+  const controller = new AbortController();
+  const fx = fakeExec({
+    'serverless remove': () => {
+      controller.abort();
+      return { status: 0 };
+    },
+  });
+  const { result } = await run(fixture(), { fx, args: { signal: controller.signal } });
+  assert.equal(result.result, 'fail');
+  assert.equal(result.failedStep, 'remove');
+  assert.equal(result.detail, 'interrupted');
+  assert.equal(result.leftBehind, undefined);
+});
+
+test('CLI: the first signal stops the step, removes, writes the result and exits 1', async () => {
+  const root = fixture();
+  const signals = new EventEmitter();
+  const resultFile = path.join(root, 'r.json');
+  const fx = fakeExec({
+    'serverless deploy': () => {
+      signals.emit('SIGINT');
+      return { status: null, interrupted: true };
+    },
+  });
+  const exits = [];
+  const { code, out } = await cli([DIR, '--result-file', resultFile], root, { exec: fx.exec, signals, exit: (c) => exits.push(c) });
+  assert.equal(code, 1);
+  assert.deepEqual(exits, []);
+  assert.match(out[0], /^FAIL hello /);
+  assert.equal(fx.steps().at(-1), 'serverless remove');
+  const result = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
+  assert.equal(result.failedStep, 'deploy');
+  assert.equal(result.detail, 'interrupted');
+  assert.equal(signals.listenerCount('SIGINT') + signals.listenerCount('SIGTERM'), 0);
+});
+
+test('CLI: a second signal during remove exits 1 at once and names the stack left behind', async () => {
+  const root = fixture();
+  const signals = new EventEmitter();
+  let stage;
+  const fx = fakeExec({
+    'serverless deploy': ({ args }) => {
+      stage = args[2];
+      signals.emit('SIGTERM');
+      return { status: null, interrupted: true };
+    },
+    'serverless remove': () => {
+      signals.emit('SIGINT');
+      return { status: 0 };
+    },
+  });
+  const exits = [];
+  const { err } = await cli([DIR], root, { exec: fx.exec, signals, exit: (c) => exits.push(c) });
+  assert.deepEqual(exits, [1]);
+  assert.ok(err.includes(`left behind: hello-svc-${stage}`), err.join('\n'));
+});
+
 // --- framework version
 
 test('canary rewrites the copy and never the checkout', async () => {
@@ -452,7 +602,10 @@ test('a compose root installs in the root and each service with a package.json, 
   );
   assert.equal(fx.calls.find((c) => c.step === 'serverless deploy').cwd, copy);
   assert.equal(fx.calls.find((c) => c.step === 'serverless remove').cwd, copy);
-  assert.deepEqual(JSON.parse(fx.calls.find((c) => c.cmd === 'node').env.EXAMPLE_OUTPUTS), {});
+  const script = fx.calls.find((c) => c.cmd === 'node');
+  assert.deepEqual(JSON.parse(script.env.EXAMPLE_OUTPUTS), {});
+  assert.equal(script.env.EXAMPLE_REGION, 'us-east-1');
+  assert.deepEqual(regionsUsed(fx), ['us-east-1', 'us-east-1']);
 });
 
 test('a compose root rewrites frameworkVersion in each service copy', async () => {
@@ -603,6 +756,14 @@ test('runCommand stops a command at its timeout', async () => {
   assert.equal(r.status, null);
 });
 
+test('runCommand stops a command when its signal aborts', async () => {
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), 100);
+  const r = await runCommand(process.execPath, ['-e', 'setTimeout(() => {}, 60000)'], { signal: controller.signal, echo: false });
+  assert.equal(r.interrupted, true);
+  assert.equal(r.status, null);
+});
+
 test('runCommand reports a missing command', async () => {
   const r = await runCommand('no-such-command-for-runner-tests', [], { echo: false });
   assert.equal(r.error?.code, 'ENOENT');
@@ -623,6 +784,7 @@ async function cli(argv, root, deps = {}) {
     sleep: clock.sleep,
     out: (line) => out.push(line),
     err: (line) => err.push(line),
+    env: {},
     ...deps,
   });
   return { code, out, err };

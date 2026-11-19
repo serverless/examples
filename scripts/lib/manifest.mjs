@@ -35,7 +35,8 @@ const KEYS = {
   invoke: ['function', 'event', 'args', 'contains'],
   script: ['path'],
 };
-const SKIP_DIRS = new Set(['node_modules', '.git', '.github', '.serverless', '.superpowers', 'tests', 'scripts']);
+// Directories whose name starts with a dot are skipped too.
+const SKIP_DIRS = new Set(['node_modules', 'tests', 'scripts']);
 
 /**
  * Returns the repo-relative directories (forward slashes, sorted) that contain
@@ -45,7 +46,7 @@ export function findExampleDirs(root) {
   const found = [];
   const walk = (rel) => {
     for (const entry of fs.readdirSync(path.join(root, rel), { withFileTypes: true })) {
-      if (!entry.isDirectory() || SKIP_DIRS.has(entry.name)) continue;
+      if (!entry.isDirectory() || SKIP_DIRS.has(entry.name) || entry.name.startsWith('.')) continue;
       const childRel = rel ? `${rel}/${entry.name}` : entry.name;
       if (fs.existsSync(path.join(root, childRel, MANIFEST_FILE))) found.push(childRel);
       else walk(childRel);

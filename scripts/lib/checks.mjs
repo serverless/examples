@@ -6,7 +6,7 @@
 //           `contains`
 //   script  node <path> in the example copy; exit code 0 passes
 
-import { runOrThrow, TimedOut } from './exec.mjs';
+import { Interrupted, runOrThrow, TimedOut } from './exec.mjs';
 
 export const HTTP_RETRY_MS = 5_000;
 export const HTTP_WINDOW_MS = 90_000;
@@ -16,8 +16,8 @@ const EXCERPT_CHARS = 300;
 
 /**
  * Runs `check` (one manifest check) and resolves when it passes; throws an
- * Error describing the mismatch otherwise, or TimedOut when `ctx.deadline`
- * passes first.
+ * Error describing the mismatch otherwise, TimedOut when `ctx.deadline`
+ * passes first, or Interrupted when `ctx.signal` aborts.
  *
  * ctx: {
  *   cwd        the example copy
@@ -28,9 +28,11 @@ const EXCERPT_CHARS = 300;
  *   now        () => epoch ms
  *   sleep      (ms) => Promise
  *   deadline?  epoch ms after which the check stops
+ *   signal?    AbortSignal that stops the check
  * }
  */
 export async function runCheck(check, ctx) {
+  if (ctx.signal?.aborted) throw new Interrupted();
   if (check.http) return httpCheck(check.http, ctx);
   if (check.invoke) return invokeCheck(check.invoke, ctx);
   if (check.script) return scriptCheck(check.script, ctx);
@@ -54,10 +56,15 @@ async function httpCheck({ output, path = '', status, contains }, ctx) {
   const start = now();
   let attempts = 0;
   let last;
+  const stopIfInterrupted = () => {
+    if (ctx.signal?.aborted) throw new Interrupted();
+  };
   for (;;) {
+    stopIfInterrupted();
     if (now() >= deadline) throw new TimedOut();
     attempts += 1;
-    last = await httpAttempt(fetchImpl, url, Math.min(HTTP_ATTEMPT_MS, deadline - now()));
+    last = await httpAttempt(fetchImpl, url, Math.min(HTTP_ATTEMPT_MS, deadline - now()), ctx.signal);
+    stopIfInterrupted();
     const statusOk = status === undefined || last.status === status;
     const bodyOk = contains === undefined || (last.body ?? '').includes(contains);
     if (last.status !== undefined && statusOk && bodyOk) return;
@@ -72,9 +79,10 @@ async function httpCheck({ output, path = '', status, contains }, ctx) {
   throw new Error(`GET ${url}: expected ${want}; after ${attempts} attempt(s) in ${HTTP_WINDOW_MS / 1000} s the last response was ${got}`);
 }
 
-async function httpAttempt(fetchImpl, url, timeoutMs) {
+async function httpAttempt(fetchImpl, url, timeoutMs, stop) {
+  const timeout = AbortSignal.timeout(Math.max(1, timeoutMs));
   try {
-    const res = await fetchImpl(url, { signal: AbortSignal.timeout(Math.max(1, timeoutMs)) });
+    const res = await fetchImpl(url, { signal: stop ? AbortSignal.any([timeout, stop]) : timeout });
     let body = '';
     try {
       body = await res.text();
@@ -92,7 +100,12 @@ async function invokeCheck({ function: fn, event, args = [], contains }, ctx) {
   if (ctx.region) cliArgs.push('--region', ctx.region);
   if (event) cliArgs.push('--path', event);
   cliArgs.push(...args);
-  const r = await runOrThrow(ctx.exec, 'serverless', cliArgs, { cwd: ctx.cwd, step: 'check', timeoutMs: remaining(ctx) });
+  const r = await runOrThrow(ctx.exec, 'serverless', cliArgs, {
+    cwd: ctx.cwd,
+    step: 'check',
+    timeoutMs: remaining(ctx),
+    signal: ctx.signal,
+  });
   const output = `${r.stdout ?? ''}${r.stderr ?? ''}`;
   if (!output.includes(contains)) {
     throw new Error(
@@ -109,7 +122,7 @@ async function scriptCheck({ path: script }, ctx) {
     EXAMPLE_DIR: ctx.cwd,
   };
   if (ctx.region) env.EXAMPLE_REGION = ctx.region;
-  await runOrThrow(ctx.exec, 'node', [script], { cwd: ctx.cwd, env, step: 'check', timeoutMs: remaining(ctx) });
+  await runOrThrow(ctx.exec, 'node', [script], { cwd: ctx.cwd, env, step: 'check', timeoutMs: remaining(ctx), signal: ctx.signal });
 }
 
 function remaining(ctx) {
