@@ -6,6 +6,7 @@
   "scripts": {
     "docs": "node generate-readme.js",
     "validate": "node validate.js",
+    "test": "node --test tests/",
     "check-docs": "node generate-readme.js && git diff --exit-code README.md examples.json"
   },
   "license": "MIT",
