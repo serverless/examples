@@ -22,7 +22,7 @@ Three CloudFormation stacks per stage:
 
 - `shared-resources-example-<stage>`, from `cloudformation/template.yml`: a DynamoDB table, `shared-table-<stage>`, with provisioned capacity, and a `TableName` output.
 - `traditional-<stage>`, from `traditional/serverless.yml`: a Lambda function behind an API Gateway HTTP API, with an IAM role and a log group.
-- `sam-compose-service-example-<stage>`, from `sam/template.yml`: a Lambda function behind an API Gateway HTTP API, with an IAM role, and an `Endpoint` output.
+- `sam-compose-service-example-<stage>`, from `sam/template.yml`: a Lambda function behind an API Gateway HTTP API, with an IAM role and a log group, and an `Endpoint` output.
 
 Both functions receive the table name and the stage's `domain` parameter in environment variables and return them.
 
@@ -32,7 +32,6 @@ Both functions receive the table name and the stage's `domain` parameter in envi
 - The Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
-- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), to delete the `sam` function's log group after the remove.
 
 ## Deploy
 
@@ -140,20 +139,13 @@ The [Serverless Compose guide](https://www.serverless.com/framework/docs/guides/
 
 ## Cost and cleanup
 
-Each stage you deploy has its own three stacks. While a stage is deployed, Lambda bills each request and the functions' compute time, and API Gateway bills each request. The stage's DynamoDB table uses provisioned capacity, five read and five write units, which is billed by the hour while the table exists, whether or not you use it. The functions' logs go to CloudWatch Logs, which bills for stored log data. The `traditional` function's log group is part of its stack, and `serverless remove` deletes it with its logs; Lambda creates the `sam` function's log group outside the stack on the first invoke, so that log group stays after the remove until you delete it. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove all three stacks of a stage, in reverse dependency order, from this directory:
+Each stage you deploy has its own three stacks. While a stage is deployed, Lambda bills each request and the functions' compute time, and API Gateway bills each request. The stage's DynamoDB table uses provisioned capacity, five read and five write units, which is billed by the hour while the table exists, whether or not you use it. The functions' logs go to CloudWatch Logs, which bills for stored log data. Both functions' log groups are part of their stacks, and `serverless remove` deletes them with their logs. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [API Gateway pricing](https://aws.amazon.com/api-gateway/pricing/), [DynamoDB pricing](https://aws.amazon.com/dynamodb/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove all three stacks of a stage, in reverse dependency order, from this directory:
 
 ```bash
 serverless remove
 ```
 
 Compose removes `traditional` and `sam` first, then `shared-resources-example` with the table.
-
-The remove leaves the `sam` function's log group, `/aws/lambda/sam-compose-service-example-<…>-HelloWorldFunction-<id>`. Find its name and delete it with the AWS CLI, in the Region you deployed to:
-
-```bash
-aws logs describe-log-groups --region us-east-1 --log-group-name-prefix /aws/lambda/sam-compose-service-example --query 'logGroups[].logGroupName' --output text
-aws logs delete-log-group --region us-east-1 --log-group-name <name>
-```
 
 ## Next steps
 

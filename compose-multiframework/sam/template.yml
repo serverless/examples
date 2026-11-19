@@ -7,11 +7,20 @@ Globals:
     MemorySize: 128
 
 Resources:
+  # The function's log group is part of the stack, so removing the service
+  # deletes it together with its logs.
+  HelloWorldLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${AWS::StackName}-hello
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler.handler
       Runtime: nodejs24.x
+      LoggingConfig:
+        LogGroup: !Ref HelloWorldLogGroup
       Environment:
         Variables:
           # We are using the output of the shared resources CloudFormation template
