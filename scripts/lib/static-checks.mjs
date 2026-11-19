@@ -6,6 +6,8 @@
 //   readme-headings      README.md has the standard H2 headings, in order
 //   readme-cleanup       `serverless remove` appears under "Cost and cleanup"
 //   code-fence-language  every code fence in README.md names a language
+//   readme-links         every link and image target in README.md is an
+//                        https:// URL, an in-page #anchor or mailto:
 //   lockfile             a package.json with dependencies has a lockfile beside it
 //   exact-version        dependencies and devDependencies use exact versions
 //   no-stage             serverless.yml sets no top-level or provider.stage
@@ -38,6 +40,11 @@ export const README_HEADINGS = [
 const EXTRA_HEADINGS_AFTER = 'How it works';
 const CLEANUP_HEADING = 'Cost and cleanup';
 const CLEANUP_COMMAND = 'serverless remove';
+const ALLOWED_LINK_TARGET = /^(https:\/\/|#|mailto:)/i;
+// `](target` of an inline link or image, and `[label]: target` of a reference definition.
+const INLINE_LINK_TARGET = /\]\(\s*<?([^\s)>]*)/g;
+const REFERENCE_DEFINITION = /^ {0,3}\[[^\]]+\]:\s*<?([^\s>]+)/;
+const INLINE_CODE = /(`+).+?\1/g;
 
 const NPM_LOCKFILES = ['package-lock.json', 'npm-shrinkwrap.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lock', 'bun.lockb'];
 const LOCKFILES = new Set([
@@ -146,6 +153,7 @@ function checkReadme(readme) {
   const lines = readme.split('\n');
   const headings = [];
   const unlabeledFences = [];
+  const links = [];
   let fence = null;
   lines.forEach((line, i) => {
     const marker = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
@@ -160,10 +168,14 @@ function checkReadme(readme) {
     }
     const h2 = line.match(/^## +(.*?)\s*#*\s*$/);
     if (h2) headings.push({ text: h2[1], line: i });
+    links.push(...linkTargets(line).map((target) => ({ target, line: i + 1 })));
   });
 
   errors.push(...checkHeadings(headings.map((h) => h.text)));
   for (const n of unlabeledFences) errors.push(`code-fence-language: README.md:${n}: code fence has no language`);
+  for (const { target, line } of links.filter((l) => !ALLOWED_LINK_TARGET.test(l.target))) {
+    errors.push(`readme-links: README.md:${line}: link target "${target}" is not an https:// URL, a #anchor or mailto:`);
+  }
 
   const cleanup = headings.findIndex((h) => h.text === CLEANUP_HEADING);
   if (cleanup !== -1) {
@@ -173,6 +185,16 @@ function checkReadme(readme) {
     }
   }
   return errors;
+}
+
+// Returns the link and image targets on one line outside code fences,
+// ignoring inline code.
+function linkTargets(line) {
+  const text = line.replace(INLINE_CODE, '');
+  const targets = [...text.matchAll(INLINE_LINK_TARGET)].map((m) => m[1]);
+  const definition = text.match(REFERENCE_DEFINITION);
+  if (definition) targets.push(definition[1]);
+  return targets;
 }
 
 // Reports all heading problems as one message.

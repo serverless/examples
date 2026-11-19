@@ -139,6 +139,48 @@ test('code-fence-language: reports a fence without a language and its line', () 
   assert.equal(read(path.join(root, DIR, 'README.md')).split('\n')[line - 1], '```');
 });
 
+// readme-links
+
+for (const [what, target] of [
+  ['a relative link', 'handler.js'],
+  ['a ./ link', './serverless.yml'],
+  ['an http:// link', 'http://example.com/'],
+]) {
+  test(`readme-links: reports ${what} with its line and target`, () => {
+    const root = fixture(({ file }) => edit(file('README.md'), (s) => s.replace('The handler returns', `The [handler](${target}) returns`)));
+    const error = assertOneError(root, 'readme-links', /README\.md:\d+/);
+    assert.ok(error.includes(target), error);
+    const line = Number(error.match(/README\.md:(\d+)/)[1]);
+    assert.match(read(path.join(root, DIR, 'README.md')).split('\n')[line - 1], /The \[handler\]/);
+  });
+}
+
+test('readme-links: reports a relative image target', () => {
+  const root = fixture(({ file }) => edit(file('README.md'), (s) => s.replace('Add an HTTP event.', '![Diagram](images/diagram.png)')));
+  assertOneError(root, 'readme-links', /images\/diagram\.png/);
+});
+
+test('readme-links: accepts https://, #anchor and mailto: targets', () => {
+  const root = fixture(({ file }) =>
+    edit(file('README.md'), (s) =>
+      s.replace(
+        'The handler returns',
+        'The [handler](https://github.com/serverless/examples/blob/v4/hello/handler.js) ([cleanup](#cost-and-cleanup), [mail](mailto:hello@example.com)) returns',
+      ),
+    ),
+  );
+  assert.deepEqual(checkExample(root, DIR), []);
+});
+
+test('readme-links: ignores links inside code fences and inline code', () => {
+  const root = fixture(({ file }) =>
+    edit(file('README.md'), (s) =>
+      s.replace('npm ci\n', 'npm ci\n# see [notes](./notes.md)\n').replace('The handler returns', 'Write `[handler](handler.js)` to link. The handler returns'),
+    ),
+  );
+  assert.deepEqual(checkExample(root, DIR), []);
+});
+
 // lockfile
 
 test('lockfile: reports a package.json with dependencies and no lockfile', () => {

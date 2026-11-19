@@ -27,6 +27,7 @@
 
 - Never hand-edit generated content: the frontmatter comment and the badge line at the top of a README that has an `example.json`, `examples.json` entries for those examples, and the tables in the root `README.md`. Change `example.json` and run `npm run docs`.
 - An example with an `example.json` has a README with these H2 headings, in order: What it deploys, Prerequisites, Deploy, Try it, How it works, Cost and cleanup, Next steps. Other H2 headings go after How it works.
+- Links and images in the README of an example with an `example.json` use absolute `https://` URLs, in-page `#anchors` or `mailto:`; link to the example's own files as `https://github.com/serverless/examples/blob/v4/<example dir>/<file>`.
 - Every check in `example.json` must be able to fail: assert on text the code really returns or logs.
 - Examples with `"onboarding": true` are copied into new users' projects by the CLI. Change only their `README.md`, `example.json`, `events/` and `test/` files.
 - Never commit secrets. Put the names an example needs in `.env.example` with fake values.
