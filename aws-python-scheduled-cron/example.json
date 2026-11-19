@@ -29,6 +29,10 @@
           "contains": "Your cron function ran at"
         }
       }
-    ]
+    ],
+    "quarantine": {
+      "reason": "Waits for the Serverless Framework release in which serverless invoke --log shows messages logged with Python's logging module",
+      "since": "2026-11-19"
+    }
   }
 }
