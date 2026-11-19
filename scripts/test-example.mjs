@@ -29,8 +29,8 @@
 //
 // On SIGINT or SIGTERM the current step stops, remove runs, the result records
 // the stopped step as `interrupted`, and the exit code is 1. A second signal
-// exits at once and names the stacks left behind. With --remove-only a signal
-// does not stop the remove.
+// kills every running command's process group, exits at once and names the
+// stacks left behind. With --remove-only a first signal does not stop the remove.
 
 import { randomInt } from 'node:crypto';
 import fs from 'node:fs';
@@ -40,7 +40,17 @@ import { setTimeout as sleepFor } from 'node:timers/promises';
 import { parseArgs } from 'node:util';
 
 import { runCheck } from './lib/checks.mjs';
-import { copyExample, installCommands, Interrupted, isComposeRoot, runCommand, runOrThrow, serviceDirs, TimedOut } from './lib/exec.mjs';
+import {
+  copyExample,
+  installCommands,
+  Interrupted,
+  isComposeRoot,
+  runCommand,
+  runOrThrow,
+  serviceDirs,
+  stopAllCommands,
+  TimedOut,
+} from './lib/exec.mjs';
 import { loadManifest, validateManifest, MANIFEST_FILE } from './lib/manifest.mjs';
 
 const USAGE =
@@ -56,6 +66,34 @@ const STAGE_TIME_CHARS = 5;
 const STAGE_RANDOM_CHARS = 4;
 const STAGE = /^ex[a-z0-9]{1,13}$/;
 const PLUGINS_LINE = /^plugins[ \t]*:/m;
+// `Framework <version>` in `serverless --version`: a release (4.46.0) or a canary build id (52f2ef5).
+const FRAMEWORK_LINE = /Framework\s+v?(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?|[0-9a-f]{7,40})(?![0-9A-Za-z.-])/;
+
+/** CloudFormation stack statuses of a stack that still exists: every status except DELETE_COMPLETE. */
+export const EXISTING_STACK_STATUSES = [
+  'CREATE_IN_PROGRESS',
+  'CREATE_FAILED',
+  'CREATE_COMPLETE',
+  'ROLLBACK_IN_PROGRESS',
+  'ROLLBACK_FAILED',
+  'ROLLBACK_COMPLETE',
+  'DELETE_IN_PROGRESS',
+  'DELETE_FAILED',
+  'UPDATE_IN_PROGRESS',
+  'UPDATE_COMPLETE_CLEANUP_IN_PROGRESS',
+  'UPDATE_COMPLETE',
+  'UPDATE_FAILED',
+  'UPDATE_ROLLBACK_IN_PROGRESS',
+  'UPDATE_ROLLBACK_FAILED',
+  'UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS',
+  'UPDATE_ROLLBACK_COMPLETE',
+  'REVIEW_IN_PROGRESS',
+  'IMPORT_IN_PROGRESS',
+  'IMPORT_COMPLETE',
+  'IMPORT_ROLLBACK_IN_PROGRESS',
+  'IMPORT_ROLLBACK_FAILED',
+  'IMPORT_ROLLBACK_COMPLETE',
+];
 
 /** A problem with the command line or the example's manifest (exit code 2). */
 export class UsageError extends Error {
@@ -349,7 +387,7 @@ function loadsPlugins(dir) {
 // Resolves to the names of the region's stacks (not deleted) that end in
 // `-<stage>`, or to null when they cannot be listed.
 async function findStageStacks(exec, cwd, stage, region, log) {
-  const args = ['cloudformation', 'list-stacks', '--region', region, '--output', 'json'];
+  const args = ['cloudformation', 'list-stacks', '--region', region, '--output', 'json', '--stack-status-filter', ...EXISTING_STACK_STATUSES];
   try {
     const r = await runOrThrow(exec, 'aws', args, { cwd, step: 'list-stacks', echo: false, timeoutMs: VERSION_TIMEOUT_MS });
     return JSON.parse(r.stdout)
@@ -417,9 +455,12 @@ async function readFrameworkVersion(exec, cwd, timeoutMs, signal) {
   try {
     const r = await runOrThrow(exec, 'serverless', ['--version'], { cwd, step: 'version', timeoutMs, signal });
     const text = `${r.stdout ?? ''}\n${r.stderr ?? ''}`;
-    const version = /(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)/;
-    const line = text.split('\n').find((l) => /framework/i.test(l) && version.test(l)) ?? text;
-    return line.match(version)?.[1] ?? 'unknown';
+    // The last match: `Serverless ϟ Framework <v>` comes after any install lines.
+    const found = text
+      .split('\n')
+      .map((l) => l.match(FRAMEWORK_LINE)?.[1])
+      .filter(Boolean);
+    return found.at(-1) ?? 'unknown';
   } catch {
     return 'unknown';
   }
@@ -445,12 +486,21 @@ async function readOutputs(exec, cwd, stack, region, timeoutMs, signal) {
 
 /**
  * Runs the CLI with `argv`; resolves to the exit code. SIGINT and SIGTERM from
- * `signals` (default: process) interrupt the run; a second one calls `exit(1)`.
+ * `signals` (default: process) interrupt the run; a second one calls
+ * `stopCommands('SIGKILL')` (default: stopAllCommands) and then `exit(1)`.
  * Other deps go to runExample.
  */
 export async function main(
   argv,
-  { root, out = console.log, err = (line) => process.stderr.write(`${line}\n`), signals = process, exit = (code) => process.exit(code), ...deps } = {},
+  {
+    root,
+    out = console.log,
+    err = (line) => process.stderr.write(`${line}\n`),
+    signals = process,
+    exit = (code) => process.exit(code),
+    stopCommands = stopAllCommands,
+    ...deps
+  } = {},
 ) {
   const controller = new AbortController();
   let deployed = [];
@@ -467,8 +517,9 @@ export async function main(
       controller.abort();
       return;
     }
-    err(`[run] ${name} again: exiting without waiting for remove`);
+    err(`[run] ${name} again: killing the running commands and exiting without waiting for remove`);
     if (deployed.length) err(`left behind: ${deployed.join(', ')}`);
+    stopCommands('SIGKILL');
     exit(1);
   };
   const handlers = { SIGINT: () => onSignal('SIGINT'), SIGTERM: () => onSignal('SIGTERM') };

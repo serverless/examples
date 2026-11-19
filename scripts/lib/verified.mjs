@@ -18,12 +18,15 @@ const SAFE_DIR = /^(?!.*(^|\/)\.{1,2}(\/|$))[A-Za-z0-9._-]+(\/[A-Za-z0-9._-]+)*$
 
 /**
  * Returns `previous` with the `latest` results of one workflow run (`runs`,
- * Result objects of scripts/test-example.mjs) added. Each example keeps its
- * newest 2 runs, newest first. `verified` is the newest passing kept run, or
- * null when no kept run passed or the example is quarantined. Quarantined are
- * the examples in `options.quarantined` and those with a `skip` result; a skip
- * is not recorded as a run. Examples with no entry and no run stay absent.
- * Does not change `previous`.
+ * Result objects of scripts/test-example.mjs) added. One workflow run counts
+ * once per example, whatever the attempt: its newest result stands, and it
+ * replaces a kept run with the same run URL (ignoring an `/attempts/<n>`
+ * suffix), so merging a run again or a re-run of it never adds a second entry.
+ * Each example keeps its newest 2 runs, newest first. `verified` is the newest
+ * passing kept run, or null when no kept run passed or the example is
+ * quarantined. Quarantined are the examples in `options.quarantined` and those
+ * with a `skip` result; a skip is not recorded as a run. Examples with no entry
+ * and no run stay absent. Does not change `previous`.
  */
 export function mergeResults(previous, runs, runUrl, { quarantined = [] } = {}) {
   const merged = structuredClone(previous ?? {});
@@ -35,15 +38,16 @@ export function mergeResults(previous, runs, runUrl, { quarantined = [] } = {}) 
     .filter((r) => r.result === 'pass' || r.result === 'fail')
     .sort((a, b) => b.startedAt.localeCompare(a.startedAt));
   const byExample = Map.groupBy(added, (r) => r.example);
-  for (const [example, results] of byExample) {
+  const thisRun = workflowRun(runUrl);
+  for (const [example, [newest]] of byExample) {
     const entry = merged[example] ?? { runs: [], verified: null };
-    const fresh = results.map((r) => ({
-      result: r.result,
-      date: r.startedAt.slice(0, 10),
-      frameworkVersion: r.resolvedVersion && r.resolvedVersion !== 'unknown' ? r.resolvedVersion : r.frameworkVersion,
+    const fresh = {
+      result: newest.result,
+      date: newest.startedAt.slice(0, 10),
+      frameworkVersion: newest.resolvedVersion && newest.resolvedVersion !== 'unknown' ? newest.resolvedVersion : newest.frameworkVersion,
       runUrl,
-    }));
-    entry.runs = [...fresh, ...entry.runs].slice(0, KEPT_RUNS);
+    };
+    entry.runs = [fresh, ...entry.runs.filter((r) => workflowRun(r.runUrl) !== thisRun)].slice(0, KEPT_RUNS);
     merged[example] = entry;
   }
 
@@ -52,6 +56,11 @@ export function mergeResults(previous, runs, runUrl, { quarantined = [] } = {}) 
     entry.verified = pass && !held.has(example) ? { date: pass.date, frameworkVersion: pass.frameworkVersion, runUrl: pass.runUrl } : null;
   }
   return Object.fromEntries(Object.entries(merged).sort(([a], [b]) => a.localeCompare(b)));
+}
+
+// A run URL without its `/attempts/<n>` suffix: one workflow run, whatever the attempt.
+function workflowRun(url) {
+  return String(url).replace(/\/attempts\/\d+\/?$/, '');
 }
 
 /**

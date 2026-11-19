@@ -13,6 +13,9 @@ const NPM_CI_LOCKFILES = ['package-lock.json', 'npm-shrinkwrap.json'];
 export const COMPOSE_FILES = ['serverless-compose.yml', 'serverless-compose.yaml'];
 // How long a killed command gets between SIGTERM and SIGKILL.
 const KILL_GRACE_MS = 10_000;
+// Every command started by runCommand whose process group may still hold
+// processes: removed when it exits on its own, or after its SIGKILL.
+const liveGroups = new Set();
 
 /** Raised when a step is stopped by an interruption; its message is the step's detail. */
 export class Interrupted extends Error {
@@ -113,6 +116,7 @@ export function runCommand(
       return;
     }
 
+    liveGroups.add(child);
     const pending = { stdout: '', stderr: '' };
     const onData = (stream) => (chunk) => {
       const text = chunk.toString('utf8');
@@ -129,7 +133,10 @@ export function runCommand(
     const stop = () => {
       if (killTimer) return;
       killGroup(child, 'SIGTERM');
-      killTimer = setTimeout(() => killGroup(child, 'SIGKILL'), KILL_GRACE_MS);
+      killTimer = setTimeout(() => {
+        killGroup(child, 'SIGKILL');
+        liveGroups.delete(child);
+      }, KILL_GRACE_MS);
     };
     const timer =
       Number.isFinite(timeoutMs) &&
@@ -150,7 +157,8 @@ export function runCommand(
       clearTimeout(timer);
       // A stopped command's group gets its SIGKILL even after the command
       // itself exited, without keeping this process alive for it.
-      killTimer?.unref();
+      if (killTimer) killTimer.unref();
+      else liveGroups.delete(child);
       signal?.removeEventListener('abort', onAbort);
       if (echo) {
         for (const stream of ['stdout', 'stderr']) if (pending[stream]) write(`[${step}] ${pending[stream]}\n`);
@@ -158,6 +166,16 @@ export function runCommand(
       resolve({ status: timedOut || interrupted || error ? null : status, ...out, timedOut, interrupted, error });
     });
   });
+}
+
+/**
+ * Sends `sig` (default SIGKILL) to the process group of every command
+ * runCommand started that may still be running, including stopped commands
+ * whose grandchildren have not exited yet. For an exit that cannot wait.
+ */
+export function stopAllCommands(sig = 'SIGKILL') {
+  for (const child of liveGroups) killGroup(child, sig);
+  if (sig === 'SIGKILL') liveGroups.clear();
 }
 
 // Sends `sig` to the process group led by `child`, or to `child` alone when

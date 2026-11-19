@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { run as cleanupReport } from '../scripts/cleanup-report.mjs';
+import { EXISTING_STACK_STATUSES } from '../scripts/test-example.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WORKFLOWS = path.join(ROOT, '.github', 'workflows');
@@ -97,12 +98,54 @@ test('every workflow starts with no permissions and every job states its own', (
   }
 });
 
+// Returns the body of every `run: |` block in `text`.
+function runBlocks(text) {
+  const blocks = [];
+  const lines = text.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(/^(\s*)(?:- )?run: \|\s*$/);
+    if (!m) continue;
+    const body = [];
+    while (i + 1 < lines.length && (lines[i + 1].trim() === '' || lines[i + 1].search(/\S/) > m[1].length)) body.push(lines[++i]);
+    blocks.push(body.join('\n'));
+  }
+  return blocks;
+}
+
+test('every multi-line script with a pipeline sets pipefail', () => {
+  for (const file of FILES) {
+    for (const block of runBlocks(read(file))) {
+      // A pipe outside quotes, comments and `[[ =~ ]]` patterns: `cmd | cmd`, not `||`.
+      const piped = block.split('\n').filter((l) => !l.includes('=~')).some((l) =>
+        /\|/.test(
+          l
+            .replace(/'[^']*'|"(?:\\.|[^"\\])*"/g, '')
+            .replace(/\|\|/g, '')
+            .replace(/#.*$/, ''),
+        ),
+      );
+      if (piped) assert.match(block, /^\s*set -o pipefail$/m, `${file}:\n${block}`);
+    }
+  }
+});
+
+test('publish-verified reads only the triggering attempt', () => {
+  const publish = read('publish-verified.yml');
+  assert.match(publish, /pattern: result-\*--latest-\$\{\{ github\.event\.workflow_run\.run_attempt \}\}/);
+  assert.match(publish, /RUN_ATTEMPT: \$\{\{ github\.event\.workflow_run\.run_attempt \}\}/);
+  assert.match(publish, /--latest-\$\{RUN_ATTEMPT\}\$/);
+});
+
+test('no step is named after an empty value', () => {
+  assert.doesNotMatch(read('sweep.yml'), /^\s+- name: .*\$\{\{ needs\.select\.outputs\.second \}\}/m);
+});
+
 test('ci selects with full history, and publish-verified reads only latest results of v4 runs', () => {
   assert.match(job(read('ci.yml'), 'select'), /fetch-depth: 0/);
   const publish = read('publish-verified.yml');
   assert.match(publish, /workflows: \[ci, sweep\]/);
   assert.match(publish, /branches: \[v4\]/);
-  assert.match(publish, /pattern: result-\*--latest-\*/);
+  assert.match(publish, /pattern: result-\*--latest-\$\{\{ github\.event\.workflow_run\.run_attempt \}\}/);
   assert.doesNotMatch(publish, /workflow_run\.event == 'pull_request'/);
 });
 
@@ -150,8 +193,8 @@ test('the cleanup report lists test-stage stacks older than 24 hours in every re
   });
   assert.equal(code, 0);
   assert.deepEqual(calls, [
-    ['aws', 'cloudformation', 'list-stacks', '--region', 'us-east-1', '--output', 'json'],
-    ['aws', 'cloudformation', 'list-stacks', '--region', 'eu-west-1', '--output', 'json'],
+    ['aws', 'cloudformation', 'list-stacks', '--region', 'us-east-1', '--output', 'json', '--stack-status-filter', ...EXISTING_STACK_STATUSES],
+    ['aws', 'cloudformation', 'list-stacks', '--region', 'eu-west-1', '--output', 'json', '--stack-status-filter', ...EXISTING_STACK_STATUSES],
   ]);
   assert.match(out, /: 2 \(us-east-1: 1, eu-west-1: 1\)/);
   assert.ok(out.includes('| us-east-1 | aws-node-exabc123def | CREATE_COMPLETE |'), out);

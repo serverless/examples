@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 
 import { runCommand } from './lib/exec.mjs';
+import { EXISTING_STACK_STATUSES } from './test-example.mjs';
 
 const USAGE = 'Usage: node scripts/cleanup-report.mjs --regions <list>';
 const TEST_STACK = /-ex[a-z0-9]{9}$/;
@@ -80,7 +81,8 @@ export async function run(args, { exec = runCommand, now = Date.now, out = conso
 
 // Resolves to the region's stack summaries, or null when they cannot be listed.
 async function listStacks(exec, region) {
-  const r = await exec('aws', ['cloudformation', 'list-stacks', '--region', region, '--output', 'json'], {
+  const args = ['cloudformation', 'list-stacks', '--region', region, '--output', 'json', '--stack-status-filter', ...EXISTING_STACK_STATUSES];
+  const r = await exec('aws', args, {
     step: 'list-stacks',
     echo: false,
     timeoutMs: LIST_TIMEOUT_MS,

@@ -28,6 +28,8 @@ jobs:
     env:
       RUN_ID: ${{ github.event.workflow_run.id }}
       RUN_URL: ${{ github.event.workflow_run.html_url }}
+      # Only the attempt that triggered this run: a re-run must not merge an earlier attempt's results again.
+      RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
     steps:
       - name: Look for latest results and the verified branch
         id: find
@@ -35,12 +37,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
+          set -o pipefail
           count=$(gh api --paginate "repos/$REPO/actions/runs/$RUN_ID/artifacts" \
-            --jq '.artifacts[].name | select(test("^result-.+--latest-[0-9]+$"))' | wc -l)
+            --jq ".artifacts[].name | select(test(\"^result-.+--latest-${RUN_ATTEMPT}$\"))" | wc -l)
           branch=$(gh api "repos/$REPO/git/matching-refs/heads/verified" \
             --jq 'map(select(.ref == "refs/heads/verified")) | length')
           { echo "count=$count"; echo "branch=$branch"; } >> "$GITHUB_OUTPUT"
-          echo "$count latest result artifact(s) in run $RUN_ID; verified branch exists: $branch"
+          echo "$count latest result artifact(s) in run $RUN_ID attempt $RUN_ATTEMPT; verified branch exists: $branch"
       - name: Check out the scripts
         if: steps.find.outputs.count != '0'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -70,7 +73,7 @@ jobs:
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         if: steps.find.outputs.count != '0'
         with:
-          pattern: result-*--latest-*
+          pattern: result-*--latest-${{ github.event.workflow_run.run_attempt }}
           path: results
           merge-multiple: true
           run-id: ${{ github.event.workflow_run.id }}

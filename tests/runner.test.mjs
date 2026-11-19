@@ -5,9 +5,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { main, newStage, runExample, UsageError } from '../scripts/test-example.mjs';
+import { EXISTING_STACK_STATUSES, main, newStage, runExample, UsageError } from '../scripts/test-example.mjs';
 import { runCheck } from '../scripts/lib/checks.mjs';
-import { runCommand } from '../scripts/lib/exec.mjs';
+import { runCommand, stopAllCommands } from '../scripts/lib/exec.mjs';
 
 const DIR = 'hello';
 const STAGE_PATTERN = /^ex[a-z0-9]{9}$/;
@@ -535,6 +535,19 @@ test('latest leaves serverless.yml as it is', async () => {
   assert.equal(deployed, fs.readFileSync(path.join(root, DIR, 'serverless.yml'), 'utf8'));
 });
 
+test('the canary build id after Framework is the resolved version', async () => {
+  const stdout = 'Using Canary release channel\n\n✔ Installed Serverless Framework v52f2ef5\n\nServerless ϟ Framework 52f2ef5\n';
+  const { result } = await run(fixture(), { fx: fakeExec({ 'serverless --version': { status: 0, stdout } }), args: { frameworkVersion: 'canary' } });
+  assert.equal(result.resolvedVersion, '52f2ef5');
+  const { out } = await cli([DIR, '--framework-version', 'canary'], fixture(), { exec: fakeExec({ 'serverless --version': { status: 0, stdout } }).exec });
+  assert.match(out[0], /^PASS hello 52f2ef5 /);
+});
+
+test('a released version after Framework is the resolved version', async () => {
+  const { result } = await run(fixture(), { fx: fakeExec({ 'serverless --version': { status: 0, stdout: 'Serverless ϟ Framework 4.46.0\n' } }) });
+  assert.equal(result.resolvedVersion, '4.46.0');
+});
+
 test('an unparseable or failing serverless --version gives resolvedVersion unknown and does not fail the run', async () => {
   for (const r of [{ status: 0, stdout: 'something else' }, { status: 1 }, { status: null, timedOut: true }]) {
     const { result } = await run(fixture(), { fx: fakeExec({ 'serverless --version': r }) });
@@ -785,6 +798,8 @@ async function cli(argv, root, deps = {}) {
     out: (line) => out.push(line),
     err: (line) => err.push(line),
     env: {},
+    // Only the test of the real second-signal path kills real process groups.
+    stopCommands: () => {},
     ...deps,
   });
   return { code, out, err };
@@ -884,7 +899,18 @@ test('CLI: --remove-only looks for the stage, removes it and exits 0', async () 
   const { code, out } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec, env: { AWS_REGION: 'eu-west-1' } });
   assert.equal(code, 0);
   assert.deepEqual(fx.steps(), ['aws cloudformation', 'serverless remove']);
-  assert.deepEqual(fx.calls[0].args, ['cloudformation', 'list-stacks', '--region', 'eu-west-1', '--output', 'json']);
+  assert.deepEqual(fx.calls[0].args, [
+    'cloudformation',
+    'list-stacks',
+    '--region',
+    'eu-west-1',
+    '--output',
+    'json',
+    '--stack-status-filter',
+    ...EXISTING_STACK_STATUSES,
+  ]);
+  assert.equal(EXISTING_STACK_STATUSES.length, 22);
+  assert.ok(!EXISTING_STACK_STATUSES.includes('DELETE_COMPLETE'));
   assert.deepEqual(fx.calls[1].args, ['remove', '--stage', STAGE, '--region', 'eu-west-1']);
   assert.equal(fx.calls[1].timeoutMs, 15 * MINUTE);
   assert.ok(!fx.calls[1].cwd.startsWith(root), 'remove runs in a copy');
@@ -971,5 +997,62 @@ test('runCommand stops the grandchildren of a command, not only the command', as
     assert.equal(alive(grandchild), false, 'the grandchild is still running');
   } finally {
     if (alive(grandchild)) process.kill(grandchild, 'SIGKILL');
+  }
+});
+
+// A command whose grandchild ignores SIGTERM and writes its pid to `pidFile`.
+function stubbornGrandchild(pidFile) {
+  return `
+    const { spawn } = require('node:child_process');
+    spawn(process.execPath, ['-e', ${JSON.stringify(
+      "process.on('SIGTERM', () => {}); require('node:fs').writeFileSync(process.argv[1], String(process.pid)); setTimeout(() => {}, 60000);",
+    )}, ${JSON.stringify(pidFile)}], { stdio: 'ignore' });
+    setTimeout(() => {}, 60000);
+  `;
+}
+
+async function waitFor(check, ms = 5000) {
+  for (let waited = 0; waited < ms && !check(); waited += 25) await new Promise((resolve) => setTimeout(resolve, 25));
+  return check();
+}
+
+test('stopAllCommands kills the process group of every running command', async () => {
+  const pidFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'runner-test-')), 'pid');
+  const running = runCommand(process.execPath, ['-e', stubbornGrandchild(pidFile)], { echo: false });
+  assert.ok(await waitFor(() => fs.existsSync(pidFile) && fs.readFileSync(pidFile, 'utf8')), 'the grandchild did not start');
+  const grandchild = Number(fs.readFileSync(pidFile, 'utf8'));
+  try {
+    stopAllCommands('SIGKILL');
+    const r = await running;
+    assert.equal(r.status, null);
+    assert.ok(await waitFor(() => !alive(grandchild), 3000), 'the grandchild is still running');
+  } finally {
+    if (alive(grandchild)) process.kill(grandchild, 'SIGKILL');
+  }
+});
+
+test('CLI: a second signal kills the running command group, grandchildren included, before exiting', async () => {
+  const root = fixture();
+  const signals = new EventEmitter();
+  const pidFile = path.join(root, 'pid');
+  let grandchild;
+  const exits = [];
+  const fx = fakeExec({
+    'serverless deploy': async ({ signal }) => {
+      const running = runCommand(process.execPath, ['-e', stubbornGrandchild(pidFile)], { echo: false, signal });
+      assert.ok(await waitFor(() => fs.existsSync(pidFile) && fs.readFileSync(pidFile, 'utf8')), 'the grandchild did not start');
+      grandchild = Number(fs.readFileSync(pidFile, 'utf8'));
+      // GitHub cancels a job with SIGINT, then SIGTERM.
+      signals.emit('SIGINT');
+      signals.emit('SIGTERM');
+      return running;
+    },
+  });
+  try {
+    await cli([DIR], root, { exec: fx.exec, signals, exit: (c) => exits.push(c), stopCommands: stopAllCommands });
+    assert.deepEqual(exits, [1]);
+    assert.ok(await waitFor(() => !alive(grandchild), 3000), 'the grandchild is still running');
+  } finally {
+    if (grandchild && alive(grandchild)) process.kill(grandchild, 'SIGKILL');
   }
 });

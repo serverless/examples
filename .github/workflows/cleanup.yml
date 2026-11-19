@@ -42,6 +42,7 @@ jobs:
           DEFAULT_REGION: ${{ vars.EXAMPLES_REGION }}
           ROLE: ${{ matrix.role }}
         run: |
+          set -o pipefail
           # The default region plus every region an example manifest sets.
           regions=$(node --input-type=module -e '
             import { findExampleDirs, loadManifest } from "./scripts/lib/manifest.mjs";

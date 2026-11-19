@@ -104,11 +104,41 @@ test('only latest results count; canary and pinned versions are ignored', () => 
   assert.deepEqual(merged, {});
 });
 
-test('several results for one example in one run are ordered newest first', () => {
+test('one workflow run counts once per example: its newest result stands', () => {
   const merged = mergeResults({}, [result({ result: 'fail', startedAt: '2026-11-19T01:00:00.000Z' }), result({ startedAt: '2026-11-19T02:00:00.000Z' })], RUN_1);
   assert.deepEqual(
     merged['aws-node'].runs.map((r) => r.result),
-    ['pass', 'fail'],
+    ['pass'],
+  );
+});
+
+test('merging the same run twice changes nothing', () => {
+  const first = mergeResults({}, [result({ startedAt: '2026-11-18T03:20:00.000Z' })], RUN_1);
+  const second = mergeResults(first, [result({ result: 'fail' })], RUN_2);
+  assert.deepEqual(mergeResults(second, [result({ result: 'fail' })], RUN_2), second);
+});
+
+test('a re-run replaces the run it repeats instead of being added', () => {
+  const first = mergeResults({}, [result({ startedAt: '2026-11-18T03:20:00.000Z' })], RUN_1);
+  const failed = mergeResults(first, [result({ result: 'fail' })], RUN_2);
+  // Attempt 2 of run 2 fails again: still one failing workflow run after a pass.
+  const rerun = mergeResults(failed, [result({ result: 'fail', startedAt: '2026-11-19T05:00:00.000Z' })], `${RUN_2}/attempts/2`);
+  assert.deepEqual(
+    rerun['aws-node'].runs.map((r) => [r.result, r.runUrl]),
+    [
+      ['fail', `${RUN_2}/attempts/2`],
+      ['pass', RUN_1],
+    ],
+  );
+  assert.equal(rerun['aws-node'].verified.runUrl, RUN_1);
+  // A passing re-run of the same run replaces the failure.
+  const fixed = mergeResults(rerun, [result({ startedAt: '2026-11-19T06:00:00.000Z' })], `${RUN_2}/attempts/3`);
+  assert.deepEqual(
+    fixed['aws-node'].runs.map((r) => [r.result, r.runUrl]),
+    [
+      ['pass', `${RUN_2}/attempts/3`],
+      ['pass', RUN_1],
+    ],
   );
 });
 
