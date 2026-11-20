@@ -4,8 +4,8 @@ description: 'This template demonstrates how to deploy a Python function running
 layout: Doc
 framework: v4
 platform: AWS
-language: python
-priority: 2
+language: Python
+priority: 10
 authorLink: 'https://github.com/serverless'
 authorName: 'Serverless, Inc.'
 authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
@@ -13,69 +13,115 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 
 # Serverless Framework AWS Python Example
 
-This template demonstrates how to deploy a Python function running on AWS Lambda using the Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+[![Verified](https://raw.githubusercontent.com/serverless/examples/verified/badges/aws-python.svg)](https://github.com/serverless/examples/blob/verified/results.json)
 
-## Usage
+This template deploys one Python function to AWS Lambda. The function has no events and no database, so it is the smallest service you can deploy and invoke. Start here to learn the deploy and invoke loop, then add the [events](https://www.serverless.com/framework/docs/providers/aws/events/) your use case needs.
 
-### Deployment
+## What it deploys
 
-In order to deploy the example, you need to run the following command:
+- A Lambda function, `hello`.
+- An IAM role for the function and a CloudWatch Logs log group for its logs.
 
-```
+## Prerequisites
+
+- [Python](https://www.python.org/) 3.14, to run the function locally and to package dependencies when you add them.
+- [Node.js](https://nodejs.org/), to install the Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
+- An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
+- A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
+
+## Deploy
+
+Run the deploy from this directory:
+
+```bash
 serverless deploy
 ```
 
-After running deploy, you should see output similar to:
+Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
 
-```
+You should see output like this:
+
+```text
 Deploying "aws-python" to stage "dev" (us-east-1)
-
-✔ Service deployed to stack aws-python-dev (90s)
-
+✔ Service deployed to stack aws-python-dev (41s)
 functions:
-  hello: aws-python-dev-hello (1.9 kB)
+  hello: aws-python-dev-hello (2.7 kB)
 ```
 
-### Invocation
+## Try it
 
-After successful deployment, you can invoke the deployed function by using the following command:
+Invoke the deployed function:
 
-```
+```bash
 serverless invoke --function hello
 ```
 
-Which should result in response similar to the following:
+The command prints the function's response:
 
 ```json
 {
-  "statusCode": 200,
-  "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
+    "statusCode": 200,
+    "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
 }
 ```
 
-### Local development
+## How it works
 
-You can invoke your function locally by using the following command:
+`serverless.yml` declares the function and its runtime:
 
+```yaml
+provider:
+  name: aws
+  runtime: python3.14
+  architecture: arm64
+
+functions:
+  hello:
+    handler: handler.hello
 ```
+
+`handler.hello` points at the `hello` function in `handler.py`, which returns a status code and a JSON body:
+
+```python
+def hello(event, context):
+    body = {
+        "message": "Go Serverless v4.0! Your function executed successfully!"
+    }
+
+    return {"statusCode": 200, "body": json.dumps(body)}
+```
+
+### Run it locally
+
+Invoke the function on your machine:
+
+```bash
 serverless invoke local --function hello
 ```
 
-Which should result in response similar to the following:
+The command prints the same response as the deployed function.
 
-```
-{
-  "statusCode": 200,
-  "body": "{\"message\": \"Go Serverless v4.0! Your function executed successfully!\"}"
-}
-```
+### Add dependencies
 
-### Bundling dependencies
+The Framework packages Python dependencies itself, with no plugin. List them in a `requirements.txt` file and add a `custom.pythonRequirements` block to `serverless.yml` to turn the packaging on:
 
-In case you would like to include third-party dependencies, you will need to use a plugin called `serverless-python-requirements`. You can set it up by running the following command:
-
-```
-serverless plugin install -n serverless-python-requirements
+```yaml
+custom:
+  pythonRequirements: {}
 ```
 
-Running the above will automatically add `serverless-python-requirements` to `plugins` section in your `serverless.yml` file and add it as a `devDependency` to `package.json` file. The `package.json` file will be automatically created if it doesn't exist beforehand. Now you will be able to add your dependencies to `requirements.txt` file (`Pipfile` and `pyproject.toml` is also supported but requires additional configuration) and they will be automatically injected to Lambda package during build process. For more details about the plugin's configuration, please refer to [official documentation](https://github.com/UnitedIncome/serverless-python-requirements).
+The deploy then installs the requirements into the Lambda package. `Pipfile` and `pyproject.toml` work too, with the configuration the [Python requirements guide](https://www.serverless.com/framework/docs/providers/aws/guide/python) describes.
+
+## Cost and cleanup
+
+While the example is deployed, Lambda bills each invocation and the function's compute time; while you do not invoke the function, it bills nothing. Until you remove the stack, the function's logs stay in CloudWatch Logs, which bills for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the function and its log group, when you are done:
+
+```bash
+serverless remove
+```
+
+## Next steps
+
+- Read the [functions guide](https://www.serverless.com/framework/docs/providers/aws/guide/functions) for memory, timeouts and environment variables.
+- Put the function behind an HTTP endpoint with the [HTTP API example](https://github.com/serverless/examples/tree/v4/aws-python-http-api).
+- Run it on a schedule with the [scheduled cron example](https://github.com/serverless/examples/tree/v4/aws-python-scheduled-cron).

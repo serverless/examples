@@ -1,0 +1,6 @@
+version = 0.1
+
+[default]
+[default.global.parameters]
+# The stage is part of the stack name, so each stage deploys its own stack.
+stack_name = "shared-resources-example-${sls:stage}"

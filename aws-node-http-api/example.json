@@ -1,0 +1,33 @@
+{
+  "title": "AWS Simple HTTP Endpoint example in NodeJS",
+  "description": "This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "priority": 1,
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "apigateway",
+    "iam",
+    "logs"
+  ],
+  "onboarding": true,
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "http": {
+          "output": "HttpApiUrl",
+          "path": "/",
+          "status": 200,
+          "contains": "Go Serverless v4! Your function executed successfully!"
+        }
+      }
+    ]
+  }
+}

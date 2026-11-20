@@ -1,0 +1,12 @@
+service: hello
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  environment:
+    # A nested key named stage is allowed; only provider.stage is not.
+    stage: ${sls:stage}
+
+functions:
+  hello:
+    handler: handler.hello

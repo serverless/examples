@@ -7,11 +7,22 @@ Globals:
     MemorySize: 128
 
 Resources:
+  # The function's log group is part of the stack, so removing the service
+  # deletes it together with its logs. Without this, Lambda creates the log
+  # group on the first invoke, outside the stack, and it stays after the
+  # service is removed.
+  HelloWorldLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${AWS::StackName}-hello
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler.handler
       Runtime: nodejs24.x
+      LoggingConfig:
+        LogGroup: !Ref HelloWorldLogGroup
       Environment:
         Variables:
           # We are using the output of the shared resources CloudFormation template

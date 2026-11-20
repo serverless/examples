@@ -1,0 +1,38 @@
+{
+  "title": "AWS Python Scheduled Cron example in Python",
+  "description": "A Python function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event.",
+  "language": "python",
+  "platform": "AWS",
+  "framework": "v4",
+  "priority": 9,
+  "author": {
+    "name": "Rupak Ganguly",
+    "link": "https://github.com/rupakg",
+    "avatar": "https://avatars0.githubusercontent.com/u/8188?v=4&s=140"
+  },
+  "services": [
+    "lambda",
+    "eventbridge",
+    "iam",
+    "logs"
+  ],
+  "onboarding": true,
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "invoke": {
+          "function": "rateHandler",
+          "args": [
+            "--log"
+          ],
+          "contains": "Your cron function ran at"
+        }
+      }
+    ],
+    "quarantine": {
+      "reason": "Waits for the Serverless Framework release in which serverless invoke --log shows messages logged with Python's logging module",
+      "since": "2026-11-19"
+    }
+  }
+}
