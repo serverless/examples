@@ -107,7 +107,8 @@ for (const file of ['ci.yml', 'sweep.yml']) {
     ]) {
       assert.ok(live.includes(line), `${file}: ${line}`);
     }
-    for (const n of [1, 2, 3]) assert.ok(live.includes(`vars.EXAMPLES_ROLE_ARN_${n}`), `role ${n}`);
+    // Role ARNs carry account ids; as secrets they are masked in the step's logged inputs.
+    for (const n of [1, 2, 3]) assert.ok(live.includes(`secrets.EXAMPLES_ROLE_ARN_${n}`), `role ${n}`);
     assert.match(live, /if: always\(\) && steps\.stage\.outputs\.stage != ''\n(.*\n)*?\s+run: node scripts\/test-example\.mjs "\$EXAMPLE_DIR" --remove-only --stage "\$STAGE"/);
     assert.doesNotMatch(live, /--region/, 'the region comes from AWS_REGION so the manifest region wins');
   });
@@ -312,4 +313,21 @@ test('the cleanup report rejects missing or invalid regions with exit 2', async 
 test('the cleanup script has no delete command', () => {
   const source = fs.readFileSync(path.join(ROOT, 'scripts', 'cleanup-report.mjs'), 'utf8');
   assert.doesNotMatch(source, /delete-stack|'remove'/);
+});
+
+test('no workflow reads a role ARN from a repository variable, which job logs print in clear', () => {
+  for (const file of FILES) assert.doesNotMatch(read(file), /vars\.EXAMPLES_ROLE_ARN/, file);
+});
+
+test('sweep.yml renews the AWS credentials before the second version and before the final remove', () => {
+  const live = job(read('sweep.yml'), 'live');
+  const renew = [...live.matchAll(/- name: Renew the AWS credentials[^\n]*\n((?: {8}.*\n)+)/g)].map((m) => m[1]);
+  assert.equal(renew.length, 2);
+  for (const body of renew) {
+    assert.match(body, /uses: aws-actions\/configure-aws-credentials@[0-9a-f]{40}/);
+    assert.match(body, /unset-current-credentials: true/);
+  }
+  const at = (s) => live.indexOf(s);
+  assert.ok(at('Renew the AWS credentials for the second version') < at("id: second"));
+  assert.ok(at('Renew the AWS credentials for the final remove') < at('- name: Remove what the stage left'));
 });

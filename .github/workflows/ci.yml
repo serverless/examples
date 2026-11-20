@@ -110,7 +110,7 @@ jobs:
         run: npm install --global serverless
       - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
-          role-to-assume: ${{ matrix.role == 1 && vars.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && vars.EXAMPLES_ROLE_ARN_2 || vars.EXAMPLES_ROLE_ARN_3 }}
+          role-to-assume: ${{ matrix.role == 1 && secrets.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && secrets.EXAMPLES_ROLE_ARN_2 || secrets.EXAMPLES_ROLE_ARN_3 }}
           aws-region: ${{ vars.EXAMPLES_REGION }}
           role-duration-seconds: 3600
           mask-aws-account-id: true

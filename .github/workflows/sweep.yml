@@ -132,7 +132,7 @@ jobs:
         run: npm install --global serverless
       - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
-          role-to-assume: ${{ matrix.role == 1 && vars.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && vars.EXAMPLES_ROLE_ARN_2 || vars.EXAMPLES_ROLE_ARN_3 }}
+          role-to-assume: ${{ matrix.role == 1 && secrets.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && secrets.EXAMPLES_ROLE_ARN_2 || secrets.EXAMPLES_ROLE_ARN_3 }}
           aws-region: ${{ vars.EXAMPLES_REGION }}
           role-duration-seconds: 3600
           mask-aws-account-id: true
@@ -160,6 +160,17 @@ jobs:
           path: results/${{ matrix.slug }}--${{ needs.select.outputs.first }}.json
           if-no-files-found: warn
           retention-days: 30
+      # The credentials last an hour and the job up to 80 minutes, so each later
+      # step that calls AWS starts with new ones.
+      - name: Renew the AWS credentials for the second version
+        if: ${{ !cancelled() && steps.stage.outcome == 'success' && needs.select.outputs.second != '' }}
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ matrix.role == 1 && secrets.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && secrets.EXAMPLES_ROLE_ARN_2 || secrets.EXAMPLES_ROLE_ARN_3 }}
+          aws-region: ${{ vars.EXAMPLES_REGION }}
+          role-duration-seconds: 3600
+          mask-aws-account-id: true
+          unset-current-credentials: true
       - name: Test with ${{ needs.select.outputs.second || 'a second version' }}
         id: second
         if: ${{ !cancelled() && steps.stage.outcome == 'success' && needs.select.outputs.second != '' }}
@@ -178,6 +189,15 @@ jobs:
           path: results/${{ matrix.slug }}--${{ needs.select.outputs.second }}.json
           if-no-files-found: warn
           retention-days: 30
+      - name: Renew the AWS credentials for the final remove
+        if: always() && steps.stage.outputs.stage != ''
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ matrix.role == 1 && secrets.EXAMPLES_ROLE_ARN_1 || matrix.role == 2 && secrets.EXAMPLES_ROLE_ARN_2 || secrets.EXAMPLES_ROLE_ARN_3 }}
+          aws-region: ${{ vars.EXAMPLES_REGION }}
+          role-duration-seconds: 3600
+          mask-aws-account-id: true
+          unset-current-credentials: true
       # A cancelled or timed-out job gives the runner only seconds to remove;
       # this step removes whatever the stage still has.
       - name: Remove what the stage left
