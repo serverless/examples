@@ -3,252 +3,252 @@
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-node-durable-function": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-node-express-api": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-node-express-dynamodb-api": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-node-http-api": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-node-scheduled-cron": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-python": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-python-flask-api": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-python-flask-dynamodb-api": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "aws-python-http-api": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "compose-multiframework": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   },
   "mcp/minimal": {
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-21",
+        "date": "2026-11-22",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
       },
       {
         "result": "pass",
-        "date": "2026-11-20",
+        "date": "2026-11-21",
         "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/44782398751"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
       }
     ],
     "verified": {
-      "date": "2026-11-21",
+      "date": "2026-11-22",
       "frameworkVersion": "4.46.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/44860720303"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/44980311691"
     }
   }
 }
