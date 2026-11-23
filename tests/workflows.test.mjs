@@ -88,8 +88,10 @@ test('the ci static job has no secrets and only reads contents', () => {
   for (const command of ['npm test', 'npm run validate', 'npm run check-docs']) assert.ok(stat.includes(`run: ${command}`), command);
 });
 
-// ci runs one Framework version per job; the sweep's nightly job runs two.
-const LIVE_TIMEOUT = { 'ci.yml': 50, 'sweep.yml': 80 };
+// Each version: a 15-minute run and a 15-minute remove; each stage: a 20-minute
+// final remove. ci runs one version and one stage per job; the sweep's nightly
+// job runs two of each.
+const LIVE_TIMEOUT = { 'ci.yml': 50, 'sweep.yml': 100 };
 
 for (const file of ['ci.yml', 'sweep.yml']) {
   test(`${file}: the live job has the limits, concurrency group and cleanup step`, () => {

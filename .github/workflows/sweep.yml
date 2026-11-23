@@ -92,8 +92,9 @@ jobs:
     # The AWS roles exist for this repository only.
     if: github.repository == 'serverless/examples' && needs.select.outputs.count != '0'
     runs-on: ubuntu-latest
-    # The nightly job tests two Framework versions, each with its run and remove.
-    timeout-minutes: 80
+    # The nightly job tests two Framework versions, each with its run and remove
+    # (15 + 15 minutes), then removes each stage (up to 20 minutes each).
+    timeout-minutes: 100
     permissions:
       id-token: write
       contents: read
