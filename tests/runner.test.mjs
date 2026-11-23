@@ -659,6 +659,37 @@ test('a compose root rewrites frameworkVersion in each service copy', async () =
   assert.match(seen.worker, /^frameworkVersion: 'canary'$/m);
 });
 
+// The installer picks the CLI from serverless-compose.yml for the whole Compose
+// run; a service's frameworkVersion is only a range check.
+test('a compose root writes frameworkVersion into serverless-compose.yml for the run and the remove', async () => {
+  const root = composeFixture();
+  const seen = [];
+  const read = ({ cwd }) => {
+    seen.push(fs.readFileSync(path.join(cwd, 'serverless-compose.yml'), 'utf8'));
+    return { status: 0 };
+  };
+  await run(root, { fx: fakeExec({ 'serverless deploy': read }), args: { frameworkVersion: 'canary' } });
+  assert.match(seen[0], /^frameworkVersion: 'canary'$/m);
+  assert.match(seen[0], /^services:$/m);
+  const fx = fakeExec({ 'aws cloudformation': stackList(['hello-api-exabc123def']), 'serverless remove': read });
+  const { code } = await cli([DIR, '--remove-only', '--stage', 'exabc123def', '--framework-version', '4.4.7'], root, { exec: fx.exec, env: { AWS_REGION: 'eu-west-1' } });
+  assert.equal(code, 0);
+  assert.match(seen[1], /^frameworkVersion: '4\.4\.7'$/m);
+});
+
+test('a compose root with latest leaves serverless-compose.yml as it is', async () => {
+  const root = composeFixture();
+  let text;
+  const fx = fakeExec({
+    'serverless deploy': ({ cwd }) => {
+      text = fs.readFileSync(path.join(cwd, 'serverless-compose.yml'), 'utf8');
+      return { status: 0 };
+    },
+  });
+  await run(root, { fx });
+  assert.doesNotMatch(text, /frameworkVersion/);
+});
+
 test('a compose root reports each service stack left behind', async () => {
   const { result } = await run(composeFixture(), { fx: fakeExec({ 'serverless remove': { status: 1 } }) });
   assert.equal(result.failedStep, 'remove');

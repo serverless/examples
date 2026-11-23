@@ -51,6 +51,7 @@ import {
   copyExample,
   installCommands,
   Interrupted,
+  COMPOSE_FILES,
   isComposeRoot,
   runCommand,
   runOrThrow,
@@ -233,10 +234,7 @@ export async function runExample({
   let leftBehind;
   try {
     try {
-      if (frameworkVersion !== 'latest') {
-        const dirs = compose ? serviceDirs(copy) : [copy];
-        for (const d of dirs) rewriteFrameworkVersion(d, frameworkVersion);
-      }
+      if (frameworkVersion !== 'latest') pinFrameworkVersion(copy, compose, frameworkVersion);
       resolvedVersion = await readFrameworkVersion(exec, copy, Math.min(VERSION_TIMEOUT_MS, left()), signal);
 
       await attempt('install', async () => {
@@ -349,7 +347,7 @@ export async function removeOnly({
   try {
     const compose = isComposeRoot(copy);
     const dirs = compose ? serviceDirs(copy) : [copy];
-    if (frameworkVersion !== 'latest') for (const d of dirs) rewriteFrameworkVersion(d, frameworkVersion);
+    if (frameworkVersion !== 'latest') pinFrameworkVersion(copy, compose, frameworkVersion);
 
     const listed = await listStageStacks(exec, copy, stage, region);
     if (listed.error) log(`[list-stacks] could not list the stacks in ${region} (${listed.error}); running remove anyway`);
@@ -584,10 +582,17 @@ function readServiceName(root, dir) {
   return name;
 }
 
+// The installer picks the CLI from the config file in the directory the command
+// runs in: serverless-compose.yml for the whole Compose run, else serverless.yml.
+// Service files get the version too; there it is only a range check.
+function pinFrameworkVersion(copy, compose, version) {
+  const files = compose ? serviceDirs(copy).map(findServiceFile) : [findServiceFile(copy)];
+  if (compose) files.push(COMPOSE_FILES.map((f) => path.join(copy, f)).find((f) => fs.existsSync(f)));
+  for (const file of files) if (file) rewriteFrameworkVersion(file, version);
+}
+
 // Replaces the top-level frameworkVersion line, or adds one at the top.
-function rewriteFrameworkVersion(dir, version) {
-  const file = findServiceFile(dir);
-  if (!file) return;
+function rewriteFrameworkVersion(file, version) {
   const text = fs.readFileSync(file, 'utf8');
   const line = `frameworkVersion: '${version}'`;
   const pattern = /^frameworkVersion[ \t]*:.*$/m;

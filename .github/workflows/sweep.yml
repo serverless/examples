@@ -92,8 +92,9 @@ jobs:
     # The AWS roles exist for this repository only.
     if: github.repository == 'serverless/examples' && needs.select.outputs.count != '0'
     runs-on: ubuntu-latest
-    # The nightly job tests two Framework versions, each with its run and remove.
-    timeout-minutes: 80
+    # The nightly job tests two Framework versions, each with its run and remove
+    # (15 + 15 minutes), then removes each stage (up to 20 minutes each).
+    timeout-minutes: 100
     permissions:
       id-token: write
       contents: read
@@ -136,13 +137,24 @@ jobs:
           aws-region: ${{ vars.EXAMPLES_REGION }}
           role-duration-seconds: 3600
           mask-aws-account-id: true
-      - name: Choose the stage
+      - name: Choose the stages
         id: stage
+        env:
+          SECOND: ${{ needs.select.outputs.second }}
         run: |
-          stage=$(node --input-type=module -e 'import { newStage } from "./scripts/test-example.mjs"; console.log(newStage())')
+          new_stage() { node --input-type=module -e 'import { newStage } from "./scripts/test-example.mjs"; console.log(newStage())'; }
+          stage=$(new_stage)
           echo "stage=$stage" >> "$GITHUB_OUTPUT"
           echo "Stage: $stage"
-      # The versions run one after another with the same stage. The region is
+          # The second version gets its own stage: redeploying a stage right after
+          # removing it recreates IAM roles under the same names, and Lambda can
+          # reject a role that IAM has not finished propagating.
+          if [[ -n "$SECOND" ]]; then
+            stage2=$(new_stage)
+            echo "stage2=$stage2" >> "$GITHUB_OUTPUT"
+            echo "Second stage: $stage2"
+          fi
+      # The versions run one after another, each with its own stage. The region is
       # AWS_REGION from the credentials step, unless the manifest sets one.
       - name: Test with ${{ needs.select.outputs.first }}
         env:
@@ -175,7 +187,7 @@ jobs:
         id: second
         if: ${{ !cancelled() && steps.stage.outcome == 'success' && needs.select.outputs.second != '' }}
         env:
-          STAGE: ${{ steps.stage.outputs.stage }}
+          STAGE: ${{ steps.stage.outputs.stage2 }}
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
           SERVERLESS_PLATFORM_STAGE: dev
         run: |
@@ -199,13 +211,21 @@ jobs:
           mask-aws-account-id: true
           unset-current-credentials: true
       # A cancelled or timed-out job gives the runner only seconds to remove;
-      # this step removes whatever the stage still has.
+      # these steps remove whatever each stage still has.
       - name: Remove what the stage left
         if: always() && steps.stage.outputs.stage != ''
         # Remove's own 15-minute budget plus the listing and install around it.
         timeout-minutes: 20
         env:
           STAGE: ${{ steps.stage.outputs.stage }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
+          SERVERLESS_PLATFORM_STAGE: dev
+        run: node scripts/test-example.mjs "$EXAMPLE_DIR" --remove-only --stage "$STAGE"
+      - name: Remove what the second stage left
+        if: always() && steps.stage.outputs.stage2 != ''
+        timeout-minutes: 20
+        env:
+          STAGE: ${{ steps.stage.outputs.stage2 }}
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY_DEV }}
           SERVERLESS_PLATFORM_STAGE: dev
         run: node scripts/test-example.mjs "$EXAMPLE_DIR" --remove-only --stage "$STAGE"
