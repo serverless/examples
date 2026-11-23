@@ -114,6 +114,16 @@ for (const file of ['ci.yml', 'sweep.yml']) {
   });
 }
 
+// Redeploying a stage right after removing it recreates IAM roles under the same
+// names, and Lambda can reject a role IAM has not finished propagating.
+test('sweep.yml: the second version deploys to its own stage, and both stages are removed', () => {
+  const live = job(read('sweep.yml'), 'live');
+  assert.match(live, /echo "stage2=\$stage2" >> "\$GITHUB_OUTPUT"/);
+  const second = live.slice(live.indexOf('id: second'));
+  assert.match(second.slice(0, second.indexOf('run:')), /STAGE: \$\{\{ steps\.stage\.outputs\.stage2 \}\}/);
+  assert.match(live, /if: always\(\) && steps\.stage\.outputs\.stage2 != ''\n(.*\n)*?\s+STAGE: \$\{\{ steps\.stage\.outputs\.stage2 \}\}\n(.*\n)*?\s+run: node scripts\/test-example\.mjs "\$EXAMPLE_DIR" --remove-only --stage "\$STAGE"/);
+});
+
 test('no workflow names a GitHub environment', () => {
   for (const file of FILES) assert.doesNotMatch(read(file), /^\s*environment:/m, file);
 });
