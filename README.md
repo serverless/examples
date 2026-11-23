@@ -197,6 +197,7 @@ serverless deploy
 | [AWS MCP Server Verifying OAuth In-Module (NodeJS)](https://github.com/serverless/examples/tree/v4/mcp/oauth-in-module) <br/> Verify OAuth 2.1 bearer tokens inside your MCP server module with the MCP SDK's requireBearerAuth gate - spec-shaped 401 challenges, scope-aware 403s, and the caller's identity in your tools, with the Serverless Framework. | nodeJS |
 | [Serverless Compose Shared Data Service with Personal Stages](https://github.com/serverless/examples/tree/v4/compose-shared-services) <br/> Share one stateful data service across many personal stages using the Compose service resolver, wiring outputs both same-stage and cross-stage | nodeJS |
 | [Serverless Compose EventBridge Custom Event Bus Subscribers](https://github.com/serverless/examples/tree/v4/compose-eventbridge-custom-bus) <br/> Own an EventBridge Custom Event Bus in a stateful service and subscribe functions from other services to it, with ordered and batched delivery, wired together with Serverless Compose | nodeJS |
+| [GPU function with PyTorch on Lambda Managed Instances](https://github.com/serverless/examples/tree/v4/aws-python-gpu-managed-instances) <br/> This example runs a Python function with PyTorch on an NVIDIA GPU, using AWS Lambda Managed Instances and the Serverless Framework. | python |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Community Examples

@@ -1,0 +1,101 @@
+# A Python function that runs PyTorch on an NVIDIA GPU, with Lambda Managed Instances.
+# Deploying builds the image and pushes it to ECR, so Docker must be running.
+service: aws-python-gpu-managed-instances
+
+provider:
+  name: aws
+  # The capacity provider launches its instances in these subnets.
+  vpc:
+    subnetIds:
+      - !Ref SubnetA
+      - !Ref SubnetB
+    securityGroupIds:
+      - !Ref InstancesSecurityGroup
+  ecr:
+    images:
+      pytorch:
+        path: ./
+        # Push a single-platform image, the format Lambda accepts.
+        provenance: 'false'
+  capacityProviders:
+    gpu:
+      instanceRequirements:
+        # Fractional NVIDIA L4 instances, the smallest GPU instances Lambda offers.
+        allowedInstanceTypes:
+          - g6f.large
+          - g6f.xlarge
+      scaling:
+        # Caps the instances the capacity provider launches, and so the cost.
+        maxVCpuCount: 12
+
+functions:
+  matmul:
+    image: pytorch
+    timeout: 60
+    capacityProvider:
+      name: gpu
+      accelerator:
+        # GPU memory in GB: a 3 GB slice of an L4.
+        memory: 3
+      scaling:
+        # One execution environment, on one instance.
+        min: 1
+        max: 1
+
+# The Framework doesn't create VPCs: this one has two public subnets and no NAT gateway,
+# so it adds no hourly network charge.
+resources:
+  Resources:
+    Vpc:
+      Type: AWS::EC2::VPC
+      Properties:
+        CidrBlock: 10.0.0.0/16
+        EnableDnsHostnames: true
+        EnableDnsSupport: true
+    InternetGateway:
+      Type: AWS::EC2::InternetGateway
+    GatewayAttachment:
+      Type: AWS::EC2::VPCGatewayAttachment
+      Properties:
+        VpcId: !Ref Vpc
+        InternetGatewayId: !Ref InternetGateway
+    RouteTable:
+      Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId: !Ref Vpc
+    DefaultRoute:
+      Type: AWS::EC2::Route
+      DependsOn: GatewayAttachment
+      Properties:
+        RouteTableId: !Ref RouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: !Ref InternetGateway
+    SubnetA:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId: !Ref Vpc
+        CidrBlock: 10.0.0.0/24
+        AvailabilityZone: !Select [0, !GetAZs '']
+        MapPublicIpOnLaunch: true
+    SubnetB:
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId: !Ref Vpc
+        CidrBlock: 10.0.1.0/24
+        AvailabilityZone: !Select [1, !GetAZs '']
+        MapPublicIpOnLaunch: true
+    SubnetARouteTable:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId: !Ref SubnetA
+        RouteTableId: !Ref RouteTable
+    SubnetBRouteTable:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        SubnetId: !Ref SubnetB
+        RouteTableId: !Ref RouteTable
+    InstancesSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: GPU instances of the capacity provider
+        VpcId: !Ref Vpc
