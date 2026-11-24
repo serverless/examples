@@ -20,6 +20,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45453117910"
     }
   },
+  "aws-node-customer-managed-runtime": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-24",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45470691656"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-24",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45470691656"
+    }
+  },
   "aws-node-durable-function": {
     "runs": [
       {
