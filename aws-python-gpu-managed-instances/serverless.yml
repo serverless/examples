@@ -34,7 +34,7 @@ functions:
     timeout: 60
     capacityProvider:
       name: gpu
-      accelerator:
+      gpu:
         # GPU memory in GB: a 3 GB slice of an L4.
         memory: 3
       scaling:

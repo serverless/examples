@@ -25,7 +25,7 @@ This example runs a Python function with PyTorch on an NVIDIA GPU. The function 
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/), running: the deploy builds the image on your machine. The PyTorch base image is about 5 GB to download.
-- [Node.js](https://nodejs.org/), to install the Serverless Framework CLI: `npm i -g serverless`. The example needs version 4.47.0 or later, the first with `capacityProvider.accelerator`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
+- [Node.js](https://nodejs.org/), to install the Serverless Framework CLI: `npm i -g serverless`. The example needs version 4.47.0 or later, the first with `capacityProvider.gpu`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - The EC2 service quota **Running On-Demand G and VT instances** of at least 4 vCPUs in the Region you deploy to. Its default is 0, so request an increase in the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home/services/ec2/quotas/) first.
 - A Region where [Lambda runs GPU functions](https://docs.aws.amazon.com/lambda/latest/dg/lambda-managed-instances-gpu.html). The deploy uses `us-east-1` unless you pass `--region`.
@@ -69,7 +69,7 @@ The function answers with the GPU it ran on and the product's first element, whi
 }
 ```
 
-`NVIDIA L4-3Q` is a 3 GB slice of an NVIDIA L4, the GPU memory that `accelerator.memory: 3` asks for. `milliseconds` is the time the multiplication took on the GPU.
+`NVIDIA L4-3Q` is a 3 GB slice of an NVIDIA L4, the GPU memory that `gpu.memory: 3` asks for. `milliseconds` is the time the multiplication took on the GPU.
 
 ## How it works
 
@@ -97,7 +97,7 @@ functions:
     timeout: 60
     capacityProvider:
       name: gpu
-      accelerator:
+      gpu:
         memory: 3
       scaling:
         min: 1
@@ -106,7 +106,7 @@ functions:
 
 - `provider.ecr.images.pytorch` builds the image from the `Dockerfile`. `provenance: 'false'` pushes a single-platform image, the format Lambda accepts.
 - `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount` caps how many instances the capacity provider launches.
-- `accelerator.memory: 3` asks for at least 3 GB of GPU memory. Lambda gives each execution environment one GPU, or one GPU fraction on `g6f` instances.
+- `gpu.memory: 3` asks for at least 3 GB of GPU memory. Lambda gives each execution environment one GPU, or one GPU fraction on `g6f` instances.
 - `scaling` keeps one execution environment running, so the function answers right away.
 
 The [`Dockerfile`](https://github.com/serverless/examples/blob/v4/aws-python-gpu-managed-instances/Dockerfile) starts from the PyTorch image that AWS publishes for GPU functions; Lambda provides the GPU driver:
