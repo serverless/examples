@@ -370,6 +370,19 @@ test('check-paths: reports a missing invoke event file', () => {
   assertOneError(root, 'check-paths', /events\/hello\.json/);
 });
 
+test('check-paths: reports missing prepare and cleanup scripts', () => {
+  const root = fixture(({ file }) =>
+    editJson(file('example.json'), (m) => {
+      m.test.prepare = { path: 'test/prepare.mjs' };
+      m.test.cleanup = { path: 'test/cleanup.mjs' };
+    }),
+  );
+  const errors = checkExample(root, DIR).filter((e) => e.startsWith('check-paths'));
+  assert.equal(errors.length, 2, errors.join('\n'));
+  assert.match(errors[0], /test\.prepare: script test\/prepare\.mjs does not exist/);
+  assert.match(errors[1], /test\.cleanup: script test\/cleanup\.mjs does not exist/);
+});
+
 // --package
 
 // Records each exec call; `statuses` maps a step ("npm ci", "serverless package") to its exit status.

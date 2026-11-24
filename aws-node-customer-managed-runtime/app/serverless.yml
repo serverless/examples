@@ -1,0 +1,14 @@
+service: cmr-app
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  region: us-east-1
+  architecture: arm64
+  # The runtime alias ARN that the runtime service publishes, passed in by Compose.
+  runtime: ${param:runtimeAliasArn}
+
+functions:
+  hello:
+    handler: handler.hello

@@ -88,8 +88,10 @@ test('the ci static job has no secrets and only reads contents', () => {
   for (const command of ['npm test', 'npm run validate', 'npm run check-docs']) assert.ok(stat.includes(`run: ${command}`), command);
 });
 
-// ci runs one Framework version per job; the sweep's nightly job runs two.
-const LIVE_TIMEOUT = { 'ci.yml': 50, 'sweep.yml': 80 };
+// Each version: a 15-minute run and a 15-minute remove; each stage: a 20-minute
+// final remove. ci runs one version and one stage per job; the sweep's nightly
+// job runs two of each.
+const LIVE_TIMEOUT = { 'ci.yml': 50, 'sweep.yml': 100 };
 
 for (const file of ['ci.yml', 'sweep.yml']) {
   test(`${file}: the live job has the limits, concurrency group and cleanup step`, () => {
@@ -113,6 +115,16 @@ for (const file of ['ci.yml', 'sweep.yml']) {
     assert.doesNotMatch(live, /--region/, 'the region comes from AWS_REGION so the manifest region wins');
   });
 }
+
+// Redeploying a stage right after removing it recreates IAM roles under the same
+// names, and Lambda can reject a role IAM has not finished propagating.
+test('sweep.yml: the second version deploys to its own stage, and both stages are removed', () => {
+  const live = job(read('sweep.yml'), 'live');
+  assert.match(live, /echo "stage2=\$stage2" >> "\$GITHUB_OUTPUT"/);
+  const second = live.slice(live.indexOf('id: second'));
+  assert.match(second.slice(0, second.indexOf('run:')), /STAGE: \$\{\{ steps\.stage\.outputs\.stage2 \}\}/);
+  assert.match(live, /if: always\(\) && steps\.stage\.outputs\.stage2 != ''\n(.*\n)*?\s+STAGE: \$\{\{ steps\.stage\.outputs\.stage2 \}\}\n(.*\n)*?\s+run: node scripts\/test-example\.mjs "\$EXAMPLE_DIR" --remove-only --stage "\$STAGE"/);
+});
 
 test('no workflow names a GitHub environment', () => {
   for (const file of FILES) assert.doesNotMatch(read(file), /^\s*environment:/m, file);

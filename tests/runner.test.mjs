@@ -659,6 +659,37 @@ test('a compose root rewrites frameworkVersion in each service copy', async () =
   assert.match(seen.worker, /^frameworkVersion: 'canary'$/m);
 });
 
+// The installer picks the CLI from serverless-compose.yml for the whole Compose
+// run; a service's frameworkVersion is only a range check.
+test('a compose root writes frameworkVersion into serverless-compose.yml for the run and the remove', async () => {
+  const root = composeFixture();
+  const seen = [];
+  const read = ({ cwd }) => {
+    seen.push(fs.readFileSync(path.join(cwd, 'serverless-compose.yml'), 'utf8'));
+    return { status: 0 };
+  };
+  await run(root, { fx: fakeExec({ 'serverless deploy': read }), args: { frameworkVersion: 'canary' } });
+  assert.match(seen[0], /^frameworkVersion: 'canary'$/m);
+  assert.match(seen[0], /^services:$/m);
+  const fx = fakeExec({ 'aws cloudformation': stackList(['hello-api-exabc123def']), 'serverless remove': read });
+  const { code } = await cli([DIR, '--remove-only', '--stage', 'exabc123def', '--framework-version', '4.4.7'], root, { exec: fx.exec, env: { AWS_REGION: 'eu-west-1' } });
+  assert.equal(code, 0);
+  assert.match(seen[1], /^frameworkVersion: '4\.4\.7'$/m);
+});
+
+test('a compose root with latest leaves serverless-compose.yml as it is', async () => {
+  const root = composeFixture();
+  let text;
+  const fx = fakeExec({
+    'serverless deploy': ({ cwd }) => {
+      text = fs.readFileSync(path.join(cwd, 'serverless-compose.yml'), 'utf8');
+      return { status: 0 };
+    },
+  });
+  await run(root, { fx });
+  assert.doesNotMatch(text, /frameworkVersion/);
+});
+
 test('a compose root reports each service stack left behind', async () => {
   const { result } = await run(composeFixture(), { fx: fakeExec({ 'serverless remove': { status: 1 } }) });
   assert.equal(result.failedStep, 'remove');
@@ -1280,4 +1311,128 @@ test('a successful listing resets the count of failed ones', async () => {
   const { result } = await run(fixture(), { fx, args: { stage: STAGE } });
   assert.equal(fx.calls.filter((c) => c.args[1] === 'list-stacks').length, 6);
   assert.equal(result.result, 'pass');
+});
+
+// --- prepare and cleanup
+
+function hookManifest(hooks = { prepare: { path: 'test/prepare.mjs' }, cleanup: { path: 'test/cleanup.mjs' } }) {
+  const m = manifest();
+  Object.assign(m.test, hooks);
+  return m;
+}
+
+const nodeStep = (script) => (c) => c.step === `node ${script}`;
+
+function hookFixture(hooks) {
+  return fixture({ example: hookManifest(hooks), files: { 'test/prepare.mjs': '', 'test/cleanup.mjs': '' } });
+}
+
+test('prepare runs after install and before deploy, cleanup after remove, both in the copy with the stage, region and dir', async () => {
+  const root = hookFixture();
+  const { result, fx } = await run(root, { args: { region: 'eu-west-1' } });
+  assert.equal(result.result, 'pass');
+  assert.deepEqual(fx.steps(), [
+    'serverless --version',
+    'npm ci',
+    'node test/prepare.mjs',
+    'serverless deploy',
+    'aws cloudformation',
+    'serverless remove',
+    'node test/cleanup.mjs',
+  ]);
+  const deployCwd = fx.calls.find((c) => c.step === 'serverless deploy').cwd;
+  for (const script of ['test/prepare.mjs', 'test/cleanup.mjs']) {
+    const call = fx.calls.find(nodeStep(script));
+    assert.equal(call.cwd, deployCwd);
+    assert.equal(call.env.EXAMPLE_STAGE, result.stage);
+    assert.equal(call.env.EXAMPLE_REGION, 'eu-west-1');
+    assert.equal(call.env.EXAMPLE_DIR, deployCwd);
+  }
+  assert.equal(fx.calls.find(nodeStep('test/cleanup.mjs')).timeoutMs, 10 * MINUTE);
+});
+
+test('a failed prepare deploys nothing, removes nothing and still runs cleanup', async () => {
+  const root = hookFixture();
+  const { result, fx } = await run(root, { fx: fakeExec({ 'node test/prepare.mjs': { status: 1 } }) });
+  assert.equal(result.failedStep, 'prepare');
+  assert.equal(result.detail, 'node test/prepare.mjs exited with code 1');
+  assert.deepEqual(fx.steps(), ['serverless --version', 'npm ci', 'node test/prepare.mjs', 'node test/cleanup.mjs']);
+});
+
+test('a failed install runs neither prepare nor cleanup', async () => {
+  const root = hookFixture();
+  const { result, fx } = await run(root, { fx: fakeExec({ 'npm ci': { status: 1 } }) });
+  assert.equal(result.failedStep, 'install');
+  assert.deepEqual(fx.steps(), ['serverless --version', 'npm ci']);
+});
+
+test('cleanup runs after a failed check and its error is added to the detail', async () => {
+  const root = hookFixture();
+  const { result, fx } = await run(root, {
+    fx: fakeExec({ 'node test/cleanup.mjs': { status: 2 } }),
+    ff: fakeFetch(response(500, 'Internal Server Error')),
+  });
+  assert.equal(result.failedStep, 'check');
+  assert.match(result.detail, /; cleanup: node test\/cleanup\.mjs exited with code 2$/);
+  assert.deepEqual(fx.steps().slice(-2), ['serverless remove', 'node test/cleanup.mjs']);
+});
+
+test('a failed cleanup after a pass fails the run at the cleanup step', async () => {
+  const root = hookFixture();
+  const { result } = await run(root, { fx: fakeExec({ 'node test/cleanup.mjs': { status: 1 } }) });
+  assert.equal(result.result, 'fail');
+  assert.equal(result.failedStep, 'cleanup');
+  assert.equal(result.detail, 'node test/cleanup.mjs exited with code 1');
+});
+
+test('prepare without cleanup runs only prepare', async () => {
+  const root = hookFixture({ prepare: { path: 'test/prepare.mjs' } });
+  const { result, fx } = await run(root);
+  assert.equal(result.result, 'pass');
+  assert.equal(fx.steps().filter((s) => s.startsWith('node ')).join(','), 'node test/prepare.mjs');
+});
+
+test('an interruption during prepare deploys nothing and still runs cleanup without the signal', async () => {
+  const root = hookFixture();
+  const controller = new AbortController();
+  const fx = fakeExec({
+    'node test/prepare.mjs': () => {
+      controller.abort();
+      return { status: 0 };
+    },
+  });
+  const { result } = await run(root, { fx, args: { signal: controller.signal } });
+  assert.equal(result.failedStep, 'prepare');
+  assert.ok(!fx.steps().includes('serverless deploy'));
+  const cleanupCall = fx.calls.find(nodeStep('test/cleanup.mjs'));
+  assert.ok(cleanupCall, fx.steps().join(','));
+  assert.equal(cleanupCall.signal, undefined);
+});
+
+test('CLI: --remove-only runs cleanup after remove, and also when nothing was deployed', async () => {
+  for (const [listing, steps] of [
+    [stackList([`hello-svc-${STAGE}`]), ['aws cloudformation', 'serverless remove', 'node test/cleanup.mjs']],
+    [stackList(), ['aws cloudformation', 'node test/cleanup.mjs']],
+  ]) {
+    const root = hookFixture();
+    const fx = fakeExec({ 'aws cloudformation': listing });
+    const { code } = await cli([DIR, '--remove-only', '--stage', STAGE], root, { exec: fx.exec, env: { AWS_REGION: 'eu-west-1' } });
+    assert.equal(code, 0);
+    assert.deepEqual(fx.steps(), steps);
+    const call = fx.calls.at(-1);
+    assert.equal(call.env.EXAMPLE_STAGE, STAGE);
+    assert.equal(call.env.EXAMPLE_REGION, 'eu-west-1');
+  }
+});
+
+test('CLI: --remove-only exits 1 when cleanup does not complete', async () => {
+  const root = hookFixture();
+  const resultFile = path.join(root, 'r.json');
+  const fx = fakeExec({ 'aws cloudformation': stackList(), 'node test/cleanup.mjs': { status: 1 } });
+  const { code, out } = await cli([DIR, '--remove-only', '--stage', STAGE, '--result-file', resultFile], root, { exec: fx.exec });
+  assert.equal(code, 1);
+  assert.match(out[0], /^FAIL hello /);
+  const result = JSON.parse(fs.readFileSync(resultFile, 'utf8'));
+  assert.equal(result.failedStep, 'cleanup');
+  assert.equal(result.detail, 'node test/cleanup.mjs exited with code 1');
 });

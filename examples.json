@@ -2850,6 +2850,18 @@
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   },
   {
+    "title": "Customer-managed Lambda runtime with Node.js",
+    "name": "aws-node-customer-managed-runtime",
+    "description": "Publish a customer-managed Lambda runtime from a container image and run a Node.js function on it through a runtime alias, with Serverless Compose.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-customer-managed-runtime",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
     "title": "REST API with a JWT authorizer and Amazon Cognito (NodeJS)",
     "name": "aws-node-rest-api-jwt-authorizer",
     "description": "Protect API Gateway REST API endpoints with a JWT authorizer that trusts an Amazon Cognito user pool, require an OAuth scope on one of them, and read the caller's claims in Node.js.",

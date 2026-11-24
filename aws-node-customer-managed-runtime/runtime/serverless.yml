@@ -1,0 +1,37 @@
+# The runtime publisher: a customer-managed runtime, its first version, and the
+# alias `stable` that functions use. The version's image must already be in the
+# ECR repository named after this service and stage (see README.md → Deploy).
+service: cmr-runtime
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  region: us-east-1
+
+resources:
+  Resources:
+    Runtime:
+      Type: AWS::Lambda::Runtime
+      Properties:
+        # Lambda keeps a deleted runtime's name reserved for up to 30 days, so the
+        # name includes the stage.
+        Name: platform-node24-${sls:stage}
+        Description: Node.js 24 with the platform team's runtime info file
+    RuntimeVersionV1:
+      Type: AWS::Lambda::RuntimeVersion
+      Properties:
+        RuntimeName: !Select [1, !Split ['runtime/', !Ref Runtime]]
+        Name: v1
+        ImageUri: ${aws:accountId}.dkr.ecr.${aws:region}.amazonaws.com/${self:service}-${sls:stage}:v1
+    RuntimeAliasStable:
+      Type: AWS::Lambda::RuntimeAlias
+      Properties:
+        RuntimeName: !Select [1, !Split ['runtime/', !Ref Runtime]]
+        Name: stable
+        RuntimeVersion: !Select [1, !Split ['version/', !Ref RuntimeVersionV1]]
+
+  Outputs:
+    RuntimeAliasArn:
+      Description: The runtime alias ARN that functions set as their runtime
+      Value: !Ref RuntimeAliasStable
