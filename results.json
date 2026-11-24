@@ -119,6 +119,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45453117910"
     }
   },
+  "aws-node-rest-api-jwt-authorizer": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-24",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45481631397"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-24",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45481631397"
+    }
+  },
   "aws-node-scheduled-cron": {
     "runs": [
       {
