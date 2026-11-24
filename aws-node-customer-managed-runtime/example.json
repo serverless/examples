@@ -1,0 +1,34 @@
+{
+  "title": "Customer-managed Lambda runtime with Node.js",
+  "description": "Publish a customer-managed Lambda runtime from a container image and run a Node.js function on it through a runtime alias, with Serverless Compose.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "ecr",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "slow",
+    "prepare": {
+      "path": "test/prepare.mjs"
+    },
+    "cleanup": {
+      "path": "test/cleanup.mjs"
+    },
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}

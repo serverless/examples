@@ -1,0 +1,76 @@
+# A REST API whose endpoints API Gateway protects with a JWT authorizer. The
+# issuer is an Amazon Cognito user pool in the same service: API Gateway checks
+# each token's signature, issuer, audience, expiry and scopes itself, so no
+# authorizer function runs.
+service: rest-jwt-authorizer
+
+provider:
+  name: aws
+  runtime: nodejs26.x
+  architecture: arm64
+  apiGateway:
+    authorizers:
+      # The key is the name http events use to reference the authorizer.
+      users:
+        type: jwt
+        # The pool's ProviderURL is its tokens' `iss` claim,
+        # https://cognito-idp.<region>.amazonaws.com/<user pool ID>.
+        issuerUrl: !GetAtt UserPool.ProviderURL
+        # The app client ID: ID tokens carry it in `aud`, access tokens in
+        # `client_id`, and API Gateway accepts either.
+        audience: !Ref UserPoolClient
+        # Cognito signs its tokens with RS256.
+        algorithms:
+          - rs256
+
+functions:
+  # No authorizer: anyone can call it.
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+  # No scopes: with a Cognito issuer, API Gateway accepts ID tokens only.
+  me:
+    handler: handler.me
+    events:
+      - http:
+          path: me
+          method: get
+          authorizer: users
+  # Scopes: API Gateway accepts access tokens that carry one of them only.
+  account:
+    handler: handler.account
+    events:
+      - http:
+          path: account
+          method: get
+          authorizer:
+            name: users
+            scopes:
+              - aws.cognito.signin.user.admin
+
+resources:
+  Resources:
+    # CloudFormation names the pool and the app client, so every stage gets its own.
+    UserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolTier: LITE
+    UserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        UserPoolId: !Ref UserPool
+        GenerateSecret: false
+        # Lets an administrator get tokens for a user with the AWS CLI, as the
+        # README does. A web or mobile app would use the hosted login pages or
+        # ALLOW_USER_SRP_AUTH instead.
+        ExplicitAuthFlows:
+          - ALLOW_ADMIN_USER_PASSWORD_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+  Outputs:
+    UserPoolId:
+      Value: !Ref UserPool
+    UserPoolClientId:
+      Value: !Ref UserPoolClient
