@@ -24,7 +24,7 @@ This example runs a Python function with PyTorch on an NVIDIA GPU. The function 
 
 ## Prerequisites
 
-- [Docker](https://docs.docker.com/get-docker/), running: the deploy builds the image on your machine. The PyTorch base image is about 5 GB to download.
+- [Docker](https://docs.docker.com/get-docker/), running: the deploy builds the image on your machine. The PyTorch base image is about 5 GB to download and the built image about 10 GB on disk, so keep about 20 GB free for Docker.
 - [Node.js](https://nodejs.org/), to install the Serverless Framework CLI: `npm i -g serverless`. The example needs version 4.47.0 or later, the first with `capacityProvider.gpu`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - The EC2 service quota **Running On-Demand G and VT instances** of at least 4 vCPUs in the Region you deploy to. Its default is 0, so request an increase in the [Service Quotas console](https://console.aws.amazon.com/servicequotas/home/services/ec2/quotas/) first.
@@ -41,7 +41,7 @@ serverless deploy
 
 Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
 
-The deploy takes 15 minutes or more: it pushes the image, then Lambda launches a GPU instance and starts the function on it. You should see output like this:
+The deploy takes 15 to 25 minutes: it pushes the image, then Lambda launches a GPU instance and starts the function on it. Pulling the large image can make the first execution environment run past its initialization timeout; Lambda then starts a replacement, sometimes on another instance, up to the capacity provider's `maxVCpuCount`. You should see output like this:
 
 ```text
 Deploying "aws-python-gpu-managed-instances" to stage "dev" (us-east-1)
@@ -89,7 +89,7 @@ provider:
           - g6f.large
           - g6f.xlarge
       scaling:
-        maxVCpuCount: 12
+        maxVCpuCount: 4
 
 functions:
   matmul:
@@ -105,7 +105,7 @@ functions:
 ```
 
 - `provider.ecr.images.pytorch` builds the image from the `Dockerfile`. `provenance: 'false'` pushes a single-platform image, the format Lambda accepts.
-- `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount` caps how many instances the capacity provider launches.
+- `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount: 4` caps the instances the capacity provider runs at once, and so the cost: two `g6f.large` (2 vCPUs each) or one `g6f.xlarge` (4 vCPUs), the 4 vCPUs of G instance quota the prerequisites ask for.
 - `gpu.memory: 3` asks for at least 3 GB of GPU memory. Lambda gives each execution environment one GPU, or one GPU fraction on `g6f` instances.
 - `scaling` keeps one execution environment running, so the function answers right away.
 
@@ -141,7 +141,11 @@ While the example is deployed, the GPU instance runs and EC2 bills it by the sec
 serverless remove
 ```
 
-The remove takes several minutes while Lambda stops the instances.
+The remove takes several minutes while Lambda stops the instances. It keeps the capacity provider's own log group; delete it as well, with the stage and Region you deployed to:
+
+```bash
+aws logs delete-log-group --log-group-name /aws/lambda/capacity-provider/aws-python-gpu-managed-instances-dev-gpu
+```
 
 ## Next steps
 
