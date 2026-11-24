@@ -10,7 +10,11 @@
 //   region?                     string
 //   priority?                   number
 //   onboarding?                 boolean
-//   test?                       { tier: "fast"|"slow", checks: Check[], timeoutMinutes?, quarantine?: { reason, since } }
+//   test?                       { tier: "fast"|"slow", checks: Check[], timeoutMinutes?, quarantine?: { reason, since },
+//                                 prepare?: { path }, cleanup?: { path } }
+//
+// prepare and cleanup name Node.js scripts the live test runs before deploy and
+// after remove; cleanup needs prepare.
 //
 // A Check has exactly one key:
 //   http:   { output, path?, status?, contains? }   status or contains is required
@@ -31,7 +35,8 @@ const CHECK_KINDS = ['http', 'invoke', 'script'];
 const KEYS = {
   root: ['dir', 'title', 'description', 'language', 'platform', 'framework', 'author', 'services', 'region', 'priority', 'onboarding', 'test'],
   author: ['name', 'link', 'avatar'],
-  test: ['tier', 'checks', 'timeoutMinutes', 'quarantine'],
+  test: ['tier', 'checks', 'timeoutMinutes', 'quarantine', 'prepare', 'cleanup'],
+  hook: ['path'],
   quarantine: ['reason', 'since'],
   http: ['output', 'path', 'status', 'contains'],
   invoke: ['function', 'event', 'args', 'contains'],
@@ -122,6 +127,19 @@ function validateTest(errors, t) {
 
   if (t.timeoutMinutes !== undefined && !(Number.isFinite(t.timeoutMinutes) && t.timeoutMinutes > 0)) {
     errors.push('test.timeoutMinutes: must be a positive number');
+  }
+
+  for (const hook of ['prepare', 'cleanup']) {
+    if (t[hook] === undefined) continue;
+    if (!isObject(t[hook])) {
+      errors.push(`test.${hook}: must be an object with path`);
+      continue;
+    }
+    rejectUnknownKeys(errors, t[hook], KEYS.hook, `test.${hook}.`);
+    requireString(errors, t[hook], 'path', `test.${hook}.path`);
+  }
+  if (t.cleanup !== undefined && t.prepare === undefined) {
+    errors.push('test.cleanup: needs test.prepare; cleanup runs only after a prepare script ran');
   }
 
   if (t.quarantine !== undefined) {

@@ -15,7 +15,7 @@
 //                        blocks) in files tracked by git
 //   generated-readme     README.md frontmatter and badge match the manifest
 //   generated-catalogue  the examples.json entry matches the manifest
-//   check-paths          script check paths and invoke event files exist
+//   check-paths          script check paths, invoke event files and prepare and cleanup scripts exist
 //
 // An example whose manifest sets `"onboarding": true` is exempt from the
 // lockfile and exact-version rules only.
@@ -329,6 +329,12 @@ function checkPaths(exampleDir, manifest) {
       errors.push(`check-paths: test.checks[${i}]: ${what} ${target} does not exist`);
     }
   });
+  for (const hook of ['prepare', 'cleanup']) {
+    const target = manifest.test?.[hook]?.path;
+    if (typeof target === 'string' && !fs.existsSync(path.join(exampleDir, target))) {
+      errors.push(`check-paths: test.${hook}: script ${target} does not exist`);
+    }
+  }
   return errors;
 }
 

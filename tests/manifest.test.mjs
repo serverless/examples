@@ -49,6 +49,8 @@ test('optional fields with the right types are valid', () => {
     { script: { path: 'test/smoke.mjs' } },
   );
   m.test.quarantine = { reason: 'Upstream API rate limits', since: '2026-11-01' };
+  m.test.prepare = { path: 'test/prepare.mjs' };
+  m.test.cleanup = { path: 'test/cleanup.mjs' };
   assert.deepEqual(validateManifest(m), []);
 });
 
@@ -122,6 +124,7 @@ test('unknown keys are errors naming the key and its path, at every level', () =
     [(m) => { m.test.checks[0].http.statusCode = 200; }, 'test.checks[0].http.statusCode'],
     [(m) => { m.test.checks = [{ invoke: { function: 'f', contains: 'ok', payload: '{}' } }]; }, 'test.checks[0].invoke.payload'],
     [(m) => { m.test.checks = [{ script: { path: 'test/smoke.mjs', args: [] } }]; }, 'test.checks[0].script.args'],
+    [(m) => { m.test.prepare = { path: 'test/prepare.mjs', args: [] }; }, 'test.prepare.args'],
   ];
   for (const [mutate, keyPath] of cases) {
     const m = validManifest();
@@ -338,4 +341,25 @@ test('loadManifest names the file when the JSON is invalid', () => {
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('prepare and cleanup need a path', () => {
+  for (const hook of ['prepare', 'cleanup']) {
+    for (const value of [{}, { path: '' }, 'test/prepare.mjs']) {
+      const m = validManifest();
+      m.test.prepare = { path: 'test/prepare.mjs' };
+      m.test[hook] = value;
+      const errors = validateManifest(m);
+      assert.equal(errors.length, 1, `${hook}=${JSON.stringify(value)}: ${errors.join('\n')}`);
+      assert.match(errors[0], new RegExp(`test\\.${hook}`));
+    }
+  }
+});
+
+test('cleanup without prepare is an error', () => {
+  const m = validManifest();
+  m.test.cleanup = { path: 'test/cleanup.mjs' };
+  const errors = validateManifest(m);
+  assert.equal(errors.length, 1, errors.join('\n'));
+  assert.match(errors[0], /test\.cleanup: needs test\.prepare/);
 });

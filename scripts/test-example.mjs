@@ -34,6 +34,12 @@
 // `SKIP <dir> quarantined: <reason>` for a quarantined example.
 // Exit code: 0 pass or skip, 1 a failed step (remove included), 2 usage or manifest error.
 //
+// A manifest's test.prepare script runs after install and before deploy, and
+// its test.cleanup script after remove, whenever prepare started (also when a
+// step failed or the run was interrupted) and in --remove-only runs. Both run
+// with `node` in the copy, with EXAMPLE_STAGE, EXAMPLE_REGION and EXAMPLE_DIR
+// set; cleanup must pass when there is nothing to remove.
+//
 // On SIGINT or SIGTERM the current step stops, remove runs, the result records
 // the stopped step as `interrupted`, and the exit code is 1. A second signal
 // kills every running command's process group, exits at once and names the
@@ -67,6 +73,7 @@ const MINUTE = 60_000;
 const DEFAULT_TIMEOUT_MINUTES = 15;
 const DEFAULT_REGION = 'us-east-1';
 const REMOVE_TIMEOUT_MS = 15 * MINUTE;
+const CLEANUP_TIMEOUT_MS = 10 * MINUTE;
 const VERSION_TIMEOUT_MS = 2 * MINUTE;
 // After a remove that exits non-zero: how often and how long to watch the stage's stacks.
 const REMOVE_POLL_MS = 10_000;
@@ -126,7 +133,7 @@ export class UsageError extends Error {
  * @property {string} region            the region every command used
  * @property {string} startedAt         ISO 8601
  * @property {number} durationSeconds
- * @property {'install'|'deploy'|'check'|'remove'} [failedStep]  the first step that did not complete
+ * @property {'install'|'prepare'|'deploy'|'check'|'remove'|'cleanup'} [failedStep]  the first step that did not complete
  * @property {string} [detail]          what went wrong, or why the example was skipped
  * @property {string} [leftBehind]      stacks a failed remove may have left, comma-separated
  * In `detail` and `leftBehind` every 12-digit number reads 123456789012.
@@ -142,8 +149,9 @@ export function newStage(now = Date.now()) {
 
 /**
  * Copies the example at `<root>/<dir>` to a temporary directory, installs its
- * dependencies, deploys it with a new stage, reads the stack outputs, runs the
- * manifest's checks and removes the deployment. Every external command goes
+ * dependencies, runs the manifest's prepare script, deploys it with a new stage,
+ * reads the stack outputs, runs the manifest's checks, removes the deployment
+ * and runs the manifest's cleanup script. Every external command goes
  * through `exec` (signature of runCommand), HTTP through `fetchImpl`. The
  * region is `region`, else the manifest's, else AWS_REGION or
  * AWS_DEFAULT_REGION from `env`, else us-east-1. When `signal` aborts, the
@@ -230,6 +238,7 @@ export async function runExample({
 
   const { copy, cleanup } = copyExample(root, dir, 'example-run-');
   let deployStarted = false;
+  let prepareStarted = false;
   let resolvedVersion = 'unknown';
   let leftBehind;
   try {
@@ -241,6 +250,12 @@ export async function runExample({
         for (const { cwd, cmd, args } of installCommands(copy)) {
           await runOrThrow(exec, cmd, args, { cwd, step: 'install', timeoutMs: left(), signal });
         }
+      });
+
+      await attempt('prepare', () => {
+        if (!manifest.test.prepare) return undefined;
+        prepareStarted = true;
+        return runHook({ exec, env, hook: 'prepare', script: manifest.test.prepare.path, cwd: copy, stage, region, timeoutMs: left(), signal });
       });
 
       await attempt('deploy', () => {
@@ -287,6 +302,15 @@ export async function runExample({
           }
         }
       }
+      if (prepareStarted) {
+        const error = await runCleanupHook({ exec, env, manifest, cwd: copy, stage, region, log });
+        if (error && failure.step) {
+          failure.detail += `; cleanup: ${error}`;
+        } else if (error) {
+          failure.step = 'cleanup';
+          failure.detail = error;
+        }
+      }
     }
   } finally {
     cleanup();
@@ -311,6 +335,7 @@ export async function runExample({
  * in `-<stage>`, installs dependencies where a serverless.yml loads plugins and
  * runs `serverless remove`. Nothing deployed is a pass with the detail
  * `nothing deployed`. When the stacks cannot be listed, remove runs anyway.
+ * The manifest's cleanup script runs last, whatever remove found.
  * The region is chosen as in runExample. Resolves to a Result.
  */
 export async function removeOnly({
@@ -379,6 +404,12 @@ export async function removeOnly({
         });
       }
     }
+    const error = await runCleanupHook({ exec, env, manifest, cwd: copy, stage, region, log });
+    if (error && result.result === 'fail') {
+      result.detail += `; cleanup: ${error}`;
+    } else if (error) {
+      Object.assign(result, { result: 'fail', failedStep: 'cleanup', detail: error });
+    }
   } finally {
     cleanup();
   }
@@ -389,6 +420,25 @@ export async function removeOnly({
     fs.writeFileSync(resultFile, `${JSON.stringify(result, null, 2)}\n`);
   }
   return result;
+}
+
+// Runs a test.prepare or test.cleanup script with node in `cwd`.
+function runHook({ exec, env, hook, script, cwd, stage, region, timeoutMs, signal }) {
+  const hookEnv = { ...env, EXAMPLE_STAGE: stage, EXAMPLE_REGION: region, EXAMPLE_DIR: cwd };
+  return runOrThrow(exec, 'node', [script], { cwd, env: hookEnv, step: hook, timeoutMs, signal });
+}
+
+// Runs the manifest's cleanup script, when it has one, with its own deadline and
+// no signal, like remove. Resolves to undefined, or to why it did not complete.
+async function runCleanupHook({ exec, env, manifest, cwd, stage, region, log }) {
+  if (!manifest.test.cleanup) return undefined;
+  try {
+    await runHook({ exec, env, hook: 'cleanup', script: manifest.test.cleanup.path, cwd, stage, region, timeoutMs: CLEANUP_TIMEOUT_MS });
+    return undefined;
+  } catch (err) {
+    log(`[cleanup] ${err.message}`);
+    return err.message;
+  }
 }
 
 // Result files are uploaded as artifacts of a public repository, and AWS error
