@@ -1,0 +1,10 @@
+# Two services: `runtime` publishes a customer-managed runtime, `app` runs a
+# function on it. Compose deploys `runtime` first, because `app` reads its output.
+services:
+  runtime:
+    path: runtime
+
+  app:
+    path: app
+    params:
+      runtimeAliasArn: ${runtime.RuntimeAliasArn}
