@@ -25,9 +25,8 @@ provider:
           - g6f.large
           - g6f.xlarge
       scaling:
-        # Caps the instances the capacity provider runs at once, and so the cost:
-        # 4 vCPUs, the G instance quota the README asks for.
-        maxVCpuCount: 4
+        # Caps the instances the capacity provider launches, and so the cost.
+        maxVCpuCount: 12
 
 functions:
   matmul:

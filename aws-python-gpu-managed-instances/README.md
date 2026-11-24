@@ -41,7 +41,7 @@ serverless deploy
 
 Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
 
-The deploy takes 15 to 25 minutes: it pushes the image, then Lambda launches a GPU instance and starts the function on it. Pulling the large image can make the first execution environment run past its initialization timeout; Lambda then starts a replacement, sometimes on another instance, up to the capacity provider's `maxVCpuCount`. You should see output like this:
+The deploy takes 15 to 25 minutes: it pushes the image, then Lambda launches a GPU instance and starts the function on it. Pulling the large image can make the first execution environment run past its initialization timeout; Lambda then starts a replacement, sometimes on another instance, within the capacity provider's `maxVCpuCount` and your G instance quota. In our runs it launched up to three `g6f.large` instances, and all of them ran, and billed, until `serverless remove`. You should see output like this:
 
 ```text
 Deploying "aws-python-gpu-managed-instances" to stage "dev" (us-east-1)
@@ -89,7 +89,7 @@ provider:
           - g6f.large
           - g6f.xlarge
       scaling:
-        maxVCpuCount: 4
+        maxVCpuCount: 12
 
 functions:
   matmul:
@@ -105,7 +105,7 @@ functions:
 ```
 
 - `provider.ecr.images.pytorch` builds the image from the `Dockerfile`. `provenance: 'false'` pushes a single-platform image, the format Lambda accepts.
-- `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount: 4` caps the instances the capacity provider runs at once, and so the cost: two `g6f.large` (2 vCPUs each) or one `g6f.xlarge` (4 vCPUs), the 4 vCPUs of G instance quota the prerequisites ask for.
+- `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount` caps how many instances the capacity provider launches; 12 is the lowest value the Framework accepts. Your account's G instance quota caps them too.
 - `gpu.memory: 3` asks for at least 3 GB of GPU memory. Lambda gives each execution environment one GPU, or one GPU fraction on `g6f` instances.
 - `scaling` keeps one execution environment running, so the function answers right away.
 
@@ -135,7 +135,7 @@ Capacity providers run their instances in a VPC. The Framework doesn't create VP
 
 ## Cost and cleanup
 
-While the example is deployed, the GPU instance runs and EC2 bills it by the second, whether or not you invoke the function; Lambda adds a management charge for the instance and bills each request. ECR bills for storing the image, and CloudWatch Logs for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [EC2 On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/), [ECR pricing](https://aws.amazon.com/ecr/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the instances, the function, the VPC and the log group, when you are done:
+While the example is deployed, the GPU instances run and EC2 bills them by the second, whether or not you invoke the function; Lambda adds a management charge for the instance and bills each request. ECR bills for storing the image, and CloudWatch Logs for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [EC2 On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/), [ECR pricing](https://aws.amazon.com/ecr/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the instances, the function, the VPC and the log group, when you are done:
 
 ```bash
 serverless remove
