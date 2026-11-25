@@ -1,0 +1,30 @@
+{
+  "title": "Node SQS Producer Consumer on AWS",
+  "description": "This example shows how a Lambda function behind an HTTP API puts jobs on an Amazon SQS queue and a worker function processes them in batches, reporting failed messages so they retry and then move to a dead-letter queue.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "priority": 1,
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "apigateway",
+    "sqs",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}
