@@ -199,6 +199,7 @@ serverless deploy
 | [Serverless Compose EventBridge Custom Event Bus Subscribers](https://github.com/serverless/examples/tree/v4/compose-eventbridge-custom-bus) <br/> Own an EventBridge Custom Event Bus in a stateful service and subscribe functions from other services to it, with ordered and batched delivery, wired together with Serverless Compose | nodeJS |
 | [Customer-managed Lambda runtime with Node.js](https://github.com/serverless/examples/tree/v4/aws-node-customer-managed-runtime) <br/> Publish a customer-managed Lambda runtime from a container image and run a Node.js function on it through a runtime alias, with Serverless Compose. | nodeJS |
 | [REST API with a JWT authorizer and Amazon Cognito (NodeJS)](https://github.com/serverless/examples/tree/v4/aws-node-rest-api-jwt-authorizer) <br/> Protect API Gateway REST API endpoints with a JWT authorizer that trusts an Amazon Cognito user pool, require an OAuth scope on one of them, and read the caller's claims in Node.js. | nodeJS |
+| [GPU function with PyTorch on Lambda Managed Instances](https://github.com/serverless/examples/tree/v4/aws-python-gpu-managed-instances) <br/> This example runs a Python function with PyTorch on an NVIDIA GPU, using AWS Lambda Managed Instances and the Serverless Framework. | python |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Community Examples

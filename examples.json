@@ -2872,5 +2872,17 @@
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, Inc.",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "GPU function with PyTorch on Lambda Managed Instances",
+    "name": "aws-python-gpu-managed-instances",
+    "description": "This example runs a Python function with PyTorch on an NVIDIA GPU, using AWS Lambda Managed Instances and the Serverless Framework.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-python-gpu-managed-instances",
+    "framework": "v4",
+    "language": "python",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   }
 ]
