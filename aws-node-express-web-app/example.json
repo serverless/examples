@@ -1,0 +1,30 @@
+{
+  "title": "Express web app on AWS Lambda Web Functions",
+  "description": "This example deploys a plain Express server to AWS Lambda Web Functions with the Serverless Framework. The server has no Lambda-specific code and answers on a public HTTPS endpoint.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "http": {
+          "output": "ApiWebFunctionUrl",
+          "path": "/hello/serverless",
+          "status": 200,
+          "contains": "Hello, serverless!"
+        }
+      }
+    ]
+  }
+}
