@@ -206,6 +206,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
     }
   },
+  "aws-node-step-functions": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45721910600"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45721910600"
+    }
+  },
   "aws-node-text-analysis-via-sns-post-processing": {
     "runs": [
       {
