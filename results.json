@@ -83,19 +83,19 @@
         "result": "pass",
         "date": "2026-11-25",
         "frameworkVersion": "4.47.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45703476586"
       },
       {
         "result": "pass",
-        "date": "2026-11-24",
-        "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/45453117910"
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
       }
     ],
     "verified": {
       "date": "2026-11-25",
       "frameworkVersion": "4.47.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45703476586"
     }
   },
   "aws-node-http-api": {
