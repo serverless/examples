@@ -1,0 +1,10 @@
+{
+  "name": "aws-node-step-functions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Node.js AWS Step Functions state machine deployed with the Serverless Framework",
+  "type": "module",
+  "devDependencies": {
+    "serverless-step-functions": "3.31.2"
+  }
+}

@@ -1,0 +1,60 @@
+# A Step Functions state machine that runs two Lambda functions with a wait
+# between them. The serverless-step-functions plugin turns the stepFunctions
+# section into the state machine and its IAM role.
+service: aws-node-step-functions
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+plugins:
+  - serverless-step-functions
+
+functions:
+  validateOrder:
+    handler: handler.validateOrder
+  processOrder:
+    handler: handler.processOrder
+
+stepFunctions:
+  stateMachines:
+    orderWorkflow:
+      # id fixes the logical ID, so the stack output is OrderWorkflowArn on every stage.
+      id: OrderWorkflow
+      name: order-workflow-${sls:stage}
+      definition:
+        StartAt: ValidateOrder
+        States:
+          ValidateOrder:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [validateOrder, Arn]
+            Next: IsValid
+          IsValid:
+            Type: Choice
+            Choices:
+              - Variable: $.valid
+                BooleanEquals: true
+                Next: WaitTenSeconds
+            Default: Rejected
+          WaitTenSeconds:
+            Type: Wait
+            Seconds: 10
+            Next: ProcessOrder
+          ProcessOrder:
+            Type: Task
+            Resource:
+              Fn::GetAtt: [processOrder, Arn]
+            Retry:
+              - ErrorEquals: [States.ALL]
+                IntervalSeconds: 2
+                MaxAttempts: 3
+                BackoffRate: 2
+            End: true
+          Rejected:
+            Type: Pass
+            Parameters:
+              orderId.$: $.orderId
+              status: rejected
+            End: true
