@@ -2898,5 +2898,17 @@
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, Inc.",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS Step Functions state machine (NodeJS)",
+    "name": "aws-node-step-functions",
+    "description": "Deploy a Step Functions state machine that runs two Node.js Lambda functions with a retry, a wait and a choice, and start an execution with serverless invoke stepf.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-step-functions",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   }
 ]
