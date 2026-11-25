@@ -1,0 +1,29 @@
+{
+  "title": "AWS Upload a file to S3 to trigger a Lambda function example in NodeJS",
+  "description": "This example shows how an upload to an Amazon S3 bucket triggers a Lambda function that reads the new object and writes a result back to the bucket.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "priority": 10,
+  "author": {
+    "name": "walgarch",
+    "link": "https://github.com/walgarch",
+    "avatar": "https://avatars1.githubusercontent.com/u/32451330?v=4&s=140"
+  },
+  "services": [
+    "lambda",
+    "s3",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}

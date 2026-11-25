@@ -1,10 +1,6 @@
-service: upload-to-s3-and-postprocess
+service: s3-postprocess
 
 frameworkVersion: '4'
-
-custom:
-  defaultBucket: upload-postprocess-${sls:stage}-${aws:accountId}
-  bucket: ${env:BUCKET, self:custom.defaultBucket}
 
 provider:
   name: aws
@@ -13,17 +9,34 @@ provider:
   iam:
     role:
       statements:
+        # Read what arrives under uploads/ and write results under processed/.
         - Effect: Allow
           Action:
-            - s3:*
-          Resource: "*"
+            - s3:GetObject
+          Resource: arn:aws:s3:::${self:custom.bucket}/uploads/*
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+          Resource: arn:aws:s3:::${self:custom.bucket}/processed/*
+
+custom:
+  # Bucket names are global: the stage and the account ID keep this one unique.
+  bucket: upload-postprocess-${sls:stage}-${aws:accountId}
 
 functions:
   postprocess:
     handler: handler.postprocess
+    environment:
+      OUTPUT_PREFIX: processed/
     events:
       - s3:
           bucket: ${self:custom.bucket}
           event: s3:ObjectCreated:*
           rules:
-            - suffix: .png
+            - prefix: uploads/
+
+resources:
+  Outputs:
+    UploadBucketName:
+      Description: The bucket to upload files to, under uploads/
+      Value: ${self:custom.bucket}
