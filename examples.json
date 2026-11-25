@@ -798,14 +798,15 @@
   {
     "title": "AWS Data Processing example in NodeJS",
     "name": "aws-node-text-analysis-via-sns-post-processing",
-    "description": "This example demonstrates how to setup a simple data processing pipeline.",
+    "description": "This example shows how a Lambda function behind an HTTP API publishes a note to an Amazon SNS topic and a second function subscribed to the topic analyzes it.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-text-analysis-via-sns-post-processing",
     "framework": "v4",
     "language": "node",
     "platform": "aws",
     "authorLink": "https://github.com/adambrgmn",
     "authorName": "Adam Bergman",
-    "authorAvatar": "https://avatars1.githubusercontent.com/u/13746650?v=4&s=140"
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13746650?v=4&s=140",
+    "priority": 10
   },
   {
     "title": "AWS Send SMS Message with Twilio example in NodeJS",
@@ -882,14 +883,15 @@
   {
     "title": "AWS Upload a file to S3 to trigger a Lambda function example in NodeJS",
     "name": "aws-node-upload-to-s3-and-postprocess",
-    "description": "This example shows how to upload a file to S3 using a HTML form, and have S3 trigger a lambda function.",
+    "description": "This example shows how an upload to an Amazon S3 bucket triggers a Lambda function that reads the new object and writes a result back to the bucket.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-upload-to-s3-and-postprocess",
     "framework": "v4",
     "language": "node",
     "platform": "aws",
     "authorLink": "https://github.com/walgarch",
     "authorName": "walgarch",
-    "authorAvatar": "https://avatars1.githubusercontent.com/u/32451330?v=4&s=140"
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/32451330?v=4&s=140",
+    "priority": 10
   },
   {
     "title": "Next.js and Express web apps on one custom domain",
@@ -2880,6 +2882,18 @@
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-python-gpu-managed-instances",
     "framework": "v4",
     "language": "python",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AppSync GraphQL API with DynamoDB (NodeJS)",
+    "name": "aws-node-appsync-dynamodb",
+    "description": "An AWS AppSync GraphQL API with API key authentication and two JavaScript resolvers that write and read posts in a DynamoDB table, from the built-in appSync block of serverless.yml.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-appsync-dynamodb",
+    "framework": "v4",
+    "language": "node",
     "platform": "aws",
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, Inc.",

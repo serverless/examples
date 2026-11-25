@@ -44,9 +44,9 @@ You should see output like this:
 
 ```text
 Deploying "aws-python-scheduled-cron" to stage "dev" (us-east-1)
-✔ Service deployed to stack aws-python-scheduled-cron-dev (102s)
+✔ Service deployed to stack aws-python-scheduled-cron-dev (103s)
 functions:
-  rateHandler: aws-python-scheduled-cron-dev-rateHandler (2.9 kB)
+  rateHandler: aws-python-scheduled-cron-dev-rateHandler (3.6 kB)
 ```
 
 The schedule is active as soon as the deploy finishes; there is no further step.
@@ -59,12 +59,34 @@ Invoke the function now instead of waiting for the next run, and print its log:
 serverless invoke --function rateHandler --log
 ```
 
-The log printed after the response contains the line the handler writes, `Your cron function ran at`, followed by the current time.
+The function returns nothing, so the response is `null`. The log printed after it contains the line the handler writes, `Your cron function ran at`, followed by the current time in UTC:
 
-To see the scheduled runs, read the function's logs. Each minute adds one line:
+```text
+null
+
+----------------------
+
+START - 85562358-d2ef-43af-9ee5-43cc94ef2aed - Version: $LATEST
+2026-11-25 20:43:43.932 - 85562358-d2ef-43af-9ee5-43cc94ef2aed - [INFO]
+Your cron function ran at 20:43:43.932250
+
+REPORT - 85562358-d2ef-43af-9ee5-43cc94ef2aed
+Duration: 2.12 ms	Billed Duration: 3 ms	Memory Size: 1024 MB	Max Memory Used: 33 MB
+```
+
+To see the scheduled runs, read the function's logs. Each minute adds one run:
 
 ```bash
 serverless logs --function rateHandler
+```
+
+```text
+START - 8d3a87fb-dbd1-47ac-b578-baa6676a9e11 - Version: $LATEST
+2026-11-25 20:44:33.725 - 8d3a87fb-dbd1-47ac-b578-baa6676a9e11 - [INFO]
+Your cron function ran at 20:44:33.725330
+END - 8d3a87fb-dbd1-47ac-b578-baa6676a9e11
+REPORT - 8d3a87fb-dbd1-47ac-b578-baa6676a9e11
+Duration: 1.74 ms	Billed Duration: 2 ms	Memory Size: 1024 MB	Max Memory Used: 33 MB
 ```
 
 ## How it works
