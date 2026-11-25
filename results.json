@@ -176,6 +176,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
     }
   },
+  "aws-node-text-analysis-via-sns-post-processing": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45708747913"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45708747913"
+    }
+  },
   "aws-node-upload-to-s3-and-postprocess": {
     "runs": [
       {
