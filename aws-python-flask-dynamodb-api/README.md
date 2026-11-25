@@ -40,12 +40,16 @@ npm install
 serverless deploy
 ```
 
+With npm 12 or later, `npm install` ends with a warning that it blocked the install script of `es5-ext`, a dependency of the plugin. That script only prints a message, so the example needs nothing from it.
+
 Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
 
 You should see output like this:
 
 ```text
 Deploying "aws-python-flask-dynamodb-api" to stage "dev" (us-east-1)
+Using Python specified in "runtime": python3.15
+Packaging Python WSGI handler...
 ✔ Service deployed to stack aws-python-flask-dynamodb-api-dev (66s)
 endpoints:
   ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
