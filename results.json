@@ -149,6 +149,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
     }
   },
+  "aws-node-nextjs-web-app": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45721506301"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45721506301"
+    }
+  },
   "aws-node-rest-api-jwt-authorizer": {
     "runs": [
       {
