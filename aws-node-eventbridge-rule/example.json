@@ -1,0 +1,28 @@
+{
+  "title": "Node EventBridge Rule on AWS",
+  "description": "This example shows how an Amazon EventBridge rule on the default event bus invokes a Lambda function only for the events that match its content filter.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "eventbridge",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}

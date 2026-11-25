@@ -201,6 +201,7 @@ serverless deploy
 | [REST API with a JWT authorizer and Amazon Cognito (NodeJS)](https://github.com/serverless/examples/tree/v4/aws-node-rest-api-jwt-authorizer) <br/> Protect API Gateway REST API endpoints with a JWT authorizer that trusts an Amazon Cognito user pool, require an OAuth scope on one of them, and read the caller's claims in Node.js. | nodeJS |
 | [GPU function with PyTorch on Lambda Managed Instances](https://github.com/serverless/examples/tree/v4/aws-python-gpu-managed-instances) <br/> This example runs a Python function with PyTorch on an NVIDIA GPU, using AWS Lambda Managed Instances and the Serverless Framework. | python |
 | [AppSync GraphQL API with DynamoDB (NodeJS)](https://github.com/serverless/examples/tree/v4/aws-node-appsync-dynamodb) <br/> An AWS AppSync GraphQL API with API key authentication and two JavaScript resolvers that write and read posts in a DynamoDB table, from the built-in appSync block of serverless.yml. | nodeJS |
+| [Node EventBridge Rule on AWS](https://github.com/serverless/examples/tree/v4/aws-node-eventbridge-rule) <br/> This example shows how an Amazon EventBridge rule on the default event bus invokes a Lambda function only for the events that match its content filter. | nodeJS |
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Community Examples

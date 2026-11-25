@@ -2898,5 +2898,17 @@
     "authorLink": "https://github.com/serverless",
     "authorName": "Serverless, Inc.",
     "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "Node EventBridge Rule on AWS",
+    "name": "aws-node-eventbridge-rule",
+    "description": "This example shows how an Amazon EventBridge rule on the default event bus invokes a Lambda function only for the events that match its content filter.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-eventbridge-rule",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
   }
 ]
