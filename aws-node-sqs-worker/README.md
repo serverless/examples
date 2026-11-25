@@ -49,8 +49,8 @@ Deploying "sqs-worker" to stage "dev" (us-east-1)
 endpoint: POST - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/jobs
 
 functions:
-  producer: sqs-worker-dev-producer (8 kB)
-  worker: sqs-worker-dev-worker (8 kB)
+  producer: sqs-worker-dev-producer (8.1 kB)
+  worker: sqs-worker-dev-worker (8.1 kB)
 ```
 
 ## Try it
@@ -81,6 +81,8 @@ Lambda polls the queue and invokes `worker` a moment later. Its log shows the fi
 serverless logs --function worker
 ```
 
+Among Lambda's own `START`, `END` and `REPORT` lines, the worker's lines are:
+
 ```text
 INFO	Processed job ec7e4da2-61be-4b48-a044-75f90574a751: resize photo-1.png
 ERROR	Job 7ab82ef6-12ea-4e01-9204-15c5b6ad7059 failed on receive 1: the job has no "task" string
@@ -88,13 +90,15 @@ ERROR	Job 7ab82ef6-12ea-4e01-9204-15c5b6ad7059 failed on receive 2: the job has 
 ERROR	Job 7ab82ef6-12ea-4e01-9204-15c5b6ad7059 failed on receive 3: the job has no "task" string
 ```
 
-If the command prints `No existing streams for the function`, or a line isn't there yet, the worker hasn't run yet: wait a few seconds and run the command again.
+If the command prints `No existing streams for the function` or only an `INIT_START` line, or a line isn't there yet, the worker hasn't run yet: wait a few seconds and run the command again.
 
 After the third failure, SQS moves the job to the dead-letter queue, about two minutes after it was sent. Show the stack outputs to find the dead-letter queue's URL:
 
 ```bash
 serverless info --verbose
 ```
+
+Among the other outputs, the list shows:
 
 ```text
 Stack Outputs:
