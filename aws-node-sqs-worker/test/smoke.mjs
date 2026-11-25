@@ -58,9 +58,9 @@ for (;;) {
     '--wait-time-seconds', '10', '--visibility-timeout', '0', '--output', 'json']);
   const messages = out.trim() ? (JSON.parse(out).Messages ?? []) : [];
   for (const m of messages) seen.add(m.MessageId);
+  if (seen.has(goodId)) fail(`dead-letter queue: the processed job ${goodId} arrived there too`);
   found = messages.find((m) => m.MessageId === badId);
   if (found) break;
-  if (seen.has(goodId)) fail(`dead-letter queue: the processed job ${goodId} arrived there too`);
   if (Date.now() - start >= DLQ_WAIT_MS) fail(`dead-letter queue: expected message ${badId} within ${DLQ_WAIT_MS / 1000} s; saw ${[...seen].join(', ') || 'none'}`);
 }
 if (!found.Body.includes(`photo-${tag}.png`)) fail(`dead-letter queue: expected the body of ${badId} to name photo-${tag}.png; got ${found.Body}`);
