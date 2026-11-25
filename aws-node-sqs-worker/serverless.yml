@@ -1,4 +1,5 @@
 service: sqs-worker
+
 frameworkVersion: '4'
 
 provider:
@@ -8,8 +9,11 @@ provider:
   iam:
     role:
       statements:
+        # The producer may send messages to this service's jobs queue and nothing else.
+        # The sqs event adds the permissions the worker needs to read the queue.
         - Effect: Allow
-          Action: sqs:SendMessage
+          Action:
+            - sqs:SendMessage
           Resource: !GetAtt JobsQueue.Arn
 
 functions:
@@ -19,18 +23,42 @@ functions:
       QUEUE_URL: !Ref JobsQueue
     events:
       - httpApi:
-          path: /produce
+          path: /jobs
           method: post
-  consumer:
-    handler: handler.consumer
+
+  worker:
+    handler: handler.worker
     events:
+      # Creates the event source mapping: Lambda polls the queue and invokes
+      # the worker with up to 10 messages at a time.
       - sqs:
           arn: !GetAtt JobsQueue.Arn
           batchSize: 10
+          # The worker returns the messages it couldn't process; only those go back to the queue.
+          functionResponseType: ReportBatchItemFailures
 
+# The sqs event doesn't create queues, so they are declared here.
 resources:
   Resources:
     JobsQueue:
       Type: AWS::SQS::Queue
       Properties:
-        QueueName: ${self:service}-jobs-${sls:stage}
+        # The stage in the name lets two stages of this service share an account.
+        QueueName: ${self:service}-${sls:stage}-jobs
+        # At least the worker's timeout (6 seconds by default); AWS recommends six times it.
+        VisibilityTimeout: 36
+        # A message received 3 times without success moves to the dead-letter queue.
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
+          maxReceiveCount: 3
+
+    DeadLetterQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${sls:stage}-jobs-dlq
+        # Keep failed jobs for 14 days, the longest SQS allows.
+        MessageRetentionPeriod: 1209600
+
+  Outputs:
+    DeadLetterQueueUrl:
+      Value: !Ref DeadLetterQueue
