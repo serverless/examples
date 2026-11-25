@@ -1,0 +1,41 @@
+{
+  "title": "Next.js app on AWS Lambda Web Functions",
+  "description": "This example deploys a Next.js app to AWS Lambda Web Functions with the Serverless Framework, using the standalone server that next build writes. Pages, route handlers and static assets are all served from one public HTTPS endpoint.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "prepare": {
+      "path": "test/prepare.mjs"
+    },
+    "checks": [
+      {
+        "http": {
+          "output": "SiteWebFunctionUrl",
+          "path": "/api/hello",
+          "status": 200,
+          "contains": "Hello from a Next.js route handler!"
+        }
+      },
+      {
+        "http": {
+          "output": "SiteWebFunctionUrl",
+          "path": "/lambda.svg",
+          "status": 200,
+          "contains": "fill=\"#fd5750\""
+        }
+      }
+    ]
+  }
+}
