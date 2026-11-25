@@ -26,7 +26,7 @@ This template deploys a [Flask](https://flask.palletsprojects.com/) API on AWS L
 
 ## Prerequisites
 
-- [Python](https://www.python.org/) 3.14 on your `PATH`: the deploy runs it to package the dependencies in `requirements.txt`. To package them inside a Docker container instead, set the `dockerizePip` option under `custom.pythonRequirements` in `serverless.yml`.
+- [Python](https://www.python.org/) 3.15 on your `PATH`: the deploy runs it to package the dependencies in `requirements.txt`. To package them inside a Docker container instead, set the `dockerizePip` option under `custom.pythonRequirements` in `serverless.yml`.
 - [Node.js](https://nodejs.org/), to install the Serverless Framework CLI (`npm i -g serverless`) and the `serverless-wsgi` plugin. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
@@ -46,7 +46,7 @@ You should see output like this:
 
 ```text
 Deploying "aws-python-flask-dynamodb-api" to stage "dev" (us-east-1)
-✔ Service deployed to stack aws-python-flask-dynamodb-api-dev (64s)
+✔ Service deployed to stack aws-python-flask-dynamodb-api-dev (66s)
 endpoints:
   ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
   ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
@@ -157,7 +157,7 @@ After the deploy, the API is public and anyone can call it. To restrict access, 
 `serverless-wsgi` can serve the application on your machine, against a local DynamoDB. Install `werkzeug`, `boto3` and the requirements first, in a virtual environment:
 
 ```bash
-python3.14 -m venv ./venv
+python3.15 -m venv ./venv
 source ./venv/bin/activate
 pip install werkzeug boto3
 pip install -r requirements.txt
@@ -181,15 +181,7 @@ custom:
       - dev
 ```
 
-The virtual environment and the local DynamoDB files (`.dynamodb/`) are in this directory, so the next `serverless deploy` would add them to the function's package. Leave them out with a top-level `package` section, as [Keep local environments out of the package](https://www.serverless.com/framework/docs/providers/aws/guide/python#keep-local-environments-out-of-the-package) describes:
-
-```yaml
-package:
-  patterns:
-    - '!venv/**'
-    - '!.dynamodb/**'
-    - '!**/__pycache__/**'
-```
+The virtual environment and the local DynamoDB files (`.dynamodb/`) stay out of the deployed package: the `package` section of `serverless.yml` excludes them, as [Keep local environments out of the package](https://www.serverless.com/framework/docs/providers/aws/guide/python#keep-local-environments-out-of-the-package) describes.
 
 `app.py` already connects to the local DynamoDB when `serverless-wsgi` sets the `IS_OFFLINE` environment variable:
 

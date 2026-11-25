@@ -23,7 +23,7 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.14
+  runtime: python3.15
   architecture: arm64
   # Uncomment to easily set up a custom domain. Read the docs for more details:
   # https://www.serverless.com/framework/docs/providers/aws/guide/domains
@@ -43,6 +43,13 @@ provider:
             - Fn::GetAtt: [UsersTable, Arn]
   environment:
     USERS_TABLE: ${param:tableName}
+
+# Keep a local virtual environment and local DynamoDB files out of the package.
+package:
+  patterns:
+    - '!venv/**'
+    - '!.dynamodb/**'
+    - '!**/__pycache__/**'
 
 functions:
   api:
