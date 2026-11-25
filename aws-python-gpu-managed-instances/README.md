@@ -105,7 +105,7 @@ functions:
 ```
 
 - `provider.ecr.images.pytorch` builds the image from the `Dockerfile`. `provenance: 'false'` pushes a single-platform image, the format Lambda accepts.
-- `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount` caps how many instances the capacity provider launches; 12 is the lowest value the Framework accepts. Your account's G instance quota caps them too.
+- `allowedInstanceTypes` lists only GPU instance types: a capacity provider runs either GPU or non-GPU functions. `g6f` instances carry fractions of an NVIDIA L4; `maxVCpuCount` caps how many instances the capacity provider launches; AWS requires at least 12. Your account's G instance quota caps them too.
 - `gpu.memory: 3` asks for at least 3 GB of GPU memory. Lambda gives each execution environment one GPU, or one GPU fraction on `g6f` instances.
 - `scaling` keeps one execution environment running, so the function answers right away.
 
@@ -135,7 +135,7 @@ Capacity providers run their instances in a VPC. The Framework doesn't create VP
 
 ## Cost and cleanup
 
-While the example is deployed, the GPU instances run and EC2 bills them by the second, whether or not you invoke the function; Lambda adds a management charge for the instance and bills each request. ECR bills for storing the image, and CloudWatch Logs for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [EC2 On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/), [ECR pricing](https://aws.amazon.com/ecr/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the instances, the function, the VPC and the log group, when you are done:
+While the example is deployed, the GPU instances run and EC2 bills them by the second, whether or not you invoke the function; Lambda adds a management charge for the instance and bills each request. At the time of writing, in `us-east-1`, a `g6f.large` instance costs $0.202 per hour and Lambda's management charge for GPU instances is 9.75% of that, so about $0.22 per hour for each instance, or about $160 a month if you leave it running. Lambda can start more than one instance, so the total can be a multiple of that. ECR bills for storing the image, and CloudWatch Logs for the log data it stores. See [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [EC2 On-Demand pricing](https://aws.amazon.com/ec2/pricing/on-demand/), [ECR pricing](https://aws.amazon.com/ecr/pricing/) and [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/). Remove the stack, with the instances, the function, the VPC and the log group, when you are done:
 
 ```bash
 serverless remove
