@@ -12,3 +12,10 @@ functions:
     handler: handler.run
     events:
       - schedule: rate(1 minute)
+  cronHandler:
+    handler: handler.cron
+    events:
+      - schedule:
+          method: scheduler
+          rate: cron(0 9 ? * MON-FRI *)
+          timezone: America/New_York
