@@ -38,6 +38,8 @@ npm ci
 serverless deploy
 ```
 
+With npm 12 or later, `npm ci` ends with a warning that it blocked the install script of `es5-ext`, a dependency of the plugin. That script only prints a message, so the example needs nothing from it.
+
 Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
 
 You should see output like this:
@@ -80,7 +82,7 @@ Send an order without an `orderId`:
 serverless invoke stepf --name orderWorkflow --data '{}'
 ```
 
-The Choice state sends it to the `Rejected` state, which ends the execution at once:
+The Choice state sends it to the `Rejected` state, which ends the execution at once. The command prints the execution again, here trimmed to its status, input and output:
 
 ```json
 {
