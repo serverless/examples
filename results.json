@@ -191,19 +191,19 @@
         "result": "pass",
         "date": "2026-11-25",
         "frameworkVersion": "4.47.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
       },
       {
         "result": "pass",
-        "date": "2026-11-24",
-        "frameworkVersion": "4.46.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/45453117910"
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
       }
     ],
     "verified": {
       "date": "2026-11-25",
       "frameworkVersion": "4.47.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
     }
   },
   "aws-node-text-analysis-via-sns-post-processing": {
@@ -326,13 +326,19 @@
         "result": "pass",
         "date": "2026-11-25",
         "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
+      },
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
         "runUrl": "https://github.com/serverless/examples/actions/runs/45705000309"
       }
     ],
     "verified": {
       "date": "2026-11-25",
       "frameworkVersion": "4.47.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/45705000309"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
     }
   },
   "compose-multiframework": {
