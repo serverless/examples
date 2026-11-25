@@ -7,8 +7,7 @@ package:
 
 provider:
   name: aws
-  # python3.13 until pydantic-core ships manylinux cp314 wheels (checked 2026-07-17)
-  runtime: python3.13
+  runtime: python3.15
   architecture: arm64
   environment:
     CHANNEL_ACCESS_TOKEN: ${env:CHANNEL_ACCESS_TOKEN, 'YOUR_CHANNEL_ACCESS_TOKEN'}
@@ -25,10 +24,10 @@ functions:
 custom:
   # Built-in python requirements packaging activates on this key.
   pythonRequirements:
-    # Force Linux wheels for the deploying (non-Linux) host so packaging fails loudly
-    # instead of silently bundling a host-platform native wheel (pydantic-core et al).
-    useUv: false
+    # Download Linux arm64 wheels for Python 3.15 on any machine, so compiled
+    # dependencies (such as pydantic-core) match the Lambda architecture and runtime.
     pipCmdExtraArgs:
-      - --platform
-      - manylinux2014_aarch64
+      - '--platform=manylinux2014_aarch64'
+      - '--platform=manylinux_2_28_aarch64'
+      - '--python-version=3.15'
       - '--only-binary=:all:'

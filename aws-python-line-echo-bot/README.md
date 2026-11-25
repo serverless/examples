@@ -52,13 +52,11 @@ The webhook validates the `X-Line-Signature` header on every request (via `Webho
 
 ## Notes on packaging
 
-`line-bot-sdk` v3 pulls in `pydantic` / `pydantic-core`, a native (Rust) extension. The
-Lambda runtime is pinned to `python3.13` because `pydantic-core` has no `manylinux` wheel for
-`python3.14` yet — packaging on a non-Linux host would otherwise silently bundle the host's
-native wheel into the deployment artifact, crashing the function at cold start. `custom.pythonRequirements`
-also pins `pipCmdExtraArgs` to `--platform manylinux2014_aarch64 --only-binary=:all:` (with
-`useUv: false`, since `uv` doesn't accept pip's `--platform` flag) so packaging always fetches
-prebuilt Linux wheels for the deployed architecture, and fails loudly instead of silently if a
-compatible wheel isn't available.
+`line-bot-sdk` v3 pulls in `pydantic` / `pydantic-core`, a native (Rust) extension. The function
+runs on `python3.15` and `arm64`, so `custom.pythonRequirements.pipCmdExtraArgs` makes pip download
+Linux arm64 wheels built for Python 3.15 (`--platform=manylinux2014_aarch64`,
+`--platform=manylinux_2_28_aarch64`, `--python-version=3.15`, `--only-binary=:all:`) on any machine.
+Without them, packaging on another platform would bundle the host's native wheel, which can't load in
+Lambda; with them, packaging stops with an error if a compatible wheel isn't available.
 
 ![Echo bot](https://i.imgur.com/Tn1XS13.png)

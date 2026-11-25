@@ -24,7 +24,7 @@ This template deploys one Python function to AWS Lambda. The function has no eve
 
 ## Prerequisites
 
-- [Python](https://www.python.org/) 3.14, to run the function locally and to package dependencies when you add them.
+- [Python](https://www.python.org/) 3.15, to run the function locally and to package dependencies when you add them.
 - [Node.js](https://nodejs.org/), to install the Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
@@ -45,7 +45,7 @@ You should see output like this:
 Deploying "aws-python" to stage "dev" (us-east-1)
 ✔ Service deployed to stack aws-python-dev (41s)
 functions:
-  hello: aws-python-dev-hello (2.7 kB)
+  hello: aws-python-dev-hello (2.9 kB)
 ```
 
 ## Try it
@@ -72,7 +72,7 @@ The command prints the function's response:
 ```yaml
 provider:
   name: aws
-  runtime: python3.14
+  runtime: python3.15
   architecture: arm64
 
 functions:
