@@ -1,0 +1,30 @@
+{
+  "title": "AWS Data Processing example in NodeJS",
+  "description": "This example shows how a Lambda function behind an HTTP API publishes a note to an Amazon SNS topic and a second function subscribed to the topic analyzes it.",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "priority": 10,
+  "author": {
+    "name": "Adam Bergman",
+    "link": "https://github.com/adambrgmn",
+    "avatar": "https://avatars1.githubusercontent.com/u/13746650?v=4&s=140"
+  },
+  "services": [
+    "lambda",
+    "apigateway",
+    "sns",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}

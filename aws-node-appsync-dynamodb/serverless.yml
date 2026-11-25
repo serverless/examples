@@ -1,0 +1,48 @@
+service: appsync-dynamodb
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+
+appSync:
+  name: ${self:service}-${sls:stage}
+  authentication:
+    type: API_KEY
+  apiKeys:
+    - name: defaultKey
+      expiresAfter: 30d
+  dataSources:
+    postsTable:
+      type: AMAZON_DYNAMODB
+      config:
+        tableName: !Ref PostsTable
+  resolvers:
+    Query.getPost:
+      kind: UNIT
+      dataSource: postsTable
+      code: resolvers/getPost.js
+    Mutation.createPost:
+      kind: UNIT
+      dataSource: postsTable
+      code: resolvers/createPost.js
+
+resources:
+  Resources:
+    PostsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+  Outputs:
+    GraphQlApiUrl:
+      Description: The GraphQL endpoint of the API
+      Value: ${appsync:url}
+    GraphQlApiKey:
+      Description: The API key that clients send in the x-api-key header
+      Value: ${appsync:apiKey.defaultKey}

@@ -2,32 +2,37 @@ service: text-analysis-sns
 
 frameworkVersion: '4'
 
+custom:
+  # The stage in the name lets two stages of this service share an account.
+  topicName: ${self:service}-${sls:stage}-notes
+  topicArn: arn:aws:sns:${aws:region}:${aws:accountId}:${self:custom.topicName}
+
 provider:
   name: aws
   runtime: nodejs24.x
   architecture: arm64
-  region: us-east-1
-  stage: dev
-  environment:
-    SNS_TOPIC_ARN: arn:aws:sns:${aws:region}:${aws:accountId}:analyzeNote
   iam:
     role:
       statements:
+        # addNote may publish to this service's topic and nothing else.
         - Effect: Allow
-          Resource: ${self:provider.environment.SNS_TOPIC_ARN}
           Action:
             - sns:Publish
+          Resource: ${self:custom.topicArn}
 
 functions:
   addNote:
-    handler: addNote.addNote
+    handler: handler.addNote
+    environment:
+      TOPIC_ARN: ${self:custom.topicArn}
     events:
-      - http:
-          path: notes
+      - httpApi:
+          path: /notes
           method: post
-          cors: true
 
   analyzeNote:
-    handler: analyzeNote.analyzeNote
+    handler: handler.analyzeNote
     events:
-      - sns: analyzeNote
+      # Creates the topic and subscribes this function to it.
+      - sns:
+          topicName: ${self:custom.topicName}
