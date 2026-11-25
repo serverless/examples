@@ -206,6 +206,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
     }
   },
+  "aws-node-sqs-worker": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45722926823"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45722926823"
+    }
+  },
   "aws-node-step-functions": {
     "runs": [
       {
