@@ -74,7 +74,7 @@ The API answers with status 202 and the ID of the SNS message, before the note i
 {"messageId":"7414c426-1aa6-518d-8d0b-a7a74b40e013"}
 ```
 
-SNS invokes `analyzeNote` a moment later. Its log shows the analysis, under the same message ID:
+SNS invokes `analyzeNote` a moment later. Its log shows the analysis under the same message ID, between the invocation's `START`, `END` and `REPORT` lines:
 
 ```bash
 serverless logs --function analyzeNote
@@ -84,7 +84,7 @@ serverless logs --function analyzeNote
 INFO	Analyzed note 7414c426-1aa6-518d-8d0b-a7a74b40e013: 9 words, 2 sentences, 52 characters
 ```
 
-If the line isn't there yet, wait a few seconds and run the command again. A body without a `note` string gets status 400 and `{"error":"Send a JSON body with a \"note\" string."}`, and nothing is published.
+If the command prints `No existing streams for the function`, or the line isn't there yet, the function hasn't run yet: wait a few seconds and run the command again. A body without a `note` string gets status 400 and `{"error":"Send a JSON body with a \"note\" string."}`, and nothing is published.
 
 ## How it works
 
