@@ -20,6 +20,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
     }
   },
+  "aws-node-appsync-dynamodb": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45706202281"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45706202281"
+    }
+  },
   "aws-node-customer-managed-runtime": {
     "runs": [
       {
@@ -159,6 +174,21 @@
       "date": "2026-11-25",
       "frameworkVersion": "4.47.0",
       "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
+    }
+  },
+  "aws-node-upload-to-s3-and-postprocess": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45706202281"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45706202281"
     }
   },
   "aws-python": {
