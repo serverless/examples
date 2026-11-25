@@ -1,5 +1,5 @@
 // Creates a user through the deployed API, reads it back and checks that the
-// name round-trips. Run by the example test runner, which passes the stack
+// name round-trips, then checks that an invalid body is rejected and not stored. Run by the example test runner, which passes the stack
 // outputs in EXAMPLE_OUTPUTS and the stage in EXAMPLE_STAGE.
 
 const OUTPUT = 'HttpApiUrl';
@@ -23,7 +23,14 @@ expectUser(created, `POST ${url('/users')}`);
 const read = await requestUntil(() => fetch(url(`/users/${encodeURIComponent(userId)}`)), `GET ${url(`/users/${userId}`)}`);
 expectUser(read, `GET ${url(`/users/${userId}`)}`);
 
-console.log(`created and read back user ${userId}`);
+// An invalid body answers 400 and stores nothing.
+const invalidId = `${userId}-invalid`;
+const rejected = await fetch(url('/users'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ userId: invalidId, name: 42 }) });
+if (rejected.status !== 400) fail(`POST ${url('/users')} with a numeric name: expected status 400, got ${rejected.status}`);
+const missing = await fetch(url(`/users/${encodeURIComponent(invalidId)}`));
+if (missing.status !== 404) fail(`GET ${url(`/users/${invalidId}`)} after a rejected POST: expected status 404, got ${missing.status}`);
+
+console.log(`created and read back user ${userId}; an invalid POST answered 400 and stored nothing`);
 
 function expectUser(body, what) {
   if (body?.userId !== userId || body?.name !== name) {
