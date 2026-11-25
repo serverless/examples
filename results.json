@@ -113,6 +113,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45703476586"
     }
   },
+  "aws-node-express-web-app": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-25",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45721304329"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-25",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45721304329"
+    }
+  },
   "aws-node-http-api": {
     "runs": [
       {
