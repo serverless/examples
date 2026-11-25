@@ -629,7 +629,7 @@
   {
     "title": "AWS Node Scheduled Cron example in NodeJS",
     "name": "aws-node-scheduled-cron",
-    "description": "A Node.js function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event.",
+    "description": "A Node.js function on AWS Lambda that runs once a minute, and one that runs at 9 AM New York time on weekdays, triggered by the Serverless Framework schedule event.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-scheduled-cron",
     "framework": "v4",
     "language": "node",
@@ -1092,7 +1092,7 @@
   {
     "title": "AWS Python Scheduled Cron example in Python",
     "name": "aws-python-scheduled-cron",
-    "description": "A Python function on AWS Lambda that runs once a minute, triggered by the Serverless Framework schedule event.",
+    "description": "A Python function on AWS Lambda that runs once a minute, and one that runs at 9 AM New York time on weekdays, triggered by the Serverless Framework schedule event.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-python-scheduled-cron",
     "framework": "v4",
     "language": "python",
@@ -2892,6 +2892,18 @@
     "name": "aws-node-appsync-dynamodb",
     "description": "An AWS AppSync GraphQL API with API key authentication and two JavaScript resolvers that write and read posts in a DynamoDB table, from the built-in appSync block of serverless.yml.",
     "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-appsync-dynamodb",
+    "framework": "v4",
+    "language": "node",
+    "platform": "aws",
+    "authorLink": "https://github.com/serverless",
+    "authorName": "Serverless, Inc.",
+    "authorAvatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  {
+    "title": "AWS Step Functions state machine (NodeJS)",
+    "name": "aws-node-step-functions",
+    "description": "Deploy a Step Functions state machine that runs two Node.js Lambda functions with a retry, a wait and a choice, and start an execution with serverless invoke stepf.",
+    "githubUrl": "https://github.com/serverless/examples/tree/v4/aws-node-step-functions",
     "framework": "v4",
     "language": "node",
     "platform": "aws",
