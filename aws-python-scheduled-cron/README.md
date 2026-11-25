@@ -46,8 +46,8 @@ You should see output like this:
 Deploying "aws-python-scheduled-cron" to stage "dev" (us-east-1)
 ✔ Service deployed to stack aws-python-scheduled-cron-dev (103s)
 functions:
-  rateHandler: aws-python-scheduled-cron-dev-rateHandler (4.4 kB)
-  cronHandler: aws-python-scheduled-cron-dev-cronHandler (4.4 kB)
+  rateHandler: aws-python-scheduled-cron-dev-rateHandler (4.5 kB)
+  cronHandler: aws-python-scheduled-cron-dev-cronHandler (4.5 kB)
 ```
 
 The schedules are active as soon as the deploy finishes; there is no further step.
@@ -75,7 +75,7 @@ REPORT - 85562358-d2ef-43af-9ee5-43cc94ef2aed
 Duration: 2.12 ms	Billed Duration: 3 ms	Memory Size: 1024 MB	Max Memory Used: 33 MB
 ```
 
-To see the scheduled runs, read the function's logs. Each minute adds one run:
+To see the scheduled runs, read the function's logs. The first scheduled run comes within about a minute of the deploy, and each minute adds one more, next to the runs you invoked yourself; if no scheduled run is there yet, wait a minute and run the command again:
 
 ```bash
 serverless logs --function rateHandler
