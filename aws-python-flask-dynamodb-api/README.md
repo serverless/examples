@@ -26,14 +26,7 @@ This template deploys a [Flask](https://flask.palletsprojects.com/) API on AWS L
 
 ## Prerequisites
 
-- [Python](https://www.python.org/) 3.14 on your `PATH`: the deploy runs it to package the dependencies in `requirements.txt`. A virtual environment keeps them apart from your other projects:
-
-  ```bash
-  python3.14 -m venv ./venv
-  source ./venv/bin/activate
-  ```
-
-  To package the dependencies inside a Docker container instead, set the `dockerizePip` option under `custom.pythonRequirements` in `serverless.yml`.
+- [Python](https://www.python.org/) 3.15 on your `PATH`: the deploy runs it to package the dependencies in `requirements.txt`. It downloads Linux arm64 wheels, so the package matches the function on macOS, Windows and Linux alike, without Docker.
 - [Node.js](https://nodejs.org/), to install the Serverless Framework CLI (`npm i -g serverless`) and the `serverless-wsgi` plugin. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
@@ -47,19 +40,23 @@ npm install
 serverless deploy
 ```
 
+With npm 12 or later, `npm install` ends with a warning that it blocked the install script of `es5-ext`, a dependency of the plugin. That script only prints a message, so the example needs nothing from it.
+
 Without options, the deploy uses the stage `dev` and the Region `us-east-1`. To change them, pass `--stage` or `--region`, and pass the same options to every later command, including `serverless remove`.
 
 You should see output like this:
 
 ```text
 Deploying "aws-python-flask-dynamodb-api" to stage "dev" (us-east-1)
-✔ Service deployed to stack aws-python-flask-dynamodb-api-dev (64s)
+Using Python specified in "runtime": python3.15
+Packaging Python WSGI handler...
+✔ Service deployed to stack aws-python-flask-dynamodb-api-dev (62s)
 endpoints:
   ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/
   ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
 
 functions:
-  api: aws-python-flask-dynamodb-api-dev-api (658 kB)
+  api: aws-python-flask-dynamodb-api-dev-api (660 kB)
 ```
 
 The deploy prints the endpoint URLs, which end in the stage name: `https://<api-id>.execute-api.<region>.amazonaws.com/dev/` for the default `dev` stage.
@@ -140,6 +137,22 @@ resources:
 
 Two `http` events, `/` and `/{proxy+}` with method `ANY`, send every request to the `api` function. [`serverless-wsgi`](https://github.com/logandk/serverless-wsgi) adds the `wsgi_handler.handler` entry point, which turns each Lambda event into a WSGI request for the Flask application named in `custom.wsgi.app`. The Framework's built-in [Python requirements packaging](https://www.serverless.com/framework/docs/providers/aws/guide/python), turned on by `custom.pythonRequirements`, bundles the dependencies in `requirements.txt`.
 
+The function runs on `arm64`, and one of Flask's dependencies, MarkupSafe, includes compiled code. `pipCmdExtraArgs` tells pip to download wheels built for Linux on arm64 and Python 3.15, whatever machine you deploy from, as [Linux wheels without Docker](https://www.serverless.com/framework/docs/providers/aws/guide/python#linux-wheels-without-docker) describes:
+
+```yaml
+custom:
+  pythonRequirements:
+    # Download Linux arm64 wheels for Python 3.15 on any machine, so compiled
+    # dependencies (such as MarkupSafe) match the Lambda architecture and runtime.
+    pipCmdExtraArgs:
+      - '--platform=manylinux2014_aarch64'
+      - '--platform=manylinux_2_28_aarch64'
+      - '--python-version=3.15'
+      - '--only-binary=:all:'
+```
+
+With `--only-binary=:all:`, a dependency you add that publishes no such wheel stops the deploy instead of being built for your machine. To build those inside a Docker container, set the `dockerizePip` option under `custom.pythonRequirements`.
+
 `app.py` reads and writes the table with `boto3`:
 
 ```python
@@ -161,9 +174,11 @@ After the deploy, the API is public and anyone can call it. To restrict access, 
 
 ### Run it locally
 
-`serverless-wsgi` can serve the application on your machine, against a local DynamoDB. Install `werkzeug`, `boto3` and the requirements first, preferably in a virtual environment:
+`serverless-wsgi` can serve the application on your machine, against a local DynamoDB. Install `werkzeug`, `boto3` and the requirements first, in a virtual environment:
 
 ```bash
+python3.15 -m venv ./venv
+source ./venv/bin/activate
 pip install werkzeug boto3
 pip install -r requirements.txt
 ```
@@ -185,6 +200,8 @@ custom:
     stages:
       - dev
 ```
+
+The virtual environment and the local DynamoDB files (`.dynamodb/`) stay out of the deployed package: the `package` section of `serverless.yml` excludes them, as [Keep local environments out of the package](https://www.serverless.com/framework/docs/providers/aws/guide/python#keep-local-environments-out-of-the-package) describes.
 
 `app.py` already connects to the local DynamoDB when `serverless-wsgi` sets the `IS_OFFLINE` environment variable:
 
