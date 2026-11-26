@@ -4,6 +4,6 @@
   "description": "Publishes order events to an EventBridge Custom Event Bus",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-eventbridgev2": "^3.1156.0"
+    "@aws-sdk/client-eventbridgev2": "3.1172.0"
   }
 }
