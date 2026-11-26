@@ -71,6 +71,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45539687900"
     }
   },
+  "aws-node-eventbridge-rule": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-26",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45726597291"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-26",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45726597291"
+    }
+  },
   "aws-node-express-api": {
     "runs": [
       {
