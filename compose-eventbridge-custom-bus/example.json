@@ -1,0 +1,29 @@
+{
+  "title": "Serverless Compose EventBridge Custom Event Bus Subscribers",
+  "description": "Own an EventBridge Custom Event Bus in a stateful service and subscribe functions from other services to it, with ordered and batched delivery, wired together with Serverless Compose",
+  "language": "node",
+  "platform": "AWS",
+  "framework": "v4",
+  "author": {
+    "name": "Serverless, Inc.",
+    "link": "https://github.com/serverless",
+    "avatar": "https://avatars1.githubusercontent.com/u/13742415?s=200&v=4"
+  },
+  "services": [
+    "lambda",
+    "eventbridge",
+    "sqs",
+    "iam",
+    "logs"
+  ],
+  "test": {
+    "tier": "fast",
+    "checks": [
+      {
+        "script": {
+          "path": "test/smoke.mjs"
+        }
+      }
+    ]
+  }
+}
