@@ -4,6 +4,6 @@
   "description": "Demonstration of protecting API gateway endpoints with auth0",
   "license": "MIT",
   "devDependencies": {
-    "serverless-offline": "^14.7.4"
+    "serverless-offline": "^14.8.5"
   }
 }

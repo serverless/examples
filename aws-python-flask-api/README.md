@@ -25,7 +25,7 @@ This template deploys a [Flask](https://flask.palletsprojects.com/) application 
 
 ## Prerequisites
 
-- [Python](https://www.python.org/) 3.14 on your `PATH`: the deploy runs it to package the dependencies in `requirements.txt`.
+- [Python](https://www.python.org/) 3.15 on your `PATH`: the deploy runs it to package the dependencies in `requirements.txt`.
 - [Node.js](https://nodejs.org/), to install the Serverless Framework CLI (`npm i -g serverless`) and the `serverless-wsgi` plugin. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
@@ -51,7 +51,7 @@ endpoints:
   ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/{proxy+}
 
 functions:
-  api: aws-python-flask-api-dev-api (655 kB)
+  api: aws-python-flask-api-dev-api (657 kB)
 ```
 
 The deploy prints the endpoint URLs, which end in the stage name: `https://<api-id>.execute-api.<region>.amazonaws.com/dev/` for the default `dev` stage.

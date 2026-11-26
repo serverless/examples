@@ -8,7 +8,7 @@ provider:
 
 functions:
   hello:
-    runtime: python3.14
+    runtime: python3.15
     events:
       - httpApi:
           method: get

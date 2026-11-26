@@ -25,7 +25,7 @@ This template deploys an HTTP API on AWS Lambda and API Gateway with Python. One
 
 ## Prerequisites
 
-- [Python](https://www.python.org/) 3.14, to run the function locally and to package dependencies when you add them.
+- [Python](https://www.python.org/) 3.15, to run the function locally and to package dependencies when you add them.
 - [Node.js](https://nodejs.org/), to install the Serverless Framework CLI: `npm i -g serverless`. See [Getting started](https://www.serverless.com/framework/docs/getting-started).
 - An AWS account, with credentials configured on your machine. See [AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials).
 - A Serverless account, or a license key in `SERVERLESS_LICENSE_KEY`. The CLI asks you to sign in the first time you run it.
@@ -48,7 +48,7 @@ Deploying "aws-python-http-api" to stage "dev" (us-east-1)
 endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
 
 functions:
-  hello: aws-python-http-api-dev-hello (3.1 kB)
+  hello: aws-python-http-api-dev-hello (3.3 kB)
 ```
 
 The deploy prints the endpoint URL, `https://<api-id>.execute-api.<region>.amazonaws.com/`.

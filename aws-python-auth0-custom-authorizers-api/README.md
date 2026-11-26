@@ -23,7 +23,7 @@ Custom Authorizers allow you to run an AWS Lambda Function before your targeted 
 
 ## Setup
 
-1. You must have Python 3.14! Third-party dependencies (`PyJWT`, `cryptography`) are bundled automatically at
+1. You must have Python 3.15! Third-party dependencies (`PyJWT`, `cryptography`) are bundled automatically at
    deploy time by the Framework's built-in Python requirements packaging (configured under
    `custom.pythonRequirements` in `serverless.yml`) — no plugin needed. Run `npm install` once to pull in
    `serverless-offline` for local testing.

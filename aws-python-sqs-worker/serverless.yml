@@ -3,7 +3,7 @@ frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: python3.14
+  runtime: python3.15
   architecture: arm64
 
 constructs:
