@@ -386,6 +386,21 @@
       "runUrl": "https://github.com/serverless/examples/actions/runs/45721701479"
     }
   },
+  "compose-eventbridge-custom-bus": {
+    "runs": [
+      {
+        "result": "pass",
+        "date": "2026-11-26",
+        "frameworkVersion": "4.47.0",
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45727089594"
+      }
+    ],
+    "verified": {
+      "date": "2026-11-26",
+      "frameworkVersion": "4.47.0",
+      "runUrl": "https://github.com/serverless/examples/actions/runs/45727089594"
+    }
+  },
   "compose-multiframework": {
     "runs": [
       {
