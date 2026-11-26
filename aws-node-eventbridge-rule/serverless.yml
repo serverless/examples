@@ -1,0 +1,25 @@
+service: eventbridge-rule
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs24.x
+  architecture: arm64
+
+functions:
+  orderPlaced:
+    handler: handler.orderPlaced
+    events:
+      # Creates a rule on the account's default event bus and lets EventBridge
+      # invoke the function for every event that matches the pattern.
+      - eventBridge:
+          pattern:
+            source:
+              - orders.app
+            detail-type:
+              - OrderPlaced
+            # Only orders with a total of 100 or more reach the function.
+            detail:
+              total:
+                - numeric: ['>=', 100]
