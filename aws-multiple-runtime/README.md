@@ -12,7 +12,7 @@ authorAvatar: 'https://avatars0.githubusercontent.com/u/527924?v=4&s=140'
 -->
 # Multiple Runtimes Example
 
-This example demonstrates how you can run multiple runtimes (Node.js and Python) side by side in the same Serverless Framework service. The `time` function runs on `nodejs24.x` and returns the current Unix timestamp; the `hello` function runs on `python3.14`, calls the `time` endpoint over HTTP, and renders a greeting with the formatted date.
+This example demonstrates how you can run multiple runtimes (Node.js and Python) side by side in the same Serverless Framework service. The `time` function runs on `nodejs24.x` and returns the current Unix timestamp; the `hello` function runs on `python3.15`, calls the `time` endpoint over HTTP, and renders a greeting with the formatted date.
 
 ## Deploy
 

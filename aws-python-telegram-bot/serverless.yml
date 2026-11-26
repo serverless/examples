@@ -8,7 +8,7 @@ package:
 
 provider:
   name: aws
-  runtime: python3.14
+  runtime: python3.15
   architecture: arm64
   environment:
     TELEGRAM_TOKEN: ${file(./serverless.env.yml):TELEGRAM_TOKEN, ''}

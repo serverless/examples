@@ -8,11 +8,18 @@ package:
 
 custom:
   # Built-in python requirements packaging activates on this key.
-  pythonRequirements: {}
+  pythonRequirements:
+    # Download Linux arm64 wheels for Python 3.15 on any machine, so compiled
+    # dependencies (such as pymongo) match the Lambda architecture and runtime.
+    pipCmdExtraArgs:
+      - '--platform=manylinux2014_aarch64'
+      - '--platform=manylinux_2_28_aarch64'
+      - '--python-version=3.15'
+      - '--only-binary=:all:'
 
 provider:
   name: aws
-  runtime: python3.14
+  runtime: python3.15
   architecture: arm64
   environment:
     MONGO_DB_USER: ${env:MONGO_DB_USER, ''}

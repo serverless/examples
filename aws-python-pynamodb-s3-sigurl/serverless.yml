@@ -51,7 +51,7 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.14
+  runtime: python3.15
   architecture: arm64
   region: us-east-1
   environment:
