@@ -45,21 +45,21 @@
     "runs": [
       {
         "result": "pass",
-        "date": "2026-11-26",
+        "date": "2026-11-28",
         "frameworkVersion": "4.47.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/45730174103"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/46109001475"
       },
       {
         "result": "pass",
-        "date": "2026-11-24",
+        "date": "2026-11-26",
         "frameworkVersion": "4.47.0",
-        "runUrl": "https://github.com/serverless/examples/actions/runs/45470691656"
+        "runUrl": "https://github.com/serverless/examples/actions/runs/45730174103"
       }
     ],
     "verified": {
-      "date": "2026-11-26",
+      "date": "2026-11-28",
       "frameworkVersion": "4.47.0",
-      "runUrl": "https://github.com/serverless/examples/actions/runs/45730174103"
+      "runUrl": "https://github.com/serverless/examples/actions/runs/46109001475"
     }
   },
   "aws-node-durable-function": {
